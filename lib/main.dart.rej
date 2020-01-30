@@ -1,0 +1,772 @@
+diff a/lib/main.dart b/lib/main.dart	(rejected hunks)
+@@ -48,475 +50,357 @@ import 'screens/statisticsScreen.dart';
+ import 'screens/studentScreen.dart';
+ import 'screens/timeTableScreen.dart';
+ import 'screens/testsScreen.dart';
+-
+ bool isNew = true;
+-
+-final GlobalKey<NavigatorState> navigatorKey =
+-    GlobalKey(debugLabel: "Main Navigator");
+-
++final GlobalKey < NavigatorState > navigatorKey = GlobalKey(debugLabel: "Main Navigator");
+ class MyApp extends StatelessWidget {
+-  @override
+-  Widget build(BuildContext context) {
+-    return new DynamicTheme(
+-        defaultBrightness: Brightness.light,
+-        data: (brightness) => ColorManager().getTheme(brightness),
+-        themedWidgetBuilder: (context, theme) {
+-          return new MaterialApp(
+-            localizationsDelegates: const <LocalizationsDelegate>[
+-              S.delegate,
+-              GlobalMaterialLocalizations.delegate,
+-              GlobalWidgetsLocalizations.delegate,
+-            ],
+-            supportedLocales: S.delegate.supportedLocales,
+-            locale: globals.lang != "auto" ? Locale(globals.lang) : null,
+-            onGenerateTitle: (BuildContext context) => S.of(context).title,
+-            title: "Szivacs Napló",
+-            theme: theme,
+-            routes: <String, WidgetBuilder>{
+-              '/main': (_) => new MainScreen(),
+-              '/accept': (_) => new AcceptTermsState(),
+-              '/login': (_) => new LoginScreen(),
+-              '/about': (_) => new AboutScreen(),
+-              '/timetable': (_) => new TimeTableScreen(),
+-              '/homework': (_) => new HomeworkScreen(),
+-              '/evaluations': (_) => new EvaluationsScreen(),
+-              '/notes': (_) => new NotesScreen(),
+-              '/messages': (_) => new MessageScreen(),
+-              '/absents': (_) => new AbsentsScreen(),
+-              '/accounts': (_) => new AccountsScreen(),
+-              '/settings': (_) => new SettingsScreen(),
+-              '/statistics': (_) => new StatisticsScreen(),
+-              '/export': (_) => new ExportScreen(),
+-              '/import': (_) => new ImportScreen(),
+-              '/easteregg': (_) => new BattleRoyaleScreen(),
+-              '/evalcolor': (_) => new colorSettingsScreen(),
+-              '/student': (_) => new StudentScreen(),
+-              '/tests': (_) => new TestsScreen(),
+-            },
+-            navigatorKey: navigatorKey,
+-            home: isNew ? new LogoApp() : MainScreen(),
+-          );
++    @override
++    Widget build(BuildContext context) {
++        return new DynamicTheme(defaultBrightness: Brightness.light, data: (brightness) => ColorManager().getTheme(brightness), themedWidgetBuilder: (context, theme) {
++            return new MaterialApp(localizationsDelegates: const < LocalizationsDelegate > [
++                S.delegate,
++                GlobalMaterialLocalizations.delegate,
++                GlobalWidgetsLocalizations.delegate,
++            ], supportedLocales: S.delegate.supportedLocales, locale: globals.lang != "auto" ? Locale(globals.lang) : null, onGenerateTitle: (BuildContext context) => S.of(context).title, title: "Szivacs Napló", theme: theme, routes: < String, WidgetBuilder > {
++                '/main': (_) => new MainScreen(),
++                //  '/accept': (_) => new AcceptTermsState(),
++                '/login': (_) => new LoginScreen(),
++                '/about': (_) => new AboutScreen(),
++                '/timetable': (_) => new TimeTableScreen(),
++                '/homework': (_) => new HomeworkScreen(),
++                '/evaluations': (_) => new EvaluationsScreen(),
++                '/notes': (_) => new NotesScreen(),
++                '/messages': (_) => new MessageScreen(),
++                '/absents': (_) => new AbsentsScreen(),
++                '/accounts': (_) => new AccountsScreen(),
++                '/settings': (_) => new SettingsScreen(),
++                '/statistics': (_) => new StatisticsScreen(),
++                '/export': (_) => new ExportScreen(),
++                '/import': (_) => new ImportScreen(),
++                //      '/easteregg': (_) => new BattleRoyaleScreen(),
++                '/evalcolor': (_) => new colorSettingsScreen(),
++                '/student': (_) => new StudentScreen(),
++                '/tests': (_) => new TestsScreen(),
++            }, navigatorKey: navigatorKey, home: isNew ? new LoginScreen() : MainScreen(), );
+         });
+-  }
++    }
+ }
+-
+ // todo refactor this and separate the 3 screens here
+-
+-void main({bool noReset = false}) async {
+-  WidgetsFlutterBinding.ensureInitialized();
+-
+-  if (!noReset) {
+-    final storage = new FlutterSecureStorage();
+-    String value = await storage.read(key: "db_key");
+-    if (value == null) {
+-      int randomNumber = Random.secure().nextInt(4294967296);
+-      await storage.write(key: "db_key", value: randomNumber.toString());
+-      value = await storage.read(key: "db_key");
++void main({
++    bool noReset = false
++}) async {
++    WidgetsFlutterBinding.ensureInitialized();
++    if (!noReset) {
++        final storage = new FlutterSecureStorage();
++        String value = await storage.read(key: "db_key");
++        if (value == null) {
++            int randomNumber = Random.secure().nextInt(4294967296);
++            await storage.write(key: "db_key", value: randomNumber.toString());
++            value = await storage.read(key: "db_key");
++        }
++        var codec = getEncryptSembastCodec(password: value);
++        globals.db = await globals.dbFactory.openDatabase(
++            (await DBHelper().localFolder) + DBHelper().dbPath, codec: codec);
+     }
+-
+-    var codec = getEncryptSembastCodec(password: value);
+-
+-    globals.db = await globals.dbFactory.openDatabase(
+-        (await DBHelper().localFolder) + DBHelper().dbPath,
+-        codec: codec);
+-  }
+-  if (await Saver.shouldMigrate) {
+-    Saver.migrate();
+-  } else {
+-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+-    globals.version = packageInfo.version;
+-    globals.isBeta = globals.version.endsWith("-beta");
+-    if (globals.isBeta)
+-      globals.version = globals.version.replaceFirst("-beta", "");
+-    List<User> users = await AccountManager().getUsers();
+-    isNew = (users.isEmpty);
+-    globals.isLogo = await SettingsHelper().getLogo();
+-    globals.isSingle = await SettingsHelper().getSingleUser();
+-    globals.lang = await SettingsHelper().getLang();
+-    RequestHelper().refreshSzivacsSettigns();
+-    loadFAQ();
+-
+-    if (!isNew) {
+-      //BackgroundHelper().register();
+-
+-      globals.isDark = await SettingsHelper().getDarkTheme();
+-      globals.isAmoled = await SettingsHelper().getAmoled();
+-      globals.isColor = await SettingsHelper().getColoredMainPage();
+-      globals.isSingle = await SettingsHelper().getSingleUser();
+-      globals.multiAccount = (await Saver.readUsers()).length != 1;
+-      if (!noReset) globals.users = users;
+-      if (!noReset) globals.accounts = List();
+-      if (!noReset)
+-        for (User user in users) globals.accounts.add(Account(user));
+-      if (!noReset) globals.selectedAccount = globals.accounts[0];
+-      if (!noReset) globals.selectedUser = users[0];
+-      globals.themeID = await SettingsHelper().getTheme();
+-      globals.color1 = await SettingsHelper().getEvalColor(0);
+-      globals.color2 = await SettingsHelper().getEvalColor(1);
+-      globals.color3 = await SettingsHelper().getEvalColor(2);
+-      globals.color4 = await SettingsHelper().getEvalColor(3);
+-      globals.color5 = await SettingsHelper().getEvalColor(4);
++    if (await Saver.shouldMigrate) {
++        Saver.migrate();
++    } else {
++        PackageInfo packageInfo = await PackageInfo.fromPlatform();
++        globals.version = packageInfo.version;
++        globals.isBeta = globals.version.endsWith("-beta");
++        if (globals.isBeta) globals.version = globals.version.replaceFirst("-beta", "");
++        List < User > users = await AccountManager().getUsers();
++        isNew = (users.isEmpty);
++        globals.isLogo = await SettingsHelper().getLogo();
++        globals.isSingle = await SettingsHelper().getSingleUser();
++        globals.lang = await SettingsHelper().getLang();
++        RequestHelper().refreshSzivacsSettigns();
++        //loadFAQ();
++        if (!isNew) {
++            //BackgroundHelper().register();
++            globals.isDark = await SettingsHelper().getDarkTheme();
++            globals.isAmoled = await SettingsHelper().getAmoled();
++            globals.isColor = await SettingsHelper().getColoredMainPage();
++            globals.isSingle = await SettingsHelper().getSingleUser();
++            globals.multiAccount = (await Saver.readUsers()).length != 1;
++            if (!noReset) globals.users = users;
++            if (!noReset) globals.accounts = List();
++            if (!noReset)
++                for (User user in users) globals.accounts.add(Account(user));
++            if (!noReset) globals.selectedAccount = globals.accounts[0];
++            if (!noReset) globals.selectedUser = users[0];
++            globals.themeID = await SettingsHelper().getTheme();
++            globals.color1 = await SettingsHelper().getEvalColor(0);
++            globals.color2 = await SettingsHelper().getEvalColor(1);
++            globals.color3 = await SettingsHelper().getEvalColor(2);
++            globals.color4 = await SettingsHelper().getEvalColor(3);
++            globals.color5 = await SettingsHelper().getEvalColor(4);
++        }
++        runApp(MyApp());
++        BackgroundFetch.registerHeadlessTask(backgroundFetchHeadlessTask);
+     }
+-
+-    runApp(MyApp());
+-    BackgroundFetch.registerHeadlessTask(backgroundFetchHeadlessTask);
+-  }
+ }
+-
++/*
+ void loadFAQ() async {
+   String markdownFAQ = await RequestHelper().getFAQ();
+   globals.htmlFAQ = markdown.markdownToHtml(markdownFAQ);
+ }
+-
+-Future<void> reInit() async {
+-  globals.lang = await SettingsHelper().getLang();
+-  runApp(MyApp());
++*/
++Future < void > reInit() async {
++    globals.lang = await SettingsHelper().getLang();
++    runApp(MyApp());
+ }
+-
+-FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+-    new FlutterLocalNotificationsPlugin();
+-
++FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+ void backgroundFetchHeadlessTask() async {
+-  var initializationSettingsAndroid =
+-      new AndroidInitializationSettings('notification_icon');
+-  var initializationSettingsIOS = new IOSInitializationSettings();
+-  var initializationSettings = new InitializationSettings(
+-      initializationSettingsAndroid, initializationSettingsIOS);
+-  flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+-  flutterLocalNotificationsPlugin.initialize(initializationSettings);
+-
+-  await BackgroundHelper().backgroundTask().then((int finished) {
+-    BackgroundFetch.finish();
+-  });
++    var initializationSettingsAndroid = new AndroidInitializationSettings('notification_icon');
++    var initializationSettingsIOS = new IOSInitializationSettings();
++    var initializationSettings = new InitializationSettings(initializationSettingsAndroid, initializationSettingsIOS);
++    flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
++    flutterLocalNotificationsPlugin.initialize(initializationSettings);
++    await BackgroundHelper().backgroundTask().then((int finished) {
++        BackgroundFetch.finish();
++    });
+ }
+-
+ LoginScreenState loginScreenState = new LoginScreenState();
+-
+ class LoginScreen extends StatefulWidget {
+-  LoginScreen({this.fromApp});
+-
+-  bool fromApp = false;
+-
+-  @override
+-  LoginScreenState createState() => LoginScreenState();
++    LoginScreen({
++        this.fromApp
++    });
++    bool fromApp = false;
++    @override
++    LoginScreenState createState() => LoginScreenState();
+ }
+-
+-Icon helpIconSwitch = new Icon(
+-  Icons.help,
+-  color: Colors.white12,
+-);
++Icon helpIconSwitch = new Icon(Icons.help, color: Colors.white12, );
+ bool helpSwitch = false;
+-
+ void helpToggle() {
+-  helpSwitch = !helpSwitch;
+-  if (helpSwitch) {
+-    helpIconSwitch = new Icon(
+-      Icons.help,
+-      color: Colors.white,
+-    );
+-  } else {
+-    helpIconSwitch = new Icon(
+-      Icons.help,
+-      color: Colors.white12,
+-    );
+-  }
++    helpSwitch = !helpSwitch;
++    if (helpSwitch) {
++        helpIconSwitch = new Icon(Icons.help, color: Colors.white, );
++    } else {
++        helpIconSwitch = new Icon(Icons.help, color: Colors.white12, );
++    }
+ }
+-
+ void showToggle() {
+-  showSwitch = !showSwitch;
+-  if (showSwitch) {
+-    showIconSwitch = new Icon(
+-      Icons.remove_red_eye,
+-      color: Colors.white,
+-    );
+-  } else {
+-    showIconSwitch = new Icon(
+-      Icons.remove_red_eye,
+-      color: Colors.white12,
+-    );
+-  }
++    showSwitch = !showSwitch;
++    if (showSwitch) {
++        showIconSwitch = new Icon(Icons.remove_red_eye, color: Colors.white, );
++    } else {
++        showIconSwitch = new Icon(Icons.remove_red_eye, color: Colors.white12, );
++    }
+ }
+-
+-Icon showIconSwitch = new Icon(
+-  Icons.remove_red_eye,
+-  color: Colors.white12,
+-);
++Icon showIconSwitch = new Icon(Icons.remove_red_eye, color: Colors.white12, );
+ bool showSwitch = false;
+-
+ String userName = "";
+ String password = "";
+-
+ String userError;
+ String passwordError;
+ bool schoolSelected = true;
+-
+ double kbSize;
+-
+ bool isDialog = false;
+-
+ bool loggingIn = false;
+-
+ final userNameController = new TextEditingController();
+ final passwordController = new TextEditingController();
+-
+-class LoginScreenState extends State<LoginScreen> {
+-//todo refactor some stuff here
+-
+-  Future<bool> showBlockDialog() async {
+-    return showDialog<bool>(
+-      context: context,
+-      barrierDismissible: false,
+-      builder: (BuildContext context) {
+-        return new SimpleDialog(
+-          children: <Widget>[
+-            Text("""
+-Most úgy néz ki, hogy megint lassítják a Szivacsot az iskolák egy részénél (a visszajelzések alapján valószínűleg a klikes sulik érintettek), így újra használhatatlan.
+-
+-Azt továbbra sem árulták el, hogy mi ennek az oka, nem válaszolnak e-maileimre.
+-
+-Ha tényleg így marad én nem látom értelmét a projekt folytatásának.
+-Az app azért fent maradna a Play Áruházban a nagyon elvetemülteknek (és azoknak akiknek nincs lassítva), de nem frissíteném.
+-
+-Üdv.:
+-Boa
+-
+-2019. 12. 09.
+-            """),
+-            new MaterialButton(
+-              child: Text("Értem"),
+-              onPressed: () {
+-                SettingsHelper().setAcceptBlock(true);
+-                Navigator.of(context).pop(true);
+-              },
+-            )
+-          ],
+-          title: Text("Egy üzenet a fejlesztőtől:"),
+-          contentPadding: EdgeInsets.all(20),
+-          shape: RoundedRectangleBorder(
+-            side: BorderSide(
+-              style: BorderStyle.none,
+-              width: 1,
+-            ),
+-            borderRadius: BorderRadius.circular(10),
+-          ),
+-        );
+-      },
+-    );
+-  }
+-
+-  Future<bool> showTOSDialog() async {
+-    return showDialog(
+-          barrierDismissible: false,
++class LoginScreenState extends State < LoginScreen > {
++    //todo refactor some stuff here
++    /*
++      Future<bool> showBlockDialog() async {
++        return showDialog<bool>(
+           context: context,
++          barrierDismissible: false,
+           builder: (BuildContext context) {
+-            return new TOSDialog();
++            return new SimpleDialog(
++              children: <Widget>[
++                Text("""
++    Most úgy néz ki, hogy megint lassítják a Szivacsot az iskolák egy részénél (a visszajelzések alapján valószínűleg a klikes sulik érintettek), így újra használhatatlan.
++
++    Azt továbbra sem árulták el, hogy mi ennek az oka, nem válaszolnak e-maileimre.
++
++    Ha tényleg így marad én nem látom értelmét a projekt folytatásának.
++    Az app azért fent maradna a Play Áruházban a nagyon elvetemülteknek (és azoknak akiknek nincs lassítva), de nem frissíteném.
++
++    Üdv.:
++    Boa
++
++    2019. 12. 09.
++                """),
++                new MaterialButton(
++                  child: Text("Értem"),
++                  onPressed: () {
++                    SettingsHelper().setAcceptBlock(true);
++                    Navigator.of(context).pop(true);
++                  },
++                )
++              ],
++              title: Text("Egy üzenet a fejlesztőtől:"),
++              contentPadding: EdgeInsets.all(20),
++              shape: RoundedRectangleBorder(
++                side: BorderSide(
++                  style: BorderStyle.none,
++                  width: 1,
++                ),
++                borderRadius: BorderRadius.circular(10),
++              ),
++            );
+           },
+-        ) ??
+-        false;
+-  }
+-
+-  @override
+-  void initState() {
+-    loggingIn = false;
+-    super.initState();
++        );
++      }
++      *
++
++      Future<bool> showTOSDialog() async {
++        return showDialog(
++              barrierDismissible: false,
++              context: context,
++              builder: (BuildContext context) {
++                return new TOSDialog();
++              },
++            ) ??
++            false;
++      }
++      * 
++      * */
++    @override
++    void initState() {
++        loggingIn = false;
++        super.initState();
++        /*
++    //faszt érdekel tbh
+     WidgetsBinding.instance.addPostFrameCallback((_) async {
+       if (!(await SettingsHelper().getAcceptTOS()))
+         showTOSDialog();
+       else if (!(await SettingsHelper().getAcceptBlock())) showBlockDialog();
+     });
+ 
+-    initJson();
+-/*
+-    DynamicTheme.of(context).setBrightness(Brightness.light).then((void a){
+-      setStateHere();
+-    });
++       DynamicTheme.of(context).setBrightness(Brightness.light).then((void a) {
++            setStateHere();
++        });
+ */
+-  }
+-
+-  void initJson() async {
+-    String data =
+-        ""; //await DefaultAssetBundle.of(context).loadString("assets/data.json");
+-
+-    data = await RequestHelper().getInstitutes();
+-
+-    try {
+-      globals.jsonres = json.decode(data);
+-    } catch (e) {
+-      print(e);
+-      Fluttertoast.showToast(
+-        msg:
+-            "Nem sikerült lekérni a Krétás iskolákat, így az offline adatbázist fogja használni az app.",
+-        backgroundColor: Colors.red,
+-        textColor: Colors.white,
+-        fontSize: 16.0,
+-      );
+-
+-      data =
+-          await DefaultAssetBundle.of(context).loadString("assets/data.json");
+-      globals.jsonres = json.decode(data);
++        initJson();
++ 
+     }
+-
+-    globals.jsonres.sort((dynamic a, dynamic b) {
+-      return a["Name"].toString().compareTo(b["Name"].toString());
+-    });
+-
+-    globals.searchres = json.decode(data);
+-
+-    globals.searchres.sort((dynamic a, dynamic b) {
+-      return a["Name"].toString().compareTo(b["Name"].toString());
+-    });
+-
+-    if (isDialog) {
+-      myDialogState.setState(() {});
++    void initJson() async {
++        //   ""; //await DefaultAssetBundle.of(context).loadString("assets/data.json");
++        String data = "";
++        data = await RequestHelper().getInstitutes();
++        try {
++            globals.jsonres = json.decode(data);
++            print("iskolak hossza:");
++            print(globals.jsonres.length);
++        } catch (e) {
++            print(e);
++            Fluttertoast.showToast(msg: "Nem sikerült lekérni a Krétás iskolákat.", backgroundColor: Colors.red, textColor: Colors.white, fontSize: 16.0, );
++            globals.jsonres = json.decode(data);
++        }
++        globals.jsonres.sort((dynamic a, dynamic b) {
++            return a["Name"].toString().compareTo(b["Name"].toString());
++        });
++        globals.searchres = json.decode(data);
++        globals.searchres.sort((dynamic a, dynamic b) {
++            return a["Name"].toString().compareTo(b["Name"].toString());
++        });
++        if (isDialog) {
++            myDialogState.setState(() {});
++        }
+     }
+-  }
+-
+-  void login(BuildContext context) async {
+-    userError = null;
+-    passwordError = null;
+-
+-    try {
+-      final result = await InternetAddress.lookup('google.com');
+-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+-        password = passwordController.text;
+-        userName = userNameController.text;
++    void login(BuildContext context) async {
+         userError = null;
+         passwordError = null;
+-        schoolSelected = true;
+-        String bearerResp;
+-        String code;
+-        if (userName == "") {
+-          userError = S.of(context).choose_username;
+-          setState(() {
+-            loggingIn = false;
+-          });
+-        } else if (password == "") {
+-          setState(() {
+-            loggingIn = false;
+-          });
+-          passwordError = S.of(context).choose_password;
+-        } else if (globals.selectedSchoolUrl == "") {
+-          setState(() {
+-            loggingIn = false;
+-          });
+-          schoolSelected = false;
+-        } else {
+-          String instCode = globals.selectedSchoolCode; //suli kódja
+-          String jsonBody = "institute_code=" +
+-              instCode +
+-              "&userName=" +
+-              userName +
+-              "&password=" +
+-              password +
+-              "&grant_type=password&client_id=919e0c1c-76a2-4646-a2fb-7085bbbf3c56";
+-
+-          try {
+-            bearerResp =
+-                await RequestHelper().getBearer(jsonBody, instCode, false);
+-            Map<String, dynamic> bearerMap = json.decode(bearerResp);
+-            code = bearerMap.values.toList()[0];
+-
+-            Map<String, String> userInfo = await UserInfoHelper()
+-                .getInfo(instCode, userName, password, false);
+-
+-            setState(() {
+-              User user = new User(
+-                  int.parse(userInfo["StudentId"]),
+-                  userName,
+-                  password,
+-                  userInfo["StudentName"],
+-                  instCode,
+-                  globals.selectedSchoolUrl,
+-                  globals.selectedSchoolName,
+-                  userInfo["ParentName"],
+-                  userInfo["ParentId"]);
+-              AccountManager().addUser(user);
+-
+-              globals.users.add(user);
+-
+-              globals.multiAccount = globals.users.length != 1;
+-
+-              globals.accounts = List();
+-              for (User user in globals.users)
+-                globals.accounts.add(Account(user));
+-              globals.selectedAccount = globals.accounts
+-                  .firstWhere((Account account) => account.user.id == user.id);
+-              globals.selectedUser = user;
+-
+-              Navigator.pushNamed(context, "/main");
+-            });
+-          } catch (e) {
+-            setState(() {
+-              loggingIn = false;
+-            });
+-            print(e);
++        try {
++            final result = await InternetAddress.lookup('e-kreta.hu');
++            if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
++                password = passwordController.text;
++                userName = userNameController.text;
++                userError = null;
++                passwordError = null;
++                schoolSelected = true;
++                String bearerResp;
++                String code;
++                if (userName == "") {
++                    userError = S.of(context).choose_username;
++                    setState(() {
++                        loggingIn = false;
++                    });
++                } else if (password == "") {
++                    setState(() {
++                        loggingIn = false;
++                    });
++                    passwordError = S.of(context).choose_password;
++                } else if (globals.selectedSchoolUrl == "") {
++                    setState(() {
++                        loggingIn = false;
++                    });
++                    schoolSelected = false;
++                } else {
++                    String instCode = globals.selectedSchoolCode; //suli kódja
++                    String jsonBody = "institute_code=" + instCode + "&userName=" + userName + "&password=" + password + "&grant_type=password&client_id=" + globals.clientId;
++                    try {
++                        bearerResp = await RequestHelper().getBearer(jsonBody, instCode, false);
++                        Map < String, dynamic > bearerMap = json.decode(bearerResp);
++                        code = bearerMap.values.toList()[0];
++                        Map < String, String > userInfo = await UserInfoHelper().getInfo(instCode, userName, password, false);
++                        setState(() {
++                            User user = new User(int.parse(userInfo["StudentId"]), userName, password, userInfo["StudentName"], instCode, globals.selectedSchoolUrl, globals.selectedSchoolName, userInfo["ParentName"], userInfo["ParentId"]);
++                            AccountManager().addUser(user);
++                            globals.users.add(user);
++                            globals.multiAccount = globals.users.length != 1;
++                            globals.accounts = List();
++                            for (User user in globals.users) globals.accounts.add(Account(user));
++                            globals.selectedAccount = globals.accounts.firstWhere((Account account) => account.user.id == user.id);
++                            globals.selectedUser = user;
++                            Navigator.pushNamed(context, "/main");
++                        });
++                    } catch (e) {
++                        setState(() {
++                            loggingIn = false;
++                        });
++                        print(e);
++                        setState(() {
++                            if (code == "invalid_grant") {
++                                passwordError = "hibás felasználónév vagy jelszó";
++                            } else if (code == "invalid_password") {
++                                passwordError = "hibás felasználónév vagy jelszó";
++                            } else {
++                                passwordError = "ismeretlen probléma";
++                                print(bearerResp);
++                            }
++                        });
++                    }
++                }
++            } else {
++                setState(() {
++                    loggingIn = false;
++                });
++            }
++        }
++        on SocketException
++        catch (_) {
+             setState(() {
+-              if (code == "invalid_grant") {
+-                passwordError = "hibás felasználónév vagy jelszó";
+-              } else if (code == "invalid_password") {
+-                passwordError = "hibás felasználónév vagy jelszó";
+-              } else {
+-                passwordError = "hálózati probléma";
+-              }
++                loggingIn = false;
+             });
+-          }
++            passwordError = "nincs internet";
+         }
+-      } else {
++    }
++    void showSelectDialog() {
+         setState(() {
+-          loggingIn = false;
++            myDialogState = new MyDialogState();
++            showDialog < Institution > (context: context, builder: (BuildContext context) {
++                return new MyDialog();
++            }).then((dynamic) {
++                setState(() {});
++            });
+         });
+-      }
+-    } on SocketException catch (_) {
+-      setState(() {
+-        loggingIn = false;
+-      });
+-      passwordError = "nincs internet";
+     }
+-  }
+-
+-  void showSelectDialog() {
+-    setState(() {
+-      myDialogState = new MyDialogState();
+-      showDialog<Institution>(
+-          context: context,
+-          builder: (BuildContext context) {
+-            return new MyDialog();
+-          }).then((dynamic) {
+-        setState(() {});
+-      });
+-    });
+-  }
+-
+-  _launchFAQ() async {
+-    return showDialog<Null>(
+-      context: context,
+-      barrierDismissible: true,
+-      builder: (BuildContext context) {
+-        return new SimpleDialog(
+-          children: <Widget>[
+-            new SingleChildScrollView(
+-              child: Html(data: globals.htmlFAQ),
+-            ),
+-          ],
+-          title: Text(S.of(context).faq),
+-          contentPadding: EdgeInsets.all(20),
+-          shape: RoundedRectangleBorder(
+-            side: BorderSide(
+-              style: BorderStyle.none,
+-              width: 1,
+-            ),
+-            borderRadius: BorderRadius.circular(3),
+-          ),
+-        );
+-      },
+-    );
+-  }
++    _launchFAQ() async {
++        return showDialog < Null > (context: context, barrierDismissible: true, builder: (BuildContext context) {
++            return new SimpleDialog(children: < Widget > [
++                new SingleChildScrollView(child: Html(data: globals.htmlFAQ), ),
++            ], title: Text(S.of(context).faq), contentPadding: EdgeInsets.all(20), shape: RoundedRectangleBorder(side: BorderSide(style: BorderStyle.none, width: 1, ), borderRadius: BorderRadius.circular(3), ), );
++        }, );
++    }
++    _gotoAbout() {
++        Navigator.popAndPushNamed(context, "/about");
++    }
+ 
+-  _gotoAbout() {
+-    Navigator.popAndPushNamed(context, "/about");
+-  }
+ 
+-  @override
++   @override
+   Widget build(BuildContext context) {
+     return new WillPopScope(
+         onWillPop: () {
