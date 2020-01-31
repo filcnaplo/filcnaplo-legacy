@@ -110,7 +110,7 @@ class AboutScreenState extends State < AboutScreen > {
         }
     }
     _launchTOS() async {
-        const url = 'https://www.e-szivacs.org/adatkezeles_es_feltetelek.html';
+        const url = '';
         if (await canLaunch(url)) {
             await launch(url);
         } else {
