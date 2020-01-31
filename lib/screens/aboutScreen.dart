@@ -102,7 +102,7 @@ class AboutScreenState extends State < AboutScreen > {
         }, );
     }
     _launchYoutubeURL() async {
-        const url = 'https://www.youtube.com/channel/UC1V9Sdq4RlYjzZEkB9bzwrA';
+        const url = '';
         if (await canLaunch(url)) {
             await launch(url);
         } else {
@@ -118,7 +118,7 @@ class AboutScreenState extends State < AboutScreen > {
         }
     }
     _launchTelegramURL() async {
-        const url = 'https://t.me/eSzivacs';
+        const url = '';
         if (await canLaunch(url)) {
             await launch(url);
         } else {
@@ -126,7 +126,7 @@ class AboutScreenState extends State < AboutScreen > {
         }
     }
     _launchGmailURL() async {
-        const url = 'mailto:eSzivacs@gmail.com';
+        const url = '';
         if (await canLaunch(url)) {
             await launch(url);
         } else {
@@ -134,7 +134,7 @@ class AboutScreenState extends State < AboutScreen > {
         }
     }
     _launchGithubURL() async {
-        const url = 'https://github.com/boapps/e-Szivacs-2';
+        const url = '';
         if (await canLaunch(url)) {
             await launch(url);
         } else {
@@ -142,7 +142,7 @@ class AboutScreenState extends State < AboutScreen > {
         }
     }
     _launchInstagramURL() async {
-        const url = 'https://www.instagram.com/e_szivacs/';
+        const url = '';
         if (await canLaunch(url)) {
             await launch(url);
         } else {

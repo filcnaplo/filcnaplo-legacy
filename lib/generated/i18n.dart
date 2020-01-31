@@ -34,7 +34,6 @@ class S implements WidgetsLocalizations {
   String get average_menu => "average";
   String get averages => "Averages";
   String get blue => "blue";
-  String get boa => "Boa";
   String get choose => "choose";
   String get choose_password => "Please enter a password.";
   String get choose_school => "Choose a school:";
@@ -423,8 +422,6 @@ class $hu extends S {
   String get tests => "Számonkérések";
   @override
   String get month => "hónap";
-  @override
-  String get boa => "BoA";
   @override
   String get info_school => "Iskola: ";
   @override
