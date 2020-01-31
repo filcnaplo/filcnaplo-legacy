@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../globals.dart' as globals;
-import 'package:e_szivacs/generated/i18n.dart';
+import 'package:filcnaplo/generated/i18n.dart';
 
 class TimeSelectDialog extends StatefulWidget {
   const TimeSelectDialog();

@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:dynamic_theme/dynamic_theme.dart';
-import 'package:e_szivacs/Cards/TomorrowLessonCard.dart';
-//import 'package:e_szivacs/Dialog/TOSDialog.dart';
-import 'package:e_szivacs/generated/i18n.dart';
+import 'package:filcnaplo/Cards/TomorrowLessonCard.dart';
+//import 'package:filcnaplo/Dialog/TOSDialog.dart';
+import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';

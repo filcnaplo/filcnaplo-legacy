@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../GlobalDrawer.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:e_szivacs/generated/i18n.dart';
+import 'package:filcnaplo/generated/i18n.dart';
 import '../globals.dart'
 as globals;
 import 'package:flutter_localizations/flutter_localizations.dart';

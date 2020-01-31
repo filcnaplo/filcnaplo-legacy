@@ -1,4 +1,4 @@
-library e_szivacs.globals;
+library filcnaplo.globals;
 import 'package:flutter/material.dart';
 import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';

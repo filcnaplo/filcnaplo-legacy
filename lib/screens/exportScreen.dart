@@ -1,8 +1,8 @@
 import 'dart:ui';
-import 'package:e_szivacs/Datas/Account.dart';
+import 'package:filcnaplo/Datas/Account.dart';
 import 'package:flutter/material.dart';
 import '../GlobalDrawer.dart';
-import 'package:e_szivacs/generated/i18n.dart';
+import 'package:filcnaplo/generated/i18n.dart';
 import '../Datas/User.dart';
 import '../Utils/Saver.dart' as Saver;
 import '../globals.dart' as globals;

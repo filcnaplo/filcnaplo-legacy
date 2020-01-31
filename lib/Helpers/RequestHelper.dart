@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert'
 show json, utf8;
-import 'package:e_szivacs/Datas/Lesson.dart';
+import 'package:filcnaplo/Datas/Lesson.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart'

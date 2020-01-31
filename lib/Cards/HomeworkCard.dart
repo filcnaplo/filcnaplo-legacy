@@ -1,4 +1,4 @@
-import 'package:e_szivacs/Datas/Homework.dart';
+import 'package:filcnaplo/Datas/Homework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';

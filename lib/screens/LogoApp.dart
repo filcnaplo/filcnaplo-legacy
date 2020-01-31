@@ -1,7 +1,7 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import '../PageRouteBuilder.dart';
-import 'package:e_szivacs/generated/i18n.dart';
+import 'package:filcnaplo/generated/i18n.dart';
 import '../main.dart';
 //todo refactor this
 class LogoApp extends StatefulWidget {

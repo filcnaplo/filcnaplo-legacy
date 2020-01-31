@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Datas/Lesson.dart';
-import 'package:e_szivacs/generated/i18n.dart';
+import 'package:filcnaplo/generated/i18n.dart';
 
 
 class Week {

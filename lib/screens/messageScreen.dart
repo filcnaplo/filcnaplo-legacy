@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:e_szivacs/Datas/Message.dart';
-import 'package:e_szivacs/Dialog/MessageDialog.dart';
-import 'package:e_szivacs/Helpers/RequestHelper.dart';
+import 'package:filcnaplo/Datas/Message.dart';
+import 'package:filcnaplo/Dialog/MessageDialog.dart';
+import 'package:filcnaplo/Helpers/RequestHelper.dart';
 import 'package:flutter/material.dart';
 
 import '../GlobalDrawer.dart';

@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:ui' as prefix0;
 
-import 'package:e_szivacs/Cards/SummaryCards.dart';
-import 'package:e_szivacs/generated/i18n.dart';
+import 'package:filcnaplo/Cards/SummaryCards.dart';
+import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 
 import '../Datas/Average.dart';

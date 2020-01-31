@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert' show utf8, json;
 
-import 'package:e_szivacs/Helpers/RequestHelper.dart';
+import 'package:filcnaplo/Helpers/RequestHelper.dart';
 
 import '../Datas/Message.dart';
 import '../Datas/User.dart';

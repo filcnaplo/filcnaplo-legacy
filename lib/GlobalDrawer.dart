@@ -1,4 +1,4 @@
-import 'package:e_szivacs/generated/i18n.dart';
+import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 
 import 'Datas/Account.dart';
@@ -97,7 +97,7 @@ class GDrawerState extends State<GDrawer> {
                               ),
                               new Container(
                                 child: new Text(
-                                  version,
+                                  "\n" + version,
                                   style: TextStyle(
                                       fontSize: 19.0,
                                       color: Theme.of(context).accentColor),

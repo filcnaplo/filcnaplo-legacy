@@ -2,7 +2,7 @@ import 'dart:convert' show utf8, json;
 import 'dart:ui';
 
 import 'package:charts_flutter/flutter.dart';
-import 'package:e_szivacs/generated/i18n.dart';
+import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../Datas/Average.dart';

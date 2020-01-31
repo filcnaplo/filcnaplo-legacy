@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:e_szivacs/globals.dart'
+import 'package:filcnaplo/globals.dart'
 as globals;
 Color getColors(BuildContext context, int value, bool getBackground) {
     switch (value) { //Define background and foreground color of the card for number values.
