@@ -1,5 +1,5 @@
-name: e_szivacs
-description: A new Flutter application.
+name: filcnaplo
+description: A Szivacs Naplóból forkolt enapló alkalmazás KRÉTA rendszerhez. 
 
 dependencies:
   background_fetch: '^0.2.0'
