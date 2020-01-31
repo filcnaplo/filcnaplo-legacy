@@ -13,8 +13,8 @@ import '../globals.dart'
 as globals;
 import "dart:math";
 class RequestHelper {
-    static
-    const String GRANT_TYPE = "password";
+ //   static
+   // const String GRANT_TYPE = "password";
     var randomDeviceCodeNames = ["a3xelte", "a5xelte", "a5y17lte", "A6020", "a7y17lte", "addison", "albus", "Amber", "angler", "armani", "athene", "axon7", "bacon", "bardock", "bardockpro", "berkeley", "beryllium", "bullhead", "cancro", "capricorn", "chagalllte", "chagallwifi", "chaozu", "charlotte", "che10", "cheeseburger", "cherry", "cheryl", "chiron", "clark"];
     final _random = new Random();
     void showError(String msg) {
@@ -31,14 +31,14 @@ class RequestHelper {
         try {
             String settings = utf8.decode((await http.get(globals.SETTINGS_API_URL)).bodyBytes);
             Map settingsJson = json.decode(settings);
-            globals.latestVersion = globals.isBeta ? settingsJson["BetaVersion"] : settingsJson["CurrentAppVersion"];
-            if (globals.smartUserAgent) {
-                // globals.userAgent = settingsJson["FillableUserAgent"];
-                var randomCodeName = randomDeviceCodeNames[_random.nextInt(randomDeviceCodeNames.length)];
-                globals.userAgent = settingsJson["FillableUserAgent"].replaceAll('<codename>', randomCodeName);
-            } else {
-                globals.userAgent = "Filc.Naplo." + globals.version;
-            }
+            globals.latestVersion = settingsJson["LatestVersion"];
+            //       if (globals.smartUserAgent) {
+            // globals.userAgent = settingsJson["FillableUserAgent"];
+            var randomCodeName = randomDeviceCodeNames[_random.nextInt(randomDeviceCodeNames.length)];
+            globals.userAgent = settingsJson["KretaUserAgent"].replaceAll('<codename>', randomCodeName);
+            //   } else {
+            //       globals.userAgent = "FilcNaplo-" + globals.version;
+            //   }
         } catch (e) {
             print(e);
         }

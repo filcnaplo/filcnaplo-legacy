@@ -10,8 +10,8 @@ import 'Datas/Homework.dart';
 import 'Datas/Lesson.dart';
 import 'Datas/Account.dart';
 
-String SETTINGS_API_URL = "https://www.efilc.hu/mirror/settings.json";
-String INSTITUTES_API_URL = "https://www.efilc.hu/mirror/school-list.json";
+String SETTINGS_API_URL = "https://www.filcnaplo.hu/settings.json";
+String INSTITUTES_API_URL = "https://www.filcnaplo.hu/school_list.json";
 String clientId = "919e0c1c-76a2-4646-a2fb-7085bbbf3c56";
 bool firstMain = true;
 String version;
