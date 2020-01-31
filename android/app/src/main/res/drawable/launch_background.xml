@@ -5,6 +5,6 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@mipmap/eszivacs_splash" />
+            android:src="@mipmap/filc_splash" />
     </item>
 </layer-list>

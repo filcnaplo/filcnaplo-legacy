@@ -174,9 +174,9 @@ class SettingsScreenState extends State < SettingsScreen > {
     @override
     Widget build(BuildContext context) {
         List < String > themes = [
-            S.of(context).blue,
-            S.of(context).red,
             S.of(context).green,
+            S.of(context).red,
+            S.of(context).blue,
             S.of(context).color_lightgreen,
             S.of(context).yellow,
             S.of(context).orange,

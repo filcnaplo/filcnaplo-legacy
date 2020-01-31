@@ -13,3 +13,4 @@ packages
 .gradle/
 local.properties
 flutter_export_environment.sh
+keystore.file

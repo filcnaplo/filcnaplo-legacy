@@ -22,10 +22,10 @@ android {
     }
     signingConfigs {
         release {
-            keyAlias 'alias'
-            keyPassword 'keypass'
-            storeFile file('/home/marci/dev/Szivacs-Naplo/keystore.file')
-            storePassword 'storepass'
+            keyAlias 'Alias1234'
+            keyPassword 'Keypass1234'
+            storeFile file('/home/marci/dev/filcnaplo/keystore.file')
+            storePassword 'Storepass1234'
         }
     }
     buildTypes {
@@ -37,8 +37,8 @@ android {
         applicationId "org.filc.naplo"
         minSdkVersion 18
         targetSdkVersion 28
-        versionCode 2019
-        versionName "2.2.19f"
+        versionCode 10
+        versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 }
