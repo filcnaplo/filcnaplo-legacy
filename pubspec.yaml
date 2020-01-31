@@ -55,8 +55,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/icon.png
-    - assets/noise.webp
-
   fonts:
     - family: Raleway
       fonts:

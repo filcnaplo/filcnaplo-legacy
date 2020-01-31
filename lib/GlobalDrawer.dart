@@ -89,7 +89,7 @@ class GDrawerState extends State<GDrawer> {
                             children: <Widget>[
                               new Container(
                                 child: new Text(
-                                  S.of(context).title,
+                                  "\n" + S.of(context).title,
                                   style: TextStyle(fontSize: 19.0),
                                 ),
                                 padding: new EdgeInsets.fromLTRB(

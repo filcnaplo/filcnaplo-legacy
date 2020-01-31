@@ -1,0 +1,4 @@
+- aboutscreen (info) javitasa
+- kek betuszinek lecserelese zoldre
+- tobbfele lehetosegu user agent implementalasa (weboldalas, sajat, ures, custom)
+- forditasok
