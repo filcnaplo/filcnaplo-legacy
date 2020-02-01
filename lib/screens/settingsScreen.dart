@@ -193,7 +193,7 @@ class SettingsScreenState extends State < SettingsScreen > {
             SwitchListTile(title: new Text(S.of(context).singleuser_mainpage, style: TextStyle(fontSize: 20.0), ), activeColor: Theme.of(context).accentColor, value: _isSingleUser, onChanged: _isSingleUserChange, secondary: new Icon(Icons.person), ),
             SwitchListTile(title: new Text(S.of(context).dark_theme, style: TextStyle(fontSize: 20.0), ), activeColor: Theme.of(context).accentColor, value: _isDark, onChanged: _isDarkChange, secondary: new Icon(IconData(0xf50e, fontFamily: "Material Design Icons")), ),
             SwitchListTile(title: new Text(S.of(context).settings_amoled, style: TextStyle(fontSize: 20.0), ), activeColor: Theme.of(context).accentColor, value: _isDark ? _amoled : false, onChanged: _isDark ? _setAmoled : null, secondary: new Icon(IconData(0xf301, fontFamily: "Material Design Icons")), ),
-            SwitchListTile(title: new Text("Okos User-Agent", style: TextStyle(fontSize: 20.0), ), activeColor: Theme.of(context).accentColor, value: _smartUserAgent, onChanged: _isSingleUserChange, ),
+            SwitchListTile(title: new Text("Okos User-Agent", style: TextStyle(fontSize: 20.0), ), activeColor: Theme.of(context).accentColor, value: _smartUserAgent, onChanged: _smartUserAgentChange, secondary: new Icon(IconData(0xfcbf, fontFamily: "Material Design Icons")), ),
             ListTile(title: new Text(S.of(context).color + " (" + S.of(context).evaluations + ")", style: TextStyle(fontSize: 20.0), ), onTap: () {
                 Navigator.pushNamed(context, "/evalcolor");
             }, leading: new Icon(Icons.color_lens), ),
