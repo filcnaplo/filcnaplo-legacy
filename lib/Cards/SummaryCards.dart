@@ -35,14 +35,16 @@ class SummaryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Card(
-      color: globals.isDark ? Color.fromARGB(255, 25, 25, 25) : Colors.grey[300],
+      color: globals.isSingle
+        ? globals.isDark ? Colors.grey[800] : Colors.grey[300]
+        : summaryEvaluations.first.owner.color??(globals.isDark ? Colors.grey[800] : Colors.grey[300]), //If a user logs in, default color is null.
       margin: EdgeInsets.all(6.0),
       child: new Container(
       child: new Column(
         children: <Widget>[
           showTitle
           ? new Container(
-            child: new Column(
+            child: new Row(
               children: <Widget>[
                 new Text(
                   title,
@@ -50,7 +52,16 @@ class SummaryCard extends StatelessWidget {
                       new TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
+                globals.isSingle
+                ? new Container()
+                : new Text(
+                  summaryEvaluations.first.owner.name,
+                  textAlign: TextAlign.center,
+                )
               ],
+              mainAxisAlignment: globals.isSingle
+              ? MainAxisAlignment.center
+              : MainAxisAlignment.spaceAround,
             ),
             padding: EdgeInsets.all(7),
             constraints: BoxConstraints.expand(height: 36),
@@ -74,7 +85,9 @@ class SummaryCard extends StatelessWidget {
       ),
       decoration: new BoxDecoration(
         border: Border.all(
-            color: globals.isDark ? Color.fromARGB(255, 25, 25, 25) : Colors.grey[300],
+            color: globals.isSingle
+              ? globals.isDark ? Colors.grey[800] : Colors.grey[300]
+              : summaryEvaluations.first.owner.color??(globals.isDark ? Colors.grey[800] : Colors.grey[300]),
             width: 2.5),
         borderRadius: new BorderRadius.all(Radius.circular(5)),
       ),
