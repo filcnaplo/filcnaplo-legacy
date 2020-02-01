@@ -26,7 +26,7 @@ List jsonres;
 List < User > users = new List < User > ();
 bool multiAccount;
 bool isSingle;
-bool smartUserAgent = true;
+bool smartUserAgent;
 User selectedUser;
 String lang = "";
 String selectedSchoolCode = "";

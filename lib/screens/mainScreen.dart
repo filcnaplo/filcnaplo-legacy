@@ -252,8 +252,8 @@ class MainScreenState extends State < MainScreen > {
                 tempNotes.addAll(globals.selectedAccount.notes);
                 tempAbsents.addAll(globals.selectedAccount.absents);
             } catch (exception) {
-                Fluttertoast.showToast(msg: "Hiba", backgroundColor: Colors.red, textColor: Colors.white, fontSize: 16.0);
-                print(exception);
+            //    Fluttertoast.showToast(msg: "Hiba", backgroundColor: Colors.red, textColor: Colors.white, fontSize: 16.0);
+                print("singleexcp: " + exception);
             }
         } else {
             for (Account account in globals.accounts) {
@@ -261,8 +261,7 @@ class MainScreenState extends State < MainScreen > {
                     try {
                         await account.refreshStudentString(offline, showErrors);
                     } catch (e) {
-                        print("HIBA 2");
-                        print(e);
+                        print("error, needs relogin");
                     }
                     tempEvaluations.addAll(account.student.Evaluations);
                     tempNotes.addAll(account.notes);
