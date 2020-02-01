@@ -7,5 +7,7 @@ Konyítasz a kódoláshoz, és becsatlakoznál a fejlesztésbe? Érezd otthon ma
 Első sikeres, lényegi változást tartalmazó commitod után meghívunk a fejlesztői Telegram csoportunkba.
 
 [Telegram Hírlevél](https://t.me/filc_naplo)
+
 [További információ](https://filcnaplo.hu/)
+
 [Letöltés](https://github.com/filcnaplo/filcnaplo/releases)
