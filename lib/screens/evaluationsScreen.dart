@@ -2,7 +2,7 @@ import 'dart:convert' show utf8, json;
 import 'dart:ui';
 
 import 'package:charts_flutter/flutter.dart';
-import 'package:filcnaplo/generated/i18n.dart';
+import 'package:e_szivacs/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../Datas/Average.dart';
@@ -14,15 +14,15 @@ import 'dart:ui' as dart_ui;
 import '../Utils/ColorManager.dart';
 import '../Dialog/SortDialog.dart';
 import '../Datas/User.dart';
-import 'evaluationsScreen.dart';
+//import 'evaluationsScreen.dart';
 
 void main() {
-  runApp(new MaterialApp(home: new StatisticsScreen()));
+  runApp(new MaterialApp(home: new EvaluationsScreen()));
 }
 
-class StatisticsScreen extends StatefulWidget {
+class EvaluationsScreen extends StatefulWidget {
   @override
-  StatisticsScreenState createState() => new StatisticsScreenState();
+  EvaluationsScreenState createState() => new EvaluationsScreenState();
 }
 
 //todo refactor this file
@@ -32,7 +32,7 @@ var series;
 
 List<Evaluation> allEvals = new List();
 
-class StatisticsScreenState extends State<StatisticsScreen> {
+class EvaluationsScreenState extends State<EvaluationsScreen> {
   Average selectedAverage;
   final List<Series<TimeAverage, DateTime>> seriesList = new List();
   List<Evaluation> evals = new List();
@@ -419,9 +419,9 @@ class StatisticsScreenState extends State<StatisticsScreen> {
                     border: Border.all(
                         color: (allEvals[index].Weight != "100%" &&
                                 allEvals[index].Weight != null)
-                            ? globals.isDark ? Colors.white60 : Colors.black45
+                            ? globals.isDark ? Colors.white38 : Colors.black38
                             : Colors.transparent,
-                        width: 4),
+                        width: 3),
                     borderRadius: new BorderRadius.all(Radius.circular(40))),
               ),
               title: new Text(
@@ -681,6 +681,7 @@ class StatisticsScreenState extends State<StatisticsScreen> {
               //Build list of evaluations below graph
               child: new Container(
                 child: new ListView.builder(
+                  reverse: true,
                   itemBuilder: _itemBuilder,
                   itemCount: globals.currentEvals.length,
                   shrinkWrap: true,
@@ -768,7 +769,7 @@ class StatisticsScreenState extends State<StatisticsScreen> {
                     border: Border.all(
                         color: (globals.currentEvals[index].Weight != "100%" &&
                                 globals.currentEvals[index].Weight != null)
-                            ? globals.isDark ? Colors.white30 : Colors.black26
+                            ? globals.isDark ? Colors.white38 : Colors.black38
                             : Colors.transparent,
                         width: 3),
                     borderRadius: new BorderRadius.all(Radius.circular(40))),
@@ -835,21 +836,24 @@ class StatisticsScreenState extends State<StatisticsScreen> {
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
         return new AlertDialog(
-          title:
-              new Text(evaluation.Subject ?? "" + " " + evaluation.Value ?? ""),
+          title: new Text(evaluation.Subject ?? "" + evaluation.Value ?? ""),
           content: new SingleChildScrollView(
             child: new ListBody(
               children: <Widget>[
-                evaluation.Theme != ""
+                evaluation.Theme != null
                     ? new Text(S.of(context).theme + evaluation.Theme ?? "")
                     : new Container(),
                 new Text(S.of(context).teacher + evaluation.Teacher ?? ""),
                 new Text(
                     S.of(context).time + dateToHuman(evaluation.Date ?? "")),
-                new Text(S.of(context).mode + evaluation.Mode ?? ""),
+                evaluation.Mode != null
+                    ? new Text(S.of(context).mode + evaluation.Mode)
+                    : new Container(),
                 new Text(S.of(context).administration_time +
                     dateToHuman(evaluation.CreatingTime ?? "")),
-                new Text(S.of(context).weight + evaluation.Weight ?? ""),
+                evaluation.Weight != null
+                    ? new Text(S.of(context).weight + evaluation.Weight ?? "")
+                    : new Container(),
                 new Text(S.of(context).value + evaluation.Value ?? ""),
                 new Text(S.of(context).range + evaluation.FormName ?? ""),
               ],
