@@ -134,6 +134,7 @@ void main({bool noReset = false}) async {
     isNew = (users.isEmpty);
     globals.isLogo = await SettingsHelper().getLogo();
     globals.isSingle = await SettingsHelper().getSingleUser();
+    globals.smartUserAgent = await SettingsHelper().getSmartUserAgent();
     globals.lang = await SettingsHelper().getLang();
     RequestHelper().refreshSzivacsSettigns();
 //    loadFAQ();

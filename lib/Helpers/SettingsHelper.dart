@@ -81,8 +81,17 @@ class SettingsHelper {
   }
 
   Future<bool> getSingleUser() async {
-    return await _getProperty("SingleUser", false);
+    return await _getProperty("SingleUser", true);
   }
+
+  void setSmartUserAgent(bool value) {
+    _setPropertyBool("SmartUserAgent", value);
+  }
+
+  Future<bool> getSmartUserAgent() async {
+    return await _getProperty("SmartUserAgent", true);
+  }
+
 
   void setLang(String lang) {
     _setPropertyBool("lang", lang);

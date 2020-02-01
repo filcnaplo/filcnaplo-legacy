@@ -50,6 +50,7 @@ class SettingsScreenState extends State < SettingsScreen > {
         _isLogo = await SettingsHelper().getLogo();
         _refreshNotification = await SettingsHelper().getRefreshNotification();
         _isSingleUser = await SettingsHelper().getSingleUser();
+        _smartUserAgent = await SettingsHelper().getSmartUserAgent();
         _lang = await SettingsHelper().getLang();
         _theme = await SettingsHelper().getTheme();
         _amoled = await SettingsHelper().getAmoled();
@@ -160,8 +161,8 @@ class SettingsScreenState extends State < SettingsScreen > {
         setState(() {
             _smartUserAgent = value;
             globals.smartUserAgent = value;
+            SettingsHelper().setSmartUserAgent(_smartUserAgent);
             RequestHelper().refreshSzivacsSettigns();
-            //  SettingsHelper().setSingleUser(_isSingleUser);
         });
     }
     void _isCanSyncOnDataChange(bool value) {
