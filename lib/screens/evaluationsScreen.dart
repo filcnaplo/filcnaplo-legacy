@@ -2,11 +2,11 @@ import 'dart:convert' show utf8, json;
 import 'dart:ui';
 
 import 'package:charts_flutter/flutter.dart';
-<<<<<<< HEAD
+//<<<<<<< HEAD
 import 'package:filcnaplo/generated/i18n.dart';
-=======
+//=======
 import '../generated/i18n.dart';
->>>>>>> a4326adc56e3ebcd61371ea42e9bb4f70a52e46d
+//>>>>>>> a4326adc56e3ebcd61371ea42e9bb4f70a52e46d
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../Datas/Average.dart';
