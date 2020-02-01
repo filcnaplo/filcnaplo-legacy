@@ -1,18 +1,12 @@
 //Contributed by RedyAu
 
 import 'dart:async';
-import 'dart:ffi';
-import 'dart:math';
-import 'dart:ui' as prefix0;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_html/html_parser.dart';
 
 import '../Datas/Student.dart';
-import '../Helpers/SettingsHelper.dart';
 import '../Utils/StringFormatter.dart';
 import '../globals.dart' as globals;
-import '../Cards/EvaluationCard.dart';
 import '../Utils/ColorManager.dart';
 
 class SummaryCard extends StatelessWidget {
