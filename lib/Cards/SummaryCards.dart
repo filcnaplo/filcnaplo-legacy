@@ -17,19 +17,21 @@ class SummaryCard extends StatelessWidget {
   String title;
   bool showTheme;
   bool showTitle;
+  bool showColor;
 
-  SummaryCard(List<Evaluation> summaryEvaluations, BuildContext context, String title, bool showTheme, bool showTitle) { //Summary types: 1: 1st Q, 2: Mid-year, 3: 3rd Q, 4: End-year
+  SummaryCard(List<Evaluation> summaryEvaluations, BuildContext context, String title, bool showTheme, bool showTitle, bool showColor) { //Summary types: 1: 1st Q, 2: Mid-year, 3: 3rd Q, 4: End-year
     this.summaryEvaluations = summaryEvaluations;
     this.context = context;
     this.title = title;
     this.showTheme = showTheme;
     this.showTitle = showTitle;
+    this.showColor = showColor;
   }
 
   @override
   Widget build(BuildContext context) {
     return new Card(
-      color: globals.isSingle
+      color: !showColor
         ? globals.isDark ? Colors.grey[800] : Colors.grey[300]
         : summaryEvaluations.first.owner.color??(globals.isDark ? Colors.grey[800] : Colors.grey[300]), //If a user logs in, default color is null.
       margin: EdgeInsets.all(6.0),
@@ -46,14 +48,14 @@ class SummaryCard extends StatelessWidget {
                       new TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
-                globals.isSingle
+                !showColor
                 ? new Container()
                 : new Text(
                   summaryEvaluations.first.owner.name,
                   textAlign: TextAlign.center,
                 )
               ],
-              mainAxisAlignment: globals.isSingle
+              mainAxisAlignment: !showColor
               ? MainAxisAlignment.center
               : MainAxisAlignment.spaceAround,
             ),
@@ -79,7 +81,7 @@ class SummaryCard extends StatelessWidget {
       ),
       decoration: new BoxDecoration(
         border: Border.all(
-            color: globals.isSingle
+            color: !showColor
               ? globals.isDark ? Colors.grey[800] : Colors.grey[300]
               : summaryEvaluations.first.owner.color??(globals.isDark ? Colors.grey[800] : Colors.grey[300]),
             width: 2.5),

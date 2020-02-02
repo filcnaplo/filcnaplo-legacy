@@ -1,12 +1,13 @@
 import 'dart:convert' show utf8, json;
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:charts_flutter/flutter.dart';
-//<<<<<<< HEAD
-import 'package:filcnaplo/generated/i18n.dart';
-//=======
+import '../Cards/SummaryCards.dart';
+import '../Cards/SummaryCards.dart';
+import '../Cards/SummaryCards.dart';
+import '../Utils/ColorManager.dart';
 import '../generated/i18n.dart';
-//>>>>>>> a4326adc56e3ebcd61371ea42e9bb4f70a52e46d
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../Datas/Average.dart';
@@ -18,10 +19,62 @@ import 'dart:ui' as dart_ui;
 import '../Utils/ColorManager.dart';
 import '../Dialog/SortDialog.dart';
 import '../Datas/User.dart';
-//import 'evaluationsScreen.dart';
+import '../Cards/SummaryCards.dart';
 
 void main() {
   runApp(new MaterialApp(home: new EvaluationsScreen()));
+}
+
+class EvalCount extends StatelessWidget {
+  //The colorful cards showing how many of a type of note you have
+  BuildContext context;
+  int value;
+  int count;
+  EvalCount(BuildContext context, int value, int count) {
+    this.context = context;
+    this.value = value;
+    this.count = count;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new Container(
+      child: new Card(
+          child: Container(
+              child: new Row(
+                children: <Widget>[
+                  new Container(
+                    child: new Text(value.toString(),
+                        style: new TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: getColors(context, value, false),
+                        )),
+                    alignment: Alignment(0, 0),
+                    height: 40,
+                    width: 40,
+                    decoration: new BoxDecoration(
+                        color: getColors(context, value, true),
+                        borderRadius:
+                            new BorderRadius.all(Radius.circular(40))),
+                  ),
+                  new Row(
+                    children: <Widget>[
+                      new Text(count.toString() ?? "0",
+                          style: new TextStyle(fontSize: 20)),
+                      new Text(" db")
+                    ],
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                  ),
+                ],
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+              ),
+              padding: EdgeInsets.all(10),
+              color: globals.isDark ? Colors.black54 : Colors.white70),
+          color: getColors(context, value, true)),
+      height: 70,
+    );
+  }
 }
 
 class EvaluationsScreen extends StatefulWidget {
@@ -34,12 +87,12 @@ List<Average> averages = new List();
 List<TimeAverage> timeData = new List();
 var series;
 
-List<Evaluation> allEvals = new List();
-
 class EvaluationsScreenState extends State<EvaluationsScreen> {
   Average selectedAverage;
   final List<Series<TimeAverage, DateTime>> seriesList = new List();
   List<Evaluation> evals = new List();
+  List<Evaluation> toSummaryEvals = new List();
+  List<Evaluation> allEvals = new List();
   String avrString = "";
   String classAvrString = "";
   int db1 = 0;
@@ -50,6 +103,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
   double allAverage;
   double allMedian;
   int allMode;
+  List<Widget> summaryCardsToShow = new List();
 
   bool hasOfflineLoaded = false;
   bool hasLoaded = true;
@@ -141,6 +195,9 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
 
   void initEvals() async {
     await globals.selectedAccount.refreshStudentString(true, false);
+
+    toSummaryEvals.addAll(globals.selectedAccount.student.Evaluations);
+
     evals = globals.selectedAccount.student.Evaluations;
     evals.removeWhere((Evaluation evaluation) =>
         evaluation.NumberValue == 0 ||
@@ -148,6 +205,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
         evaluation.Weight == null ||
         evaluation.Weight == "-" ||
         evaluation.isSummaryEvaluation());
+
     _onSelect(averages[0]);
     for (Evaluation e in evals)
       switch (e.NumberValue) {
@@ -173,6 +231,49 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
     if (allMedian == null) allMedian = 0;
     if (allAverage == null) allAverage = 0;
     if (allMode == null) allMode = 0;
+
+    List<Evaluation> firstQuarterEvaluations = (toSummaryEvals
+        .where((Evaluation evaluation) => (evaluation.isFirstQuarter()))
+        .toList());
+    List<Evaluation> halfYearEvaluations = (toSummaryEvals
+        .where((Evaluation evaluation) => (evaluation.isHalfYear()))
+        .toList());
+    List<Evaluation> thirdQuarterEvaluations = (toSummaryEvals
+        .where((Evaluation evaluation) => (evaluation.isThirdQuarter()))
+        .toList());
+    List<Evaluation> endYearEvaluations = (toSummaryEvals
+        .where((Evaluation evaluation) => (evaluation.isEndYear()))
+        .toList());
+
+    print("1: " + globals.selectedAccount.student.Evaluations.length.toString());
+    print("2: " + toSummaryEvals.length.toString());
+    print("3: " + allEvals.length.toString());
+    print("4: " + evals.length.toString());
+
+    if (firstQuarterEvaluations.isNotEmpty)
+      summaryCardsToShow.add(new SummaryCard(firstQuarterEvaluations, context,
+          "Első negyedévi jegyek", false, true, false));
+    if (halfYearEvaluations.isNotEmpty)
+      summaryCardsToShow.add(new SummaryCard(
+          halfYearEvaluations, context, "Félévi jegyek", false, true, false));
+    if (thirdQuarterEvaluations.isNotEmpty)
+      summaryCardsToShow.add(new SummaryCard(thirdQuarterEvaluations, context,
+          "Harmadik negyedévi jegyek", false, true, false));
+    if (endYearEvaluations.isNotEmpty)
+      summaryCardsToShow.add(new SummaryCard(
+          endYearEvaluations, context, "Év végi jegyek", false, true, false));
+
+    if (summaryCardsToShow.isEmpty)
+      summaryCardsToShow.add(Card(
+        child: Container(
+          padding: EdgeInsets.all(5),
+                child: new Text(
+                    "Itt fognak megjelenni a negyedévi, félévi és év végi jegyeid.")),
+      ));
+
+    print("############################################\n" +
+        summaryCardsToShow.length.toString() + "\n" +
+        firstQuarterEvaluations.length.toString());
   }
 
   double getAllAverages() {
@@ -275,7 +376,8 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
   void _initAllEvals() async {
     try {
       await globals.selectedAccount.refreshStudentString(true, false);
-      allEvals = (globals.selectedAccount.student.Evaluations.where((Evaluation evaluation) => evaluation.isMidYear())).toList();
+      allEvals = (globals.selectedAccount.student.Evaluations
+          .where((Evaluation evaluation) => evaluation.isMidYear())).toList();
     } catch (exeption) {
       Fluttertoast.showToast(
           msg: "Nem sikerült betölteni a jegyeket",
@@ -384,21 +486,20 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
       Widget sep = new Container();
 
       if (globals.sort == 1) {
-          if (((index == 0) && (allEvals[index].Value.length < 16) ||
-              (allEvals[index].Value != allEvals[index - 1].Value &&
-                  allEvals[index].Value.length < 16)))
-            sep = Card(
-                color: globals.isDark ? Colors.grey[1000] : Colors.grey[300],
-                child: Container(
-                  child: new Text(
-                    allEvals[index].Value,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  alignment: Alignment(0, 0),
-                  constraints: BoxConstraints.expand(height: 36),
+        if (((index == 0) && (allEvals[index].Value.length < 16) ||
+            (allEvals[index].Value != allEvals[index - 1].Value &&
+                allEvals[index].Value.length < 16)))
+          sep = Card(
+              color: globals.isDark ? Colors.grey[1000] : Colors.grey[300],
+              child: Container(
+                child: new Text(
+                  allEvals[index].Value,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
-                margin:
-                    EdgeInsets.only(top: 10, left: 30, right: 30, bottom: 3));
+                alignment: Alignment(0, 0),
+                constraints: BoxConstraints.expand(height: 36),
+              ),
+              margin: EdgeInsets.only(top: 10, left: 30, right: 30, bottom: 3));
       }
 
       return new Column(
@@ -454,26 +555,27 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
     }
 
     void refreshSort() async {
-    setState(() {
-      switch (globals.sort) {
-        case 0:
-          allEvals.sort((a, b) => b.CreatingTime.compareTo(a.CreatingTime));
-          break;
-        case 1:
-          allEvals.sort((a, b) {
-            if (a.realValue == b.realValue)
-              return b.CreatingTime.compareTo(a.CreatingTime);
-            return a.realValue.compareTo(b.realValue);
-          });
-          break;
-        case 2:
-          allEvals.sort((a, b) => b.Date.compareTo(a.Date));
-          break;
-      }
-    });
-  }
+      setState(() {
+        switch (globals.sort) {
+          case 0:
+            allEvals.sort((a, b) => b.CreatingTime.compareTo(a.CreatingTime));
+            break;
+          case 1:
+            allEvals.sort((a, b) {
+              if (a.realValue == b.realValue)
+                return b.CreatingTime.compareTo(a.CreatingTime);
+              return a.realValue.compareTo(b.realValue);
+            });
+            break;
+          case 2:
+            allEvals.sort((a, b) => b.Date.compareTo(a.Date));
+            break;
+        }
+      });
+    }
 
     evaluationsBody = new Scaffold(
+        //"Összes"
         floatingActionButton: new FloatingActionButton(
           onPressed: () {
             showSortDialog().then((b) {
@@ -495,7 +597,161 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           ],
         ))));
 
-    dataBody = new SingleChildScrollView(
+    averageBody = Scaffold(
+      //"Tárgyanként"
+      body: new Stack(children: <Widget>[
+        new Column(
+          children: <Widget>[
+            new Container(
+              child: selectedAverage != null
+                  ? new DropdownButton(
+                      items: averages.map((Average average) {
+                        return new DropdownMenuItem<Average>(
+                            value: average,
+                            child: new Row(
+                              children: <Widget>[
+                                new Text(average.subject),
+                              ],
+                            ));
+                      }).toList(),
+                      onChanged: _onSelect,
+                      value: selectedAverage,
+                    )
+                  : new Container(),
+              alignment: Alignment(0, 0),
+              margin: EdgeInsets.all(5),
+            ),
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Text(S.of(context).average),
+                new Text(
+                  avrString,
+                  style: TextStyle(
+                      color: getColorForAverageString(avrString),
+                      fontWeight: FontWeight.bold),
+                ),
+                new Container(
+                  padding: EdgeInsets.only(left: 10),
+                ),
+                selectedAverage != null
+                    ? selectedAverage.classValue != null
+                        ? new Text(S.of(context).class_average)
+                        : Container()
+                    : Container(),
+                selectedAverage != null
+                    ? selectedAverage.classValue != null
+                        ? new Text(
+                            selectedAverage.classValue != 0
+                                ? selectedAverage.classValue.toString()
+                                : r"¯\_(ツ)_/¯",
+                            style: TextStyle(
+                                color: getColorForAverage(
+                                    selectedAverage.classValue),
+                                fontWeight: FontWeight.bold),
+                          )
+                        : Container()
+                    : Container(),
+              ],
+            ),
+            new Container(
+              child: new SizedBox(
+                child: new TimeSeriesChart(
+                  series,
+                  animate: true,
+                  primaryMeasureAxis: NumericAxisSpec(
+                    showAxisLine: true,
+                  ),
+                ),
+                height: 150,
+              ),
+            ),
+            new Flexible(
+              //Build list of evaluations below graph
+              child: new Container(
+                child: new ListView.builder(
+                  reverse: true,
+                  itemBuilder: _itemBuilder,
+                  itemCount: globals.currentEvals.length,
+                  shrinkWrap: true,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ]),
+      floatingActionButton: new FloatingActionButton(
+        onPressed: () {
+          return showDialog(
+                barrierDismissible: true,
+                context: context,
+                builder: (BuildContext context) {
+                  return new GradeDialog(this.callback);
+                },
+              ) ??
+              false;
+        },
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+        tooltip: S.of(context).sort,
+      ),
+    );
+
+    dataBody = ListView(children: <Widget>[
+      new Table(
+        children: [
+          new TableRow(
+            children: <Widget>[
+              new EvalCount(context, 5, db5),
+              new EvalCount(context, 4, db4),
+              new EvalCount(context, 3, db3)
+            ],
+          ),
+          new TableRow(
+            children: <Widget>[
+              new EvalCount(context, 2, db2),
+              new EvalCount(context, 1, db1),
+              new Container(
+                  child: new Card(
+                      child: Container(
+                          child: FittedBox(
+                            child: new Row(
+                              children: <Widget>[
+                                new Column(
+                                  children: <Widget>[
+                                    new Text("átlaga:"),
+                                    new Text("mediánja:"),
+                                    new Text("módusza:")
+                                  ],
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                ),
+                                new Column(
+                                  children: <Widget>[
+                                    new Text(allAverage.toStringAsFixed(2)),
+                                    new Text(allMedian.toString()),
+                                    new Text(allMode.toString())
+                                  ],
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                )
+                              ],
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            ),
+                          ),
+                          color:
+                              globals.isDark ? Colors.black54 : Colors.white70),
+                      color: getColorForAverage(allAverage)),
+                  height: 70)
+            ],
+          )
+        ],
+        defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+      ),
+      new Column(children: summaryCardsToShow)
+    ]);
+
+    /*dataBody = new SingleChildScrollView( //"Eredmények"
       child: new Center(
         child: new Container(
           margin: EdgeInsets.all(10),
@@ -611,108 +867,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           ),
         ),
       ),
-    );
-
-    averageBody = Scaffold(
-      body: new Stack(children: <Widget>[
-        new Column(
-          children: <Widget>[
-            new Container(
-              child: selectedAverage != null
-                  ? new DropdownButton(
-                      items: averages.map((Average average) {
-                        return new DropdownMenuItem<Average>(
-                            value: average,
-                            child: new Row(
-                              children: <Widget>[
-                                new Text(average.subject),
-                              ],
-                            ));
-                      }).toList(),
-                      onChanged: _onSelect,
-                      value: selectedAverage,
-                    )
-                  : new Container(),
-              alignment: Alignment(0, 0),
-              margin: EdgeInsets.all(5),
-            ),
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                new Text(S.of(context).average),
-                new Text(
-                  avrString,
-                  style: TextStyle(
-                      color: getColorForAverageString(avrString),
-                      fontWeight: FontWeight.bold),
-                ),
-                new Container(
-                  padding: EdgeInsets.only(left: 10),
-                ),
-                selectedAverage != null
-                    ? selectedAverage.classValue != null
-                        ? new Text(S.of(context).class_average)
-                        : Container()
-                    : Container(),
-                selectedAverage != null
-                    ? selectedAverage.classValue != null
-                        ? new Text(
-                            selectedAverage.classValue != 0
-                                ? selectedAverage.classValue.toString()
-                                : r"¯\_(ツ)_/¯",
-                            style: TextStyle(
-                                color: getColorForAverage(
-                                    selectedAverage.classValue),
-                                fontWeight: FontWeight.bold),
-                          )
-                        : Container()
-                    : Container(),
-              ],
-            ),
-            new Container(
-              child: new SizedBox(
-                child: new TimeSeriesChart(
-                  series,
-                  animate: true,
-                  primaryMeasureAxis: NumericAxisSpec(
-                    showAxisLine: true,
-                  ),
-                ),
-                height: 150,
-              ),
-            ),
-            new Flexible(
-              //Build list of evaluations below graph
-              child: new Container(
-                child: new ListView.builder(
-                  reverse: true,
-                  itemBuilder: _itemBuilder,
-                  itemCount: globals.currentEvals.length,
-                  shrinkWrap: true,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ]),
-      floatingActionButton: new FloatingActionButton(
-        onPressed: () {
-          return showDialog(
-                barrierDismissible: true,
-                context: context,
-                builder: (BuildContext context) {
-                  return new GradeDialog(this.callback);
-                },
-              ) ??
-              false;
-        },
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-        tooltip: S.of(context).sort,
-      ),
-    );
+    );*/
 
     return new WillPopScope(
         onWillPop: () {
@@ -731,7 +886,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                 ),
                 BottomNavigationBarItem(
                   icon: new Icon(Icons.assistant),
-                  title: new Text("Statisztika"),
+                  title: new Text("Eredmények"),
                 ),
               ],
               onTap: switchToScreen,

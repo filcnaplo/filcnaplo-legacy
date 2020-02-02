@@ -154,10 +154,6 @@ class MainScreenState extends State<MainScreen> {
             });
   }
 
-  bool firstQuarterCard = false;
-  bool halfYearCard = false;
-  bool thirdQuarterCard = false;
-  bool endYearCard = false;
   Future<List<Widget>> feedItems() async {
     int maximumFeedLength = 100;
     List<Widget> feedCards = new List();
@@ -179,16 +175,16 @@ class MainScreenState extends State<MainScreen> {
 
       if (firstQuarterEvaluations.isNotEmpty)
         feedCards.add(new SummaryCard(firstQuarterEvaluations, context,
-            "Első negyedévi jegyek", false, true));
+            "Első negyedévi jegyek", false, true, !globals.isSingle));
       if (halfYearEvaluations.isNotEmpty)
-        feedCards.add(new SummaryCard(
-            halfYearEvaluations, context, "Félévi jegyek", false, true));
+        feedCards.add(new SummaryCard(halfYearEvaluations, context,
+            "Félévi jegyek", false, true, !globals.isSingle));
       if (thirdQuarterEvaluations.isNotEmpty)
         feedCards.add(new SummaryCard(thirdQuarterEvaluations, context,
-            "Harmadik negyedévi jegyek", false, true));
+            "Harmadik negyedévi jegyek", false, true, !globals.isSingle));
       if (endYearEvaluations.isNotEmpty)
         feedCards.add(new SummaryCard(
-            endYearEvaluations, context, "Év végi jegyek", false, true));
+            endYearEvaluations, context, "Év végi jegyek", false, true, !globals.isSingle));
     }
 
     for (String day in absents.keys.toList())
