@@ -5,6 +5,19 @@ import 'package:flutter/material.dart';
 import '../globals.dart';
 import 'DBHelper.dart';
 
+Map defaultShowCardType = {
+        "AbsenceCard": true,
+        "ChangedLessonCard": true,
+        "EvaluationCard": true,
+        "HomewordCard": true,
+        "LessonCard": true,
+        "NoteCard": true,
+        "FirstQCard": true,
+        "HalfYearCard": true,
+        "ThirdQCard": true,
+        "EndYearCard": true
+      };
+
 class SettingsHelper {
   Future<void> _setPropertyBool(String name, dynamic value) async {
     Map<String, dynamic> settings = new Map();
@@ -143,6 +156,14 @@ class SettingsHelper {
 
   Future<void> setAcceptBlock(bool value) async {
     await _setPropertyBool("acceptBlockV3", value);
+  }
+
+  Future<Map> getShowCardType() async {
+    return await _getProperty("showCardType", defaultShowCardType);
+  }
+
+  Future<void> setShowCardType(Map showCardType) async {
+    await _setPropertyBool("showCardType", showCardType);
   }
 
   static const List<Color> COLORS = [

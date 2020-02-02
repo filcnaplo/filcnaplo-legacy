@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:filcnaplo/Cards/TomorrowLessonCard.dart';
+import 'package:filcnaplo/Dialog/CardChooserDialog.dart';
 //import 'package:filcnaplo/Dialog/TOSDialog.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +47,8 @@ class MainScreenState extends State<MainScreen> {
   //DateTime startDate = DateTime.now();
   bool hasOfflineLoaded = false;
   bool hasLoaded = true;
+  
+
   void _initSettings() async {
     DynamicTheme.of(context).setBrightness(await SettingsHelper().getDarkTheme()
         ? Brightness.dark
@@ -286,6 +289,14 @@ class MainScreenState extends State<MainScreen> {
                   : S.of(context).title),
               actions: <Widget>[
                 //TODO search maybe?
+                new IconButton(
+                  icon: new Icon(Icons.queue),
+                  onPressed: () {
+                    cardChooserDialog().then((b) {
+                      Navigator.pushNamed(context, "/main");
+                    });
+                  }
+                )
               ],
             ),
             body: hasOfflineLoaded &&
@@ -322,6 +333,16 @@ class MainScreenState extends State<MainScreen> {
                     ),
                   ]))
                 : new Center(child: new CircularProgressIndicator())));
+  }
+
+  Future<Null> cardChooserDialog() {
+    return showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (BuildContext context) {
+        return new CardChooserDialog();
+      }
+    );
   }
 
   Future<Null> _onRefresh(

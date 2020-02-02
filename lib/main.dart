@@ -99,6 +99,8 @@ class MyApp extends StatelessWidget {
 
 // todo refactor this and separate the 3 screens here
 
+//########################## MAIN
+
 void main({bool noReset = false}) async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -154,6 +156,8 @@ void main({bool noReset = false}) async {
       globals.color3 = await SettingsHelper().getEvalColor(2);
       globals.color4 = await SettingsHelper().getEvalColor(3);
       globals.color5 = await SettingsHelper().getEvalColor(4);
+
+      globals.showCardType = await SettingsHelper().getShowCardType();
     }
 
     runApp(MyApp());
