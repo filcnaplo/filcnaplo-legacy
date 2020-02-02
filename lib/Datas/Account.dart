@@ -34,7 +34,7 @@ class Account {
   List<Average> averages;
   List<Message> messages;
 
-  //todo add a Bearer token here
+  //TODO add a Bearer token here
 
   Account(User user) {
     this.user = user;

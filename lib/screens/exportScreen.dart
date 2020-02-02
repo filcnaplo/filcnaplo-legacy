@@ -46,7 +46,7 @@ class ExportScreenState extends State<ExportScreen> {
     });
   }
 
-  //todo refactor everything below this
+  //TODO refactor everything below this
 
   void initPath() async {
       path = (await getExternalStorageDirectory()).path + "/grades-" + selectedUser.username + ".json";

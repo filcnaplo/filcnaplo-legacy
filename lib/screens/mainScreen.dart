@@ -218,7 +218,7 @@ class MainScreenState extends State<MainScreen> {
     } catch (e) {
       print(e);
     }
-    //todo homework cards
+    //TODO homework cards
     /*for (Lesson l in lessons) {
           if (l.homework != null){
             print(l.homework);
@@ -286,7 +286,7 @@ class MainScreenState extends State<MainScreen> {
                   ? globals.selectedAccount.user.name
                   : S.of(context).title),
               actions: <Widget>[
-                //todo search maybe?
+                //TODO search maybe?
               ],
             ),
             body: hasOfflineLoaded &&

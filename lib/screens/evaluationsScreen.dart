@@ -82,7 +82,7 @@ class EvaluationsScreen extends StatefulWidget {
   EvaluationsScreenState createState() => new EvaluationsScreenState();
 }
 
-//todo refactor this file
+//TODO refactor this file
 List<Average> averages = new List();
 List<TimeAverage> timeData = new List();
 var series;

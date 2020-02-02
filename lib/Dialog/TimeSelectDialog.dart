@@ -15,7 +15,7 @@ class TimeSelectDialogState extends State<TimeSelectDialog> {
     setState(() {
       selectedTime = idok.indexOf(sel);
       globals.selectedTimeForHomework = selectedTime;
-      //todo: ezt meg kéne jegyeztetni
+      //TODO: ezt meg kéne jegyeztetni
     });
   }
 

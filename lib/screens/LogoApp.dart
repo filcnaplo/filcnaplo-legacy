@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../PageRouteBuilder.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import '../main.dart';
-//todo refactor this
+//TODO refactor this
 class LogoApp extends StatefulWidget {
     WelcomeNewUserState createState() => WelcomeNewUserState();
 }

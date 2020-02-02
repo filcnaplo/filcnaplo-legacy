@@ -117,7 +117,7 @@ class TomorrowLessonCard extends StatelessWidget {
               }).toList()),
             ),
           ],
-          title: Text("Holnapi órák"), //todo fordítási adatbázisból!
+          title: Text("Holnapi órák"), //TODO fordítási adatbázisból!
           contentPadding: EdgeInsets.all(20),
           shape: RoundedRectangleBorder(
             side: BorderSide(

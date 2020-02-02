@@ -195,6 +195,8 @@ void backgroundFetchHeadlessTask() async {
   });
 }
 
+//########## LOGIN SCREEN BEGIN
+
 LoginScreenState loginScreenState = new LoginScreenState();
 
 class LoginScreen extends StatefulWidget {
@@ -265,7 +267,7 @@ final userNameController = new TextEditingController();
 final passwordController = new TextEditingController();
 
 class LoginScreenState extends State<LoginScreen> {
-//todo refactor some stuff here
+//TODO refactor some stuff here
 
 /*
   Future<bool> showBlockDialog() async {

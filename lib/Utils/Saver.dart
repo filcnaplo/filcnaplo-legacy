@@ -24,7 +24,7 @@ void initEncryption() async {
 
   Map<String, String> allValues = await storage.readAll();
   if (!allValues.containsKey("encryption")) {
-    //todo ez kriptográfiailag biztonságos??
+    //TODO ez kriptográfiailag biztonságos??
     Uint8List seed = new Uint8List.fromList(List.filled(32, (rng.nextInt(255))));
     FortunaRandom rnd = new FortunaRandom()..seed(new KeyParameter(seed));
     await storage.write(key: "encryption", value: String.fromCharCodes(rnd.nextBytes(32)));

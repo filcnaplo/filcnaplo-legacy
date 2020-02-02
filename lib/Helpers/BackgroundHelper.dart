@@ -57,9 +57,9 @@ class BackgroundHelper {
             payload: e.trueID().toString());
       }
 
-      //todo jegyek változása
-      //todo új házik
-      //todo ha óra elmarad/helyettesítés
+      //TODO jegyek változása
+      //TODO új házik
+      //TODO ha óra elmarad/helyettesítés
     }
   }
 
