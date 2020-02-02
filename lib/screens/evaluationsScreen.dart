@@ -198,7 +198,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
 
     toSummaryEvals.addAll(globals.selectedAccount.student.Evaluations);
 
-    evals = globals.selectedAccount.student.Evaluations;
+    evals.addAll(globals.selectedAccount.student.Evaluations);
     evals.removeWhere((Evaluation evaluation) =>
         evaluation.NumberValue == 0 ||
         evaluation.Mode == "Na" ||
@@ -245,10 +245,8 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
         .where((Evaluation evaluation) => (evaluation.isEndYear()))
         .toList());
 
-    print("1: " + globals.selectedAccount.student.Evaluations.length.toString());
-    print("2: " + toSummaryEvals.length.toString());
-    print("3: " + allEvals.length.toString());
-    print("4: " + evals.length.toString());
+    //print("##############Jegymennyiség: " + globals.selectedAccount.student.Evaluations.length.toString());
+    //print("##############Első negyedév: " + firstQuarterEvaluations.length.toString());
 
     if (firstQuarterEvaluations.isNotEmpty)
       summaryCardsToShow.add(new SummaryCard(firstQuarterEvaluations, context,
@@ -270,10 +268,6 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                 child: new Text(
                     "Itt fognak megjelenni a negyedévi, félévi és év végi jegyeid.")),
       ));
-
-    print("############################################\n" +
-        summaryCardsToShow.length.toString() + "\n" +
-        firstQuarterEvaluations.length.toString());
   }
 
   double getAllAverages() {

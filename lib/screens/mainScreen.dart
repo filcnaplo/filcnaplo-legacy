@@ -343,8 +343,8 @@ class MainScreenState extends State<MainScreen> {
         tempNotes.addAll(globals.selectedAccount.notes);
         tempAbsents.addAll(globals.selectedAccount.absents);
       } catch (exception) {
-        //    Fluttertoast.showToast(msg: "Hiba", backgroundColor: Colors.red, textColor: Colors.white, fontSize: 16.0);
-        print("singleexcp: " + exception);
+        Fluttertoast.showToast(msg: "Hiba", backgroundColor: Colors.red, textColor: Colors.white, fontSize: 16.0);
+        //print("singleexcp: " + exception);
       }
     } else {
       for (Account account in globals.accounts) {
