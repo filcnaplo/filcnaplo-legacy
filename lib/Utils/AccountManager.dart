@@ -4,6 +4,7 @@ import '../globals.dart' as globals;
 import 'package:flutter/material.dart';
 import '../Utils/Saver.dart';
 import '../Datas/User.dart';
+import '../Helpers/SettingsHelper.dart';
 
 class AccountManager {
   Future<List<User>> getUsers() async {
@@ -29,18 +30,25 @@ class AccountManager {
 
   void addUser(User user) async{
     try {
-      List<User> users = await getUsers();
+      List<User> users = await getUsers(); //Logging in with another account
       for (User u in users)
         if (u.id == user.id)
           return;
       users.add(user);
       globals.users = users;
       saveUsers(users);
-    } catch (e) {
+
+      globals.isSingle = false;
+      SettingsHelper().setSingleUser(false);
+
+    } catch (e) { //Logging in with the first account
       List<User> users = new List();
       users.add(user);
       globals.users = users;
       saveUsers(users);
+
+      globals.isSingle = true;
+      SettingsHelper().setSingleUser(true);
     }
   }
 
@@ -50,8 +58,11 @@ class AccountManager {
     for (User u in users)
       if (u.id!=user.id)
         newUsers.add(u);
-    if (newUsers.length < 2)
+    if (newUsers.length < 2) {
       globals.multiAccount = false;
+      globals.isSingle = true;
+      SettingsHelper().setSingleUser(true); //If only one user left, set SingleUser.
+    }
     globals.users = newUsers;
     saveUsers(newUsers);
   }

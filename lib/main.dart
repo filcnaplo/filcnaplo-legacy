@@ -1,5 +1,4 @@
-import 'dart:convert'
-show json;
+import 'dart:convert' show json;
 import 'dart:io';
 import 'dart:math';
 import 'package:background_fetch/background_fetch.dart';
@@ -12,11 +11,9 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:http/http.dart'
-as http;
+import 'package:http/http.dart' as http;
 import 'package:package_info/package_info.dart';
-import 'package:markdown/markdown.dart'
-as markdown;
+import 'package:markdown/markdown.dart' as markdown;
 import 'package:flutter_html/flutter_html.dart';
 import 'Datas/Account.dart';
 import 'Datas/Institution.dart';
@@ -29,10 +26,8 @@ import 'Helpers/UserInfoHelper.dart';
 import 'Helpers/encrypt_codec.dart';
 import 'Utils/AccountManager.dart';
 import 'Utils/ColorManager.dart';
-import 'Utils/Saver.dart'
-as Saver;
-import 'globals.dart'
-as globals;
+import 'Utils/Saver.dart' as Saver;
+import 'globals.dart' as globals;
 //import 'screens/LogoApp.dart';
 import 'screens/aboutScreen.dart';
 import 'screens/absentsScreen.dart';
@@ -76,7 +71,7 @@ class MyApp extends StatelessWidget {
             theme: theme,
             routes: <String, WidgetBuilder>{
               '/main': (_) => new MainScreen(),
-           //   '/accept': (_) => new AcceptTermsState(),
+              //   '/accept': (_) => new AcceptTermsState(),
               '/login': (_) => new LoginScreen(),
               '/about': (_) => new AboutScreen(),
               '/timetable': (_) => new TimeTableScreen(),
@@ -90,7 +85,7 @@ class MyApp extends StatelessWidget {
               '/evaluations': (_) => new EvaluationsScreen(),
               '/export': (_) => new ExportScreen(),
               '/import': (_) => new ImportScreen(),
-         //     '/easteregg': (_) => new BattleRoyaleScreen(),
+              //     '/easteregg': (_) => new BattleRoyaleScreen(),
               '/evalcolor': (_) => new colorSettingsScreen(),
               '/student': (_) => new StudentScreen(),
               '/tests': (_) => new TestsScreen(),
@@ -346,15 +341,15 @@ Boa
   }
 
   void initJson() async {
-    String data = ""; //await DefaultAssetBundle.of(context).loadString("assets/data.json");
+    String data =
+        ""; //await DefaultAssetBundle.of(context).loadString("assets/data.json");
     data = await RequestHelper().getInstitutes();
     try {
       globals.jsonres = json.decode(data);
     } catch (e) {
       print(e);
       Fluttertoast.showToast(
-        msg:
-            "Nem sikerült lekérni a Krétás iskolákat.",
+        msg: "Nem sikerült lekérni a Krétás iskolákat.",
         backgroundColor: Colors.red,
         textColor: Colors.white,
         fontSize: 16.0,
@@ -414,7 +409,8 @@ Boa
               userName +
               "&password=" +
               password +
-              "&grant_type=password&client_id=" + globals.clientId;
+              "&grant_type=password&client_id=" +
+              globals.clientId;
 
           try {
             bearerResp =
@@ -462,7 +458,8 @@ Boa
               } else if (code == "invalid_password") {
                 passwordError = "hibás felasználónév vagy jelszó";
               } else {
-                passwordError = "ismeretlen (valószínűleg KRÉTÁS) probléma";
+                passwordError =
+                    "ismeretlen (valószínűleg KRÉTÁS) probléma: " + code;
               }
             });
           }
@@ -691,7 +688,8 @@ Boa
                               new Row(
                                 children: <Widget>[
                                   !Platform.isIOS
-                                      ? Expanded(child: new Container(
+                                      ? Expanded(
+                                          child: new Container(
                                           //margin: EdgeInsets.only(top: 20.0),
                                           child: FlatButton(
                                             onPressed: () {
@@ -705,7 +703,7 @@ Boa
                                             //#2196F3
                                             textColor: Colors.white,
                                           ),
-                                          padding: EdgeInsets.only(right:12),
+                                          padding: EdgeInsets.only(right: 12),
                                         ))
                                       : Container(),
                                   Expanded(
@@ -761,73 +759,111 @@ Boa
                           )))));
   }
 
-    @override
-    void dispose() {
-        // Clean up the controller when the Widget is disposed
-        //    passwordController.dispose();
-        //    userNameController.dispose();
-        super.dispose();
-    }
+  @override
+  void dispose() {
+    // Clean up the controller when the Widget is disposed
+    //    passwordController.dispose();
+    //    userNameController.dispose();
+    super.dispose();
+  }
 }
+
 class MyDialog extends StatefulWidget {
-    //  List newList;
-    const MyDialog();
-    @override
-    State createState() {
-        if (globals.jsonres != null) globals.searchres.addAll(globals.jsonres);
-        return myDialogState;
-    }
+  //  List newList;
+  const MyDialog();
+  @override
+  State createState() {
+    if (globals.jsonres != null) globals.searchres.addAll(globals.jsonres);
+    return myDialogState;
+  }
 }
+
 MyDialogState myDialogState = new MyDialogState();
-class MyDialogState extends State < MyDialog > {
-    @override
-    void dispose() {
-        //    this.dispose();
-        // Clean up the controller when the Widget is disposed
-        //    passwordController.dispose();
-        //    userNameController.dispose();
-        //    myDialogState.dispose();
-        isDialog = false;
-        super.dispose();
-    }
-    @override
-    void initState() {
-        super.initState();
-        isDialog = true;
-    }
-    Widget build(BuildContext context) {
-        return new SimpleDialog(title: new Text(S.of(context).choose_school), contentPadding: const EdgeInsets.all(10.0),
-            children: < Widget > [
-                new Container(child: new TextField(maxLines: 1, autofocus: true, onChanged: (String search) {
-                    setState(() {
-                        updateSearch(search);
-                    });
-                }), margin: new EdgeInsets.all(10.0), ),
-                new Container(child: globals.searchres != null ? new ListView.builder(itemBuilder: _itemBuilder, itemCount: globals.searchres.length, ) : new Container(), width: 320.0, height: 400.0, )
-            ], );
-    }
-    void updateSearch(String searchText) {
-        setState(() {
-            globals.searchres.clear();
-            globals.searchres.addAll(globals.jsonres);
-        });
-        if (searchText != "") {
-            setState(() {
-                globals.searchres.removeWhere((dynamic element) => !element.toString().toLowerCase().contains(searchText.toLowerCase()));
-            });
-        }
-    }
-    Widget _itemBuilder(BuildContext context, int index) {
-        return new Column(children: < Widget > [
-            ListTile(title: new Text(globals.searchres[index]["Name"]), subtitle: new Text(globals.searchres[index]["Url"]), onTap: () {
+
+class MyDialogState extends State<MyDialog> {
+  @override
+  void dispose() {
+    //    this.dispose();
+    // Clean up the controller when the Widget is disposed
+    //    passwordController.dispose();
+    //    userNameController.dispose();
+    //    myDialogState.dispose();
+    isDialog = false;
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    isDialog = true;
+  }
+
+  Widget build(BuildContext context) {
+    return new SimpleDialog(
+      title: new Text(S.of(context).choose_school),
+      contentPadding: const EdgeInsets.all(10.0),
+      children: <Widget>[
+        new Container(
+          child: new TextField(
+              maxLines: 1,
+              autofocus: true,
+              onChanged: (String search) {
                 setState(() {
-                    globals.selectedSchoolCode = globals.searchres[index]["InstituteCode"];
-                    globals.selectedSchoolUrl = globals.searchres[index]["Url"];
-                    globals.selectedSchoolName = globals.searchres[index]["Name"];
-                    Navigator.pop(context);
+                  updateSearch(search);
                 });
-            }, ),
-            new Container(child: new Text(globals.searchres[index]["City"]), alignment: new Alignment(1.0, 0.0), )
-        ], );
+              }),
+          margin: new EdgeInsets.all(10.0),
+        ),
+        new Container(
+          child: globals.searchres != null
+              ? new ListView.builder(
+                  itemBuilder: _itemBuilder,
+                  itemCount: globals.searchres.length,
+                )
+              : new Container(),
+          width: 320.0,
+          height: 400.0,
+        )
+      ],
+    );
+  }
+
+  void updateSearch(String searchText) {
+    setState(() {
+      globals.searchres.clear();
+      globals.searchres.addAll(globals.jsonres);
+    });
+    if (searchText != "") {
+      setState(() {
+        globals.searchres.removeWhere((dynamic element) => !element
+            .toString()
+            .toLowerCase()
+            .contains(searchText.toLowerCase()));
+      });
     }
+  }
+
+  Widget _itemBuilder(BuildContext context, int index) {
+    return new Column(
+      children: <Widget>[
+        ListTile(
+          title: new Text(globals.searchres[index]["Name"]),
+          subtitle: new Text(globals.searchres[index]["Url"]),
+          onTap: () {
+            setState(() {
+              globals.selectedSchoolCode =
+                  globals.searchres[index]["InstituteCode"];
+              globals.selectedSchoolUrl = globals.searchres[index]["Url"];
+              globals.selectedSchoolName = globals.searchres[index]["Name"];
+              Navigator.pop(context);
+            });
+          },
+        ),
+        new Container(
+          child: new Text(globals.searchres[index]["City"]),
+          alignment: new Alignment(1.0, 0.0),
+        )
+      ],
+    );
+  }
 }

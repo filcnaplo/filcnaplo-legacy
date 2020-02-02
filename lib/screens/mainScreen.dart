@@ -129,7 +129,6 @@ class MainScreenState extends State<MainScreen> {
     _initSettings();
     super.initState();
     /*
-        geci
         WidgetsBinding.instance.addPostFrameCallback((_) async {
           if (!(await SettingsHelper().getAcceptTOS()))
             showTOSDialog();

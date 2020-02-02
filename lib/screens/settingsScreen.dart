@@ -247,7 +247,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                         ),
                         activeColor: Theme.of(context).accentColor,
                         value: _isSingleUser,
-                        onChanged: _isSingleUserChange,
+                        onChanged: !globals.multiAccount ? null : _isSingleUserChange, //Only able to be turned on, if multiple users are logged in. On second user login, gets turned on automatically (See: AccountManager)
                         secondary: new Icon(Icons.person),
                       ),
                       SwitchListTile(

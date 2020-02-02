@@ -124,18 +124,13 @@ class AccountsScreenState extends State<AccountsScreen> {
                 ),
                 new FlatButton(onPressed: () async {
                   _removeUserDialog(a.user).then((nul) async {
-                    print("asd2");
                     users = await AccountManager().getUsers();
-                    print(users.length);
                     globals.accounts.removeWhere((Account a) => !users.map((User u) => u.id).contains(a.user.id));
                     await _getListWidgets();
-                    setState(() {
-                      print("asd3");
-                      print(users.length);
-                    });
+                    setState(() {}); //TODO Ez így lehet hogy full felesleges, delete this line if so
                   });
                 },
-                    child: new Icon(Icons.close, color: Colors.red,),),
+                    child: new Icon(Icons.clear, color: Colors.red,),),
               ],
             ),
             title: new Text(a.user.name),
@@ -193,7 +188,7 @@ class AccountsScreenState extends State<AccountsScreen> {
               onPressed: () async {
                 await AccountManager().removeUser(user);
                 print("asd1");
-                setState(() async {
+                setState(() {
                   globals.accounts.removeWhere((Account a) => a.user.id == user.id);
                   Navigator.of(context).pop();
                   Navigator.pop(context); // close the drawer
