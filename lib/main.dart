@@ -466,7 +466,7 @@ Boa
                 passwordError = "hibás felasználónév vagy jelszó";
               } else {
                 passwordError =
-                    "ismeretlen (valószínűleg KRÉTÁS) probléma: " + code;
+                    "ismeretlen (valószínűleg KRÉTÁS) probléma: " + code.toString();
               }
             });
           }
