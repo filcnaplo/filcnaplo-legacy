@@ -137,7 +137,7 @@ void main({bool noReset = false}) async {
 //    loadFAQ();
 
     if (!isNew) {
-      //BackgroundHelper().register();
+      BackgroundHelper().register();
 
       globals.isDark = await SettingsHelper().getDarkTheme();
       globals.isAmoled = await SettingsHelper().getAmoled();
@@ -151,6 +151,9 @@ void main({bool noReset = false}) async {
       if (!noReset) globals.selectedAccount = globals.accounts[0];
       if (!noReset) globals.selectedUser = users[0];
       globals.themeID = await SettingsHelper().getTheme();
+      globals.CurrentTextColor = await ColorManager().getTheme(0).accentColor;
+  //    print("main color:");
+ //     print(globals.CurrentTextColor);
       globals.color1 = await SettingsHelper().getEvalColor(0);
       globals.color2 = await SettingsHelper().getEvalColor(1);
       globals.color3 = await SettingsHelper().getEvalColor(2);

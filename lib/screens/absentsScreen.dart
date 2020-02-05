@@ -235,7 +235,7 @@ class AbsentsScreenState extends State<AbsentsScreen> {
         return Colors.green;
         break;
       case Absence.BE_JUSTIFIED:
-        return Colors.blue;
+        return Colors.grey;
         break;
       default:
         return Colors.black;

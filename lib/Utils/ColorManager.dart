@@ -90,18 +90,21 @@ class ColorManager {
                 primaryLight = Colors.teal[700];
                 break;
         }
-        if (brightness.index == 0) {
-            primary = primaryDark;
-            background = Color.fromARGB(255, 40, 40, 40);
+        if (brightness != 0) {
+            if (brightness.index == 0) {
+                primary = primaryDark;
+                background = Color.fromARGB(255, 40, 40, 40);
+            } else {
+                primary = primaryLight;
+                background = null;
+            }
+            if (globals.isAmoled && globals.isDark) {
+                primary = Colors.black;
+                background = Colors.black;
+            }
+            return new ThemeData(primarySwatch: Colors.blue, accentColor: accent, brightness: brightness, primaryColor: primary, primaryColorLight: primaryLight, primaryColorDark: primaryDark, appBarTheme: AppBarTheme(color: primary, ), scaffoldBackgroundColor: background, dialogBackgroundColor: background, cardColor: brightness.index == 0 ? Color.fromARGB(255, 25, 25, 25) : null, fontFamily: 'Quicksand', );
         } else {
-            primary = primaryLight;
-            background = null;
+            return new ThemeData(primarySwatch: Colors.blue, accentColor: accent, primaryColor: primary, primaryColorLight: primaryLight, primaryColorDark: primaryDark, appBarTheme: AppBarTheme(color: primary, ), scaffoldBackgroundColor: background, dialogBackgroundColor: background, fontFamily: 'Quicksand', );
         }
-        if (globals.isAmoled && globals.isDark) {
-            primary = Colors.black;
-            background = Colors.black;
-        }
-        //globals.isDark = brightness.index == 0;
-        return new ThemeData(primarySwatch: Colors.blue, accentColor: accent, brightness: brightness, primaryColor: primary, primaryColorLight: primaryLight, primaryColorDark: primaryDark, appBarTheme: AppBarTheme(color: primary, ), scaffoldBackgroundColor: background, dialogBackgroundColor: background, cardColor: brightness.index == 0 ? Color.fromARGB(255, 25, 25, 25) : null, fontFamily: 'Quicksand', );
     }
 }

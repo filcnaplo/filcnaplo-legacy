@@ -61,7 +61,7 @@ class AbsenceCard extends StatelessWidget {
       color = Colors.green;
     } else if (!unjust&&!just&&bejust) {
       state = "igazolandó";
-      color = Colors.blue;
+      color = Colors.grey;
     } else {
       state = "vegyes";
       color = Colors.orange;
@@ -105,7 +105,7 @@ class AbsenceCard extends StatelessWidget {
         return Colors.green;
         break;
       case Absence.BE_JUSTIFIED:
-        return Colors.blue;
+        return Colors.grey;
         break;
       default:
         return Colors.black;
@@ -190,7 +190,7 @@ class AbsenceCard extends StatelessWidget {
                 new Container(
                   child: new Row(
                     children: <Widget>[
-                        new Text("$numOfAbsences ", style: new TextStyle(fontSize: 18.0, color: Colors.blueAccent)),
+                        new Text("$numOfAbsences ", style: new TextStyle(fontSize: 18.0, color: globals.CurrentTextColor)),
                         new Text("db ", style: new TextStyle(fontSize: 18.0, color: globals.isDark ? Colors.white : Colors.black)),
                         new Text("$state ", style: new TextStyle(fontSize: 18.0, color: color)),
                         new Text(cardText, style: new TextStyle(fontSize: 18.0, color: globals.isDark ? Colors.white : Colors.black)),

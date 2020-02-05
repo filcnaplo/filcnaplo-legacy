@@ -18,7 +18,7 @@ class AccountManager {
     if (usersJson.isNotEmpty)
       for (Map<String, dynamic> m in usersJson)
         users.add(User.fromJson(m));
-    List<Color> colors = [Colors.blue, Colors.green, Colors.red, Colors.black, Colors.brown, Colors.orange];
+    List<Color> colors = [Colors.green, Colors.blue, Colors.red, Colors.black, Colors.brown, Colors.orange];
     Iterator<Color> cit = colors.iterator;
     for (User u in users) {
       cit.moveNext();

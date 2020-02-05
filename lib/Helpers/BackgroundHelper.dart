@@ -42,7 +42,7 @@ class BackgroundHelper {
           'értesítések a jegyekről',
           importance: Importance.Max,
           priority: Priority.High,
-          color: Colors.blue,
+          color: Colors.grey,
         );
         var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
         var platformChannelSpecifics = new NotificationDetails(

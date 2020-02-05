@@ -1,6 +1,7 @@
 // Ennek a nagyrészét valamelyik json to dart pluginnal generáltattam.
 
 import 'package:flutter/material.dart';
+import '../globals.dart' as globals;
 import 'User.dart';
 
 class Student {
@@ -437,7 +438,7 @@ class Evaluation {
         return Colors.redAccent;
         break;
       case "300%":
-        return Colors.blueAccent;
+        return globals.CurrentTextColor;
         break;
       case "400%":
         return Colors.green;

@@ -182,7 +182,7 @@ class LessonCard extends StatelessWidget {
                     ),
                     new Text(getNext() != null ? getNext().subject : "error",
                         style: new TextStyle(
-                            fontSize: 18.0, color: Colors.blueAccent)),
+                            fontSize: 18.0, color: globals.CurrentTextColor)),
                     new Text(", ",
                         style: new TextStyle(
                           fontSize: 18.0,
@@ -193,7 +193,7 @@ class LessonCard extends StatelessWidget {
                           getRemainingTime(
                               S.of(context).hour, S.of(context).minute),
                           style: new TextStyle(
-                              fontSize: 18.0, color: Colors.blueAccent)),
+                              fontSize: 18.0, color: globals.CurrentTextColor)),
                     ),
                     new Text(
                       S.of(context).later,
@@ -228,12 +228,12 @@ class LessonCard extends StatelessWidget {
                     children: <Widget>[
                       new Text(getNext() != null ? getNext().room : "error",
                           style: new TextStyle(
-                              fontSize: 18.0, color: Colors.blueAccent)),
+                              fontSize: 18.0, color: globals.CurrentTextColor)),
                       new Expanded(
                           child: new Container(
                         child: new Text(progress(),
                             style: new TextStyle(
-                                fontSize: 18.0, color: Colors.blueAccent)),
+                                fontSize: 18.0, color: globals.CurrentTextColor)),
                         alignment: Alignment(1.0, 0.0),
                       ))
                     ],

@@ -3,6 +3,7 @@ import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 
 import '../Datas/Lesson.dart';
+import '../globals.dart' as globals;
 
 class TomorrowLessonCard extends StatelessWidget {
   List<Lesson> lessons;
@@ -152,7 +153,7 @@ class TomorrowLessonCard extends StatelessWidget {
                     padding: EdgeInsets.only(right: 5, left: 5),
                     child: new Text(lessons.length.toString(),
                         style: new TextStyle(
-                            fontSize: 18.0, color: Colors.blueAccent)),
+                            fontSize: 18.0, color: globals.CurrentTextColor)),
                   ),
                   new Text(
                     S.of(context).tomorrow_lessons,

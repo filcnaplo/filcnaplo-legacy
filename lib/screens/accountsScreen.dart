@@ -151,7 +151,7 @@ class AccountsScreenState extends State<AccountsScreen> {
 
     setState(() {
       accountListWidgets.add(new FlatButton(onPressed: addPressed,
-          child: new Icon(Icons.add, color: Theme.of(context).accentColor,)));
+          child: new Icon(Icons.add, color: globals.CurrentTextColor,)));
     });
 
   }
@@ -187,7 +187,7 @@ class AccountsScreenState extends State<AccountsScreen> {
                   .yes),
               onPressed: () async {
                 await AccountManager().removeUser(user);
-                print("asd1");
+   //             print("asd1");
                 setState(() {
                   globals.accounts.removeWhere((Account a) => a.user.id == user.id);
                   Navigator.of(context).pop();

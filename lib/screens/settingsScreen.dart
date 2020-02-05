@@ -172,8 +172,10 @@ class SettingsScreenState extends State<SettingsScreen> {
       SettingsHelper().setTheme(_theme);
     });
     globals.themeID = _theme;
-    DynamicTheme.of(context)
-        .setThemeData(ColorManager().getTheme(Theme.of(context).brightness));
+    DynamicTheme.of(context).setThemeData(ColorManager().getTheme(Theme.of(context).brightness));
+    globals.CurrentTextColor = ColorManager().getTheme(Theme.of(context).brightness).accentColor;
+//    print("CurrentTextColor: ");
+   // print(globals.CurrentTextColor);
   }
 
   void _isSingleUserChange(bool value) {

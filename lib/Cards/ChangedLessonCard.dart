@@ -43,7 +43,7 @@ class ChangedLessonCard extends StatelessWidget {
                         )): new Container(),
 
                         new Text(lesson.count.toString() + ". ",
-                            style: new TextStyle(fontSize: 18.0, color: Colors.blueAccent)),
+                            style: new TextStyle(fontSize: 18.0, color: globals.CurrentTextColor)),
 
                         new Text(S.of(context).lesson + ", ",
                           style: new TextStyle(
@@ -51,7 +51,7 @@ class ChangedLessonCard extends StatelessWidget {
                       
                         new Text(lesson.subject,
                             style: new TextStyle(
-                              fontSize: 18.0, color: Colors.blueAccent)),
+                              fontSize: 18.0, color: globals.CurrentTextColor)),
                       ],
                       //padding: EdgeInsets.only(left: 4.0, right: 10.0),
                     ),
