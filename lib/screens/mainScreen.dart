@@ -289,14 +289,14 @@ class MainScreenState extends State<MainScreen> {
                   : S.of(context).title),
               actions: <Widget>[
                 //TODO search maybe?
-                new IconButton(
+                /*new IconButton( //TODO Finish card chooser
                   icon: new Icon(Icons.queue),
                   onPressed: () {
                     cardChooserDialog().then((b) {
                       Navigator.pushNamed(context, "/main");
                     });
                   }
-                )
+                )*/
               ],
             ),
             body: hasOfflineLoaded &&
