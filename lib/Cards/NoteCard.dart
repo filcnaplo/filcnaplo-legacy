@@ -59,7 +59,6 @@ class NoteCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!note.isEvent)
     return new GestureDetector(
       onTap: openDialog,
       child: new Card(
@@ -71,7 +70,7 @@ class NoteCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(6),
       ),
       margin: EdgeInsets.all(6.0),
-      color: globals.isColor ? Colors.blue : globals.isDark ? Color.fromARGB(255, 25, 25, 25) : Colors.white,
+      color: globals.isColor ? note.isEvent ? Colors.indigo[400] : Colors.indigoAccent : globals.isDark ? Color.fromARGB(255, 25, 25, 25) : Colors.white,
       child: Container(
         child: new Column(
           children: <Widget>[
@@ -89,7 +88,7 @@ class NoteCard extends StatelessWidget {
             ),
 
             !isSingle ? new Container(
-              child: new Text(dateToHuman(note.date) + dateToWeekDay(note.date), style: new TextStyle(fontSize: 16.0, color: Colors.white)),
+              child: new Text(dateToHuman(note.date), style: new TextStyle(fontSize: 16.0, color: Colors.white)),
               alignment: Alignment(1.0, -1.0),
               padding: EdgeInsets.fromLTRB(5.0, 5.0, 10.0, 5.0),
             ) : new Container(),
@@ -112,12 +111,12 @@ class NoteCard extends StatelessWidget {
                     new Container(
                       padding: new EdgeInsets.only(left: 2),
                       child: new Icon(
-                        IconData(0xf0e5, fontFamily: "Material Design Icons"),
+                        note.isEvent ? IconData(0xf0e5, fontFamily: "Material Design Icons") : Icons.comment,
                         color: globals.isDark ? Colors.white : Colors.black,
                       ),
                     ),
                     new Container(
-                      child: new Text("Feljegyzés",
+                      child: new Text(note.isEvent ? "Faliújság" :"Feljegyzés",
                         style: new TextStyle(fontSize: 18.0),
                       ),
                       padding: EdgeInsets.only(left: 8.0),
@@ -125,7 +124,7 @@ class NoteCard extends StatelessWidget {
                     new Divider(),
                     isSingle ? new Expanded(
                         child: new Container(
-                          child: new Text(dateToHuman(note.date) + dateToWeekDay(note.date), style: new TextStyle(fontSize: 16.0, color: globals.isDark ? Colors.white : Colors.grey[900])),
+                          child: new Text(dateToHuman(note.date), style: new TextStyle(fontSize: 16.0, color: globals.isDark ? Colors.white : Colors.grey[900])),
                           alignment: Alignment(1.0, 0.0),
                         )) : new Container(),
 
@@ -147,74 +146,12 @@ class NoteCard extends StatelessWidget {
         ),
         decoration: new BoxDecoration(
             border: Border.all(
-              color: globals.isColor ? Colors.blue : globals.isDark ? Color.fromARGB(255, 25, 25, 25) : Colors.white,
+              color: globals.isColor ? note.isEvent ? Colors.indigo[400] : Colors.indigoAccent : globals.isDark ? Color.fromARGB(255, 25, 25, 25) : Colors.white,
               width: 2.5),
             borderRadius: new BorderRadius.all(Radius.circular(5)),
           ),
         ),
         ),
       );
-      else
-      return new GestureDetector(
-          onTap: openDialog,
-          child: Card(
-        color: globals.isColor ? Colors.blue : globals.isDark ? Color.fromARGB(255, 25, 25, 25) : Colors.white,
-        child: new Column(
-          children: <Widget>[
-
-            new Container(
-              child: new Text(note.content, style: new TextStyle(fontSize: 17.0, color: Colors.white)),
-              padding: EdgeInsets.all(10.0),
-            ),
-
-            !isSingle ? new Container(
-              child: new Text(dateToHuman(note.date) + dateToWeekDay(note.date), style: new TextStyle(fontSize: 16.0, color: Colors.white)),
-              alignment: Alignment(1.0, -1.0),
-              padding: EdgeInsets.fromLTRB(5.0, 5.0, 10.0, 5.0),
-            ) : new Container(),
-
-            new Container(
-                color: Color.fromARGB(255, 25, 25, 25),
-                child: new Padding(
-                  padding: new EdgeInsets.all(10.0),
-                  child: new Row(
-                    children: <Widget>[
-                      new Container(
-                        padding: new EdgeInsets.only(left: 2),
-                        child: new Icon(
-                          IconData(0xf0e5, fontFamily: "Material Design Icons"),
-                          color: globals.isDark ? Colors.white : Colors.black,
-                        ),
-                      ),
-                      new Container(
-                        child: new Text("Feljegyzés",
-                          style: new TextStyle(fontSize: 18.0),
-                        ),
-                        padding: EdgeInsets.only(left: 8.0),
-                      ),
-                      isSingle ? new Expanded(
-                          child: new Container(
-                            child: new Text(dateToHuman(note.date) + dateToWeekDay(note.date), style: new TextStyle(fontSize: 18.0, color: Colors.white)),
-                            alignment: Alignment(1.0, 0.0),
-                          )) : new Container(),
-
-                      !isSingle ? new Expanded(
-                        child: new Container(
-                          child: new Text(note.owner.name, 
-                              style: new TextStyle(
-                                color: note.owner.color ??
-                                    (globals.isDark ? Colors.white : Colors.black),
-                                fontSize: 18.0)),
-                          alignment: Alignment(1.0, -1.0),
-                        ),
-                      ) : new Container(),
-                    ],
-                  ),
-                )
-              ),
-          ],
-        ),
-      ),
-    );
   }
 }
