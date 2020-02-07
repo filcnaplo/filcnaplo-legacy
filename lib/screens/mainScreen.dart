@@ -47,7 +47,6 @@ class MainScreenState extends State<MainScreen> {
   //DateTime startDate = DateTime.now();
   bool hasOfflineLoaded = false;
   bool hasLoaded = true;
-  
 
   void _initSettings() async {
     DynamicTheme.of(context).setBrightness(await SettingsHelper().getDarkTheme()
@@ -70,6 +69,11 @@ class MainScreenState extends State<MainScreen> {
         globals.color4.computeLuminance() >= 0.5 ? Colors.black : Colors.white;
     globals.colorF5 =
         globals.color5.computeLuminance() >= 0.5 ? Colors.black : Colors.white;
+
+    if (globals.users.length == 1) {
+      globals.isSingle = true;
+      SettingsHelper().setSingleUser(true);
+    }
   }
 
   /*
@@ -185,8 +189,8 @@ class MainScreenState extends State<MainScreen> {
         feedCards.add(new SummaryCard(thirdQuarterEvaluations, context,
             "Harmadik negyedévi jegyek", false, true, !globals.isSingle));
       if (endYearEvaluations.isNotEmpty)
-        feedCards.add(new SummaryCard(
-            endYearEvaluations, context, "Év végi jegyek", false, true, !globals.isSingle));
+        feedCards.add(new SummaryCard(endYearEvaluations, context,
+            "Év végi jegyek", false, true, !globals.isSingle));
     }
 
     for (String day in absents.keys.toList())
@@ -337,12 +341,11 @@ class MainScreenState extends State<MainScreen> {
 
   Future<Null> cardChooserDialog() {
     return showDialog(
-      barrierDismissible: true,
-      context: context,
-      builder: (BuildContext context) {
-        return new CardChooserDialog();
-      }
-    );
+        barrierDismissible: true,
+        context: context,
+        builder: (BuildContext context) {
+          return new CardChooserDialog();
+        });
   }
 
   Future<Null> _onRefresh(
@@ -363,7 +366,11 @@ class MainScreenState extends State<MainScreen> {
         tempNotes.addAll(globals.selectedAccount.notes);
         tempAbsents.addAll(globals.selectedAccount.absents);
       } catch (exception) {
-        Fluttertoast.showToast(msg: "Hiba", backgroundColor: Colors.red, textColor: Colors.white, fontSize: 16.0);
+        Fluttertoast.showToast(
+            msg: "Hiba",
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
         print("singleexcp: " + exception.toString());
       }
     } else {
