@@ -232,6 +232,8 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
     if (allAverage == null) allAverage = 0;
     if (allMode == null) allMode = 0;
 
+    refreshSort();
+
     List<Evaluation> firstQuarterEvaluations = (toSummaryEvals
         .where((Evaluation evaluation) => (evaluation.isFirstQuarter()))
         .toList());
@@ -244,9 +246,6 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
     List<Evaluation> endYearEvaluations = (toSummaryEvals
         .where((Evaluation evaluation) => (evaluation.isEndYear()))
         .toList());
-
-    //print("##############Jegymennyiség: " + globals.selectedAccount.student.Evaluations.length.toString());
-    //print("##############Első negyedév: " + firstQuarterEvaluations.length.toString());
 
     if (firstQuarterEvaluations.isNotEmpty)
       summaryCardsToShow.add(new SummaryCard(firstQuarterEvaluations, context,
@@ -264,9 +263,9 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
     if (summaryCardsToShow.isEmpty)
       summaryCardsToShow.add(Card(
         child: Container(
-          padding: EdgeInsets.all(5),
-                child: new Text(
-                    "Itt fognak megjelenni a negyedévi, félévi és év végi jegyeid.")),
+            padding: EdgeInsets.all(5),
+            child: new Text(
+                "Itt fognak megjelenni a negyedéves, félévi és év végi jegyeid.")),
       ));
   }
 
@@ -458,6 +457,26 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
     });
   }
 
+  void refreshSort() async {
+    setState(() {
+      switch (globals.sort) {
+        case 0:
+          allEvals.sort((a, b) => b.CreatingTime.compareTo(a.CreatingTime));
+          break;
+        case 1:
+          allEvals.sort((a, b) {
+            if (a.realValue == b.realValue)
+              return b.CreatingTime.compareTo(a.CreatingTime);
+            return a.realValue.compareTo(b.realValue);
+          });
+          break;
+        case 2:
+          allEvals.sort((a, b) => b.Date.compareTo(a.Date));
+          break;
+      }
+    });
+  }
+
   int currentBody = 0;
   Widget evaluationsBody;
   Widget averageBody;
@@ -546,26 +565,6 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           ),
         ],
       );
-    }
-
-    void refreshSort() async {
-      setState(() {
-        switch (globals.sort) {
-          case 0:
-            allEvals.sort((a, b) => b.CreatingTime.compareTo(a.CreatingTime));
-            break;
-          case 1:
-            allEvals.sort((a, b) {
-              if (a.realValue == b.realValue)
-                return b.CreatingTime.compareTo(a.CreatingTime);
-              return a.realValue.compareTo(b.realValue);
-            });
-            break;
-          case 2:
-            allEvals.sort((a, b) => b.Date.compareTo(a.Date));
-            break;
-        }
-      });
     }
 
     evaluationsBody = new Scaffold(
