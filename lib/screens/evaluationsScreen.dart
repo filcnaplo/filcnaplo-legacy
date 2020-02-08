@@ -547,9 +547,15 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                       allEvals[index].Jelleg.Leiras ??
                       "",
                   style: new TextStyle(fontWeight: FontWeight.bold)),
-              subtitle:
-                  new Text(allEvals[index].Theme ?? allEvals[index].Value) ??
-                      "",
+              subtitle: new Text(
+                (allEvals[index].Theme == "")
+                    ? allEvals[index].Mode
+                    : allEvals[index].Theme,
+                style: new TextStyle(
+                    fontStyle: (allEvals[index].Theme == "")
+                        ? FontStyle.italic
+                        : FontStyle.normal),
+              ),
               trailing: new Column(
                 children: <Widget>[
                   new Text(dateToHuman(allEvals[index].Date)) ?? "",
@@ -926,7 +932,15 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                         width: 3),
                     borderRadius: new BorderRadius.all(Radius.circular(40))),
               ),
-              title: new Text(globals.currentEvals[index].Theme),
+              title: new Text(
+                (globals.currentEvals[index].Theme == "")
+                    ? globals.currentEvals[index].Mode
+                    : globals.currentEvals[index].Theme,
+                style: new TextStyle(
+                    fontStyle: (globals.currentEvals[index].Theme == "")
+                        ? FontStyle.italic
+                        : FontStyle.normal),
+              ),
               trailing: new Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -967,7 +981,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                   _evaluationDialog(globals.currentEvals[index]);
                 } catch (exeption) {
                   Fluttertoast.showToast(
-                      msg: "HIBA",
+                      msg: "Hiba",
                       backgroundColor: Colors.red,
                       textColor: Colors.white,
                       fontSize: 16.0);
@@ -1189,7 +1203,7 @@ class GradeDialogState extends State<GradeDialog> {
       "Subject": "${globals.selectedAverage.subject}",
       "SubjectCategory": null,
       "SubjectCategoryName": "",
-      "Theme": "",
+      "Theme": "🔘 Ha kapnék egy...",
       "IsAtlagbaBeleszamit": true,
       "Mode": "Hamis",
       "Weight": "$weight",

@@ -116,7 +116,7 @@ class NoteCard extends StatelessWidget {
                       ),
                     ),
                     new Container(
-                      child: new Text(note.isEvent ? "Faliújság" :"Feljegyzés",
+                      child: new Text(note.isEvent ? "faliújság" :"feljegyzés",
                         style: new TextStyle(fontSize: 18.0),
                       ),
                       padding: EdgeInsets.only(left: 8.0),
