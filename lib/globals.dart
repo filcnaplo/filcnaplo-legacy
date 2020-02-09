@@ -12,7 +12,7 @@ import 'Datas/Lesson.dart';
 import 'Datas/Account.dart';
 
 Color CurrentTextColor;
-String MAIN_WEBSITE = "https://www.filcnaplo.hu/"
+String MAIN_WEBSITE = "https://www.filcnaplo.hu/";
 String SETTINGS_API_URL = MAIN_WEBSITE + "settings.json";
 String INSTITUTES_API_URL = MAIN_WEBSITE + "school_list.json";
 String clientId = "919e0c1c-76a2-4646-a2fb-7085bbbf3c56";
