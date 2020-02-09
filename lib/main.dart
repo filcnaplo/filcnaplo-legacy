@@ -133,7 +133,7 @@ void main({bool noReset = false}) async {
     globals.isSingle = await SettingsHelper().getSingleUser();
     globals.smartUserAgent = await SettingsHelper().getSmartUserAgent();
     globals.lang = await SettingsHelper().getLang();
-    RequestHelper().refreshSzivacsSettigns();
+    RequestHelper().refreshSzivacsSettings();
 //    loadFAQ();
 
     if (!isNew) {
