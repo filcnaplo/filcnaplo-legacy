@@ -191,7 +191,7 @@ class SettingsScreenState extends State<SettingsScreen> {
       _smartUserAgent = value;
       globals.smartUserAgent = value;
       SettingsHelper().setSmartUserAgent(_smartUserAgent);
-      RequestHelper().refreshSzivacsSettigns();
+      RequestHelper().refreshAppSettings();
     });
   }
 

@@ -20,6 +20,7 @@ class AboutScreen extends StatefulWidget {
     AboutScreenState createState() => new AboutScreenState();
 }
 class AboutScreenState extends State < AboutScreen > {
+    //TODO: Easter egg code really needed?
     /*
       int clicksUntilEasteregg = 5;
       bool showEasteregg = false;
@@ -30,7 +31,7 @@ class AboutScreenState extends State < AboutScreen > {
           } else if (!showEasteregg) {
               showEasteregg = true;
               //globals.behaveNicely = false;
-              RequestHelper().refreshSzivacsSettigns();
+              RequestHelper().refreshAppSettings();
               Fluttertoast.showToast(msg: "" , backgroundColor: Colors.green, textColor: Colors.white, fontSize: 16.0);
               Navigator.pushReplacementNamed(context, "/easteregg");
           }
@@ -152,7 +153,7 @@ class AboutScreenState extends State < AboutScreen > {
     _behaveNicelyAgain() {
         globals.behaveNicely = true;
         Fluttertoast.showToast(msg: "Hiperhajtómű kikapcsolva.", backgroundColor: Colors.red, textColor: Colors.white, fontSize: 16.0);
-        RequestHelper().refreshSzivacsSettigns();
+        RequestHelper().refreshAppSettings();
         Navigator.pushNamed(context, "/about");
     }
     */
