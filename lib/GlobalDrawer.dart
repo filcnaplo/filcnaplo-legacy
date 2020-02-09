@@ -30,39 +30,38 @@ class GDrawerState extends State<GDrawer> {
       selectedAccount =
           accounts.firstWhere((Account account) => account.user.id == user.id);
     });
+    bool popContext = true;
     switch (screen) {
       case 0:
-        Navigator.pop(context); // close the drawer
         Navigator.pushReplacementNamed(context, "/main");
         break;
       /*case 1:
-        Navigator.pop(context); // close the drawer
         Navigator.pushReplacementNamed(context, "/evaluations");
-        break;*/
+        break;*/	
       case 2:
-        Navigator.pop(context); // close the drawer
         Navigator.pushReplacementNamed(context, "/timetable");
         break;
       case 3:
-        Navigator.pop(context); // close the drawer
         Navigator.pushReplacementNamed(context, "/notes");
         break;
       case 5:
-        Navigator.pop(context); // close the drawer
         Navigator.pushReplacementNamed(context, "/absents");
         break;
       case 6:
-        Navigator.pop(context); // close the drawer
         Navigator.pushReplacementNamed(context, "/evaluations");
         break;
       case 8:
-        Navigator.pop(context); // close the drawer
         Navigator.pushReplacementNamed(context, "/homework");
         break;
       case 11:
-        Navigator.pop(context); // close the drawer
         Navigator.pushReplacementNamed(context, "/messages");
         break;
+      default:
+	popContext = false;
+	break;
+    }
+    if (popContext) {
+        Navigator.pop(context); // close the drawer
     }
   }
 

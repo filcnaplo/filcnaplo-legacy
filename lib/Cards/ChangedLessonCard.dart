@@ -27,7 +27,6 @@ class ChangedLessonCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      //onTap: openDialog,
       child: new Card(
         margin: EdgeInsets.all(6.0),
         child: new Container(
@@ -53,7 +52,6 @@ class ChangedLessonCard extends StatelessWidget {
                             style: new TextStyle(
                               fontSize: 18.0, color: globals.CurrentTextColor)),
                       ],
-                      //padding: EdgeInsets.only(left: 4.0, right: 10.0),
                     ),
                   ].where((Widget w)=>w!=null).toList(),
                   alignment: WrapAlignment.start,

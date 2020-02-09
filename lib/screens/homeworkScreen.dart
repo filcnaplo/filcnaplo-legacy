@@ -159,7 +159,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
       hasLoaded = false;
     });
     Completer<Null> completer = new Completer<Null>();
-    List<Homework> homeworksNew = await HomeworkHelper().getHomeworks(globals.idoAdatok[globals.selectedTimeForHomework], showErrors);
+    List<Homework> homeworksNew = await HomeworkHelper().getHomeworks(globals.timeData[globals.selectedTimeForHomework], showErrors);
     if (homeworksNew.length > homeworks.length)
       homeworks = homeworksNew;
     homeworks
@@ -180,7 +180,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
     });
     Completer<Null> completer = new Completer<Null>();
     homeworks = await HomeworkHelper().getHomeworksOffline(
-        globals.idoAdatok[globals.selectedTimeForHomework]);
+        globals.timeData[globals.selectedTimeForHomework]);
     homeworks
         .sort((Homework a, Homework b) => b.uploadDate.compareTo(a.uploadDate));
     if (mounted)

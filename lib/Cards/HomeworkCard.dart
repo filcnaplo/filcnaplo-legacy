@@ -66,11 +66,8 @@ class HomeworkCard extends StatelessWidget {
       child: new Column(
         children: <Widget>[
           new Container(
-            child: /*new Row(
-              children: <Widget>[*/
-                new Text(homework.uploader, style: new TextStyle(fontSize: 21.0, color: Colors.white, fontWeight: FontWeight.bold),),
-//              ],
-//            ),
+            child: 
+              new Text(homework.uploader, style: new TextStyle(fontSize: 21.0, color: Colors.white, fontWeight: FontWeight.bold),),
             margin: EdgeInsets.all(10.0),
           ),
 

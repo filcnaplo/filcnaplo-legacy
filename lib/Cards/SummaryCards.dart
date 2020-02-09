@@ -96,12 +96,13 @@ class SummaryCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(5),
     ));
   }
-  
-  String getDate() {//Place the card on the main page where the last item on it would go
+
+  //Place the card on the main page where the last item on it would go
+  String getDate() {    
     return summaryEvaluations.first.CreatingTime.toIso8601String()??"" + summaryEvaluations.first.trueID().toString()??"";
   }
 
-  @override //Köszi BoA az emailes segítségnyújtást, erre nem jöttem volna rá :D
+  @override
   Key get key => new Key(getDate());
 
   Widget evaluationList(BuildContext context) {

@@ -23,14 +23,14 @@ class AbsenceCard extends StatelessWidget {
 
     String realLang = globals.lang == "auto" ? Localizations.localeOf(context).languageCode : globals.lang;
     if (absence[0].DelayTimeMinutes != 0) {
-      //keses
+      //delay
       if (realLang == "hu") {
         cardText = "késés";
       } else if (realLang == "en") {
         cardText = "delay";
       }
     } else {
-      //logas
+      //absence
       if (realLang == "hu") {
         cardText = "hiányzás";
       } else if (realLang == "en") {

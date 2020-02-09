@@ -27,7 +27,7 @@ class RequestHelper {
         String institutesBody = utf8.decode((await http.get(globals.INSTITUTES_API_URL)).bodyBytes);
         return institutesBody;
     }
-    void refreshSzivacsSettigns() async {
+    void refreshAppSettings() async {
         try {
             String settings = utf8.decode((await http.get(globals.SETTINGS_API_URL)).bodyBytes);
             Map settingsJson = json.decode(settings);
