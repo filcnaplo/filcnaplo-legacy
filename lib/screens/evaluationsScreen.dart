@@ -249,7 +249,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
 
     if (firstQuarterEvaluations.isNotEmpty)
       summaryCardsToShow.add(new SummaryCard(firstQuarterEvaluations, context,
-          "Első negyedévi jegyek", false, true, false));
+          "Első negyedévi jegyek", false, true, false)); //TODO Make use of translation DB everywhere
     if (halfYearEvaluations.isNotEmpty)
       summaryCardsToShow.add(new SummaryCard(
           halfYearEvaluations, context, "Félévi jegyek", false, true, false));
@@ -265,7 +265,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
         child: Container(
             padding: EdgeInsets.all(5),
             child: new Text(
-                "Itt fognak megjelenni a negyedéves, félévi és év végi jegyeid.")),
+                "Itt fognak megjelenni a negyedéves, félévi és év végi jegyeid.")), //TODO Make use of translation DB everywhere
       ));
   }
 
@@ -373,7 +373,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           .where((Evaluation evaluation) => evaluation.isMidYear())).toList();
     } catch (exeption) {
       Fluttertoast.showToast(
-          msg: "Nem sikerült betölteni a jegyeket",
+          msg: "Nem sikerült betölteni a jegyeket", //TODO Make use of translation DB everywhere
           backgroundColor: Colors.red,
           textColor: Colors.white,
           fontSize: 16.0);
@@ -720,7 +720,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                               children: <Widget>[
                                 new Column(
                                   children: <Widget>[
-                                    new Text("átlaga:"),
+                                    new Text("átlaga:"), //TODO Make use of translation DB everywhere
                                     new Text("mediánja:"),
                                     new Text("módusza:")
                                   ],
@@ -750,124 +750,6 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
       new Column(children: summaryCardsToShow)
     ]);
 
-    /*dataBody = new SingleChildScrollView( //"Eredmények"
-      child: new Center(
-        child: new Container(
-          margin: EdgeInsets.all(10),
-          child: new Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  new Text(
-                    S.of(context).grade1,
-                    style: TextStyle(fontSize: 21),
-                  ),
-                  new Text(
-                    db1.toString() + " db",
-                    style: TextStyle(fontSize: 21),
-                  ),
-                ],
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              ),
-              Row(
-                children: <Widget>[
-                  new Text(
-                    S.of(context).grade2,
-                    style: TextStyle(fontSize: 21),
-                  ),
-                  new Text(
-                    db2.toString() + " db",
-                    style: TextStyle(fontSize: 21),
-                  ),
-                ],
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              ),
-              Row(
-                children: <Widget>[
-                  new Text(
-                    S.of(context).grade3,
-                    style: TextStyle(fontSize: 21),
-                  ),
-                  new Text(
-                    db3.toString() + " db",
-                    style: TextStyle(fontSize: 21),
-                  ),
-                ],
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              ),
-              Row(
-                children: <Widget>[
-                  new Text(
-                    S.of(context).grade4,
-                    style: TextStyle(fontSize: 21),
-                  ),
-                  new Text(
-                    db4.toString() + " db",
-                    style: TextStyle(fontSize: 21),
-                  ),
-                ],
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              ),
-              Row(
-                children: <Widget>[
-                  new Text(
-                    S.of(context).grade5,
-                    style: TextStyle(fontSize: 21),
-                  ),
-                  new Text(
-                    db5.toString() + " db",
-                    style: TextStyle(fontSize: 21),
-                  ),
-                ],
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              ),
-              new Divider(),
-              Row(
-                children: <Widget>[
-                  new Text(
-                    S.of(context).all_average,
-                    style: TextStyle(fontSize: 21),
-                  ),
-                  new Text(
-                    allAverage != null ? allAverage.toStringAsFixed(2) : "...",
-                    style: TextStyle(fontSize: 21),
-                  ),
-                ],
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              ),
-              Row(
-                children: <Widget>[
-                  new Text(
-                    S.of(context).all_median,
-                    style: TextStyle(fontSize: 21),
-                  ),
-                  new Text(
-                    allMedian != null ? allMedian.toStringAsFixed(2) : "...",
-                    style: TextStyle(fontSize: 21),
-                  ),
-                ],
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              ),
-              Row(
-                children: <Widget>[
-                  new Text(
-                    S.of(context).all_mode,
-                    style: TextStyle(fontSize: 21),
-                  ),
-                  new Text(
-                    allMode != null ? allMode.toString() : "...",
-                    style: TextStyle(fontSize: 21),
-                  ),
-                ],
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );*/
-
     return new WillPopScope(
         onWillPop: () {
           globals.screen = 0;
@@ -878,10 +760,10 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
               currentIndex: currentBody,
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
-                    icon: new Icon(Icons.list), title: new Text("Összes")),
+                    icon: new Icon(Icons.list), title: new Text("Összes")), //TODO Make use of translation DB everywhere
                 BottomNavigationBarItem(
                   icon: new Icon(Icons.show_chart),
-                  title: new Text("Tárgyanként"), //S.of(context).averages),
+                  title: new Text("Tárgyanként"),
                 ),
                 BottomNavigationBarItem(
                   icon: new Icon(Icons.assistant),
@@ -981,7 +863,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                   _evaluationDialog(globals.currentEvals[index]);
                 } catch (exeption) {
                   Fluttertoast.showToast(
-                      msg: "Hiba",
+                      msg: "Hiba", //TODO Make use of translation DB everywhere
                       backgroundColor: Colors.red,
                       textColor: Colors.white,
                       fontSize: 16.0);
@@ -1203,7 +1085,7 @@ class GradeDialogState extends State<GradeDialog> {
       "Subject": "${globals.selectedAverage.subject}",
       "SubjectCategory": null,
       "SubjectCategoryName": "",
-      "Theme": "🔘 Ha kapnék egy...",
+      "Theme": "🔘 Ha kapnék egy...", //TODO Make use of translation DB everywhere
       "IsAtlagbaBeleszamit": true,
       "Mode": "Hamis",
       "Weight": "$weight",
