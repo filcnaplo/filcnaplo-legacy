@@ -146,7 +146,7 @@ class LessonCard extends StatelessWidget {
               }).toList()),
             ),
           ],
-          title: Text("Órák"), //TODO fordítási adatbázisból!
+          title: Text("Órák"), //TODO: make use of translation DB everywhere
           contentPadding: EdgeInsets.all(20),
           shape: RoundedRectangleBorder(
             side: BorderSide(
