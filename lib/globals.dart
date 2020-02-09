@@ -37,7 +37,7 @@ String selectedSchoolName;
 int screen = 0;
 int sort = 0;
 int selectedTimeForHomework = 1;
-List<int> idoAdatok = [1, 7, 30, 60];
+List<int> timeData = [1, 7, 30, 60];
 Average selectedAverage;
 List<Evaluation> currentEvals = new List();
 int themeID = 0;

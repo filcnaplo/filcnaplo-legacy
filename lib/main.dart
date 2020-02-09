@@ -97,8 +97,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// todo refactor this and separate the 3 screens here
-
+//TODO: refactor this and separate the 3 screens here
+//TODO: make noReset reset, so boolean logic is easier to understand
 //########################## MAIN
 
 void main({bool noReset = false}) async {
@@ -133,7 +133,7 @@ void main({bool noReset = false}) async {
     globals.isSingle = await SettingsHelper().getSingleUser();
     globals.smartUserAgent = await SettingsHelper().getSmartUserAgent();
     globals.lang = await SettingsHelper().getLang();
-    RequestHelper().refreshSzivacsSettings();
+    RequestHelper().refreshAppSettings();
 //    loadFAQ();
 
     if (!isNew) {
@@ -269,64 +269,6 @@ final userNameController = new TextEditingController();
 final passwordController = new TextEditingController();
 
 class LoginScreenState extends State<LoginScreen> {
-//TODO refactor some stuff here
-
-/*
-  Future<bool> showBlockDialog() async {
-    return showDialog<bool>(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return new SimpleDialog(
-          children: <Widget>[
-            Text("""
-Most úgy néz ki, hogy megint lassítják a Szivacsot az iskolák egy részénél (a visszajelzések alapján valószínűleg a klikes sulik érintettek), így újra használhatatlan.
-
-Azt továbbra sem árulták el, hogy mi ennek az oka, nem válaszolnak e-maileimre.
-
-Ha tényleg így marad én nem látom értelmét a projekt folytatásának.
-Az app azért fent maradna a Play Áruházban a nagyon elvetemülteknek (és azoknak akiknek nincs lassítva), de nem frissíteném.
-
-Üdv.:
-Boa
-
-2019. 12. 09.
-            """),
-            new MaterialButton(
-              child: Text("Értem"),
-              onPressed: () {
-                SettingsHelper().setAcceptBlock(true);
-                Navigator.of(context).pop(true);
-              },
-            )
-          ],
-          title: Text("Egy üzenet a fejlesztőtől:"),
-          contentPadding: EdgeInsets.all(20),
-          shape: RoundedRectangleBorder(
-            side: BorderSide(
-              style: BorderStyle.none,
-              width: 1,
-            ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-        );
-      },
-    );
-  }
-
-  Future<bool> showTOSDialog() async {
-    return showDialog(
-          barrierDismissible: false,
-          context: context,
-          builder: (BuildContext context) {
-            return new TOSDialog();
-          },
-        ) ??
-        false;
-  }
-
-  */
-
   @override
   void initState() {
     loggingIn = false;
@@ -769,14 +711,11 @@ Boa
   @override
   void dispose() {
     // Clean up the controller when the Widget is disposed
-    //    passwordController.dispose();
-    //    userNameController.dispose();
     super.dispose();
   }
 }
 
 class MyDialog extends StatefulWidget {
-  //  List newList;
   const MyDialog();
   @override
   State createState() {
@@ -790,11 +729,7 @@ MyDialogState myDialogState = new MyDialogState();
 class MyDialogState extends State<MyDialog> {
   @override
   void dispose() {
-    //    this.dispose();
     // Clean up the controller when the Widget is disposed
-    //    passwordController.dispose();
-    //    userNameController.dispose();
-    //    myDialogState.dispose();
     isDialog = false;
     super.dispose();
   }
