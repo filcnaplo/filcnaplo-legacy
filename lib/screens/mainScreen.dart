@@ -87,14 +87,12 @@ class MainScreenState extends State<MainScreen> {
   }
 
   Future showUpdateDialog() async {
-    //print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
     return showDialog<bool>(
         context: context,
-        barrierDismissible: false,
         builder: (BuildContext context) {
           return new SimpleDialog(
               children: <Widget>[
-                new Text("Töltsd le most a legújabb verziót:"),
+                new Text("Töltsd le most a legújabb verziót:"), //TODO: Make use translation DB everywhere
                 new Text(
                   globals.latestVersion + "\n",
                   style: new TextStyle(
@@ -124,21 +122,9 @@ class MainScreenState extends State<MainScreen> {
   void initState() {
     _initSettings();
     super.initState();
-    /*
-        WidgetsBinding.instance.addPostFrameCallback((_) async {
-          if (!(await SettingsHelper().getAcceptTOS()))
-            showTOSDialog();
-          else if (!(await SettingsHelper().getAcceptBlock())) showBlockDialog();
-        });
-        */
-    //print("####################################");
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (globals.version != globals.latestVersion &&
-          globals.latestVersion != "") {
-        //print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-        showUpdateDialog();
-      }
+      if (globals.version != globals.latestVersion && globals.latestVersion != "") showUpdateDialog();
     });
 
     _onRefresh(offline: true, showErrors: false).then((var a) async {
