@@ -7,6 +7,7 @@ import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../Cards/SummaryCards.dart';
 import '../Cards/AbsenceCard.dart';
 import '../Cards/ChangedLessonCard.dart';
@@ -32,6 +33,15 @@ void main() {
 class MainScreen extends StatefulWidget {
   @override
   MainScreenState createState() => new MainScreenState();
+}
+
+_launchDownloadWebsite() async {
+  const url = 'https://www.filcnaplo.hu/download/';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
 }
 
 class MainScreenState extends State<MainScreen> {
@@ -76,61 +86,40 @@ class MainScreenState extends State<MainScreen> {
     }
   }
 
-  /*
-      Future<bool> showBlockDialog() async {
-        return showDialog<bool>(
-          context: context,
-          barrierDismissible: false,
-          builder: (BuildContext context) {
-            return new SimpleDialog(
+  Future showUpdateDialog() async {
+    //print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+    return showDialog<bool>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return new SimpleDialog(
               children: <Widget>[
-                Text("""
-    Most úgy néz ki, hogy megint lassítják a Szivacsot az iskolák egy részénél (a visszajelzések alapján valószínűleg a klikes sulik érintettek), így újra használhatatlan.
-
-    Azt továbbra sem árulták el, hogy mi ennek az oka, nem válaszolnak e-maileimre.
-
-    Ha tényleg így marad én nem látom értelmét a projekt folytatásának.
-    Az app azért fent maradna a Play Áruházban a nagyon elvetemülteknek (és azoknak akiknek nincs lassítva), de nem frissíteném.
-
-    Üdv.:
-    Boa
-
-    2019. 12. 09.
-                """),
-                new MaterialButton(
-                  child: Text("Értem"),
-                  onPressed: () {
-                    SettingsHelper().setAcceptBlock(true);
-                    Navigator.of(context).pop(true);
-                  },
+                new Text("Töltsd le most a legújabb verziót:"),
+                new Text(
+                  globals.latestVersion + "\n",
+                  style: new TextStyle(
+                      color: Theme.of(context).accentColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
+                ),
+                new Row(
+                  children: <Widget>[
+                    new RaisedButton(
+                      onPressed: _launchDownloadWebsite(),
+                      child: Text("Letöltés"),
+                    )
+                  ],
                 )
               ],
-              title: Text("Egy üzenet a fejlesztőtől:"),
+              title: Text("Frissítés elérhető!"),
               contentPadding: EdgeInsets.all(20),
               shape: RoundedRectangleBorder(
-                side: BorderSide(
-                  style: BorderStyle.none,
-                  width: 1,
-                ),
+                side: BorderSide(style: BorderStyle.none, width: 1),
                 borderRadius: BorderRadius.circular(10),
-              ),
-            );
-          },
-        );
-      }
+              ));
+        });
+  }
 
-
-      Future<bool> showTOSDialog() async {
-        return showDialog(
-              barrierDismissible: false,
-              context: context,
-              builder: (BuildContext context) {
-                return new TOSDialog();
-              },
-            ) ??
-            false;
-      }
-      */
   @override
   void initState() {
     _initSettings();
@@ -142,6 +131,16 @@ class MainScreenState extends State<MainScreen> {
           else if (!(await SettingsHelper().getAcceptBlock())) showBlockDialog();
         });
         */
+    //print("####################################");
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (globals.version != globals.latestVersion &&
+          globals.latestVersion != "") {
+        //print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+        showUpdateDialog();
+      }
+    });
+
     _onRefresh(offline: true, showErrors: false).then((var a) async {
       mainScreenCards = await feedItems();
     });
