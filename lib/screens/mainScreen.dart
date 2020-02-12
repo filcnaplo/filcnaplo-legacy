@@ -105,7 +105,7 @@ class MainScreenState extends State<MainScreen> {
                 new Row(
                   children: <Widget>[
                     new RaisedButton(
-                      onPressed: _launchDownloadWebsite(),
+                      onPressed: _launchDownloadWebsite,
                       child: Text("Letöltés"),
                     )
                   ],
