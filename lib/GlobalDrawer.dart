@@ -1,5 +1,7 @@
+import 'package:charts_flutter/flutter.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/html_parser.dart';
 
 import 'Datas/Account.dart';
 import 'Datas/User.dart';
@@ -37,7 +39,7 @@ class GDrawerState extends State<GDrawer> {
         break;
       /*case 1:
         Navigator.pushReplacementNamed(context, "/evaluations");
-        break;*/	
+        break;*/
       case 2:
         Navigator.pushReplacementNamed(context, "/timetable");
         break;
@@ -57,11 +59,11 @@ class GDrawerState extends State<GDrawer> {
         Navigator.pushReplacementNamed(context, "/messages");
         break;
       default:
-	popContext = false;
-	break;
+        popContext = false;
+        break;
     }
     if (popContext) {
-        Navigator.pop(context); // close the drawer
+      Navigator.pop(context); // close the drawer
     }
   }
 
@@ -84,32 +86,51 @@ class GDrawerState extends State<GDrawer> {
                             height: 120.0,
                             width: 120.0,
                           ),
-                          new Row(
-                            children: <Widget>[
-                              new Container(
-                                child: new Text(
-                                  "\n" + S.of(context).title,
-                                  style: TextStyle(fontSize: 19.0),
+                          new Container(
+                            child: new Row(
+                              children: <Widget>[
+                                new Container(
+                                  child: new Text(
+                                    S.of(context).title,
+                                    style: TextStyle(fontSize: 19.0),
+                                  ),
                                 ),
-                                padding: new EdgeInsets.fromLTRB(
-                                    16.0, 0.0, 5.0, 0.0),
-                              ),
-                              new Container(
-                                child: new Text(
-                                  "\n" + version,
-                                  style: TextStyle(
-                                      fontSize: 19.0,
-                                      color: Theme.of(context).accentColor),
+                                new Container(
+                                  child: new Text(
+                                    " " + version,
+                                    style: TextStyle(
+                                        fontSize: 19.0,
+                                        color: Theme.of(context).accentColor),
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
+                            padding: EdgeInsets.fromLTRB(5.0, 5.0, 0.0, 0.0),
                           ),
+                          version != latestVersion && latestVersion != ""
+                              ? new Card(
+                                  child: Container(
+                                    child: new Text(
+                                        "Új verzió elérhető: " + latestVersion,
+                                        style: new TextStyle(
+                                          color: Colors.redAccent[100],
+                                          fontWeight: FontWeight.bold
+                                        )
+                                        ),
+                                    padding: EdgeInsets.all(5),
+                                    decoration: new BoxDecoration(
+                                      border: Border.all(width: 2, color: Colors.redAccent)
+                                    ),
+                                  ),
+                                )
+                              : new Container(),
                         ],
                         crossAxisAlignment: CrossAxisAlignment.start,
                       ),
                       padding: EdgeInsets.all(2.0),
                     ),
-                    height: 190.0,
+                    height: version != latestVersion && latestVersion != "" ? 205.0 : 195.0,
+                    padding: EdgeInsets.only(left:10)
                   )
                 : new Container(
                     height: 5,
