@@ -101,7 +101,8 @@
     
     "note": {
         "": "feljegyzés",
-        "2": "faliújság"
+        "2": "faliújság",
+        "title": "feljegyzések"
     },
 
     "message": {

@@ -156,6 +156,8 @@ class I18n implements WidgetsLocalizations {
   String get note2 => "faliújság";
   /// "feljegyzés"
   String get note => "feljegyzés";
+  /// "feljegyzések"
+  String get noteTitle => "feljegyzések";
   /// "receivers"
   String get messageReceivers => "receivers";
   /// "statisztikák"
