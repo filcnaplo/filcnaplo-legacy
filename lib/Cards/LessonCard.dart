@@ -72,7 +72,7 @@ class LessonCard extends StatelessWidget {
           barrierDismissible: true,
           context: context,
           builder: (BuildContext context) {
-            return new HomeworkDialog(lesson);            
+            return new HomeworkDialog(lesson);
           },
         ) ??
         false;
@@ -208,45 +208,55 @@ class LessonCard extends StatelessWidget {
                 ),
                 alignment: Alignment(-1, 0),
                 padding: EdgeInsets.all(10.0),
-                color: globals.isDark ? Color.fromARGB(255, 25, 25, 25) : Colors.grey[300],
+                color: globals.isDark
+                    ? Color.fromARGB(255, 25, 25, 25)
+                    : Colors.grey[300],
               ),
               new Container(
-                decoration: ShapeDecoration(
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                      style: BorderStyle.none,
-                      width: 1,
+                  decoration: ShapeDecoration(
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        style: BorderStyle.none,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(4),
                     ),
-                    borderRadius: BorderRadius.circular(4),
+                    color: globals.isDark
+                        ? Color.fromARGB(255, 15, 15, 15)
+                        : Colors.white,
                   ),
-                  color: globals.isDark ? Color.fromARGB(255, 15, 15, 15) : Colors.white,
-                ),
-                padding: EdgeInsets.all(10.0),
-                child: new Padding(
-                  padding: new EdgeInsets.all(0.0),
-                  child: new Row(
-                    children: <Widget>[
-                      new Text(getNext() != null ? getNext().room : "error",
-                          style: new TextStyle(
-                              fontSize: 18.0, color: globals.CurrentTextColor)),
-                      new Expanded(
-                          child: new Container(
-                        child: new Text(progress(),
+                  padding: EdgeInsets.all(10.0),
+                  child: new Padding(
+                    padding: new EdgeInsets.all(0.0),
+                    child: new Row(
+                      children: <Widget>[
+                        new Text(getNext() != null ? getNext().room : "error",
                             style: new TextStyle(
-                                fontSize: 18.0, color: globals.CurrentTextColor)),
-                        alignment: Alignment(1.0, 0.0),
-                      ))
-                    ],
-                  ),
-                ))
+                                fontSize: 18.0,
+                                color: globals.CurrentTextColor)),
+                        new Expanded(
+                            child: new Container(
+                          child: new Text(progress(),
+                              style: new TextStyle(
+                                  fontSize: 18.0,
+                                  color: globals.CurrentTextColor)),
+                          alignment: Alignment(1.0, 0.0),
+                        ))
+                      ],
+                    ),
+                  ))
             ],
           ),
-        decoration: new BoxDecoration(
-          border: Border.all(
-            color: globals.isDark ? Color.fromARGB(255, 25, 25, 25) : Colors.grey[300],
-            width: 2.5),
-          borderRadius: new BorderRadius.all(Radius.circular(5)),
-          color: globals.isDark ? Color.fromARGB(255, 25, 25, 25) : Colors.grey[300],
+          decoration: new BoxDecoration(
+            border: Border.all(
+                color: globals.isDark
+                    ? Color.fromARGB(255, 25, 25, 25)
+                    : Colors.grey[300],
+                width: 2.5),
+            borderRadius: new BorderRadius.all(Radius.circular(5)),
+            color: globals.isDark
+                ? Color.fromARGB(255, 25, 25, 25)
+                : Colors.grey[300],
           ),
         ),
       ),

@@ -27,6 +27,5 @@ class Message {
     for (var att in json["uzenet"]["csatolmanyok"]) {
       attachments.add(att["fajlNev"]);
     }
-
   }
 }

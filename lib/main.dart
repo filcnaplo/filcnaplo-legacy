@@ -182,4 +182,3 @@ void backgroundFetchHeadlessTask() async {
     BackgroundFetch.finish();
   });
 }
-

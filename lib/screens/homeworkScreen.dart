@@ -80,23 +80,24 @@ class HomeworkScreenState extends State<HomeworkScreen> {
             body: new Container(
                 child: hasOfflineLoaded
                     ? new Column(children: <Widget>[
-                !hasLoaded
-                ? Container(
-                child: new LinearProgressIndicator(
-                  value: null,
-                ),
-              height: 3,
-            )
-              : Container(
-          height: 3,
-        ),
-        new Expanded(child: new RefreshIndicator(
-                            child: new ListView.builder(
-                              itemBuilder: _itemBuilder,
-                              itemCount: selectedHomework.length,
-                            ),
-                            onRefresh: _onRefresh)),
-                ])
+                        !hasLoaded
+                            ? Container(
+                                child: new LinearProgressIndicator(
+                                  value: null,
+                                ),
+                                height: 3,
+                              )
+                            : Container(
+                                height: 3,
+                              ),
+                        new Expanded(
+                            child: new RefreshIndicator(
+                                child: new ListView.builder(
+                                  itemBuilder: _itemBuilder,
+                                  itemCount: selectedHomework.length,
+                                ),
+                                onRefresh: _onRefresh)),
+                      ])
                     : new Center(child: new CircularProgressIndicator()))));
   }
 
@@ -154,14 +155,14 @@ class HomeworkScreenState extends State<HomeworkScreen> {
     );
   }
 
-  Future<Null> _onRefresh({bool showErrors=true}) async {
+  Future<Null> _onRefresh({bool showErrors = true}) async {
     setState(() {
       hasLoaded = false;
     });
     Completer<Null> completer = new Completer<Null>();
-    List<Homework> homeworksNew = await HomeworkHelper().getHomeworks(globals.timeData[globals.selectedTimeForHomework], showErrors);
-    if (homeworksNew.length > homeworks.length)
-      homeworks = homeworksNew;
+    List<Homework> homeworksNew = await HomeworkHelper().getHomeworks(
+        globals.timeData[globals.selectedTimeForHomework], showErrors);
+    if (homeworksNew.length > homeworks.length) homeworks = homeworksNew;
     homeworks
         .sort((Homework a, Homework b) => b.uploadDate.compareTo(a.uploadDate));
     if (mounted)
@@ -179,8 +180,8 @@ class HomeworkScreenState extends State<HomeworkScreen> {
       hasOfflineLoaded = false;
     });
     Completer<Null> completer = new Completer<Null>();
-    homeworks = await HomeworkHelper().getHomeworksOffline(
-        globals.timeData[globals.selectedTimeForHomework]);
+    homeworks = await HomeworkHelper()
+        .getHomeworksOffline(globals.timeData[globals.selectedTimeForHomework]);
     homeworks
         .sort((Homework a, Homework b) => b.uploadDate.compareTo(a.uploadDate));
     if (mounted)

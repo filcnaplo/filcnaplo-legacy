@@ -172,10 +172,12 @@ class SettingsScreenState extends State<SettingsScreen> {
       SettingsHelper().setTheme(_theme);
     });
     globals.themeID = _theme;
-    DynamicTheme.of(context).setThemeData(ColorManager().getTheme(Theme.of(context).brightness));
-    globals.CurrentTextColor = ColorManager().getTheme(Theme.of(context).brightness).accentColor;
+    DynamicTheme.of(context)
+        .setThemeData(ColorManager().getTheme(Theme.of(context).brightness));
+    globals.CurrentTextColor =
+        ColorManager().getTheme(Theme.of(context).brightness).accentColor;
 //    print("CurrentTextColor: ");
-   // print(globals.CurrentTextColor);
+    // print(globals.CurrentTextColor);
   }
 
   void _isSingleUserChange(bool value) {
@@ -249,7 +251,9 @@ class SettingsScreenState extends State<SettingsScreen> {
                         ),
                         activeColor: Theme.of(context).accentColor,
                         value: _isSingleUser,
-                        onChanged: !globals.multiAccount ? null : _isSingleUserChange, //Only able to be turned on, if multiple users are logged in. On second user login, gets turned on automatically (See: AccountManager)
+                        onChanged: !globals.multiAccount
+                            ? null
+                            : _isSingleUserChange, //Only able to be turned on, if multiple users are logged in. On second user login, gets turned on automatically (See: AccountManager)
                         secondary: new Icon(Icons.person),
                       ),
                       SwitchListTile(

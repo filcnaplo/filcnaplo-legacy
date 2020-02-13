@@ -16,12 +16,14 @@ class AbsenceCard extends StatelessWidget {
   bool isSingle;
   String cardText = "?";
 
-  AbsenceCard(List<Absence> absence, bool isSingle, BuildContext context){
+  AbsenceCard(List<Absence> absence, bool isSingle, BuildContext context) {
     this.context = context;
     this.absences = absence;
     numOfAbsences = absence.length;
 
-    String realLang = globals.lang == "auto" ? Localizations.localeOf(context).languageCode : globals.lang;
+    String realLang = globals.lang == "auto"
+        ? Localizations.localeOf(context).languageCode
+        : globals.lang;
     if (absence[0].DelayTimeMinutes != 0) {
       //delay
       if (realLang == "hu") {
@@ -44,34 +46,33 @@ class AbsenceCard extends StatelessWidget {
     bool just = false;
     bool bejust = false;
 
-    for (Absence a in absence){
+    for (Absence a in absence) {
       if (a.JustificationState == "UnJustified")
         unjust = true;
       else if (a.JustificationState == "Justified")
         just = true;
-      else if (a.JustificationState == "BeJustified")
-        bejust = true;
+      else if (a.JustificationState == "BeJustified") bejust = true;
     }
 
-    if (unjust&&!just&&!bejust) {
+    if (unjust && !just && !bejust) {
       state = "igazolatlan";
       color = Colors.red;
-    } else if (!unjust&&just&&!bejust) {
+    } else if (!unjust && just && !bejust) {
       state = "igazolt";
       color = Colors.green;
-    } else if (!unjust&&!just&&bejust) {
+    } else if (!unjust && !just && bejust) {
       state = "igazolandó";
       color = Colors.grey;
     } else {
       state = "vegyes";
       color = Colors.orange;
     }
-    }
+  }
 
   @override
   Key get key => new Key(getDate());
 
-  String getDate(){
+  String getDate() {
     return absences[0].CreatingTime.toIso8601String();
   }
 
@@ -123,39 +124,29 @@ class AbsenceCard extends StatelessWidget {
             new SingleChildScrollView(
               child: new ListBody(
                 children: <Widget>[
-                  new Text(S
-                      .of(context)
-                      .lessons(numOfAbsences.toString())),
+                  new Text(S.of(context).lessons(numOfAbsences.toString())),
                   //new Text("mód: " + absence.modeName),
-                  new Text(S
-                      .of(context)
-                      .absence_time +
+                  new Text(S.of(context).absence_time +
                       dateToHuman(absence.LessonStartTime) +
                       dateToWeekDay(absence.LessonStartTime)),
-                  new Text(S
-                      .of(context)
-                      .administration_time +
+                  new Text(S.of(context).administration_time +
                       dateToHuman(absence.CreatingTime) +
                       dateToWeekDay(absence.LessonStartTime)),
-                  new Text(S
-                      .of(context)
-                      .justification_state +
+                  new Text(S.of(context).justification_state +
                       absence.JustificationStateName),
-                  new Text(S
-                      .of(context)
-                      .justification_mode +
+                  new Text(S.of(context).justification_mode +
                       absence.JustificationTypeName),
                   absence.DelayTimeMinutes != 0
-                      ? new Text(S
-                      .of(context)
-                      .delay_mins +
-                      absence.DelayTimeMinutes.toString() + " perc")
+                      ? new Text(S.of(context).delay_mins +
+                          absence.DelayTimeMinutes.toString() +
+                          " perc")
                       : new Container(),
                 ].followedBy(absences.map((Absence absence) {
                   return ListTile(
-                    leading: new Icon(absence.DelayTimeMinutes == 0
-                        ? iconifyState(absence.JustificationState)
-                        : (Icons.watch_later),
+                    leading: new Icon(
+                        absence.DelayTimeMinutes == 0
+                            ? iconifyState(absence.JustificationState)
+                            : (Icons.watch_later),
                         color: colorifyState(absence.JustificationState)),
                     title: new Text(absence.Subject),
                     subtitle: new Text(dateToHuman(absence.LessonStartTime)),
@@ -164,7 +155,9 @@ class AbsenceCard extends StatelessWidget {
               ),
             ),
           ],
-          title: Text(absence.ModeName,),
+          title: Text(
+            absence.ModeName,
+          ),
           contentPadding: EdgeInsets.all(20),
           shape: RoundedRectangleBorder(
             side: BorderSide(
@@ -181,89 +174,116 @@ class AbsenceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: openDialog,
-        child: new Card(
-          margin: EdgeInsets.all(6.0),
-          child: new Container(
-            child: new Column(
-              children: <Widget>[
-                new Container(
+      onTap: openDialog,
+      child: new Card(
+        margin: EdgeInsets.all(6.0),
+        child: new Container(
+          child: new Column(
+            children: <Widget>[
+              new Container(
+                child: new Row(
+                  children: <Widget>[
+                    new Text("$numOfAbsences ",
+                        style: new TextStyle(
+                            fontSize: 18.0, color: globals.CurrentTextColor)),
+                    new Text("db ",
+                        style: new TextStyle(
+                            fontSize: 18.0,
+                            color:
+                                globals.isDark ? Colors.white : Colors.black)),
+                    new Text("$state ",
+                        style: new TextStyle(fontSize: 18.0, color: color)),
+                    new Text(cardText,
+                        style: new TextStyle(
+                            fontSize: 18.0,
+                            color:
+                                globals.isDark ? Colors.white : Colors.black)),
+                  ],
+                ),
+                padding: EdgeInsets.all(10.0),
+              ),
+              !isSingle
+                  ? new Container(
+                      child: new Text(
+                          dateToHuman(absences[0].LessonStartTime) +
+                              dateToWeekDay(absences[0].LessonStartTime),
+                          style: new TextStyle(
+                            fontSize: 16.0,
+                          )),
+                      alignment: Alignment(1.0, -1.0),
+                      padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 2.0),
+                    )
+                  : new Container(),
+              new Container(
+                padding: EdgeInsets.all(10.0),
+                child: new Padding(
+                  padding: new EdgeInsets.all(0.0),
                   child: new Row(
                     children: <Widget>[
-                        new Text("$numOfAbsences ", style: new TextStyle(fontSize: 18.0, color: globals.CurrentTextColor)),
-                        new Text("db ", style: new TextStyle(fontSize: 18.0, color: globals.isDark ? Colors.white : Colors.black)),
-                        new Text("$state ", style: new TextStyle(fontSize: 18.0, color: color)),
-                        new Text(cardText, style: new TextStyle(fontSize: 18.0, color: globals.isDark ? Colors.white : Colors.black)),
+                      new Container(
+                        padding: new EdgeInsets.only(left: 2),
+                        child: new Icon(
+                          Icons.block,
+                          color: globals.isDark ? Colors.white : Colors.black,
+                        ),
+                      ),
+                      new Container(
+                        child: new Text(
+                          cardText,
+                          style: new TextStyle(fontSize: 18.0),
+                        ),
+                        padding: EdgeInsets.only(left: 8.0),
+                      ),
+                      isSingle
+                          ? new Expanded(
+                              child: new Container(
+                              child: new Text(
+                                  dateToHuman(absences[0].LessonStartTime) +
+                                      dateToWeekDay(
+                                          absences[0].LessonStartTime),
+                                  style: new TextStyle(
+                                    fontSize: 18.0,
+                                  )),
+                              alignment: Alignment(1.0, 0.0),
+                            ))
+                          : new Container(),
+                      !isSingle
+                          ? new Expanded(
+                              child: new Container(
+                              child: new Text(absences[0].owner.name,
+                                  style: new TextStyle(
+                                      fontSize: 18.0,
+                                      color: absences[0].owner.color)),
+                              alignment: Alignment(1.0, 0.0),
+                            ))
+                          : new Container(),
                     ],
                   ),
-                  padding: EdgeInsets.all(10.0),
                 ),
-                !isSingle ? new Container(
-                  child: new Text(dateToHuman(absences[0].LessonStartTime) +
-                      dateToWeekDay(absences[0].LessonStartTime),
-                      style: new TextStyle(
-                      fontSize: 16.0,)),
-                  alignment: Alignment(1.0, -1.0),
-                  padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 2.0),
-                ) : new Container(),
-
-                new Container(
-                  padding: EdgeInsets.all(10.0),
-                  child: new Padding(
-                    padding: new EdgeInsets.all(0.0),
-                    child: new Row(
-                      children: <Widget>[
-                        new Container(
-                          padding: new EdgeInsets.only(left: 2),
-                          child: new Icon(
-                            Icons.block,
-                            color: globals.isDark ? Colors.white : Colors.black,
-                          ),
-                        ),
-                        new Container(
-                          child: new Text(cardText,
-                            style: new TextStyle(fontSize: 18.0),
-                          ),
-                          padding: EdgeInsets.only(left: 8.0),
-                        ),
-
-                        isSingle ? new Expanded(
-                          child: new Container(
-                            child: new Text(dateToHuman(
-                                absences[0].LessonStartTime) + dateToWeekDay(
-                                absences[0].LessonStartTime), style: new TextStyle(
-                              fontSize: 18.0,)),
-                          alignment: Alignment(1.0, 0.0),
-                        )) : new Container(),
-                        !isSingle ? new Expanded(
-                          child: new Container(
-                            child: new Text(
-                                absences[0].owner.name, style: new TextStyle(
-                                fontSize: 18.0, color: absences[0].owner.color)),
-                          alignment: Alignment(1.0, 0.0),
-                        )) : new Container(),
-                      ],
-                    ),
-                  ),
-                  decoration: ShapeDecoration(
+                decoration: ShapeDecoration(
                     shape: RoundedRectangleBorder(
                       side: BorderSide(
                         style: BorderStyle.none,
                         width: 1,
                       ),
-                    borderRadius: BorderRadius.circular(4),
+                      borderRadius: BorderRadius.circular(4),
                     ),
-                    color: globals.isDark ? Color.fromARGB(255, 15, 15, 15) : Colors.white
-                  ),
-                )
+                    color: globals.isDark
+                        ? Color.fromARGB(255, 15, 15, 15)
+                        : Colors.white),
+              )
             ],
           ),
-        decoration: new BoxDecoration(
-          border: Border.all(
-            color: globals.isDark ? Color.fromARGB(255, 25, 25, 25) : Colors.blueGrey[100],
-            width: 2.5),
-          borderRadius: new BorderRadius.all(Radius.circular(5)),
-          color: globals.isDark ? Color.fromARGB(255, 25, 25, 25) : Colors.blueGrey[100],
+          decoration: new BoxDecoration(
+            border: Border.all(
+                color: globals.isDark
+                    ? Color.fromARGB(255, 25, 25, 25)
+                    : Colors.blueGrey[100],
+                width: 2.5),
+            borderRadius: new BorderRadius.all(Radius.circular(5)),
+            color: globals.isDark
+                ? Color.fromARGB(255, 25, 25, 25)
+                : Colors.blueGrey[100],
           ),
         ),
       ),

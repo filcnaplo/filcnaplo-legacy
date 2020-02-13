@@ -25,7 +25,8 @@ class EvaluationCard extends StatelessWidget {
     return await SettingsHelper().getColoredMainPage();
   }
 
-  EvaluationCard(Evaluation evaluation, bool isColor, bool isSingle, BuildContext context) {
+  EvaluationCard(Evaluation evaluation, bool isColor, bool isSingle,
+      BuildContext context) {
     this.evaluation = evaluation;
     this.context = context;
 
@@ -33,7 +34,8 @@ class EvaluationCard extends StatelessWidget {
     this.isSingle = isSingle;
 
     if (isColor) {
-      switch (evaluation.realValue) { //Define background and foreground color of the card for number values.
+      switch (evaluation.realValue) {
+        //Define background and foreground color of the card for number values.
         case 1:
           bColor = globals.color1;
           fColor = globals.colorF1;
@@ -75,7 +77,8 @@ class EvaluationCard extends StatelessWidget {
         break;
     }
 
-    switch (evaluation.Mode) { //Map evalutaion types to shorter, more readable versions. Set icons.
+    switch (evaluation.Mode) {
+      //Map evalutaion types to shorter, more readable versions. Set icons.
       case "Írásbeli témazáró dolgozat":
         typeIcon = Icons.widgets;
         typeName = "témazáró";
@@ -166,8 +169,9 @@ class EvaluationCard extends StatelessWidget {
   }
 
   String getDate() {
-    return evaluation.CreatingTime.toIso8601String()??"" +
-        evaluation.trueID().toString()??"";
+    return evaluation.CreatingTime.toIso8601String() ??
+        "" + evaluation.trueID().toString() ??
+        "";
   }
 
   @override
@@ -178,13 +182,15 @@ class EvaluationCard extends StatelessWidget {
   }
 
   Widget listEntry(String data, {bold = false, right = false}) => new Container(
-    child: new Text(
-      data,
-      style: TextStyle(fontSize: right ? 16 : 19, fontWeight: bold ? FontWeight.bold : FontWeight.normal),
-    ),
-    alignment: right ? Alignment(1, -1) : Alignment(0, 0),
-    padding: EdgeInsets.only(bottom: 3),
-  );
+        child: new Text(
+          data,
+          style: TextStyle(
+              fontSize: right ? 16 : 19,
+              fontWeight: bold ? FontWeight.bold : FontWeight.normal),
+        ),
+        alignment: right ? Alignment(1, -1) : Alignment(0, 0),
+        padding: EdgeInsets.only(bottom: 3),
+      );
 
   Future<Null> _evaluationDialog(Evaluation evaluation) async {
     return showDialog<Null>(
@@ -200,10 +206,10 @@ class EvaluationCard extends StatelessWidget {
                       ? listEntry(evaluation.Value)
                       : new Container(),
                   evaluation.Weight != "" &&
-                      evaluation.Weight != "100%" &&
-                      evaluation.Weight != null
+                          evaluation.Weight != "100%" &&
+                          evaluation.Weight != null
                       ? listEntry(evaluation.Weight,
-                      bold: ["200%", "300%"].contains(evaluation.Weight))
+                          bold: ["200%", "300%"].contains(evaluation.Weight))
                       : new Container(),
                   evaluation.Theme != "" && evaluation.Theme != null
                       ? listEntry(evaluation.Theme)
@@ -212,8 +218,8 @@ class EvaluationCard extends StatelessWidget {
                       ? listEntry(evaluation.Mode)
                       : new Container(),
                   evaluation.CreatingTime != null
-                      ? listEntry(
-                      dateToHuman(evaluation.CreatingTime), right: true)
+                      ? listEntry(dateToHuman(evaluation.CreatingTime),
+                          right: true)
                       : new Container(),
                   evaluation.Teacher != null
                       ? listEntry(evaluation.Teacher, right: true)
@@ -225,8 +231,8 @@ class EvaluationCard extends StatelessWidget {
           title: (evaluation.Subject != null)
               ? Text(evaluation.Subject)
               : evaluation.Jelleg.Leiras != null
-              ? Text(evaluation.Jelleg.Leiras)
-              : new Container(),
+                  ? Text(evaluation.Jelleg.Leiras)
+                  : new Container(),
           contentPadding: EdgeInsets.all(20),
           shape: RoundedRectangleBorder(
             side: BorderSide(
@@ -242,7 +248,6 @@ class EvaluationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return new GestureDetector(
       onTap: openDialog,
       child: new Card(
@@ -260,12 +265,12 @@ class EvaluationCard extends StatelessWidget {
                               fontSize: 18.0,
                               fontWeight: FontWeight.bold))
                       : evaluation.Jelleg.Leiras != null
-                      ? new Text(evaluation.Jelleg.Leiras,
-                      style: new TextStyle(
-                          color: fColor,
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold))
-                      : Container(),
+                          ? new Text(evaluation.Jelleg.Leiras,
+                              style: new TextStyle(
+                                  color: fColor,
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold))
+                          : Container(),
                   leading: (evaluation.NumberValue != 0 && textShort == null)
                       ? new Text(evaluation.NumberValue.toString(),
                           style: new TextStyle(
@@ -285,7 +290,8 @@ class EvaluationCard extends StatelessWidget {
                           : new Container(),
                       evaluation.Theme != null
                           ? new Text(evaluation.Theme,
-                              style: new TextStyle(color: fColor, fontSize: 18.0))
+                              style:
+                                  new TextStyle(color: fColor, fontSize: 18.0))
                           : Container(),
                       new Text(
                         evaluation.Teacher,
@@ -299,8 +305,9 @@ class EvaluationCard extends StatelessWidget {
               !showPadding || !isSingle
                   ? new Container(
                       child: new Text(
-                          dateToHuman(evaluation.Date)??"" +
-                              dateToWeekDay(evaluation.Date)??"",
+                          dateToHuman(evaluation.Date) ??
+                              "" + dateToWeekDay(evaluation.Date) ??
+                              "",
                           style: new TextStyle(fontSize: 16.0, color: fColor)),
                       alignment: Alignment(1.0, -1.0),
                     )
@@ -347,7 +354,7 @@ class EvaluationCard extends StatelessWidget {
                                       maxLines: 1,
                                     )
                                   : new Text(
-                                evaluation.Value,
+                                      evaluation.Value,
                                       style: new TextStyle(
                                           fontSize: 18.0,
                                           color: globals.isDark
@@ -359,7 +366,8 @@ class EvaluationCard extends StatelessWidget {
                             ),
                             new Container(
                               child: new Padding(
-                                child: (evaluation.Weight != "100%" && evaluation.Weight != null)
+                                child: (evaluation.Weight != "100%" &&
+                                        evaluation.Weight != null)
                                     ? new Text(evaluation.Weight,
                                         style: TextStyle(
                                             color: globals.isDark
@@ -367,30 +375,34 @@ class EvaluationCard extends StatelessWidget {
                                                 : Colors.black87))
                                     : null,
                                 padding: new EdgeInsets.all(2.0),
-                                ),
+                              ),
                               alignment: Alignment(-1.0, 0.0),
                             ),
                             !isSingle
                                 ? new Expanded(
                                     child: new Container(
-                                      child: new Text(evaluation.owner.name ?? "",
-                                        maxLines: 1,
-                                        softWrap: false,
-                                        overflow: TextOverflow.fade, 
-                                        style: new TextStyle(
-                                            color: evaluation.owner.color ??
-                                                Colors.black,
-                                            fontSize: 18.0)),
+                                      child: new Text(
+                                          evaluation.owner.name ?? "",
+                                          maxLines: 1,
+                                          softWrap: false,
+                                          overflow: TextOverflow.fade,
+                                          style: new TextStyle(
+                                              color: evaluation.owner.color ??
+                                                  Colors.black,
+                                              fontSize: 18.0)),
                                       alignment: Alignment(1.0, -1.0),
                                     ),
                                   )
                                 : new Container(),
                             isSingle
-                                ? new Expanded( 
+                                ? new Expanded(
                                     child: new Container(
                                       child: new Text(
-                                        dateToHuman(evaluation.Date)??"" +
-                                            dateToWeekDay(evaluation.Date)??"",
+                                        dateToHuman(evaluation.Date) ??
+                                            "" +
+                                                dateToWeekDay(
+                                                    evaluation.Date) ??
+                                            "",
                                         maxLines: 1,
                                         softWrap: false,
                                         overflow: TextOverflow.fade,
@@ -401,9 +413,9 @@ class EvaluationCard extends StatelessWidget {
                                                 : Colors.black87),
                                         textAlign: TextAlign.end,
                                       ),
-                                    alignment: Alignment(1.0, 0.0),
-                                  ),
-                                )
+                                      alignment: Alignment(1.0, 0.0),
+                                    ),
+                                  )
                                 : new Container(),
                           ],
                         ),
@@ -412,9 +424,7 @@ class EvaluationCard extends StatelessWidget {
             ],
           ),
           decoration: new BoxDecoration(
-            border: Border.all(
-              color: Colors.transparent,
-              width: 2.5),
+            border: Border.all(color: Colors.transparent, width: 2.5),
             borderRadius: new BorderRadius.all(Radius.circular(5)),
           ),
         ),

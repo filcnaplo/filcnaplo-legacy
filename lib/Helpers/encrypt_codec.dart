@@ -19,9 +19,7 @@ Uint8List _randBytes(int length) {
 ///
 /// It uses MD5 which generates a 16 bytes blob, size needed for Salsa20
 Uint8List _generateEncryptPassword(String password) {
-  var blob = Uint8List.fromList(md5
-      .convert(utf8.encode(password))
-      .bytes);
+  var blob = Uint8List.fromList(md5.convert(utf8.encode(password)).bytes);
   assert(blob.length == 16);
   return blob;
 }
@@ -41,9 +39,7 @@ class _EncryptEncoder extends Converter<Map<String, dynamic>, String> {
 
     // Encode the input value
     String encoded =
-        Encrypter(salsa20)
-            .encrypt(json.encode(input), iv: IV(iv))
-            .base64;
+        Encrypter(salsa20).encrypt(json.encode(input), iv: IV(iv)).base64;
 
     // Prepend the initial value
     return '$ivEncoded$encoded';

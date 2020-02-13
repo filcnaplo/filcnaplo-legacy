@@ -42,33 +42,32 @@ class TestsScreenState extends State<TestsScreen> {
         child: Scaffold(
             drawer: GDrawer(),
             appBar: new AppBar(
-              title: new Text(S
-                  .of(context)
-                  .tests),
+              title: new Text(S.of(context).tests),
               actions: <Widget>[],
             ),
             body: new Container(
                 child: (hasOfflineLoaded && tests != null)
                     ? new Column(children: <Widget>[
-                !hasLoaded
-                ? Container(
-                child: new LinearProgressIndicator(
-                  value: null,
-                ),
-              height: 3,
-            )
-              : Container(
-          height: 3,
-        ),
-        new Expanded(child: new RefreshIndicator(
+                        !hasLoaded
+                            ? Container(
+                                child: new LinearProgressIndicator(
+                                  value: null,
+                                ),
+                                height: 3,
+                              )
+                            : Container(
+                                height: 3,
+                              ),
+                        new Expanded(
+                          child: new RefreshIndicator(
                             child: new ListView.builder(
                               itemBuilder: _itemBuilder,
                               itemCount: tests.length,
                             ),
                             onRefresh: _onRefresh,
-        ),
-                      ),
-                ])
+                          ),
+                        ),
+                      ])
                     : new Center(child: new CircularProgressIndicator()))));
   }
 

@@ -3,25 +3,32 @@ import 'package:flutter/material.dart';
 import '../GlobalDrawer.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:filcnaplo/generated/i18n.dart';
-import '../globals.dart'
-as globals;
+import '../globals.dart' as globals;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_html/flutter_html.dart';
 import '../Helpers/RequestHelper.dart';
+
 void main() {
-    runApp(new MaterialApp(home: new AboutScreen(), localizationsDelegates: const < LocalizationsDelegate < WidgetsLocalizations >> [
-        S.delegate,
-        GlobalWidgetsLocalizations.delegate,
-    ], supportedLocales: S.delegate.supportedLocales, onGenerateTitle: (BuildContext context) => S.of(context).title, ));
+  runApp(new MaterialApp(
+    home: new AboutScreen(),
+    localizationsDelegates: const <LocalizationsDelegate<WidgetsLocalizations>>[
+      S.delegate,
+      GlobalWidgetsLocalizations.delegate,
+    ],
+    supportedLocales: S.delegate.supportedLocales,
+    onGenerateTitle: (BuildContext context) => S.of(context).title,
+  ));
 }
+
 class AboutScreen extends StatefulWidget {
-    @override
-    AboutScreenState createState() => new AboutScreenState();
+  @override
+  AboutScreenState createState() => new AboutScreenState();
 }
-class AboutScreenState extends State < AboutScreen > {
-    //TODO: Easter egg code really needed?
-    /*
+
+class AboutScreenState extends State<AboutScreen> {
+  //TODO: Easter egg code really needed?
+  /*
       int clicksUntilEasteregg = 5;
       bool showEasteregg = false;
       void battleRoyaleCounter() {
@@ -37,26 +44,85 @@ class AboutScreenState extends State < AboutScreen > {
           }
       }
       */
-    @override
-    Widget build(BuildContext context) {
-        return new WillPopScope(onWillPop: () {
-            globals.screen = 7;
-            Navigator.pushReplacementNamed(context, "/settings");
-        }, child: Scaffold(drawer: GDrawer(), appBar: new AppBar(title: new Text(S.of(context).title), actions: < Widget > [], ), body: new Center(child: Container(child: new ListView(padding: EdgeInsets.all(20), children: < Widget > [
-            new Container(child: new Text(S.of(context).title, style: new TextStyle(fontSize: 28.0, ), textAlign: TextAlign.center, ), padding: EdgeInsets.only(bottom: 30.0), ),
-            new Row(children: < Widget > [
-                new Text(S.of(context).version, style: new TextStyle(fontSize: 22.0, ), ),
-                new Text(globals.version, style: new TextStyle(fontSize: 22.0, color: Theme.of(context).accentColor), ),
-            ], mainAxisAlignment: MainAxisAlignment.center, ),
-            Container(child: new Row(children: < Widget > [
-                new Text(S.of(context).made_with, style: new TextStyle(fontSize: 22.0, ), ),
-                new Text(S.of(context).flutter, style: new TextStyle(fontSize: 22.0, color: Theme.of(context).accentColor), ),
-            ], mainAxisAlignment: MainAxisAlignment.center, ), ),
-            new Row(children: < Widget > [
-                new Text("User-Agent:", style: new TextStyle(fontSize: 22.0, ), ),
-                new Text("\n" + globals.userAgent,),
-            ], mainAxisAlignment: MainAxisAlignment.center, ),
-            /*
+  @override
+  Widget build(BuildContext context) {
+    return new WillPopScope(
+        onWillPop: () {
+          globals.screen = 7;
+          Navigator.pushReplacementNamed(context, "/settings");
+        },
+        child: Scaffold(
+          drawer: GDrawer(),
+          appBar: new AppBar(
+            title: new Text(S.of(context).title),
+            actions: <Widget>[],
+          ),
+          body: new Center(
+            child: Container(
+              child: new ListView(
+                padding: EdgeInsets.all(20),
+                children: <Widget>[
+                  new Container(
+                    child: new Text(
+                      S.of(context).title,
+                      style: new TextStyle(
+                        fontSize: 28.0,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    padding: EdgeInsets.only(bottom: 30.0),
+                  ),
+                  new Row(
+                    children: <Widget>[
+                      new Text(
+                        S.of(context).version,
+                        style: new TextStyle(
+                          fontSize: 22.0,
+                        ),
+                      ),
+                      new Text(
+                        globals.version,
+                        style: new TextStyle(
+                            fontSize: 22.0,
+                            color: Theme.of(context).accentColor),
+                      ),
+                    ],
+                    mainAxisAlignment: MainAxisAlignment.center,
+                  ),
+                  Container(
+                    child: new Row(
+                      children: <Widget>[
+                        new Text(
+                          S.of(context).made_with,
+                          style: new TextStyle(
+                            fontSize: 22.0,
+                          ),
+                        ),
+                        new Text(
+                          S.of(context).flutter,
+                          style: new TextStyle(
+                              fontSize: 22.0,
+                              color: Theme.of(context).accentColor),
+                        ),
+                      ],
+                      mainAxisAlignment: MainAxisAlignment.center,
+                    ),
+                  ),
+                  new Row(
+                    children: <Widget>[
+                      new Text(
+                        "User-Agent:",
+                        style: new TextStyle(
+                          fontSize: 22.0,
+                        ),
+                      ),
+                      new Text(
+                        "\n" + globals.userAgent,
+                      ),
+                    ],
+                    mainAxisAlignment: MainAxisAlignment.center,
+                  ),
+                  /*
 
                         new FlatButton(onPressed: _launchFAQ, child: new Row(children: < Widget > [
                             new Container(child: new Icon(Icons.question_answer, color: Colors.green, size: 20.0, ), padding: EdgeInsets.all(5.0), ),
@@ -90,11 +156,28 @@ class AboutScreenState extends State < AboutScreen > {
                         ], mainAxisAlignment: MainAxisAlignment.center, )),
                       ű
                     */
-            (globals.selectedUser == null) //If there is no user selected, show a button to go back to login screen.
-            ? new Container(child: new RaisedButton(onPressed: _popToLogin, child: new Text("Vissza a bejelentkezéshez", style: new TextStyle(fontSize: 17.0, ), ), ), padding: EdgeInsets.all(5)) : new Container(),
-        ], ), ), ), ));
-    }
-    /*
+                  (globals.selectedUser ==
+                          null) //If there is no user selected, show a button to go back to login screen.
+                      ? new Container(
+                          child: new RaisedButton(
+                            onPressed: _popToLogin,
+                            child: new Text(
+                              "Vissza a bejelentkezéshez",
+                              style: new TextStyle(
+                                fontSize: 17.0,
+                              ),
+                            ),
+                          ),
+                          padding: EdgeInsets.all(5))
+                      : new Container(),
+                ],
+              ),
+            ),
+          ),
+        ));
+  }
+
+  /*
     _launchFAQ() async {
         return showDialog < Null > (context: context, barrierDismissible: true, builder: (BuildContext context) {
             return new SimpleDialog(children: < Widget > [
@@ -157,7 +240,7 @@ class AboutScreenState extends State < AboutScreen > {
         Navigator.pushNamed(context, "/about");
     }
     */
-    _popToLogin() {
-        Navigator.pushNamed(context, "/login");
-    }
+  _popToLogin() {
+    Navigator.pushNamed(context, "/login");
+  }
 }

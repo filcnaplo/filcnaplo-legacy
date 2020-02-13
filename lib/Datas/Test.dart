@@ -14,8 +14,17 @@ class Test {
   DateTime creationDate; //BejelentesDatuma
   User owner;
 
-  Test(this.uid, this.id, this.date, this.dayOfWeek, this.lessonNumber,
-      this.subject, this.teacher, this.title, this.mode, this.creationDate,
+  Test(
+      this.uid,
+      this.id,
+      this.date,
+      this.dayOfWeek,
+      this.lessonNumber,
+      this.subject,
+      this.teacher,
+      this.title,
+      this.mode,
+      this.creationDate,
       this.owner);
 
   Test.fromJson(Map json) {

@@ -42,37 +42,36 @@ class NotesScreenState extends State<NotesScreen> {
         child: Scaffold(
             drawer: GDrawer(),
             appBar: new AppBar(
-              title: new Text(S
-                  .of(context)
-                  .notes),
+              title: new Text(S.of(context).notes),
               actions: <Widget>[],
             ),
             body: new Container(
                 child: hasOfflineLoaded
                     ? new Column(children: <Widget>[
-                !hasLoaded
-                ? Container(
-                child: new LinearProgressIndicator(
-                  value: null,
-                ),
-              height: 3,
-            )
-              : Container(
-          height: 3,
-        ),
-        new Expanded(child: new RefreshIndicator(
+                        !hasLoaded
+                            ? Container(
+                                child: new LinearProgressIndicator(
+                                  value: null,
+                                ),
+                                height: 3,
+                              )
+                            : Container(
+                                height: 3,
+                              ),
+                        new Expanded(
+                          child: new RefreshIndicator(
                             child: new ListView.builder(
                               itemBuilder: _itemBuilder,
                               itemCount: notes.length,
                             ),
                             onRefresh: _onRefresh,
-        ),
-                      ),
-                ])
+                          ),
+                        ),
+                      ])
                     : new Center(child: new CircularProgressIndicator()))));
   }
 
-  Future<Null> _onRefresh({bool showErrors=true}) async {
+  Future<Null> _onRefresh({bool showErrors = true}) async {
     setState(() {
       hasLoaded = false;
     });

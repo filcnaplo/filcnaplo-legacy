@@ -34,43 +34,31 @@ class Student {
     studentBean.PlaceOfBirth = map['PlaceOfBirth'];
     studentBean.MothersName = map['MothersName'];
     studentBean.AddressDataList = List()
-      ..addAll(
-          (map['AddressDataList'] as List ?? []).map((o) => o.toString())
-      );
+      ..addAll((map['AddressDataList'] as List ?? []).map((o) => o.toString()));
     studentBean.DateOfBirthUtc = map['DateOfBirthUtc'];
     studentBean.InstituteName = map['InstituteName'];
     studentBean.InstituteCode = map['InstituteCode'];
     studentBean.Evaluations = List()
-      ..addAll(
-          (map['Evaluations'] as List ?? []).map((o) =>
-              Evaluation.fromMap(o, owner))
-      );
+      ..addAll((map['Evaluations'] as List ?? [])
+          .map((o) => Evaluation.fromMap(o, owner)));
     studentBean.SubjectAverages = List()
-      ..addAll(
-          (map['SubjectAverages'] as List ?? []).map((o) =>
-              SubjectAveragesBean.fromMap(o))
-      );
+      ..addAll((map['SubjectAverages'] as List ?? [])
+          .map((o) => SubjectAveragesBean.fromMap(o)));
     studentBean.Absences = List()
-      ..addAll(
-          (map['Absences'] as List ?? []).map((o) => Absence.fromMap(o, owner))
-      );
+      ..addAll((map['Absences'] as List ?? [])
+          .map((o) => Absence.fromMap(o, owner)));
     studentBean.Notes = List()
-      ..addAll(
-          (map['Notes'] as List ?? []).map((o) => NotesBean.fromMap(o))
-      );
+      ..addAll((map['Notes'] as List ?? []).map((o) => NotesBean.fromMap(o)));
     studentBean.Lessons = map['Lessons'];
     studentBean.Events = map['Events'];
     studentBean.FormTeacher = FormTeacherBean.fromMap(map['FormTeacher']);
     studentBean.Tutelaries = List()
-      ..addAll(
-          (map['Tutelaries'] as List ?? []).map((o) =>
-              TutelariesBean.fromMap(o))
-      );
+      ..addAll((map['Tutelaries'] as List ?? [])
+          .map((o) => TutelariesBean.fromMap(o)));
     return studentBean;
   }
 
-  Map toJson() =>
-      {
+  Map toJson() => {
         "StudentId": StudentId,
         "SchoolYearId": SchoolYearId,
         "Name": Name,
@@ -108,8 +96,7 @@ class TutelariesBean {
     return tutelariesBean;
   }
 
-  Map toJson() =>
-      {
+  Map toJson() => {
         "TutelaryId": TutelaryId,
         "Name": Name,
         "Email": Email,
@@ -133,8 +120,7 @@ class FormTeacherBean {
     return formTeacherBean;
   }
 
-  Map toJson() =>
-      {
+  Map toJson() => {
         "TeacherId": TeacherId,
         "Name": Name,
         "Email": Email,
@@ -166,8 +152,7 @@ class NotesBean {
     return notesBean;
   }
 
-  Map toJson() =>
-      {
+  Map toJson() => {
         "NoteId": NoteId,
         "Type": Type,
         "Title": Title,
@@ -244,8 +229,7 @@ class Absence {
     return absencesBean;
   }
 
-  Map toJson() =>
-      {
+  Map toJson() => {
         "AbsenceId": AbsenceId,
         "Type": Type,
         "TypeName": TypeName,
@@ -289,8 +273,7 @@ class SubjectAveragesBean {
     return subjectAveragesBean;
   }
 
-  Map toJson() =>
-      {
+  Map toJson() => {
         "SubjectId": SubjectId,
         "Subject": Subject,
         "SubjectCategory": SubjectCategory,
@@ -325,10 +308,11 @@ class Evaluation {
   ErtekFajtaBean ErtekFajta;
 
   User owner;
-  
+
   static const String MID_YEAR = "MidYear";
   static const String TEXT = "Text";
-  static const String PERCENTAGE = "Percentage"; //Nem biztos, hogy így van, de hátha :D
+  static const String PERCENTAGE =
+      "Percentage"; //Nem biztos, hogy így van, de hátha :D
 
   static const String HALF_YEAR = "HalfYear";
   static const String END_YEAR = "EndYear";
@@ -343,11 +327,11 @@ class Evaluation {
   bool isEndYear() => Type == END_YEAR;
   bool isFirstQuarter() => Type == FIRST_QUARTER;
   bool isThirdQuarter() => Type == THIRD_QUARTER;
-  bool isSummaryEvaluation() => (isHalfYear() || isEndYear() || isFirstQuarter() || isThirdQuarter());
+  bool isSummaryEvaluation() =>
+      (isHalfYear() || isEndYear() || isFirstQuarter() || isThirdQuarter());
 
-
-  int trueID() =>
-      int.parse(EvaluationId.toString() + Jelleg.Id
+  int trueID() => int.parse(EvaluationId.toString() +
+      Jelleg.Id
           .toString()); // Az EvaluationId nem egyedi azonosító (van, hogy két jegy ugyanazt kapja!), ezért kellett egy igazi ID.
   int get realValue {
     if (NumberValue != 0)
@@ -368,7 +352,6 @@ class Evaluation {
     }
     return 0;
   }
-
 
   static Evaluation fromMap(Map<String, dynamic> map, User owner) {
     if (map == null) return null;
@@ -403,8 +386,7 @@ class Evaluation {
     return evaluationsBean;
   }
 
-  Map toJson() =>
-      {
+  Map toJson() => {
         "EvaluationId": EvaluationId,
         "Form": Form,
         "FormName": FormName,
@@ -448,7 +430,6 @@ class Evaluation {
         break;
     }
   }
-
 }
 
 class ErtekFajtaBean {
@@ -465,8 +446,7 @@ class ErtekFajtaBean {
     return ertekFajtaBean;
   }
 
-  Map toJson() =>
-      {
+  Map toJson() => {
         "Id": Id,
         "Nev": Nev,
         "Leiras": Leiras,
@@ -487,8 +467,7 @@ class JellegBean {
     return jellegBean;
   }
 
-  Map toJson() =>
-      {
+  Map toJson() => {
         "Id": Id,
         "Nev": Nev,
         "Leiras": Leiras,

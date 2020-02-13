@@ -26,22 +26,23 @@ void main() {
 class AccountsScreen extends StatefulWidget {
   @override
   AccountsScreenState createState() => new AccountsScreenState();
-
 }
 
 class AccountsScreenState extends State<AccountsScreen> {
-
   Color selected;
 
   void addPressed() {
     setState(() {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => LoginScreen(fromApp: true,)),
+        MaterialPageRoute(
+            builder: (context) => LoginScreen(
+                  fromApp: true,
+                )),
       );
     });
-
   }
+
   List<User> users;
   Future<List<User>> _getUserList() async {
     return await AccountManager().getUsers();
@@ -49,8 +50,7 @@ class AccountsScreenState extends State<AccountsScreen> {
 
   @override
   void initState() {
-
-  super.initState();
+    super.initState();
     setState(() {
       performInitState();
     });
@@ -70,17 +70,13 @@ class AccountsScreenState extends State<AccountsScreen> {
         content: content,
         actions: [
           FlatButton(
-            child: Text(S
-                .of(context)
-                .no),
+            child: Text(S.of(context).no),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           FlatButton(
-            child: Text(S
-                .of(context)
-                .ok),
+            child: Text(S.of(context).ok),
             onPressed: () async {
               Navigator.of(context).pop();
               users[users.map((User u) => u.id).toList().indexOf(user.id)]
@@ -91,8 +87,7 @@ class AccountsScreenState extends State<AccountsScreen> {
                 if (globals.selectedUser.id == user.id)
                   globals.selectedUser.color = selected;
                 for (Account account in globals.accounts)
-                  if (account.user.id == user.id)
-                    account.user.color = selected;
+                  if (account.user.id == user.id) account.user.color = selected;
                 _getListWidgets();
               });
             },
@@ -103,8 +98,7 @@ class AccountsScreenState extends State<AccountsScreen> {
   }
 
   Future<void> _getListWidgets() async {
-    if (users.isEmpty)
-      Navigator.pushNamed(context, "/login");
+    if (users.isEmpty) Navigator.pushNamed(context, "/login");
     accountListWidgets = new List();
     for (Account a in globals.accounts) {
       setState(() {
@@ -115,28 +109,38 @@ class AccountsScreenState extends State<AccountsScreen> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 new Container(
-                  child: new FlatButton(onPressed: (){
-                    _openDialog(
-                        S
-                            .of(context)
-                            .color,
-                      MaterialColorPicker(
-                        selectedColor: selected,
-                        onColorChange: (Color c) => selected = c,
-                      ),
-                        a.user
-                    );
-                  }, child: new Icon(Icons.color_lens, color: a.user.color,),),
+                  child: new FlatButton(
+                    onPressed: () {
+                      _openDialog(
+                          S.of(context).color,
+                          MaterialColorPicker(
+                            selectedColor: selected,
+                            onColorChange: (Color c) => selected = c,
+                          ),
+                          a.user);
+                    },
+                    child: new Icon(
+                      Icons.color_lens,
+                      color: a.user.color,
+                    ),
+                  ),
                 ),
-                new FlatButton(onPressed: () async {
-                  _removeUserDialog(a.user).then((nul) async {
-                    users = await AccountManager().getUsers();
-                    globals.accounts.removeWhere((Account a) => !users.map((User u) => u.id).contains(a.user.id));
-                    await _getListWidgets();
-                    setState(() {}); //TODO Ez így lehet hogy full felesleges, delete this line if so
-                  });
-                },
-                    child: new Icon(Icons.clear, color: Colors.red,),),
+                new FlatButton(
+                  onPressed: () async {
+                    _removeUserDialog(a.user).then((nul) async {
+                      users = await AccountManager().getUsers();
+                      globals.accounts.removeWhere((Account a) =>
+                          !users.map((User u) => u.id).contains(a.user.id));
+                      await _getListWidgets();
+                      setState(
+                          () {}); //TODO Ez így lehet hogy full felesleges, delete this line if so
+                    });
+                  },
+                  child: new Icon(
+                    Icons.clear,
+                    color: Colors.red,
+                  ),
+                ),
               ],
             ),
             title: new Text(a.user.name),
@@ -144,22 +148,32 @@ class AccountsScreenState extends State<AccountsScreen> {
               child: Icon(Icons.person_outline),
               onTap: () async {
                 await a.refreshStudentString(true, false);
-                Navigator.push(context, new MaterialPageRoute(
-                    builder: (BuildContext context) => new StudentScreen(
-                      account: a,)));
+                Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (BuildContext context) => new StudentScreen(
+                              account: a,
+                            )));
               },
             ),
           ),
         );
-        accountListWidgets.add(new Divider(height: 1.0,),);
+        accountListWidgets.add(
+          new Divider(
+            height: 1.0,
+          ),
+        );
       });
     }
 
     setState(() {
-      accountListWidgets.add(new FlatButton(onPressed: addPressed,
-          child: new Icon(Icons.add, color: globals.CurrentTextColor,)));
+      accountListWidgets.add(new FlatButton(
+          onPressed: addPressed,
+          child: new Icon(
+            Icons.add,
+            color: globals.CurrentTextColor,
+          )));
     });
-
   }
 
   Future<Null> _removeUserDialog(User user) async {
@@ -168,9 +182,7 @@ class AccountsScreenState extends State<AccountsScreen> {
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
         return new AlertDialog(
-          title: new Text(S
-              .of(context)
-              .sure),
+          title: new Text(S.of(context).sure),
           content: new SingleChildScrollView(
             child: new ListBody(
               children: <Widget>[
@@ -180,22 +192,19 @@ class AccountsScreenState extends State<AccountsScreen> {
           ),
           actions: <Widget>[
             new FlatButton(
-              child: new Text(S
-                  .of(context)
-                  .no),
+              child: new Text(S.of(context).no),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             new FlatButton(
-              child: new Text(S
-                  .of(context)
-                  .yes),
+              child: new Text(S.of(context).yes),
               onPressed: () async {
                 await AccountManager().removeUser(user);
-   //             print("asd1");
+                //             print("asd1");
                 setState(() {
-                  globals.accounts.removeWhere((Account a) => a.user.id == user.id);
+                  globals.accounts
+                      .removeWhere((Account a) => a.user.id == user.id);
                   Navigator.of(context).pop();
                   Navigator.pop(context); // close the drawer
                   Navigator.pushReplacementNamed(context, "/accounts");
@@ -217,27 +226,23 @@ class AccountsScreenState extends State<AccountsScreen> {
         globals.screen = 0;
         Navigator.pushReplacementNamed(context, "/main");
       },
-        child: Scaffold(
-          drawer: GDrawer(),
-            appBar: new AppBar(
-              title: new Text(S
-                  .of(context)
-                  .accounts),
-              actions: <Widget>[
-              ],
-            ),
-          body: new Column(
-              children: <Widget>[
-                new Expanded(
-                  child: new Container(
-                      child: accountListWidgets != null ? new ListView(
-                        children:  accountListWidgets ,
-                      ) : new CircularProgressIndicator()
-                  ),
-                ),
-              ]
-            ),
+      child: Scaffold(
+        drawer: GDrawer(),
+        appBar: new AppBar(
+          title: new Text(S.of(context).accounts),
+          actions: <Widget>[],
         ),
+        body: new Column(children: <Widget>[
+          new Expanded(
+            child: new Container(
+                child: accountListWidgets != null
+                    ? new ListView(
+                        children: accountListWidgets,
+                      )
+                    : new CircularProgressIndicator()),
+          ),
+        ]),
+      ),
     );
   }
 }

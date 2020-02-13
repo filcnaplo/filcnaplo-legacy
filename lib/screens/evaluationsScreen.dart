@@ -248,8 +248,13 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
         .toList());
 
     if (firstQuarterEvaluations.isNotEmpty)
-      summaryCardsToShow.add(new SummaryCard(firstQuarterEvaluations, context,
-          "Első negyedévi jegyek", false, true, false)); //TODO Make use of translation DB everywhere
+      summaryCardsToShow.add(new SummaryCard(
+          firstQuarterEvaluations,
+          context,
+          "Első negyedévi jegyek",
+          false,
+          true,
+          false)); //TODO Make use of translation DB everywhere
     if (halfYearEvaluations.isNotEmpty)
       summaryCardsToShow.add(new SummaryCard(
           halfYearEvaluations, context, "Félévi jegyek", false, true, false));
@@ -373,7 +378,8 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           .where((Evaluation evaluation) => evaluation.isMidYear())).toList();
     } catch (exeption) {
       Fluttertoast.showToast(
-          msg: "Nem sikerült betölteni a jegyeket", //TODO Make use of translation DB everywhere
+          msg:
+              "Nem sikerült betölteni a jegyeket", //TODO Make use of translation DB everywhere
           backgroundColor: Colors.red,
           textColor: Colors.white,
           fontSize: 16.0);
@@ -720,7 +726,8 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                               children: <Widget>[
                                 new Column(
                                   children: <Widget>[
-                                    new Text("átlaga:"), //TODO Make use of translation DB everywhere
+                                    new Text(
+                                        "átlaga:"), //TODO Make use of translation DB everywhere
                                     new Text("mediánja:"),
                                     new Text("módusza:")
                                   ],
@@ -760,7 +767,9 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
               currentIndex: currentBody,
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
-                    icon: new Icon(Icons.list), title: new Text("Összes")), //TODO Make use of translation DB everywhere
+                    icon: new Icon(Icons.list),
+                    title: new Text(
+                        "Összes")), //TODO Make use of translation DB everywhere
                 BottomNavigationBarItem(
                   icon: new Icon(Icons.show_chart),
                   title: new Text("Tárgyanként"),

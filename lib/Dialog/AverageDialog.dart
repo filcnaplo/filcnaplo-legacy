@@ -15,12 +15,13 @@ class AverageDialog extends StatefulWidget {
 class AverageDialogState extends State<AverageDialog> {
   List<Evaluation> evaluations = new List();
   List<Average> averages = new List();
-  List<Average> currentAvers = new List(); // todo már nem is emlékszem ez mit csinál
+  List<Average> currentAvers =
+      new List(); // todo már nem is emlékszem ez mit csinál
   List<Widget> widgets = new List();
   bool felevi = false;
   int pageID = 0;
 
-  void onChanged (int change) {
+  void onChanged(int change) {
     pageID = change;
     setState(() {
       refWidgets();
@@ -32,34 +33,31 @@ class AverageDialogState extends State<AverageDialog> {
     averages = globals.selectedAccount.averages;
     evaluations = globals.selectedAccount.student.Evaluations;
     evaluations.removeWhere((Evaluation e) =>
-    e.NumberValue == 0
-        || e.Mode == "Na" || e.Weight == null || e.Weight == "-");
+        e.NumberValue == 0 ||
+        e.Mode == "Na" ||
+        e.Weight == null ||
+        e.Weight == "-");
 
     List<String> avrChoice = [
-      S
-          .of(context)
-          .average_menu,
-      S
-          .of(context)
-          .halfyear,
-      S
-          .of(context)
-          .quarteryear + " (${S
-          .of(context)
-          .notworking})",
-      S
-          .of(context)
-          .endyear
+      S.of(context).average_menu,
+      S.of(context).halfyear,
+      S.of(context).quarteryear + " (${S.of(context).notworking})",
+      S.of(context).endyear
     ];
 
-    widgets.add(
-        new Container(
-          child: new DropdownButton<int>(items: [0, 1, 2, 3].map((int choice){
-            return DropdownMenuItem<int>(child: Text(avrChoice[choice]), value: choice,);
-          }).toList(), onChanged: onChanged, value: pageID,),
-          margin: EdgeInsets.all(10),
-        )
-    );
+    widgets.add(new Container(
+      child: new DropdownButton<int>(
+        items: [0, 1, 2, 3].map((int choice) {
+          return DropdownMenuItem<int>(
+            child: Text(avrChoice[choice]),
+            value: choice,
+          );
+        }).toList(),
+        onChanged: onChanged,
+        value: pageID,
+      ),
+      margin: EdgeInsets.all(10),
+    ));
 
     setState(() {
       refWidgets();
@@ -67,20 +65,16 @@ class AverageDialogState extends State<AverageDialog> {
 
     setState(() {
       if (currentAvers.isNotEmpty)
-        widgets.add(
-            new Container(
-              child: new ListView.builder(
-                  itemBuilder: _itemBuilder, itemCount: currentAvers.length),
-              width: 320.0,
-              height: 400.0,
-            )
-        );
+        widgets.add(new Container(
+          child: new ListView.builder(
+              itemBuilder: _itemBuilder, itemCount: currentAvers.length),
+          width: 320.0,
+          height: 400.0,
+        ));
     });
 
     return new SimpleDialog(
-      title: new Text(S
-          .of(context)
-          .averages),
+      title: new Text(S.of(context).averages),
       contentPadding: const EdgeInsets.all(10.0),
       children: widgets,
     );
@@ -89,32 +83,38 @@ class AverageDialogState extends State<AverageDialog> {
   Widget _itemBuilder(BuildContext context, int index) {
     return new ListTile(
       title: new Text(currentAvers[index].subject),
-      subtitle: new Text(currentAvers[index].value.toStringAsFixed(2), style: TextStyle(
-          color: currentAvers[index].value < 2 ? Colors.red : null),),
+      subtitle: new Text(
+        currentAvers[index].value.toStringAsFixed(2),
+        style:
+            TextStyle(color: currentAvers[index].value < 2 ? Colors.red : null),
+      ),
       onTap: () {},
     );
   }
 
   void refWidgets() {
     currentAvers.clear();
-    switch(pageID){
+    switch (pageID) {
       case 0: // sima átlagok
         for (Average average in averages)
-          if (average.value >= 1 && average.value <= 5) currentAvers.add(average);
+          if (average.value >= 1 && average.value <= 5)
+            currentAvers.add(average);
         currentAvers.sort((Average a, Average b) {
           return a.subject.compareTo(b.subject);
         });
-        currentAvers.add(Average(S
-            .of(context)
-            .all_average, "",
-            "", getAllAverages(), 0, 0));
+        currentAvers.add(
+            Average(S.of(context).all_average, "", "", getAllAverages(), 0, 0));
         break;
       case 1: // félévi jegyek
         for (Evaluation evaluation in evaluations)
           if (evaluation.isHalfYear())
-            currentAvers.add(Average(evaluation.Subject,
-                evaluation.SubjectCategory, evaluation.Subject,
-                evaluation.NumberValue / 1, 0, 0));
+            currentAvers.add(Average(
+                evaluation.Subject,
+                evaluation.SubjectCategory,
+                evaluation.Subject,
+                evaluation.NumberValue / 1,
+                0,
+                0));
         currentAvers.sort((Average a, Average b) {
           return a.subject.compareTo(b.subject);
         });
@@ -124,9 +124,13 @@ class AverageDialogState extends State<AverageDialog> {
       case 3: // év végi jegyek
         for (Evaluation evaluation in evaluations)
           if (evaluation.isEndYear())
-            currentAvers.add(Average(evaluation.Subject,
-                evaluation.SubjectCategory, evaluation.Subject,
-                evaluation.NumberValue / 1, 0, 0));
+            currentAvers.add(Average(
+                evaluation.Subject,
+                evaluation.SubjectCategory,
+                evaluation.Subject,
+                evaluation.NumberValue / 1,
+                0,
+                0));
         currentAvers.sort((Average a, Average b) {
           return a.subject.compareTo(b.subject);
         });

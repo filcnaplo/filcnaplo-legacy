@@ -28,8 +28,8 @@ class AbsentDialogState extends State<AbsentDialog> {
 
     setState(() {
       absents.forEach((String day, List<Absence> absencesOnDay) {
-        if (absencesOnDay[0].isParental() && absencesOnDay[0].owner.isSelected())
-          sumOfParentalAbsences++;
+        if (absencesOnDay[0].isParental() &&
+            absencesOnDay[0].owner.isSelected()) sumOfParentalAbsences++;
         if (absencesOnDay[0].owner.isSelected())
           for (Absence absence in absencesOnDay)
             if (absence.DelayTimeMinutes == 0)
@@ -48,29 +48,31 @@ class AbsentDialogState extends State<AbsentDialog> {
 
   Widget build(BuildContext context) {
     return new SimpleDialog(
-        title: new Text(S
-            .of(context)
-            .statistics),
+        title: new Text(S.of(context).statistics),
         titlePadding: EdgeInsets.all(16),
         contentPadding: const EdgeInsets.all(5.0),
         children: <Widget>[
-          Container(child: new Text(
-            S.of(context).parental_justification(
-                sumOfParentalAbsences.toString()),
-            style: TextStyle(fontSize: 16.0),
-          ),
+          Container(
+            child: new Text(
+              S
+                  .of(context)
+                  .parental_justification(sumOfParentalAbsences.toString()),
+              style: TextStyle(fontSize: 16.0),
+            ),
             margin: EdgeInsets.all(8),
           ),
-          Container(child: new Text(
-            S.of(context).all_absences(sumOfAllAbsences.toString()),
-            style: TextStyle(fontSize: 16.0),
-          ),
+          Container(
+            child: new Text(
+              S.of(context).all_absences(sumOfAllAbsences.toString()),
+              style: TextStyle(fontSize: 16.0),
+            ),
             margin: EdgeInsets.all(8),
           ),
-          Container(child: new Text(
-            S.of(context).all_delay(sumOfDelayMinutes.toString()),
-            style: TextStyle(fontSize: 16.0),
-          ),
+          Container(
+            child: new Text(
+              S.of(context).all_delay(sumOfDelayMinutes.toString()),
+              style: TextStyle(fontSize: 16.0),
+            ),
             margin: EdgeInsets.all(8),
           ),
           Container(

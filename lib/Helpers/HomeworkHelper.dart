@@ -11,21 +11,21 @@ import '../globals.dart' as globals;
 class HomeworkHelper {
   Future<List<Homework>> getHomeworksByLesson(Lesson lesson) async {
     List<Homework> homeworks = List();
-    String code = await RequestHelper().getBearerToken(globals.selectedAccount.user, false);
-    String homeworkString = (await RequestHelper()
-        .getHomework(code, globals.selectedAccount.user.schoolCode, lesson.homework));
+    String code = await RequestHelper()
+        .getBearerToken(globals.selectedAccount.user, false);
+    String homeworkString = (await RequestHelper().getHomework(
+        code, globals.selectedAccount.user.schoolCode, lesson.homework));
     if (homeworkString == "[]")
       homeworkString = "[" +
-    (await RequestHelper().getHomeworkByTeacher(code, globals.selectedAccount.user.schoolCode, lesson.homework))
-          + "]";
+          (await RequestHelper().getHomeworkByTeacher(
+              code, globals.selectedAccount.user.schoolCode, lesson.homework)) +
+          "]";
     String ctargy = lesson.subject;
     List<dynamic> homeworksJson = json.decode(homeworkString);
     List<Map<String, dynamic>> hwmapuser = new List();
 
     for (dynamic d in homeworksJson) {
-      Map<String, String> lessonProperty = <String, String>{
-        "subject": ctargy
-      };
+      Map<String, String> lessonProperty = <String, String>{"subject": ctargy};
 
       (d as Map<String, dynamic>).addAll(lessonProperty);
       hwmapuser.add(d as Map<String, dynamic>);
@@ -83,7 +83,8 @@ class HomeworkHelper {
     return homeworks;
   }
 
-  Future<List<Map<String, dynamic>>> getHomeworkList(int time, bool showErrors) async {
+  Future<List<Map<String, dynamic>>> getHomeworkList(
+      int time, bool showErrors) async {
     List<Map<String, dynamic>> homeworkMap = new List<Map<String, dynamic>>();
     List<User> users = await AccountManager().getUsers();
 
@@ -95,10 +96,10 @@ class HomeworkHelper {
       DateTime to = startDate;
 
       String timetableString = (await RequestHelper().getTimeTable(
-              from.toIso8601String().substring(0, 10),
-              to.toIso8601String().substring(0, 10),
-              code,
-              user.schoolCode));
+          from.toIso8601String().substring(0, 10),
+          to.toIso8601String().substring(0, 10),
+          code,
+          user.schoolCode));
       if (timetableString != null) {
         List<dynamic> ttMap = json.decode(timetableString);
         List<Map<String, dynamic>> hwmapuser = new List();
@@ -110,7 +111,8 @@ class HomeworkHelper {
             if (homeworkString == "[]")
               homeworkString = "[" +
                   (await RequestHelper().getHomeworkByTeacher(
-                      code, user.schoolCode, d["TeacherHomeworkId"])) + "]";
+                      code, user.schoolCode, d["TeacherHomeworkId"])) +
+                  "]";
             String ctargy = d["Subject"];
             List<dynamic> evaluationsMapUser = json.decode(homeworkString);
             for (dynamic d in evaluationsMapUser) {

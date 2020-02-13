@@ -19,7 +19,9 @@ class SummaryCard extends StatelessWidget {
   bool showTitle;
   bool showColor;
 
-  SummaryCard(List<Evaluation> summaryEvaluations, BuildContext context, String title, bool showTheme, bool showTitle, bool showColor) { //Summary types: 1: 1st Q, 2: Mid-year, 3: 3rd Q, 4: End-year
+  SummaryCard(List<Evaluation> summaryEvaluations, BuildContext context,
+      String title, bool showTheme, bool showTitle, bool showColor) {
+    //Summary types: 1: 1st Q, 2: Mid-year, 3: 3rd Q, 4: End-year
     this.summaryEvaluations = summaryEvaluations;
     this.context = context;
     this.title = title;
@@ -31,75 +33,86 @@ class SummaryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Card(
-      color: !showColor
-        ? globals.isDark ? Colors.grey[800] : Colors.grey[300]
-        : summaryEvaluations.first.owner.color??(globals.isDark ? Colors.grey[800] : Colors.grey[300]), //If a user logs in, default color is null.
-      margin: EdgeInsets.all(6.0),
-      child: new Container(
-      child: new Column(
-        children: <Widget>[
-          showTitle
-          ? new Container(
-            child: new Row(
-              children: <Widget>[
-                new Text(
-                  title,
-                  style:
-                      new TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center,
+        color: !showColor
+            ? globals.isDark ? Colors.grey[800] : Colors.grey[300]
+            : summaryEvaluations.first.owner.color ??
+                (globals.isDark
+                    ? Colors.grey[800]
+                    : Colors
+                        .grey[300]), //If a user logs in, default color is null.
+        margin: EdgeInsets.all(6.0),
+        child: new Container(
+          child: new Column(
+            children: <Widget>[
+              showTitle
+                  ? new Container(
+                      child: new Row(
+                        children: <Widget>[
+                          new Text(
+                            title,
+                            style: new TextStyle(
+                                fontSize: 17, fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
+                          ),
+                          !showColor
+                              ? new Container()
+                              : new Text(
+                                  summaryEvaluations.first.owner.name,
+                                  textAlign: TextAlign.center,
+                                )
+                        ],
+                        mainAxisAlignment: !showColor
+                            ? MainAxisAlignment.center
+                            : MainAxisAlignment.spaceAround,
+                      ),
+                      padding: EdgeInsets.all(7),
+                      constraints: BoxConstraints.expand(height: 36),
+                    )
+                  : new Container(),
+              new Container(
+                child: evaluationList(context),
+                padding: EdgeInsets.fromLTRB(0.0, 6.0, 0.0, 6.0),
+                decoration: ShapeDecoration(
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      style: BorderStyle.none,
+                      width: 0,
+                    ),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  color: globals.isDark
+                      ? globals.isAmoled
+                          ? Colors.black
+                          : Color.fromARGB(255, 15, 15, 15)
+                      : Colors.white,
                 ),
-                !showColor
-                ? new Container()
-                : new Text(
-                  summaryEvaluations.first.owner.name,
-                  textAlign: TextAlign.center,
-                )
-              ],
-              mainAxisAlignment: !showColor
-              ? MainAxisAlignment.center
-              : MainAxisAlignment.spaceAround,
-            ),
-            padding: EdgeInsets.all(7),
-            constraints: BoxConstraints.expand(height: 36),
-          )
-          : new Container(),
-          new Container(
-            child: evaluationList(context),
-            padding: EdgeInsets.fromLTRB(0.0, 6.0, 0.0, 6.0),
-            decoration: ShapeDecoration(
-              shape: RoundedRectangleBorder(
-                side: BorderSide(
-                  style: BorderStyle.none,
-                  width: 0,
-                ),
-                borderRadius: BorderRadius.circular(5),
-              ),
-              color: globals.isDark ? globals.isAmoled ? Colors.black : Color.fromARGB(255, 15, 15, 15) : Colors.white,
-            ),
-          )
-        ],
-      ),
-      decoration: new BoxDecoration(
-        border: Border.all(
-            color: !showColor
-              ? globals.isDark ? Colors.grey[800] : Colors.grey[300]
-              : summaryEvaluations.first.owner.color??(globals.isDark ? Colors.grey[800] : Colors.grey[300]),
-            width: 2.5),
-        borderRadius: new BorderRadius.all(Radius.circular(5)),
-      ),
-    ),
-    shape: RoundedRectangleBorder(
-      side: BorderSide(
-        style: BorderStyle.none,
-        width: 1,
-      ),
-      borderRadius: BorderRadius.circular(5),
-    ));
+              )
+            ],
+          ),
+          decoration: new BoxDecoration(
+            border: Border.all(
+                color: !showColor
+                    ? globals.isDark ? Colors.grey[800] : Colors.grey[300]
+                    : summaryEvaluations.first.owner.color ??
+                        (globals.isDark ? Colors.grey[800] : Colors.grey[300]),
+                width: 2.5),
+            borderRadius: new BorderRadius.all(Radius.circular(5)),
+          ),
+        ),
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            style: BorderStyle.none,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(5),
+        ));
   }
 
   //Place the card on the main page where the last item on it would go
-  String getDate() {    
-    return summaryEvaluations.first.CreatingTime.toIso8601String()??"" + summaryEvaluations.first.trueID().toString()??"";
+  String getDate() {
+    return summaryEvaluations.first.CreatingTime.toIso8601String() ??
+        "" + summaryEvaluations.first.trueID().toString() ??
+        "";
   }
 
   @override
@@ -107,35 +120,37 @@ class SummaryCard extends StatelessWidget {
 
   Widget evaluationList(BuildContext context) {
     return Column(children: <Widget>[
-      for (Evaluation evaluation in summaryEvaluations) new ListTile(
-        leading: new Container(
-          child: new Text(
-            evaluation.realValue.toString(),
-            style: new TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-              color: globals.isColor ? getColors(context, evaluation.realValue, false) : Colors.white,
-            )),
-            alignment: Alignment(0,0),
+      for (Evaluation evaluation in summaryEvaluations)
+        new ListTile(
+          leading: new Container(
+            child: new Text(evaluation.realValue.toString(),
+                style: new TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: globals.isColor
+                      ? getColors(context, evaluation.realValue, false)
+                      : Colors.white,
+                )),
+            alignment: Alignment(0, 0),
             height: 40,
             width: 40,
             decoration: new BoxDecoration(
-              color: globals.isColor ? getColors(context, evaluation.realValue, true) : Color.fromARGB(255, 15, 15, 15), 
-              borderRadius: new BorderRadius.all(Radius.circular(40))
-            ),
-        ),
-        title: new Text(
-          evaluation.Subject ?? evaluation.Jelleg.Leiras,
-          style: new TextStyle(
-            fontWeight: FontWeight.bold
+                color: globals.isColor
+                    ? getColors(context, evaluation.realValue, true)
+                    : Color.fromARGB(255, 15, 15, 15),
+                borderRadius: new BorderRadius.all(Radius.circular(40))),
           ),
+          title: new Text(
+            evaluation.Subject ?? evaluation.Jelleg.Leiras,
+            style: new TextStyle(fontWeight: FontWeight.bold),
           ),
-        subtitle: new Text(evaluation.Teacher),
-        trailing: new Text(dateToHuman(evaluation.Date)),
-        onTap: () {openDialog(evaluation);},
+          subtitle: new Text(evaluation.Teacher),
+          trailing: new Text(dateToHuman(evaluation.Date)),
+          onTap: () {
+            openDialog(evaluation);
+          },
         )
-    ]
-    );
+    ]);
   }
 
   void openDialog(Evaluation evaluation) {
@@ -143,13 +158,15 @@ class SummaryCard extends StatelessWidget {
   }
 
   Widget listEntry(String data, {bold = false, right = false}) => new Container(
-    child: new Text(
-      data,
-      style: TextStyle(fontSize: right ? 16 : 19, fontWeight: bold ? FontWeight.bold : FontWeight.normal),
-    ),
-    alignment: right ? Alignment(1, -1) : Alignment(0, 0),
-    padding: EdgeInsets.only(bottom: 3),
-  );
+        child: new Text(
+          data,
+          style: TextStyle(
+              fontSize: right ? 16 : 19,
+              fontWeight: bold ? FontWeight.bold : FontWeight.normal),
+        ),
+        alignment: right ? Alignment(1, -1) : Alignment(0, 0),
+        padding: EdgeInsets.only(bottom: 3),
+      );
 
   Future<Null> _evaluationDialog(Evaluation evaluation) async {
     return showDialog<Null>(
@@ -165,10 +182,10 @@ class SummaryCard extends StatelessWidget {
                       ? listEntry(evaluation.Value)
                       : new Container(),
                   evaluation.Weight != "" &&
-                      evaluation.Weight != "100%" &&
-                      evaluation.Weight != null
+                          evaluation.Weight != "100%" &&
+                          evaluation.Weight != null
                       ? listEntry(evaluation.Weight,
-                      bold: ["200%", "300%"].contains(evaluation.Weight))
+                          bold: ["200%", "300%"].contains(evaluation.Weight))
                       : new Container(),
                   evaluation.Theme != "" && evaluation.Theme != null
                       ? listEntry(evaluation.Theme)
@@ -177,8 +194,8 @@ class SummaryCard extends StatelessWidget {
                       ? listEntry(evaluation.Mode)
                       : new Container(),
                   evaluation.CreatingTime != null
-                      ? listEntry(
-                      dateToHuman(evaluation.CreatingTime), right: true)
+                      ? listEntry(dateToHuman(evaluation.CreatingTime),
+                          right: true)
                       : new Container(),
                   evaluation.Teacher != null
                       ? listEntry(evaluation.Teacher, right: true)
@@ -190,8 +207,8 @@ class SummaryCard extends StatelessWidget {
           title: (evaluation.Subject != null)
               ? Text(evaluation.Subject)
               : evaluation.Jelleg.Leiras != null
-              ? Text(evaluation.Jelleg.Leiras)
-              : new Container(),
+                  ? Text(evaluation.Jelleg.Leiras)
+                  : new Container(),
           contentPadding: EdgeInsets.all(20),
           shape: RoundedRectangleBorder(
             side: BorderSide(

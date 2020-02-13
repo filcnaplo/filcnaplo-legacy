@@ -22,21 +22,13 @@ class SortDialogState extends State<SortDialog> {
 
   Widget build(BuildContext context) {
     List<String> sortOptionList = [
-      S
-          .of(context)
-          .sort_time,
-      S
-          .of(context)
-          .sort_eval,
-      S
-          .of(context)
-          .sort_real_time,
+      S.of(context).sort_time,
+      S.of(context).sort_eval,
+      S.of(context).sort_real_time,
     ];
 
     return new SimpleDialog(
-      title: new Text(S
-          .of(context)
-          .sort),
+      title: new Text(S.of(context).sort),
       contentPadding: const EdgeInsets.all(10.0),
       children: <Widget>[
         new PopupMenuButton<String>(
@@ -55,7 +47,9 @@ class SortDialogState extends State<SortDialog> {
             ),
             padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 2.0),
           ),
-          onSelected: (String selected) {_onSelect(selected, sortOptionList);},
+          onSelected: (String selected) {
+            _onSelect(selected, sortOptionList);
+          },
           itemBuilder: (BuildContext context) {
             return sortOptionList.map((String sor) {
               return new PopupMenuItem<String>(

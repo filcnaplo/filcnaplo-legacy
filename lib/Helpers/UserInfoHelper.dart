@@ -3,22 +3,21 @@ import 'dart:convert' show utf8, json;
 import '../globals.dart' as globals;
 import 'RequestHelper.dart';
 
-
 class UserInfoHelper {
 //TODO refactor this file
 
-  Future<Map<String, String>> getInfo(String instCode, String userName, String password, bool showErrors) async {
+  Future<Map<String, String>> getInfo(String instCode, String userName,
+      String password, bool showErrors) async {
     Map<String, dynamic> evaluationsMap;
 
-    evaluationsMap = await _getEvaluationlist(instCode, userName, password, showErrors);
+    evaluationsMap =
+        await _getEvaluationlist(instCode, userName, password, showErrors);
 
     print(evaluationsMap);
     String StudentId = evaluationsMap["StudentId"].toString();
-    if (StudentId == null)
-      StudentId = "";
+    if (StudentId == null) StudentId = "";
     String StudentName = evaluationsMap["Name"].toString();
-    if (StudentName == null)
-      StudentName = "";
+    if (StudentName == null) StudentName = "";
 //    String ParentId;
 //    String ParentName;
 //    if (evaluationsMap["Tutelary"]==null) {
@@ -52,18 +51,19 @@ class UserInfoHelper {
     return infoMap;
   }
 
-  Future <Map<String, dynamic>> _getEvaluationlist(String instCode, String userName, String password, bool showErrors) async{
-
+  Future<Map<String, dynamic>> _getEvaluationlist(String instCode,
+      String userName, String password, bool showErrors) async {
     String jsonBody = "institute_code=" +
         instCode +
         "&userName=" +
         userName +
         "&password=" +
         password +
-        "&grant_type=password&client_id=" + globals.clientId;
+        "&grant_type=password&client_id=" +
+        globals.clientId;
 
-    Map<String, dynamic> bearerMap =
-    json.decode((await RequestHelper().getBearer(jsonBody, instCode, showErrors)));
+    Map<String, dynamic> bearerMap = json.decode(
+        (await RequestHelper().getBearer(jsonBody, instCode, showErrors)));
 
     String code = bearerMap.values.toList()[0];
 

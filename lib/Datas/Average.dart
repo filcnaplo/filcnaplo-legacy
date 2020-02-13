@@ -12,7 +12,7 @@ class Average {
   Average(this.subject, this.subjectCategory, this.subjectCategoryName,
       this.value, this.classValue, this.difference);
 
-  Average.fromJson(Map json){
+  Average.fromJson(Map json) {
     subject = json["Subject"];
     subjectCategory = json["SubjectCategory"];
     subjectCategoryName = json["SubjectCategoryName"];

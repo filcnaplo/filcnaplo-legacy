@@ -66,33 +66,19 @@ class Lesson {
     calendarOraType = json["CalendarOraType"];
     homeworkEnabled = json["IsTanuloHaziFeladatEnabled"];
 
-    if (theme == null)
-      theme = "";
-    if (subject == null)
-      subject = "";
-    if (subjectName == null)
-      subjectName = "";
-    if (room == null)
-      room = "";
-    if (group == null)
-      group = "";
-    if (teacher == null)
-      teacher = "";
-    if (depTeacher == null)
-      depTeacher = "";
-    if (state == null)
-      state = "";
-    if (stateName == null)
-      stateName = "";
-    if (presence == null)
-      presence = "";
-    if (presenceName == null)
-      presenceName = "";
-    if (homework == null)
-      homework = null;
-    if (calendarOraType == null)
-      calendarOraType = "";
-    if (homeworkEnabled == null)
-      homeworkEnabled = true;
+    if (theme == null) theme = "";
+    if (subject == null) subject = "";
+    if (subjectName == null) subjectName = "";
+    if (room == null) room = "";
+    if (group == null) group = "";
+    if (teacher == null) teacher = "";
+    if (depTeacher == null) depTeacher = "";
+    if (state == null) state = "";
+    if (stateName == null) stateName = "";
+    if (presence == null) presence = "";
+    if (presenceName == null) presenceName = "";
+    if (homework == null) homework = null;
+    if (calendarOraType == null) calendarOraType = "";
+    if (homeworkEnabled == null) homeworkEnabled = true;
   }
 }

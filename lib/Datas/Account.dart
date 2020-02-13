@@ -54,13 +54,12 @@ class Account {
               msg: "Hiba a felhasználó olvasása közben",
               backgroundColor: Colors.red,
               textColor: Colors.white,
-              fontSize: 16.0
-          );
+              fontSize: 16.0);
         }
         messages = await MessageHelper().getMessagesOffline(user);
       } else if (!isOffline) {
-        String studentString = await RequestHelper().getStudentString(
-            user, showErrors);
+        String studentString =
+            await RequestHelper().getStudentString(user, showErrors);
         if (studentString != null) {
           _studentJson = json.decode(studentString);
           await DBHelper().addStudentJson(_studentJson, user);
@@ -71,10 +70,10 @@ class Account {
       student = Student.fromMap(_studentJson, user);
       absents = await AbsentHelper().getAbsentsFrom(student.Absences);
       await _refreshEventsString(isOffline, showErrors);
-      notes = await NotesHelper().getNotesFrom(
-          _eventsString, json.encode(_studentJson), user);
-      averages =
-      await AverageHelper().getAveragesFrom(json.encode(_studentJson), user);
+      notes = await NotesHelper()
+          .getNotesFrom(_eventsString, json.encode(_studentJson), user);
+      averages = await AverageHelper()
+          .getAveragesFrom(json.encode(_studentJson), user);
 
       user.setRecentlyRefreshed("refreshStudentString");
     }
@@ -118,13 +117,11 @@ class Account {
       if (isOffline)
         _eventsString = await readEventsString(user);
       else
-        _eventsString =
-        await RequestHelper().getEventsString(user, showErrors);
+        _eventsString = await RequestHelper().getEventsString(user, showErrors);
       user.setRecentlyRefreshed("_refreshEventsString");
     }
   }
 
-  List<Evaluation> get midyearEvaluations =>
-      student.Evaluations.where(
-              (Evaluation evaluation) => evaluation.isMidYear()).toList();
+  List<Evaluation> get midyearEvaluations => student.Evaluations.where(
+      (Evaluation evaluation) => evaluation.isMidYear()).toList();
 }

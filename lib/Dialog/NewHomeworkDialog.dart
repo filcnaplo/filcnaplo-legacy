@@ -20,21 +20,22 @@ class NewHomeworkDialogState extends State<NewHomeworkDialog> {
 
   Widget build(BuildContext context) {
     return new SimpleDialog(
-      title: new Text(S
-          .of(context)
-          .homework),
+      title: new Text(S.of(context).homework),
       contentPadding: const EdgeInsets.all(10.0),
       children: <Widget>[
         new TextField(
           keyboardType: TextInputType.multiline,
           maxLines: 10,
-          onChanged: (String text) {homework = text;},
+          onChanged: (String text) {
+            homework = text;
+          },
         ),
         MaterialButton(
           child: Text(S.of(context).ok),
           onPressed: () {
-              RequestHelper().uploadHomework(homework, widget.lesson, globals.selectedAccount.user);
-              Navigator.of(context).pop();
+            RequestHelper().uploadHomework(
+                homework, widget.lesson, globals.selectedAccount.user);
+            Navigator.of(context).pop();
           },
         )
       ],

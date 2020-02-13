@@ -92,11 +92,11 @@ class TimeTableScreenState extends State<TimeTableScreen>
             lessonsWeek = week;
             int index = getInitIndex(lessonsWeek, now);
             _tabController = new TabController(
-                          vsync: this,
-                          length: lessonsWeek.dayList().length,
-                          initialIndex: first && index < week.dayList().length
-                              ? index
-                              : first ? week.dayList().length - 1 : 0);
+                vsync: this,
+                length: lessonsWeek.dayList().length,
+                initialIndex: first && index < week.dayList().length
+                    ? index
+                    : first ? week.dayList().length - 1 : 0);
           } catch (e) {
             print(e);
           }
@@ -106,21 +106,21 @@ class TimeTableScreenState extends State<TimeTableScreen>
 
     getWeek(startDate, false, !first).then((Week week) {
       if (current == process)
-      setState(() {
-        try {
-          lessonsWeek = week;
-          int index = getInitIndex(lessonsWeek, now);
-          _tabController = new TabController(
-              vsync: this,
-              length: lessonsWeek.dayList().length,
-              initialIndex: first && index < week.dayList().length
-                  ? index
-                  : first ? week.dayList().length - 1 : 0);
-        } catch (e) {
-          print(e);
-        }
-        ended = true;
-      });
+        setState(() {
+          try {
+            lessonsWeek = week;
+            int index = getInitIndex(lessonsWeek, now);
+            _tabController = new TabController(
+                vsync: this,
+                length: lessonsWeek.dayList().length,
+                initialIndex: first && index < week.dayList().length
+                    ? index
+                    : first ? week.dayList().length - 1 : 0);
+          } catch (e) {
+            print(e);
+          }
+          ended = true;
+        });
     });
   }
 
@@ -173,71 +173,77 @@ class TimeTableScreenState extends State<TimeTableScreen>
                 new Expanded(
                   child: (ended)
                       ? (lessonsWeek != null)
-                        ? (lessonsWeek.dayList().isNotEmpty)
-                          ? new TabBarView(
-                              controller: _tabController,
-                              children: (lessonsWeek != null)
-                                  ? lessonsWeek
-                                      .dayList()
-                                      .map((List<Lesson> lessonList) {
-                                      return new ListView.builder(
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                          return _itemBuilderLessonList(
-                                              context, index, lessonList);
-                                        },
-                                        itemCount: lessonsWeek != null
-                                            ? lessonList.length
-                                            : 0,
-                                      );
-                                    }).toList()
-                                  : <Widget>[
-                                      new Container(
-                                          child: new Center(
-                                              child:
-                                                  new CircularProgressIndicator()),
-                                          height: 20.0,
-                                          width: 20.0),
-                                      new Container(
-                                          child: new Center(
-                                              child:
-                                                  new CircularProgressIndicator()),
-                                          height: 20.0,
-                                          width: 20.0),
-                                      new Container(
-                                          child: new Center(
-                                              child:
-                                                  new CircularProgressIndicator()),
-                                          height: 20.0,
-                                          width: 20.0),
-                                      new Container(
-                                          child: new Center(
-                                              child:
-                                                  new CircularProgressIndicator()),
-                                          height: 20.0,
-                                          width: 20.0),
-                                      new Container(
-                                          child: new Center(
-                                              child:
-                                                  new CircularProgressIndicator()),
-                                          height: 20.0,
-                                          width: 20.0),
-                                      new Container(
-                                          child: new Center(
-                                              child:
-                                                  new CircularProgressIndicator()),
-                                          height: 20.0,
-                                          width: 20.0),
-                                      new Container(
-                                          child: new Center(
-                                              child:
-                                                  new CircularProgressIndicator()),
-                                          height: 20.0,
-                                          width: 20.0),
-                                    ])
-                          : Center(child: Text(S.of(context).no_lessons),)
-                        : Container()
-                      : Center(child: Container(child: CircularProgressIndicator(),),),
+                          ? (lessonsWeek.dayList().isNotEmpty)
+                              ? new TabBarView(
+                                  controller: _tabController,
+                                  children: (lessonsWeek != null)
+                                      ? lessonsWeek
+                                          .dayList()
+                                          .map((List<Lesson> lessonList) {
+                                          return new ListView.builder(
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
+                                              return _itemBuilderLessonList(
+                                                  context, index, lessonList);
+                                            },
+                                            itemCount: lessonsWeek != null
+                                                ? lessonList.length
+                                                : 0,
+                                          );
+                                        }).toList()
+                                      : <Widget>[
+                                          new Container(
+                                              child: new Center(
+                                                  child:
+                                                      new CircularProgressIndicator()),
+                                              height: 20.0,
+                                              width: 20.0),
+                                          new Container(
+                                              child: new Center(
+                                                  child:
+                                                      new CircularProgressIndicator()),
+                                              height: 20.0,
+                                              width: 20.0),
+                                          new Container(
+                                              child: new Center(
+                                                  child:
+                                                      new CircularProgressIndicator()),
+                                              height: 20.0,
+                                              width: 20.0),
+                                          new Container(
+                                              child: new Center(
+                                                  child:
+                                                      new CircularProgressIndicator()),
+                                              height: 20.0,
+                                              width: 20.0),
+                                          new Container(
+                                              child: new Center(
+                                                  child:
+                                                      new CircularProgressIndicator()),
+                                              height: 20.0,
+                                              width: 20.0),
+                                          new Container(
+                                              child: new Center(
+                                                  child:
+                                                      new CircularProgressIndicator()),
+                                              height: 20.0,
+                                              width: 20.0),
+                                          new Container(
+                                              child: new Center(
+                                                  child:
+                                                      new CircularProgressIndicator()),
+                                              height: 20.0,
+                                              width: 20.0),
+                                        ])
+                              : Center(
+                                  child: Text(S.of(context).no_lessons),
+                                )
+                          : Container()
+                      : Center(
+                          child: Container(
+                            child: CircularProgressIndicator(),
+                          ),
+                        ),
                 ),
                 new Container(
                   height: 54.0,
@@ -313,9 +319,9 @@ class TimeTableScreenState extends State<TimeTableScreen>
               textScaleFactor: 2.0,
             )
           : new Text(
-        "+",
-        textScaleFactor: 2.0,
-      ),
+              "+",
+              textScaleFactor: 2.0,
+            ),
       title: new Text(
         lessonList[index].subject +
             (lessonList[index].isMissed ? " (${S.of(context).missed})" : "") +
@@ -330,11 +336,15 @@ class TimeTableScreenState extends State<TimeTableScreen>
                     : null),
       ),
       subtitle: new Text(lessonList[index].theme),
-      trailing:
-      new Row(
+      trailing: new Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          lessonList[index].homework != null ? new Container(child: new Icon(Icons.home), margin: EdgeInsets.all(8),):Container(),
+          lessonList[index].homework != null
+              ? new Container(
+                  child: new Icon(Icons.home),
+                  margin: EdgeInsets.all(8),
+                )
+              : Container(),
           new Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -351,20 +361,19 @@ class TimeTableScreenState extends State<TimeTableScreen>
     );
   }
 
-
   Future<Null> _lessonDialog(Lesson lesson) async {
-
     return showDialog(
-      barrierDismissible: true,
-      context: context,
-      builder: (BuildContext context) {
-        return new HomeworkDialog(lesson);
-      },
-    ) ??
+          barrierDismissible: true,
+          context: context,
+          builder: (BuildContext context) {
+            return new HomeworkDialog(lesson);
+          },
+        ) ??
         false;
   }
 
-  Future<Week> getWeek(DateTime startDate, bool offline, bool showErrors) async {
+  Future<Week> getWeek(
+      DateTime startDate, bool offline, bool showErrors) async {
     List<Lesson> list;
     if (offline)
       list = await getLessonsOffline(startDate,

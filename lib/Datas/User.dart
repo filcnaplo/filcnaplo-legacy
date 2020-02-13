@@ -15,9 +15,8 @@ class User {
   Map<String, String> lastRefreshMap = Map();
   static const RATE_LIMIT_MINUTES = 5;
 
-  User(this.id, this.username, this.password, this.name,
-      this.schoolCode, this.schoolUrl, this.schoolName, this.parentName,
-      this.parentId);
+  User(this.id, this.username, this.password, this.name, this.schoolCode,
+      this.schoolUrl, this.schoolName, this.parentName, this.parentId);
 
   User.fromJson(Map json) {
     id = json["id"];
@@ -44,17 +43,19 @@ class User {
   bool isSelected() => id == globals.selectedUser.id;
 
   bool getRecentlyRefreshed(String request) {
-    if (lastRefreshMap != null)
-      if (lastRefreshMap.containsKey(request))
-        return DateTime.now().difference(DateTime.parse(
-            lastRefreshMap[request])
-        ).inMinutes < RATE_LIMIT_MINUTES;
+    if (lastRefreshMap != null) if (lastRefreshMap.containsKey(request))
+      return DateTime.now()
+              .difference(DateTime.parse(lastRefreshMap[request]))
+              .inMinutes <
+          RATE_LIMIT_MINUTES;
 
     return false;
   }
 
   void setRecentlyRefreshed(String request) {
-    lastRefreshMap.update(request, (String s) => DateTime.now().toIso8601String(), ifAbsent: () => DateTime.now().toIso8601String());
+    lastRefreshMap.update(
+        request, (String s) => DateTime.now().toIso8601String(),
+        ifAbsent: () => DateTime.now().toIso8601String());
   }
 
   Map<String, dynamic> toMap() {

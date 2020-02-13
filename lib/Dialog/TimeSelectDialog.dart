@@ -20,21 +20,15 @@ class TimeSelectDialogState extends State<TimeSelectDialog> {
   }
 
   Widget build(BuildContext context) {
-    List<String> timeOptionList = [S
-        .of(context)
-        .day, S
-        .of(context)
-        .week, S
-        .of(context)
-        .month, S
-        .of(context)
-        .two_months
+    List<String> timeOptionList = [
+      S.of(context).day,
+      S.of(context).week,
+      S.of(context).month,
+      S.of(context).two_months
     ];
 
     return new SimpleDialog(
-      title: new Text(S
-          .of(context)
-          .time),
+      title: new Text(S.of(context).time),
       contentPadding: const EdgeInsets.all(10.0),
       children: <Widget>[
         new PopupMenuButton<String>(
@@ -53,7 +47,9 @@ class TimeSelectDialogState extends State<TimeSelectDialog> {
             ),
             padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 2.0),
           ),
-          onSelected: (String selected) {_onSelect(selected, timeOptionList);},
+          onSelected: (String selected) {
+            _onSelect(selected, timeOptionList);
+          },
           itemBuilder: (BuildContext context) {
             return timeOptionList.map((String sor) {
               return new PopupMenuItem<String>(
@@ -67,4 +63,3 @@ class TimeSelectDialogState extends State<TimeSelectDialog> {
     );
   }
 }
-

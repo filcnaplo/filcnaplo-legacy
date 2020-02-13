@@ -91,7 +91,8 @@ class MainScreenState extends State<MainScreen> {
         builder: (BuildContext context) {
           return new SimpleDialog(
               children: <Widget>[
-                new Text("Töltsd le most a legújabb verziót:"), //TODO: Make use translation DB everywhere
+                new Text(
+                    "Töltsd le most a legújabb verziót:"), //TODO: Make use translation DB everywhere
                 new Text(
                   globals.latestVersion + "\n",
                   style: new TextStyle(
@@ -123,7 +124,8 @@ class MainScreenState extends State<MainScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (globals.version != globals.latestVersion && globals.latestVersion != "") showUpdateDialog();
+      if (globals.version != globals.latestVersion &&
+          globals.latestVersion != "") showUpdateDialog();
     });
 
     _onRefresh(offline: true, showErrors: false).then((var a) async {

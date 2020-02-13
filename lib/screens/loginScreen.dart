@@ -209,8 +209,8 @@ class LoginScreenState extends State<LoginScreen> {
               } else if (code == "invalid_password") {
                 passwordError = "hibás felasználónév vagy jelszó";
               } else {
-                passwordError =
-                    "ismeretlen (valószínűleg KRÉTÁS) probléma: " + code.toString();
+                passwordError = "ismeretlen (valószínűleg KRÉTÁS) probléma: " +
+                    code.toString();
               }
             });
           }

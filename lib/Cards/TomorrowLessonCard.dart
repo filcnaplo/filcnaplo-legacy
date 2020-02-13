@@ -118,7 +118,8 @@ class TomorrowLessonCard extends StatelessWidget {
               }).toList()),
             ),
           ],
-          title: Text("Holnapi órák"), //TODO: Use translation DB everywhere (duplicate comment btw)
+          title: Text(
+              "Holnapi órák"), //TODO: Use translation DB everywhere (duplicate comment btw)
           contentPadding: EdgeInsets.all(20),
           shape: RoundedRectangleBorder(
             side: BorderSide(

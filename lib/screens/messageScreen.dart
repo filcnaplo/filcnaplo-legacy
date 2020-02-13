@@ -65,11 +65,11 @@ class MessageScreenState extends State<MessageScreen> {
                               ),
                               onRefresh: _onRefresh),
                         ),
-                ])
+                      ])
                     : new Center(child: new CircularProgressIndicator()))));
   }
 
-  Future<Null> _onRefresh({bool showErrors=true}) async {
+  Future<Null> _onRefresh({bool showErrors = true}) async {
     setState(() {
       hasLoaded = false;
     });

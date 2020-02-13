@@ -8,7 +8,8 @@ class NotesHelper {
   List<dynamic> evalsMap;
   Map<String, dynamic> onlyNotes;
 
-  Future<List<Note>> getNotesFrom(String eventsString, String studentString, User user) async {
+  Future<List<Note>> getNotesFrom(
+      String eventsString, String studentString, User user) async {
     List<Note> notesList = List();
     try {
       List<dynamic> dynamicNotesList = json.decode(studentString)["Notes"];
@@ -16,8 +17,8 @@ class NotesHelper {
       dynamicNotesList.addAll(dynamicEventsList);
 
       for (dynamic d in dynamicNotesList) {
-            notesList.add(Note.fromJson(d));
-          }
+        notesList.add(Note.fromJson(d));
+      }
 
       notesList.forEach((Note n) => n.owner = user);
     } catch (e) {

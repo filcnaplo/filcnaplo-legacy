@@ -12,18 +12,14 @@ import '../Utils/StringFormatter.dart';
 import '../globals.dart' as globals;
 
 void main() {
-  runApp(
-      new MaterialApp(home: new AbsentsScreen(),
-        localizationsDelegates: const <
-            LocalizationsDelegate<WidgetsLocalizations>>[
-          S.delegate,
-          GlobalWidgetsLocalizations.delegate,
-        ],
-        supportedLocales: S.delegate.supportedLocales,
-    onGenerateTitle: (BuildContext context) =>
-    S
-        .of(context)
-        .title,
+  runApp(new MaterialApp(
+    home: new AbsentsScreen(),
+    localizationsDelegates: const <LocalizationsDelegate<WidgetsLocalizations>>[
+      S.delegate,
+      GlobalWidgetsLocalizations.delegate,
+    ],
+    supportedLocales: S.delegate.supportedLocales,
+    onGenerateTitle: (BuildContext context) => S.of(context).title,
   ));
 }
 
@@ -67,54 +63,51 @@ class AbsentsScreenState extends State<AbsentsScreen> {
         child: Scaffold(
             drawer: GDrawer(),
             appBar: new AppBar(
-              title: new Text(S
-                  .of(context)
-                  .absent_title),
+              title: new Text(S.of(context).absent_title),
               actions: <Widget>[
-                Tooltip(child: new IconButton(
-                    icon: new Icon(Icons.info),
-                    onPressed: () {
-                      return showDialog(
-                            barrierDismissible: true,
-                            context: context,
-                            builder: (BuildContext context) {
-                              return new AbsentDialog();
-                            },
-                          ) ??
-                          false;
-                    }),
-                  message: S
-                      .of(context)
-                      .statistics,
+                Tooltip(
+                  child: new IconButton(
+                      icon: new Icon(Icons.info),
+                      onPressed: () {
+                        return showDialog(
+                              barrierDismissible: true,
+                              context: context,
+                              builder: (BuildContext context) {
+                                return new AbsentDialog();
+                              },
+                            ) ??
+                            false;
+                      }),
+                  message: S.of(context).statistics,
                 ),
               ],
             ),
             body: new Container(
                 child: hasOfflineLoaded
                     ? new Column(children: <Widget>[
-                !hasLoaded
-                ? Container(
-                child: new LinearProgressIndicator(
-                  value: null,
-                ),
-              height: 3,
-            )
-              : Container(
-          height: 3,
-        ),
-        new Expanded(
-          child: new RefreshIndicator(
-                            child: new ListView.builder(
-                              itemBuilder: _itemBuilder,
-                              itemCount: absents.length,
-                            ),
-                            onRefresh: _onRefresh),
-                      ),
-                ])
+                        !hasLoaded
+                            ? Container(
+                                child: new LinearProgressIndicator(
+                                  value: null,
+                                ),
+                                height: 3,
+                              )
+                            : Container(
+                                height: 3,
+                              ),
+                        new Expanded(
+                          child: new RefreshIndicator(
+                              child: new ListView.builder(
+                                itemBuilder: _itemBuilder,
+                                itemCount: absents.length,
+                              ),
+                              onRefresh: _onRefresh),
+                        ),
+                      ])
                     : new Center(child: new CircularProgressIndicator()))));
   }
 
-  Future<Null> _onRefresh({bool showErrors=true}) async {
+  Future<Null> _onRefresh({bool showErrors = true}) async {
     setState(() {
       hasLoaded = false;
     });
@@ -162,35 +155,20 @@ class AbsentsScreenState extends State<AbsentsScreen> {
           content: new SingleChildScrollView(
             child: new ListBody(
               children: <Widget>[
-                new Text(S
-                    .of(context)
-                    .mode + absence.ModeName),
-                new Text(S
-                    .of(context)
-                    .subject + absence.Subject),
-                new Text(S
-                    .of(context)
-                    .teacher + absence.Teacher),
-                new Text(S
-                    .of(context)
-                    .absence_time +
+                new Text(S.of(context).mode + absence.ModeName),
+                new Text(S.of(context).subject + absence.Subject),
+                new Text(S.of(context).teacher + absence.Teacher),
+                new Text(S.of(context).absence_time +
                     dateToHuman(absence.LessonStartTime)),
-                new Text(S
-                    .of(context)
-                    .administration_time +
+                new Text(S.of(context).administration_time +
                     dateToHuman(absence.CreatingTime)),
-                new Text(
-                    S
-                        .of(context)
-                        .justification_state + absence.JustificationStateName),
-                new Text(S
-                    .of(context)
-                    .justification_mode + absence.JustificationTypeName),
+                new Text(S.of(context).justification_state +
+                    absence.JustificationStateName),
+                new Text(S.of(context).justification_mode +
+                    absence.JustificationTypeName),
                 absence.DelayTimeMinutes != 0
-                    ? new Text(
-                    S
-                        .of(context)
-                        .delay_mins + absence.DelayTimeMinutes.toString() +
+                    ? new Text(S.of(context).delay_mins +
+                        absence.DelayTimeMinutes.toString() +
                         " perc")
                     : new Container(),
               ],
@@ -253,28 +231,32 @@ class AbsentsScreenState extends State<AbsentsScreen> {
 
     for (Absence absence in thisAbsence)
       children.add(new ListTile(
-        leading: new Icon(absence.DelayTimeMinutes == 0
-            ? iconifyState(absence.JustificationState)
-            : (Icons.watch_later),
+        leading: new Icon(
+            absence.DelayTimeMinutes == 0
+                ? iconifyState(absence.JustificationState)
+                : (Icons.watch_later),
             color: colorifyState(absence.JustificationState)),
         title: new Text(absence.Subject),
         subtitle: new Text(absence.Teacher),
-        trailing: new Text(
-            dateToHuman(absence.LessonStartTime)),
+        trailing: new Text(dateToHuman(absence.LessonStartTime)),
         onTap: () {
           absenceDialog(absence);
         },
       ));
 
     for (Absence absence in thisAbsence) {
-      if (absence.isUnjustified()) unjust = true;
-      else if (absence.isJustified()) just = true;
+      if (absence.isUnjustified())
+        unjust = true;
+      else if (absence.isJustified())
+        just = true;
       else if (absence.isBeJustified()) bejust = true;
     }
 
     String state = "";
-    if (unjust && !just && !bejust) state = Absence.UNJUSTIFIED;
-    else if (!unjust && just && !bejust) state = Absence.JUSTIFIED;
+    if (unjust && !just && !bejust)
+      state = Absence.UNJUSTIFIED;
+    else if (!unjust && just && !bejust)
+      state = Absence.JUSTIFIED;
     else if (!unjust && !just && bejust) state = Absence.BE_JUSTIFIED;
 
     Widget title = new Container(
@@ -287,7 +269,8 @@ class AbsentsScreenState extends State<AbsentsScreen> {
           new Container(
             padding: EdgeInsets.all(10),
             child: new Text(dateToHuman(thisAbsence[0].LessonStartTime) +
-                dateToWeekDay(thisAbsence[0].LessonStartTime) + " " +
+                dateToWeekDay(thisAbsence[0].LessonStartTime) +
+                " " +
                 "(" +
                 thisAbsence.length.toString() +
                 " db)"),
@@ -308,4 +291,3 @@ class AbsentsScreenState extends State<AbsentsScreen> {
     super.dispose();
   }
 }
-

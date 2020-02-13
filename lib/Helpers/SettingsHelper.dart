@@ -6,17 +6,17 @@ import '../globals.dart';
 import 'DBHelper.dart';
 
 Map defaultShowCardType = {
-        "AbsenceCard": true,
-        "ChangedLessonCard": true,
-        "EvaluationCard": true,
-        "HomewordCard": true,
-        "LessonCard": true,
-        "NoteCard": true,
-        "FirstQCard": true,
-        "HalfYearCard": true,
-        "ThirdQCard": true,
-        "EndYearCard": true
-      };
+  "AbsenceCard": true,
+  "ChangedLessonCard": true,
+  "EvaluationCard": true,
+  "HomewordCard": true,
+  "LessonCard": true,
+  "NoteCard": true,
+  "FirstQCard": true,
+  "HalfYearCard": true,
+  "ThirdQCard": true,
+  "EndYearCard": true
+};
 
 class SettingsHelper {
   Future<void> _setPropertyBool(String name, dynamic value) async {
@@ -33,10 +33,8 @@ class SettingsHelper {
 
   dynamic _getProperty(String name, dynamic defaultValue) async {
     Map<String, dynamic> settings = await DBHelper().getSettingsMap();
-    if (settings==null)
-      settings = new Map();
-    if (settings.containsKey(name))
-      return (settings[name]);
+    if (settings == null) settings = new Map();
+    if (settings.containsKey(name)) return (settings[name]);
     return defaultValue;
   }
 
@@ -104,7 +102,6 @@ class SettingsHelper {
   Future<bool> getSmartUserAgent() async {
     return await _getProperty("SmartUserAgent", true);
   }
-
 
   void setLang(String lang) {
     _setPropertyBool("lang", lang);

@@ -12,7 +12,8 @@ class MessageHelper {
     List<Message> messages = new List();
     try {
       String code = await RequestHelper().getBearerToken(user, showErrors);
-      String messageSting = await RequestHelper().getMessages(code, user.schoolCode);
+      String messageSting =
+          await RequestHelper().getMessages(code, user.schoolCode);
       var messagesJson = json.decode(messageSting);
       DBHelper().addMessagesJson(messagesJson, user);
 
@@ -53,7 +54,8 @@ class MessageHelper {
     Message message;
     try {
       String code = await RequestHelper().getBearerToken(user, true);
-      String messageSting = await RequestHelper().getMessageById(id, code, user.schoolCode);
+      String messageSting =
+          await RequestHelper().getMessageById(id, code, user.schoolCode);
       var messagesJson = json.decode(messageSting);
       DBHelper().addMessageByIdJson(id, messagesJson, user);
 
@@ -68,7 +70,8 @@ class MessageHelper {
   Future<Message> getMessageByIdOffline(User user, int id) async {
     Message message;
     try {
-      Map<String, dynamic> messagesJson = await DBHelper().getMessageByIdJson(id, user);
+      Map<String, dynamic> messagesJson =
+          await DBHelper().getMessageByIdJson(id, user);
       message = Message.fromJson(messagesJson);
     } catch (e) {
       print(e);

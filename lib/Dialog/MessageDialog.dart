@@ -22,13 +22,17 @@ class MessageDialogState extends State<MessageDialog> {
   void initState() {
     super.initState();
     currentMessage = widget.message;
-    MessageHelper().getMessageByIdOffline(globals.selectedAccount.user, currentMessage.id).then((Message message){
+    MessageHelper()
+        .getMessageByIdOffline(globals.selectedAccount.user, currentMessage.id)
+        .then((Message message) {
       if (message != null) {
         setState(() {
           currentMessage = message;
         });
       }
-      MessageHelper().getMessageById(globals.selectedAccount.user, currentMessage.id).then((Message message){
+      MessageHelper()
+          .getMessageById(globals.selectedAccount.user, currentMessage.id)
+          .then((Message message) {
         if (message != null) {
           setState(() {
             currentMessage = message;
@@ -45,15 +49,21 @@ class MessageDialogState extends State<MessageDialog> {
         contentPadding: const EdgeInsets.all(15.0),
         children: <Widget>[
           Container(
-            child: Text(S.of(context).receivers + currentMessage.receivers.join(", "), style: TextStyle(fontWeight: FontWeight.bold),),
+            child: Text(
+              S.of(context).receivers + currentMessage.receivers.join(", "),
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
           Container(
-            child: new Html( data: HtmlUnescape().convert(currentMessage.text)),
+            child: new Html(data: HtmlUnescape().convert(currentMessage.text)),
           ),
           Container(
-            child: Text(currentMessage.senderName, textAlign: TextAlign.end, style: TextStyle(fontSize: 16),),
+            child: Text(
+              currentMessage.senderName,
+              textAlign: TextAlign.end,
+              style: TextStyle(fontSize: 16),
+            ),
           ),
-        ]
-    );
+        ]);
   }
 }
