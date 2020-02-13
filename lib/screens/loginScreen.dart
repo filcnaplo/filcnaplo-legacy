@@ -1,35 +1,19 @@
 import 'dart:convert' show json;
 import 'dart:io';
-import 'dart:math';
 
-import 'package:background_fetch/background_fetch.dart';
-import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/screens/messageScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:http/http.dart' as http;
-import 'package:package_info/package_info.dart';
-import 'package:markdown/markdown.dart' as markdown;
-import 'package:flutter_html/flutter_html.dart';
 
 import '../Datas/Account.dart';
 import '../Datas/Institution.dart';
 import '../Datas/User.dart';
 
-import '../Helpers/BackgroundHelper.dart';
-import '../Helpers/DBHelper.dart';
 import '../Helpers/RequestHelper.dart';
-import '../Helpers/SettingsHelper.dart';
 import '../Helpers/UserInfoHelper.dart';
-import '../Helpers/encrypt_codec.dart';
 
 import '../Utils/AccountManager.dart';
-import '../Utils/ColorManager.dart';
-import '../Utils/Saver.dart' as Saver;
 
 import '../globals.dart' as globals;
 
