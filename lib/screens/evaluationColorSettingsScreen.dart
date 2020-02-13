@@ -75,7 +75,7 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
             child: Column(
               children: <Widget>[
                 ListTile(
-                  title: Text(I18n.of(context).grade1),
+                  title: Text(I18n.of(context).grade1 + " " + I18n.of(context).grade),
                   trailing: new Container(
                     child: new FlatButton(
                       onPressed: () {
@@ -92,7 +92,7 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
                   ),
                 ),
                 ListTile(
-                  title: Text(I18n.of(context).grade2),
+                  title: Text(I18n.of(context).grade2 + " " + I18n.of(context).grade),
                   trailing: new Container(
                     child: new FlatButton(
                       onPressed: () {
@@ -109,7 +109,7 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
                   ),
                 ),
                 ListTile(
-                  title: Text(I18n.of(context).grade3),
+                  title: Text(I18n.of(context).grade3 + " " + I18n.of(context).grade),
                   trailing: new Container(
                     child: new FlatButton(
                       onPressed: () {
@@ -126,7 +126,7 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
                   ),
                 ),
                 ListTile(
-                  title: Text(I18n.of(context).grade4),
+                  title: Text(I18n.of(context).grade4 + " " + I18n.of(context).grade),
                   trailing: new Container(
                     child: new FlatButton(
                       onPressed: () {
@@ -143,7 +143,7 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
                   ),
                 ),
                 ListTile(
-                  title: Text(I18n.of(context).grade5),
+                  title: Text(I18n.of(context).grade5 + " " + I18n.of(context).grade),
                   trailing: new Container(
                     child: new FlatButton(
                       onPressed: () {

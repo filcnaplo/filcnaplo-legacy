@@ -56,6 +56,18 @@ class I18n implements WidgetsLocalizations {
   String get drawerSettings => "beállítások";
   /// "számonkérések"
   String get testTitle => "számonkérések";
+  /// "1-es"
+  String get grade1 => "1-es";
+  /// "2-es"
+  String get grade2 => "2-es";
+  /// "3-as"
+  String get grade3 => "3-as";
+  /// "4-es"
+  String get grade4 => "4-es";
+  /// "5-ös"
+  String get grade5 => "5-ös";
+  /// "osztályzat"
+  String get grade => "osztályzat";
   /// "fiókok"
   String get accountTitle => "fiókok";
   /// "Felhasználó törlése"

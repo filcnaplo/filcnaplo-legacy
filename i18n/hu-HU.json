@@ -20,6 +20,15 @@
         "title": "számonkérések"
     },
 
+    "grade": {
+        "": "osztályzat",
+        "1": "1-es",
+        "2": "2-es",
+        "3": "3-as",
+        "4": "4-es",
+        "5": "5-ös"
+    },
+
     "account": {
         "title": "fiókok",
         "delete": "Felhasználó törlése",
