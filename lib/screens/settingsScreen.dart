@@ -3,17 +3,18 @@ import 'dart:ui';
 import 'dart:io';
 import 'package:background_fetch/background_fetch.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:filcnaplo/Cards/LessonCard.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:filcnaplo/screens/mainScreen.dart';
 import 'package:filcnaplo/GlobalDrawer.dart';
 import 'package:filcnaplo/Helpers/BackgroundHelper.dart';
 import 'package:filcnaplo/Helpers/SettingsHelper.dart';
 import 'package:filcnaplo/Helpers/RequestHelper.dart';
 import 'package:filcnaplo/Utils/ColorManager.dart';
+import 'package:filcnaplo/Utils/StringFormatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 import 'package:filcnaplo/main.dart' as Main;
 
@@ -35,7 +36,6 @@ class SettingsScreenState extends State<SettingsScreen> {
   bool _isLogo;
   bool _isSingleUser;
   bool _smartUserAgent;
-  bool _canSyncOnData;
   bool nextLesson;
   String _lang = "auto";
   static const List<String> LANG_LIST = ["auto", "en", "hu", "de"];
@@ -55,7 +55,6 @@ class SettingsScreenState extends State<SettingsScreen> {
     _lang = await SettingsHelper().getLang();
     _theme = await SettingsHelper().getTheme();
     _amoled = await SettingsHelper().getAmoled();
-    _canSyncOnData = await SettingsHelper().getCanSyncOnData();
     nextLesson = await SettingsHelper().getNextLesson();
     setState(() {});
   }
@@ -143,7 +142,7 @@ class SettingsScreenState extends State<SettingsScreen> {
             fontSize: 16.0);
       }).catchError((e) {
         Fluttertoast.showToast(
-            msg: I18n.of(context).notification_failed,
+            msg: I18n.of(context).notificationFailed,
             backgroundColor: Colors.red,
             textColor: Colors.white,
             fontSize: 16.0);
@@ -197,27 +196,19 @@ class SettingsScreenState extends State<SettingsScreen> {
     });
   }
 
-  void _isCanSyncOnDataChange(bool value) {
-    setState(() {
-      _canSyncOnData = value;
-      globals.canSyncOnData = value;
-      SettingsHelper().setCanSyncOnData(_canSyncOnData);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     List<String> themes = [
-      I18n.of(context).green,
-      I18n.of(context).red,
-      I18n.of(context).blue,
-      I18n.of(context).color_lightgreen,
-      I18n.of(context).yellow,
-      I18n.of(context).orange,
-      I18n.of(context).grey,
-      I18n.of(context).color_pink,
-      I18n.of(context).color_purple,
-      I18n.of(context).color_teal
+      I18n.of(context).colorGreen,
+      I18n.of(context).colorRed,
+      I18n.of(context).colorBlue,
+      I18n.of(context).colorLime,
+      I18n.of(context).colorYellow,
+      I18n.of(context).colorOrange,
+      I18n.of(context).colorGrey,
+      I18n.of(context).colorPink,
+      I18n.of(context).colorPurple,
+      I18n.of(context).colorTeal
     ];
     return new WillPopScope(
         onWillPop: () {
@@ -227,7 +218,7 @@ class SettingsScreenState extends State<SettingsScreen> {
         child: Scaffold(
           drawer: GDrawer(),
           appBar: new AppBar(
-            title: new Text(I18n.of(context).settings),
+            title: new Text(I18n.of(context).settingsTitle),
           ),
           body: new Container(
             child: _isColor != null
@@ -235,7 +226,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                     children: <Widget>[
                       SwitchListTile(
                         title: new Text(
-                          I18n.of(context).colorful_mainpage,
+                          I18n.of(context).settingsColorful,
                           style: TextStyle(fontSize: 20.0),
                         ),
                         activeColor: Theme.of(context).accentColor,
@@ -246,19 +237,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                       ),
                       SwitchListTile(
                         title: new Text(
-                          I18n.of(context).singleuser_mainpage,
-                          style: TextStyle(fontSize: 20.0),
-                        ),
-                        activeColor: Theme.of(context).accentColor,
-                        value: _isSingleUser,
-                        onChanged: !globals.multiAccount
-                            ? null
-                            : _isSingleUserChange, //Only able to be turned on, if multiple users are logged in. On second user login, gets turned on automatically (See: AccountManager)
-                        secondary: new Icon(Icons.person),
-                      ),
-                      SwitchListTile(
-                        title: new Text(
-                          I18n.of(context).dark_theme,
+                          I18n.of(context).settingsDarkTheme,
                           style: TextStyle(fontSize: 20.0),
                         ),
                         activeColor: Theme.of(context).accentColor,
@@ -269,7 +248,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                       ),
                       SwitchListTile(
                         title: new Text(
-                          I18n.of(context).settings_amoled,
+                          I18n.of(context).settingsAmoled,
                           style: TextStyle(fontSize: 20.0),
                         ),
                         activeColor: Theme.of(context).accentColor,
@@ -291,10 +270,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                       ),
                       ListTile(
                         title: new Text(
-                          I18n.of(context).color +
-                              " (" +
-                              I18n.of(context).evaluations +
-                              ")",
+                          I18n.of(context).settingsEvaluationColors,
                           style: TextStyle(fontSize: 20.0),
                         ),
                         onTap: () {
@@ -307,7 +283,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                           child: new ListTile(
                             contentPadding: EdgeInsets.all(0),
                             title: new Text(
-                              I18n.of(context).color + ": " + themes[_theme],
+                              capitalize(I18n.of(context).color) + ": " + themes[_theme],
                               style: TextStyle(fontSize: 20.0),
                             ),
                           ),
@@ -338,7 +314,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                       ),
                       SwitchListTile(
                         title: new Text(
-                          I18n.of(context).notification,
+                          I18n.of(context).settingsNotifications,
                           style: TextStyle(fontSize: 20.0),
                         ),
                         activeColor: Theme.of(context).accentColor,
@@ -349,18 +325,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                       ),
                       SwitchListTile(
                         title: new Text(
-                          I18n.of(context).sync_on_data,
-                          style: TextStyle(fontSize: 20.0),
-                        ),
-                        value: _canSyncOnData,
-                        activeColor: Theme.of(context).accentColor,
-                        onChanged:
-                            _isNotification ? _isCanSyncOnDataChange : null,
-                        secondary: new Icon(Icons.network_locked),
-                      ),
-                      SwitchListTile(
-                        title: new Text(
-                          I18n.of(context).next_lesson,
+                          I18n.of(context).settingsNextLesson,
                           style: TextStyle(fontSize: 20.0),
                         ),
                         value: nextLesson,
@@ -372,7 +337,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                           ? new PopupMenuButton<int>(
                               child: new ListTile(
                                 title: new Text(
-                                  I18n.of(context).sync_frequency(
+                                  I18n.of(context).settingsSyncFrequency(
                                       _refreshNotification.toString()),
                                   style: TextStyle(fontSize: 20.0),
                                 ),
@@ -388,7 +353,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                                         children: <Widget>[
                                           new Text(integer.toString() +
                                               " " +
-                                              I18n.of(context).minute),
+                                              I18n.of(context).timeMinute),
                                         ],
                                       ));
                                 }).toList();
@@ -396,7 +361,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                             )
                           : new ListTile(
                               title: new Text(
-                                I18n.of(context).sync_frequency(
+                                I18n.of(context).settingsSyncFrequency(
                                     _refreshNotification.toString()),
                                 style: TextStyle(fontSize: 20.0),
                               ),
@@ -404,21 +369,9 @@ class SettingsScreenState extends State<SettingsScreen> {
                               leading: new Icon(IconData(0xf4e6,
                                   fontFamily: "Material Design Icons")),
                             ),
-                      SwitchListTile(
-                        title: new Text(
-                          I18n.of(context).logo_menu,
-                          style: TextStyle(fontSize: 20.0),
-                        ),
-                        onChanged: _isLogoChange,
-                        value: _isLogo,
-                        activeColor: Theme.of(context).accentColor,
-                        secondary: new Icon(
-                          IconData(0xf6fb, fontFamily: "Material Design Icons"),
-                        ),
-                      ),
                       ListTile(
                         title: new Text(
-                          I18n.of(context).language,
+                          I18n.of(context).settingsLanguage,
                           style: TextStyle(fontSize: 20.0),
                         ),
                         trailing: new Container(
@@ -441,13 +394,6 @@ class SettingsScreenState extends State<SettingsScreen> {
                         ),
                         leading: new Icon(IconData(0xf1e7,
                             fontFamily: "Material Design Icons")),
-                      ),
-                      new ListTile(
-                        leading: new Icon(Icons.info),
-                        title: new Text(I18n.of(context).info),
-                        onTap: () {
-                          Navigator.pushNamed(context, "/about");
-                        },
                       ),
                       !Platform.isIOS
                           ? new ListTile(

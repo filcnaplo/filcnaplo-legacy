@@ -551,7 +551,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                   style: new TextStyle(fontWeight: FontWeight.bold)),
               subtitle: new Text(
                 (allEvals[index].Theme == "")
-                    ? allEvals[index].Mode
+                    ? allEvals[index].Mode ?? ""
                     : allEvals[index].Theme,
                 style: new TextStyle(
                     fontStyle: (allEvals[index].Theme == "")

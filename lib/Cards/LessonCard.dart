@@ -3,10 +3,9 @@ import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 
 import 'package:filcnaplo/Datas/Lesson.dart';
+import 'package:filcnaplo/Utils/StringFormatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 import 'dart:async';
-
-String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
 
 class LessonCard extends StatelessWidget {
   List<Lesson> lessons;

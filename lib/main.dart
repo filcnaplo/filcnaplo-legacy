@@ -25,7 +25,6 @@ import 'Utils/Saver.dart' as Saver;
 
 import 'globals.dart' as globals;
 
-import 'screens/aboutScreen.dart';
 import 'screens/absentsScreen.dart';
 import 'screens/accountsScreen.dart';
 import 'screens/evaluationColorSettingsScreen.dart';
@@ -67,7 +66,6 @@ class MyApp extends StatelessWidget {
             routes: <String, WidgetBuilder>{
               '/main': (_) => new MainScreen(),
               '/login': (_) => new LoginScreen(),
-              '/about': (_) => new AboutScreen(),
               '/timetable': (_) => new TimeTableScreen(),
               '/homework': (_) => new HomeworkScreen(),
               '/notes': (_) => new NotesScreen(),

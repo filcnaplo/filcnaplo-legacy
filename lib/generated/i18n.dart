@@ -74,8 +74,6 @@ class I18n implements WidgetsLocalizations {
   String get accountDelete => "Felhasználó törlése";
   /// "Biztosan törölni szeretnéd ${name} felhasználót?"
   String accountDeleteConfirm(String name) => "Biztosan törölni szeretnéd ${name} felhasználót?";
-  /// "szín"
-  String get color => "szín";
   /// "OK"
   String get dialogOk => "OK";
   /// "IGEN"
@@ -274,6 +272,64 @@ class I18n implements WidgetsLocalizations {
   String get closeTitle => "Alkalmazás bezárása";
   /// "Biztosan be akarod zárni az alkalmazást?"
   String get closeConfirm => "Biztosan be akarod zárni az alkalmazást?";
+  /// "Születési dátum: "
+  String get infoBirthdate => "Születési dátum: ";
+  /// "Kréta azonosító: "
+  String get infoKretaID => "Kréta azonosító: ";
+  /// "Lakcím: "
+  String get infoAddress => "Lakcím: ";
+  /// "Osztályfőnök: "
+  String get infoTeacher => "Osztályfőnök: ";
+  /// "Iskola: "
+  String get infoSchool => "Iskola: ";
+  /// "Szülők: "
+  String get infoParents => "Szülők: ";
+  /// "Anyja neve: "
+  String get infoMother => "Anyja neve: ";
+  /// "szín"
+  String get color => "szín";
+  /// "zöld"
+  String get colorGreen => "zöld";
+  /// "piros"
+  String get colorRed => "piros";
+  /// "kék"
+  String get colorBlue => "kék";
+  /// "lime"
+  String get colorLime => "lime";
+  /// "sárga"
+  String get colorYellow => "sárga";
+  /// "narancs"
+  String get colorOrange => "narancs";
+  /// "szürke"
+  String get colorGrey => "szürke";
+  /// "rózsaszín"
+  String get colorPink => "rózsaszín";
+  /// "lila"
+  String get colorPurple => "lila";
+  /// "kékeszöld"
+  String get colorTeal => "kékeszöld";
+  /// "Beállítások"
+  String get settingsTitle => "Beállítások";
+  /// "Színes főoldal"
+  String get settingsColorful => "Színes főoldal";
+  /// "Sötét üzemmód"
+  String get settingsDarkTheme => "Sötét üzemmód";
+  /// "Amoled"
+  String get settingsAmoled => "Amoled";
+  /// "Jegyek színe"
+  String get settingsEvaluationColors => "Jegyek színe";
+  /// "Értesítések"
+  String get settingsNotifications => "Értesítések";
+  /// "Következő óra"
+  String get settingsNextLesson => "Következő óra";
+  /// "Szinkronizálás gyakorisága: ${n}"
+  String settingsSyncFrequency(String n) => "Szinkronizálás gyakorisága: ${n}";
+  /// "Nyelv"
+  String get settingsLanguage => "Nyelv";
+  /// "Nem sikerült bekapcsolni az értesítéseket"
+  String get notificationFailed => "Nem sikerült bekapcsolni az értesítéseket";
+  /// "Sikeres"
+  String get success => "Sikeres";
 }
 
 class _I18n_hu_HU extends I18n {

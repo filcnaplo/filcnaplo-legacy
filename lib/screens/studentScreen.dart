@@ -7,7 +7,6 @@ import 'package:filcnaplo/Datas/Account.dart';
 import 'package:filcnaplo/Datas/Student.dart';
 import 'package:filcnaplo/GlobalDrawer.dart';
 import 'package:filcnaplo/Utils/StringFormatter.dart';
-import 'package:filcnaplo/globals.dart' as globals;
 
 class StudentScreen extends StatefulWidget {
   StudentScreen({this.account});
@@ -34,7 +33,7 @@ class StudentScreenState extends State<StudentScreen> {
           children: <Widget>[
             Card(
               child: ListTile(
-                title: Text(I18n.of(context).info_birthdate),
+                title: Text(I18n.of(context).infoBirthdate),
                 trailing: this.widget.account.student != null
                     ? Text(dateToHuman(DateTime.parse(
                             this.widget.account.student.DateOfBirthUtc ?? "")
@@ -44,7 +43,7 @@ class StudentScreenState extends State<StudentScreen> {
             ),
             Card(
               child: ListTile(
-                title: Text(I18n.of(context).info_kretaid),
+                title: Text(I18n.of(context).infoKretaID),
                 trailing: Text(this.widget.account.student.StudentId != null
                     ? this.widget.account.student.StudentId.toString()
                     : "-"),
@@ -55,7 +54,7 @@ class StudentScreenState extends State<StudentScreen> {
                 children: <Widget>[
                   Expanded(
                     child: Container(
-                      child: Text(I18n.of(context).info_address),
+                      child: Text(I18n.of(context).infoAddress),
                       padding: EdgeInsets.all(18),
                     ),
                   ),
@@ -87,7 +86,7 @@ class StudentScreenState extends State<StudentScreen> {
                         Expanded(
                           child: Container(
                             child: Text(
-                              I18n.of(context).info_teacher,
+                              I18n.of(context).infoTeacher,
                               softWrap: false,
                               maxLines: 1,
                             ),
@@ -125,7 +124,7 @@ class StudentScreenState extends State<StudentScreen> {
                 children: <Widget>[
                   Expanded(
                     child: Container(
-                      child: Text(I18n.of(context).info_school),
+                      child: Text(I18n.of(context).infoSchool),
                       padding: EdgeInsets.all(18),
                     ),
                   ),
@@ -156,7 +155,7 @@ class StudentScreenState extends State<StudentScreen> {
                       children: <Widget>[
                         Expanded(
                           child: Container(
-                            child: Text(I18n.of(context).info_parents),
+                            child: Text(I18n.of(context).infoParents),
                             padding: EdgeInsets.all(18),
                           ),
                         ),
@@ -198,7 +197,7 @@ class StudentScreenState extends State<StudentScreen> {
             widget.account.student.MothersName != null
                 ? Card(
                     child: ListTile(
-                      title: Text(I18n.of(context).info_mathers_name),
+                      title: Text(I18n.of(context).infoMother),
                       trailing: Text(widget.account.student.MothersName),
                     ),
                   )

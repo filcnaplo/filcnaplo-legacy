@@ -35,10 +35,6 @@
         "deleteConfirm": "Biztosan törölni szeretnéd {name} felhasználót?"
     },
 
-    "color": {
-        "": "szín"
-    },
-
     "dialog": {
         "ok": "OK",
         "yes": "IGEN",
@@ -200,5 +196,47 @@
     "close": {
         "title": "Alkalmazás bezárása",
         "confirm": "Biztosan be akarod zárni az alkalmazást?"
-    }
+    },
+
+    "info": {
+        "birthdate": "Születési dátum: ",
+        "kretaID": "Kréta azonosító: ",
+        "address": "Lakcím: ",
+        "teacher": "Osztályfőnök: ",
+        "school": "Iskola: ",
+        "parents": "Szülők: ",
+        "mother": "Anyja neve: "
+    },
+
+    "color": {
+        "": "szín",
+        "green": "zöld",
+        "red": "piros",
+        "blue": "kék",
+        "lime": "lime",
+        "yellow": "sárga",
+        "orange": "narancs",
+        "grey": "szürke",
+        "pink": "rózsaszín",
+        "purple": "lila",
+        "teal": "kékeszöld"
+    },
+
+    "settings": {
+        "title": "Beállítások",
+        "colorful": "Színes főoldal",
+        "darkTheme": "Sötét üzemmód",
+        "amoled": "Amoled",
+        "evaluationColors": "Jegyek színe",
+        "notifications": "Értesítések",
+        "nextLesson": "Következő óra",
+        "syncFrequency": "Szinkronizálás gyakorisága: {n}",
+        "language": "Nyelv"
+    },
+
+    "notification": {
+        "failed": "Nem sikerült bekapcsolni az értesítéseket"
+    },
+
+    "success": "Sikeres"
 }
