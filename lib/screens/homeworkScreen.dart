@@ -62,7 +62,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
         child: Scaffold(
             drawer: GDrawer(),
             appBar: new AppBar(
-              title: new Text(I18n.of(context).homeworks),
+              title: new Text(capitalize(I18n.of(context).homeworkTitle)),
               actions: <Widget>[
                 new IconButton(
                   icon: new Icon(Icons.access_time),
@@ -123,11 +123,18 @@ class HomeworkScreenState extends State<HomeworkScreen> {
             child: new ListBody(
               children: <Widget>[
                 homework.deadline != null
-                    ? new Text(I18n.of(context).deadline + homework.deadline)
+                    ? new Text(capitalize(I18n.of(context).homeworkDeadline) +
+                        ": " +
+                        homework.deadline)
                     : new Container(),
-                new Text(I18n.of(context).subject + homework.subject),
-                new Text(I18n.of(context).uploader + homework.uploader),
-                new Text(I18n.of(context).upload_time +
+                new Text(capitalize(I18n.of(context).homeworkSubject) +
+                    ": " +
+                    homework.subject),
+                new Text(capitalize(I18n.of(context).homeworkUploadUser) +
+                    ": " +
+                    homework.uploader),
+                new Text(capitalize(I18n.of(context).homeworkUploadTime) +
+                    ": " +
                     homework.uploadDate
                         .substring(0, 16)
                         .replaceAll("-", '. ')

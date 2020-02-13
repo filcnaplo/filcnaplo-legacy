@@ -170,6 +170,16 @@ class I18n implements WidgetsLocalizations {
   String get lessonSubject => "tárgy";
   /// "házi feladat"
   String get homework => "házi feladat";
+  /// "házi feladatok"
+  String get homeworkTitle => "házi feladatok";
+  /// "határidő"
+  String get homeworkDeadline => "határidő";
+  /// ""
+  String get homeworkSubject => "";
+  /// ""
+  String get homeworkUploadUser => "";
+  /// ""
+  String get homeworkUploadTime => "";
   /// "helyettesítés"
   String get substitution => "helyettesítés";
   /// "elmarad"
