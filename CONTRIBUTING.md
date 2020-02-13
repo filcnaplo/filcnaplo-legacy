@@ -18,10 +18,10 @@ A kód refactorolása (olvashatóbbá, minöségibbé tételében), issue-k javi
 ### Gondolkodj előre
   - Próbáld meg tesztelni a PR-jaidat mielött elküldöd. 
     - Nem a legnagyobb probléma ha valami nem tökéletes itt, még van ideje release-ig.
-  - Kövesd a commit üzenetek formáit. [Lentebb]() 
+  - Kövesd a commit üzenetek formáit. [Lentebb](#form%c3%a1tum) 
   - Kovesd a kód konvenciót. (TODO)
-  - Próbálj segitőkész commenteket hagyni. [Guide]()
-  - Ha valamit nem értesz, nyugodtan kérdezz. [Lentebb]()
+  - Próbálj segitőkész commenteket hagyni. [Guide](#commit-%c3%bczenetek)
+  - Ha valamit nem értesz, nyugodtan kérdezz. [Lentebb](#k%c3%b6z%c3%b6ss%c3%a9g)
     - Sok dolgot mi se értünk, ne várj azonnali választ.
 
 ## Első közremüködésed

@@ -19,7 +19,8 @@
     "dialog": {
         "ok": "ok",
         "yes": "igen",
-        "no": "nem"
+        "no": "nem",
+        "done": "kész"
     },
 
     "time": {

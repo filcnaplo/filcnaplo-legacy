@@ -60,6 +60,8 @@ class I18n implements WidgetsLocalizations {
   String get dialogYes => "igen";
   /// "nem"
   String get dialogNo => "nem";
+  /// "kész"
+  String get dialogDone => "kész";
   /// "idő"
   String get time => "idő";
   /// "óra"

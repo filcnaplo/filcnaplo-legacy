@@ -1119,7 +1119,7 @@ class GradeDialogState extends State<GradeDialog> {
             });
           },
           child: new Text(
-            I18n.of(context).done,
+            I18n.of(context).dialogDone,
             style: TextStyle(color: Theme.of(context).accentColor),
           ),
           padding: EdgeInsets.all(10),
