@@ -76,14 +76,14 @@ class I18n implements WidgetsLocalizations {
   String accountDeleteConfirm(String name) => "Biztosan törölni szeretnéd ${name} felhasználót?";
   /// "szín"
   String get color => "szín";
-  /// "ok"
-  String get dialogOk => "ok";
-  /// "igen"
-  String get dialogYes => "igen";
-  /// "nem"
-  String get dialogNo => "nem";
-  /// "kész"
-  String get dialogDone => "kész";
+  /// "OK"
+  String get dialogOk => "OK";
+  /// "IGEN"
+  String get dialogYes => "IGEN";
+  /// "NEM"
+  String get dialogNo => "NEM";
+  /// "KÉSZ"
+  String get dialogDone => "KÉSZ";
   /// "idő"
   String get time => "idő";
   /// "óra"
@@ -234,6 +234,40 @@ class I18n implements WidgetsLocalizations {
   String get evaluationRange => "mód";
   /// "ha kapnék egy"
   String get evaluationIf => "ha kapnék egy";
+  /// "bejelentkezés"
+  String get login => "bejelentkezés";
+  /// "Felhasználónév"
+  String get loginUsername => "Felhasználónév";
+  /// "Jelszó"
+  String get loginPassword => "Jelszó";
+  /// "oktatási azonosító 11-jegyű diákigazolványszám"
+  String get loginUsernameHint => "oktatási azonosító 11-jegyű diákigazolványszám";
+  /// "általában a születési dátum(pl.: 2000-01-02)"
+  String get loginPasswordHint => "általában a születési dátum(pl.: 2000-01-02)";
+  /// "Kérlek add meg a felhasználónevedet!"
+  String get loginUsernameError => "Kérlek add meg a felhasználónevedet!";
+  /// "Kérlek add meg a jelszavadat!"
+  String get loginPasswordError => "Kérlek add meg a jelszavadat!";
+  /// "Kérlek válassz egy iskolát!"
+  String get loginSchoolError => "Kérlek válassz egy iskolát!";
+  /// "Iskola"
+  String get loginSchool => "Iskola";
+  /// "válassz"
+  String get loginChoose => "válassz";
+  /// "Válassz iskolát"
+  String get loginChooseSchool => "Válassz iskolát";
+  /// "Exportálás"
+  String get export => "Exportálás";
+  /// "jegyek"
+  String get exportGrades => "jegyek";
+  /// "órák"
+  String get exportLessons => "órák";
+  /// "fiókok"
+  String get exportAccounts => "fiókok";
+  /// "válassz intervallumot"
+  String get exportChoose => "válassz intervallumot";
+  /// "sikeresen exportálva"
+  String get exportSuccess => "sikeresen exportálva";
 }
 
 class _I18n_hu_HU extends I18n {

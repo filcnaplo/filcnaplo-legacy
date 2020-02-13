@@ -55,9 +55,9 @@ class ExportScreenState extends State<ExportScreen> {
   TextEditingController controller = new TextEditingController();
   User selectedUser = globals.users[0];
   List<String> get exportOptions => [
-        I18n.of(context).export_grades,
-        I18n.of(context).export_lessons,
-        I18n.of(context).export_accounts
+        I18n.of(context).exportGrades,
+        I18n.of(context).exportLessons,
+        I18n.of(context).exportAccounts
       ];
   List<String> formatOptions = ["JSON", "CSV"];
   List<String> formats = [".json", ".csv"];
@@ -164,7 +164,7 @@ class ExportScreenState extends State<ExportScreen> {
                             }
                           },
                           child: new Text(
-                              selectedDate ?? I18n.of(context).export_interval),
+                              selectedDate ?? I18n.of(context).exportChoose),
                         )
                       : new Container(),
                   (selectedData != 2)
@@ -235,7 +235,7 @@ class ExportScreenState extends State<ExportScreen> {
                                   file.writeAsString(data).then((File f) {
                                     if (f.existsSync())
                                       Fluttertoast.showToast(
-                                          msg: I18n.of(context).export_success +
+                                          msg: I18n.of(context).exportSuccess +
                                               ": " +
                                               path,
                                           backgroundColor: Colors.green,
@@ -301,7 +301,7 @@ class ExportScreenState extends State<ExportScreen> {
                                   file.writeAsString(csv).then((File f) {
                                     if (f.existsSync())
                                       Fluttertoast.showToast(
-                                          msg: I18n.of(context).export_success +
+                                          msg: I18n.of(context).exportSuccess +
                                               ": " +
                                               path,
                                           backgroundColor: Colors.green,
@@ -322,7 +322,7 @@ class ExportScreenState extends State<ExportScreen> {
                               file.writeAsString(data).then((File f) {
                                 if (f.existsSync())
                                   Fluttertoast.showToast(
-                                      msg: I18n.of(context).export_success +
+                                      msg: I18n.of(context).exportSuccess +
                                           ": " +
                                           path,
                                       backgroundColor: Colors.green,
@@ -349,7 +349,7 @@ class ExportScreenState extends State<ExportScreen> {
                                   file.writeAsString(data).then((File f) {
                                     if (f.existsSync())
                                       Fluttertoast.showToast(
-                                          msg: I18n.of(context).export_success +
+                                          msg: I18n.of(context).exportSuccess +
                                               ": " +
                                               path,
                                           backgroundColor: Colors.green,
@@ -425,7 +425,7 @@ class ExportScreenState extends State<ExportScreen> {
                                   file.writeAsString(csv).then((File f) {
                                     if (f.existsSync())
                                       Fluttertoast.showToast(
-                                          msg: I18n.of(context).export_success +
+                                          msg: I18n.of(context).exportSuccess +
                                               ": " +
                                               path,
                                           backgroundColor: Colors.green,

@@ -40,10 +40,10 @@
     },
 
     "dialog": {
-        "ok": "ok",
-        "yes": "igen",
-        "no": "nem",
-        "done": "kész"
+        "ok": "OK",
+        "yes": "IGEN",
+        "no": "NEM",
+        "done": "KÉSZ"
     },
 
     "time": {
@@ -171,5 +171,28 @@
         "value": "érték",
         "range": "mód",
         "if": "ha kapnék egy"
+    },
+
+    "login": {
+        "": "bejelentkezés",
+        "username": "Felhasználónév",
+        "password": "Jelszó",
+        "usernameHint": "oktatási azonosító 11-jegyű diákigazolványszám",
+        "passwordHint": "általában a születési dátum(pl.: 2000-01-02)",
+        "usernameError": "Kérlek add meg a felhasználónevedet!",
+        "passwordError": "Kérlek add meg a jelszavadat!",
+        "schoolError": "Kérlek válassz egy iskolát!",
+        "school": "Iskola",
+        "choose": "válassz",
+        "chooseSchool": "Válassz iskolát"
+    },
+
+    "export": {
+        "": "Exportálás",
+        "grades": "jegyek",
+        "lessons": "órák",
+        "accounts": "fiókok",
+        "choose": "válassz intervallumot",
+        "success": "sikeresen exportálva"
     }
 }
