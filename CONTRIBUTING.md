@@ -9,7 +9,7 @@ A kód refactorolása (olvashatóbbá, minöségibbé tételében), issue-k javi
 
 ## Elvárások:
 
-### Ne legyél tiszteletlen senkivel. (meg a KRÉTA fejlesztőivel se)
+### Ne legyél tiszteletlen senkivel. (még a KRÉTA fejlesztőivel se)
   - Trágár beszédet hanyagolni, ha lehet.
   - Vitákban civilizált viselkedés. (Semmi veszekedés)
   - Viselkedj úgy mintha szemtől szemben beszélnél.
@@ -22,12 +22,12 @@ A kód refactorolása (olvashatóbbá, minöségibbé tételében), issue-k javi
   - Kovesd a kód konvenciót. (TODO)
   - Próbálj segitőkész commenteket hagyni. [Guide]()
   - Ha valamit nem értesz, nyugodtan kérdezz. [Lentebb]()
-    - Sok dolgot mi se értunk, ne várj azonnali választ.
+    - Sok dolgot mi se értünk, ne várj azonnali választ.
 
 ## Első közremüködésed
 Reméljük olyan izgatott vagy mint mi!
 
-### Hogyan is kezdjek hozzá? (TODO: better guide)
+### Hogyan is kezdjek hozzá? *(TODO: better guide)*
 - Csinálj egy forkot.
 - Szerkessz bele.
 - Csinálj egy PR-t a forkodból.
@@ -70,5 +70,5 @@ Reméljük olyan izgatott vagy mint mi!
 
 ## Közösség
 - [Telegram Hírlevél](https://t.me/filc_naplo)
-- Telegram Fejlesztői csoport (meghívas első értelmes PR után)
+- Telegram Fejlesztői csoport (meghívas első hasznos PR után)
 - [Weboldal](https://filcnaplo.hu)
