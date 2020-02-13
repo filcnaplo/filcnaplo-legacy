@@ -247,8 +247,8 @@ class MainScreenState extends State<MainScreen> {
       context: context,
       builder: (BuildContext context) {
         return new AlertDialog(
-          title: new Text(I18n.of(context).sure),
-          content: new Text(I18n.of(context).confirm_close),
+          title: new Text(I18n.of(context).closeTitle),
+          content: new Text(I18n.of(context).closeConfirm),
           actions: <Widget>[
             new FlatButton(
               onPressed: () => Navigator.of(context).pop(false),

@@ -135,6 +135,7 @@
     },
 
     "message": {
+        "title": "Üzenetek",
         "receivers": "receivers"
     },
 
@@ -194,5 +195,10 @@
         "accounts": "fiókok",
         "choose": "válassz intervallumot",
         "success": "sikeresen exportálva"
+    },
+
+    "close": {
+        "title": "Alkalmazás bezárása",
+        "confirm": "Biztosan be akarod zárni az alkalmazást?"
     }
 }

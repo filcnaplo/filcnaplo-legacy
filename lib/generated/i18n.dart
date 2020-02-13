@@ -192,6 +192,8 @@ class I18n implements WidgetsLocalizations {
   String get note => "feljegyzés";
   /// "feljegyzések"
   String get noteTitle => "feljegyzések";
+  /// "Üzenetek"
+  String get messageTitle => "Üzenetek";
   /// "receivers"
   String get messageReceivers => "receivers";
   /// "statisztikák"
@@ -268,6 +270,10 @@ class I18n implements WidgetsLocalizations {
   String get exportChoose => "válassz intervallumot";
   /// "sikeresen exportálva"
   String get exportSuccess => "sikeresen exportálva";
+  /// "Alkalmazás bezárása"
+  String get closeTitle => "Alkalmazás bezárása";
+  /// "Biztosan be akarod zárni az alkalmazást?"
+  String get closeConfirm => "Biztosan be akarod zárni az alkalmazást?";
 }
 
 class _I18n_hu_HU extends I18n {
