@@ -37,9 +37,9 @@ class GDrawerState extends State<GDrawer> {
       case 0:
         Navigator.pushReplacementNamed(context, "/main");
         break;
-      /*case 1:
+      case 1:
         Navigator.pushReplacementNamed(context, "/evaluations");
-        break;*/
+        break;	
       case 2:
         Navigator.pushReplacementNamed(context, "/timetable");
         break;

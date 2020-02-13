@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:filcnaplo/Cards/TomorrowLessonCard.dart';
 import 'package:filcnaplo/Dialog/CardChooserDialog.dart';
-//import 'package:filcnaplo/Dialog/TOSDialog.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

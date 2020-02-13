@@ -6,12 +6,18 @@ import 'package:flutter_material_color_picker/flutter_material_color_picker.dart
 
 import '../Datas/Account.dart';
 import '../Datas/User.dart';
+
 import '../GlobalDrawer.dart';
+
 import '../Utils/AccountManager.dart';
 import '../Utils/Saver.dart';
+
 import '../globals.dart' as globals;
+
 import '../main.dart';
+
 import 'studentScreen.dart';
+import 'loginScreen.dart';
 
 void main() {
   runApp(new MaterialApp(home: new AccountsScreen()));
