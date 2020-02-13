@@ -1,7 +1,5 @@
-import 'package:charts_flutter/flutter.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/html_parser.dart';
 
 import 'Datas/Account.dart';
 import 'Datas/User.dart';
@@ -91,7 +89,7 @@ class GDrawerState extends State<GDrawer> {
                               children: <Widget>[
                                 new Container(
                                   child: new Text(
-                                    S.of(context).title,
+                                    I18n.of(context).title,
                                     style: TextStyle(fontSize: 19.0),
                                   ),
                                 ),
@@ -222,7 +220,7 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 0 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
-                S.of(context).main_page,
+                I18n.of(context).main_page,
                 style: TextStyle(
                     color: screen == 0 ? Theme.of(context).accentColor : null),
               ),
@@ -238,7 +236,7 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 1 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
-                S.of(context).evaluations,
+                I18n.of(context).evaluations,
                 style: TextStyle(
                     color: screen == 1 ? Theme.of(context).accentColor : null),
               ),
@@ -254,7 +252,7 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 2 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
-                S.of(context).timetable,
+                I18n.of(context).timetable,
                 style: TextStyle(
                     color: screen == 2 ? Theme.of(context).accentColor : null),
               ),
@@ -270,7 +268,7 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 8 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
-                S.of(context).homeworks,
+                I18n.of(context).homeworks,
                 style: TextStyle(
                     color: screen == 8 ? Theme.of(context).accentColor : null),
               ),
@@ -286,7 +284,7 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 3 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
-                S.of(context).notes,
+                I18n.of(context).notes,
                 style: TextStyle(
                     color: screen == 3 ? Theme.of(context).accentColor : null),
               ),
@@ -302,7 +300,7 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 10 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
-                S.of(context).tests,
+                I18n.of(context).tests,
                 style: TextStyle(
                     color: screen == 10 ? Theme.of(context).accentColor : null),
               ),
@@ -318,7 +316,7 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 11 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
-                S.of(context).messages,
+                I18n.of(context).messages,
                 style: TextStyle(
                     color: screen == 11 ? Theme.of(context).accentColor : null),
               ),
@@ -334,7 +332,7 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 5 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
-                S.of(context).absent_title,
+                I18n.of(context).absent_title,
                 style: TextStyle(
                     color: screen == 5 ? Theme.of(context).accentColor : null),
               ),
@@ -350,7 +348,7 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 6 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
-                S.of(context).statistics,
+                I18n.of(context).statistics,
                 style: TextStyle(
                     color: screen == 6 ? Theme.of(context).accentColor : null),
               ),
@@ -366,7 +364,7 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 4 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
-                S.of(context).accounts,
+                I18n.of(context).accounts,
                 style: TextStyle(
                     color: screen == 4 ? Theme.of(context).accentColor : null),
               ),
@@ -382,7 +380,7 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 7 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
-                S.of(context).settings,
+                I18n.of(context).settings,
                 style: TextStyle(
                     color: screen == 7 ? Theme.of(context).accentColor : null),
               ),

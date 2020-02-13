@@ -1,11 +1,7 @@
 import 'dart:convert' show utf8, json;
-import 'dart:io';
 import 'dart:ui';
 
 import 'package:charts_flutter/flutter.dart';
-import '../Cards/SummaryCards.dart';
-import '../Cards/SummaryCards.dart';
-import '../Cards/SummaryCards.dart';
 import '../Utils/ColorManager.dart';
 import '../generated/i18n.dart';
 import 'package:flutter/material.dart';
@@ -589,7 +585,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
             });
           },
           child: new Icon(Icons.sort, color: Colors.white),
-          tooltip: S.of(context).sort,
+          tooltip: I18n.of(context).sort,
         ),
         body: (new Container(
             child: new Column(
@@ -629,7 +625,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
             new Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                new Text(S.of(context).average),
+                new Text(I18n.of(context).average),
                 new Text(
                   avrString,
                   style: TextStyle(
@@ -641,7 +637,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                 ),
                 selectedAverage != null
                     ? selectedAverage.classValue != null
-                        ? new Text(S.of(context).class_average)
+                        ? new Text(I18n.of(context).class_average)
                         : Container()
                     : Container(),
                 selectedAverage != null
@@ -700,7 +696,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           Icons.add,
           color: Colors.white,
         ),
-        tooltip: S.of(context).sort,
+        tooltip: I18n.of(context).sort,
       ),
     );
 
@@ -782,7 +778,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
               onTap: switchToScreen,
             ),
             drawer: GDrawer(),
-            appBar: new AppBar(title: new Text(S.of(context).evaluations)),
+            appBar: new AppBar(title: new Text(I18n.of(context).evaluations)),
             body: (currentBody == 0
                 ? evaluationsBody
                 : (currentBody == 1 ? averageBody : dataBody))));
@@ -898,27 +894,27 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
             child: new ListBody(
               children: <Widget>[
                 evaluation.Theme != null
-                    ? new Text(S.of(context).theme + evaluation.Theme ?? "")
+                    ? new Text(I18n.of(context).theme + evaluation.Theme ?? "")
                     : new Container(),
-                new Text(S.of(context).teacher + evaluation.Teacher ?? ""),
+                new Text(I18n.of(context).teacher + evaluation.Teacher ?? ""),
                 new Text(
-                    S.of(context).time + dateToHuman(evaluation.Date ?? "")),
+                    I18n.of(context).time + dateToHuman(evaluation.Date ?? "")),
                 evaluation.Mode != null
-                    ? new Text(S.of(context).mode + evaluation.Mode)
+                    ? new Text(I18n.of(context).mode + evaluation.Mode)
                     : new Container(),
-                new Text(S.of(context).administration_time +
+                new Text(I18n.of(context).administration_time +
                     dateToHuman(evaluation.CreatingTime ?? "")),
                 evaluation.Weight != null
-                    ? new Text(S.of(context).weight + evaluation.Weight ?? "")
+                    ? new Text(I18n.of(context).weight + evaluation.Weight ?? "")
                     : new Container(),
-                new Text(S.of(context).value + evaluation.Value ?? ""),
-                new Text(S.of(context).range + evaluation.FormName ?? ""),
+                new Text(I18n.of(context).value + evaluation.Value ?? ""),
+                new Text(I18n.of(context).range + evaluation.FormName ?? ""),
               ],
             ),
           ),
           actions: <Widget>[
             new FlatButton(
-              child: new Text(S.of(context).ok),
+              child: new Text(I18n.of(context).ok),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -961,7 +957,7 @@ class GradeDialogState extends State<GradeDialog> {
   Widget build(BuildContext context) {
     return new SimpleDialog(
       contentPadding: EdgeInsets.all(0),
-      title: new Text(S.of(context).if_i_got),
+      title: new Text(I18n.of(context).if_i_got),
       children: <Widget>[
         Container(
           child: Row(
@@ -1123,7 +1119,7 @@ class GradeDialogState extends State<GradeDialog> {
             });
           },
           child: new Text(
-            S.of(context).done,
+            I18n.of(context).done,
             style: TextStyle(color: Theme.of(context).accentColor),
           ),
           padding: EdgeInsets.all(10),

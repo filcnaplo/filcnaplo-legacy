@@ -41,7 +41,7 @@ class MessageScreenState extends State<MessageScreen> {
         child: Scaffold(
             drawer: GDrawer(),
             appBar: new AppBar(
-              title: new Text(S.of(context).messages),
+              title: new Text(I18n.of(context).messages),
               actions: <Widget>[],
             ),
             body: new Container(

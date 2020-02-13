@@ -24,21 +24,21 @@ class HomeworkDialogState extends State<HomeworkDialog> {
       content: new SingleChildScrollView(
         child: new ListBody(
           children: <Widget>[
-            new Text(S.of(context).room + widget.lesson.room),
-            new Text(S.of(context).teacher + widget.lesson.teacher),
-            new Text(S.of(context).group + widget.lesson.group),
+            new Text(I18n.of(context).room + widget.lesson.room),
+            new Text(I18n.of(context).teacher + widget.lesson.teacher),
+            new Text(I18n.of(context).group + widget.lesson.group),
             new Text(
-                S.of(context).lesson_start + getLessonStartText(widget.lesson)),
+                I18n.of(context).lesson_start + getLessonStartText(widget.lesson)),
             new Text(
-                S.of(context).lesson_end + getLessonEndText(widget.lesson)),
+                I18n.of(context).lesson_end + getLessonEndText(widget.lesson)),
             widget.lesson.isMissed
-                ? new Text(S.of(context).state + widget.lesson.stateName)
+                ? new Text(I18n.of(context).state + widget.lesson.stateName)
                 : new Container(),
             (widget.lesson.theme != "" && widget.lesson.theme != null)
-                ? new Text(S.of(context).theme + widget.lesson.theme)
+                ? new Text(I18n.of(context).theme + widget.lesson.theme)
                 : new Container(),
             widget.lesson.homework != null
-                ? new Text("\n" + S.of(context).homework + ":")
+                ? new Text("\n" + I18n.of(context).homework + ":")
                 : Container(),
             widget.lesson.homework != null
                 ? new Divider(
@@ -63,7 +63,7 @@ class HomeworkDialogState extends State<HomeworkDialog> {
       actions: <Widget>[
         widget.lesson.homeworkEnabled
             ? new FlatButton(
-                child: new Text(S.of(context).homework),
+                child: new Text(I18n.of(context).homework),
                 onPressed: () {
                   Navigator.of(context).pop();
                   return showDialog(
@@ -78,7 +78,7 @@ class HomeworkDialogState extends State<HomeworkDialog> {
               )
             : Container(),
         new FlatButton(
-          child: new Text(S.of(context).ok),
+          child: new Text(I18n.of(context).ok),
           onPressed: () {
             Navigator.of(context).pop();
           },

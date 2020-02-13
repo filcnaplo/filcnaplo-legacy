@@ -50,7 +50,7 @@ class MessageDialogState extends State<MessageDialog> {
         children: <Widget>[
           Container(
             child: Text(
-              S.of(context).receivers + currentMessage.receivers.join(", "),
+              I18n.of(context).receivers + currentMessage.receivers.join(", "),
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),

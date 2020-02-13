@@ -145,7 +145,7 @@ class TomorrowLessonCard extends StatelessWidget {
               child: Wrap(
                 children: <Widget>[
                   new Text(
-                    S.of(context).tomorrow,
+                    I18n.of(context).tomorrow,
                     style: new TextStyle(
                       fontSize: 18.0,
                     ),
@@ -157,7 +157,7 @@ class TomorrowLessonCard extends StatelessWidget {
                             fontSize: 18.0, color: globals.CurrentTextColor)),
                   ),
                   new Text(
-                    S.of(context).tomorrow_lessons,
+                    I18n.of(context).tomorrow_lessons,
                     style: new TextStyle(
                       fontSize: 18.0,
                     ),

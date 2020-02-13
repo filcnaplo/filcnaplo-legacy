@@ -124,20 +124,20 @@ class AbsenceCard extends StatelessWidget {
             new SingleChildScrollView(
               child: new ListBody(
                 children: <Widget>[
-                  new Text(S.of(context).lessons(numOfAbsences.toString())),
+                  new Text(I18n.of(context).lessons(numOfAbsences.toString())),
                   //new Text("mód: " + absence.modeName),
-                  new Text(S.of(context).absence_time +
+                  new Text(I18n.of(context).absence_time +
                       dateToHuman(absence.LessonStartTime) +
                       dateToWeekDay(absence.LessonStartTime)),
-                  new Text(S.of(context).administration_time +
+                  new Text(I18n.of(context).administration_time +
                       dateToHuman(absence.CreatingTime) +
                       dateToWeekDay(absence.LessonStartTime)),
-                  new Text(S.of(context).justification_state +
+                  new Text(I18n.of(context).justification_state +
                       absence.JustificationStateName),
-                  new Text(S.of(context).justification_mode +
+                  new Text(I18n.of(context).justification_mode +
                       absence.JustificationTypeName),
                   absence.DelayTimeMinutes != 0
-                      ? new Text(S.of(context).delay_mins +
+                      ? new Text(I18n.of(context).delay_mins +
                           absence.DelayTimeMinutes.toString() +
                           " perc")
                       : new Container(),

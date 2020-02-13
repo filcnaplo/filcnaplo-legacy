@@ -62,7 +62,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
         child: Scaffold(
             drawer: GDrawer(),
             appBar: new AppBar(
-              title: new Text(S.of(context).homeworks),
+              title: new Text(I18n.of(context).homeworks),
               actions: <Widget>[
                 new IconButton(
                   icon: new Icon(Icons.access_time),
@@ -118,16 +118,16 @@ class HomeworkScreenState extends State<HomeworkScreen> {
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
         return new AlertDialog(
-          title: new Text(homework.subject + " " + S.of(context).homework),
+          title: new Text(homework.subject + " " + I18n.of(context).homework),
           content: new SingleChildScrollView(
             child: new ListBody(
               children: <Widget>[
                 homework.deadline != null
-                    ? new Text(S.of(context).deadline + homework.deadline)
+                    ? new Text(I18n.of(context).deadline + homework.deadline)
                     : new Container(),
-                new Text(S.of(context).subject + homework.subject),
-                new Text(S.of(context).uploader + homework.uploader),
-                new Text(S.of(context).upload_time +
+                new Text(I18n.of(context).subject + homework.subject),
+                new Text(I18n.of(context).uploader + homework.uploader),
+                new Text(I18n.of(context).upload_time +
                     homework.uploadDate
                         .substring(0, 16)
                         .replaceAll("-", '. ')
@@ -144,7 +144,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
           ),
           actions: <Widget>[
             new FlatButton(
-              child: new Text(S.of(context).ok),
+              child: new Text(I18n.of(context).ok),
               onPressed: () {
                 Navigator.of(context).pop();
               },

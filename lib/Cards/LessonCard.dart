@@ -175,7 +175,7 @@ class LessonCard extends StatelessWidget {
                 child: Wrap(
                   children: <Widget>[
                     new Text(
-                      S.of(context).next_lesson,
+                      I18n.of(context).next_lesson,
                       style: new TextStyle(
                         fontSize: 18.0,
                       ),
@@ -191,12 +191,12 @@ class LessonCard extends StatelessWidget {
                       padding: EdgeInsets.only(right: 5),
                       child: new Text(
                           getRemainingTime(
-                              S.of(context).hour, S.of(context).minute),
+                              I18n.of(context).hour, I18n.of(context).minute),
                           style: new TextStyle(
                               fontSize: 18.0, color: globals.CurrentTextColor)),
                     ),
                     new Text(
-                      S.of(context).later,
+                      I18n.of(context).later,
                       style: new TextStyle(
                         fontSize: 18.0,
                       ),

@@ -42,7 +42,7 @@ class NotesScreenState extends State<NotesScreen> {
         child: Scaffold(
             drawer: GDrawer(),
             appBar: new AppBar(
-              title: new Text(S.of(context).notes),
+              title: new Text(I18n.of(context).notes),
               actions: <Widget>[],
             ),
             body: new Container(

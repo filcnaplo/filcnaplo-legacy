@@ -21,14 +21,14 @@ class TimeSelectDialogState extends State<TimeSelectDialog> {
 
   Widget build(BuildContext context) {
     List<String> timeOptionList = [
-      S.of(context).day,
-      S.of(context).week,
-      S.of(context).month,
-      S.of(context).two_months
+      I18n.of(context).day,
+      I18n.of(context).week,
+      I18n.of(context).month,
+      I18n.of(context).two_months
     ];
 
     return new SimpleDialog(
-      title: new Text(S.of(context).time),
+      title: new Text(I18n.of(context).time),
       contentPadding: const EdgeInsets.all(10.0),
       children: <Widget>[
         new PopupMenuButton<String>(

@@ -4,7 +4,6 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:html_unescape/html_unescape.dart';
 import '../Datas/Note.dart';
-import '../Utils/StringFormatter.dart';
 import 'package:url_launcher/url_launcher.dart' as launcher;
 
 class HomeworkCard extends StatelessWidget {

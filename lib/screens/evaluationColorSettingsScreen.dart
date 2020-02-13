@@ -32,13 +32,13 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
         content: content,
         actions: [
           FlatButton(
-            child: Text(S.of(context).no),
+            child: Text(I18n.of(context).no),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           FlatButton(
-            child: Text(S.of(context).ok),
+            child: Text(I18n.of(context).ok),
             onPressed: () async {
               Navigator.of(context).pop();
               if (selected != null) {
@@ -68,19 +68,19 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
         child: Scaffold(
           drawer: GDrawer(),
           appBar: new AppBar(
-            title: new Text(S.of(context).title),
+            title: new Text(I18n.of(context).title),
             actions: <Widget>[],
           ),
           body: new Center(
             child: Column(
               children: <Widget>[
                 ListTile(
-                  title: Text(S.of(context).grade1),
+                  title: Text(I18n.of(context).grade1),
                   trailing: new Container(
                     child: new FlatButton(
                       onPressed: () {
                         _openDialog(
-                            S.of(context).color,
+                            I18n.of(context).color,
                             MaterialColorPicker(
                               selectedColor: selected,
                               onColorChange: (Color c) => selected = c,
@@ -92,12 +92,12 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
                   ),
                 ),
                 ListTile(
-                  title: Text(S.of(context).grade2),
+                  title: Text(I18n.of(context).grade2),
                   trailing: new Container(
                     child: new FlatButton(
                       onPressed: () {
                         _openDialog(
-                            S.of(context).color,
+                            I18n.of(context).color,
                             MaterialColorPicker(
                               selectedColor: selected,
                               onColorChange: (Color c) => selected = c,
@@ -109,12 +109,12 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
                   ),
                 ),
                 ListTile(
-                  title: Text(S.of(context).grade3),
+                  title: Text(I18n.of(context).grade3),
                   trailing: new Container(
                     child: new FlatButton(
                       onPressed: () {
                         _openDialog(
-                            S.of(context).color,
+                            I18n.of(context).color,
                             MaterialColorPicker(
                               selectedColor: selected,
                               onColorChange: (Color c) => selected = c,
@@ -126,12 +126,12 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
                   ),
                 ),
                 ListTile(
-                  title: Text(S.of(context).grade4),
+                  title: Text(I18n.of(context).grade4),
                   trailing: new Container(
                     child: new FlatButton(
                       onPressed: () {
                         _openDialog(
-                            S.of(context).color,
+                            I18n.of(context).color,
                             MaterialColorPicker(
                               selectedColor: selected,
                               onColorChange: (Color c) => selected = c,
@@ -143,12 +143,12 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
                   ),
                 ),
                 ListTile(
-                  title: Text(S.of(context).grade5),
+                  title: Text(I18n.of(context).grade5),
                   trailing: new Container(
                     child: new FlatButton(
                       onPressed: () {
                         _openDialog(
-                            S.of(context).color,
+                            I18n.of(context).color,
                             MaterialColorPicker(
                               selectedColor: selected,
                               onColorChange: (Color c) => selected = c,

@@ -1,6 +1,5 @@
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/html_parser.dart';
 
 import '../Datas/Lesson.dart';
 import '../Utils/StringFormatter.dart';
@@ -46,7 +45,7 @@ class ChangedLessonCard extends StatelessWidget {
                               style: new TextStyle(
                                   fontSize: 18.0,
                                   color: globals.CurrentTextColor)),
-                          new Text(S.of(context).lesson + ", ",
+                          new Text(I18n.of(context).lesson + ", ",
                               style: new TextStyle(fontSize: 18.0)),
                           new Text(lesson.subject,
                               style: new TextStyle(
@@ -92,8 +91,8 @@ class ChangedLessonCard extends StatelessWidget {
                             padding: EdgeInsets.only(left: 4),
                             child: new Text(
                                 (isSubstitution
-                                    ? S.of(context).dep
-                                    : S.of(context).missed),
+                                    ? I18n.of(context).dep
+                                    : I18n.of(context).missed),
                                 style: new TextStyle(fontSize: 18.0)),
                           ),
                           new Expanded(

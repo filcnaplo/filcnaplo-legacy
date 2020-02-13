@@ -3,9 +3,6 @@ import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import '../Datas/Lesson.dart';
 import '../globals.dart' as globals;
-import '../Utils/StringFormatter.dart';
-import 'package:flutter_rounded_date_picker/rounded_date_picker.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class NewHomeworkDialog extends StatefulWidget {
   const NewHomeworkDialog(this.lesson);
@@ -20,7 +17,7 @@ class NewHomeworkDialogState extends State<NewHomeworkDialog> {
 
   Widget build(BuildContext context) {
     return new SimpleDialog(
-      title: new Text(S.of(context).homework),
+      title: new Text(I18n.of(context).homework),
       contentPadding: const EdgeInsets.all(10.0),
       children: <Widget>[
         new TextField(
@@ -31,7 +28,7 @@ class NewHomeworkDialogState extends State<NewHomeworkDialog> {
           },
         ),
         MaterialButton(
-          child: Text(S.of(context).ok),
+          child: Text(I18n.of(context).ok),
           onPressed: () {
             RequestHelper().uploadHomework(
                 homework, widget.lesson, globals.selectedAccount.user);

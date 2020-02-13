@@ -15,11 +15,11 @@ void main() {
   runApp(new MaterialApp(
     home: new AbsentsScreen(),
     localizationsDelegates: const <LocalizationsDelegate<WidgetsLocalizations>>[
-      S.delegate,
+      I18n.delegate,
       GlobalWidgetsLocalizations.delegate,
     ],
-    supportedLocales: S.delegate.supportedLocales,
-    onGenerateTitle: (BuildContext context) => S.of(context).title,
+    supportedLocales: I18n.delegate.supportedLocales,
+    onGenerateTitle: (BuildContext context) => I18n.of(context).title,
   ));
 }
 
@@ -63,7 +63,7 @@ class AbsentsScreenState extends State<AbsentsScreen> {
         child: Scaffold(
             drawer: GDrawer(),
             appBar: new AppBar(
-              title: new Text(S.of(context).absent_title),
+              title: new Text(I18n.of(context).absent_title),
               actions: <Widget>[
                 Tooltip(
                   child: new IconButton(
@@ -78,7 +78,7 @@ class AbsentsScreenState extends State<AbsentsScreen> {
                             ) ??
                             false;
                       }),
-                  message: S.of(context).statistics,
+                  message: I18n.of(context).statistics,
                 ),
               ],
             ),
@@ -155,19 +155,19 @@ class AbsentsScreenState extends State<AbsentsScreen> {
           content: new SingleChildScrollView(
             child: new ListBody(
               children: <Widget>[
-                new Text(S.of(context).mode + absence.ModeName),
-                new Text(S.of(context).subject + absence.Subject),
-                new Text(S.of(context).teacher + absence.Teacher),
-                new Text(S.of(context).absence_time +
+                new Text(I18n.of(context).mode + absence.ModeName),
+                new Text(I18n.of(context).subject + absence.Subject),
+                new Text(I18n.of(context).teacher + absence.Teacher),
+                new Text(I18n.of(context).absence_time +
                     dateToHuman(absence.LessonStartTime)),
-                new Text(S.of(context).administration_time +
+                new Text(I18n.of(context).administration_time +
                     dateToHuman(absence.CreatingTime)),
-                new Text(S.of(context).justification_state +
+                new Text(I18n.of(context).justification_state +
                     absence.JustificationStateName),
-                new Text(S.of(context).justification_mode +
+                new Text(I18n.of(context).justification_mode +
                     absence.JustificationTypeName),
                 absence.DelayTimeMinutes != 0
-                    ? new Text(S.of(context).delay_mins +
+                    ? new Text(I18n.of(context).delay_mins +
                         absence.DelayTimeMinutes.toString() +
                         " perc")
                     : new Container(),

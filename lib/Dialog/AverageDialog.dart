@@ -39,10 +39,10 @@ class AverageDialogState extends State<AverageDialog> {
         e.Weight == "-");
 
     List<String> avrChoice = [
-      S.of(context).average_menu,
-      S.of(context).halfyear,
-      S.of(context).quarteryear + " (${S.of(context).notworking})",
-      S.of(context).endyear
+      I18n.of(context).average_menu,
+      I18n.of(context).halfyear,
+      I18n.of(context).quarteryear + " (${I18n.of(context).notworking})",
+      I18n.of(context).endyear
     ];
 
     widgets.add(new Container(
@@ -74,7 +74,7 @@ class AverageDialogState extends State<AverageDialog> {
     });
 
     return new SimpleDialog(
-      title: new Text(S.of(context).averages),
+      title: new Text(I18n.of(context).averages),
       contentPadding: const EdgeInsets.all(10.0),
       children: widgets,
     );
@@ -103,7 +103,7 @@ class AverageDialogState extends State<AverageDialog> {
           return a.subject.compareTo(b.subject);
         });
         currentAvers.add(
-            Average(S.of(context).all_average, "", "", getAllAverages(), 0, 0));
+            Average(I18n.of(context).all_average, "", "", getAllAverages(), 0, 0));
         break;
       case 1: // félévi jegyek
         for (Evaluation evaluation in evaluations)

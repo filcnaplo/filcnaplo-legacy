@@ -17,11 +17,11 @@ void main() {
   runApp(new MaterialApp(
     home: new ImportScreen(),
     localizationsDelegates: const <LocalizationsDelegate<WidgetsLocalizations>>[
-      S.delegate,
+      I18n.delegate,
       GlobalWidgetsLocalizations.delegate,
     ],
-    supportedLocales: S.delegate.supportedLocales,
-    onGenerateTitle: (BuildContext context) => S.of(context).title,
+    supportedLocales: I18n.delegate.supportedLocales,
+    onGenerateTitle: (BuildContext context) => I18n.of(context).title,
   ));
 }
 

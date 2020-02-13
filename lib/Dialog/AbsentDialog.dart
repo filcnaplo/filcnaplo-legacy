@@ -48,13 +48,13 @@ class AbsentDialogState extends State<AbsentDialog> {
 
   Widget build(BuildContext context) {
     return new SimpleDialog(
-        title: new Text(S.of(context).statistics),
+        title: new Text(I18n.of(context).statistics),
         titlePadding: EdgeInsets.all(16),
         contentPadding: const EdgeInsets.all(5.0),
         children: <Widget>[
           Container(
             child: new Text(
-              S
+              I18n
                   .of(context)
                   .parental_justification(sumOfParentalAbsences.toString()),
               style: TextStyle(fontSize: 16.0),
@@ -63,21 +63,21 @@ class AbsentDialogState extends State<AbsentDialog> {
           ),
           Container(
             child: new Text(
-              S.of(context).all_absences(sumOfAllAbsences.toString()),
+              I18n.of(context).all_absences(sumOfAllAbsences.toString()),
               style: TextStyle(fontSize: 16.0),
             ),
             margin: EdgeInsets.all(8),
           ),
           Container(
             child: new Text(
-              S.of(context).all_delay(sumOfDelayMinutes.toString()),
+              I18n.of(context).all_delay(sumOfDelayMinutes.toString()),
               style: TextStyle(fontSize: 16.0),
             ),
             margin: EdgeInsets.all(8),
           ),
           Container(
             margin: EdgeInsets.only(top: 30),
-            child: new Text(S.of(context).excluding_delay),
+            child: new Text(I18n.of(context).excluding_delay),
           )
         ]);
   }

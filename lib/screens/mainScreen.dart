@@ -247,19 +247,19 @@ class MainScreenState extends State<MainScreen> {
       context: context,
       builder: (BuildContext context) {
         return new AlertDialog(
-          title: new Text(S.of(context).sure),
-          content: new Text(S.of(context).confirm_close),
+          title: new Text(I18n.of(context).sure),
+          content: new Text(I18n.of(context).confirm_close),
           actions: <Widget>[
             new FlatButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: new Text(S.of(context).no),
+              child: new Text(I18n.of(context).no),
             ),
             new FlatButton(
               onPressed: () async {
                 await SystemChannels.platform
                     .invokeMethod<void>('SystemNavigator.pop');
               },
-              child: new Text(S.of(context).yes),
+              child: new Text(I18n.of(context).yes),
             ),
           ],
         );
@@ -276,7 +276,7 @@ class MainScreenState extends State<MainScreen> {
             appBar: new AppBar(
               title: new Text(globals.isSingle
                   ? globals.selectedAccount.user.name
-                  : S.of(context).title),
+                  : I18n.of(context).title),
               actions: <Widget>[
                 //TODO search maybe?
                 /*new IconButton( //TODO Finish card chooser

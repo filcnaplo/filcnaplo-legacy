@@ -137,13 +137,13 @@ class SettingsScreenState extends State<SettingsScreen> {
       BackgroundFetch.start().then((int status) {
         print('[BackgroundFetch] start success: $status');
         Fluttertoast.showToast(
-            msg: S.of(context).success,
+            msg: I18n.of(context).success,
             backgroundColor: Colors.green,
             textColor: Colors.white,
             fontSize: 16.0);
       }).catchError((e) {
         Fluttertoast.showToast(
-            msg: S.of(context).notification_failed,
+            msg: I18n.of(context).notification_failed,
             backgroundColor: Colors.red,
             textColor: Colors.white,
             fontSize: 16.0);
@@ -208,16 +208,16 @@ class SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     List<String> themes = [
-      S.of(context).green,
-      S.of(context).red,
-      S.of(context).blue,
-      S.of(context).color_lightgreen,
-      S.of(context).yellow,
-      S.of(context).orange,
-      S.of(context).grey,
-      S.of(context).color_pink,
-      S.of(context).color_purple,
-      S.of(context).color_teal
+      I18n.of(context).green,
+      I18n.of(context).red,
+      I18n.of(context).blue,
+      I18n.of(context).color_lightgreen,
+      I18n.of(context).yellow,
+      I18n.of(context).orange,
+      I18n.of(context).grey,
+      I18n.of(context).color_pink,
+      I18n.of(context).color_purple,
+      I18n.of(context).color_teal
     ];
     return new WillPopScope(
         onWillPop: () {
@@ -227,7 +227,7 @@ class SettingsScreenState extends State<SettingsScreen> {
         child: Scaffold(
           drawer: GDrawer(),
           appBar: new AppBar(
-            title: new Text(S.of(context).settings),
+            title: new Text(I18n.of(context).settings),
           ),
           body: new Container(
             child: _isColor != null
@@ -235,7 +235,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                     children: <Widget>[
                       SwitchListTile(
                         title: new Text(
-                          S.of(context).colorful_mainpage,
+                          I18n.of(context).colorful_mainpage,
                           style: TextStyle(fontSize: 20.0),
                         ),
                         activeColor: Theme.of(context).accentColor,
@@ -246,7 +246,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                       ),
                       SwitchListTile(
                         title: new Text(
-                          S.of(context).singleuser_mainpage,
+                          I18n.of(context).singleuser_mainpage,
                           style: TextStyle(fontSize: 20.0),
                         ),
                         activeColor: Theme.of(context).accentColor,
@@ -258,7 +258,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                       ),
                       SwitchListTile(
                         title: new Text(
-                          S.of(context).dark_theme,
+                          I18n.of(context).dark_theme,
                           style: TextStyle(fontSize: 20.0),
                         ),
                         activeColor: Theme.of(context).accentColor,
@@ -269,7 +269,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                       ),
                       SwitchListTile(
                         title: new Text(
-                          S.of(context).settings_amoled,
+                          I18n.of(context).settings_amoled,
                           style: TextStyle(fontSize: 20.0),
                         ),
                         activeColor: Theme.of(context).accentColor,
@@ -291,9 +291,9 @@ class SettingsScreenState extends State<SettingsScreen> {
                       ),
                       ListTile(
                         title: new Text(
-                          S.of(context).color +
+                          I18n.of(context).color +
                               " (" +
-                              S.of(context).evaluations +
+                              I18n.of(context).evaluations +
                               ")",
                           style: TextStyle(fontSize: 20.0),
                         ),
@@ -307,7 +307,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                           child: new ListTile(
                             contentPadding: EdgeInsets.all(0),
                             title: new Text(
-                              S.of(context).color + ": " + themes[_theme],
+                              I18n.of(context).color + ": " + themes[_theme],
                               style: TextStyle(fontSize: 20.0),
                             ),
                           ),
@@ -338,7 +338,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                       ),
                       SwitchListTile(
                         title: new Text(
-                          S.of(context).notification,
+                          I18n.of(context).notification,
                           style: TextStyle(fontSize: 20.0),
                         ),
                         activeColor: Theme.of(context).accentColor,
@@ -349,7 +349,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                       ),
                       SwitchListTile(
                         title: new Text(
-                          S.of(context).sync_on_data,
+                          I18n.of(context).sync_on_data,
                           style: TextStyle(fontSize: 20.0),
                         ),
                         value: _canSyncOnData,
@@ -360,7 +360,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                       ),
                       SwitchListTile(
                         title: new Text(
-                          S.of(context).next_lesson,
+                          I18n.of(context).next_lesson,
                           style: TextStyle(fontSize: 20.0),
                         ),
                         value: nextLesson,
@@ -372,7 +372,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                           ? new PopupMenuButton<int>(
                               child: new ListTile(
                                 title: new Text(
-                                  S.of(context).sync_frequency(
+                                  I18n.of(context).sync_frequency(
                                       _refreshNotification.toString()),
                                   style: TextStyle(fontSize: 20.0),
                                 ),
@@ -388,7 +388,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                                         children: <Widget>[
                                           new Text(integer.toString() +
                                               " " +
-                                              S.of(context).minute),
+                                              I18n.of(context).minute),
                                         ],
                                       ));
                                 }).toList();
@@ -396,7 +396,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                             )
                           : new ListTile(
                               title: new Text(
-                                S.of(context).sync_frequency(
+                                I18n.of(context).sync_frequency(
                                     _refreshNotification.toString()),
                                 style: TextStyle(fontSize: 20.0),
                               ),
@@ -406,7 +406,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                             ),
                       SwitchListTile(
                         title: new Text(
-                          S.of(context).logo_menu,
+                          I18n.of(context).logo_menu,
                           style: TextStyle(fontSize: 20.0),
                         ),
                         onChanged: _isLogoChange,
@@ -418,7 +418,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                       ),
                       ListTile(
                         title: new Text(
-                          S.of(context).language,
+                          I18n.of(context).language,
                           style: TextStyle(fontSize: 20.0),
                         ),
                         trailing: new Container(
@@ -444,7 +444,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                       ),
                       new ListTile(
                         leading: new Icon(Icons.info),
-                        title: new Text(S.of(context).info),
+                        title: new Text(I18n.of(context).info),
                         onTap: () {
                           Navigator.pushNamed(context, "/about");
                         },
@@ -452,7 +452,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                       !Platform.isIOS
                           ? new ListTile(
                               leading: new Icon(Icons.import_export),
-                              title: new Text(S.of(context).export),
+                              title: new Text(I18n.of(context).export),
                               onTap: () {
                                 Navigator.pushNamed(context, "/export");
                               },

@@ -14,8 +14,6 @@ import '../Utils/Saver.dart';
 
 import '../globals.dart' as globals;
 
-import '../main.dart';
-
 import 'studentScreen.dart';
 import 'loginScreen.dart';
 
@@ -70,13 +68,13 @@ class AccountsScreenState extends State<AccountsScreen> {
         content: content,
         actions: [
           FlatButton(
-            child: Text(S.of(context).no),
+            child: Text(I18n.of(context).no),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           FlatButton(
-            child: Text(S.of(context).ok),
+            child: Text(I18n.of(context).ok),
             onPressed: () async {
               Navigator.of(context).pop();
               users[users.map((User u) => u.id).toList().indexOf(user.id)]
@@ -112,7 +110,7 @@ class AccountsScreenState extends State<AccountsScreen> {
                   child: new FlatButton(
                     onPressed: () {
                       _openDialog(
-                          S.of(context).color,
+                          I18n.of(context).color,
                           MaterialColorPicker(
                             selectedColor: selected,
                             onColorChange: (Color c) => selected = c,
@@ -182,23 +180,23 @@ class AccountsScreenState extends State<AccountsScreen> {
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
         return new AlertDialog(
-          title: new Text(S.of(context).sure),
+          title: new Text(I18n.of(context).sure),
           content: new SingleChildScrollView(
             child: new ListBody(
               children: <Widget>[
-                new Text(S.of(context).delete_confirmation(user.name)),
+                new Text(I18n.of(context).delete_confirmation(user.name)),
               ],
             ),
           ),
           actions: <Widget>[
             new FlatButton(
-              child: new Text(S.of(context).no),
+              child: new Text(I18n.of(context).no),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             new FlatButton(
-              child: new Text(S.of(context).yes),
+              child: new Text(I18n.of(context).yes),
               onPressed: () async {
                 await AccountManager().removeUser(user);
                 //             print("asd1");
@@ -229,7 +227,7 @@ class AccountsScreenState extends State<AccountsScreen> {
       child: Scaffold(
         drawer: GDrawer(),
         appBar: new AppBar(
-          title: new Text(S.of(context).accounts),
+          title: new Text(I18n.of(context).accounts),
           actions: <Widget>[],
         ),
         body: new Column(children: <Widget>[

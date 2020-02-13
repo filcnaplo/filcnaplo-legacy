@@ -26,13 +26,13 @@ class Week {
 
   List<String> dayStrings(BuildContext context) {
     List<String> days = new List();
-    if (monday.isNotEmpty) days.add(S.of(context).short_monday);
-    if (tuesday.isNotEmpty) days.add(S.of(context).short_tuesday);
-    if (wednesday.isNotEmpty) days.add(S.of(context).short_wednesday);
-    if (thursday.isNotEmpty) days.add(S.of(context).short_thursday);
-    if (friday.isNotEmpty) days.add(S.of(context).short_friday);
-    if (saturday.isNotEmpty) days.add(S.of(context).short_saturday);
-    if (sunday.isNotEmpty) days.add(S.of(context).short_sunday);
+    if (monday.isNotEmpty) days.add(I18n.of(context).short_monday);
+    if (tuesday.isNotEmpty) days.add(I18n.of(context).short_tuesday);
+    if (wednesday.isNotEmpty) days.add(I18n.of(context).short_wednesday);
+    if (thursday.isNotEmpty) days.add(I18n.of(context).short_thursday);
+    if (friday.isNotEmpty) days.add(I18n.of(context).short_friday);
+    if (saturday.isNotEmpty) days.add(I18n.of(context).short_saturday);
+    if (sunday.isNotEmpty) days.add(I18n.of(context).short_sunday);
     return days;
   }
 

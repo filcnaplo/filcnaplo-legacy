@@ -166,7 +166,7 @@ class TimeTableScreenState extends State<TimeTableScreen>
             drawer: GDrawer(),
             appBar: new AppBar(
               title: new Text(
-                  S.of(context).timetable + getTimetableText(startDateText)),
+                  I18n.of(context).timetable + getTimetableText(startDateText)),
             ),
             body: new Column(
               children: <Widget>[
@@ -236,7 +236,7 @@ class TimeTableScreenState extends State<TimeTableScreen>
                                               width: 20.0),
                                         ])
                               : Center(
-                                  child: Text(S.of(context).no_lessons),
+                                  child: Text(I18n.of(context).no_lessons),
                                 )
                           : Container()
                       : Center(
@@ -253,7 +253,7 @@ class TimeTableScreenState extends State<TimeTableScreen>
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       new IconButton(
-                        tooltip: S.of(context).prev_week,
+                        tooltip: I18n.of(context).prev_week,
                         icon: const Icon(
                           Icons.skip_previous,
                           size: 20,
@@ -291,7 +291,7 @@ class TimeTableScreenState extends State<TimeTableScreen>
                           size: 20,
                           color: Colors.white,
                         ),
-                        tooltip: S.of(context).next_week,
+                        tooltip: I18n.of(context).next_week,
                         onPressed: () {
                           setState(() {
                             HapticFeedback.lightImpact();
@@ -324,7 +324,7 @@ class TimeTableScreenState extends State<TimeTableScreen>
             ),
       title: new Text(
         lessonList[index].subject +
-            (lessonList[index].isMissed ? " (${S.of(context).missed})" : "") +
+            (lessonList[index].isMissed ? " (${I18n.of(context).missed})" : "") +
             (lessonList[index].depTeacher != ""
                 ? " (${lessonList[index].depTeacher})"
                 : ""),

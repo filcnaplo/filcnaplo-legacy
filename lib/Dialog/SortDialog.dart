@@ -22,13 +22,13 @@ class SortDialogState extends State<SortDialog> {
 
   Widget build(BuildContext context) {
     List<String> sortOptionList = [
-      S.of(context).sort_time,
-      S.of(context).sort_eval,
-      S.of(context).sort_real_time,
+      I18n.of(context).sort_time,
+      I18n.of(context).sort_eval,
+      I18n.of(context).sort_real_time,
     ];
 
     return new SimpleDialog(
-      title: new Text(S.of(context).sort),
+      title: new Text(I18n.of(context).sort),
       contentPadding: const EdgeInsets.all(10.0),
       children: <Widget>[
         new PopupMenuButton<String>(

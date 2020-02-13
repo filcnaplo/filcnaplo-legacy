@@ -1,23 +1,19 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../GlobalDrawer.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import '../globals.dart' as globals;
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:flutter_html/flutter_html.dart';
-import '../Helpers/RequestHelper.dart';
 
 void main() {
   runApp(new MaterialApp(
     home: new AboutScreen(),
     localizationsDelegates: const <LocalizationsDelegate<WidgetsLocalizations>>[
-      S.delegate,
+      I18n.delegate,
       GlobalWidgetsLocalizations.delegate,
     ],
-    supportedLocales: S.delegate.supportedLocales,
-    onGenerateTitle: (BuildContext context) => S.of(context).title,
+    supportedLocales: I18n.delegate.supportedLocales,
+    onGenerateTitle: (BuildContext context) => I18n.of(context).title,
   ));
 }
 
@@ -54,7 +50,7 @@ class AboutScreenState extends State<AboutScreen> {
         child: Scaffold(
           drawer: GDrawer(),
           appBar: new AppBar(
-            title: new Text(S.of(context).title),
+            title: new Text(I18n.of(context).title),
             actions: <Widget>[],
           ),
           body: new Center(
@@ -64,7 +60,7 @@ class AboutScreenState extends State<AboutScreen> {
                 children: <Widget>[
                   new Container(
                     child: new Text(
-                      S.of(context).title,
+                      I18n.of(context).title,
                       style: new TextStyle(
                         fontSize: 28.0,
                       ),
@@ -75,7 +71,7 @@ class AboutScreenState extends State<AboutScreen> {
                   new Row(
                     children: <Widget>[
                       new Text(
-                        S.of(context).version,
+                        I18n.of(context).version,
                         style: new TextStyle(
                           fontSize: 22.0,
                         ),
@@ -93,13 +89,13 @@ class AboutScreenState extends State<AboutScreen> {
                     child: new Row(
                       children: <Widget>[
                         new Text(
-                          S.of(context).made_with,
+                          I18n.of(context).made_with,
                           style: new TextStyle(
                             fontSize: 22.0,
                           ),
                         ),
                         new Text(
-                          S.of(context).flutter,
+                          I18n.of(context).flutter,
                           style: new TextStyle(
                               fontSize: 22.0,
                               color: Theme.of(context).accentColor),
@@ -126,7 +122,7 @@ class AboutScreenState extends State<AboutScreen> {
 
                         new FlatButton(onPressed: _launchFAQ, child: new Row(children: < Widget > [
                             new Container(child: new Icon(Icons.question_answer, color: Colors.green, size: 20.0, ), padding: EdgeInsets.all(5.0), ),
-                            new Text(S.of(context).faq, style: new TextStyle(color: Colors.green, fontSize: 20.0, ), ),
+                            new Text(I18n.of(context).faq, style: new TextStyle(color: Colors.green, fontSize: 20.0, ), ),
                         ], mainAxisAlignment: MainAxisAlignment.center, ), ),
 
 
@@ -136,23 +132,23 @@ class AboutScreenState extends State<AboutScreen> {
                         ], mainAxisAlignment: MainAxisAlignment.center, ), ),
                         new FlatButton(onPressed: _launchYoutubeURL, child: new Row(children: < Widget > [
                             new Container(child: new Icon(IconData(0xf5c3, fontFamily: "Material Design Icons"), color: Colors.red, size: 20.0, ), padding: EdgeInsets.all(5.0), ),
-                            new Text(S.of(context).youtube, style: new TextStyle(color: Colors.red, fontSize: 20.0, ), ),
+                            new Text(I18n.of(context).youtube, style: new TextStyle(color: Colors.red, fontSize: 20.0, ), ),
                         ], mainAxisAlignment: MainAxisAlignment.center, ), ),
                         new FlatButton(onPressed: _launchTelegramURL, child: new Row(children: < Widget > [
                             new Container(child: new Icon(IconData(0xf501, fontFamily: "Material Design Icons"), color: Colors.blue, size: 20.0, ), padding: EdgeInsets.all(5.0), ),
-                            new Text(S.of(context).telegram, style: new TextStyle(color: Colors.blue, fontSize: 20.0, ), ),
+                            new Text(I18n.of(context).telegram, style: new TextStyle(color: Colors.blue, fontSize: 20.0, ), ),
                         ], mainAxisAlignment: MainAxisAlignment.center, )),
                         new FlatButton(onPressed: _launchGmailURL, child: new Row(children: < Widget > [
                             new Container(child: new Icon(IconData(0xf2ab, fontFamily: "Material Design Icons"), color: Colors.red, size: 20.0, ), padding: EdgeInsets.all(5.0), ),
-                            new Text(S.of(context).email, style: new TextStyle(color: Colors.red, fontSize: 20.0, ), ),
+                            new Text(I18n.of(context).email, style: new TextStyle(color: Colors.red, fontSize: 20.0, ), ),
                         ], mainAxisAlignment: MainAxisAlignment.center, )),
                         new FlatButton(onPressed: _launchGithubURL, child: new Row(children: < Widget > [
                             new Container(child: new Icon(IconData(0xf2a4, fontFamily: "Material Design Icons"), color: Colors.black, size: 20.0, ), padding: EdgeInsets.all(5.0), ),
-                            new Text(S.of(context).github, style: new TextStyle(fontSize: 20.0, ), ),
+                            new Text(I18n.of(context).github, style: new TextStyle(fontSize: 20.0, ), ),
                         ], mainAxisAlignment: MainAxisAlignment.center, )),
                         new FlatButton(onPressed: _launchInstagramURL, child: new Row(children: < Widget > [
                             new Container(child: new Icon(IconData(0xf2fe, fontFamily: "Material Design Icons"), color: Colors.pink, size: 20.0, ), padding: EdgeInsets.all(5.0), ),
-                            new Text(S.of(context).instagram, style: new TextStyle(color: Colors.pink, fontSize: 20.0, ), ),
+                            new Text(I18n.of(context).instagram, style: new TextStyle(color: Colors.pink, fontSize: 20.0, ), ),
                         ], mainAxisAlignment: MainAxisAlignment.center, )),
                       ű
                     */
@@ -182,7 +178,7 @@ class AboutScreenState extends State<AboutScreen> {
         return showDialog < Null > (context: context, barrierDismissible: true, builder: (BuildContext context) {
             return new SimpleDialog(children: < Widget > [
                 new SingleChildScrollView(child: Html(data: globals.htmlFAQ), ),
-            ], title: Text(S.of(context).faq), contentPadding: EdgeInsets.all(20), shape: RoundedRectangleBorder(side: BorderSide(style: BorderStyle.none, width: 1, ), borderRadius: BorderRadius.circular(3), ), );
+            ], title: Text(I18n.of(context).faq), contentPadding: EdgeInsets.all(20), shape: RoundedRectangleBorder(side: BorderSide(style: BorderStyle.none, width: 1, ), borderRadius: BorderRadius.circular(3), ), );
         }, );
     }
     _launchYoutubeURL() async {

@@ -42,14 +42,14 @@ class WelcomeNewUserState extends State<LogoApp>
               child: new Row(
                 children: <Widget>[
                   new Text(
-                    S.of(context).title,
+                    I18n.of(context).title,
                     style: TextStyle(
                         fontSize: 40.0,
                         color:
                             Color.fromARGB(animation.value.toInt(), 0, 0, 0)),
                   ),
                   new Text(
-                    " " + S.of(context).version_number,
+                    " " + I18n.of(context).version_number,
                     style: TextStyle(
                         color: Color.fromARGB(
                             animation.value.toInt(), 68, 138, 255),
@@ -121,7 +121,7 @@ class AcceptTermsState extends StatelessWidget {
             alignment: Alignment(0, 0),
             child: new SingleChildScrollView(
               child: new Text(
-                S.of(context).disclaimer,
+                I18n.of(context).disclaimer,
                 style: TextStyle(
                   fontSize: 21.0,
                 ),

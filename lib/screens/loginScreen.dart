@@ -2,7 +2,6 @@ import 'dart:convert' show json;
 import 'dart:io';
 
 import 'package:filcnaplo/generated/i18n.dart';
-import 'package:filcnaplo/screens/messageScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -138,7 +137,7 @@ class LoginScreenState extends State<LoginScreen> {
         String bearerResp;
         String code;
         if (userName == "") {
-          userError = S.of(context).choose_username;
+          userError = I18n.of(context).choose_username;
           setState(() {
             loggingIn = false;
           });
@@ -146,7 +145,7 @@ class LoginScreenState extends State<LoginScreen> {
           setState(() {
             loggingIn = false;
           });
-          passwordError = S.of(context).choose_password;
+          passwordError = I18n.of(context).choose_password;
         } else if (globals.selectedSchoolUrl == "") {
           setState(() {
             loggingIn = false;
@@ -284,7 +283,7 @@ class LoginScreenState extends State<LoginScreen> {
                                             decoration: InputDecoration(
                                               prefixIcon:
                                                   new Icon(Icons.person),
-                                              hintText: S.of(context).username,
+                                              hintText: I18n.of(context).username,
                                               hintStyle: TextStyle(
                                                   color: Colors.white30),
                                               errorText: userError,
@@ -292,7 +291,7 @@ class LoginScreenState extends State<LoginScreen> {
                                                   40, 20, 20, 30),
                                               filled: true,
                                               helperText: helpSwitch
-                                                  ? S.of(context).username_hint
+                                                  ? I18n.of(context).username_hint
                                                   : null,
                                               helperStyle: TextStyle(
                                                   color: Colors.white30),
@@ -332,13 +331,13 @@ class LoginScreenState extends State<LoginScreen> {
                                           prefixIcon: new Icon(Icons.https),
                                           hintStyle:
                                               TextStyle(color: Colors.white30),
-                                          hintText: S.of(context).password,
+                                          hintText: I18n.of(context).password,
                                           errorText: passwordError,
                                           fillColor:
                                               Color.fromARGB(40, 20, 20, 30),
                                           filled: true,
                                           helperText: helpSwitch
-                                              ? S.of(context).password_hint
+                                              ? I18n.of(context).password_hint
                                               : null,
                                           helperStyle:
                                               TextStyle(color: Colors.white30),
@@ -382,7 +381,7 @@ class LoginScreenState extends State<LoginScreen> {
                                   child: new Row(
                                     children: <Widget>[
                                       new Text(
-                                        S.of(context).school,
+                                        I18n.of(context).school,
                                         style: new TextStyle(
                                             fontSize: 21.0,
                                             color: Colors.white30),
@@ -395,7 +394,7 @@ class LoginScreenState extends State<LoginScreen> {
                                           },
                                           child: new Text(
                                             globals.selectedSchoolName ??
-                                                S.of(context).choose,
+                                                I18n.of(context).choose,
                                             style: new TextStyle(
                                                 fontSize: 21.0,
                                                 color: Colors.blue),
@@ -407,7 +406,7 @@ class LoginScreenState extends State<LoginScreen> {
                                 ),
                                 !schoolSelected
                                     ? new Text(
-                                        S.of(context).choose_school_warning,
+                                        I18n.of(context).choose_school_warning,
                                         style: new TextStyle(color: Colors.red),
                                       )
                                     : new Container(),
@@ -445,7 +444,7 @@ class LoginScreenState extends State<LoginScreen> {
                                     : null,
                                 disabledColor: Colors.blueGrey.shade800,
                                 disabledTextColor: Colors.blueGrey,
-                                child: new Text(S.of(context).login),
+                                child: new Text(I18n.of(context).login),
                                 color: Colors.blue,
                                 //#2196F3
                                 textColor: Colors.white,
@@ -491,7 +490,7 @@ class MyDialogState extends State<MyDialog> {
 
   Widget build(BuildContext context) {
     return new SimpleDialog(
-      title: new Text(S.of(context).choose_school),
+      title: new Text(I18n.of(context).choose_school),
       contentPadding: const EdgeInsets.all(10.0),
       children: <Widget>[
         new Container(
