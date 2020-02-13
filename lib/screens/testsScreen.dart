@@ -42,7 +42,7 @@ class TestsScreenState extends State<TestsScreen> {
         child: Scaffold(
             drawer: GDrawer(),
             appBar: new AppBar(
-              title: new Text(I18n.of(context).tests),
+              title: new Text(I18n.of(context).testTitle),
               actions: <Widget>[],
             ),
             body: new Container(

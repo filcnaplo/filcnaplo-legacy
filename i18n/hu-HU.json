@@ -16,6 +16,10 @@
         "settings": "beállítások"
     },
 
+    "test": {
+        "title": "számonkérések"
+    },
+
     "dialog": {
         "ok": "ok",
         "yes": "igen",

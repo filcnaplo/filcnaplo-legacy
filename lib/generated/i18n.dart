@@ -54,6 +54,8 @@ class I18n implements WidgetsLocalizations {
   String get drawerAbsences => "mulasztások";
   /// "beállítások"
   String get drawerSettings => "beállítások";
+  /// "számonkérések"
+  String get testTitle => "számonkérések";
   /// "ok"
   String get dialogOk => "ok";
   /// "igen"
