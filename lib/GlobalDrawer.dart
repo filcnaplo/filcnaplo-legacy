@@ -39,11 +39,7 @@ class GDrawerState extends State<GDrawer> {
         break;
       case 1:
         Navigator.pushReplacementNamed(context, "/evaluations");
-<<<<<<< HEAD
-        break;*/
-=======
         break;	
->>>>>>> fix: evaluation not getting highlighted
       case 2:
         Navigator.pushReplacementNamed(context, "/timetable");
         break;
