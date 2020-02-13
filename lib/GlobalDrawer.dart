@@ -86,23 +86,9 @@ class GDrawerState extends State<GDrawer> {
                             width: 120.0,
                           ),
                           new Container(
-                            child: new Row(
-                              children: <Widget>[
-                                new Container(
-                                  child: new Text(
-                                    I18n.of(context).appTitle,
-                                    style: TextStyle(fontSize: 19.0),
-                                  ),
-                                ),
-                                new Container(
-                                  child: new Text(
-                                    " " + version,
-                                    style: TextStyle(
-                                        fontSize: 19.0,
-                                        color: Theme.of(context).accentColor),
-                                  ),
-                                ),
-                              ],
+                            child: new Text(
+                                I18n.of(context).appTitle,
+                                style: TextStyle(fontSize: 19.0),
                             ),
                             padding: EdgeInsets.fromLTRB(5.0, 5.0, 0.0, 0.0),
                           ),
