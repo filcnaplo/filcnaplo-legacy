@@ -229,6 +229,7 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   void showSelectDialog() {
+    initJson();
     setState(() {
       myDialogState = new MyDialogState();
       showDialog<Institution>(
