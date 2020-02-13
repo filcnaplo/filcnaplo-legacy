@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:convert' show json;
-import '../Datas/User.dart';
-import '../Datas/Homework.dart';
-import '../Utils/AccountManager.dart';
-import '../Utils/Saver.dart';
-import '../Datas/Lesson.dart';
+import 'package:filcnaplo/Datas/User.dart';
+import 'package:filcnaplo/Datas/Homework.dart';
+import 'package:filcnaplo/Utils/AccountManager.dart';
+import 'package:filcnaplo/Utils/Saver.dart';
+import 'package:filcnaplo/Datas/Lesson.dart';
 import 'RequestHelper.dart';
-import '../globals.dart' as globals;
+import 'package:filcnaplo/globals.dart' as globals;
 
 class HomeworkHelper {
   Future<List<Homework>> getHomeworksByLesson(Lesson lesson) async {

@@ -4,9 +4,9 @@ import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 
-import '../GlobalDrawer.dart';
-import '../Helpers/SettingsHelper.dart';
-import '../globals.dart' as globals;
+import 'package:filcnaplo/GlobalDrawer.dart';
+import 'package:filcnaplo/Helpers/SettingsHelper.dart';
+import 'package:filcnaplo/globals.dart' as globals;
 
 class colorSettingsScreen extends StatefulWidget {
   @override
@@ -32,13 +32,13 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
         content: content,
         actions: [
           FlatButton(
-            child: Text(I18n.of(context).no),
+            child: Text(I18n.of(context).dialogNo),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           FlatButton(
-            child: Text(I18n.of(context).ok),
+            child: Text(I18n.of(context).dialogOk),
             onPressed: () async {
               Navigator.of(context).pop();
               if (selected != null) {
@@ -68,7 +68,7 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
         child: Scaffold(
           drawer: GDrawer(),
           appBar: new AppBar(
-            title: new Text(I18n.of(context).title),
+            title: new Text(I18n.of(context).appTitle),
             actions: <Widget>[],
           ),
           body: new Center(

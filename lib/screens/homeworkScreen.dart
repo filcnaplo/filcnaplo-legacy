@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:html_unescape/html_unescape.dart';
 
-import '../Datas/Homework.dart';
-import '../Datas/User.dart';
-import '../Dialog/TimeSelectDialog.dart';
-import '../GlobalDrawer.dart';
-import '../Helpers/HomeworkHelper.dart';
-import '../Utils/StringFormatter.dart';
-import '../globals.dart' as globals;
+import 'package:filcnaplo/Datas/Homework.dart';
+import 'package:filcnaplo/Datas/User.dart';
+import 'package:filcnaplo/Dialog/TimeSelectDialog.dart';
+import 'package:filcnaplo/GlobalDrawer.dart';
+import 'package:filcnaplo/Helpers/HomeworkHelper.dart';
+import 'package:filcnaplo/Utils/StringFormatter.dart';
+import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
   runApp(new MaterialApp(home: new HomeworkScreen()));
@@ -144,7 +144,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
           ),
           actions: <Widget>[
             new FlatButton(
-              child: new Text(I18n.of(context).ok),
+              child: new Text(I18n.of(context).dialogOk),
               onPressed: () {
                 Navigator.of(context).pop();
               },

@@ -5,10 +5,10 @@ import 'package:filcnaplo/Dialog/MessageDialog.dart';
 import 'package:filcnaplo/Helpers/RequestHelper.dart';
 import 'package:flutter/material.dart';
 
-import '../GlobalDrawer.dart';
-import '../Utils/StringFormatter.dart';
-import '../generated/i18n.dart';
-import '../globals.dart' as globals;
+import 'package:filcnaplo/GlobalDrawer.dart';
+import 'package:filcnaplo/Utils/StringFormatter.dart';
+import 'package:filcnaplo/generated/i18n.dart';
+import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
   runApp(new MaterialApp(home: new MessageScreen()));

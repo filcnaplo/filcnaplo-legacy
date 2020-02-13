@@ -2,9 +2,11 @@ import 'package:filcnaplo/Dialog/HomeworkDialog.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 
-import '../Datas/Lesson.dart';
-import '../globals.dart' as globals;
+import 'package:filcnaplo/Datas/Lesson.dart';
+import 'package:filcnaplo/globals.dart' as globals;
 import 'dart:async';
+
+String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
 
 class LessonCard extends StatelessWidget {
   List<Lesson> lessons;
@@ -175,7 +177,7 @@ class LessonCard extends StatelessWidget {
                 child: Wrap(
                   children: <Widget>[
                     new Text(
-                      I18n.of(context).next_lesson,
+                      capitalize(I18n.of(context).lessonNext) + ":",
                       style: new TextStyle(
                         fontSize: 18.0,
                       ),
@@ -191,12 +193,12 @@ class LessonCard extends StatelessWidget {
                       padding: EdgeInsets.only(right: 5),
                       child: new Text(
                           getRemainingTime(
-                              I18n.of(context).hour, I18n.of(context).minute),
+                              I18n.of(context).timeHour, I18n.of(context).timeMinute),
                           style: new TextStyle(
                               fontSize: 18.0, color: globals.CurrentTextColor)),
                     ),
                     new Text(
-                      I18n.of(context).later,
+                      I18n.of(context).timeLater,
                       style: new TextStyle(
                         fontSize: 18.0,
                       ),

@@ -2,20 +2,20 @@ import 'dart:convert' show utf8, json;
 import 'dart:ui';
 
 import 'package:charts_flutter/flutter.dart';
-import '../Utils/ColorManager.dart';
-import '../generated/i18n.dart';
+import 'package:filcnaplo/Utils/ColorManager.dart';
+import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../Datas/Average.dart';
-import '../Datas/Student.dart';
-import '../GlobalDrawer.dart';
-import '../Utils/StringFormatter.dart';
-import '../globals.dart' as globals;
+import 'package:filcnaplo/Datas/Average.dart';
+import 'package:filcnaplo/Datas/Student.dart';
+import 'package:filcnaplo/GlobalDrawer.dart';
+import 'package:filcnaplo/Utils/StringFormatter.dart';
+import 'package:filcnaplo/globals.dart' as globals;
 import 'dart:ui' as dart_ui;
-import '../Utils/ColorManager.dart';
-import '../Dialog/SortDialog.dart';
-import '../Datas/User.dart';
-import '../Cards/SummaryCards.dart';
+import 'package:filcnaplo/Utils/ColorManager.dart';
+import 'package:filcnaplo/Dialog/SortDialog.dart';
+import 'package:filcnaplo/Datas/User.dart';
+import 'package:filcnaplo/Cards/SummaryCards.dart';
 
 void main() {
   runApp(new MaterialApp(home: new EvaluationsScreen()));
@@ -914,7 +914,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           ),
           actions: <Widget>[
             new FlatButton(
-              child: new Text(I18n.of(context).ok),
+              child: new Text(I18n.of(context).dialogOk),
               onPressed: () {
                 Navigator.of(context).pop();
               },

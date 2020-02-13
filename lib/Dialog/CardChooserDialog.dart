@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../globals.dart' as globals;
+import 'package:filcnaplo/globals.dart' as globals;
 
 class CardChooserDialog extends StatefulWidget {
   const CardChooserDialog();

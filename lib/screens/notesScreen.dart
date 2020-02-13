@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart' as launcher;
 
-import '../Datas/Note.dart';
-import '../GlobalDrawer.dart';
-import '../Utils/StringFormatter.dart';
-import '../globals.dart' as globals;
+import 'package:filcnaplo/Datas/Note.dart';
+import 'package:filcnaplo/GlobalDrawer.dart';
+import 'package:filcnaplo/Utils/StringFormatter.dart';
+import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
   runApp(new MaterialApp(home: new NotesScreen()));

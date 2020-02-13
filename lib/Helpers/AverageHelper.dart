@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert' show json;
-import '../Datas/Average.dart';
-import '../Datas/User.dart';
+import 'package:filcnaplo/Datas/Average.dart';
+import 'package:filcnaplo/Datas/User.dart';
 
 class AverageHelper {
   Future<List<Average>> getAveragesFrom(String studentString, User user) async {

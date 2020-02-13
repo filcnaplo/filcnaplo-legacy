@@ -9,9 +9,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../Datas/User.dart';
-import '../Helpers/DBHelper.dart';
-import '../globals.dart' as globals;
+import 'package:filcnaplo/Datas/User.dart';
+import 'package:filcnaplo/Helpers/DBHelper.dart';
+import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
   runApp(new MaterialApp(
@@ -21,7 +21,7 @@ void main() {
       GlobalWidgetsLocalizations.delegate,
     ],
     supportedLocales: I18n.delegate.supportedLocales,
-    onGenerateTitle: (BuildContext context) => I18n.of(context).title,
+    onGenerateTitle: (BuildContext context) => I18n.of(context).appTitle,
   ));
 }
 

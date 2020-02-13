@@ -4,12 +4,12 @@ import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import '../Datas/Student.dart';
-import '../Datas/User.dart';
-import '../Dialog/AbsentDialog.dart';
-import '../GlobalDrawer.dart';
-import '../Utils/StringFormatter.dart';
-import '../globals.dart' as globals;
+import 'package:filcnaplo/Datas/Student.dart';
+import 'package:filcnaplo/Datas/User.dart';
+import 'package:filcnaplo/Dialog/AbsentDialog.dart';
+import 'package:filcnaplo/GlobalDrawer.dart';
+import 'package:filcnaplo/Utils/StringFormatter.dart';
+import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
   runApp(new MaterialApp(
@@ -19,7 +19,7 @@ void main() {
       GlobalWidgetsLocalizations.delegate,
     ],
     supportedLocales: I18n.delegate.supportedLocales,
-    onGenerateTitle: (BuildContext context) => I18n.of(context).title,
+    onGenerateTitle: (BuildContext context) => I18n.of(context).appTitle,
   ));
 }
 

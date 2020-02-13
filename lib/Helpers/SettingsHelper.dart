@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../globals.dart';
+import 'package:filcnaplo/globals.dart';
 import 'DBHelper.dart';
 
 Map defaultShowCardType = {

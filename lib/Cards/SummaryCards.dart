@@ -4,10 +4,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../Datas/Student.dart';
-import '../Utils/StringFormatter.dart';
-import '../globals.dart' as globals;
-import '../Utils/ColorManager.dart';
+import 'package:filcnaplo/Datas/Student.dart';
+import 'package:filcnaplo/Utils/StringFormatter.dart';
+import 'package:filcnaplo/globals.dart' as globals;
+import 'package:filcnaplo/Utils/ColorManager.dart';
 
 class SummaryCard extends StatelessWidget {
   List<Evaluation> summaryEvaluations;

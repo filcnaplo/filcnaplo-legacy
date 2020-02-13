@@ -1,9 +1,9 @@
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 
-import '../Datas/Lesson.dart';
-import '../Utils/StringFormatter.dart';
-import '../globals.dart' as globals;
+import 'package:filcnaplo/Datas/Lesson.dart';
+import 'package:filcnaplo/Utils/StringFormatter.dart';
+import 'package:filcnaplo/globals.dart' as globals;
 
 class ChangedLessonCard extends StatelessWidget {
   Lesson lesson;
@@ -91,8 +91,8 @@ class ChangedLessonCard extends StatelessWidget {
                             padding: EdgeInsets.only(left: 4),
                             child: new Text(
                                 (isSubstitution
-                                    ? I18n.of(context).dep
-                                    : I18n.of(context).missed),
+                                    ? I18n.of(context).substitution
+                                    : I18n.of(context).substitutionMissed),
                                 style: new TextStyle(fontSize: 18.0)),
                           ),
                           new Expanded(

@@ -2,8 +2,9 @@ import 'package:filcnaplo/Dialog/HomeworkDialog.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 
-import '../Datas/Lesson.dart';
-import '../globals.dart' as globals;
+import 'package:filcnaplo/Datas/Lesson.dart';
+import 'package:filcnaplo/globals.dart' as globals;
+import 'package:filcnaplo/Utils/StringFormatter.dart';
 
 class TomorrowLessonCard extends StatelessWidget {
   List<Lesson> lessons;
@@ -145,7 +146,7 @@ class TomorrowLessonCard extends StatelessWidget {
               child: Wrap(
                 children: <Widget>[
                   new Text(
-                    I18n.of(context).tomorrow,
+                    capitalize(I18n.of(context).dateTomorrow),
                     style: new TextStyle(
                       fontSize: 18.0,
                     ),
@@ -157,7 +158,7 @@ class TomorrowLessonCard extends StatelessWidget {
                             fontSize: 18.0, color: globals.CurrentTextColor)),
                   ),
                   new Text(
-                    I18n.of(context).tomorrow_lessons,
+                    I18n.of(context).lessonHave,
                     style: new TextStyle(
                       fontSize: 18.0,
                     ),

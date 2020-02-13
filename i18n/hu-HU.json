@@ -1,3 +1,131 @@
 {
-    "greetTo": "Jó napot {name}"
+    "app": {
+        "title": "Szivacs Napló",
+        "version": "verzió"
+    },
+
+    "drawer": {
+        "home": "főoldal",
+        "evaluations": "jegyek",
+        "timetable": "órarend",
+        "homeworks": "házi feladatok",
+        "notes": "feljegyzések",
+        "messages": "üzenetek",
+        "tests": "számonkérések",
+        "absences": "mulasztások",
+        "settings": "beállítások"
+    },
+
+    "dialog": {
+        "ok": "ok",
+        "yes": "igen",
+        "no": "nem"
+    },
+
+    "time": {
+        "": "idő",
+        "hour": "óra",
+        "minute": "perc",
+        "later": "timeLater"
+    },
+
+    "date": {
+        "": "dátum",
+        "tomorrow": "holnap",
+        
+        "monday": "hétfő",
+        "tuesday": "kedd",
+        "wednesday": "szerda",
+        "thursday": "csütörtök",
+        "friday": "péntek",
+        "saturday": "szombat",
+        "sunday": "vasárnap",
+
+        "mondayShort": "h",
+        "tuesdayShort": "k",
+        "wednesdayShort": "sz",
+        "thursdayShort": "cs",
+        "fridayShort": "p",
+        "saturdayShort": "sz",
+        "sundayShort": "v",
+
+        "day": "nap",
+        "week": "hét",
+        "month": "hónap",
+        "month2": "két hónap",
+
+        "weekPrev": "előző hét",
+        "weekNext": "következö hét"
+    },
+
+    "delay": {
+        "mins": "delayMins",
+        "all": "Összes késés: {count} perc"
+    },
+
+    "administration": {
+        "time": "administrationTime"
+    },
+
+    "justification": {
+        "state": "justificationState",
+        "mode": "justificationMode"
+    },
+
+    "lesson": {
+        "": "óra",
+        "count": "{count} óra",
+        "next": "következő óra",
+        "have": "óra lesz",
+        "room": "terem",
+        "teacher": "tanár",
+        "class": "osztály",
+        "start": "óra kezdete",
+        "end": "óra vége",
+        "theme": "téma"
+    },
+
+    "homework": {
+        "": "házi feladat"
+    },
+
+    "substitution": {
+        "": "helyettesítés",
+        "missed": "elmarad"
+    },
+
+    "state": {
+        "": "state (?)"
+    },
+    
+    "note": {
+        "": "feljegyzés",
+        "2": "faliújság"
+    },
+
+    "message": {
+        "receivers": "receivers"
+    },
+
+    "statistics": {
+        "": "statisztikák"
+    },
+
+    "absence": {
+        "time": "absenceTime",
+        "all": "Összes hiányzás: {count} óra",
+        "parental": "Szülői igazolás: {count} db"
+    },
+    
+    "timetable": {
+        "": "órarend",
+        "empty": "üres órarend"
+    },
+
+    "sort": {
+        "": "Rendezés",
+        "time": "beírás ideje",
+        "eval": "jegy",
+        "timeReal": "számonkérés ideje"
+    }
 }

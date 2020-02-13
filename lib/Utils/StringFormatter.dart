@@ -1,4 +1,4 @@
-import '../Datas/Lesson.dart';
+import 'package:filcnaplo/Datas/Lesson.dart';
 
 String getTimetableText(DateTime startDateText) {
   return ((" (" +
@@ -70,3 +70,5 @@ String dateToWeekDay(DateTime date) {
   }
   return "";
 }
+
+String capitalize(String s) => s[0].toUpperCase() + s.substring(1);

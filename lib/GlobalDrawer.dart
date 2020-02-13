@@ -1,10 +1,11 @@
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 
-import 'Datas/Account.dart';
-import 'Datas/User.dart';
-import 'globals.dart';
-import 'screens/studentScreen.dart';
+import 'package:filcnaplo/Datas/Account.dart';
+import 'package:filcnaplo/Datas/User.dart';
+import 'package:filcnaplo/globals.dart';
+import 'package:filcnaplo/screens/studentScreen.dart';
+import 'package:filcnaplo/Utils/StringFormatter.dart';
 
 BuildContext ctx;
 
@@ -89,7 +90,7 @@ class GDrawerState extends State<GDrawer> {
                               children: <Widget>[
                                 new Container(
                                   child: new Text(
-                                    I18n.of(context).title,
+                                    I18n.of(context).appTitle,
                                     style: TextStyle(fontSize: 19.0),
                                   ),
                                 ),
@@ -127,7 +128,7 @@ class GDrawerState extends State<GDrawer> {
                     ),
                     height: version != latestVersion && latestVersion != ""
                         ? 205.0
-                        : 195.0,
+                        : 170.0,
                     padding: EdgeInsets.only(left: 10))
                 : new Container(
                     height: 5,
@@ -220,7 +221,7 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 0 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
-                I18n.of(context).main_page,
+                capitalize(I18n.of(context).drawerHome),
                 style: TextStyle(
                     color: screen == 0 ? Theme.of(context).accentColor : null),
               ),
@@ -236,7 +237,7 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 1 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
-                I18n.of(context).evaluations,
+                capitalize(I18n.of(context).drawerEvaluations),
                 style: TextStyle(
                     color: screen == 1 ? Theme.of(context).accentColor : null),
               ),
@@ -268,7 +269,7 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 8 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
-                I18n.of(context).homeworks,
+                capitalize(I18n.of(context).drawerHomeworks),
                 style: TextStyle(
                     color: screen == 8 ? Theme.of(context).accentColor : null),
               ),
@@ -284,7 +285,7 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 3 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
-                I18n.of(context).notes,
+                capitalize(I18n.of(context).drawerNotes),
                 style: TextStyle(
                     color: screen == 3 ? Theme.of(context).accentColor : null),
               ),
@@ -300,7 +301,7 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 10 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
-                I18n.of(context).tests,
+                capitalize(I18n.of(context).drawerTests),
                 style: TextStyle(
                     color: screen == 10 ? Theme.of(context).accentColor : null),
               ),
@@ -316,7 +317,7 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 11 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
-                I18n.of(context).messages,
+                capitalize(I18n.of(context).drawerMessages),
                 style: TextStyle(
                     color: screen == 11 ? Theme.of(context).accentColor : null),
               ),
@@ -332,7 +333,7 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 5 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
-                I18n.of(context).absent_title,
+                capitalize(I18n.of(context).drawerAbsences),
                 style: TextStyle(
                     color: screen == 5 ? Theme.of(context).accentColor : null),
               ),
@@ -342,45 +343,29 @@ class GDrawerState extends State<GDrawer> {
                 Navigator.pushReplacementNamed(context, "/absents");
               },
             ),
-            /*new ListTile(
-              leading: new Icon(
-                IconData(0xf127, fontFamily: "Material Design Icons"),
-                color: screen == 6 ? Theme.of(context).accentColor : null,
-              ),
-              title: new Text(
-                I18n.of(context).statistics,
-                style: TextStyle(
-                    color: screen == 6 ? Theme.of(context).accentColor : null),
-              ),
-              onTap: () {
-                screen = 6;
-                Navigator.pop(context); // close the drawer
-                Navigator.pushReplacementNamed(context, "/statistics");
-              },
-            ),*/
-            new ListTile(
-              leading: new Icon(
-                Icons.supervisor_account,
-                color: screen == 4 ? Theme.of(context).accentColor : null,
-              ),
-              title: new Text(
-                I18n.of(context).accounts,
-                style: TextStyle(
-                    color: screen == 4 ? Theme.of(context).accentColor : null),
-              ),
-              onTap: () {
-                screen = 4;
-                Navigator.pop(context); // close the drawer
-                Navigator.pushReplacementNamed(context, "/accounts");
-              },
-            ),
+            // new ListTile(
+            //   leading: new Icon(
+            //     Icons.supervisor_account,
+            //     color: screen == 4 ? Theme.of(context).accentColor : null,
+            //   ),
+            //   title: new Text(
+            //     I18n.of(context).accounts,
+            //     style: TextStyle(
+            //         color: screen == 4 ? Theme.of(context).accentColor : null),
+            //   ),
+            //   onTap: () {
+            //     screen = 4;
+            //     Navigator.pop(context); // close the drawer
+            //     Navigator.pushReplacementNamed(context, "/accounts");
+            //   },
+            // ),
             new ListTile(
               leading: new Icon(
                 Icons.settings,
                 color: screen == 7 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
-                I18n.of(context).settings,
+                capitalize(I18n.of(context).drawerSettings),
                 style: TextStyle(
                     color: screen == 7 ? Theme.of(context).accentColor : null),
               ),

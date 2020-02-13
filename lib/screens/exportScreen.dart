@@ -1,11 +1,11 @@
 import 'dart:ui';
 import 'package:filcnaplo/Datas/Account.dart';
 import 'package:flutter/material.dart';
-import '../GlobalDrawer.dart';
+import 'package:filcnaplo/GlobalDrawer.dart';
 import 'package:filcnaplo/generated/i18n.dart';
-import '../Datas/User.dart';
-import '../Utils/Saver.dart' as Saver;
-import '../globals.dart' as globals;
+import 'package:filcnaplo/Datas/User.dart';
+import 'package:filcnaplo/Utils/Saver.dart' as Saver;
+import 'package:filcnaplo/globals.dart' as globals;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
@@ -14,7 +14,7 @@ import 'dart:convert' show json;
 import 'package:csv/csv.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:date_range_picker/date_range_picker.dart' as DateRagePicker;
-import '../Helpers/TimetableHelper.dart';
+import 'package:filcnaplo/Helpers/TimetableHelper.dart';
 
 void main() {
   runApp(new MaterialApp(
@@ -24,7 +24,7 @@ void main() {
       GlobalWidgetsLocalizations.delegate,
     ],
     supportedLocales: I18n.delegate.supportedLocales,
-    onGenerateTitle: (BuildContext context) => I18n.of(context).title,
+    onGenerateTitle: (BuildContext context) => I18n.of(context).appTitle,
   ));
 }
 
@@ -76,7 +76,7 @@ class ExportScreenState extends State<ExportScreen> {
         child: Scaffold(
           drawer: GDrawer(),
           appBar: new AppBar(
-            title: new Text(I18n.of(context).title),
+            title: new Text(I18n.of(context).appTitle),
             actions: <Widget>[],
           ),
           body: new Center(

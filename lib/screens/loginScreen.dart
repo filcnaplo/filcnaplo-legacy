@@ -5,16 +5,16 @@ import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../Datas/Account.dart';
-import '../Datas/Institution.dart';
-import '../Datas/User.dart';
+import 'package:filcnaplo/Datas/Account.dart';
+import 'package:filcnaplo/Datas/Institution.dart';
+import 'package:filcnaplo/Datas/User.dart';
 
-import '../Helpers/RequestHelper.dart';
-import '../Helpers/UserInfoHelper.dart';
+import 'package:filcnaplo/Helpers/RequestHelper.dart';
+import 'package:filcnaplo/Helpers/UserInfoHelper.dart';
 
-import '../Utils/AccountManager.dart';
+import 'package:filcnaplo/Utils/AccountManager.dart';
 
-import '../globals.dart' as globals;
+import 'package:filcnaplo/globals.dart' as globals;
 
 LoginScreenState loginScreenState = new LoginScreenState();
 

@@ -5,15 +5,15 @@ import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../Dialog/HomeworkDialog.dart';
-import '../Datas/Lesson.dart';
-import '../Datas/User.dart';
-import '../Datas/Week.dart';
-import '../GlobalDrawer.dart';
-import '../Helpers/TimetableHelper.dart';
-import '../Utils/ModdedTabs.dart' as MT;
+import 'package:filcnaplo/Dialog/HomeworkDialog.dart';
+import 'package:filcnaplo/Datas/Lesson.dart';
+import 'package:filcnaplo/Datas/User.dart';
+import 'package:filcnaplo/Datas/Week.dart';
+import 'package:filcnaplo/GlobalDrawer.dart';
+import 'package:filcnaplo/Helpers/TimetableHelper.dart';
+import 'package:filcnaplo/Utils/ModdedTabs.dart' as MT;
 import "../Utils/StringFormatter.dart";
-import '../globals.dart' as globals;
+import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
   runApp(new MaterialApp(home: new TimeTableScreen()));
@@ -26,8 +26,6 @@ class TimeTableScreen extends StatefulWidget {
 
 class TimeTableScreenState extends State<TimeTableScreen>
     with TickerProviderStateMixin {
-  // for testing
-  //DateTime get now => DateTime.parse("2019-06-12 08:00:00Z");
   DateTime get now => DateTime.now();
 
   TabController _tabController;
@@ -165,8 +163,8 @@ class TimeTableScreenState extends State<TimeTableScreen>
         child: new Scaffold(
             drawer: GDrawer(),
             appBar: new AppBar(
-              title: new Text(
-                  I18n.of(context).timetable + getTimetableText(startDateText)),
+              title: new Text(capitalize(I18n.of(context).timetable) +
+                  getTimetableText(startDateText)),
             ),
             body: new Column(
               children: <Widget>[
@@ -236,7 +234,7 @@ class TimeTableScreenState extends State<TimeTableScreen>
                                               width: 20.0),
                                         ])
                               : Center(
-                                  child: Text(I18n.of(context).no_lessons),
+                                  child: Text(I18n.of(context).timetableEmpty),
                                 )
                           : Container()
                       : Center(
@@ -253,7 +251,7 @@ class TimeTableScreenState extends State<TimeTableScreen>
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       new IconButton(
-                        tooltip: I18n.of(context).prev_week,
+                        tooltip: capitalize(I18n.of(context).dateWeekPrev),
                         icon: const Icon(
                           Icons.skip_previous,
                           size: 20,
@@ -291,7 +289,7 @@ class TimeTableScreenState extends State<TimeTableScreen>
                           size: 20,
                           color: Colors.white,
                         ),
-                        tooltip: I18n.of(context).next_week,
+                        tooltip: capitalize(I18n.of(context).dateWeekNext),
                         onPressed: () {
                           setState(() {
                             HapticFeedback.lightImpact();
@@ -324,7 +322,9 @@ class TimeTableScreenState extends State<TimeTableScreen>
             ),
       title: new Text(
         lessonList[index].subject +
-            (lessonList[index].isMissed ? " (${I18n.of(context).missed})" : "") +
+            (lessonList[index].isMissed
+                ? " (${I18n.of(context).substitutionMissed})"
+                : "") +
             (lessonList[index].depTeacher != ""
                 ? " (${lessonList[index].depTeacher})"
                 : ""),

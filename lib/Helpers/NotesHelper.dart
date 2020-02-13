@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert' show utf8, json;
-import '../Datas/Note.dart';
-import '../Datas/User.dart';
+import 'package:filcnaplo/Datas/Note.dart';
+import 'package:filcnaplo/Datas/User.dart';
 
 class NotesHelper {
   List<dynamic> notesMap;

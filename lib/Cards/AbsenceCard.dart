@@ -3,9 +3,9 @@ import 'dart:ui';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 
-import '../Datas/Student.dart';
-import '../Utils/StringFormatter.dart';
-import '../globals.dart' as globals;
+import 'package:filcnaplo/Datas/Student.dart';
+import 'package:filcnaplo/Utils/StringFormatter.dart';
+import 'package:filcnaplo/globals.dart' as globals;
 
 class AbsenceCard extends StatelessWidget {
   List<Absence> absences;
@@ -124,20 +124,20 @@ class AbsenceCard extends StatelessWidget {
             new SingleChildScrollView(
               child: new ListBody(
                 children: <Widget>[
-                  new Text(I18n.of(context).lessons(numOfAbsences.toString())),
+                  new Text(I18n.of(context).lessonCount(numOfAbsences.toString())),
                   //new Text("mód: " + absence.modeName),
-                  new Text(I18n.of(context).absence_time +
+                  new Text(I18n.of(context).absenceTime +
                       dateToHuman(absence.LessonStartTime) +
                       dateToWeekDay(absence.LessonStartTime)),
-                  new Text(I18n.of(context).administration_time +
+                  new Text(I18n.of(context).administrationTime +
                       dateToHuman(absence.CreatingTime) +
                       dateToWeekDay(absence.LessonStartTime)),
-                  new Text(I18n.of(context).justification_state +
+                  new Text(I18n.of(context).justificationState +
                       absence.JustificationStateName),
-                  new Text(I18n.of(context).justification_mode +
+                  new Text(I18n.of(context).justificationMode +
                       absence.JustificationTypeName),
                   absence.DelayTimeMinutes != 0
-                      ? new Text(I18n.of(context).delay_mins +
+                      ? new Text(I18n.of(context).delayMins +
                           absence.DelayTimeMinutes.toString() +
                           " perc")
                       : new Container(),

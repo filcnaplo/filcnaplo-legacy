@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:html_unescape/html_unescape.dart';
 
-import '../generated/i18n.dart';
-import '../globals.dart' as globals;
+import 'package:filcnaplo/generated/i18n.dart';
+import 'package:filcnaplo/globals.dart' as globals;
 
 class MessageDialog extends StatefulWidget {
   const MessageDialog(this.message);
@@ -50,7 +50,7 @@ class MessageDialogState extends State<MessageDialog> {
         children: <Widget>[
           Container(
             child: Text(
-              I18n.of(context).receivers + currentMessage.receivers.join(", "),
+              I18n.of(context).messageReceivers + currentMessage.receivers.join(", "),
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),

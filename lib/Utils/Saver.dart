@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:convert' show json, ascii, base64, utf8;
 import 'dart:io';
 
-import '../Datas/User.dart';
-import '../Helpers/DBHelper.dart';
-import '../main.dart';
+import 'package:filcnaplo/Datas/User.dart';
+import 'package:filcnaplo/Helpers/DBHelper.dart';
+import 'package:filcnaplo/main.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:path_provider/path_provider.dart';

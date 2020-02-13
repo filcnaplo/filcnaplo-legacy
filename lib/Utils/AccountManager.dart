@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:core';
-import '../globals.dart' as globals;
+import 'package:filcnaplo/globals.dart' as globals;
 import 'package:flutter/material.dart';
-import '../Utils/Saver.dart';
-import '../Datas/User.dart';
-import '../Helpers/SettingsHelper.dart';
+import 'package:filcnaplo/Utils/Saver.dart';
+import 'package:filcnaplo/Datas/User.dart';
+import 'package:filcnaplo/Helpers/SettingsHelper.dart';
 
 class AccountManager {
   Future<List<User>> getUsers() async {

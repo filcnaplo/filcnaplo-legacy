@@ -1,9 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import '../GlobalDrawer.dart';
+import 'package:filcnaplo/GlobalDrawer.dart';
 import 'package:filcnaplo/generated/i18n.dart';
-import '../globals.dart' as globals;
+import 'package:filcnaplo/globals.dart' as globals;
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:filcnaplo/Utils/StringFormatter.dart';
 
 void main() {
   runApp(new MaterialApp(
@@ -13,7 +14,7 @@ void main() {
       GlobalWidgetsLocalizations.delegate,
     ],
     supportedLocales: I18n.delegate.supportedLocales,
-    onGenerateTitle: (BuildContext context) => I18n.of(context).title,
+    onGenerateTitle: (BuildContext context) => I18n.of(context).appTitle,
   ));
 }
 
@@ -50,7 +51,7 @@ class AboutScreenState extends State<AboutScreen> {
         child: Scaffold(
           drawer: GDrawer(),
           appBar: new AppBar(
-            title: new Text(I18n.of(context).title),
+            title: new Text(I18n.of(context).appTitle),
             actions: <Widget>[],
           ),
           body: new Center(
@@ -60,7 +61,7 @@ class AboutScreenState extends State<AboutScreen> {
                 children: <Widget>[
                   new Container(
                     child: new Text(
-                      I18n.of(context).title,
+                      I18n.of(context).appTitle,
                       style: new TextStyle(
                         fontSize: 28.0,
                       ),
@@ -71,7 +72,7 @@ class AboutScreenState extends State<AboutScreen> {
                   new Row(
                     children: <Widget>[
                       new Text(
-                        I18n.of(context).version,
+                        capitalize(I18n.of(context).appVersion) + ":",
                         style: new TextStyle(
                           fontSize: 22.0,
                         ),
@@ -84,25 +85,6 @@ class AboutScreenState extends State<AboutScreen> {
                       ),
                     ],
                     mainAxisAlignment: MainAxisAlignment.center,
-                  ),
-                  Container(
-                    child: new Row(
-                      children: <Widget>[
-                        new Text(
-                          I18n.of(context).made_with,
-                          style: new TextStyle(
-                            fontSize: 22.0,
-                          ),
-                        ),
-                        new Text(
-                          I18n.of(context).flutter,
-                          style: new TextStyle(
-                              fontSize: 22.0,
-                              color: Theme.of(context).accentColor),
-                        ),
-                      ],
-                      mainAxisAlignment: MainAxisAlignment.center,
-                    ),
                   ),
                   new Row(
                     children: <Widget>[
@@ -118,40 +100,6 @@ class AboutScreenState extends State<AboutScreen> {
                     ],
                     mainAxisAlignment: MainAxisAlignment.center,
                   ),
-                  /*
-
-                        new FlatButton(onPressed: _launchFAQ, child: new Row(children: < Widget > [
-                            new Container(child: new Icon(Icons.question_answer, color: Colors.green, size: 20.0, ), padding: EdgeInsets.all(5.0), ),
-                            new Text(I18n.of(context).faq, style: new TextStyle(color: Colors.green, fontSize: 20.0, ), ),
-                        ], mainAxisAlignment: MainAxisAlignment.center, ), ),
-
-
-                        new FlatButton(onPressed: _launchTOS, child: new Row(children: < Widget > [
-                            new Container(child: new Icon(Icons.error, color: Colors.red, size: 20.0, ), padding: EdgeInsets.all(5.0), ),
-                            new Text("Felhasználási feltételek", style: new TextStyle(color: Colors.red, fontSize: 20.0, ), ),
-                        ], mainAxisAlignment: MainAxisAlignment.center, ), ),
-                        new FlatButton(onPressed: _launchYoutubeURL, child: new Row(children: < Widget > [
-                            new Container(child: new Icon(IconData(0xf5c3, fontFamily: "Material Design Icons"), color: Colors.red, size: 20.0, ), padding: EdgeInsets.all(5.0), ),
-                            new Text(I18n.of(context).youtube, style: new TextStyle(color: Colors.red, fontSize: 20.0, ), ),
-                        ], mainAxisAlignment: MainAxisAlignment.center, ), ),
-                        new FlatButton(onPressed: _launchTelegramURL, child: new Row(children: < Widget > [
-                            new Container(child: new Icon(IconData(0xf501, fontFamily: "Material Design Icons"), color: Colors.blue, size: 20.0, ), padding: EdgeInsets.all(5.0), ),
-                            new Text(I18n.of(context).telegram, style: new TextStyle(color: Colors.blue, fontSize: 20.0, ), ),
-                        ], mainAxisAlignment: MainAxisAlignment.center, )),
-                        new FlatButton(onPressed: _launchGmailURL, child: new Row(children: < Widget > [
-                            new Container(child: new Icon(IconData(0xf2ab, fontFamily: "Material Design Icons"), color: Colors.red, size: 20.0, ), padding: EdgeInsets.all(5.0), ),
-                            new Text(I18n.of(context).email, style: new TextStyle(color: Colors.red, fontSize: 20.0, ), ),
-                        ], mainAxisAlignment: MainAxisAlignment.center, )),
-                        new FlatButton(onPressed: _launchGithubURL, child: new Row(children: < Widget > [
-                            new Container(child: new Icon(IconData(0xf2a4, fontFamily: "Material Design Icons"), color: Colors.black, size: 20.0, ), padding: EdgeInsets.all(5.0), ),
-                            new Text(I18n.of(context).github, style: new TextStyle(fontSize: 20.0, ), ),
-                        ], mainAxisAlignment: MainAxisAlignment.center, )),
-                        new FlatButton(onPressed: _launchInstagramURL, child: new Row(children: < Widget > [
-                            new Container(child: new Icon(IconData(0xf2fe, fontFamily: "Material Design Icons"), color: Colors.pink, size: 20.0, ), padding: EdgeInsets.all(5.0), ),
-                            new Text(I18n.of(context).instagram, style: new TextStyle(color: Colors.pink, fontSize: 20.0, ), ),
-                        ], mainAxisAlignment: MainAxisAlignment.center, )),
-                      ű
-                    */
                   (globals.selectedUser ==
                           null) //If there is no user selected, show a button to go back to login screen.
                       ? new Container(
@@ -173,69 +121,6 @@ class AboutScreenState extends State<AboutScreen> {
         ));
   }
 
-  /*
-    _launchFAQ() async {
-        return showDialog < Null > (context: context, barrierDismissible: true, builder: (BuildContext context) {
-            return new SimpleDialog(children: < Widget > [
-                new SingleChildScrollView(child: Html(data: globals.htmlFAQ), ),
-            ], title: Text(I18n.of(context).faq), contentPadding: EdgeInsets.all(20), shape: RoundedRectangleBorder(side: BorderSide(style: BorderStyle.none, width: 1, ), borderRadius: BorderRadius.circular(3), ), );
-        }, );
-    }
-    _launchYoutubeURL() async {
-        const url = '';
-        if (await canLaunch(url)) {
-            await launch(url);
-        } else {
-            throw 'Could not launch $url';
-        }
-    }
-    _launchTOS() async {
-        const url = '';
-        if (await canLaunch(url)) {
-            await launch(url);
-        } else {
-            throw 'Could not launch $url';
-        }
-    }
-    _launchTelegramURL() async {
-        const url = '';
-        if (await canLaunch(url)) {
-            await launch(url);
-        } else {
-            throw 'Could not launch $url';
-        }
-    }
-    _launchGmailURL() async {
-        const url = '';
-        if (await canLaunch(url)) {
-            await launch(url);
-        } else {
-            throw 'Could not launch $url';
-        }
-    }
-    _launchGithubURL() async {
-        const url = '';
-        if (await canLaunch(url)) {
-            await launch(url);
-        } else {
-            throw 'Could not launch $url';
-        }
-    }
-    _launchInstagramURL() async {
-        const url = '';
-        if (await canLaunch(url)) {
-            await launch(url);
-        } else {
-            throw 'Could not launch $url';
-        }
-    }
-    _behaveNicelyAgain() {
-        globals.behaveNicely = true;
-        Fluttertoast.showToast(msg: "Hiperhajtómű kikapcsolva.", backgroundColor: Colors.red, textColor: Colors.white, fontSize: 16.0);
-        RequestHelper().refreshAppSettings();
-        Navigator.pushNamed(context, "/about");
-    }
-    */
   _popToLogin() {
     Navigator.pushNamed(context, "/login");
   }

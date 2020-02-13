@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'dart:convert' show utf8, json;
 
-import '../Datas/Lesson.dart';
-import '../Helpers/RequestHelper.dart';
-import '../Helpers/DBHelper.dart';
-import '../Datas/User.dart';
+import 'package:filcnaplo/Datas/Lesson.dart';
+import 'package:filcnaplo/Helpers/RequestHelper.dart';
+import 'package:filcnaplo/Helpers/DBHelper.dart';
+import 'package:filcnaplo/Datas/User.dart';
 
 Future<List<Lesson>> getLessonsOffline(
     DateTime from, DateTime to, User user) async {

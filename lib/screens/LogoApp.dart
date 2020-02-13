@@ -1,9 +1,9 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
-import '../PageRouteBuilder.dart';
+import 'package:filcnaplo/PageRouteBuilder.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'loginScreen.dart';
-import '../main.dart';
+import 'package:filcnaplo/main.dart';
 
 //TODO refactor this
 class LogoApp extends StatefulWidget {
@@ -42,7 +42,7 @@ class WelcomeNewUserState extends State<LogoApp>
               child: new Row(
                 children: <Widget>[
                   new Text(
-                    I18n.of(context).title,
+                    I18n.of(context).appTitle,
                     style: TextStyle(
                         fontSize: 40.0,
                         color:

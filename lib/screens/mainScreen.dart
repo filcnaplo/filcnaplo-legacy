@@ -7,21 +7,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../Cards/SummaryCards.dart';
-import '../Cards/AbsenceCard.dart';
-import '../Cards/ChangedLessonCard.dart';
-import '../Cards/EvaluationCard.dart';
-import '../Cards/LessonCard.dart';
-import '../Cards/NoteCard.dart';
-import '../Datas/Account.dart';
-import '../Datas/Lesson.dart';
-import '../Datas/Note.dart';
-import '../Datas/Student.dart';
-import '../GlobalDrawer.dart';
-import '../Helpers/BackgroundHelper.dart';
-import '../Helpers/SettingsHelper.dart';
-import '../Helpers/TimetableHelper.dart';
-import '../globals.dart' as globals;
+import 'package:filcnaplo/Cards/SummaryCards.dart';
+import 'package:filcnaplo/Cards/AbsenceCard.dart';
+import 'package:filcnaplo/Cards/ChangedLessonCard.dart';
+import 'package:filcnaplo/Cards/EvaluationCard.dart';
+import 'package:filcnaplo/Cards/LessonCard.dart';
+import 'package:filcnaplo/Cards/NoteCard.dart';
+import 'package:filcnaplo/Datas/Account.dart';
+import 'package:filcnaplo/Datas/Lesson.dart';
+import 'package:filcnaplo/Datas/Note.dart';
+import 'package:filcnaplo/Datas/Student.dart';
+import 'package:filcnaplo/GlobalDrawer.dart';
+import 'package:filcnaplo/Helpers/BackgroundHelper.dart';
+import 'package:filcnaplo/Helpers/SettingsHelper.dart';
+import 'package:filcnaplo/Helpers/TimetableHelper.dart';
+import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
   runApp(new MaterialApp(
@@ -252,14 +252,14 @@ class MainScreenState extends State<MainScreen> {
           actions: <Widget>[
             new FlatButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: new Text(I18n.of(context).no),
+              child: new Text(I18n.of(context).dialogNo),
             ),
             new FlatButton(
               onPressed: () async {
                 await SystemChannels.platform
                     .invokeMethod<void>('SystemNavigator.pop');
               },
-              child: new Text(I18n.of(context).yes),
+              child: new Text(I18n.of(context).dialogYes),
             ),
           ],
         );
@@ -276,7 +276,7 @@ class MainScreenState extends State<MainScreen> {
             appBar: new AppBar(
               title: new Text(globals.isSingle
                   ? globals.selectedAccount.user.name
-                  : I18n.of(context).title),
+                  : I18n.of(context).appTitle),
               actions: <Widget>[
                 //TODO search maybe?
                 /*new IconButton( //TODO Finish card chooser

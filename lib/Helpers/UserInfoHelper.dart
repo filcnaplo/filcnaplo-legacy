@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert' show utf8, json;
-import '../globals.dart' as globals;
+import 'package:filcnaplo/globals.dart' as globals;
 import 'RequestHelper.dart';
 
 class UserInfoHelper {

@@ -7,18 +7,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import '../Datas/Account.dart';
-import '../Datas/Lesson.dart';
-import '../Datas/Note.dart';
-import '../Datas/Student.dart';
-import '../Datas/User.dart';
-import '../Helpers/DBHelper.dart';
-import '../Helpers/SettingsHelper.dart';
-import '../Helpers/TimetableHelper.dart';
-import '../Helpers/encrypt_codec.dart';
-import '../Utils/AccountManager.dart';
-import '../Utils/StringFormatter.dart';
-import '../globals.dart' as globals;
+import 'package:filcnaplo/Datas/Account.dart';
+import 'package:filcnaplo/Datas/Lesson.dart';
+import 'package:filcnaplo/Datas/Note.dart';
+import 'package:filcnaplo/Datas/Student.dart';
+import 'package:filcnaplo/Datas/User.dart';
+import 'package:filcnaplo/Helpers/DBHelper.dart';
+import 'package:filcnaplo/Helpers/SettingsHelper.dart';
+import 'package:filcnaplo/Helpers/TimetableHelper.dart';
+import 'package:filcnaplo/Helpers/encrypt_codec.dart';
+import 'package:filcnaplo/Utils/AccountManager.dart';
+import 'package:filcnaplo/Utils/StringFormatter.dart';
+import 'package:filcnaplo/globals.dart' as globals;
 import 'SettingsHelper.dart';
 
 class BackgroundHelper {

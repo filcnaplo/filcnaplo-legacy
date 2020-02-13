@@ -1,8 +1,8 @@
 import 'package:filcnaplo/Helpers/RequestHelper.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
-import '../Datas/Lesson.dart';
-import '../globals.dart' as globals;
+import 'package:filcnaplo/Datas/Lesson.dart';
+import 'package:filcnaplo/globals.dart' as globals;
 
 class NewHomeworkDialog extends StatefulWidget {
   const NewHomeworkDialog(this.lesson);
@@ -28,7 +28,7 @@ class NewHomeworkDialogState extends State<NewHomeworkDialog> {
           },
         ),
         MaterialButton(
-          child: Text(I18n.of(context).ok),
+          child: Text(I18n.of(context).dialogOk),
           onPressed: () {
             RequestHelper().uploadHomework(
                 homework, widget.lesson, globals.selectedAccount.user);

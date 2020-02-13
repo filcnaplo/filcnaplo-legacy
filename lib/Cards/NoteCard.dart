@@ -2,10 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
-import '../Datas/Note.dart';
-import '../Utils/StringFormatter.dart';
+import 'package:filcnaplo/Datas/Note.dart';
+import 'package:filcnaplo/Utils/StringFormatter.dart';
 import 'package:url_launcher/url_launcher.dart' as launcher;
-import '../globals.dart' as globals;
+import 'package:filcnaplo/globals.dart' as globals;
+import 'package:filcnaplo/generated/i18n.dart';
 
 class NoteCard extends StatelessWidget {
   Note note;
@@ -138,7 +139,7 @@ class NoteCard extends StatelessWidget {
                         ),
                         new Container(
                           child: new Text(
-                            note.isEvent ? "faliújság" : "feljegyzés",
+                            note.isEvent ? I18n.of(context).note2 : I18n.of(context).note,
                             style: new TextStyle(fontSize: 18.0),
                           ),
                           padding: EdgeInsets.only(left: 8.0),

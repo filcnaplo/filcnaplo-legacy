@@ -9,13 +9,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:filcnaplo/screens/mainScreen.dart';
-import '../GlobalDrawer.dart';
-import '../Helpers/BackgroundHelper.dart';
-import '../Helpers/SettingsHelper.dart';
-import '../Helpers/RequestHelper.dart';
-import '../Utils/ColorManager.dart';
-import '../globals.dart' as globals;
-import '../main.dart' as Main;
+import 'package:filcnaplo/GlobalDrawer.dart';
+import 'package:filcnaplo/Helpers/BackgroundHelper.dart';
+import 'package:filcnaplo/Helpers/SettingsHelper.dart';
+import 'package:filcnaplo/Helpers/RequestHelper.dart';
+import 'package:filcnaplo/Utils/ColorManager.dart';
+import 'package:filcnaplo/globals.dart' as globals;
+import 'package:filcnaplo/main.dart' as Main;
 
 void main() {
   runApp(new MaterialApp(home: new SettingsScreen()));

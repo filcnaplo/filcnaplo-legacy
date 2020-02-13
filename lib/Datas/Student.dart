@@ -1,7 +1,7 @@
 // Ennek a nagyrészét valamelyik json to dart pluginnal generáltattam.
 
 import 'package:flutter/material.dart';
-import '../globals.dart' as globals;
+import 'package:filcnaplo/globals.dart' as globals;
 import 'User.dart';
 
 class Student {

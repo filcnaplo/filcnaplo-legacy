@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../globals.dart' as globals;
+import 'package:filcnaplo/globals.dart' as globals;
 import 'package:filcnaplo/generated/i18n.dart';
 
 class TimeSelectDialog extends StatefulWidget {
@@ -21,10 +21,10 @@ class TimeSelectDialogState extends State<TimeSelectDialog> {
 
   Widget build(BuildContext context) {
     List<String> timeOptionList = [
-      I18n.of(context).day,
-      I18n.of(context).week,
-      I18n.of(context).month,
-      I18n.of(context).two_months
+      I18n.of(context).dateDay,
+      I18n.of(context).dateWeek,
+      I18n.of(context).dateMonth,
+      I18n.of(context).dateMonth2
     ];
 
     return new SimpleDialog(

@@ -4,15 +4,15 @@ import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 
-import '../Datas/Account.dart';
-import '../Datas/User.dart';
+import 'package:filcnaplo/Datas/Account.dart';
+import 'package:filcnaplo/Datas/User.dart';
 
-import '../GlobalDrawer.dart';
+import 'package:filcnaplo/GlobalDrawer.dart';
 
-import '../Utils/AccountManager.dart';
-import '../Utils/Saver.dart';
+import 'package:filcnaplo/Utils/AccountManager.dart';
+import 'package:filcnaplo/Utils/Saver.dart';
 
-import '../globals.dart' as globals;
+import 'package:filcnaplo/globals.dart' as globals;
 
 import 'studentScreen.dart';
 import 'loginScreen.dart';
@@ -68,13 +68,13 @@ class AccountsScreenState extends State<AccountsScreen> {
         content: content,
         actions: [
           FlatButton(
-            child: Text(I18n.of(context).no),
+            child: Text(I18n.of(context).dialogNo),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           FlatButton(
-            child: Text(I18n.of(context).ok),
+            child: Text(I18n.of(context).dialogOk),
             onPressed: () async {
               Navigator.of(context).pop();
               users[users.map((User u) => u.id).toList().indexOf(user.id)]
@@ -190,13 +190,13 @@ class AccountsScreenState extends State<AccountsScreen> {
           ),
           actions: <Widget>[
             new FlatButton(
-              child: new Text(I18n.of(context).no),
+              child: new Text(I18n.of(context).dialogNo),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             new FlatButton(
-              child: new Text(I18n.of(context).yes),
+              child: new Text(I18n.of(context).dialogYes),
               onPressed: () async {
                 await AccountManager().removeUser(user);
                 //             print("asd1");

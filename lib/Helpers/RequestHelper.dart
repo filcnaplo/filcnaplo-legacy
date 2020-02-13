@@ -4,10 +4,10 @@ import 'package:filcnaplo/Datas/Lesson.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
-import '../Datas/User.dart';
-import '../Utils/Saver.dart';
-import '../Utils/StringFormatter.dart';
-import '../globals.dart' as globals;
+import 'package:filcnaplo/Datas/User.dart';
+import 'package:filcnaplo/Utils/Saver.dart';
+import 'package:filcnaplo/Utils/StringFormatter.dart';
+import 'package:filcnaplo/globals.dart' as globals;
 import "dart:math";
 
 class RequestHelper {

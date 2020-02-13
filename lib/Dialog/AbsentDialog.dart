@@ -1,9 +1,10 @@
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 
-import '../Datas/Student.dart';
-import '../Datas/User.dart';
-import '../globals.dart' as globals;
+import 'package:filcnaplo/Datas/Student.dart';
+import 'package:filcnaplo/Datas/User.dart';
+import 'package:filcnaplo/globals.dart' as globals;
+import 'package:filcnaplo/Utils/StringFormatter.dart';
 
 class AbsentDialog extends StatefulWidget {
   const AbsentDialog();
@@ -48,7 +49,7 @@ class AbsentDialogState extends State<AbsentDialog> {
 
   Widget build(BuildContext context) {
     return new SimpleDialog(
-        title: new Text(I18n.of(context).statistics),
+        title: new Text(capitalize(I18n.of(context).statistics)),
         titlePadding: EdgeInsets.all(16),
         contentPadding: const EdgeInsets.all(5.0),
         children: <Widget>[
@@ -56,29 +57,25 @@ class AbsentDialogState extends State<AbsentDialog> {
             child: new Text(
               I18n
                   .of(context)
-                  .parental_justification(sumOfParentalAbsences.toString()),
+                  .absenceParental(sumOfParentalAbsences.toString()),
               style: TextStyle(fontSize: 16.0),
             ),
             margin: EdgeInsets.all(8),
           ),
           Container(
             child: new Text(
-              I18n.of(context).all_absences(sumOfAllAbsences.toString()),
+              I18n.of(context).absenceAll(sumOfAllAbsences.toString()),
               style: TextStyle(fontSize: 16.0),
             ),
             margin: EdgeInsets.all(8),
           ),
           Container(
             child: new Text(
-              I18n.of(context).all_delay(sumOfDelayMinutes.toString()),
+              I18n.of(context).delayAll(sumOfDelayMinutes.toString()),
               style: TextStyle(fontSize: 16.0),
             ),
             margin: EdgeInsets.all(8),
           ),
-          Container(
-            margin: EdgeInsets.only(top: 30),
-            child: new Text(I18n.of(context).excluding_delay),
-          )
         ]);
   }
 }

@@ -1,10 +1,10 @@
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
-import '../Datas/Lesson.dart';
-import '../Datas/Homework.dart';
-import '../globals.dart' as globals;
-import '../Utils/StringFormatter.dart';
-import '../Helpers/HomeworkHelper.dart';
+import 'package:filcnaplo/Datas/Lesson.dart';
+import 'package:filcnaplo/Datas/Homework.dart';
+import 'package:filcnaplo/globals.dart' as globals;
+import 'package:filcnaplo/Utils/StringFormatter.dart';
+import 'package:filcnaplo/Helpers/HomeworkHelper.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'NewHomeworkDialog.dart';
@@ -24,21 +24,21 @@ class HomeworkDialogState extends State<HomeworkDialog> {
       content: new SingleChildScrollView(
         child: new ListBody(
           children: <Widget>[
-            new Text(I18n.of(context).room + widget.lesson.room),
-            new Text(I18n.of(context).teacher + widget.lesson.teacher),
-            new Text(I18n.of(context).group + widget.lesson.group),
+            new Text(capitalize(I18n.of(context).lessonRoom) + ":" + widget.lesson.room),
+            new Text(capitalize(I18n.of(context).lessonTeacher) + widget.lesson.teacher),
+            new Text(capitalize(I18n.of(context).lessonClass) + widget.lesson.group),
             new Text(
-                I18n.of(context).lesson_start + getLessonStartText(widget.lesson)),
+                capitalize(I18n.of(context).lessonStart) + ":" + getLessonStartText(widget.lesson)),
             new Text(
-                I18n.of(context).lesson_end + getLessonEndText(widget.lesson)),
+                capitalize(I18n.of(context).lessonEnd) + ":" + getLessonEndText(widget.lesson)),
             widget.lesson.isMissed
                 ? new Text(I18n.of(context).state + widget.lesson.stateName)
                 : new Container(),
             (widget.lesson.theme != "" && widget.lesson.theme != null)
-                ? new Text(I18n.of(context).theme + widget.lesson.theme)
+                ? new Text(I18n.of(context).lessonTheme + widget.lesson.theme)
                 : new Container(),
             widget.lesson.homework != null
-                ? new Text("\n" + I18n.of(context).homework + ":")
+                ? new Text("\n" + capitalize(I18n.of(context).homework) + ":")
                 : Container(),
             widget.lesson.homework != null
                 ? new Divider(
@@ -78,7 +78,7 @@ class HomeworkDialogState extends State<HomeworkDialog> {
               )
             : Container(),
         new FlatButton(
-          child: new Text(I18n.of(context).ok),
+          child: new Text(I18n.of(context).dialogOk),
           onPressed: () {
             Navigator.of(context).pop();
           },

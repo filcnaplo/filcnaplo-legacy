@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:path_provider/path_provider.dart';
-import '../Datas/User.dart';
-import '../globals.dart';
+import 'package:filcnaplo/Datas/User.dart';
+import 'package:filcnaplo/globals.dart';
 
 class DBHelper {
   String dbPath = 'filcnaplo.db';

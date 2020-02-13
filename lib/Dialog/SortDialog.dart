@@ -1,7 +1,8 @@
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
+import 'package:filcnaplo/Utils/StringFormatter.dart';
 
-import '../globals.dart' as globals;
+import 'package:filcnaplo/globals.dart' as globals;
 
 class SortDialog extends StatefulWidget {
   const SortDialog();
@@ -22,13 +23,13 @@ class SortDialogState extends State<SortDialog> {
 
   Widget build(BuildContext context) {
     List<String> sortOptionList = [
-      I18n.of(context).sort_time,
-      I18n.of(context).sort_eval,
-      I18n.of(context).sort_real_time,
+      I18n.of(context).sortTime,
+      I18n.of(context).sortEval,
+      I18n.of(context).sortTimeReal,
     ];
 
     return new SimpleDialog(
-      title: new Text(I18n.of(context).sort),
+      title: new Text(capitalize(I18n.of(context).sort)),
       contentPadding: const EdgeInsets.all(10.0),
       children: <Widget>[
         new PopupMenuButton<String>(

@@ -3,9 +3,9 @@ import 'dart:convert' show utf8, json;
 
 import 'package:filcnaplo/Helpers/RequestHelper.dart';
 
-import '../Datas/Message.dart';
-import '../Datas/User.dart';
-import '../Helpers/DBHelper.dart';
+import 'package:filcnaplo/Datas/Message.dart';
+import 'package:filcnaplo/Datas/User.dart';
+import 'package:filcnaplo/Helpers/DBHelper.dart';
 
 class MessageHelper {
   Future<List<Message>> getMessages(User user, bool showErrors) async {
