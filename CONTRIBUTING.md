@@ -1,45 +1,44 @@
 # Szia!
-Elsosorban szeretnenk megkoszonni hogy kozremukodsz a projektben!
+Elsősorban szeretnénk megköszönni hogy közremüködsz a projektben!
 
-### Miert olvasd ezt el?
-Ha ezt a segedet koveted, a kommunikacio konnyebb lesz es nem fogunk felesleges dolgokon fennakadni.
+### Miért olvasd ezt el?
+Ha ezt a segédet követed, a kommunikáció könnyebb lesz és nem fogunk felesleges dolgokon fennakadni.
 
-### Milyen fajta segitseg lenne jo nekunk?
-A kod refactorolasa (olvashatobba, minosegibbe teteleben), issue-k javitasa, meg ujabb nyelvekre forditas.
+### Milyen fajta segitség lenne jó nekünk?
+A kód refactorolása (olvashatóbbá, minöségibbé tételében), issue-k javitása, meg újabb nyelvekre forditás.
 
-## Elvarasok:
+## Elvárások:
 
-- Ne legyel tiszteletlen senkivel. (meg a KRETA fejlesztoivel se)
-  - Tragar beszedet hanyagolni, ha lehet.
-  - Mindenki egy elo ember itt.
-  - Vitakban civilizalt viselkedes. (Semmi veszekedes)
-  - Viselkedj ugy mintha szemtol szemben beszelnel.
-  - Ha valaki kenyelmentelnul erzi magat az nem produktiv.
+### Ne legyél tiszteletlen senkivel. (meg a KRÉTA fejlesztőivel se)
+  - Trágár beszédet hanyagolni, ha lehet.
+  - Vitákban civilizált viselkedés. (Semmi veszekedés)
+  - Viselkedj úgy mintha szemtől szemben beszélnél.
+  - Ha valaki kényelmentelnül érzi magát az nem produktív.
 
-- Gondolkodj elore
-  - Probald meg tesztelni a PR-jaidat mielott elkuldod. 
-    - Nem a legnagyobb problema ha valami nem tokeletes itt, meg van ideje releasig.
-  - Kovesd a commit uzenetek formait. (Lentebb) [LINK COMMIT UZENETEK]
-  - Kovesd a kod konvenciot. (TODO)
-  - Probalj segitokesz commenteket hagyni. (link comment guide)
-  - Ha valamit nem ertesz, nyugodtan kerdezz. (Lentebb) [LINK KOZOSSEG]
-    - Sok dolgot mi se ertunk, ne varj azonnali valaszt.
+### Gondolkodj előre
+  - Próbáld meg tesztelni a PR-jaidat mielött elküldöd. 
+    - Nem a legnagyobb probléma ha valami nem tökéletes itt, még van ideje release-ig.
+  - Kövesd a commit üzenetek formáit. [Lentebb]() 
+  - Kovesd a kód konvenciót. (TODO)
+  - Próbálj segitőkész commenteket hagyni. [Guide]()
+  - Ha valamit nem értesz, nyugodtan kérdezz. [Lentebb]()
+    - Sok dolgot mi se értunk, ne várj azonnali választ.
 
-## Elso kozremukodesed
-Remeljuk olyan izgatott vagy mint mi!
+## Első közremüködésed
+Reméljük olyan izgatott vagy mint mi!
 
-### Hogyan is kezdjek hozza?
-- Csinalj egy forkot.
+### Hogyan is kezdjek hozzá? (TODO: better guide)
+- Csinálj egy forkot.
 - Szerkessz bele.
-- Csinalj egy PR-t a forkodbol.
+- Csinálj egy PR-t a forkodból.
 
-### Commit uzenetek
+### Commit üzenetek
 
-#### Minek kene ezeket kovetni?
-- Konnyebben lehet automata changelogokat generalni.
-- Konnyebb navigacio a git historyban.
+#### Minek kéne ezeket követni?
+- Könnyebben lehet automata changelogokat generálni.
+- Könnyebb navigáció a git historyban.
 
-#### Formatum
+#### Formátum
 ```
 <tipus>(<hataskor>): targy
 
@@ -47,25 +46,29 @@ Remeljuk olyan izgatott vagy mint mi!
 
 <lab>
 ```
-- Megengedett tipusok:
- - feat (uj feature)
- - fix (bug fix)
- - docs (dokumentacio)
- - style (barmi ami nem valtoztat a kodon)
- - refactor 
+- Megengedett típusok:
+  - feat (új feature)
+  - fix (bug fix)
+  - docs (dokumentáció)
+  - style (bármi ami nem változtat a kódon)
+  - refactor 
 
-- Pelda hataskorok:
- - ui
- - request
- - login
- - screens
- - dialogs
- - <semmi>, ha tul nagy a hataskor (ilyenkor nem kellenek a zarojelek)
+- Példa hatáskörök:
+  - ui
+  - request
+  - login
+  - screens
+  - dialogs
+  - <semmi>, ha túl nagy a hatáskör (ilyenkor nem kellenek a zárójelek)
 
-- Leiras:
- - Legtobb esetben nem kell
- - Jelen ido
- - Elmondja a kulonbseget a mostani es az elozo viselkedes kozott
+- Leirás:
+  - Legtöbb esetben nem kell
+  - Jelen idő
 
-- Lab:
- - Ha egy issue-t (vagy tobbet) bezar akkor `Closes: #123, #456, #789`
+- Láb:
+  - Ha egy issue-t (vagy többet) bezár akkor `Closes: #123, #456, #789`
+
+## Közösség
+- [Telegram Hírlevél](https://t.me/filc_naplo)
+- Telegram Fejlesztői csoport (meghívas első értelmes PR után)
+- [Weboldal](https://filcnaplo.hu)
