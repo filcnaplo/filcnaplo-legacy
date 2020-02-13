@@ -56,6 +56,14 @@ class I18n implements WidgetsLocalizations {
   String get drawerSettings => "beállítások";
   /// "számonkérések"
   String get testTitle => "számonkérések";
+  /// "fiókok"
+  String get accountTitle => "fiókok";
+  /// "Felhasználó törlése"
+  String get accountDelete => "Felhasználó törlése";
+  /// "Biztosan törölni szeretnéd ${name} felhasználót?"
+  String accountDeleteConfirm(String name) => "Biztosan törölni szeretnéd ${name} felhasználót?";
+  /// "szín"
+  String get color => "szín";
   /// "ok"
   String get dialogOk => "ok";
   /// "igen"

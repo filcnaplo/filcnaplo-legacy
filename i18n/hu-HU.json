@@ -20,6 +20,16 @@
         "title": "számonkérések"
     },
 
+    "account": {
+        "title": "fiókok",
+        "delete": "Felhasználó törlése",
+        "deleteConfirm": "Biztosan törölni szeretnéd {name} felhasználót?"
+    },
+
+    "color": {
+        "": "szín"
+    },
+
     "dialog": {
         "ok": "ok",
         "yes": "igen",

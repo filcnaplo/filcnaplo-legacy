@@ -14,8 +14,9 @@ import 'package:filcnaplo/Utils/Saver.dart';
 
 import 'package:filcnaplo/globals.dart' as globals;
 
-import 'studentScreen.dart';
-import 'loginScreen.dart';
+import 'package:filcnaplo/screens/studentScreen.dart';
+import 'package:filcnaplo/screens/loginScreen.dart';
+import 'package:filcnaplo/Utils/StringFormatter.dart';
 
 void main() {
   runApp(new MaterialApp(home: new AccountsScreen()));
@@ -180,11 +181,11 @@ class AccountsScreenState extends State<AccountsScreen> {
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
         return new AlertDialog(
-          title: new Text(I18n.of(context).sure),
+          title: new Text(capitalize(I18n.of(context).accountDelete)),
           content: new SingleChildScrollView(
             child: new ListBody(
               children: <Widget>[
-                new Text(I18n.of(context).delete_confirmation(user.name)),
+                new Text(I18n.of(context).accountDeleteConfirm(user.name)),
               ],
             ),
           ),
@@ -227,7 +228,7 @@ class AccountsScreenState extends State<AccountsScreen> {
       child: Scaffold(
         drawer: GDrawer(),
         appBar: new AppBar(
-          title: new Text(I18n.of(context).accounts),
+          title: new Text(capitalize(I18n.of(context).accountTitle)),
           actions: <Widget>[],
         ),
         body: new Column(children: <Widget>[
