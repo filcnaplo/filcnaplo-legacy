@@ -136,16 +136,16 @@ class I18n implements WidgetsLocalizations {
   String get dateWeekPrev => "előző hét";
   /// "következö hét"
   String get dateWeekNext => "következö hét";
-  /// "delayMins"
-  String get delayMins => "delayMins";
+  /// "késés ideje"
+  String get delayMins => "késés ideje";
   /// "Összes késés: ${count} perc"
   String delayAll(String count) => "Összes késés: ${count} perc";
-  /// "administrationTime"
-  String get administrationTime => "administrationTime";
-  /// "justificationState"
-  String get justificationState => "justificationState";
-  /// "justificationMode"
-  String get justificationMode => "justificationMode";
+  /// "naplózás ideje"
+  String get administrationTime => "naplózás ideje";
+  /// "igazolás állapota"
+  String get justificationState => "igazolás állapota";
+  /// "igazolás módja"
+  String get justificationMode => "igazolás módja";
   /// "óra"
   String get lesson => "óra";
   /// "${count} óra"
@@ -166,6 +166,8 @@ class I18n implements WidgetsLocalizations {
   String get lessonEnd => "óra vége";
   /// "téma"
   String get lessonTheme => "téma";
+  /// "tárgy"
+  String get lessonSubject => "tárgy";
   /// "házi feladat"
   String get homework => "házi feladat";
   /// "helyettesítés"
@@ -184,8 +186,12 @@ class I18n implements WidgetsLocalizations {
   String get messageReceivers => "receivers";
   /// "statisztikák"
   String get statistics => "statisztikák";
-  /// "absenceTime"
-  String get absenceTime => "absenceTime";
+  /// "mulasztások"
+  String get absenceTitle => "mulasztások";
+  /// "hiányzás ideje"
+  String get absenceTime => "hiányzás ideje";
+  /// "hiányzás módja"
+  String get absenceMode => "hiányzás módja";
   /// "Összes hiányzás: ${count} óra"
   String absenceAll(String count) => "Összes hiányzás: ${count} óra";
   /// "Szülői igazolás: ${count} db"

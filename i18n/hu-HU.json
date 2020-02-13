@@ -83,17 +83,17 @@
     },
 
     "delay": {
-        "mins": "delayMins",
+        "mins": "késés ideje",
         "all": "Összes késés: {count} perc"
     },
 
     "administration": {
-        "time": "administrationTime"
+        "time": "naplózás ideje"
     },
 
     "justification": {
-        "state": "justificationState",
-        "mode": "justificationMode"
+        "state": "igazolás állapota",
+        "mode": "igazolás módja"
     },
 
     "lesson": {
@@ -106,7 +106,8 @@
         "class": "osztály",
         "start": "óra kezdete",
         "end": "óra vége",
-        "theme": "téma"
+        "theme": "téma",
+        "subject": "tárgy"
     },
 
     "homework": {
@@ -137,7 +138,9 @@
     },
 
     "absence": {
-        "time": "absenceTime",
+        "title": "mulasztások",
+        "time": "hiányzás ideje",
+        "mode": "hiányzás módja",
         "all": "Összes hiányzás: {count} óra",
         "parental": "Szülői igazolás: {count} db"
     },

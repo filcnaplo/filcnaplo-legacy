@@ -63,7 +63,7 @@ class AbsentsScreenState extends State<AbsentsScreen> {
         child: Scaffold(
             drawer: GDrawer(),
             appBar: new AppBar(
-              title: new Text(I18n.of(context).absent_title),
+              title: new Text(capitalize(I18n.of(context).absenceTitle)),
               actions: <Widget>[
                 Tooltip(
                   child: new IconButton(
@@ -155,21 +155,21 @@ class AbsentsScreenState extends State<AbsentsScreen> {
           content: new SingleChildScrollView(
             child: new ListBody(
               children: <Widget>[
-                new Text(I18n.of(context).mode + absence.ModeName),
-                new Text(I18n.of(context).subject + absence.Subject),
-                new Text(I18n.of(context).teacher + absence.Teacher),
-                new Text(I18n.of(context).absence_time +
+                new Text(capitalize(I18n.of(context).absenceMode) + ": " + absence.ModeName),
+                new Text(capitalize(I18n.of(context).lessonSubject) + ": " + absence.Subject),
+                new Text(capitalize(I18n.of(context).lessonTeacher) + ": " + absence.Teacher),
+                new Text(capitalize(I18n.of(context).absenceTime) + ": " +
                     dateToHuman(absence.LessonStartTime)),
-                new Text(I18n.of(context).administration_time +
+                new Text(capitalize(I18n.of(context).administrationTime) + ": " +
                     dateToHuman(absence.CreatingTime)),
-                new Text(I18n.of(context).justification_state +
+                new Text(capitalize(I18n.of(context).justificationState) + ": " +
                     absence.JustificationStateName),
-                new Text(I18n.of(context).justification_mode +
+                new Text(capitalize(I18n.of(context).justificationMode) + ": " +
                     absence.JustificationTypeName),
                 absence.DelayTimeMinutes != 0
-                    ? new Text(I18n.of(context).delay_mins +
+                    ? new Text(I18n.of(context).delayMins +
                         absence.DelayTimeMinutes.toString() +
-                        " perc")
+                        " " + I18n.of(context).timeMinute)
                     : new Container(),
               ],
             ),
