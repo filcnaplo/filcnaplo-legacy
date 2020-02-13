@@ -432,16 +432,6 @@ class LoginScreenState extends State<LoginScreen> {
                                           padding: EdgeInsets.only(right: 12),
                                         ))
                                       : Container(),
-				  Expanded(
-				    child: new Container(
-				      child: new FlatButton (
-                                        child: new Text("GYIK"),
-					disabledColor: Colors.blueGrey[800],
-					disabledTextColor: Colors.blueGrey,
-					color: Colors.teal,
-					textColor: Colors.white,
-				      ),
-				    )),
                                 ],
                               ),
                               new FlatButton(
