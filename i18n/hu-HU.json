@@ -83,7 +83,7 @@
     },
 
     "delay": {
-        "mins": "késés ideje",
+        "mins": "késés mértéke",
         "all": "Összes késés: {count} perc"
     },
 
@@ -92,8 +92,8 @@
     },
 
     "justification": {
-        "state": "igazolás állapota",
-        "mode": "igazolás módja"
+        "state": "állapota",
+        "mode": "módja"
     },
 
     "lesson": {
@@ -120,7 +120,7 @@
     },
 
     "state": {
-        "": "state (?)"
+        "": "állapot"
     },
     
     "note": {
@@ -155,5 +155,16 @@
         "time": "beírás ideje",
         "eval": "jegy",
         "timeReal": "számonkérés ideje"
+    },
+
+    "evaluation": {
+        "title": "jegyek",
+        "average": "átlag",
+        "averageClass": "osztály átlag",
+        "mode": "faja",
+        "weight": "súly",
+        "value": "érték",
+        "range": "mód",
+        "if": "ha kapnék egy"
     }
 }

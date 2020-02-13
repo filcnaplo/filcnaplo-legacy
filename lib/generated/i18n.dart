@@ -136,16 +136,16 @@ class I18n implements WidgetsLocalizations {
   String get dateWeekPrev => "előző hét";
   /// "következö hét"
   String get dateWeekNext => "következö hét";
-  /// "késés ideje"
-  String get delayMins => "késés ideje";
+  /// "késés mértéke"
+  String get delayMins => "késés mértéke";
   /// "Összes késés: ${count} perc"
   String delayAll(String count) => "Összes késés: ${count} perc";
   /// "naplózás ideje"
   String get administrationTime => "naplózás ideje";
-  /// "igazolás állapota"
-  String get justificationState => "igazolás állapota";
-  /// "igazolás módja"
-  String get justificationMode => "igazolás módja";
+  /// "állapota"
+  String get justificationState => "állapota";
+  /// "módja"
+  String get justificationMode => "módja";
   /// "óra"
   String get lesson => "óra";
   /// "${count} óra"
@@ -174,8 +174,8 @@ class I18n implements WidgetsLocalizations {
   String get substitution => "helyettesítés";
   /// "elmarad"
   String get substitutionMissed => "elmarad";
-  /// "state (?)"
-  String get state => "state (?)";
+  /// "állapot"
+  String get state => "állapot";
   /// "faliújság"
   String get note2 => "faliújság";
   /// "feljegyzés"
@@ -208,6 +208,22 @@ class I18n implements WidgetsLocalizations {
   String get sortEval => "jegy";
   /// "számonkérés ideje"
   String get sortTimeReal => "számonkérés ideje";
+  /// "jegyek"
+  String get evaluationTitle => "jegyek";
+  /// "átlag"
+  String get evaluationAverage => "átlag";
+  /// "osztály átlag"
+  String get evaluationAverageClass => "osztály átlag";
+  /// "faja"
+  String get evaluationMode => "faja";
+  /// "súly"
+  String get evaluationWeight => "súly";
+  /// "érték"
+  String get evaluationValue => "érték";
+  /// "mód"
+  String get evaluationRange => "mód";
+  /// "ha kapnék egy"
+  String get evaluationIf => "ha kapnék egy";
 }
 
 class _I18n_hu_HU extends I18n {

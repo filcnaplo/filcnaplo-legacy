@@ -625,7 +625,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
             new Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                new Text(I18n.of(context).average),
+                new Text(capitalize(I18n.of(context).evaluationAverage) + ": "),
                 new Text(
                   avrString,
                   style: TextStyle(
@@ -637,7 +637,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                 ),
                 selectedAverage != null
                     ? selectedAverage.classValue != null
-                        ? new Text(I18n.of(context).class_average)
+                        ? new Text(capitalize(I18n.of(context).evaluationAverageClass))
                         : Container()
                     : Container(),
                 selectedAverage != null
@@ -778,7 +778,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
               onTap: switchToScreen,
             ),
             drawer: GDrawer(),
-            appBar: new AppBar(title: new Text(I18n.of(context).evaluations)),
+            appBar: new AppBar(title: new Text(capitalize(I18n.of(context).evaluationTitle))),
             body: (currentBody == 0
                 ? evaluationsBody
                 : (currentBody == 1 ? averageBody : dataBody))));
@@ -894,21 +894,21 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
             child: new ListBody(
               children: <Widget>[
                 evaluation.Theme != null
-                    ? new Text(I18n.of(context).theme + evaluation.Theme ?? "")
+                    ? new Text(capitalize(I18n.of(context).lessonTheme) + ": " + evaluation.Theme ?? "")
                     : new Container(),
-                new Text(I18n.of(context).teacher + evaluation.Teacher ?? ""),
+                new Text(capitalize(I18n.of(context).lessonTeacher) + ": " + evaluation.Teacher ?? ""),
                 new Text(
                     I18n.of(context).time + dateToHuman(evaluation.Date ?? "")),
                 evaluation.Mode != null
-                    ? new Text(I18n.of(context).mode + evaluation.Mode)
+                    ? new Text(capitalize(I18n.of(context).evaluationMode) + ": " + evaluation.Mode)
                     : new Container(),
-                new Text(I18n.of(context).administration_time +
+                new Text(capitalize(I18n.of(context).administrationTime) + ": " +
                     dateToHuman(evaluation.CreatingTime ?? "")),
                 evaluation.Weight != null
-                    ? new Text(I18n.of(context).weight + evaluation.Weight ?? "")
+                    ? new Text(I18n.of(context).evaluationWeight + evaluation.Weight ?? "")
                     : new Container(),
-                new Text(I18n.of(context).value + evaluation.Value ?? ""),
-                new Text(I18n.of(context).range + evaluation.FormName ?? ""),
+                new Text(capitalize(I18n.of(context).evaluationValue) + ": " + evaluation.Value ?? ""),
+                new Text(capitalize(I18n.of(context).evaluationRange) + ": " + evaluation.FormName ?? ""),
               ],
             ),
           ),
@@ -957,7 +957,7 @@ class GradeDialogState extends State<GradeDialog> {
   Widget build(BuildContext context) {
     return new SimpleDialog(
       contentPadding: EdgeInsets.all(0),
-      title: new Text(I18n.of(context).if_i_got),
+      title: new Text(I18n.of(context).evaluationIf),
       children: <Widget>[
         Container(
           child: Row(
