@@ -97,9 +97,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-//TODO: make noReset reset, so boolean logic is easier to understand
-//########################## MAIN
-
 void main({bool noReset = false}) async {
   WidgetsFlutterBinding.ensureInitialized();
 
