@@ -17,7 +17,7 @@
     },
 
     "test": {
-        "title": "számonkérések"
+        "title": "Számonkérések"
     },
 
     "grade": {
@@ -108,7 +108,7 @@
 
     "homework": {
         "": "házi feladat",
-        "title": "házi feladatok",
+        "title": "Házi feladatok",
         "deadline": "határidő",
         "subject": "",
         "uploadUser": "",
@@ -127,7 +127,7 @@
     "note": {
         "": "feljegyzés",
         "2": "faliújság",
-        "title": "feljegyzések"
+        "title": "Feljegyzések"
     },
 
     "message": {
@@ -140,7 +140,7 @@
     },
 
     "absence": {
-        "title": "mulasztások",
+        "title": "Mulasztások",
         "time": "hiányzás ideje",
         "mode": "hiányzás módja",
         "all": "Összes hiányzás: {count} óra",
@@ -160,7 +160,7 @@
     },
 
     "evaluation": {
-        "title": "jegyek",
+        "title": "Jegyek",
         "average": "átlag",
         "averageClass": "osztály átlag",
         "mode": "faja",

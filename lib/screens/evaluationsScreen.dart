@@ -1,4 +1,4 @@
-import 'dart:convert' show utf8, json;
+import 'dart:convert' show json;
 import 'dart:ui';
 
 import 'package:charts_flutter/flutter.dart';
@@ -12,7 +12,6 @@ import 'package:filcnaplo/GlobalDrawer.dart';
 import 'package:filcnaplo/Utils/StringFormatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 import 'dart:ui' as dart_ui;
-import 'package:filcnaplo/Utils/ColorManager.dart';
 import 'package:filcnaplo/Dialog/SortDialog.dart';
 import 'package:filcnaplo/Datas/User.dart';
 import 'package:filcnaplo/Cards/SummaryCards.dart';
@@ -468,7 +467,6 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
 
     Widget _allBuilder(BuildContext context, int index) {
       Widget sep = new Container();
-
       if (globals.sort == 1) {
         if (((index == 0) && (allEvals[index].Value.length < 16) ||
             (allEvals[index].Value != allEvals[index - 1].Value &&
@@ -520,7 +518,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                   style: new TextStyle(fontWeight: FontWeight.bold)),
               subtitle: new Text(
                 (allEvals[index].Theme == "")
-                    ? allEvals[index].Mode ?? ""
+                    ? allEvals[index].Mode
                     : allEvals[index].Theme,
                 style: new TextStyle(
                     fontStyle: (allEvals[index].Theme == "")
@@ -687,13 +685,12 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
               new Container(
                   child: new Card(
                       child: Container(
-                    margin: EdgeInsets.all(13.0),
                           child: FittedBox(
                             child: new Row(
                               children: <Widget>[
                                 new Column(
                                   children: <Widget>[
-                                    new Text("átlag:"), //localization
+                                    new Text("átlag: "), //localization
                                   ],
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                 ),
@@ -709,8 +706,8 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                           ),
                           color:
                               globals.isDark ? Colors.black54 : Colors.white70),
-                  color: getColorForAverage(allAverage)),
-              height: 70)
+                      color: getColorForAverage(allAverage)),
+                  height: 70)
             ],
           )
         ],
@@ -787,7 +784,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
               ),
               title: new Text(
                 (globals.currentEvals[index].Theme == "")
-                    ? globals.currentEvals[index].Mode ?? ""
+                    ? globals.currentEvals[index].Mode
                     : globals.currentEvals[index].Theme,
                 style: new TextStyle(
                     fontStyle: (globals.currentEvals[index].Theme == "")

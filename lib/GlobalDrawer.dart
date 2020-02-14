@@ -239,7 +239,7 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 2 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
-                I18n.of(context).timetable,
+                capitalize(I18n.of(context).timetable),
                 style: TextStyle(
                     color: screen == 2 ? Theme.of(context).accentColor : null),
               ),

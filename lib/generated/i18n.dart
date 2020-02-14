@@ -54,8 +54,8 @@ class I18n implements WidgetsLocalizations {
   String get drawerAbsences => "mulasztások";
   /// "beállítások"
   String get drawerSettings => "beállítások";
-  /// "számonkérések"
-  String get testTitle => "számonkérések";
+  /// "Számonkérések"
+  String get testTitle => "Számonkérések";
   /// "1-es"
   String get grade1 => "1-es";
   /// "2-es"
@@ -168,8 +168,8 @@ class I18n implements WidgetsLocalizations {
   String get lessonSubject => "tárgy";
   /// "házi feladat"
   String get homework => "házi feladat";
-  /// "házi feladatok"
-  String get homeworkTitle => "házi feladatok";
+  /// "Házi feladatok"
+  String get homeworkTitle => "Házi feladatok";
   /// "határidő"
   String get homeworkDeadline => "határidő";
   /// ""
@@ -188,16 +188,16 @@ class I18n implements WidgetsLocalizations {
   String get note2 => "faliújság";
   /// "feljegyzés"
   String get note => "feljegyzés";
-  /// "feljegyzések"
-  String get noteTitle => "feljegyzések";
+  /// "Feljegyzések"
+  String get noteTitle => "Feljegyzések";
   /// "Üzenetek"
   String get messageTitle => "Üzenetek";
   /// "receivers"
   String get messageReceivers => "receivers";
   /// "statisztikák"
   String get statistics => "statisztikák";
-  /// "mulasztások"
-  String get absenceTitle => "mulasztások";
+  /// "Mulasztások"
+  String get absenceTitle => "Mulasztások";
   /// "hiányzás ideje"
   String get absenceTime => "hiányzás ideje";
   /// "hiányzás módja"
@@ -218,8 +218,8 @@ class I18n implements WidgetsLocalizations {
   String get sortEval => "jegy";
   /// "számonkérés ideje"
   String get sortTimeReal => "számonkérés ideje";
-  /// "jegyek"
-  String get evaluationTitle => "jegyek";
+  /// "Jegyek"
+  String get evaluationTitle => "Jegyek";
   /// "átlag"
   String get evaluationAverage => "átlag";
   /// "osztály átlag"
