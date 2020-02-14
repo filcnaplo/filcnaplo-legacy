@@ -97,8 +97,6 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
   int db4 = 0;
   int db5 = 0;
   double allAverage;
-  double allMedian;
-  int allMode;
   List<Widget> summaryCardsToShow = new List();
 
   bool hasOfflineLoaded = false;
@@ -222,11 +220,6 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           break;
       }
     allAverage = getAllAverages();
-    allMedian = getMedian();
-    allMode = getModusz();
-    if (allMedian == null) allMedian = 0;
-    if (allAverage == null) allAverage = 0;
-    if (allMode == null) allMode = 0;
 
     refreshSort();
 
@@ -244,13 +237,8 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
         .toList());
 
     if (firstQuarterEvaluations.isNotEmpty)
-      summaryCardsToShow.add(new SummaryCard(
-          firstQuarterEvaluations,
-          context,
-          "Első negyedévi jegyek",
-          false,
-          true,
-          false)); //TODO Make use of translation DB everywhere
+      summaryCardsToShow.add(new SummaryCard(firstQuarterEvaluations, context,
+          "Első negyedévi jegyek", false, true, false)); //localization
     if (halfYearEvaluations.isNotEmpty)
       summaryCardsToShow.add(new SummaryCard(
           halfYearEvaluations, context, "Félévi jegyek", false, true, false));
@@ -266,7 +254,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
         child: Container(
             padding: EdgeInsets.all(5),
             child: new Text(
-                "Itt fognak megjelenni a negyedéves, félévi és év végi jegyeid.")), //TODO Make use of translation DB everywhere
+                "Itt fognak megjelenni a negyedéves, félévi és év végi jegyeid.")), //localization
       ));
   }
 
@@ -288,24 +276,6 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
     if (n > 0) return sum / n;
 
     return 0;
-  }
-
-  double getMedian() {
-    List<int> jegyek = new List();
-    for (Evaluation e in evals) jegyek.add(e.NumberValue);
-    jegyek.sort();
-    if (!jegyek.length.isEven)
-      return jegyek[((jegyek.length + 1) / 2).round()] / 1;
-    return (jegyek[(jegyek.length / 2).round()] +
-            jegyek[(jegyek.length / 2 + 1).round()]) /
-        2;
-  }
-
-  int getModusz() {
-    int max = 0;
-    List<int> dbk = [db1, db2, db3, db4, db5];
-    for (int n in dbk) if (n > max) max = n;
-    return dbk.indexOf(max) + 1;
   }
 
   double getAverage(List<Evaluation> evaluations) {
@@ -374,8 +344,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           .where((Evaluation evaluation) => evaluation.isMidYear())).toList();
     } catch (exeption) {
       Fluttertoast.showToast(
-          msg:
-              "Nem sikerült betölteni a jegyeket", //TODO Make use of translation DB everywhere
+          msg: "Nem sikerült betölteni a jegyeket", //localization
           backgroundColor: Colors.red,
           textColor: Colors.white,
           fontSize: 16.0);
@@ -637,7 +606,8 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                 ),
                 selectedAverage != null
                     ? selectedAverage.classValue != null
-                        ? new Text(capitalize(I18n.of(context).evaluationAverageClass))
+                        ? new Text(
+                            capitalize(I18n.of(context).evaluationAverageClass))
                         : Container()
                     : Container(),
                 selectedAverage != null
@@ -717,23 +687,19 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
               new Container(
                   child: new Card(
                       child: Container(
+                    margin: EdgeInsets.all(13.0),
                           child: FittedBox(
                             child: new Row(
                               children: <Widget>[
                                 new Column(
                                   children: <Widget>[
-                                    new Text(
-                                        "átlaga:"), //TODO Make use of translation DB everywhere
-                                    new Text("mediánja:"),
-                                    new Text("módusza:")
+                                    new Text("átlag:"), //localization
                                   ],
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                 ),
                                 new Column(
                                   children: <Widget>[
                                     new Text(allAverage.toStringAsFixed(2)),
-                                    new Text(allMedian.toString()),
-                                    new Text(allMode.toString())
                                   ],
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                 )
@@ -743,8 +709,8 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                           ),
                           color:
                               globals.isDark ? Colors.black54 : Colors.white70),
-                      color: getColorForAverage(allAverage)),
-                  height: 70)
+                  color: getColorForAverage(allAverage)),
+              height: 70)
             ],
           )
         ],
@@ -764,8 +730,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
                     icon: new Icon(Icons.list),
-                    title: new Text(
-                        "Összes")), //TODO Make use of translation DB everywhere
+                    title: new Text("Összes")), //localization
                 BottomNavigationBarItem(
                   icon: new Icon(Icons.show_chart),
                   title: new Text("Tárgyanként"),
@@ -778,7 +743,8 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
               onTap: switchToScreen,
             ),
             drawer: GDrawer(),
-            appBar: new AppBar(title: new Text(capitalize(I18n.of(context).evaluationTitle))),
+            appBar: new AppBar(
+                title: new Text(capitalize(I18n.of(context).evaluationTitle))),
             body: (currentBody == 0
                 ? evaluationsBody
                 : (currentBody == 1 ? averageBody : dataBody))));
@@ -821,7 +787,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
               ),
               title: new Text(
                 (globals.currentEvals[index].Theme == "")
-                    ? globals.currentEvals[index].Mode
+                    ? globals.currentEvals[index].Mode ?? ""
                     : globals.currentEvals[index].Theme,
                 style: new TextStyle(
                     fontStyle: (globals.currentEvals[index].Theme == "")
@@ -868,7 +834,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                   _evaluationDialog(globals.currentEvals[index]);
                 } catch (exeption) {
                   Fluttertoast.showToast(
-                      msg: "Hiba", //TODO Make use of translation DB everywhere
+                      msg: "Hiba", //localization
                       backgroundColor: Colors.red,
                       textColor: Colors.white,
                       fontSize: 16.0);
@@ -894,21 +860,38 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
             child: new ListBody(
               children: <Widget>[
                 evaluation.Theme != null
-                    ? new Text(capitalize(I18n.of(context).lessonTheme) + ": " + evaluation.Theme ?? "")
+                    ? new Text(capitalize(I18n.of(context).lessonTheme) +
+                            ": " +
+                            evaluation.Theme ??
+                        "")
                     : new Container(),
-                new Text(capitalize(I18n.of(context).lessonTeacher) + ": " + evaluation.Teacher ?? ""),
+                new Text(capitalize(I18n.of(context).lessonTeacher) +
+                        ": " +
+                        evaluation.Teacher ??
+                    ""),
                 new Text(
                     I18n.of(context).time + dateToHuman(evaluation.Date ?? "")),
                 evaluation.Mode != null
-                    ? new Text(capitalize(I18n.of(context).evaluationMode) + ": " + evaluation.Mode)
+                    ? new Text(capitalize(I18n.of(context).evaluationMode) +
+                        ": " +
+                        evaluation.Mode)
                     : new Container(),
-                new Text(capitalize(I18n.of(context).administrationTime) + ": " +
+                new Text(capitalize(I18n.of(context).administrationTime) +
+                    ": " +
                     dateToHuman(evaluation.CreatingTime ?? "")),
                 evaluation.Weight != null
-                    ? new Text(I18n.of(context).evaluationWeight + evaluation.Weight ?? "")
+                    ? new Text(
+                        I18n.of(context).evaluationWeight + evaluation.Weight ??
+                            "")
                     : new Container(),
-                new Text(capitalize(I18n.of(context).evaluationValue) + ": " + evaluation.Value ?? ""),
-                new Text(capitalize(I18n.of(context).evaluationRange) + ": " + evaluation.FormName ?? ""),
+                new Text(capitalize(I18n.of(context).evaluationValue) +
+                        ": " +
+                        evaluation.Value ??
+                    ""),
+                new Text(capitalize(I18n.of(context).evaluationRange) +
+                        ": " +
+                        evaluation.FormName ??
+                    ""),
               ],
             ),
           ),
@@ -1090,7 +1073,7 @@ class GradeDialogState extends State<GradeDialog> {
       "Subject": "${globals.selectedAverage.subject}",
       "SubjectCategory": null,
       "SubjectCategoryName": "",
-      "Theme": "🔘 Ha kapnék egy...", //TODO Make use of translation DB everywhere
+      "Theme": "🔘 Ha kapnék egy...", //localization
       "IsAtlagbaBeleszamit": true,
       "Mode": "Hamis",
       "Weight": "$weight",

@@ -5,7 +5,7 @@ import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:filcnaplo/Dialog/HomeworkDialog.dart';
+import 'package:filcnaplo/Dialog/LessonDialog.dart';
 import 'package:filcnaplo/Datas/Lesson.dart';
 import 'package:filcnaplo/Datas/User.dart';
 import 'package:filcnaplo/Datas/Week.dart';

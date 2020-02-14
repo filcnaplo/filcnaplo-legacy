@@ -24,21 +24,21 @@ class HomeworkDialogState extends State<HomeworkDialog> {
       content: new SingleChildScrollView(
         child: new ListBody(
           children: <Widget>[
-            new Text(capitalize(I18n.of(context).lessonRoom) + ":" + widget.lesson.room),
-            new Text(capitalize(I18n.of(context).lessonTeacher) + widget.lesson.teacher),
-            new Text(capitalize(I18n.of(context).lessonClass) + widget.lesson.group),
+            new Text(capitalize(I18n.of(context).lessonRoom) + ": " + widget.lesson.room),
+            new Text(capitalize(I18n.of(context).lessonTeacher) + ": " + widget.lesson.teacher),
+            new Text(capitalize(I18n.of(context).lessonClass) + ": " + widget.lesson.group),
             new Text(
-                capitalize(I18n.of(context).lessonStart) + ":" + getLessonStartText(widget.lesson)),
+                capitalize(I18n.of(context).lessonStart) + ": " + getLessonStartText(widget.lesson)),
             new Text(
-                capitalize(I18n.of(context).lessonEnd) + ":" + getLessonEndText(widget.lesson)),
+                capitalize(I18n.of(context).lessonEnd) + ": " + getLessonEndText(widget.lesson)),
             widget.lesson.isMissed
                 ? new Text(I18n.of(context).state + widget.lesson.stateName)
                 : new Container(),
             (widget.lesson.theme != "" && widget.lesson.theme != null)
-                ? new Text(I18n.of(context).lessonTheme + widget.lesson.theme)
+                ? new Text(I18n.of(context).lessonTheme + ": " + widget.lesson.theme)
                 : new Container(),
             widget.lesson.homework != null
-                ? new Text("\n" + capitalize(I18n.of(context).homework) + ":")
+                ? new Text("\n" + capitalize(I18n.of(context).homework) + ": ")
                 : Container(),
             widget.lesson.homework != null
                 ? new Divider(

@@ -108,20 +108,20 @@ class I18n implements WidgetsLocalizations {
   String get dateSaturday => "szombat";
   /// "vasárnap"
   String get dateSunday => "vasárnap";
-  /// "h"
-  String get dateMondayShort => "h";
-  /// "k"
-  String get dateTuesdayShort => "k";
-  /// "sz"
-  String get dateWednesdayShort => "sz";
-  /// "cs"
-  String get dateThursdayShort => "cs";
-  /// "p"
-  String get dateFridayShort => "p";
-  /// "sz"
-  String get dateSaturdayShort => "sz";
-  /// "v"
-  String get dateSundayShort => "v";
+  /// "H"
+  String get dateMondayShort => "H";
+  /// "K"
+  String get dateTuesdayShort => "K";
+  /// "Sz"
+  String get dateWednesdayShort => "Sz";
+  /// "Cs"
+  String get dateThursdayShort => "Cs";
+  /// "P"
+  String get dateFridayShort => "P";
+  /// "Sz"
+  String get dateSaturdayShort => "Sz";
+  /// "V"
+  String get dateSundayShort => "V";
   /// "nap"
   String get dateDay => "nap";
   /// "hét"
