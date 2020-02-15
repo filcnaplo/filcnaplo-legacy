@@ -332,6 +332,8 @@ class I18n implements WidgetsLocalizations {
   String get settingsDarkTheme => "Sötét üzemmód";
   /// "Amoled"
   String get settingsAmoled => "Amoled";
+  /// "Hamis adatlekérés KRÉTA appként (gyorsabb)"
+  String get settingsSmart => "Hamis adatlekérés KRÉTA appként (gyorsabb)";
   /// "Jegyek színe"
   String get settingsEvaluationColors => "Jegyek színe";
   /// "Értesítések"
@@ -810,6 +812,9 @@ class _I18n_en_US extends I18n {
   /// "Amoled"
   @override
   String get settingsAmoled => "Amoled";
+  /// "Use fake KRÉTA agent (faster)"
+  @override
+  String get settingsSmart => "Use fake KRÉTA agent (faster)";
   /// "Grade colors"
   @override
   String get settingsEvaluationColors => "Grade colors";
@@ -822,9 +827,9 @@ class _I18n_en_US extends I18n {
   /// "Sync frequency: ${n}"
   @override
   String settingsSyncFrequency(String n) => "Sync frequency: ${n}";
-  /// "Language"
+  /// "Language (Nyelv, Sprache)"
   @override
-  String get settingsLanguage => "Language";
+  String get settingsLanguage => "Language (Nyelv, Sprache)";
   /// "Failed to turn on notifications, please try again!"
   @override
   String get notificationFailed => "Failed to turn on notifications, please try again!";
@@ -1292,6 +1297,9 @@ class _I18n_de_DE extends I18n {
   /// "Amoled"
   @override
   String get settingsAmoled => "Amoled";
+  /// "Gefälschte KRÉTA Identität (schneller)"
+  @override
+  String get settingsSmart => "Gefälschte KRÉTA Identität (schneller)";
   /// "Notefarben"
   @override
   String get settingsEvaluationColors => "Notefarben";

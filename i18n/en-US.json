@@ -240,11 +240,12 @@
         "colorful": "Colorful home",
         "darkTheme": "Dark theme",
         "amoled": "Amoled",
+        "smart": "Use fake KRÉTA agent (faster)",
         "evaluationColors": "Grade colors",
         "notifications": "Notifications",
         "nextLesson": "Next class",
         "syncFrequency": "Sync frequency: {n}",
-        "language": "Language"
+        "language": "Language (Nyelv, Sprache)"
     },
 
     "notification": {

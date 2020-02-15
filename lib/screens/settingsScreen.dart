@@ -259,7 +259,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                       ),
                       SwitchListTile(
                         title: new Text(
-                          "Okos User-Agent",
+                          I18n.of(context).settingsSmart,
                           style: TextStyle(fontSize: 20.0),
                         ),
                         activeColor: Theme.of(context).accentColor,
