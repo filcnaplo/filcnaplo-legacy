@@ -6,6 +6,7 @@ import 'package:filcnaplo/Datas/Lesson.dart';
 import 'package:filcnaplo/Helpers/RequestHelper.dart';
 import 'package:filcnaplo/Helpers/DBHelper.dart';
 import 'package:filcnaplo/Datas/User.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 Future<List<Lesson>> getLessonsOffline(
     DateTime from, DateTime to, User user) async {
@@ -73,11 +74,14 @@ Future<List<Lesson>> getLessons(
       lessons.add(Lesson.fromJson(d));
     }
 
-    print("run: user.setRecentlyRefreshed");
     user.setRecentlyRefreshed("getLessons" + fromToString(from, to));
     print(user.lastRefreshMap);
     return lessons;
-  }
+  } else {
+      Fluttertoast.showToast(
+        msg: User.RATE_LIMIT_MINUTES.toString() + " percenként egyszer frissíthetsz!", //TODO: Translation DB //TODO: Translation DB
+        );
+    }
 
   return getLessonsOffline(from, to, user);
 }

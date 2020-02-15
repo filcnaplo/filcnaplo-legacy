@@ -76,6 +76,10 @@ class Account {
           .getAveragesFrom(json.encode(_studentJson), user);
 
       user.setRecentlyRefreshed("refreshStudentString");
+    } else {
+      Fluttertoast.showToast(
+        msg: User.RATE_LIMIT_MINUTES.toString() + " percenként egyszer frissíthetsz!", //TODO: Translation DB
+        );
     }
   }
 
@@ -109,6 +113,10 @@ class Account {
         DBHelper().addTestsJson(testJson, user);
       }
       user.setRecentlyRefreshed("refreshTests");
+    } else {
+      Fluttertoast.showToast(
+        msg: User.RATE_LIMIT_MINUTES.toString() + " percenként egyszer frissíthetsz!", //TODO: Translation DB
+        );
     }
   }
 
@@ -119,6 +127,10 @@ class Account {
       else
         _eventsString = await RequestHelper().getEventsString(user, showErrors);
       user.setRecentlyRefreshed("_refreshEventsString");
+    } else {
+      Fluttertoast.showToast(
+        msg: User.RATE_LIMIT_MINUTES.toString() + " percenként egyszer frissíthetsz!", //TODO: Translation DB
+        );
     }
   }
 
