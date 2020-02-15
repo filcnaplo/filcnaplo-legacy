@@ -108,6 +108,7 @@
 
     "homework": {
         "": "homework",
+        "add": "add homework",
         "title": "Homeworks",
         "deadline": "deadline",
         "subject": "",
@@ -161,6 +162,11 @@
 
     "evaluation": {
         "title": "Grades",
+        "navigation": {
+            "all": "All",
+            "statistics": "Statistics",
+            "results": "Results"
+        },
         "average": "averages",
         "averageClass": "class average",
         "mode": "mode",

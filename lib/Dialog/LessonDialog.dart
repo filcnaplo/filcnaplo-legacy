@@ -24,18 +24,27 @@ class HomeworkDialogState extends State<HomeworkDialog> {
       content: new SingleChildScrollView(
         child: new ListBody(
           children: <Widget>[
-            new Text(capitalize(I18n.of(context).lessonRoom) + ": " + widget.lesson.room),
-            new Text(capitalize(I18n.of(context).lessonTeacher) + ": " + widget.lesson.teacher),
-            new Text(capitalize(I18n.of(context).lessonClass) + ": " + widget.lesson.group),
-            new Text(
-                capitalize(I18n.of(context).lessonStart) + ": " + getLessonStartText(widget.lesson)),
-            new Text(
-                capitalize(I18n.of(context).lessonEnd) + ": " + getLessonEndText(widget.lesson)),
+            new Text(capitalize(I18n.of(context).lessonRoom) +
+                ": " +
+                widget.lesson.room),
+            new Text(capitalize(I18n.of(context).lessonTeacher) +
+                ": " +
+                widget.lesson.teacher),
+            new Text(capitalize(I18n.of(context).lessonClass) +
+                ": " +
+                widget.lesson.group),
+            new Text(capitalize(I18n.of(context).lessonStart) +
+                ": " +
+                getLessonStartText(widget.lesson)),
+            new Text(capitalize(I18n.of(context).lessonEnd) +
+                ": " +
+                getLessonEndText(widget.lesson)),
             widget.lesson.isMissed
                 ? new Text(I18n.of(context).state + widget.lesson.stateName)
                 : new Container(),
             (widget.lesson.theme != "" && widget.lesson.theme != null)
-                ? new Text(I18n.of(context).lessonTheme + ": " + widget.lesson.theme)
+                ? new Text(
+                    I18n.of(context).lessonTheme + ": " + widget.lesson.theme)
                 : new Container(),
             widget.lesson.homework != null
                 ? new Text("\n" + capitalize(I18n.of(context).homework) + ": ")
@@ -45,25 +54,29 @@ class HomeworkDialogState extends State<HomeworkDialog> {
                     color: Colors.blueGrey,
                   )
                 : Container(),
-            Column(
-              children:
-                  globals.currentHomeworks.map<Widget>((Homework homework) {
-                return ListTile(
-                  title: Html(data: HtmlUnescape().convert(homework.text)),
-                  subtitle: Text(homework.uploader +
-                      " | " +
-                      homework.uploadDate.substring(0,
-                          10)), //, style: TextStyle(color: homework.byTeacher ? Colors.green:null),),
-                );
-              }).toList(),
+            widget.lesson.homework != null 
+            ? Column(
+              children: globals.currentHomeworks.isEmpty
+                  ? <Widget> [Container(child: CircularProgressIndicator(), padding: EdgeInsets.all(20),)]
+                  : globals.currentHomeworks.map<Widget>((Homework homework) {
+                      return ListTile(
+                        title:
+                            Html(data: HtmlUnescape().convert(homework.text)),
+                        subtitle: Text(homework.uploader +
+                            " | " +
+                            homework.uploadDate.substring(0,
+                                10)), //, style: TextStyle(color: homework.byTeacher ? Colors.green:null),),
+                      );
+                    }).toList(),
             )
+            : Container(),
           ],
         ),
       ),
       actions: <Widget>[
         widget.lesson.homeworkEnabled
             ? new FlatButton(
-                child: new Text(I18n.of(context).homework),
+                child: new Text(I18n.of(context).homeworkAdd),
                 onPressed: () {
                   Navigator.of(context).pop();
                   return showDialog(
