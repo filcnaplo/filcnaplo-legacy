@@ -1,1 +1,241 @@
-{}
+{ "app": {
+        "title": "Filc Diary",
+        "version": "version"
+    },
+
+    "drawer": {
+        "home": "home",
+        "evaluations": "evaluations",
+        "timetable": "timetable",
+        "homeworks": "homeworks",
+        "notes": "notes",
+        "messages": "messages",
+        "tests": "tests",
+        "absences": "absences",
+        "settings": "settings"
+    },
+
+    "test": {
+        "title": "Tests"
+    },
+
+    "grade": {
+        "": "grade",
+        "1": "1",
+        "2": "2",
+        "3": "3",
+        "4": "4",
+        "5": "5"
+    },
+
+    "account": {
+        "title": "accounts",
+        "delete": "Delete user",
+        "deleteConfirm": "Do you really want to delete the user?"
+    },
+
+    "dialog": {
+        "ok": "OK",
+        "yes": "YES",
+        "no": "NEM",
+        "done": "DONE"
+    },
+
+    "time": {
+        "": "time",
+        "hour": "hour",
+        "minute": "minute",
+        "later": "later"
+    },
+
+    "date": {
+        "": "date",
+        "tomorrow": "tomorrow",
+        
+        "monday": "monday",
+        "tuesday": "tuesdau",
+        "wednesday": "wednesday",
+        "thursday": "thursday",
+        "friday": "friday",
+        "saturday": "saturday",
+        "sunday": "sunday",
+
+        "mondayShort": "M",
+        "tuesdayShort": "Tu",
+        "wednesdayShort": "W",
+        "thursdayShort": "Th",
+        "fridayShort": "F",
+        "saturdayShort": "Sa",
+        "sundayShort": "Su",
+
+        "day": "day",
+        "week": "week",
+        "month": "month",
+        "month2": "two months",
+
+        "weekPrev": "last week",
+        "weekNext": "next week"
+    },
+
+    "delay": {
+        "mins": "delay in minutes",
+        "all": "all delay: {count} minutes"
+    },
+
+    "administration": {
+        "time": "log's date"
+    },
+
+    "justification": {
+        "state": "state",
+        "mode": "mode"
+    },
+
+    "lesson": {
+        "": "óra",
+        "count": "{count} óra",
+        "next": "következő óra",
+        "have": "óra lesz",
+        "room": "terem",
+        "teacher": "tanár",
+        "class": "osztály",
+        "start": "óra kezdete",
+        "end": "óra vége",
+        "theme": "téma",
+        "subject": "tárgy"
+    },
+
+    "homework": {
+        "": "homework",
+        "title": "Homeworks",
+        "deadline": "deadline",
+        "subject": "",
+        "uploadUser": "",
+        "uploadTime": ""
+    },
+
+    "substitution": {
+        "": "substitution",
+        "missed": "not held"
+    },
+
+    "state": {
+        "": "state"
+    },
+    
+    "note": {
+        "": "note",
+        "2": "bulletin board",
+        "title": "Notes"
+    },
+
+    "message": {
+        "title": "Messages",
+        "receivers": "receivers"
+    },
+
+    "statistics": {
+        "": "statistics"
+    },
+
+    "absence": {
+        "title": "Absences",
+        "time": "date",
+        "mode": "mode",
+        "all": "all absences: {count} hour(s)",
+        "parental": "parental excuse(s): {count} pcs"
+    },
+    
+    "timetable": {
+        "": "Timetable",
+        "empty": "empty timetable"
+    },
+
+    "sort": {
+        "": "Sort",
+        "time": "date",
+        "eval": "grade",
+        "timeReal": "test's date"
+    },
+
+    "evaluation": {
+        "title": "Grades",
+        "average": "averages",
+        "averageClass": "class average",
+        "mode": "mode",
+        "weight": "weight",
+        "value": "valye",
+        "range": "range",
+        "if": "if I got"
+    },
+
+    "login": {
+        "": "login",
+        "username": "Username",
+        "password": "Password",
+        "usernameHint": "mostly your education ID (11 numbers)",
+        "passwordHint": "most of the time birth date (19700101)",
+        "usernameError": "Input your username!",
+        "passwordError": "Input your password!",
+        "schoolError": "Choose a school!",
+        "school": "School",
+        "choose": "choose",
+        "chooseSchool": "Choose a school!"
+    },
+
+    "export": {
+        "": "Export",
+        "grades": "grades",
+        "lessons": "classes",
+        "accounts": "accounts",
+        "choose": "choose an intervale",
+        "success": "Success!"
+    },
+
+    "close": {
+        "title": "Close the application",
+        "confirm": "Do you really want to leave?"
+    },
+
+    "info": {
+        "birthdate": "Birth date: ",
+        "kretaID": "Kréta ID: ",
+        "address": "Address: ",
+        "teacher": "Classroom teacher: ",
+        "school": "School: ",
+        "parents": "Parent(s): ",
+        "mother": "Mother's name: "
+    },
+
+    "color": {
+        "": "Color",
+        "green": "green",
+        "red": "red",
+        "blue": "blue",
+        "lime": "lime",
+        "yellow": "yellow",
+        "orange": "orange",
+        "grey": "grey",
+        "pink": "pink",
+        "purple": "purple",
+        "teal": "teal"
+    },
+
+    "settings": {
+        "title": "Settings",
+        "colorful": "Colorful home",
+        "darkTheme": "Dark theme",
+        "amoled": "Amoled",
+        "evaluationColors": "Grade colors",
+        "notifications": "Notifications",
+        "nextLesson": "Next class",
+        "syncFrequency": "Sync frequency: {n}",
+        "language": "Language"
+    },
+
+    "notification": {
+        "failed": "Couldn't turn on notifications, try again!"
+    },
+
+    "success": "Success!"
+}
