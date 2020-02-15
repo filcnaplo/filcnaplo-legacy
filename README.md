@@ -1,5 +1,5 @@
 # Filc Napló
-Nyílt forráskódú Szivacs-Napló fork, eKréta rendszerhez.
+Nyílt forráskódú [Szivacs-Napló](https://github.com/boapps/Szivacs-Naplo) fork, eKréta rendszerhez.
 
 [Letöltés](https://github.com/filcnaplo/filcnaplo/releases)
 
