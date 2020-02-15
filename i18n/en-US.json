@@ -238,7 +238,7 @@
     },
 
     "refresh" : {
-        "limit": "You can only update evey {mins} minutes!"
+        "limit": "You can only update every {mins} minutes!"
     },
 
     "success": "Success!"

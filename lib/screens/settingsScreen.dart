@@ -283,7 +283,9 @@ class SettingsScreenState extends State<SettingsScreen> {
                           child: new ListTile(
                             contentPadding: EdgeInsets.all(0),
                             title: new Text(
-                              capitalize(I18n.of(context).color) + ": " + themes[_theme],
+                              capitalize(I18n.of(context).color) +
+                                  ": " +
+                                  themes[_theme],
                               style: TextStyle(fontSize: 20.0),
                             ),
                           ),
