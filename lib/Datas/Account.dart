@@ -46,7 +46,6 @@ class Account {
   Map getStudentJson() => _studentJson;
 
   Future<void> refreshStudentString(bool isOffline, bool showErrors) async {
-    BuildContext context;
     if (!user.getRecentlyRefreshed("refreshStudentString")) {
       if (isOffline && _studentJson == null) {
         try {
@@ -78,10 +77,10 @@ class Account {
           .getAveragesFrom(json.encode(_studentJson), user);
 
       user.setRecentlyRefreshed("refreshStudentString");
-    } else {
+     } /*else {
       Fluttertoast.showToast(
         msg: I18n.of(context).refreshLimit(User.RATE_LIMIT_MINUTES.toString()));
-    }
+    } */
   }
 
   Future<void> refreshTests(bool isOffline, bool showErrors) async {
@@ -115,10 +114,10 @@ class Account {
         DBHelper().addTestsJson(testJson, user);
       }
       user.setRecentlyRefreshed("refreshTests");
-    } else {
+     } /*else {
       Fluttertoast.showToast(
         msg: I18n.of(context).refreshLimit(User.RATE_LIMIT_MINUTES.toString()));
-    }
+    } */
   }
 
   Future<void> _refreshEventsString(bool isOffline, bool showErrors) async {
@@ -129,10 +128,10 @@ class Account {
       else
         _eventsString = await RequestHelper().getEventsString(user, showErrors);
       user.setRecentlyRefreshed("_refreshEventsString");
-    } else {
+     } /*else {
       Fluttertoast.showToast(
         msg: I18n.of(context).refreshLimit(User.RATE_LIMIT_MINUTES.toString()));
-    }
+    } */
   }
 
   List<Evaluation> get midyearEvaluations => student.Evaluations.where(

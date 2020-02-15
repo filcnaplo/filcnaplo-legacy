@@ -218,7 +218,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           db5++;
           break;
       }
-    allAverage = getAllAverages();
+    allAverage = getAllAverages() ?? 0;
 
     refreshSort();
 

@@ -110,9 +110,9 @@
         "": "házi feladat",
         "title": "Házi feladatok",
         "deadline": "határidő",
-        "subject": "",
-        "uploadUser": "",
-        "uploadTime": ""
+        "subject": "tantárgy",
+        "uploadUser": "feltöltő",
+        "uploadTime": "feltöltés ideje"
     },
 
     "substitution": {
@@ -132,7 +132,7 @@
 
     "message": {
         "title": "Üzenetek",
-        "receivers": "receivers"
+        "receivers": "címzett"
     },
 
     "statistics": {
@@ -149,25 +149,25 @@
     
     "timetable": {
         "": "órarend",
-        "empty": "üres órarend"
+        "empty": "Úgy tűnik, ezen a héten nincs órád :)"
     },
 
     "sort": {
         "": "Rendezés",
         "time": "beírás ideje",
-        "eval": "jegy",
-        "timeReal": "számonkérés ideje"
+        "eval": "jegy alapján",
+        "timeReal": "értékelés ideje"
     },
 
     "evaluation": {
         "title": "Jegyek",
         "average": "átlag",
-        "averageClass": "osztály átlag",
+        "averageClass": "osztályátlag",
         "mode": "típus",
         "weight": "súly",
         "value": "érték",
         "range": "mód",
-        "if": "ha kapnék egy"
+        "if": "Ha kapnék egy..."
     },
 
     "login": {
@@ -186,7 +186,7 @@
 
     "export": {
         "": "Exportálás",
-        "grades": "jegyek",
+        "grades": "jegyek és minden más",
         "lessons": "órák",
         "accounts": "fiókok",
         "choose": "válassz intervallumot",
@@ -231,7 +231,7 @@
         "notifications": "Értesítések",
         "nextLesson": "Következő óra",
         "syncFrequency": "Szinkronizálás gyakorisága: {n}",
-        "language": "Nyelv"
+        "language": "Nyelv (Sprache, Language)"
     },
 
     "notification": {

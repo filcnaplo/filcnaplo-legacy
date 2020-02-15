@@ -1,0 +1,246 @@
+{
+    "app": {
+        "title": "Filc Tagebuch",
+        "version": "Version"
+    },
+
+    "drawer": {
+        "home": "hauptbildschirm",
+        "evaluations": "noten",
+        "timetable": "stundenplan",
+        "homeworks": "hausaufgaben",
+        "notes": "hinweise",
+        "messages": "benachrichtigungen",
+        "tests": "prüfungen",
+        "absences": "abwesenheiten",
+        "settings": "einstellungen"
+    },
+
+    "test": {
+        "title": "Prüfungen"
+    },
+
+    "grade": {
+        "": "note",
+        "1": "1-es",
+        "2": "2-es",
+        "3": "3-as",
+        "4": "4-es",
+        "5": "5-ös"
+    },
+
+    "account": {
+        "title": "Konten",
+        "delete": "Konte löschen",
+        "deleteConfirm": "Möchtest du {name} wirklich löschen?"
+    },
+
+    "dialog": {
+        "ok": "OK",
+        "yes": "JA",
+        "no": "NEIN",
+        "done": "FERTIG"
+    },
+
+    "time": {
+        "": "zeit",
+        "hour": "Stunde",
+        "minute": "Minute",
+        "later": " "
+    },
+
+    "date": {
+        "": "Datum",
+        "tomorrow": "Morgen",
+        
+        "monday": "Montag",
+        "tuesday": "Dienstag",
+        "wednesday": "Mittwoch",
+        "thursday": "Donnerstag",
+        "friday": "Freitag",
+        "saturday": "Samstag",
+        "sunday": "Sonntag",
+
+        "mondayShort": "Mo",
+        "tuesdayShort": "Di",
+        "wednesdayShort": "Mi",
+        "thursdayShort": "Do",
+        "fridayShort": "Fr",
+        "saturdayShort": "Sa",
+        "sundayShort": "So",
+
+        "day": "Tag",
+        "week": "Woche",
+        "month": "Monate",
+        "month2": "Zwei Monate",
+
+        "weekPrev": "vorige Woche",
+        "weekNext": "nächste Woche"
+    },
+
+    "delay": {
+        "mins": "verspetete Zeit",
+        "all": "Menge aller Verspätungen: {count} Minuten"
+    },
+
+    "administration": {
+        "time": "Zeitpunkt der Protokollierung: "
+    },
+
+    "justification": {
+        "state": "Zustand: ",
+        "mode": "Modus: "
+    },
+
+    "lesson": {
+        "": "Stunde",
+        "count": "{count} Stunde",
+        "next": "következő óra",
+        "have": " Stunden.",
+        "room": "Raum",
+        "teacher": "Lehrer",
+        "class": "Klasse",
+        "start": "Stunde beginnt um ",
+        "end": "Stunde endet um  ",
+        "theme": "Thema",
+        "subject": "Fach"
+    },
+
+    "homework": {
+        "": "Hausaufgabe",
+        "title": "Hausaufgaben",
+        "deadline": "bis",
+        "subject": "Fach",
+        "uploadUser": "Hochgeladen von",
+        "uploadTime": "Hochladezeit"
+    },
+
+    "substitution": {
+        "": "vertretung",
+        "missed": "verpasst"
+    },
+
+    "state": {
+        "": "Zustand"
+    },
+    
+    "note": {
+        "": "Hinweis",
+        "2": "Wandzeitung",
+        "title": "Hisweise"
+    },
+
+    "message": {
+        "title": "Benachrichtigungen",
+        "receivers": "Empfänger"
+    },
+
+    "statistics": {
+        "": "Statistik"
+    },
+
+    "absence": {
+        "title": "Auslassungen",
+        "time": "Zeit der Abwesenheit",
+        "mode": "Art der Abwesenheit",
+        "all": "Menge aller Verspätungen: {count} Stunde",
+        "parental": "Elterliche Rechtfertigung: {count}"
+    },
+    
+    "timetable": {
+        "": "stundenplan",
+        "empty": "Es sieht so aus, dass du dieser Woche kein Unterricht hast :)"
+    },
+
+    "sort": {
+        "": "Sortiere nach",
+        "time": "Einführungsdatum",
+        "eval": "Notewert",
+        "timeReal": "Prüfungsdatum"
+    },
+
+    "evaluation": {
+        "title": "Noten",
+        "average": "Durchschnitt",
+        "averageClass": "Klassendurchschnitt",
+        "mode": "Art",
+        "weight": "Gewicht",
+        "value": "Wert",
+        "range": "Typ",
+        "if": "Wenn ich eine ... bekommen würde"
+    },
+
+    "login": {
+        "": "Anmeldung",
+        "username": "Benutzername",
+        "password": "Passwort",
+        "usernameHint": "Studenten ID: 11-stelliger Nummer (beginnt mit 7)",
+        "passwordHint": "meistens deine Geburtsdatum (zB.: 2000-01-02)",
+        "usernameError": "Bitte Benutzername eingeben!",
+        "passwordError": "Bitte Passwort eingeben!",
+        "schoolError": "Bitte wähle deine Schule!",
+        "school": "Schule",
+        "choose": "Schulwahl",
+        "chooseSchool": "Wähle deine Schule"
+    },
+
+    "export": {
+        "": "Ausführen",
+        "grades": "Noten",
+        "lessons": "Stunden",
+        "accounts": "Konten",
+        "choose": "wähle eine Zeitabstand",
+        "success": "Ausführung fertig"
+    },
+
+    "close": {
+        "title": "App schließen",
+        "confirm": "Möchtest du den App wirklich schließen?"
+    },
+
+    "info": {
+        "birthdate": "Geburtdatum: ",
+        "kretaID": "KRÉTA Identifikationsnummer: ",
+        "address": "Wohnort: ",
+        "teacher": "Klassenlehrer: ",
+        "school": "Schule: ",
+        "parents": "Eltern: ",
+        "mother": "Name der Mutter: "
+    },
+
+    "color": {
+        "": "Farbe",
+        "green": "grün",
+        "red": "rot",
+        "blue": "blau",
+        "lime": "lime",
+        "yellow": "gelb",
+        "orange": "orange",
+        "grey": "grau",
+        "pink": "rosa",
+        "purple": "lila",
+        "teal": "blaugrün"
+    },
+
+    "settings": {
+        "title": "Einstellungen",
+        "colorful": "Bunte Hauptbildschirm",
+        "darkTheme": "Dunkles Thema",
+        "amoled": "Amoled",
+        "evaluationColors": "Notefarben",
+        "notifications": "Push-Benachrichtigung",
+        "nextLesson": "Nächster Stunde",
+        "syncFrequency": "Häufigkeit der Synchronisierung: Alle {n} Minuten",
+        "language": "Sprache (Nyelv, Language)"
+    },
+
+    "notification": {
+        "failed": "Benachrichtigungen konnten nich eingeschaltet werden"
+    },
+
+    "refresh": {
+        "limit": "Warte {mins} Minue Zeit bevor du neu lädst!"
+    },
+
+    "success": "Fertig"
+}
