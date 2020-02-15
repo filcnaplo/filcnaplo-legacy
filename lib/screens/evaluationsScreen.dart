@@ -237,16 +237,16 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
 
     if (firstQuarterEvaluations.isNotEmpty)
       summaryCardsToShow.add(new SummaryCard(firstQuarterEvaluations, context,
-          "Első negyedévi jegyek", false, true, false)); //localization
+          1, false, true, false)); //localization
     if (halfYearEvaluations.isNotEmpty)
       summaryCardsToShow.add(new SummaryCard(
-          halfYearEvaluations, context, "Félévi jegyek", false, true, false));
+          halfYearEvaluations, context, 2, false, true, false));
     if (thirdQuarterEvaluations.isNotEmpty)
       summaryCardsToShow.add(new SummaryCard(thirdQuarterEvaluations, context,
-          "Harmadik negyedévi jegyek", false, true, false));
+          3, false, true, false));
     if (endYearEvaluations.isNotEmpty)
       summaryCardsToShow.add(new SummaryCard(
-          endYearEvaluations, context, "Év végi jegyek", false, true, false));
+          endYearEvaluations, context, 4, false, true, false));
 
     if (summaryCardsToShow.isEmpty)
       summaryCardsToShow.add(Card(
@@ -877,8 +877,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                     dateToHuman(evaluation.CreatingTime ?? "")),
                 evaluation.Weight != null
                     ? new Text(
-                        I18n.of(context).evaluationWeight + evaluation.Weight ??
-                            "")
+                        I18n.of(context).evaluationWeight + ": " + evaluation.Weight ?? "")
                     : new Container(),
                 new Text(capitalize(I18n.of(context).evaluationValue) +
                         ": " +

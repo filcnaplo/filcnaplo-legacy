@@ -167,16 +167,16 @@ class MainScreenState extends State<MainScreen> {
 
       if (firstQuarterEvaluations.isNotEmpty)
         feedCards.add(new SummaryCard(firstQuarterEvaluations, context,
-            "Első negyedévi jegyek", false, true, !globals.isSingle));
+            1, false, true, !globals.isSingle));
       if (halfYearEvaluations.isNotEmpty)
         feedCards.add(new SummaryCard(halfYearEvaluations, context,
-            "Félévi jegyek", false, true, !globals.isSingle));
+            2, false, true, !globals.isSingle));
       if (thirdQuarterEvaluations.isNotEmpty)
         feedCards.add(new SummaryCard(thirdQuarterEvaluations, context,
-            "Harmadik negyedévi jegyek", false, true, !globals.isSingle));
+            3, false, true, !globals.isSingle));
       if (endYearEvaluations.isNotEmpty)
         feedCards.add(new SummaryCard(endYearEvaluations, context,
-            "Év végi jegyek", false, true, !globals.isSingle));
+            4, false, true, !globals.isSingle));
     }
 
     for (String day in absents.keys.toList())

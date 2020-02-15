@@ -37,9 +37,9 @@
 
     "dialog": {
         "ok": "OK",
-        "yes": "IGEN",
-        "no": "NEM",
-        "done": "KÉSZ"
+        "yes": "Igen",
+        "no": "Nem",
+        "done": "Kész"
     },
 
     "time": {
@@ -176,6 +176,13 @@
         "if": "Ha kapnék egy..."
     },
 
+    "summary": {
+        "firstQ": "Első negyedévi jegyek",
+        "halfYear": "Félévi jegyek",
+        "thirdQ": "Harmadik negyedévi jegyek",
+        "endYear": "Év végi jegyek"
+    },
+
     "login": {
         "": "bejelentkezés",
         "username": "Felhasználónév",
@@ -248,5 +255,5 @@
         "limit": "{mins} percenként egyszer frissíthetsz!"
     },
 
-    "success": "Sikeres"
+    "success": "Siker"
 }

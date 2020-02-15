@@ -76,12 +76,12 @@ class I18n implements WidgetsLocalizations {
   String accountDeleteConfirm(String name) => "Biztosan törölni szeretnéd ${name} felhasználót?";
   /// "OK"
   String get dialogOk => "OK";
-  /// "IGEN"
-  String get dialogYes => "IGEN";
-  /// "NEM"
-  String get dialogNo => "NEM";
-  /// "KÉSZ"
-  String get dialogDone => "KÉSZ";
+  /// "Igen"
+  String get dialogYes => "Igen";
+  /// "Nem"
+  String get dialogNo => "Nem";
+  /// "Kész"
+  String get dialogDone => "Kész";
   /// "idő"
   String get time => "idő";
   /// "óra"
@@ -242,6 +242,14 @@ class I18n implements WidgetsLocalizations {
   String get evaluationRange => "mód";
   /// "Ha kapnék egy..."
   String get evaluationIf => "Ha kapnék egy...";
+  /// "Első negyedévi jegyek"
+  String get summaryFirstQ => "Első negyedévi jegyek";
+  /// "Félévi jegyek"
+  String get summaryHalfYear => "Félévi jegyek";
+  /// "Harmadik negyedévi jegyek"
+  String get summaryThirdQ => "Harmadik negyedévi jegyek";
+  /// "Év végi jegyek"
+  String get summaryEndYear => "Év végi jegyek";
   /// "bejelentkezés"
   String get login => "bejelentkezés";
   /// "Felhasználónév"
@@ -338,8 +346,8 @@ class I18n implements WidgetsLocalizations {
   String get notificationFailed => "Nem sikerült bekapcsolni az értesítéseket";
   /// "${mins} percenként egyszer frissíthetsz!"
   String refreshLimit(String mins) => "${mins} percenként egyszer frissíthetsz!";
-  /// "Sikeres"
-  String get success => "Sikeres";
+  /// "Siker"
+  String get success => "Siker";
 }
 
 class _I18n_hu_HU extends I18n {
@@ -418,15 +426,15 @@ class _I18n_en_US extends I18n {
   /// "OK"
   @override
   String get dialogOk => "OK";
-  /// "YES"
+  /// "Yes"
   @override
-  String get dialogYes => "YES";
-  /// "NO"
+  String get dialogYes => "Yes";
+  /// "No"
   @override
-  String get dialogNo => "NO";
-  /// "DONE"
+  String get dialogNo => "No";
+  /// "Done"
   @override
-  String get dialogDone => "DONE";
+  String get dialogDone => "Done";
   /// "time"
   @override
   String get time => "time";
@@ -511,9 +519,9 @@ class _I18n_en_US extends I18n {
   /// "all delays: ${count} minutes"
   @override
   String delayAll(String count) => "all delays: ${count} minutes";
-  /// "date"
+  /// "uploaded on"
   @override
-  String get administrationTime => "date";
+  String get administrationTime => "uploaded on";
   /// "state"
   @override
   String get justificationState => "state";
@@ -667,6 +675,18 @@ class _I18n_en_US extends I18n {
   /// "if I got"
   @override
   String get evaluationIf => "if I got";
+  /// "First quarter evaluations"
+  @override
+  String get summaryFirstQ => "First quarter evaluations";
+  /// "Half year evaluations"
+  @override
+  String get summaryHalfYear => "Half year evaluations";
+  /// "Third quarter evaluations"
+  @override
+  String get summaryThirdQ => "Third quarter evaluations";
+  /// "End year evaluations"
+  @override
+  String get summaryEndYear => "End year evaluations";
   /// "login"
   @override
   String get login => "login";
@@ -981,9 +1001,9 @@ class _I18n_de_DE extends I18n {
   /// "Menge aller Verspätungen: ${count} Minuten"
   @override
   String delayAll(String count) => "Menge aller Verspätungen: ${count} Minuten";
-  /// "Zeitpunkt der Protokollierung"
+  /// "Protokolliert"
   @override
-  String get administrationTime => "Zeitpunkt der Protokollierung";
+  String get administrationTime => "Protokolliert";
   /// "Zustand: "
   @override
   String get justificationState => "Zustand: ";
@@ -1137,6 +1157,18 @@ class _I18n_de_DE extends I18n {
   /// "Wenn ich eine ... bekommen würde"
   @override
   String get evaluationIf => "Wenn ich eine ... bekommen würde";
+  /// "Noten des ersten Quartal"
+  @override
+  String get summaryFirstQ => "Noten des ersten Quartal";
+  /// "Halbjahresnoten"
+  @override
+  String get summaryHalfYear => "Halbjahresnoten";
+  /// "Noten des dritten Quartal"
+  @override
+  String get summaryThirdQ => "Noten des dritten Quartal";
+  /// "Jahresendnoten"
+  @override
+  String get summaryEndYear => "Jahresendnoten";
   /// "Anmeldung"
   @override
   String get login => "Anmeldung";

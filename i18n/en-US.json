@@ -37,9 +37,9 @@
 
     "dialog": {
         "ok": "OK",
-        "yes": "YES",
-        "no": "NO",
-        "done": "DONE"
+        "yes": "Yes",
+        "no": "No",
+        "done": "Done"
     },
 
     "time": {
@@ -84,7 +84,7 @@
     },
 
     "administration": {
-        "time": "date"
+        "time": "uploaded on"
     },
 
     "justification": {
@@ -174,6 +174,13 @@
         "value": "value",
         "range": "range",
         "if": "if I got"
+    },
+
+    "summary": {
+        "firstQ": "First quarter evaluations",
+        "halfYear": "Half year evaluations",
+        "thirdQ": "Third quarter evaluations",
+        "endYear": "End year evaluations"
     },
 
     "login": {

@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 
 import 'package:filcnaplo/Datas/Student.dart';
@@ -14,17 +15,31 @@ class SummaryCard extends StatelessWidget {
   BuildContext context;
   int summaryType;
   DateTime date;
+  int type;
   String title;
   bool showTheme;
   bool showTitle;
   bool showColor;
 
   SummaryCard(List<Evaluation> summaryEvaluations, BuildContext context,
-      String title, bool showTheme, bool showTitle, bool showColor) {
+      int type, bool showTheme, bool showTitle, bool showColor) {
     //Summary types: 1: 1st Q, 2: Mid-year, 3: 3rd Q, 4: End-year
     this.summaryEvaluations = summaryEvaluations;
     this.context = context;
-    this.title = title;
+    switch (type) {
+      case 1:
+        title = I18n.of(context).summaryFirstQ;
+        break;
+      case 2:
+        title = I18n.of(context).summaryHalfYear;
+        break;
+      case 3:
+        title = I18n.of(context).summaryThirdQ;
+        break;
+      case 4:
+        title = I18n.of(context).summaryEndYear;
+        break;
+    }
     this.showTheme = showTheme;
     this.showTitle = showTitle;
     this.showColor = showColor;
