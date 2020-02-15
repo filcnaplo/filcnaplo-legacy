@@ -339,11 +339,29 @@ class _I18n_hu_HU extends I18n {
   TextDirection get textDirection => TextDirection.ltr;
 }
 
+class _I18n_en_US extends I18n {
+  const _I18n_en_US();
+
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+}
+
+class _I18n_de_DE extends I18n {
+  const _I18n_de_DE();
+
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+}
+
 class GeneratedLocalizationsDelegate extends LocalizationsDelegate<WidgetsLocalizations> {
   const GeneratedLocalizationsDelegate();
   List<Locale> get supportedLocales {
     return const <Locale>[
-      Locale("hu", "HU")
+      Locale("hu", "HU"),
+      Locale("en", "US"),
+      Locale("de", "DE")
     ];
   }
 
@@ -366,8 +384,20 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<WidgetsLocali
     if ("hu_HU" == lang) {
       return SynchronousFuture<WidgetsLocalizations>(const _I18n_hu_HU());
     }
+    else if ("en_US" == lang) {
+      return SynchronousFuture<WidgetsLocalizations>(const _I18n_en_US());
+    }
+    else if ("de_DE" == lang) {
+      return SynchronousFuture<WidgetsLocalizations>(const _I18n_de_DE());
+    }
     else if ("hu" == languageCode) {
       return SynchronousFuture<WidgetsLocalizations>(const _I18n_hu_HU());
+    }
+    else if ("en" == languageCode) {
+      return SynchronousFuture<WidgetsLocalizations>(const _I18n_en_US());
+    }
+    else if ("de" == languageCode) {
+      return SynchronousFuture<WidgetsLocalizations>(const _I18n_de_DE());
     }
 
     return SynchronousFuture<WidgetsLocalizations>(const I18n());
