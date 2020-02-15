@@ -99,7 +99,7 @@ class ChangedLessonCard extends StatelessWidget {
                             child: new Container(
                               child: new Text(
                                   lessonToHuman(lesson) +
-                                      dateToWeekDay(lesson.date),
+                                      dateToWeekDay(lesson.date, context),
                                   style: new TextStyle(
                                     fontSize: 18.0,
                                   )),

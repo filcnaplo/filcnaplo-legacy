@@ -29,7 +29,6 @@ class BackgroundHelper {
 
   void doEvaluations(
       List<Evaluation> offlineEvals, List<Evaluation> evals) async {
-    print("TEST 2");
 
     for (Evaluation e in evals) {
       bool exist = false;
@@ -226,10 +225,7 @@ class BackgroundHelper {
               lesson.id,
               lesson.subject +
                   " " +
-                  lesson.date.toIso8601String().substring(0, 10) +
-                  " (" +
-                  dateToWeekDay(lesson.date) +
-                  ")",
+                  lesson.date.toIso8601String().substring(0, 10),
               lesson.stateName + " " + lesson.depTeacher,
               platformChannelSpecifics,
               payload: lesson.id.toString());

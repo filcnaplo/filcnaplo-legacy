@@ -306,7 +306,7 @@ class EvaluationCard extends StatelessWidget {
                   ? new Container(
                       child: new Text(
                           dateToHuman(evaluation.Date) ??
-                              "" + dateToWeekDay(evaluation.Date) ??
+                              "" + dateToWeekDay(evaluation.Date, context) ??
                               "",
                           style: new TextStyle(fontSize: 16.0, color: fColor)),
                       alignment: Alignment(1.0, -1.0),
@@ -401,7 +401,7 @@ class EvaluationCard extends StatelessWidget {
                                         dateToHuman(evaluation.Date) ??
                                             "" +
                                                 dateToWeekDay(
-                                                    evaluation.Date) ??
+                                                    evaluation.Date, context) ??
                                             "",
                                         maxLines: 1,
                                         softWrap: false,

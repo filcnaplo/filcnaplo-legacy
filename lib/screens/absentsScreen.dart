@@ -155,21 +155,32 @@ class AbsentsScreenState extends State<AbsentsScreen> {
           content: new SingleChildScrollView(
             child: new ListBody(
               children: <Widget>[
-                new Text(capitalize(I18n.of(context).absenceMode) + ": " + absence.ModeName),
-                new Text(capitalize(I18n.of(context).lessonSubject) + ": " + absence.Subject),
-                new Text(capitalize(I18n.of(context).lessonTeacher) + ": " + absence.Teacher),
-                new Text(capitalize(I18n.of(context).absenceTime) + ": " +
+                new Text(capitalize(I18n.of(context).absenceMode) +
+                    ": " +
+                    absence.ModeName),
+                new Text(capitalize(I18n.of(context).lessonSubject) +
+                    ": " +
+                    absence.Subject),
+                new Text(capitalize(I18n.of(context).lessonTeacher) +
+                    ": " +
+                    absence.Teacher),
+                new Text(capitalize(I18n.of(context).absenceTime) +
+                    ": " +
                     dateToHuman(absence.LessonStartTime)),
-                new Text(capitalize(I18n.of(context).administrationTime) + ": " +
+                new Text(capitalize(I18n.of(context).administrationTime) +
+                    ": " +
                     dateToHuman(absence.CreatingTime)),
-                new Text(capitalize(I18n.of(context).justificationState) + ": " +
+                new Text(capitalize(I18n.of(context).justificationState) +
+                    ": " +
                     absence.JustificationStateName),
-                new Text(capitalize(I18n.of(context).justificationMode) + ": " +
+                new Text(capitalize(I18n.of(context).justificationMode) +
+                    ": " +
                     absence.JustificationTypeName),
                 absence.DelayTimeMinutes != 0
                     ? new Text(I18n.of(context).delayMins +
                         absence.DelayTimeMinutes.toString() +
-                        " " + I18n.of(context).timeMinute)
+                        " " +
+                        I18n.of(context).timeMinute)
                     : new Container(),
               ],
             ),
@@ -268,12 +279,12 @@ class AbsentsScreenState extends State<AbsentsScreen> {
           ),
           new Container(
             padding: EdgeInsets.all(10),
-            child: new Text(dateToHuman(thisAbsence[0].LessonStartTime) +
-                dateToWeekDay(thisAbsence[0].LessonStartTime) +
-                " " +
-                "(" +
-                thisAbsence.length.toString() +
-                " db)"),
+            child: new Text(
+                dateToHuman(thisAbsence[0].LessonStartTime) +
+                    dateToWeekDay(thisAbsence[0].LessonStartTime, context) +
+                    " (" +
+                    thisAbsence.length.toString() +
+                    " db)"),
           ),
         ],
       ),

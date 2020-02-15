@@ -133,7 +133,7 @@ class TestsScreenState extends State<TestsScreen> {
             ),
             new Container(
               child: new Text(dateToHuman(tests[index].date) +
-                  dateToWeekDay(tests[index].date)),
+                  dateToWeekDay(tests[index].date, context)),
               alignment: Alignment(1, -1),
             ),
             tests[index].teacher != null

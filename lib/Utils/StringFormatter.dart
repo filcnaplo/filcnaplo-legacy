@@ -1,4 +1,9 @@
+import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 import 'package:filcnaplo/Datas/Lesson.dart';
+import 'package:filcnaplo/generated/i18n.dart';
 
 String getTimetableText(DateTime startDateText) {
   return ((" (" +
@@ -51,24 +56,25 @@ String lessonToHuman(Lesson lesson) {
       .replaceAll("T", ". ");
 }
 
-String dateToWeekDay(DateTime date) {
+String dateToWeekDay(DateTime date, BuildContext context) {
   switch (date.weekday) {
     case DateTime.monday:
-      return "Hétfő";
+      return I18n.of(context).dateMonday;
     case DateTime.tuesday:
-      return "Kedd";
+      return I18n.of(context).dateTuesday;
     case DateTime.wednesday:
-      return "Szerda";
+      return I18n.of(context).dateWednesday;
     case DateTime.thursday:
-      return "Csütörtök";
+      return I18n.of(context).dateThursday;
     case DateTime.friday:
-      return "Péntek";
+      return I18n.of(context).dateFriday;
     case DateTime.saturday:
-      return "Szombat";
+      return I18n.of(context).dateSaturday;
     case DateTime.sunday:
-      return "Vasárnap";
+      return I18n.of(context).dateSunday;
   }
   return "";
 }
+
 
 String capitalize(String s) => s[0].toUpperCase() + s.substring(1);

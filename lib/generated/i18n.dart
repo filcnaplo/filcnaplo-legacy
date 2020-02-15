@@ -1009,12 +1009,12 @@ class _I18n_de_DE extends I18n {
   /// "Protokolliert"
   @override
   String get administrationTime => "Protokolliert";
-  /// "Zustand: "
+  /// "Zustand"
   @override
-  String get justificationState => "Zustand: ";
-  /// "Modus: "
+  String get justificationState => "Zustand";
+  /// "Modus"
   @override
-  String get justificationMode => "Modus: ";
+  String get justificationMode => "Modus";
   /// "Stunde"
   @override
   String get lesson => "Stunde";

@@ -119,7 +119,7 @@ class MessageScreenState extends State<MessageScreen> {
                         : FontWeight.normal),
               ),
               new Text(
-                dateToWeekDay(messages[index].date),
+                dateToWeekDay(messages[index].date, context),
                 style: TextStyle(
                     fontWeight: !messages[index].seen
                         ? FontWeight.bold

@@ -88,8 +88,8 @@
     },
 
     "justification": {
-        "state": "Zustand: ",
-        "mode": "Modus: "
+        "state": "Zustand",
+        "mode": "Modus"
     },
 
     "lesson": {

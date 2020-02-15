@@ -528,7 +528,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
               trailing: new Column(
                 children: <Widget>[
                   new Text(dateToHuman(allEvals[index].Date)) ?? "",
-                  new Text(dateToWeekDay(allEvals[index].Date)) ?? "",
+                  new Text(dateToWeekDay(allEvals[index].Date, context)) ?? "",
                 ],
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -797,7 +797,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                   new Column(
                     children: <Widget>[
                       new Text(dateToHuman(globals.currentEvals[index].Date)),
-                      new Text(dateToWeekDay(globals.currentEvals[index].Date)),
+                      new Text(dateToWeekDay(globals.currentEvals[index].Date, context)),
                     ],
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.end,

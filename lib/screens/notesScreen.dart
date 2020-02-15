@@ -128,7 +128,7 @@ class NotesScreenState extends State<NotesScreen> {
             ),
             new Container(
               child: new Text(dateToHuman(notes[index].date) +
-                  dateToWeekDay(notes[index].date)),
+                  dateToWeekDay(notes[index].date, context)),
               alignment: Alignment(1, -1),
             ),
             notes[index].teacher != null

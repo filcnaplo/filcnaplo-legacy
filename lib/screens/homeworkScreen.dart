@@ -208,7 +208,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
             selectedHomework[index].uploadDate.substring(0, 10) +
                 " " +
                 dateToWeekDay(
-                    DateTime.parse(selectedHomework[index].uploadDate)) +
+                    DateTime.parse(selectedHomework[index].uploadDate), context) +
                 (selectedHomework[index].subject == null
                     ? ""
                     : (" - " + selectedHomework[index].subject)),

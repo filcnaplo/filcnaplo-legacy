@@ -128,10 +128,10 @@ class AbsenceCard extends StatelessWidget {
                   //new Text("mód: " + absence.modeName),
                   new Text(I18n.of(context).absenceTime +
                       dateToHuman(absence.LessonStartTime) +
-                      dateToWeekDay(absence.LessonStartTime)),
+                      dateToWeekDay(absence.LessonStartTime, context)),
                   new Text(I18n.of(context).administrationTime +
                       dateToHuman(absence.CreatingTime) +
-                      dateToWeekDay(absence.LessonStartTime)),
+                      dateToWeekDay(absence.LessonStartTime, context)),
                   new Text(I18n.of(context).justificationState +
                       absence.JustificationStateName),
                   new Text(I18n.of(context).justificationMode +
@@ -206,7 +206,7 @@ class AbsenceCard extends StatelessWidget {
                   ? new Container(
                       child: new Text(
                           dateToHuman(absences[0].LessonStartTime) +
-                              dateToWeekDay(absences[0].LessonStartTime),
+                              dateToWeekDay(absences[0].LessonStartTime, context),
                           style: new TextStyle(
                             fontSize: 16.0,
                           )),
@@ -240,7 +240,7 @@ class AbsenceCard extends StatelessWidget {
                               child: new Text(
                                   dateToHuman(absences[0].LessonStartTime) +
                                       dateToWeekDay(
-                                          absences[0].LessonStartTime),
+                                          absences[0].LessonStartTime, context),
                                   style: new TextStyle(
                                     fontSize: 18.0,
                                   )),
