@@ -12,7 +12,7 @@
         "notes": "feljegyzések",
         "messages": "üzenetek",
         "tests": "számonkérések",
-        "absences": "hiányzások, késések",
+        "absences": "mulasztások",
         "settings": "beállítások"
     },
 
@@ -236,6 +236,10 @@
 
     "notification": {
         "failed": "Nem sikerült bekapcsolni az értesítéseket"
+    },
+
+    "refresh": {
+        "limit": "{mins} percenként egyszer frissíthetsz!"
     },
 
     "success": "Sikeres"

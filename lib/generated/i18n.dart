@@ -50,8 +50,8 @@ class I18n implements WidgetsLocalizations {
   String get drawerMessages => "üzenetek";
   /// "számonkérések"
   String get drawerTests => "számonkérések";
-  /// "hiányzások, késések"
-  String get drawerAbsences => "hiányzások, késések";
+  /// "mulasztások"
+  String get drawerAbsences => "mulasztások";
   /// "beállítások"
   String get drawerSettings => "beállítások";
   /// "Számonkérések"
@@ -328,6 +328,8 @@ class I18n implements WidgetsLocalizations {
   String get settingsLanguage => "Nyelv";
   /// "Nem sikerült bekapcsolni az értesítéseket"
   String get notificationFailed => "Nem sikerült bekapcsolni az értesítéseket";
+  /// "${mins} percenként egyszer frissíthetsz!"
+  String refreshLimit(String mins) => "${mins} percenként egyszer frissíthetsz!";
   /// "Sikeres"
   String get success => "Sikeres";
 }
