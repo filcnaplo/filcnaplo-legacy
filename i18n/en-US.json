@@ -1,4 +1,5 @@
-{ "app": {
+{ 
+    "app": {
         "title": "Filc Diary",
         "version": "version"
     },
@@ -31,7 +32,7 @@
     "account": {
         "title": "accounts",
         "delete": "Delete user",
-        "deleteConfirm": "Do you really want to delete the user?"
+        "deleteConfirm": "Are you sure you want to delete {name}?"
     },
 
     "dialog": {
@@ -79,11 +80,11 @@
 
     "delay": {
         "mins": "delay in minutes",
-        "all": "all delay: {count} minutes"
+        "all": "all delays: {count} minutes"
     },
 
     "administration": {
-        "time": "log's date"
+        "time": "date"
     },
 
     "justification": {
@@ -143,7 +144,7 @@
         "time": "date",
         "mode": "mode",
         "all": "all absences: {count} hour(s)",
-        "parental": "parental excuse(s): {count} pcs"
+        "parental": "parental excuse(s): {count}"
     },
     
     "timetable": {
@@ -164,7 +165,7 @@
         "averageClass": "class average",
         "mode": "mode",
         "weight": "weight",
-        "value": "valye",
+        "value": "value",
         "range": "range",
         "if": "if I got"
     },
@@ -173,14 +174,14 @@
         "": "login",
         "username": "Username",
         "password": "Password",
-        "usernameHint": "mostly your education ID (11 numbers)",
+        "usernameHint": "usually your education ID (11 numbers)",
         "passwordHint": "most of the time birth date (19700101)",
-        "usernameError": "Input your username!",
-        "passwordError": "Input your password!",
-        "schoolError": "Choose a school!",
+        "usernameError": "You must give a username!",
+        "passwordError": "You must give a password!",
+        "schoolError": "Please select a school!",
         "school": "School",
         "choose": "choose",
-        "chooseSchool": "Choose a school!"
+        "chooseSchool": "Choose a school"
     },
 
     "export": {
@@ -188,13 +189,13 @@
         "grades": "grades",
         "lessons": "classes",
         "accounts": "accounts",
-        "choose": "choose an intervale",
+        "choose": "choose an interval",
         "success": "Success!"
     },
 
     "close": {
         "title": "Close the application",
-        "confirm": "Do you really want to leave?"
+        "confirm": "Are you sure you want to exit?"
     },
 
     "info": {
@@ -234,7 +235,7 @@
     },
 
     "notification": {
-        "failed": "Couldn't turn on notifications, try again!"
+        "failed": "Failed to turn on notifications, please try again!"
     },
 
     "refresh" : {
