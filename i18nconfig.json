@@ -6,7 +6,8 @@
     "localePath": "i18n",
     "generatedPath": "lib/generated",
     "ltr": [
-        "hu-HU"
+        "hu-HU",
+        "en-US"
     ],
     "rtl": []
 }

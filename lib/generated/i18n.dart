@@ -50,8 +50,8 @@ class I18n implements WidgetsLocalizations {
   String get drawerMessages => "üzenetek";
   /// "számonkérések"
   String get drawerTests => "számonkérések";
-  /// "mulasztások"
-  String get drawerAbsences => "mulasztások";
+  /// "hiányzások, késések"
+  String get drawerAbsences => "hiányzások, késések";
   /// "beállítások"
   String get drawerSettings => "beállítások";
   /// "Számonkérések"
@@ -240,10 +240,10 @@ class I18n implements WidgetsLocalizations {
   String get loginUsername => "Felhasználónév";
   /// "Jelszó"
   String get loginPassword => "Jelszó";
-  /// "oktatási azonosító 11-jegyű diákigazolványszám"
-  String get loginUsernameHint => "oktatási azonosító 11-jegyű diákigazolványszám";
-  /// "általában a születési dátum(pl.: 2000-01-02)"
-  String get loginPasswordHint => "általában a születési dátum(pl.: 2000-01-02)";
+  /// "11 jegyű, 7-tel kezdődő diákigazolványszám"
+  String get loginUsernameHint => "11 jegyű, 7-tel kezdődő diákigazolványszám";
+  /// "általában a születési dátum (pl.: 2000-01-02)"
+  String get loginPasswordHint => "általában a születési dátum (pl.: 2000-01-02)";
   /// "Kérlek add meg a felhasználónevedet!"
   String get loginUsernameError => "Kérlek add meg a felhasználónevedet!";
   /// "Kérlek add meg a jelszavadat!"
@@ -328,8 +328,8 @@ class I18n implements WidgetsLocalizations {
   String get settingsLanguage => "Nyelv";
   /// "Nem sikerült bekapcsolni az értesítéseket"
   String get notificationFailed => "Nem sikerült bekapcsolni az értesítéseket";
-  /// "Sikeres"
-  String get success => "Sikeres";
+  /// "Siker"
+  String get success => "Siker";
 }
 
 class _I18n_hu_HU extends I18n {

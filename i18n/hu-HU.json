@@ -12,7 +12,7 @@
         "notes": "feljegyzések",
         "messages": "üzenetek",
         "tests": "számonkérések",
-        "absences": "mulasztások",
+        "absences": "hiányzások, késések",
         "settings": "beállítások"
     },
 
@@ -46,7 +46,7 @@
         "": "idő",
         "hour": "óra",
         "minute": "perc",
-        "later": "timeLater"
+        "later": "múlva"
     },
 
     "date": {
@@ -174,8 +174,8 @@
         "": "bejelentkezés",
         "username": "Felhasználónév",
         "password": "Jelszó",
-        "usernameHint": "oktatási azonosító 11-jegyű diákigazolványszám",
-        "passwordHint": "általában a születési dátum(pl.: 2000-01-02)",
+        "usernameHint": "11 jegyű, 7-tel kezdődő diákigazolványszám",
+        "passwordHint": "általában a születési dátum (pl.: 2000-01-02)",
         "usernameError": "Kérlek add meg a felhasználónevedet!",
         "passwordError": "Kérlek add meg a jelszavadat!",
         "schoolError": "Kérlek válassz egy iskolát!",
@@ -238,5 +238,5 @@
         "failed": "Nem sikerült bekapcsolni az értesítéseket"
     },
 
-    "success": "Sikeres"
+    "success": "Siker"
 }
