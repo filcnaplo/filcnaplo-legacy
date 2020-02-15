@@ -22,11 +22,11 @@
 
     "grade": {
         "": "note",
-        "1": "1-es",
-        "2": "2-es",
-        "3": "3-as",
-        "4": "4-es",
-        "5": "5-ös"
+        "1": "1",
+        "2": "2",
+        "3": "3",
+        "4": "4",
+        "5": "5"
     },
 
     "account": {
@@ -37,9 +37,9 @@
 
     "dialog": {
         "ok": "OK",
-        "yes": "JA",
-        "no": "NEIN",
-        "done": "FERTIG"
+        "yes": "Ja",
+        "no": "Nein",
+        "done": "Fertig"
     },
 
     "time": {
@@ -84,7 +84,7 @@
     },
 
     "administration": {
-        "time": "Zeitpunkt der Protokollierung: "
+        "time": "Zeitpunkt der Protokollierung"
     },
 
     "justification": {

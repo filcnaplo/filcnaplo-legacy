@@ -838,21 +838,21 @@ class _I18n_de_DE extends I18n {
   /// "Prüfungen"
   @override
   String get testTitle => "Prüfungen";
-  /// "1-es"
+  /// "1"
   @override
-  String get grade1 => "1-es";
-  /// "2-es"
+  String get grade1 => "1";
+  /// "2"
   @override
-  String get grade2 => "2-es";
-  /// "3-as"
+  String get grade2 => "2";
+  /// "3"
   @override
-  String get grade3 => "3-as";
-  /// "4-es"
+  String get grade3 => "3";
+  /// "4"
   @override
-  String get grade4 => "4-es";
-  /// "5-ös"
+  String get grade4 => "4";
+  /// "5"
   @override
-  String get grade5 => "5-ös";
+  String get grade5 => "5";
   /// "note"
   @override
   String get grade => "note";
@@ -868,15 +868,15 @@ class _I18n_de_DE extends I18n {
   /// "OK"
   @override
   String get dialogOk => "OK";
-  /// "JA"
+  /// "Ja"
   @override
-  String get dialogYes => "JA";
-  /// "NEIN"
+  String get dialogYes => "Ja";
+  /// "Nein"
   @override
-  String get dialogNo => "NEIN";
-  /// "FERTIG"
+  String get dialogNo => "Nein";
+  /// "Fertig"
   @override
-  String get dialogDone => "FERTIG";
+  String get dialogDone => "Fertig";
   /// "zeit"
   @override
   String get time => "zeit";
@@ -961,9 +961,9 @@ class _I18n_de_DE extends I18n {
   /// "Menge aller Verspätungen: ${count} Minuten"
   @override
   String delayAll(String count) => "Menge aller Verspätungen: ${count} Minuten";
-  /// "Zeitpunkt der Protokollierung: "
+  /// "Zeitpunkt der Protokollierung"
   @override
-  String get administrationTime => "Zeitpunkt der Protokollierung: ";
+  String get administrationTime => "Zeitpunkt der Protokollierung";
   /// "Zustand: "
   @override
   String get justificationState => "Zustand: ";
