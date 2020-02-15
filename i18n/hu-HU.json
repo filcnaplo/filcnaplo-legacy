@@ -1,6 +1,6 @@
 {
     "app": {
-        "title": "Szivacs Napló",
+        "title": "Filc Napló",
         "version": "verzió"
     },
 
@@ -238,5 +238,5 @@
         "failed": "Nem sikerült bekapcsolni az értesítéseket"
     },
 
-    "success": "Siker"
+    "success": "Sikeres"
 }
