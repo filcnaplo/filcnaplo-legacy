@@ -788,6 +788,9 @@ class _I18n_en_US extends I18n {
   /// "Couldn't turn on notifications, try again!"
   @override
   String get notificationFailed => "Couldn't turn on notifications, try again!";
+  /// "You can only update evey ${mins} minutes!"
+  @override
+  String refreshLimit(String mins) => "You can only update evey ${mins} minutes!";
   /// "Success!"
   @override
   String get success => "Success!";

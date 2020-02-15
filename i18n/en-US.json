@@ -237,5 +237,9 @@
         "failed": "Couldn't turn on notifications, try again!"
     },
 
+    "refresh" : {
+        "limit": "You can only update evey {mins} minutes!"
+    },
+
     "success": "Success!"
 }

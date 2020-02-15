@@ -1,5 +1,4 @@
 import 'dart:convert' show json;
-import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -47,6 +46,7 @@ class Account {
   Map getStudentJson() => _studentJson;
 
   Future<void> refreshStudentString(bool isOffline, bool showErrors) async {
+    BuildContext context;
     if (!user.getRecentlyRefreshed("refreshStudentString")) {
       if (isOffline && _studentJson == null) {
         try {
@@ -80,11 +80,12 @@ class Account {
       user.setRecentlyRefreshed("refreshStudentString");
     } else {
       Fluttertoast.showToast(
-        msg: I18n.of(context).refreshLimit(RATE_LIMIT_MINUTES.toString()));
+        msg: I18n.of(context).refreshLimit(User.RATE_LIMIT_MINUTES.toString()));
     }
   }
 
   Future<void> refreshTests(bool isOffline, bool showErrors) async {
+    BuildContext context;
     if (!user.getRecentlyRefreshed("refreshTests")) {
       if (isOffline) {
         testJson = await DBHelper().getTestsJson(user);
@@ -116,11 +117,12 @@ class Account {
       user.setRecentlyRefreshed("refreshTests");
     } else {
       Fluttertoast.showToast(
-        msg: I18n.of(context).refreshLimit(RATE_LIMIT_MINUTES.toString()));
+        msg: I18n.of(context).refreshLimit(User.RATE_LIMIT_MINUTES.toString()));
     }
   }
 
   Future<void> _refreshEventsString(bool isOffline, bool showErrors) async {
+    BuildContext context;
     if (!user.getRecentlyRefreshed("_refreshEventsString")) {
       if (isOffline)
         _eventsString = await readEventsString(user);
@@ -129,7 +131,7 @@ class Account {
       user.setRecentlyRefreshed("_refreshEventsString");
     } else {
       Fluttertoast.showToast(
-        msg: I18n.of(context).refreshLimit(RATE_LIMIT_MINUTES.toString()));
+        msg: I18n.of(context).refreshLimit(User.RATE_LIMIT_MINUTES.toString()));
     }
   }
 
