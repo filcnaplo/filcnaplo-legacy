@@ -866,8 +866,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                         ": " +
                         evaluation.Teacher ??
                     ""),
-                new Text(
-                    I18n.of(context).time + dateToHuman(evaluation.Date ?? "")),
+                new Text(capitalize(I18n.of(context).time) + ": " + dateToHuman(evaluation.Date ?? "")),
                 evaluation.Mode != null
                     ? new Text(capitalize(I18n.of(context).evaluationMode) +
                         ": " +

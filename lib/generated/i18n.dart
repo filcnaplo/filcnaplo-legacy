@@ -224,8 +224,8 @@ class I18n implements WidgetsLocalizations {
   String get evaluationAverage => "átlag";
   /// "osztály átlag"
   String get evaluationAverageClass => "osztály átlag";
-  /// "faja"
-  String get evaluationMode => "faja";
+  /// "típus"
+  String get evaluationMode => "típus";
   /// "súly"
   String get evaluationWeight => "súly";
   /// "érték"
