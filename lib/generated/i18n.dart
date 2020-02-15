@@ -991,12 +991,12 @@ class _I18n_de_DE extends I18n {
   /// "Klasse"
   @override
   String get lessonClass => "Klasse";
-  /// "Stunde beginnt um "
+  /// "Stunde beginnt um"
   @override
-  String get lessonStart => "Stunde beginnt um ";
-  /// "Stunde endet um  "
+  String get lessonStart => "Stunde beginnt um";
+  /// "Stunde endet um"
   @override
-  String get lessonEnd => "Stunde endet um  ";
+  String get lessonEnd => "Stunde endet um";
   /// "Thema"
   @override
   String get lessonTheme => "Thema";

@@ -100,8 +100,8 @@
         "room": "Raum",
         "teacher": "Lehrer",
         "class": "Klasse",
-        "start": "Stunde beginnt um ",
-        "end": "Stunde endet um  ",
+        "start": "Stunde beginnt um",
+        "end": "Stunde endet um",
         "theme": "Thema",
         "subject": "Fach"
     },
