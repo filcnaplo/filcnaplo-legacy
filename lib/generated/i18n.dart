@@ -32,8 +32,8 @@ class I18n implements WidgetsLocalizations {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  /// "Szivacs Napló"
-  String get appTitle => "Szivacs Napló";
+  /// "Filc Napló"
+  String get appTitle => "Filc Napló";
   /// "verzió"
   String get appVersion => "verzió";
   /// "főoldal"
@@ -88,8 +88,8 @@ class I18n implements WidgetsLocalizations {
   String get timeHour => "óra";
   /// "perc"
   String get timeMinute => "perc";
-  /// "timeLater"
-  String get timeLater => "timeLater";
+  /// "múlva"
+  String get timeLater => "múlva";
   /// "dátum"
   String get date => "dátum";
   /// "holnap"
@@ -240,10 +240,10 @@ class I18n implements WidgetsLocalizations {
   String get loginUsername => "Felhasználónév";
   /// "Jelszó"
   String get loginPassword => "Jelszó";
-  /// "oktatási azonosító 11-jegyű diákigazolványszám"
-  String get loginUsernameHint => "oktatási azonosító 11-jegyű diákigazolványszám";
-  /// "általában a születési dátum(pl.: 2000-01-02)"
-  String get loginPasswordHint => "általában a születési dátum(pl.: 2000-01-02)";
+  /// "11 jegyű, 7-tel kezdődő diákigazolványszám"
+  String get loginUsernameHint => "11 jegyű, 7-tel kezdődő diákigazolványszám";
+  /// "általában a születési dátum (pl.: 2000-01-02)"
+  String get loginPasswordHint => "általában a születési dátum (pl.: 2000-01-02)";
   /// "Kérlek add meg a felhasználónevedet!"
   String get loginUsernameError => "Kérlek add meg a felhasználónevedet!";
   /// "Kérlek add meg a jelszavadat!"
@@ -328,6 +328,8 @@ class I18n implements WidgetsLocalizations {
   String get settingsLanguage => "Nyelv";
   /// "Nem sikerült bekapcsolni az értesítéseket"
   String get notificationFailed => "Nem sikerült bekapcsolni az értesítéseket";
+  /// "${mins} percenként egyszer frissíthetsz!"
+  String refreshLimit(String mins) => "${mins} percenként egyszer frissíthetsz!";
   /// "Sikeres"
   String get success => "Sikeres";
 }
@@ -342,14 +344,453 @@ class _I18n_hu_HU extends I18n {
 class _I18n_en_US extends I18n {
   const _I18n_en_US();
 
-
+  /// "Filc Diary"
   @override
-  TextDirection get textDirection => TextDirection.ltr;
-}
-
-class _I18n_de_DE extends I18n {
-  const _I18n_de_DE();
-
+  String get appTitle => "Filc Diary";
+  /// "version"
+  @override
+  String get appVersion => "version";
+  /// "home"
+  @override
+  String get drawerHome => "home";
+  /// "evaluations"
+  @override
+  String get drawerEvaluations => "evaluations";
+  /// "timetable"
+  @override
+  String get drawerTimetable => "timetable";
+  /// "homeworks"
+  @override
+  String get drawerHomeworks => "homeworks";
+  /// "notes"
+  @override
+  String get drawerNotes => "notes";
+  /// "messages"
+  @override
+  String get drawerMessages => "messages";
+  /// "tests"
+  @override
+  String get drawerTests => "tests";
+  /// "absences"
+  @override
+  String get drawerAbsences => "absences";
+  /// "settings"
+  @override
+  String get drawerSettings => "settings";
+  /// "Tests"
+  @override
+  String get testTitle => "Tests";
+  /// "1"
+  @override
+  String get grade1 => "1";
+  /// "2"
+  @override
+  String get grade2 => "2";
+  /// "3"
+  @override
+  String get grade3 => "3";
+  /// "4"
+  @override
+  String get grade4 => "4";
+  /// "5"
+  @override
+  String get grade5 => "5";
+  /// "grade"
+  @override
+  String get grade => "grade";
+  /// "accounts"
+  @override
+  String get accountTitle => "accounts";
+  /// "Delete user"
+  @override
+  String get accountDelete => "Delete user";
+  /// "Do you really want to delete the user?"
+  @override
+  String accountDeleteConfirm(String name) => "Do you really want to delete the user?";
+  /// "OK"
+  @override
+  String get dialogOk => "OK";
+  /// "YES"
+  @override
+  String get dialogYes => "YES";
+  /// "NO"
+  @override
+  String get dialogNo => "NO";
+  /// "DONE"
+  @override
+  String get dialogDone => "DONE";
+  /// "time"
+  @override
+  String get time => "time";
+  /// "hour"
+  @override
+  String get timeHour => "hour";
+  /// "minute"
+  @override
+  String get timeMinute => "minute";
+  /// "later"
+  @override
+  String get timeLater => "later";
+  /// "date"
+  @override
+  String get date => "date";
+  /// "tomorrow"
+  @override
+  String get dateTomorrow => "tomorrow";
+  /// "monday"
+  @override
+  String get dateMonday => "monday";
+  /// "tuesdau"
+  @override
+  String get dateTuesday => "tuesdau";
+  /// "wednesday"
+  @override
+  String get dateWednesday => "wednesday";
+  /// "thursday"
+  @override
+  String get dateThursday => "thursday";
+  /// "friday"
+  @override
+  String get dateFriday => "friday";
+  /// "saturday"
+  @override
+  String get dateSaturday => "saturday";
+  /// "sunday"
+  @override
+  String get dateSunday => "sunday";
+  /// "M"
+  @override
+  String get dateMondayShort => "M";
+  /// "Tu"
+  @override
+  String get dateTuesdayShort => "Tu";
+  /// "W"
+  @override
+  String get dateWednesdayShort => "W";
+  /// "Th"
+  @override
+  String get dateThursdayShort => "Th";
+  /// "F"
+  @override
+  String get dateFridayShort => "F";
+  /// "Sa"
+  @override
+  String get dateSaturdayShort => "Sa";
+  /// "Su"
+  @override
+  String get dateSundayShort => "Su";
+  /// "day"
+  @override
+  String get dateDay => "day";
+  /// "week"
+  @override
+  String get dateWeek => "week";
+  /// "month"
+  @override
+  String get dateMonth => "month";
+  /// "two months"
+  @override
+  String get dateMonth2 => "two months";
+  /// "last week"
+  @override
+  String get dateWeekPrev => "last week";
+  /// "next week"
+  @override
+  String get dateWeekNext => "next week";
+  /// "delay in minutes"
+  @override
+  String get delayMins => "delay in minutes";
+  /// "all delay: ${count} minutes"
+  @override
+  String delayAll(String count) => "all delay: ${count} minutes";
+  /// "log's date"
+  @override
+  String get administrationTime => "log's date";
+  /// "state"
+  @override
+  String get justificationState => "state";
+  /// "mode"
+  @override
+  String get justificationMode => "mode";
+  /// "óra"
+  @override
+  String get lesson => "óra";
+  /// "${count} óra"
+  @override
+  String lessonCount(String count) => "${count} óra";
+  /// "következő óra"
+  @override
+  String get lessonNext => "következő óra";
+  /// "óra lesz"
+  @override
+  String get lessonHave => "óra lesz";
+  /// "terem"
+  @override
+  String get lessonRoom => "terem";
+  /// "tanár"
+  @override
+  String get lessonTeacher => "tanár";
+  /// "osztály"
+  @override
+  String get lessonClass => "osztály";
+  /// "óra kezdete"
+  @override
+  String get lessonStart => "óra kezdete";
+  /// "óra vége"
+  @override
+  String get lessonEnd => "óra vége";
+  /// "téma"
+  @override
+  String get lessonTheme => "téma";
+  /// "tárgy"
+  @override
+  String get lessonSubject => "tárgy";
+  /// "homework"
+  @override
+  String get homework => "homework";
+  /// "Homeworks"
+  @override
+  String get homeworkTitle => "Homeworks";
+  /// "deadline"
+  @override
+  String get homeworkDeadline => "deadline";
+  /// ""
+  @override
+  String get homeworkSubject => "";
+  /// ""
+  @override
+  String get homeworkUploadUser => "";
+  /// ""
+  @override
+  String get homeworkUploadTime => "";
+  /// "substitution"
+  @override
+  String get substitution => "substitution";
+  /// "not held"
+  @override
+  String get substitutionMissed => "not held";
+  /// "state"
+  @override
+  String get state => "state";
+  /// "bulletin board"
+  @override
+  String get note2 => "bulletin board";
+  /// "note"
+  @override
+  String get note => "note";
+  /// "Notes"
+  @override
+  String get noteTitle => "Notes";
+  /// "Messages"
+  @override
+  String get messageTitle => "Messages";
+  /// "receivers"
+  @override
+  String get messageReceivers => "receivers";
+  /// "statistics"
+  @override
+  String get statistics => "statistics";
+  /// "Absences"
+  @override
+  String get absenceTitle => "Absences";
+  /// "date"
+  @override
+  String get absenceTime => "date";
+  /// "mode"
+  @override
+  String get absenceMode => "mode";
+  /// "all absences: ${count} hour(s)"
+  @override
+  String absenceAll(String count) => "all absences: ${count} hour(s)";
+  /// "parental excuse(s): ${count} pcs"
+  @override
+  String absenceParental(String count) => "parental excuse(s): ${count} pcs";
+  /// "Timetable"
+  @override
+  String get timetable => "Timetable";
+  /// "empty timetable"
+  @override
+  String get timetableEmpty => "empty timetable";
+  /// "Sort"
+  @override
+  String get sort => "Sort";
+  /// "date"
+  @override
+  String get sortTime => "date";
+  /// "grade"
+  @override
+  String get sortEval => "grade";
+  /// "test's date"
+  @override
+  String get sortTimeReal => "test's date";
+  /// "Grades"
+  @override
+  String get evaluationTitle => "Grades";
+  /// "averages"
+  @override
+  String get evaluationAverage => "averages";
+  /// "class average"
+  @override
+  String get evaluationAverageClass => "class average";
+  /// "mode"
+  @override
+  String get evaluationMode => "mode";
+  /// "weight"
+  @override
+  String get evaluationWeight => "weight";
+  /// "valye"
+  @override
+  String get evaluationValue => "valye";
+  /// "range"
+  @override
+  String get evaluationRange => "range";
+  /// "if I got"
+  @override
+  String get evaluationIf => "if I got";
+  /// "login"
+  @override
+  String get login => "login";
+  /// "Username"
+  @override
+  String get loginUsername => "Username";
+  /// "Password"
+  @override
+  String get loginPassword => "Password";
+  /// "mostly your education ID (11 numbers)"
+  @override
+  String get loginUsernameHint => "mostly your education ID (11 numbers)";
+  /// "most of the time birth date (19700101)"
+  @override
+  String get loginPasswordHint => "most of the time birth date (19700101)";
+  /// "Input your username!"
+  @override
+  String get loginUsernameError => "Input your username!";
+  /// "Input your password!"
+  @override
+  String get loginPasswordError => "Input your password!";
+  /// "Choose a school!"
+  @override
+  String get loginSchoolError => "Choose a school!";
+  /// "School"
+  @override
+  String get loginSchool => "School";
+  /// "choose"
+  @override
+  String get loginChoose => "choose";
+  /// "Choose a school!"
+  @override
+  String get loginChooseSchool => "Choose a school!";
+  /// "Export"
+  @override
+  String get export => "Export";
+  /// "grades"
+  @override
+  String get exportGrades => "grades";
+  /// "classes"
+  @override
+  String get exportLessons => "classes";
+  /// "accounts"
+  @override
+  String get exportAccounts => "accounts";
+  /// "choose an intervale"
+  @override
+  String get exportChoose => "choose an intervale";
+  /// "Success!"
+  @override
+  String get exportSuccess => "Success!";
+  /// "Close the application"
+  @override
+  String get closeTitle => "Close the application";
+  /// "Do you really want to leave?"
+  @override
+  String get closeConfirm => "Do you really want to leave?";
+  /// "Birth date: "
+  @override
+  String get infoBirthdate => "Birth date: ";
+  /// "Kréta ID: "
+  @override
+  String get infoKretaID => "Kréta ID: ";
+  /// "Address: "
+  @override
+  String get infoAddress => "Address: ";
+  /// "Classroom teacher: "
+  @override
+  String get infoTeacher => "Classroom teacher: ";
+  /// "School: "
+  @override
+  String get infoSchool => "School: ";
+  /// "Parent(s): "
+  @override
+  String get infoParents => "Parent(s): ";
+  /// "Mother's name: "
+  @override
+  String get infoMother => "Mother's name: ";
+  /// "Color"
+  @override
+  String get color => "Color";
+  /// "green"
+  @override
+  String get colorGreen => "green";
+  /// "red"
+  @override
+  String get colorRed => "red";
+  /// "blue"
+  @override
+  String get colorBlue => "blue";
+  /// "lime"
+  @override
+  String get colorLime => "lime";
+  /// "yellow"
+  @override
+  String get colorYellow => "yellow";
+  /// "orange"
+  @override
+  String get colorOrange => "orange";
+  /// "grey"
+  @override
+  String get colorGrey => "grey";
+  /// "pink"
+  @override
+  String get colorPink => "pink";
+  /// "purple"
+  @override
+  String get colorPurple => "purple";
+  /// "teal"
+  @override
+  String get colorTeal => "teal";
+  /// "Settings"
+  @override
+  String get settingsTitle => "Settings";
+  /// "Colorful home"
+  @override
+  String get settingsColorful => "Colorful home";
+  /// "Dark theme"
+  @override
+  String get settingsDarkTheme => "Dark theme";
+  /// "Amoled"
+  @override
+  String get settingsAmoled => "Amoled";
+  /// "Grade colors"
+  @override
+  String get settingsEvaluationColors => "Grade colors";
+  /// "Notifications"
+  @override
+  String get settingsNotifications => "Notifications";
+  /// "Next class"
+  @override
+  String get settingsNextLesson => "Next class";
+  /// "Sync frequency: ${n}"
+  @override
+  String settingsSyncFrequency(String n) => "Sync frequency: ${n}";
+  /// "Language"
+  @override
+  String get settingsLanguage => "Language";
+  /// "Couldn't turn on notifications, try again!"
+  @override
+  String get notificationFailed => "Couldn't turn on notifications, try again!";
+  /// "Success!"
+  @override
+  String get success => "Success!";
 
   @override
   TextDirection get textDirection => TextDirection.ltr;
@@ -360,8 +801,7 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<WidgetsLocali
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale("hu", "HU"),
-      Locale("en", "US"),
-      Locale("de", "DE")
+      Locale("en", "US")
     ];
   }
 
@@ -387,17 +827,11 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<WidgetsLocali
     else if ("en_US" == lang) {
       return SynchronousFuture<WidgetsLocalizations>(const _I18n_en_US());
     }
-    else if ("de_DE" == lang) {
-      return SynchronousFuture<WidgetsLocalizations>(const _I18n_de_DE());
-    }
     else if ("hu" == languageCode) {
       return SynchronousFuture<WidgetsLocalizations>(const _I18n_hu_HU());
     }
     else if ("en" == languageCode) {
       return SynchronousFuture<WidgetsLocalizations>(const _I18n_en_US());
-    }
-    else if ("de" == languageCode) {
-      return SynchronousFuture<WidgetsLocalizations>(const _I18n_de_DE());
     }
 
     return SynchronousFuture<WidgetsLocalizations>(const I18n());

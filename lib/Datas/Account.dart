@@ -1,4 +1,5 @@
 import 'dart:convert' show json;
+import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -11,6 +12,7 @@ import 'package:filcnaplo/Helpers/NotesHelper.dart';
 import 'package:filcnaplo/Helpers/RequestHelper.dart';
 import 'package:filcnaplo/Helpers/TestHelper.dart';
 import 'package:filcnaplo/Utils/Saver.dart';
+import 'package:filcnaplo/generated/i18n.dart';
 import 'Average.dart';
 import 'Message.dart';
 import 'Note.dart';
@@ -76,6 +78,9 @@ class Account {
           .getAveragesFrom(json.encode(_studentJson), user);
 
       user.setRecentlyRefreshed("refreshStudentString");
+    } else {
+      Fluttertoast.showToast(
+        msg: I18n.of(context).refreshLimit(RATE_LIMIT_MINUTES.toString()));
     }
   }
 
@@ -109,6 +114,9 @@ class Account {
         DBHelper().addTestsJson(testJson, user);
       }
       user.setRecentlyRefreshed("refreshTests");
+    } else {
+      Fluttertoast.showToast(
+        msg: I18n.of(context).refreshLimit(RATE_LIMIT_MINUTES.toString()));
     }
   }
 
@@ -119,6 +127,9 @@ class Account {
       else
         _eventsString = await RequestHelper().getEventsString(user, showErrors);
       user.setRecentlyRefreshed("_refreshEventsString");
+    } else {
+      Fluttertoast.showToast(
+        msg: I18n.of(context).refreshLimit(RATE_LIMIT_MINUTES.toString()));
     }
   }
 

@@ -1,6 +1,6 @@
 {
     "app": {
-        "title": "Szivacs Napló",
+        "title": "Filc Napló",
         "version": "verzió"
     },
 
@@ -46,7 +46,7 @@
         "": "idő",
         "hour": "óra",
         "minute": "perc",
-        "later": "timeLater"
+        "later": "múlva"
     },
 
     "date": {
@@ -174,8 +174,8 @@
         "": "bejelentkezés",
         "username": "Felhasználónév",
         "password": "Jelszó",
-        "usernameHint": "oktatási azonosító 11-jegyű diákigazolványszám",
-        "passwordHint": "általában a születési dátum(pl.: 2000-01-02)",
+        "usernameHint": "11 jegyű, 7-tel kezdődő diákigazolványszám",
+        "passwordHint": "általában a születési dátum (pl.: 2000-01-02)",
         "usernameError": "Kérlek add meg a felhasználónevedet!",
         "passwordError": "Kérlek add meg a jelszavadat!",
         "schoolError": "Kérlek válassz egy iskolát!",
@@ -236,6 +236,10 @@
 
     "notification": {
         "failed": "Nem sikerült bekapcsolni az értesítéseket"
+    },
+
+    "refresh": {
+        "limit": "{mins} percenként egyszer frissíthetsz!"
     },
 
     "success": "Sikeres"
