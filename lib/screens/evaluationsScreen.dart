@@ -1070,7 +1070,7 @@ class GradeDialogState extends State<GradeDialog> {
       "Subject": "${globals.selectedAverage.subject}",
       "SubjectCategory": null,
       "SubjectCategoryName": "",
-      "Theme": "🔘 Ha kapnék egy...", //localization
+      "Theme": "🔘 Ha kapnék egy...",
       "IsAtlagbaBeleszamit": true,
       "Mode": "Hamis",
       "Weight": "$weight",
