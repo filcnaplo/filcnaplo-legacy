@@ -108,6 +108,7 @@
 
     "homework": {
         "": "homework",
+        "add": "add homework",
         "title": "Homeworks",
         "deadline": "deadline",
         "subject": "",

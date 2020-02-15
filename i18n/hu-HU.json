@@ -108,6 +108,7 @@
 
     "homework": {
         "": "házi feladat",
+        "add": "házi hozzáadása",
         "title": "Házi feladatok",
         "deadline": "határidő",
         "subject": "tantárgy",

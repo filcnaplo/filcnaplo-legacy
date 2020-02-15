@@ -168,6 +168,8 @@ class I18n implements WidgetsLocalizations {
   String get lessonSubject => "tárgy";
   /// "házi feladat"
   String get homework => "házi feladat";
+  /// "házi hozzáadása"
+  String get homeworkAdd => "házi hozzáadása";
   /// "Házi feladatok"
   String get homeworkTitle => "Házi feladatok";
   /// "határidő"
@@ -548,6 +550,9 @@ class _I18n_en_US extends I18n {
   /// "homework"
   @override
   String get homework => "homework";
+  /// "add homework"
+  @override
+  String get homeworkAdd => "add homework";
   /// "Homeworks"
   @override
   String get homeworkTitle => "Homeworks";
@@ -1006,6 +1011,9 @@ class _I18n_de_DE extends I18n {
   /// "Hausaufgabe"
   @override
   String get homework => "Hausaufgabe";
+  /// "Hausaufgabe hochladen"
+  @override
+  String get homeworkAdd => "Hausaufgabe hochladen";
   /// "Hausaufgaben"
   @override
   String get homeworkTitle => "Hausaufgaben";

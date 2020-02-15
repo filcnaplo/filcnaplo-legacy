@@ -108,6 +108,7 @@
 
     "homework": {
         "": "Hausaufgabe",
+        "add": "Hausaufgabe hochladen",
         "title": "Hausaufgaben",
         "deadline": "bis",
         "subject": "Fach",
