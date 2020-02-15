@@ -690,7 +690,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                               children: <Widget>[
                                 new Column(
                                   children: <Widget>[
-                                    new Text("átlag: "), //localization
+                                    new Text(I18n.of(context).evaluationAverage + ": "), //localization
                                   ],
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                 ),
@@ -727,14 +727,14 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
                     icon: new Icon(Icons.list),
-                    title: new Text("Összes")), //localization
+                    title: new Text (I18n.of(context).evaluationNavigationAll)),
                 BottomNavigationBarItem(
                   icon: new Icon(Icons.show_chart),
-                  title: new Text("Tárgyanként"),
+                  title: new Text(I18n.of(context).evaluationNavigationStatistics),
                 ),
                 BottomNavigationBarItem(
                   icon: new Icon(Icons.assistant),
-                  title: new Text("Eredmények"),
+                  title: new Text(I18n.of(context).evaluationNavigationResults),
                 ),
               ],
               onTap: switchToScreen,
@@ -1026,7 +1026,7 @@ class GradeDialogState extends State<GradeDialog> {
           child: new Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new Text("Súlyozás: "),
+              new Text(I18n.of(context).evaluationWeight + ": "),
               new Checkbox(
                 value: isTZ,
                 onChanged: (value) {
@@ -1069,7 +1069,7 @@ class GradeDialogState extends State<GradeDialog> {
       "Subject": "${globals.selectedAverage.subject}",
       "SubjectCategory": null,
       "SubjectCategoryName": "",
-      "Theme": "🔘 Ha kapnék egy...",
+      "Theme": "${I18n.of(context).evaluationIf}",
       "IsAtlagbaBeleszamit": true,
       "Mode": "Hamis",
       "Weight": "$weight",

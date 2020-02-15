@@ -162,10 +162,15 @@
 
     "evaluation": {
         "title": "Jegyek",
+        "navigation": {
+            "all": "Összes",
+            "statistics": "Statisztika",
+            "results": "Eredmények"
+        },
         "average": "átlag",
         "averageClass": "osztályátlag",
         "mode": "típus",
-        "weight": "súly",
+        "weight": "súlyozás",
         "value": "érték",
         "range": "mód",
         "if": "Ha kapnék egy..."

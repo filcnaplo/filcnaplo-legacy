@@ -162,6 +162,11 @@
 
     "evaluation": {
         "title": "Noten",
+        "navigation": {
+            "all": "Alles",
+            "statistics": "Statistik",
+            "results": "Ergebnisse"
+        },
         "average": "Durchschnitt",
         "averageClass": "Klassendurchschnitt",
         "mode": "Art",

@@ -222,14 +222,20 @@ class I18n implements WidgetsLocalizations {
   String get sortTimeReal => "értékelés ideje";
   /// "Jegyek"
   String get evaluationTitle => "Jegyek";
+  /// "Összes"
+  String get evaluationNavigationAll => "Összes";
+  /// "Statisztika"
+  String get evaluationNavigationStatistics => "Statisztika";
+  /// "Eredmények"
+  String get evaluationNavigationResults => "Eredmények";
   /// "átlag"
   String get evaluationAverage => "átlag";
   /// "osztályátlag"
   String get evaluationAverageClass => "osztályátlag";
   /// "típus"
   String get evaluationMode => "típus";
-  /// "súly"
-  String get evaluationWeight => "súly";
+  /// "súlyozás"
+  String get evaluationWeight => "súlyozás";
   /// "érték"
   String get evaluationValue => "érték";
   /// "mód"
@@ -631,6 +637,15 @@ class _I18n_en_US extends I18n {
   /// "Grades"
   @override
   String get evaluationTitle => "Grades";
+  /// "All"
+  @override
+  String get evaluationNavigationAll => "All";
+  /// "Statistics"
+  @override
+  String get evaluationNavigationStatistics => "Statistics";
+  /// "Results"
+  @override
+  String get evaluationNavigationResults => "Results";
   /// "averages"
   @override
   String get evaluationAverage => "averages";
@@ -1092,6 +1107,15 @@ class _I18n_de_DE extends I18n {
   /// "Noten"
   @override
   String get evaluationTitle => "Noten";
+  /// "Alles"
+  @override
+  String get evaluationNavigationAll => "Alles";
+  /// "Statistik"
+  @override
+  String get evaluationNavigationStatistics => "Statistik";
+  /// "Ergebnisse"
+  @override
+  String get evaluationNavigationResults => "Ergebnisse";
   /// "Durchschnitt"
   @override
   String get evaluationAverage => "Durchschnitt";
