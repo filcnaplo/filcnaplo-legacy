@@ -404,9 +404,9 @@ class _I18n_en_US extends I18n {
   /// "Delete user"
   @override
   String get accountDelete => "Delete user";
-  /// "Do you really want to delete the user?"
+  /// "Are you sure you want to delete ${name}?"
   @override
-  String accountDeleteConfirm(String name) => "Do you really want to delete the user?";
+  String accountDeleteConfirm(String name) => "Are you sure you want to delete ${name}?";
   /// "OK"
   @override
   String get dialogOk => "OK";
@@ -500,12 +500,12 @@ class _I18n_en_US extends I18n {
   /// "delay in minutes"
   @override
   String get delayMins => "delay in minutes";
-  /// "all delay: ${count} minutes"
+  /// "all delays: ${count} minutes"
   @override
-  String delayAll(String count) => "all delay: ${count} minutes";
-  /// "log's date"
+  String delayAll(String count) => "all delays: ${count} minutes";
+  /// "date"
   @override
-  String get administrationTime => "log's date";
+  String get administrationTime => "date";
   /// "state"
   @override
   String get justificationState => "state";
@@ -602,9 +602,9 @@ class _I18n_en_US extends I18n {
   /// "all absences: ${count} hour(s)"
   @override
   String absenceAll(String count) => "all absences: ${count} hour(s)";
-  /// "parental excuse(s): ${count} pcs"
+  /// "parental excuse(s): ${count}"
   @override
-  String absenceParental(String count) => "parental excuse(s): ${count} pcs";
+  String absenceParental(String count) => "parental excuse(s): ${count}";
   /// "Timetable"
   @override
   String get timetable => "Timetable";
@@ -638,9 +638,9 @@ class _I18n_en_US extends I18n {
   /// "weight"
   @override
   String get evaluationWeight => "weight";
-  /// "valye"
+  /// "value"
   @override
-  String get evaluationValue => "valye";
+  String get evaluationValue => "value";
   /// "range"
   @override
   String get evaluationRange => "range";
@@ -656,30 +656,30 @@ class _I18n_en_US extends I18n {
   /// "Password"
   @override
   String get loginPassword => "Password";
-  /// "mostly your education ID (11 numbers)"
+  /// "usually your education ID (11 numbers)"
   @override
-  String get loginUsernameHint => "mostly your education ID (11 numbers)";
+  String get loginUsernameHint => "usually your education ID (11 numbers)";
   /// "most of the time birth date (19700101)"
   @override
   String get loginPasswordHint => "most of the time birth date (19700101)";
-  /// "Input your username!"
+  /// "You must give a username!"
   @override
-  String get loginUsernameError => "Input your username!";
-  /// "Input your password!"
+  String get loginUsernameError => "You must give a username!";
+  /// "You must give a password!"
   @override
-  String get loginPasswordError => "Input your password!";
-  /// "Choose a school!"
+  String get loginPasswordError => "You must give a password!";
+  /// "Please select a school!"
   @override
-  String get loginSchoolError => "Choose a school!";
+  String get loginSchoolError => "Please select a school!";
   /// "School"
   @override
   String get loginSchool => "School";
   /// "choose"
   @override
   String get loginChoose => "choose";
-  /// "Choose a school!"
+  /// "Choose a school"
   @override
-  String get loginChooseSchool => "Choose a school!";
+  String get loginChooseSchool => "Choose a school";
   /// "Export"
   @override
   String get export => "Export";
@@ -692,18 +692,18 @@ class _I18n_en_US extends I18n {
   /// "accounts"
   @override
   String get exportAccounts => "accounts";
-  /// "choose an intervale"
+  /// "choose an interval"
   @override
-  String get exportChoose => "choose an intervale";
+  String get exportChoose => "choose an interval";
   /// "Success!"
   @override
   String get exportSuccess => "Success!";
   /// "Close the application"
   @override
   String get closeTitle => "Close the application";
-  /// "Do you really want to leave?"
+  /// "Are you sure you want to exit?"
   @override
-  String get closeConfirm => "Do you really want to leave?";
+  String get closeConfirm => "Are you sure you want to exit?";
   /// "Birth date: "
   @override
   String get infoBirthdate => "Birth date: ";
@@ -785,12 +785,12 @@ class _I18n_en_US extends I18n {
   /// "Language"
   @override
   String get settingsLanguage => "Language";
-  /// "Couldn't turn on notifications, try again!"
+  /// "Failed to turn on notifications, please try again!"
   @override
-  String get notificationFailed => "Couldn't turn on notifications, try again!";
-  /// "You can only update evey ${mins} minutes!"
+  String get notificationFailed => "Failed to turn on notifications, please try again!";
+  /// "You can only update every ${mins} minutes!"
   @override
-  String refreshLimit(String mins) => "You can only update evey ${mins} minutes!";
+  String refreshLimit(String mins) => "You can only update every ${mins} minutes!";
   /// "Success!"
   @override
   String get success => "Success!";
