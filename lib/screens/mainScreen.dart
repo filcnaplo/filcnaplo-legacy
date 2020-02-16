@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:filcnaplo/Cards/SummaryCards.dart';
+import 'package:filcnaplo/Cards/SummaryCard.dart';
 import 'package:filcnaplo/Cards/AbsenceCard.dart';
 import 'package:filcnaplo/Cards/ChangedLessonCard.dart';
 import 'package:filcnaplo/Cards/EvaluationCard.dart';

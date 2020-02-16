@@ -14,7 +14,7 @@ import 'package:filcnaplo/globals.dart' as globals;
 import 'dart:ui' as dart_ui;
 import 'package:filcnaplo/Dialog/SortDialog.dart';
 import 'package:filcnaplo/Datas/User.dart';
-import 'package:filcnaplo/Cards/SummaryCards.dart';
+import 'package:filcnaplo/Cards/SummaryCard.dart';
 
 void main() {
   runApp(new MaterialApp(home: new EvaluationsScreen()));
