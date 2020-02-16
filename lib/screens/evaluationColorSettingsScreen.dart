@@ -32,13 +32,21 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
         content: content,
         actions: [
           FlatButton(
+<<<<<<< Updated upstream
             child: Text(I18n.of(context).dialogNo),
+=======
+            child: Text(.no),
+>>>>>>> Stashed changes
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           FlatButton(
+<<<<<<< Updated upstream
             child: Text(I18n.of(context).dialogOk),
+=======
+            child: Text(.ok),
+>>>>>>> Stashed changes
             onPressed: () async {
               Navigator.of(context).pop();
               if (selected != null) {
@@ -68,19 +76,31 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
         child: Scaffold(
           drawer: GDrawer(),
           appBar: new AppBar(
+<<<<<<< Updated upstream
             title: new Text(I18n.of(context).appTitle),
+=======
+            title: new Text(.title),
+>>>>>>> Stashed changes
             actions: <Widget>[],
           ),
           body: new Center(
             child: Column(
               children: <Widget>[
                 ListTile(
+<<<<<<< Updated upstream
                   title: Text(I18n.of(context).grade1 + " " + I18n.of(context).grade),
+=======
+                  title: Text(.grade1),
+>>>>>>> Stashed changes
                   trailing: new Container(
                     child: new FlatButton(
                       onPressed: () {
                         _openDialog(
+<<<<<<< Updated upstream
                             I18n.of(context).color,
+=======
+                            .color,
+>>>>>>> Stashed changes
                             MaterialColorPicker(
                               selectedColor: selected,
                               onColorChange: (Color c) => selected = c,
@@ -92,12 +112,20 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
                   ),
                 ),
                 ListTile(
+<<<<<<< Updated upstream
                   title: Text(I18n.of(context).grade2 + " " + I18n.of(context).grade),
+=======
+                  title: Text(.grade2),
+>>>>>>> Stashed changes
                   trailing: new Container(
                     child: new FlatButton(
                       onPressed: () {
                         _openDialog(
+<<<<<<< Updated upstream
                             I18n.of(context).color,
+=======
+                            .color,
+>>>>>>> Stashed changes
                             MaterialColorPicker(
                               selectedColor: selected,
                               onColorChange: (Color c) => selected = c,
@@ -109,12 +137,20 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
                   ),
                 ),
                 ListTile(
+<<<<<<< Updated upstream
                   title: Text(I18n.of(context).grade3 + " " + I18n.of(context).grade),
+=======
+                  title: Text(.grade3),
+>>>>>>> Stashed changes
                   trailing: new Container(
                     child: new FlatButton(
                       onPressed: () {
                         _openDialog(
+<<<<<<< Updated upstream
                             I18n.of(context).color,
+=======
+                            .color,
+>>>>>>> Stashed changes
                             MaterialColorPicker(
                               selectedColor: selected,
                               onColorChange: (Color c) => selected = c,
@@ -126,12 +162,20 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
                   ),
                 ),
                 ListTile(
+<<<<<<< Updated upstream
                   title: Text(I18n.of(context).grade4 + " " + I18n.of(context).grade),
+=======
+                  title: Text(.grade4),
+>>>>>>> Stashed changes
                   trailing: new Container(
                     child: new FlatButton(
                       onPressed: () {
                         _openDialog(
+<<<<<<< Updated upstream
                             I18n.of(context).color,
+=======
+                            .color,
+>>>>>>> Stashed changes
                             MaterialColorPicker(
                               selectedColor: selected,
                               onColorChange: (Color c) => selected = c,
@@ -143,12 +187,20 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
                   ),
                 ),
                 ListTile(
+<<<<<<< Updated upstream
                   title: Text(I18n.of(context).grade5 + " " + I18n.of(context).grade),
+=======
+                  title: Text(.grade5),
+>>>>>>> Stashed changes
                   trailing: new Container(
                     child: new FlatButton(
                       onPressed: () {
                         _openDialog(
+<<<<<<< Updated upstream
                             I18n.of(context).color,
+=======
+                            .color,
+>>>>>>> Stashed changes
                             MaterialColorPicker(
                               selectedColor: selected,
                               onColorChange: (Color c) => selected = c,

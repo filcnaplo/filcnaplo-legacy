@@ -69,13 +69,21 @@ class AccountsScreenState extends State<AccountsScreen> {
         content: content,
         actions: [
           FlatButton(
+<<<<<<< Updated upstream
             child: Text(I18n.of(context).dialogNo),
+=======
+            child: Text(.no),
+>>>>>>> Stashed changes
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           FlatButton(
+<<<<<<< Updated upstream
             child: Text(I18n.of(context).dialogOk),
+=======
+            child: Text(.ok),
+>>>>>>> Stashed changes
             onPressed: () async {
               Navigator.of(context).pop();
               users[users.map((User u) => u.id).toList().indexOf(user.id)]
@@ -111,7 +119,11 @@ class AccountsScreenState extends State<AccountsScreen> {
                   child: new FlatButton(
                     onPressed: () {
                       _openDialog(
+<<<<<<< Updated upstream
                           I18n.of(context).color,
+=======
+                          .color,
+>>>>>>> Stashed changes
                           MaterialColorPicker(
                             selectedColor: selected,
                             onColorChange: (Color c) => selected = c,
@@ -181,23 +193,39 @@ class AccountsScreenState extends State<AccountsScreen> {
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
         return new AlertDialog(
+<<<<<<< Updated upstream
           title: new Text(capitalize(I18n.of(context).accountDelete)),
           content: new SingleChildScrollView(
             child: new ListBody(
               children: <Widget>[
                 new Text(I18n.of(context).accountDeleteConfirm(user.name)),
+=======
+          title: new Text(.sure),
+          content: new SingleChildScrollView(
+            child: new ListBody(
+              children: <Widget>[
+                new Text(.delete_confirmation(user.name)),
+>>>>>>> Stashed changes
               ],
             ),
           ),
           actions: <Widget>[
             new FlatButton(
+<<<<<<< Updated upstream
               child: new Text(I18n.of(context).dialogNo),
+=======
+              child: new Text(.no),
+>>>>>>> Stashed changes
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             new FlatButton(
+<<<<<<< Updated upstream
               child: new Text(I18n.of(context).dialogYes),
+=======
+              child: new Text(.yes),
+>>>>>>> Stashed changes
               onPressed: () async {
                 await AccountManager().removeUser(user);
                 //             print("asd1");
@@ -228,7 +256,11 @@ class AccountsScreenState extends State<AccountsScreen> {
       child: Scaffold(
         drawer: GDrawer(),
         appBar: new AppBar(
+<<<<<<< Updated upstream
           title: new Text(capitalize(I18n.of(context).accountTitle)),
+=======
+          title: new Text(.accounts),
+>>>>>>> Stashed changes
           actions: <Widget>[],
         ),
         body: new Column(children: <Widget>[

@@ -111,6 +111,7 @@ class AbsenceCard extends StatelessWidget {
             new SingleChildScrollView(
               child: new ListBody(
                 children: <Widget>[
+<<<<<<< Updated upstream
                   new Text(
                       I18n.of(context).lessonCount(numOfAbsences.toString())),
                   //new Text("mód: " + absence.modeName),
@@ -124,6 +125,22 @@ class AbsenceCard extends StatelessWidget {
                       absence.JustificationTypeName),
                   absence.DelayTimeMinutes != 0
                       ? new Text(I18n.of(context).delayMins +
+=======
+                  new Text(.lessons(numOfAbsences.toString())),
+                  //new Text("mód: " + absence.modeName),
+                  new Text(.absence_time +
+                      dateToHuman(absence.LessonStartTime) +
+                      dateToWeekDay(absence.LessonStartTime)),
+                  new Text(.administration_time +
+                      dateToHuman(absence.CreatingTime) +
+                      dateToWeekDay(absence.LessonStartTime)),
+                  new Text(.justification_state +
+                      absence.JustificationStateName),
+                  new Text(.justification_mode +
+                      absence.JustificationTypeName),
+                  absence.DelayTimeMinutes != 0
+                      ? new Text(.delay_mins +
+>>>>>>> Stashed changes
                           absence.DelayTimeMinutes.toString() +
                           " perc")
                       : new Container(),

@@ -45,7 +45,11 @@ class ChangedLessonCard extends StatelessWidget {
                               style: new TextStyle(
                                   fontSize: 18.0,
                                   color: globals.CurrentTextColor)),
+<<<<<<< Updated upstream
                           new Text(I18n.of(context).lesson + ", ",
+=======
+                          new Text(.lesson + ", ",
+>>>>>>> Stashed changes
                               style: new TextStyle(fontSize: 18.0)),
                           new Text(lesson.subject,
                               style: new TextStyle(
@@ -91,8 +95,13 @@ class ChangedLessonCard extends StatelessWidget {
                             padding: EdgeInsets.only(left: 4),
                             child: new Text(
                                 (isSubstitution
+<<<<<<< Updated upstream
                                     ? I18n.of(context).substitution
                                     : I18n.of(context).substitutionMissed),
+=======
+                                    ? .dep
+                                    : .missed),
+>>>>>>> Stashed changes
                                 style: new TextStyle(fontSize: 18.0)),
                           ),
                           new Expanded(

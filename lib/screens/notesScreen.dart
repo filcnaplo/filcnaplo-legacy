@@ -42,7 +42,11 @@ class NotesScreenState extends State<NotesScreen> {
         child: Scaffold(
             drawer: GDrawer(),
             appBar: new AppBar(
+<<<<<<< Updated upstream
               title: new Text(capitalize(I18n.of(context).noteTitle)),
+=======
+              title: new Text(.notes),
+>>>>>>> Stashed changes
               actions: <Widget>[],
             ),
             body: new Container(

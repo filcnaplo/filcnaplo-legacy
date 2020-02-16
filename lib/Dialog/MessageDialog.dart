@@ -50,7 +50,11 @@ class MessageDialogState extends State<MessageDialog> {
         children: <Widget>[
           Container(
             child: Text(
+<<<<<<< Updated upstream
               I18n.of(context).messageReceivers + currentMessage.receivers.join(", "),
+=======
+              .receivers + currentMessage.receivers.join(", "),
+>>>>>>> Stashed changes
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),

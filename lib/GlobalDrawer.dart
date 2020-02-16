@@ -86,9 +86,29 @@ class GDrawerState extends State<GDrawer> {
                             width: 120.0,
                           ),
                           new Container(
+<<<<<<< Updated upstream
                             child: new Text(
                                 I18n.of(context).appTitle,
                                 style: TextStyle(fontSize: 19.0),
+=======
+                            child: new Row(
+                              children: <Widget>[
+                                new Container(
+                                  child: new Text(
+                                    .title,
+                                    style: TextStyle(fontSize: 19.0),
+                                  ),
+                                ),
+                                new Container(
+                                  child: new Text(
+                                    " " + version,
+                                    style: TextStyle(
+                                        fontSize: 19.0,
+                                        color: Theme.of(context).accentColor),
+                                  ),
+                                ),
+                              ],
+>>>>>>> Stashed changes
                             ),
                             padding: EdgeInsets.fromLTRB(5.0, 5.0, 0.0, 0.0),
                           ),
@@ -207,7 +227,11 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 0 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
+<<<<<<< Updated upstream
                 capitalize(I18n.of(context).drawerHome),
+=======
+                .main_page,
+>>>>>>> Stashed changes
                 style: TextStyle(
                     color: screen == 0 ? Theme.of(context).accentColor : null),
               ),
@@ -223,7 +247,11 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 1 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
+<<<<<<< Updated upstream
                 capitalize(I18n.of(context).drawerEvaluations),
+=======
+                .evaluations,
+>>>>>>> Stashed changes
                 style: TextStyle(
                     color: screen == 1 ? Theme.of(context).accentColor : null),
               ),
@@ -239,7 +267,11 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 2 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
+<<<<<<< Updated upstream
                 capitalize(I18n.of(context).timetable),
+=======
+                .timetable,
+>>>>>>> Stashed changes
                 style: TextStyle(
                     color: screen == 2 ? Theme.of(context).accentColor : null),
               ),
@@ -255,7 +287,11 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 8 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
+<<<<<<< Updated upstream
                 capitalize(I18n.of(context).drawerHomeworks),
+=======
+                .homeworks,
+>>>>>>> Stashed changes
                 style: TextStyle(
                     color: screen == 8 ? Theme.of(context).accentColor : null),
               ),
@@ -271,7 +307,11 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 3 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
+<<<<<<< Updated upstream
                 capitalize(I18n.of(context).drawerNotes),
+=======
+                .notes,
+>>>>>>> Stashed changes
                 style: TextStyle(
                     color: screen == 3 ? Theme.of(context).accentColor : null),
               ),
@@ -287,7 +327,11 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 10 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
+<<<<<<< Updated upstream
                 capitalize(I18n.of(context).drawerTests),
+=======
+                .tests,
+>>>>>>> Stashed changes
                 style: TextStyle(
                     color: screen == 10 ? Theme.of(context).accentColor : null),
               ),
@@ -303,7 +347,11 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 11 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
+<<<<<<< Updated upstream
                 capitalize(I18n.of(context).drawerMessages),
+=======
+                .messages,
+>>>>>>> Stashed changes
                 style: TextStyle(
                     color: screen == 11 ? Theme.of(context).accentColor : null),
               ),
@@ -319,7 +367,11 @@ class GDrawerState extends State<GDrawer> {
                 color: screen == 5 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
+<<<<<<< Updated upstream
                 capitalize(I18n.of(context).drawerAbsences),
+=======
+                .absent_title,
+>>>>>>> Stashed changes
                 style: TextStyle(
                     color: screen == 5 ? Theme.of(context).accentColor : null),
               ),
@@ -329,6 +381,7 @@ class GDrawerState extends State<GDrawer> {
                 Navigator.pushReplacementNamed(context, "/absents");
               },
             ),
+<<<<<<< Updated upstream
             // new ListTile(
             //   leading: new Icon(
             //     Icons.supervisor_account,
@@ -345,13 +398,51 @@ class GDrawerState extends State<GDrawer> {
             //     Navigator.pushReplacementNamed(context, "/accounts");
             //   },
             // ),
+=======
+            /*new ListTile(
+              leading: new Icon(
+                IconData(0xf127, fontFamily: "Material Design Icons"),
+                color: screen == 6 ? Theme.of(context).accentColor : null,
+              ),
+              title: new Text(
+                .statistics,
+                style: TextStyle(
+                    color: screen == 6 ? Theme.of(context).accentColor : null),
+              ),
+              onTap: () {
+                screen = 6;
+                Navigator.pop(context); // close the drawer
+                Navigator.pushReplacementNamed(context, "/statistics");
+              },
+            ),*/
+            new ListTile(
+              leading: new Icon(
+                Icons.supervisor_account,
+                color: screen == 4 ? Theme.of(context).accentColor : null,
+              ),
+              title: new Text(
+                .accounts,
+                style: TextStyle(
+                    color: screen == 4 ? Theme.of(context).accentColor : null),
+              ),
+              onTap: () {
+                screen = 4;
+                Navigator.pop(context); // close the drawer
+                Navigator.pushReplacementNamed(context, "/accounts");
+              },
+            ),
+>>>>>>> Stashed changes
             new ListTile(
               leading: new Icon(
                 Icons.settings,
                 color: screen == 7 ? Theme.of(context).accentColor : null,
               ),
               title: new Text(
+<<<<<<< Updated upstream
                 capitalize(I18n.of(context).drawerSettings),
+=======
+                .settings,
+>>>>>>> Stashed changes
                 style: TextStyle(
                     color: screen == 7 ? Theme.of(context).accentColor : null),
               ),

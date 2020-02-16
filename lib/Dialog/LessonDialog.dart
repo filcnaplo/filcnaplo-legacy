@@ -24,6 +24,7 @@ class HomeworkDialogState extends State<HomeworkDialog> {
       content: new SingleChildScrollView(
         child: new ListBody(
           children: <Widget>[
+<<<<<<< Updated upstream:lib/Dialog/LessonDialog.dart
             new Text(capitalize(I18n.of(context).lessonRoom) +
                 ": " +
                 widget.lesson.room),
@@ -48,6 +49,23 @@ class HomeworkDialogState extends State<HomeworkDialog> {
                 : new Container(),
             widget.lesson.homework != null
                 ? new Text("\n" + capitalize(I18n.of(context).homework) + ": ")
+=======
+            new Text(.room + widget.lesson.room),
+            new Text(.teacher + widget.lesson.teacher),
+            new Text(.group + widget.lesson.group),
+            new Text(
+                .lesson_start + getLessonStartText(widget.lesson)),
+            new Text(
+                .lesson_end + getLessonEndText(widget.lesson)),
+            widget.lesson.isMissed
+                ? new Text(.state + widget.lesson.stateName)
+                : new Container(),
+            (widget.lesson.theme != "" && widget.lesson.theme != null)
+                ? new Text(.theme + widget.lesson.theme)
+                : new Container(),
+            widget.lesson.homework != null
+                ? new Text("\n" + .homework + ":")
+>>>>>>> Stashed changes:lib/Dialog/HomeworkDialog.dart
                 : Container(),
             widget.lesson.homework != null
                 ? new Divider(
@@ -76,7 +94,11 @@ class HomeworkDialogState extends State<HomeworkDialog> {
       actions: <Widget>[
         widget.lesson.homeworkEnabled
             ? new FlatButton(
+<<<<<<< Updated upstream:lib/Dialog/LessonDialog.dart
                 child: new Text(I18n.of(context).homeworkAdd),
+=======
+                child: new Text(.homework),
+>>>>>>> Stashed changes:lib/Dialog/HomeworkDialog.dart
                 onPressed: () {
                   Navigator.of(context).pop();
                   return showDialog(
@@ -91,7 +113,11 @@ class HomeworkDialogState extends State<HomeworkDialog> {
               )
             : Container(),
         new FlatButton(
+<<<<<<< Updated upstream:lib/Dialog/LessonDialog.dart
           child: new Text(I18n.of(context).dialogOk),
+=======
+          child: new Text(.ok),
+>>>>>>> Stashed changes:lib/Dialog/HomeworkDialog.dart
           onPressed: () {
             Navigator.of(context).pop();
           },

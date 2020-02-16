@@ -146,7 +146,11 @@ class TomorrowLessonCard extends StatelessWidget {
               child: Wrap(
                 children: <Widget>[
                   new Text(
+<<<<<<< Updated upstream
                     capitalize(I18n.of(context).lessonTomorrow),
+=======
+                    .tomorrow,
+>>>>>>> Stashed changes
                     style: new TextStyle(
                       fontSize: 18.0,
                     ),
@@ -158,7 +162,11 @@ class TomorrowLessonCard extends StatelessWidget {
                             fontSize: 18.0, color: globals.CurrentTextColor)),
                   ),
                   new Text(
+<<<<<<< Updated upstream
                     I18n.of(context).lessonHave,
+=======
+                    .tomorrow_lessons,
+>>>>>>> Stashed changes
                     style: new TextStyle(
                       fontSize: 18.0,
                     ),

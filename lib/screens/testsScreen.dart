@@ -42,7 +42,11 @@ class TestsScreenState extends State<TestsScreen> {
         child: Scaffold(
             drawer: GDrawer(),
             appBar: new AppBar(
+<<<<<<< Updated upstream
               title: new Text(I18n.of(context).testTitle),
+=======
+              title: new Text(.tests),
+>>>>>>> Stashed changes
               actions: <Widget>[],
             ),
             body: new Container(

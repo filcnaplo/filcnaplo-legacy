@@ -236,19 +236,32 @@ class MainScreenState extends State<MainScreen> {
       context: context,
       builder: (BuildContext context) {
         return new AlertDialog(
+<<<<<<< Updated upstream
           title: new Text(I18n.of(context).closeTitle),
           content: new Text(I18n.of(context).closeConfirm),
           actions: <Widget>[
             new FlatButton(
               onPressed: () => Navigator.of(context).pop(false),
               child: new Text(I18n.of(context).dialogNo),
+=======
+          title: new Text(.sure),
+          content: new Text(.confirm_close),
+          actions: <Widget>[
+            new FlatButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: new Text(.no),
+>>>>>>> Stashed changes
             ),
             new FlatButton(
               onPressed: () async {
                 await SystemChannels.platform
                     .invokeMethod<void>('SystemNavigator.pop');
               },
+<<<<<<< Updated upstream
               child: new Text(I18n.of(context).dialogYes),
+=======
+              child: new Text(.yes),
+>>>>>>> Stashed changes
             ),
           ],
         );
@@ -265,7 +278,22 @@ class MainScreenState extends State<MainScreen> {
             appBar: new AppBar(
               title: new Text(globals.isSingle
                   ? globals.selectedAccount.user.name
+<<<<<<< Updated upstream
                   : I18n.of(context).appTitle),
+=======
+                  : .title),
+              actions: <Widget>[
+                //TODO search maybe?
+                /*new IconButton( //TODO Finish card chooser
+                  icon: new Icon(Icons.queue),
+                  onPressed: () {
+                    cardChooserDialog().then((b) {
+                      Navigator.pushNamed(context, "/main");
+                    });
+                  }
+                )*/
+              ],
+>>>>>>> Stashed changes
             ),
             body: hasOfflineLoaded &&
                     globals.isColor != null &&

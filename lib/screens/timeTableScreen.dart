@@ -163,8 +163,13 @@ class TimeTableScreenState extends State<TimeTableScreen>
         child: new Scaffold(
             drawer: GDrawer(),
             appBar: new AppBar(
+<<<<<<< Updated upstream
               title: new Text(capitalize(I18n.of(context).timetable) +
                   getTimetableText(startDateText)),
+=======
+              title: new Text(
+                  .timetable + getTimetableText(startDateText)),
+>>>>>>> Stashed changes
             ),
             body: new Column(
               children: <Widget>[
@@ -234,7 +239,11 @@ class TimeTableScreenState extends State<TimeTableScreen>
                                               width: 20.0),
                                         ])
                               : Center(
+<<<<<<< Updated upstream
                                   child: Text(I18n.of(context).timetableEmpty),
+=======
+                                  child: Text(.no_lessons),
+>>>>>>> Stashed changes
                                 )
                           : Container()
                       : Center(
@@ -251,7 +260,11 @@ class TimeTableScreenState extends State<TimeTableScreen>
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       new IconButton(
+<<<<<<< Updated upstream
                         tooltip: capitalize(I18n.of(context).dateWeekPrev),
+=======
+                        tooltip: .prev_week,
+>>>>>>> Stashed changes
                         icon: const Icon(
                           Icons.skip_previous,
                           size: 20,
@@ -289,7 +302,11 @@ class TimeTableScreenState extends State<TimeTableScreen>
                           size: 20,
                           color: Colors.white,
                         ),
+<<<<<<< Updated upstream
                         tooltip: capitalize(I18n.of(context).dateWeekNext),
+=======
+                        tooltip: .next_week,
+>>>>>>> Stashed changes
                         onPressed: () {
                           setState(() {
                             HapticFeedback.lightImpact();
@@ -322,9 +339,13 @@ class TimeTableScreenState extends State<TimeTableScreen>
             ),
       title: new Text(
         lessonList[index].subject +
+<<<<<<< Updated upstream
             (lessonList[index].isMissed
                 ? " (${I18n.of(context).substitutionMissed})"
                 : "") +
+=======
+            (lessonList[index].isMissed ? " (${.missed})" : "") +
+>>>>>>> Stashed changes
             (lessonList[index].depTeacher != ""
                 ? " (${lessonList[index].depTeacher})"
                 : ""),

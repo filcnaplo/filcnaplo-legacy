@@ -21,6 +21,7 @@ class TimeSelectDialogState extends State<TimeSelectDialog> {
 
   Widget build(BuildContext context) {
     List<String> timeOptionList = [
+<<<<<<< Updated upstream
       I18n.of(context).dateDay,
       I18n.of(context).dateWeek,
       I18n.of(context).dateMonth,
@@ -29,6 +30,16 @@ class TimeSelectDialogState extends State<TimeSelectDialog> {
 
     return new SimpleDialog(
       title: new Text(I18n.of(context).time),
+=======
+      .day,
+      .week,
+      .month,
+      .two_months
+    ];
+
+    return new SimpleDialog(
+      title: new Text(.time),
+>>>>>>> Stashed changes
       contentPadding: const EdgeInsets.all(10.0),
       children: <Widget>[
         new PopupMenuButton<String>(

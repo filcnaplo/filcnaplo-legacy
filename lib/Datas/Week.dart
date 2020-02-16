@@ -26,6 +26,7 @@ class Week {
 
   List<String> dayStrings(BuildContext context) {
     List<String> days = new List();
+<<<<<<< Updated upstream
     if (monday.isNotEmpty) days.add(I18n.of(context).dateMondayShort);
     if (tuesday.isNotEmpty) days.add(I18n.of(context).dateTuesdayShort);
     if (wednesday.isNotEmpty) days.add(I18n.of(context).dateWednesdayShort);
@@ -33,6 +34,15 @@ class Week {
     if (friday.isNotEmpty) days.add(I18n.of(context).dateFridayShort);
     if (saturday.isNotEmpty) days.add(I18n.of(context).dateSaturdayShort);
     if (sunday.isNotEmpty) days.add(I18n.of(context).dateSundayShort);
+=======
+    if (monday.isNotEmpty) days.add(.short_monday);
+    if (tuesday.isNotEmpty) days.add(.short_tuesday);
+    if (wednesday.isNotEmpty) days.add(.short_wednesday);
+    if (thursday.isNotEmpty) days.add(.short_thursday);
+    if (friday.isNotEmpty) days.add(.short_friday);
+    if (saturday.isNotEmpty) days.add(.short_saturday);
+    if (sunday.isNotEmpty) days.add(.short_sunday);
+>>>>>>> Stashed changes
     return days;
   }
 

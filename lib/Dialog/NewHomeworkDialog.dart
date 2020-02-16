@@ -17,7 +17,11 @@ class NewHomeworkDialogState extends State<NewHomeworkDialog> {
 
   Widget build(BuildContext context) {
     return new SimpleDialog(
+<<<<<<< Updated upstream
       title: new Text(I18n.of(context).homework),
+=======
+      title: new Text(.homework),
+>>>>>>> Stashed changes
       contentPadding: const EdgeInsets.all(10.0),
       children: <Widget>[
         new TextField(
@@ -28,7 +32,11 @@ class NewHomeworkDialogState extends State<NewHomeworkDialog> {
           },
         ),
         MaterialButton(
+<<<<<<< Updated upstream
           child: Text(I18n.of(context).dialogOk),
+=======
+          child: Text(.ok),
+>>>>>>> Stashed changes
           onPressed: () {
             RequestHelper().uploadHomework(
                 homework, widget.lesson, globals.selectedAccount.user);

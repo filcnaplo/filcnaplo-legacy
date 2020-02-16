@@ -17,7 +17,19 @@ import 'package:date_range_picker/date_range_picker.dart' as DateRagePicker;
 import 'package:filcnaplo/Helpers/TimetableHelper.dart';
 
 void main() {
+<<<<<<< Updated upstream
   runApp(new MaterialApp(home: new ExportScreen()));
+=======
+  runApp(new MaterialApp(
+    home: new ExportScreen(),
+    localizationsDelegates: const <LocalizationsDelegate<WidgetsLocalizations>>[
+      S.delegate,
+      GlobalWidgetsLocalizations.delegate,
+    ],
+    supportedLocales: S.delegate.supportedLocales,
+    onGenerateTitle: (BuildContext context) => .title,
+  ));
+>>>>>>> Stashed changes
 }
 
 class ExportScreen extends StatefulWidget {
@@ -47,9 +59,15 @@ class ExportScreenState extends State<ExportScreen> {
   TextEditingController controller = new TextEditingController();
   User selectedUser = globals.users[0];
   List<String> get exportOptions => [
+<<<<<<< Updated upstream
         I18n.of(context).exportGrades,
         I18n.of(context).exportLessons,
         I18n.of(context).exportAccounts
+=======
+        .export_grades,
+        .export_lessons,
+        .export_accounts
+>>>>>>> Stashed changes
       ];
   List<String> formatOptions = ["JSON", "CSV"];
   List<String> formats = [".json", ".csv"];
@@ -68,7 +86,11 @@ class ExportScreenState extends State<ExportScreen> {
         child: Scaffold(
           drawer: GDrawer(),
           appBar: new AppBar(
+<<<<<<< Updated upstream
             title: new Text(I18n.of(context).appTitle),
+=======
+            title: new Text(.title),
+>>>>>>> Stashed changes
             actions: <Widget>[],
           ),
           body: new Center(
@@ -156,7 +178,11 @@ class ExportScreenState extends State<ExportScreen> {
                             }
                           },
                           child: new Text(
+<<<<<<< Updated upstream
                               selectedDate ?? I18n.of(context).exportChoose),
+=======
+                              selectedDate ?? .export_interval),
+>>>>>>> Stashed changes
                         )
                       : new Container(),
                   (selectedData != 2)
@@ -227,7 +253,11 @@ class ExportScreenState extends State<ExportScreen> {
                                   file.writeAsString(data).then((File f) {
                                     if (f.existsSync())
                                       Fluttertoast.showToast(
+<<<<<<< Updated upstream
                                           msg: I18n.of(context).exportSuccess +
+=======
+                                          msg: .export_success +
+>>>>>>> Stashed changes
                                               ": " +
                                               path,
                                           backgroundColor: Colors.green,
@@ -293,7 +323,11 @@ class ExportScreenState extends State<ExportScreen> {
                                   file.writeAsString(csv).then((File f) {
                                     if (f.existsSync())
                                       Fluttertoast.showToast(
+<<<<<<< Updated upstream
                                           msg: I18n.of(context).exportSuccess +
+=======
+                                          msg: .export_success +
+>>>>>>> Stashed changes
                                               ": " +
                                               path,
                                           backgroundColor: Colors.green,
@@ -314,7 +348,11 @@ class ExportScreenState extends State<ExportScreen> {
                               file.writeAsString(data).then((File f) {
                                 if (f.existsSync())
                                   Fluttertoast.showToast(
+<<<<<<< Updated upstream
                                       msg: I18n.of(context).exportSuccess +
+=======
+                                      msg: .export_success +
+>>>>>>> Stashed changes
                                           ": " +
                                           path,
                                       backgroundColor: Colors.green,
@@ -341,7 +379,11 @@ class ExportScreenState extends State<ExportScreen> {
                                   file.writeAsString(data).then((File f) {
                                     if (f.existsSync())
                                       Fluttertoast.showToast(
+<<<<<<< Updated upstream
                                           msg: I18n.of(context).exportSuccess +
+=======
+                                          msg: .export_success +
+>>>>>>> Stashed changes
                                               ": " +
                                               path,
                                           backgroundColor: Colors.green,
@@ -417,7 +459,11 @@ class ExportScreenState extends State<ExportScreen> {
                                   file.writeAsString(csv).then((File f) {
                                     if (f.existsSync())
                                       Fluttertoast.showToast(
+<<<<<<< Updated upstream
                                           msg: I18n.of(context).exportSuccess +
+=======
+                                          msg: .export_success +
+>>>>>>> Stashed changes
                                               ": " +
                                               path,
                                           backgroundColor: Colors.green,
@@ -429,7 +475,11 @@ class ExportScreenState extends State<ExportScreen> {
                         }
                       },
                       child: new Text(
+<<<<<<< Updated upstream
                         I18n.of(context).export,
+=======
+                        .export,
+>>>>>>> Stashed changes
                         style: TextStyle(color: Colors.white),
                       ),
                       color: Colors.blue[700],

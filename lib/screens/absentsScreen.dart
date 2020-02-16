@@ -12,7 +12,19 @@ import 'package:filcnaplo/Utils/StringFormatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
+<<<<<<< Updated upstream
   runApp(new MaterialApp(home: new AbsentsScreen()));
+=======
+  runApp(new MaterialApp(
+    home: new AbsentsScreen(),
+    localizationsDelegates: const <LocalizationsDelegate<WidgetsLocalizations>>[
+      S.delegate,
+      GlobalWidgetsLocalizations.delegate,
+    ],
+    supportedLocales: S.delegate.supportedLocales,
+    onGenerateTitle: (BuildContext context) => .title,
+  ));
+>>>>>>> Stashed changes
 }
 
 class AbsentsScreen extends StatefulWidget {
@@ -55,7 +67,11 @@ class AbsentsScreenState extends State<AbsentsScreen> {
         child: Scaffold(
             drawer: GDrawer(),
             appBar: new AppBar(
+<<<<<<< Updated upstream
               title: new Text(capitalize(I18n.of(context).absenceTitle)),
+=======
+              title: new Text(.absent_title),
+>>>>>>> Stashed changes
               actions: <Widget>[
                 Tooltip(
                   child: new IconButton(
@@ -70,7 +86,11 @@ class AbsentsScreenState extends State<AbsentsScreen> {
                             ) ??
                             false;
                       }),
+<<<<<<< Updated upstream
                   message: I18n.of(context).statistics,
+=======
+                  message: .statistics,
+>>>>>>> Stashed changes
                 ),
               ],
             ),
@@ -147,6 +167,7 @@ class AbsentsScreenState extends State<AbsentsScreen> {
           content: new SingleChildScrollView(
             child: new ListBody(
               children: <Widget>[
+<<<<<<< Updated upstream
                 new Text(capitalize(I18n.of(context).absenceMode) +
                     ": " +
                     absence.ModeName),
@@ -170,6 +191,21 @@ class AbsentsScreenState extends State<AbsentsScreen> {
                     absence.JustificationTypeName),
                 absence.DelayTimeMinutes != 0
                     ? new Text(I18n.of(context).delayMins +
+=======
+                new Text(.mode + absence.ModeName),
+                new Text(.subject + absence.Subject),
+                new Text(.teacher + absence.Teacher),
+                new Text(.absence_time +
+                    dateToHuman(absence.LessonStartTime)),
+                new Text(.administration_time +
+                    dateToHuman(absence.CreatingTime)),
+                new Text(.justification_state +
+                    absence.JustificationStateName),
+                new Text(.justification_mode +
+                    absence.JustificationTypeName),
+                absence.DelayTimeMinutes != 0
+                    ? new Text(.delay_mins +
+>>>>>>> Stashed changes
                         absence.DelayTimeMinutes.toString() +
                         " " +
                         I18n.of(context).timeMinute)
