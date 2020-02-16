@@ -6,58 +6,14 @@ import 'package:filcnaplo/Datas/User.dart';
 import 'package:filcnaplo/Helpers/DBHelper.dart';
 import 'package:filcnaplo/main.dart';
 import 'package:flutter/material.dart';
-//import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:path_provider/path_provider.dart';
-//import 'package:pointycastle/random/fortuna_random.dart';
-//import 'package:encrypt/encrypt.dart';
-//import 'package:pointycastle/api.dart' show KeyParameter;
-//import 'dart:typed_data';
-//import 'dart:math';
-
-//final storage = new FlutterSecureStorage();
-//get encrypter async => new Encrypter(new AES(await key, iv));
-//final iv = IV.fromLength(16);
-
-//var rng = new Random();
-/*
-void initEncryption() async {
-
-  Map<String, String> allValues = await storage.readAll();
-  if (!allValues.containsKey("encryption")) {
-    //TODO ez kriptográfiailag biztonságos??
-    Uint8List seed = new Uint8List.fromList(List.filled(32, (rng.nextInt(255))));
-    FortunaRandom rnd = new FortunaRandom()..seed(new KeyParameter(seed));
-    await storage.write(key: "encryption", value: String.fromCharCodes(rnd.nextBytes(32)));
-    //await storage.write(key: "iv", value: String.fromCharCodes(rnd.nextBytes(16)));
-  }
-
-  if (await shouldMigrate)
-    migrate();
-}
-*/
-/*
-Future<String> get key async {
-  return await storage.read(key: "encryption");
-}
-*/
-//Future<IV> get iv async {
-//  return IV.fromBase64(base64.encode((await storage.read(key: "iv")).codeUnits));
-//}
 
 Future<String> doEncrypt(String text) async {
   return text;
-//  Encrypted encrypted = (await encrypter).encrypt(text);
-//  return encrypted.base64;
 }
 
 Future<String> doDecrypt(String text) async {
   return text;
-//  try {
-//    Encrypted encrypted = Encrypted(base64.decode(text));
-//    return (await encrypter).decrypt(encrypted).toString().replaceAll(new RegExp('[\x00-\x09\x0B\x0C\x0E-\x1F\x7F]+'), '');
-//  } catch (e) {
-//    return "";
-//  }
 }
 
 Future<String> get _localFolder async {

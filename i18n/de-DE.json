@@ -79,6 +79,7 @@
     },
 
     "delay": {
+        "": "Verspätungen",
         "mins": "verspetete Zeit",
         "all": "Menge aller Verspätungen: {count} Minuten"
     },
@@ -95,15 +96,16 @@
     "lesson": {
         "": "Stunde",
         "count": "{count} Stunde",
-        "next": "következő óra",
-        "have": " Stunden.",
+        "next": "Nächste Stunde",
+        "have": "Stunden",
         "room": "Raum",
         "teacher": "Lehrer",
         "class": "Klasse",
         "start": "Stunde beginnt um",
         "end": "Stunde endet um",
         "theme": "Thema",
-        "subject": "Fach"
+        "subject": "Fach",
+        "tomorrow": "Morgen gibt es"
     },
 
     "homework": {
@@ -141,6 +143,7 @@
     },
 
     "absence": {
+        "": "Auslassung",
         "title": "Auslassungen",
         "time": "Zeit der Abwesenheit",
         "mode": "Art der Abwesenheit",
@@ -256,5 +259,14 @@
         "limit": "Warte {mins} Minue Zeit bevor du neu lädst!"
     },
 
-    "success": "Fertig"
+    "success": {
+        "": "Fertig",
+        "homework": "Házifeladat sikeresen feltöltve"
+    },
+
+    "error": {
+        "": "Hiba",
+        "network": "Hálózati hiba",
+        "readAccount": "Hiba a felhasználó olvasása közben"
+    }
 }

@@ -8,11 +8,10 @@ import 'package:filcnaplo/Datas/User.dart';
 import 'package:filcnaplo/Utils/Saver.dart';
 import 'package:filcnaplo/Utils/StringFormatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
+import 'package:filcnaplo/generated/i18n.dart';
 import "dart:math";
 
 class RequestHelper {
-  //   static
-  // const String GRANT_TYPE = "password";
   var randomDeviceCodeNames = [
     "a3xelte",
     "a5xelte",
@@ -87,19 +86,6 @@ class RequestHelper {
     }
   }
 
-  /*
-
-  Future<String> getFAQ() async {
-    String faq = (await http.get(FAQ_API_URL)).body;
-    return faq;
-  }
-
-
-  Future<String> getTOS() async {
-    String tos = utf8.decode((await http.get(TOS_API_URL)).bodyBytes);
-    return tos;
-  }
-*/
   Future<String> getStuffFromUrl(
       String url, String accessToken, String schoolCode) async {
     if (accessToken != null) {
@@ -179,7 +165,7 @@ class RequestHelper {
           body: jsonBody);
       return response.body;
     } catch (e) {
-      if (showErrors) showError("Hálózati hiba");
+      if (showErrors) showError(I18n.of(globals.context).errorNetwork);
       return null;
     }
   }
@@ -208,12 +194,12 @@ class RequestHelper {
           },
           body: jsonBody);
       if (response.statusCode == 200)
-        showSuccess("Házi sikeresen feltöltve");
+        showSuccess(I18n.of(globals.context).successHomework);
       else
-        showError("Hiba történt");
+        showError(I18n.of(globals.context).errorNetwork);
     } catch (e) {
       print(e);
-      showError("Hálózati hiba");
+      showError(I18n.of(globals.context).errorNetwork);
       return null;
     }
   }
@@ -235,7 +221,7 @@ class RequestHelper {
         return code;
       }
     } catch (e) {
-      if (showErrors) showError("hiba");
+      if (showErrors) showError(I18n.of(globals.context).error);
       print(e);
     }
     return null;
@@ -252,7 +238,7 @@ class RequestHelper {
           body: "{\"isOlvasott\":true,\"uzenetAzonositoLista\":[$id]}");
     } catch (e) {
       print(e);
-      showError("Hálózati hiba");
+      showError(I18n.of(globals.context).errorNetwork);
       return null;
     }
   }

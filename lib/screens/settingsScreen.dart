@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'dart:io';
 import 'package:background_fetch/background_fetch.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
-import 'package:filcnaplo/Cards/LessonCard.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -52,8 +51,8 @@ class SettingsScreenState extends State<SettingsScreen> {
     _refreshNotification = await SettingsHelper().getRefreshNotification();
     _isSingleUser = await SettingsHelper().getSingleUser();
     _smartUserAgent = await SettingsHelper().getSmartUserAgent();
-    _lang = await SettingsHelper().getLang();
     _theme = await SettingsHelper().getTheme();
+    _lang = await SettingsHelper().getLang();
     _amoled = await SettingsHelper().getAmoled();
     nextLesson = await SettingsHelper().getNextLesson();
     setState(() {});
@@ -86,10 +85,17 @@ class SettingsScreenState extends State<SettingsScreen> {
   }
 
   void _setLang(String value) async {
+    const Locale de = Locale("de", "DE");
+    const Locale hu = Locale("hu", "HU");
+    const Locale en = Locale("en", "US");
+
     _lang = value;
-    SettingsHelper().setLang(_lang);
     globals.lang = value;
-    runApp(Main.MyApp());
+    SettingsHelper().setLang(_lang);
+
+    var langs = {"en": en, "de": de, "hu": hu};
+    print(langs[value]);
+    I18n.onLocaleChanged(langs[value]);
   }
 
   void _setAmoled(bool value) {

@@ -831,7 +831,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                   _evaluationDialog(globals.currentEvals[index]);
                 } catch (exeption) {
                   Fluttertoast.showToast(
-                      msg: "Hiba", //localization
+                      msg: I18n.of(context).error,
                       backgroundColor: Colors.red,
                       textColor: Colors.white,
                       fontSize: 16.0);

@@ -146,7 +146,7 @@ class TomorrowLessonCard extends StatelessWidget {
               child: Wrap(
                 children: <Widget>[
                   new Text(
-                    capitalize(I18n.of(context).dateTomorrow),
+                    capitalize(I18n.of(context).lessonTomorrow),
                     style: new TextStyle(
                       fontSize: 18.0,
                     ),

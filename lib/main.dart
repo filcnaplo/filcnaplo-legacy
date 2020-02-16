@@ -45,22 +45,52 @@ bool isNew = true;
 final GlobalKey<NavigatorState> navigatorKey =
     GlobalKey(debugLabel: "Main Navigator");
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final i18n = I18n.delegate;
+
+  @override
+  void initState() {
+    super.initState();
+    I18n.onLocaleChanged = onLocaleChange;
+  }
+
+  void onLocaleChange(Locale locale) {
+    setState(() {
+      I18n.locale = locale;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    const Locale de = Locale("de", "DE");
+    const Locale hu = Locale("hu", "HU");
+    const Locale en = Locale("en", "US");
+    var langs = {"en": en, "de": de, "hu": hu};
+    print(langs[globals.lang]);
+    I18n.onLocaleChanged(langs[globals.lang]);
+
+    globals.context = context;
     return new DynamicTheme(
         defaultBrightness: Brightness.light,
         data: (brightness) => ColorManager().getTheme(brightness),
         themedWidgetBuilder: (context, theme) {
           return new MaterialApp(
-            localizationsDelegates: const <LocalizationsDelegate>[
-              I18n.delegate,
+            localizationsDelegates: [
+              i18n,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate
             ],
-            supportedLocales: I18n.delegate.supportedLocales,
-            locale: globals.lang != "auto" ? Locale(globals.lang) : null,
-            onGenerateTitle: (BuildContext context) => I18n.of(context).appTitle,
+            supportedLocales: i18n.supportedLocales,
+            localeResolutionCallback:
+                i18n.resolution(fallback: new Locale("hu", "HU")),
+            onGenerateTitle: (BuildContext context) =>
+                I18n.of(context).appTitle,
             title: "Filc Napló",
             theme: theme,
             routes: <String, WidgetBuilder>{
@@ -110,9 +140,7 @@ void main({bool noReset = false}) async {
   } else {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     globals.version = packageInfo.version;
-    globals.isBeta = globals.version.endsWith("-beta");
-    if (globals.isBeta)
-      globals.version = globals.version.replaceFirst("-beta", "");
+    globals.isBeta = globals.version.startsWith("b");
     List<User> users = await AccountManager().getUsers();
     isNew = (users.isEmpty);
     globals.isLogo = await SettingsHelper().getLogo();
@@ -152,7 +180,6 @@ void main({bool noReset = false}) async {
 }
 
 Future<void> reInit() async {
-  globals.lang = await SettingsHelper().getLang();
   runApp(MyApp());
 }
 
