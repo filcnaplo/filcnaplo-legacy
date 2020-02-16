@@ -17,7 +17,6 @@ import 'package:filcnaplo/Helpers/SettingsHelper.dart';
 import 'package:filcnaplo/Helpers/TimetableHelper.dart';
 import 'package:filcnaplo/Helpers/encrypt_codec.dart';
 import 'package:filcnaplo/Utils/AccountManager.dart';
-import 'package:filcnaplo/Utils/StringFormatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 import 'SettingsHelper.dart';
 

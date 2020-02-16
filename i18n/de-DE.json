@@ -90,7 +90,11 @@
 
     "justification": {
         "state": "Zustand",
-        "mode": "Modus"
+        "mode": "Modus",
+        "justified": "justified",
+        "unjustified": "unjustified",
+        "tojustify": "to be justified",
+        "mixed": "mixed"
     },
 
     "lesson": {
@@ -265,17 +269,17 @@
     "refresh": {
         "limit": "Warte {mins} Minue Zeit bevor du neu lädst!"
     },
-
+    
     "success": {
         "": "Fertig",
-        "homework": "Házifeladat sikeresen feltöltve"
+        "homework": "Homework uploaded successfully"
     },
 
     "error": {
-        "": "Hiba",
-        "network": "Hálózati hiba",
-        "readAccount": "Hiba a felhasználó olvasása közben"
+        "": "Error",
+        "network": "Network error",
+        "readAccount": "Error while reading user"
     },
 
-    "pcs": ""
+    "pcs": "x "
 }

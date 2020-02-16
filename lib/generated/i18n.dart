@@ -146,6 +146,14 @@ class I18n implements WidgetsLocalizations {
   String get justificationState => "állapota";
   /// "módja"
   String get justificationMode => "módja";
+  /// "igazolt"
+  String get justificationJustified => "igazolt";
+  /// "igazolatlan"
+  String get justificationUnjustified => "igazolatlan";
+  /// "igazolandó"
+  String get justificationTojustify => "igazolandó";
+  /// "vegyes"
+  String get justificationMixed => "vegyes";
   /// "óra"
   String get lesson => "óra";
   /// "${count} óra"
@@ -372,8 +380,8 @@ class I18n implements WidgetsLocalizations {
   String get errorNetwork => "Hálózati hiba";
   /// "Hiba a felhasználó olvasása közben"
   String get errorReadAccount => "Hiba a felhasználó olvasása közben";
-  /// "db"
-  String get pcs => "db";
+  /// "db "
+  String get pcs => "db ";
 }
 
 class _I18n_hu_HU extends I18n {
@@ -557,6 +565,18 @@ class _I18n_en_US extends I18n {
   /// "mode"
   @override
   String get justificationMode => "mode";
+  /// "justified"
+  @override
+  String get justificationJustified => "justified";
+  /// "unjustified"
+  @override
+  String get justificationUnjustified => "unjustified";
+  /// "to be justified"
+  @override
+  String get justificationTojustify => "to be justified";
+  /// "mixed"
+  @override
+  String get justificationMixed => "mixed";
   /// "lesson"
   @override
   String get lesson => "lesson";
@@ -884,9 +904,9 @@ class _I18n_en_US extends I18n {
   /// "Success"
   @override
   String get success => "Success";
-  /// "Házifeladat sikeresen feltöltve"
+  /// "Homework uploaded successfully"
   @override
-  String get successHomework => "Házifeladat sikeresen feltöltve";
+  String get successHomework => "Homework uploaded successfully";
   /// "Error"
   @override
   String get error => "Error";
@@ -896,9 +916,9 @@ class _I18n_en_US extends I18n {
   /// "Error while reading user"
   @override
   String get errorReadAccount => "Error while reading user";
-  /// ""
+  /// "x "
   @override
-  String get pcs => "";
+  String get pcs => "x ";
 
   @override
   TextDirection get textDirection => TextDirection.ltr;
@@ -1078,6 +1098,18 @@ class _I18n_de_DE extends I18n {
   /// "Modus"
   @override
   String get justificationMode => "Modus";
+  /// "justified"
+  @override
+  String get justificationJustified => "justified";
+  /// "unjustified"
+  @override
+  String get justificationUnjustified => "unjustified";
+  /// "to be justified"
+  @override
+  String get justificationTojustify => "to be justified";
+  /// "mixed"
+  @override
+  String get justificationMixed => "mixed";
   /// "Stunde"
   @override
   String get lesson => "Stunde";
@@ -1405,21 +1437,21 @@ class _I18n_de_DE extends I18n {
   /// "Fertig"
   @override
   String get success => "Fertig";
-  /// "Házifeladat sikeresen feltöltve"
+  /// "Homework uploaded successfully"
   @override
-  String get successHomework => "Házifeladat sikeresen feltöltve";
-  /// "Hiba"
+  String get successHomework => "Homework uploaded successfully";
+  /// "Error"
   @override
-  String get error => "Hiba";
-  /// "Hálózati hiba"
+  String get error => "Error";
+  /// "Network error"
   @override
-  String get errorNetwork => "Hálózati hiba";
-  /// "Hiba a felhasználó olvasása közben"
+  String get errorNetwork => "Network error";
+  /// "Error while reading user"
   @override
-  String get errorReadAccount => "Hiba a felhasználó olvasása közben";
-  /// ""
+  String get errorReadAccount => "Error while reading user";
+  /// "x "
   @override
-  String get pcs => "";
+  String get pcs => "x ";
 
   @override
   TextDirection get textDirection => TextDirection.ltr;

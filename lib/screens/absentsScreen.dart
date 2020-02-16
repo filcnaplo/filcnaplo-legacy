@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:filcnaplo/Datas/Student.dart';
 import 'package:filcnaplo/Datas/User.dart';

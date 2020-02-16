@@ -15,7 +15,6 @@ import 'package:filcnaplo/Helpers/RequestHelper.dart';
 import 'package:filcnaplo/Utils/ColorManager.dart';
 import 'package:filcnaplo/Utils/StringFormatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
-import 'package:filcnaplo/main.dart' as Main;
 
 void main() {
   runApp(new MaterialApp(home: new SettingsScreen()));
@@ -36,8 +35,8 @@ class SettingsScreenState extends State<SettingsScreen> {
   bool _isSingleUser;
   bool _smartUserAgent;
   bool nextLesson;
-  String _lang = "auto";
-  static const List<String> LANG_LIST = ["auto", "en", "hu", "de"];
+  String _lang = "";
+  static const List<String> LANG_LIST = ["en", "hu", "de"];
   final List<int> refreshArray = [15, 60, 90, 120, 360, 720];
   int _refreshNotification;
   int _theme;

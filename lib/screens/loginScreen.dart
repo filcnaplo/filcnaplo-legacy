@@ -429,7 +429,6 @@ class LoginScreenState extends State<LoginScreen> {
                                             //#2196F3
                                             textColor: Colors.white,
                                           ),
-                                          padding: EdgeInsets.only(right: 12),
                                         ))
                                       : Container(),
                                 ],

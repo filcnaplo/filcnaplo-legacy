@@ -42,16 +42,16 @@ class AbsenceCard extends StatelessWidget {
     }
 
     if (unjust && !just && !bejust) {
-      state = "igazolatlan";
+      state = I18n.of(context).justificationUnjustified;
       color = Colors.red;
     } else if (!unjust && just && !bejust) {
-      state = "igazolt";
+      state = I18n.of(context).justificationJustified;
       color = Colors.green;
     } else if (!unjust && !just && bejust) {
-      state = "igazolandó";
+      state = I18n.of(context).justificationTojustify;
       color = Colors.grey;
     } else {
-      state = "vegyes";
+      state = I18n.of(context).justificationMixed;
       color = Colors.orange;
     }
   }
@@ -113,19 +113,18 @@ class AbsenceCard extends StatelessWidget {
                 children: <Widget>[
                   new Text(
                       I18n.of(context).lessonCount(numOfAbsences.toString())),
-                  //new Text("mód: " + absence.modeName),
-                  new Text(I18n.of(context).absenceTime +
+                  new Text(I18n.of(context).absenceTime + ": " +
                       dateToHuman(absence.LessonStartTime)),
-                  new Text(I18n.of(context).administrationTime +
+                  new Text(I18n.of(context).administrationTime + ": " +
                       dateToHuman(absence.CreatingTime)),
-                  new Text(I18n.of(context).justificationState +
+                  new Text(I18n.of(context).justificationState + ": " +
                       absence.JustificationStateName),
-                  new Text(I18n.of(context).justificationMode +
+                  new Text(I18n.of(context).justificationMode + ": " +
                       absence.JustificationTypeName),
                   absence.DelayTimeMinutes != 0
                       ? new Text(I18n.of(context).delayMins +
                           absence.DelayTimeMinutes.toString() +
-                          " perc")
+                          " " + I18n.of(context).timeMinute)
                       : new Container(),
                 ].followedBy(absences.map((Absence absence) {
                   return ListTile(
@@ -169,10 +168,10 @@ class AbsenceCard extends StatelessWidget {
               new Container(
                 child: new Row(
                   children: <Widget>[
-                    new Text("$numOfAbsences ",
+                    new Text(numOfAbsences.toString(),
                         style: new TextStyle(
                             fontSize: 18.0, color: globals.CurrentTextColor)),
-                    new Text("db ",
+                    new Text(I18n.of(context).pcs,
                         style: new TextStyle(
                             fontSize: 18.0,
                             color:

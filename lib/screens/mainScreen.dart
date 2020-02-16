@@ -10,7 +10,6 @@ import 'package:filcnaplo/Cards/SummaryCard.dart';
 import 'package:filcnaplo/Cards/AbsenceCard.dart';
 import 'package:filcnaplo/Cards/ChangedLessonCard.dart';
 import 'package:filcnaplo/Cards/EvaluationCard.dart';
-import 'package:filcnaplo/Cards/LessonCard.dart';
 import 'package:filcnaplo/Cards/NoteCard.dart';
 import '../Cards/FilcNow.dart';
 import 'package:filcnaplo/Datas/Account.dart';

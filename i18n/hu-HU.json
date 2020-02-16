@@ -90,7 +90,11 @@
 
     "justification": {
         "state": "állapota",
-        "mode": "módja"
+        "mode": "módja",
+        "justified": "igazolt",
+        "unjustified": "igazolatlan",
+        "tojustify": "igazolandó",
+        "mixed": "vegyes"
     },
 
     "lesson": {
@@ -277,5 +281,5 @@
         "readAccount": "Hiba a felhasználó olvasása közben"
     },
 
-    "pcs": "db"
+    "pcs": " db "
 }

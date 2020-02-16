@@ -6,7 +6,6 @@ import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/Datas/User.dart';
 import 'package:filcnaplo/Utils/Saver.dart' as Saver;
 import 'package:filcnaplo/globals.dart' as globals;
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:permission_handler/permission_handler.dart';

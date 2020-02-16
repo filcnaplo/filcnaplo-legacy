@@ -110,7 +110,7 @@ class SettingsHelper {
   }
 
   Future<String> getLang() async {
-    return await _getProperty("lang", "auto");
+    return await _getProperty("lang", "hu");
   }
 
   void setTheme(int theme) {

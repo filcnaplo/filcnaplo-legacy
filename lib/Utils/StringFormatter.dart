@@ -1,6 +1,4 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:filcnaplo/Datas/Lesson.dart';
 import 'package:filcnaplo/generated/i18n.dart';

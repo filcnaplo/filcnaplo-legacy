@@ -90,7 +90,11 @@
 
     "justification": {
         "state": "state",
-        "mode": "mode"
+        "mode": "mode",
+        "justified": "justified",
+        "unjustified": "unjustified",
+        "tojustify": "to be justified",
+        "mixed": "mixed"
     },
 
     "lesson": {
@@ -268,7 +272,7 @@
 
     "success": {
         "": "Success",
-        "homework": "Házifeladat sikeresen feltöltve"
+        "homework": "Homework uploaded successfully"
     },
 
     "error": {
@@ -277,5 +281,5 @@
         "readAccount": "Error while reading user"
     },
 
-    "pcs": ""
+    "pcs": "x "
 }
