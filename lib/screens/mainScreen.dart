@@ -56,6 +56,9 @@ class MainScreenState extends State<MainScreen> {
   //DateTime startDate = DateTime.now();
   bool hasOfflineLoaded = false;
   bool hasLoaded = true;
+  List realLessons;
+  bool isLessonsToday = false;
+  bool isLessonsTomorrow = false;
 
   void _initSettings() async {
     DynamicTheme.of(context).setBrightness(await SettingsHelper().getDarkTheme()
@@ -146,37 +149,50 @@ class MainScreenState extends State<MainScreen> {
             });
   }
 
-  void _backendTest() {
-    Lesson previousLesson =
-        lessons.lastWhere((Lesson lesson) => (lesson.end.isBefore(now)));
-    print("##########################\n" + previousLesson.subject);
-    Lesson nowLesson = lessons.lastWhere((Lesson lesson) =>
-        (lesson.start.isBefore(now) && lesson.end.isAfter(now)));
-    print("\n" + nowLesson.subject);
-    Lesson nextLesson =
-        lessons.firstWhere((Lesson lesson) => (lesson.start.isAfter(now)));
-    print("\n" + nextLesson.subject);
+  void _doFilcNow() {
+    Lesson previousLesson = lessons.lastWhere(
+        (Lesson lesson) => (lesson.end.isBefore(now)),
+        orElse: () => null);
+    Lesson thisLesson = lessons.lastWhere(
+        (Lesson lesson) =>
+            (lesson.start.isBefore(now) && lesson.end.isAfter(now)),
+        orElse: () => null);
+    Lesson nextLesson = lessons.firstWhere(
+        (Lesson lesson) => (lesson.start.isAfter(now)),
+        orElse: () => null);
 
     int filcNowState;
-    //0: Before start of first lesson; 1: nowLesson not null; 2: after previous end and before next start; 3: after end of last lesson
-    //Állapotok: Első előtt / Óra alatt / Szünetben / Utolsó után
-    //              0            1            2           3
+    //States: Before first / During lesson / During break / After last
+    //              0             1               2             3
     if (lessons.first.start.isAfter(now))
       filcNowState = 0;
-    else if (nowLesson != null)
+    else if (thisLesson != null)
       filcNowState = 1;
+    else if (isLessonsTomorrow)
+      filcNowState = 3;
     else if (previousLesson.end.isBefore(now) && nextLesson.start.isAfter(now))
       filcNowState = 2;
-    else if (lessons.last.end.isBefore(now))
-      filcNowState = 3;
-    print("\nFilcNow State is " + filcNowState.toString());
+
+    int prevBreakLength;
+    int thisBreakLength;
+    if (filcNowState == 1) { //During a lesson, calculate previous and next break length
+      prevBreakLength = thisLesson.start.difference(previousLesson.end).inMinutes;
+      thisBreakLength = nextLesson.start.difference(thisLesson.end).inMinutes;
+    } else if (filcNowState == 2) { //During a break, calculate its length.
+      prevBreakLength = 0;
+      thisBreakLength = nextLesson.start.difference(previousLesson.end).inMinutes;
+    } else { //If before or after the school day, don't calculate breaks.
+      prevBreakLength = 0;
+      thisBreakLength = 0;
+    }
+
+    print("\nPrevious break: " + prevBreakLength.toString() + " This break: " + thisBreakLength.toString());
+
   }
 
   Future<List<Widget>> feedItems() async {
     int maximumFeedLength = 100;
     List<Widget> feedCards = new List();
-
-    _backendTest();
 
     for (Account account in globals.accounts) {
       List<Evaluation> firstQuarterEvaluations = (evaluations.where(
@@ -219,9 +235,8 @@ class MainScreenState extends State<MainScreen> {
         (lesson.isMissed || lesson.isSubstitution) && lesson.date.isAfter(now)))
       feedCards.add(ChangedLessonCard(l, context));
 
-    List realLessons = lessons.where((Lesson l) => !l.isMissed).toList();
-    bool isLessonsToday = false;
-    bool isLessonsTomorrow = false;
+    realLessons = lessons.where((Lesson l) => !l.isMissed).toList();
+
     for (Lesson l in realLessons) {
       if (l.start.isAfter(now) && l.start.day == now.day) {
         isLessonsToday = true;
@@ -255,6 +270,9 @@ class MainScreenState extends State<MainScreen> {
     } catch (e) {
       print(e);
     }
+
+    _doFilcNow();
+
     if (maximumFeedLength > feedCards.length)
       maximumFeedLength = feedCards.length;
     return feedCards.sublist(0, maximumFeedLength);
