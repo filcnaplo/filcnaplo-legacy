@@ -146,9 +146,37 @@ class MainScreenState extends State<MainScreen> {
             });
   }
 
+  void _backendTest() {
+    Lesson previousLesson =
+        lessons.lastWhere((Lesson lesson) => (lesson.end.isBefore(now)));
+    print("##########################\n" + previousLesson.subject);
+    Lesson nowLesson = lessons.lastWhere((Lesson lesson) =>
+        (lesson.start.isBefore(now) && lesson.end.isAfter(now)));
+    print("\n" + nowLesson.subject);
+    Lesson nextLesson =
+        lessons.firstWhere((Lesson lesson) => (lesson.start.isAfter(now)));
+    print("\n" + nextLesson.subject);
+
+    int filcNowState;
+    //0: Before start of first lesson; 1: nowLesson not null; 2: after previous end and before next start; 3: after end of last lesson
+    //Állapotok: Első előtt / Óra alatt / Szünetben / Utolsó után
+    //              0            1            2           3
+    if (lessons.first.start.isAfter(now))
+      filcNowState = 0;
+    else if (nowLesson != null)
+      filcNowState = 1;
+    else if (previousLesson.end.isBefore(now) && nextLesson.start.isAfter(now))
+      filcNowState = 2;
+    else if (lessons.last.end.isBefore(now))
+      filcNowState = 3;
+    print("\nFilcNow State is " + filcNowState.toString());
+  }
+
   Future<List<Widget>> feedItems() async {
     int maximumFeedLength = 100;
     List<Widget> feedCards = new List();
+
+    _backendTest();
 
     for (Account account in globals.accounts) {
       List<Evaluation> firstQuarterEvaluations = (evaluations.where(
@@ -166,17 +194,17 @@ class MainScreenState extends State<MainScreen> {
           .toList();
 
       if (firstQuarterEvaluations.isNotEmpty)
-        feedCards.add(new SummaryCard(firstQuarterEvaluations, context,
-            1, false, true, !globals.isSingle));
+        feedCards.add(new SummaryCard(firstQuarterEvaluations, context, 1,
+            false, true, !globals.isSingle));
       if (halfYearEvaluations.isNotEmpty)
-        feedCards.add(new SummaryCard(halfYearEvaluations, context,
-            2, false, true, !globals.isSingle));
+        feedCards.add(new SummaryCard(
+            halfYearEvaluations, context, 2, false, true, !globals.isSingle));
       if (thirdQuarterEvaluations.isNotEmpty)
-        feedCards.add(new SummaryCard(thirdQuarterEvaluations, context,
-            3, false, true, !globals.isSingle));
+        feedCards.add(new SummaryCard(thirdQuarterEvaluations, context, 3,
+            false, true, !globals.isSingle));
       if (endYearEvaluations.isNotEmpty)
-        feedCards.add(new SummaryCard(endYearEvaluations, context,
-            4, false, true, !globals.isSingle));
+        feedCards.add(new SummaryCard(
+            endYearEvaluations, context, 4, false, true, !globals.isSingle));
     }
 
     for (String day in absents.keys.toList())
@@ -210,17 +238,7 @@ class MainScreenState extends State<MainScreen> {
     } catch (e) {
       print(e);
     }
-    //TODO homework cards
-    /*for (Lesson l in lessons) {
-          if (l.homework != null){
-            print(l.homework);
-            List<Homework> homeworks = await HomeworkHelper().getHomeworksByLesson(l);
-            for (Homework homework in homeworks)
-              print(homework.text);
-              //feedCards.add(HomeworkCard(homework, globals.isSingle, context));
-          }
-        }
-        */
+
     for (Lesson l in realLessons) {
       if (l.start.isAfter(now) &&
           l.start.day == now.add(Duration(days: 1)).day) {
@@ -279,7 +297,7 @@ class MainScreenState extends State<MainScreen> {
                   : I18n.of(context).appTitle),
               actions: <Widget>[
                 //TODO search maybe?
-                /*new IconButton( //TODO Finish card chooser
+                /*new IconButton(
                   icon: new Icon(Icons.queue),
                   onPressed: () {
                     cardChooserDialog().then((b) {
