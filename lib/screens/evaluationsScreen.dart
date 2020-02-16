@@ -57,7 +57,7 @@ class EvalCount extends StatelessWidget {
                     children: <Widget>[
                       new Text(count.toString() ?? "0",
                           style: new TextStyle(fontSize: 20)),
-                      new Text(" db")
+                      new Text(" " + I18n.of(context).pcs)
                     ],
                     crossAxisAlignment: CrossAxisAlignment.end,
                   ),

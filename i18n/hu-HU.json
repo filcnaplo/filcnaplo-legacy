@@ -275,5 +275,7 @@
         "": "Hiba",
         "network": "Hálózati hiba",
         "readAccount": "Hiba a felhasználó olvasása közben"
-    }
+    },
+
+    "pcs": "db"
 }

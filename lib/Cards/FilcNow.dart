@@ -1,11 +1,8 @@
 //Contributed by RedyAu
 
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'package:filcnaplo/globals.dart' as globals;
 import '../Datas/Lesson.dart';
-import '../Utils/StringFormatter.dart';
-import '../Utils/StringFormatter.dart';
 import '../Utils/StringFormatter.dart';
 import '../generated/i18n.dart';
 

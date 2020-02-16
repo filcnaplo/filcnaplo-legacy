@@ -372,6 +372,8 @@ class I18n implements WidgetsLocalizations {
   String get errorNetwork => "Hálózati hiba";
   /// "Hiba a felhasználó olvasása közben"
   String get errorReadAccount => "Hiba a felhasználó olvasása közben";
+  /// "db"
+  String get pcs => "db";
 }
 
 class _I18n_hu_HU extends I18n {
@@ -894,6 +896,9 @@ class _I18n_en_US extends I18n {
   /// "Error while reading user"
   @override
   String get errorReadAccount => "Error while reading user";
+  /// ""
+  @override
+  String get pcs => "";
 
   @override
   TextDirection get textDirection => TextDirection.ltr;
@@ -1412,6 +1417,9 @@ class _I18n_de_DE extends I18n {
   /// "Hiba a felhasználó olvasása közben"
   @override
   String get errorReadAccount => "Hiba a felhasználó olvasása közben";
+  /// ""
+  @override
+  String get pcs => "";
 
   @override
   TextDirection get textDirection => TextDirection.ltr;

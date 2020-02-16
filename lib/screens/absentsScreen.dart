@@ -275,7 +275,7 @@ class AbsentsScreenState extends State<AbsentsScreen> {
                 dateToWeekDay(thisAbsence[0].LessonStartTime, context) +
                 " (" +
                 thisAbsence.length.toString() +
-                " db)"),
+                " ${I18n.of(context).pcs})"), 
           ),
         ],
       ),
