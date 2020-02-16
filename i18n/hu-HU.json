@@ -183,6 +183,13 @@
         "endYear": "Év végi jegyek"
     },
 
+    "filcNow": {
+        "previous": "Volt",
+        "now": "Épp - {min} perc van hátra",
+        "next": "Lesz - {min} perc múlva",
+        "minutes": "perc"
+    },
+
     "login": {
         "": "bejelentkezés",
         "username": "Felhasználónév",

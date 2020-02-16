@@ -250,6 +250,14 @@ class I18n implements WidgetsLocalizations {
   String get summaryThirdQ => "Harmadik negyedévi jegyek";
   /// "Év végi jegyek"
   String get summaryEndYear => "Év végi jegyek";
+  /// "Volt"
+  String get filcNowPrevious => "Volt";
+  /// "Épp - ${min} perc van hátra"
+  String filcNowNow(String min) => "Épp - ${min} perc van hátra";
+  /// "Lesz - ${min} perc múlva"
+  String filcNowNext(String min) => "Lesz - ${min} perc múlva";
+  /// "perc"
+  String get filcNowMinutes => "perc";
   /// "bejelentkezés"
   String get login => "bejelentkezés";
   /// "Felhasználónév"
@@ -689,6 +697,18 @@ class _I18n_en_US extends I18n {
   /// "End year evaluations"
   @override
   String get summaryEndYear => "End year evaluations";
+  /// "Previous"
+  @override
+  String get filcNowPrevious => "Previous";
+  /// "Current - ${min} minutes left"
+  @override
+  String filcNowNow(String min) => "Current - ${min} minutes left";
+  /// "Next - Starts in ${min} minutes"
+  @override
+  String filcNowNext(String min) => "Next - Starts in ${min} minutes";
+  /// "minutes"
+  @override
+  String get filcNowMinutes => "minutes";
   /// "login"
   @override
   String get login => "login";
@@ -1174,6 +1194,18 @@ class _I18n_de_DE extends I18n {
   /// "Jahresendnoten"
   @override
   String get summaryEndYear => "Jahresendnoten";
+  /// "Letzte"
+  @override
+  String get filcNowPrevious => "Letzte";
+  /// "Läuft - ${min} Minuten noch"
+  @override
+  String filcNowNow(String min) => "Läuft - ${min} Minuten noch";
+  /// "Nächste - In ${min} Minuten"
+  @override
+  String filcNowNext(String min) => "Nächste - In ${min} Minuten";
+  /// "Minuten"
+  @override
+  String get filcNowMinutes => "Minuten";
   /// "Anmeldung"
   @override
   String get login => "Anmeldung";

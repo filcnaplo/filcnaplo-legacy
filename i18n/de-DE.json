@@ -183,6 +183,13 @@
         "endYear": "Jahresendnoten"
     },
 
+    "filcNow": {
+        "previous": "Letzte",
+        "now": "Läuft - {min} Minuten noch",
+        "next": "Nächste - In {min} Minuten",
+        "minutes": "Minuten"
+    },
+
     "login": {
         "": "Anmeldung",
         "username": "Benutzername",
