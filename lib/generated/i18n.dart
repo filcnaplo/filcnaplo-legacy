@@ -380,8 +380,8 @@ class I18n implements WidgetsLocalizations {
   String get errorNetwork => "Hálózati hiba";
   /// "Hiba a felhasználó olvasása közben"
   String get errorReadAccount => "Hiba a felhasználó olvasása közben";
-  /// "db "
-  String get pcs => "db ";
+  /// " db "
+  String get pcs => " db ";
 }
 
 class _I18n_hu_HU extends I18n {
