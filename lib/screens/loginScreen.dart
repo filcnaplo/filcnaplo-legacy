@@ -138,11 +138,7 @@ class LoginScreenState extends State<LoginScreen> {
         String bearerResp;
         String code;
         if (userName == "") {
-<<<<<<< Updated upstream
           userError = I18n.of(context).loginUsernameError;
-=======
-          userError = .choose_username;
->>>>>>> Stashed changes
           setState(() {
             loggingIn = false;
           });
@@ -150,11 +146,7 @@ class LoginScreenState extends State<LoginScreen> {
           setState(() {
             loggingIn = false;
           });
-<<<<<<< Updated upstream
           passwordError = I18n.of(context).loginPasswordError;
-=======
-          passwordError = .choose_password;
->>>>>>> Stashed changes
         } else if (globals.selectedSchoolUrl == "") {
           setState(() {
             loggingIn = false;
@@ -292,11 +284,7 @@ class LoginScreenState extends State<LoginScreen> {
                                             decoration: InputDecoration(
                                               prefixIcon:
                                                   new Icon(Icons.person),
-<<<<<<< Updated upstream
                                               hintText: I18n.of(context).loginUsername,
-=======
-                                              hintText: .username,
->>>>>>> Stashed changes
                                               hintStyle: TextStyle(
                                                   color: Colors.white30),
                                               errorText: userError,
@@ -304,11 +292,7 @@ class LoginScreenState extends State<LoginScreen> {
                                                   40, 20, 20, 30),
                                               filled: true,
                                               helperText: helpSwitch
-<<<<<<< Updated upstream
                                                   ? I18n.of(context).loginUsernameHint
-=======
-                                                  ? .username_hint
->>>>>>> Stashed changes
                                                   : null,
                                               helperStyle: TextStyle(
                                                   color: Colors.white30),
@@ -348,21 +332,13 @@ class LoginScreenState extends State<LoginScreen> {
                                           prefixIcon: new Icon(Icons.https),
                                           hintStyle:
                                               TextStyle(color: Colors.white30),
-<<<<<<< Updated upstream
                                           hintText: I18n.of(context).loginPassword,
-=======
-                                          hintText: .password,
->>>>>>> Stashed changes
                                           errorText: passwordError,
                                           fillColor:
                                               Color.fromARGB(40, 20, 20, 30),
                                           filled: true,
                                           helperText: helpSwitch
-<<<<<<< Updated upstream
                                               ? I18n.of(context).loginPasswordHint
-=======
-                                              ? .password_hint
->>>>>>> Stashed changes
                                               : null,
                                           helperStyle:
                                               TextStyle(color: Colors.white30),
@@ -406,11 +382,7 @@ class LoginScreenState extends State<LoginScreen> {
                                   child: new Row(
                                     children: <Widget>[
                                       new Text(
-<<<<<<< Updated upstream
                                         I18n.of(context).loginSchool + ": ",
-=======
-                                        .school,
->>>>>>> Stashed changes
                                         style: new TextStyle(
                                             fontSize: 21.0,
                                             color: Colors.white30),
@@ -423,11 +395,7 @@ class LoginScreenState extends State<LoginScreen> {
                                           },
                                           child: new Text(
                                             globals.selectedSchoolName ??
-<<<<<<< Updated upstream
                                                 I18n.of(context).loginChoose,
-=======
-                                                .choose,
->>>>>>> Stashed changes
                                             style: new TextStyle(
                                                 fontSize: 21.0,
                                                 color: Colors.blue),
@@ -439,11 +407,7 @@ class LoginScreenState extends State<LoginScreen> {
                                 ),
                                 !schoolSelected
                                     ? new Text(
-<<<<<<< Updated upstream
                                         I18n.of(context).loginSchoolError,
-=======
-                                        .choose_school_warning,
->>>>>>> Stashed changes
                                         style: new TextStyle(color: Colors.red),
                                       )
                                     : new Container(),
@@ -481,11 +445,7 @@ class LoginScreenState extends State<LoginScreen> {
                                     : null,
                                 disabledColor: Colors.blueGrey.shade800,
                                 disabledTextColor: Colors.blueGrey,
-<<<<<<< Updated upstream
                                 child: new Text(capitalize(I18n.of(context).login)),
-=======
-                                child: new Text(.login),
->>>>>>> Stashed changes
                                 color: Colors.blue,
                                 //#2196F3
                                 textColor: Colors.white,
@@ -531,11 +491,7 @@ class MyDialogState extends State<MyDialog> {
 
   Widget build(BuildContext context) {
     return new SimpleDialog(
-<<<<<<< Updated upstream
       title: new Text(I18n.of(context).loginChooseSchool + ":"),
-=======
-      title: new Text(.choose_school),
->>>>>>> Stashed changes
       contentPadding: const EdgeInsets.all(10.0),
       children: <Widget>[
         new Container(

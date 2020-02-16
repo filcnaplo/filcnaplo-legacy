@@ -83,7 +83,8 @@ Future<List<Map<String, dynamic>>> readHomework(User user) async {
 
     List<Map<String, dynamic>> notes = new List();
     List<dynamic> notesMap = json.decode(contents);
-    for (dynamic note in notesMap) notes.add(note as Map<String, dynamic>);
+    for (dynamic note in notesMap)
+      notes.add(note as Map<String, dynamic>);
 
     return notes;
   } catch (e) {
@@ -91,14 +92,14 @@ Future<List<Map<String, dynamic>>> readHomework(User user) async {
   }
 }
 
+
 Future<File> _localTimeTable(String time, User user) async {
   final path = await _localFolder;
   String suffix = user.id.toString();
   return new File('$path/timetable_$time-$suffix.json');
 }
 
-Future<File> saveTimetable(
-    String timetableString, String time, User user) async {
+Future<File> saveTimetable(String timetableString, String time, User user) async {
   final file = await _localTimeTable(time, user);
 
   return file.writeAsString(await doEncrypt(timetableString));
@@ -111,7 +112,8 @@ Future<List<dynamic>> readTimetable(String time, User user) async {
 
     List<dynamic> timetableMap = json.decode(contents);
     return timetableMap;
-  } catch (e) {}
+  } catch (e) {
+  }
 }
 
 Future<File> get _localSettings async {
@@ -129,11 +131,13 @@ void migrate() async {
   List<Map<String, dynamic>> userMap = new List();
   String data = (await userFile).readAsStringSync();
   List<dynamic> userList = json.decode(data);
-  for (dynamic d in userList) userMap.add(d as Map<String, dynamic>);
+  for (dynamic d in userList)
+    userMap.add(d as Map<String, dynamic>);
 
   List<User> users = new List();
   if (userMap.isNotEmpty)
-    for (Map<String, dynamic> m in userMap) users.add(User.fromJson(m));
+    for (Map<String, dynamic> m in userMap)
+      users.add(User.fromJson(m));
   List<Color> colors = [
     Colors.blue,
     Colors.green,
@@ -145,7 +149,8 @@ void migrate() async {
   Iterator<Color> cit = colors.iterator;
   for (User u in users) {
     cit.moveNext();
-    if (u.color.value == 0) u.color = cit.current;
+    if (u.color.value == 0)
+      u.color = cit.current;
   }
 
   DBHelper().saveUsersJson(users);

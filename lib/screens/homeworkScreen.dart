@@ -62,11 +62,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
         child: Scaffold(
             drawer: GDrawer(),
             appBar: new AppBar(
-<<<<<<< Updated upstream
               title: new Text(capitalize(I18n.of(context).homeworkTitle)),
-=======
-              title: new Text(.homeworks),
->>>>>>> Stashed changes
               actions: <Widget>[
                 new IconButton(
                   icon: new Icon(Icons.access_time),
@@ -122,16 +118,11 @@ class HomeworkScreenState extends State<HomeworkScreen> {
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
         return new AlertDialog(
-<<<<<<< Updated upstream
           title: new Text(homework.subject + " " + I18n.of(context).homework),
-=======
-          title: new Text(homework.subject + " " + .homework),
->>>>>>> Stashed changes
           content: new SingleChildScrollView(
             child: new ListBody(
               children: <Widget>[
                 homework.deadline != null
-<<<<<<< Updated upstream
                     ? new Text(capitalize(I18n.of(context).homeworkDeadline) +
                         ": " +
                         homework.deadline)
@@ -144,13 +135,6 @@ class HomeworkScreenState extends State<HomeworkScreen> {
                     homework.uploader),
                 new Text(capitalize(I18n.of(context).homeworkUploadTime) +
                     ": " +
-=======
-                    ? new Text(.deadline + homework.deadline)
-                    : new Container(),
-                new Text(.subject + homework.subject),
-                new Text(.uploader + homework.uploader),
-                new Text(.upload_time +
->>>>>>> Stashed changes
                     homework.uploadDate
                         .substring(0, 16)
                         .replaceAll("-", '. ')
@@ -167,11 +151,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
           ),
           actions: <Widget>[
             new FlatButton(
-<<<<<<< Updated upstream
               child: new Text(I18n.of(context).dialogOk),
-=======
-              child: new Text(.ok),
->>>>>>> Stashed changes
               onPressed: () {
                 Navigator.of(context).pop();
               },

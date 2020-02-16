@@ -33,11 +33,7 @@ class StudentScreenState extends State<StudentScreen> {
           children: <Widget>[
             Card(
               child: ListTile(
-<<<<<<< Updated upstream
                 title: Text(I18n.of(context).infoBirthdate),
-=======
-                title: Text(.info_birthdate),
->>>>>>> Stashed changes
                 trailing: this.widget.account.student != null
                     ? Text(dateToHuman(DateTime.parse(
                             this.widget.account.student.DateOfBirthUtc ?? "")
@@ -47,11 +43,7 @@ class StudentScreenState extends State<StudentScreen> {
             ),
             Card(
               child: ListTile(
-<<<<<<< Updated upstream
                 title: Text(I18n.of(context).infoKretaID),
-=======
-                title: Text(.info_kretaid),
->>>>>>> Stashed changes
                 trailing: Text(this.widget.account.student.StudentId != null
                     ? this.widget.account.student.StudentId.toString()
                     : "-"),
@@ -62,11 +54,7 @@ class StudentScreenState extends State<StudentScreen> {
                 children: <Widget>[
                   Expanded(
                     child: Container(
-<<<<<<< Updated upstream
                       child: Text(I18n.of(context).infoAddress),
-=======
-                      child: Text(.info_address),
->>>>>>> Stashed changes
                       padding: EdgeInsets.all(18),
                     ),
                   ),
@@ -98,11 +86,7 @@ class StudentScreenState extends State<StudentScreen> {
                         Expanded(
                           child: Container(
                             child: Text(
-<<<<<<< Updated upstream
                               I18n.of(context).infoTeacher,
-=======
-                              .info_teacher,
->>>>>>> Stashed changes
                               softWrap: false,
                               maxLines: 1,
                             ),
@@ -140,11 +124,7 @@ class StudentScreenState extends State<StudentScreen> {
                 children: <Widget>[
                   Expanded(
                     child: Container(
-<<<<<<< Updated upstream
                       child: Text(I18n.of(context).infoSchool),
-=======
-                      child: Text(.info_school),
->>>>>>> Stashed changes
                       padding: EdgeInsets.all(18),
                     ),
                   ),
@@ -175,11 +155,7 @@ class StudentScreenState extends State<StudentScreen> {
                       children: <Widget>[
                         Expanded(
                           child: Container(
-<<<<<<< Updated upstream
                             child: Text(I18n.of(context).infoParents),
-=======
-                            child: Text(.info_parents),
->>>>>>> Stashed changes
                             padding: EdgeInsets.all(18),
                           ),
                         ),
@@ -221,11 +197,7 @@ class StudentScreenState extends State<StudentScreen> {
             widget.account.student.MothersName != null
                 ? Card(
                     child: ListTile(
-<<<<<<< Updated upstream
                       title: Text(I18n.of(context).infoMother),
-=======
-                      title: Text(.info_mathers_name),
->>>>>>> Stashed changes
                       trailing: Text(widget.account.student.MothersName),
                     ),
                   )

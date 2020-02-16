@@ -41,11 +41,7 @@ class MessageScreenState extends State<MessageScreen> {
         child: Scaffold(
             drawer: GDrawer(),
             appBar: new AppBar(
-<<<<<<< Updated upstream
               title: new Text(I18n.of(context).messageTitle),
-=======
-              title: new Text(.messages),
->>>>>>> Stashed changes
               actions: <Widget>[],
             ),
             body: new Container(

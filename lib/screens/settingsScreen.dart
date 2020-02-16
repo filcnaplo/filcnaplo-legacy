@@ -142,21 +142,13 @@ class SettingsScreenState extends State<SettingsScreen> {
       BackgroundFetch.start().then((int status) {
         print('[BackgroundFetch] start success: $status');
         Fluttertoast.showToast(
-<<<<<<< Updated upstream
             msg: I18n.of(context).success,
-=======
-            msg: .success,
->>>>>>> Stashed changes
             backgroundColor: Colors.green,
             textColor: Colors.white,
             fontSize: 16.0);
       }).catchError((e) {
         Fluttertoast.showToast(
-<<<<<<< Updated upstream
             msg: I18n.of(context).notificationFailed,
-=======
-            msg: .notification_failed,
->>>>>>> Stashed changes
             backgroundColor: Colors.red,
             textColor: Colors.white,
             fontSize: 16.0);
@@ -213,7 +205,6 @@ class SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     List<String> themes = [
-<<<<<<< Updated upstream
       I18n.of(context).colorGreen,
       I18n.of(context).colorRed,
       I18n.of(context).colorBlue,
@@ -224,18 +215,6 @@ class SettingsScreenState extends State<SettingsScreen> {
       I18n.of(context).colorPink,
       I18n.of(context).colorPurple,
       I18n.of(context).colorTeal
-=======
-      .green,
-      .red,
-      .blue,
-      .color_lightgreen,
-      .yellow,
-      .orange,
-      .grey,
-      .color_pink,
-      .color_purple,
-      .color_teal
->>>>>>> Stashed changes
     ];
     return new WillPopScope(
         onWillPop: () {
@@ -245,11 +224,7 @@ class SettingsScreenState extends State<SettingsScreen> {
         child: Scaffold(
           drawer: GDrawer(),
           appBar: new AppBar(
-<<<<<<< Updated upstream
             title: new Text(I18n.of(context).settingsTitle),
-=======
-            title: new Text(.settings),
->>>>>>> Stashed changes
           ),
           body: new Container(
             child: _isColor != null
@@ -257,11 +232,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                     children: <Widget>[
                       SwitchListTile(
                         title: new Text(
-<<<<<<< Updated upstream
                           I18n.of(context).settingsColorful,
-=======
-                          .colorful_mainpage,
->>>>>>> Stashed changes
                           style: TextStyle(fontSize: 20.0),
                         ),
                         activeColor: Theme.of(context).accentColor,
@@ -272,23 +243,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                       ),
                       SwitchListTile(
                         title: new Text(
-<<<<<<< Updated upstream
                           I18n.of(context).settingsDarkTheme,
-=======
-                          .singleuser_mainpage,
-                          style: TextStyle(fontSize: 20.0),
-                        ),
-                        activeColor: Theme.of(context).accentColor,
-                        value: _isSingleUser,
-                        onChanged: !globals.multiAccount
-                            ? null
-                            : _isSingleUserChange, //Only able to be turned on, if multiple users are logged in. On second user login, gets turned on automatically (See: AccountManager)
-                        secondary: new Icon(Icons.person),
-                      ),
-                      SwitchListTile(
-                        title: new Text(
-                          .dark_theme,
->>>>>>> Stashed changes
                           style: TextStyle(fontSize: 20.0),
                         ),
                         activeColor: Theme.of(context).accentColor,
@@ -299,11 +254,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                       ),
                       SwitchListTile(
                         title: new Text(
-<<<<<<< Updated upstream
                           I18n.of(context).settingsAmoled,
-=======
-                          .settings_amoled,
->>>>>>> Stashed changes
                           style: TextStyle(fontSize: 20.0),
                         ),
                         activeColor: Theme.of(context).accentColor,
@@ -325,14 +276,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                       ),
                       ListTile(
                         title: new Text(
-<<<<<<< Updated upstream
                           I18n.of(context).settingsEvaluationColors,
-=======
-                          .color +
-                              " (" +
-                              .evaluations +
-                              ")",
->>>>>>> Stashed changes
                           style: TextStyle(fontSize: 20.0),
                         ),
                         onTap: () {
@@ -345,13 +289,9 @@ class SettingsScreenState extends State<SettingsScreen> {
                           child: new ListTile(
                             contentPadding: EdgeInsets.all(0),
                             title: new Text(
-<<<<<<< Updated upstream
                               capitalize(I18n.of(context).color) +
                                   ": " +
                                   themes[_theme],
-=======
-                              .color + ": " + themes[_theme],
->>>>>>> Stashed changes
                               style: TextStyle(fontSize: 20.0),
                             ),
                           ),
@@ -382,11 +322,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                       ),
                       SwitchListTile(
                         title: new Text(
-<<<<<<< Updated upstream
                           I18n.of(context).settingsNotifications,
-=======
-                          .notification,
->>>>>>> Stashed changes
                           style: TextStyle(fontSize: 20.0),
                         ),
                         activeColor: Theme.of(context).accentColor,
@@ -397,22 +333,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                       ),
                       SwitchListTile(
                         title: new Text(
-<<<<<<< Updated upstream
                           I18n.of(context).settingsNextLesson,
-=======
-                          .sync_on_data,
-                          style: TextStyle(fontSize: 20.0),
-                        ),
-                        value: _canSyncOnData,
-                        activeColor: Theme.of(context).accentColor,
-                        onChanged:
-                            _isNotification ? _isCanSyncOnDataChange : null,
-                        secondary: new Icon(Icons.network_locked),
-                      ),
-                      SwitchListTile(
-                        title: new Text(
-                          .next_lesson,
->>>>>>> Stashed changes
                           style: TextStyle(fontSize: 20.0),
                         ),
                         value: nextLesson,
@@ -424,11 +345,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                           ? new PopupMenuButton<int>(
                               child: new ListTile(
                                 title: new Text(
-<<<<<<< Updated upstream
                                   I18n.of(context).settingsSyncFrequency(
-=======
-                                  .sync_frequency(
->>>>>>> Stashed changes
                                       _refreshNotification.toString()),
                                   style: TextStyle(fontSize: 20.0),
                                 ),
@@ -444,11 +361,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                                         children: <Widget>[
                                           new Text(integer.toString() +
                                               " " +
-<<<<<<< Updated upstream
                                               I18n.of(context).timeMinute),
-=======
-                                              .minute),
->>>>>>> Stashed changes
                                         ],
                                       ));
                                 }).toList();
@@ -456,11 +369,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                             )
                           : new ListTile(
                               title: new Text(
-<<<<<<< Updated upstream
                                 I18n.of(context).settingsSyncFrequency(
-=======
-                                .sync_frequency(
->>>>>>> Stashed changes
                                     _refreshNotification.toString()),
                                 style: TextStyle(fontSize: 20.0),
                               ),
@@ -468,27 +377,9 @@ class SettingsScreenState extends State<SettingsScreen> {
                               leading: new Icon(IconData(0xf4e6,
                                   fontFamily: "Material Design Icons")),
                             ),
-<<<<<<< Updated upstream
                       ListTile(
                         title: new Text(
                           I18n.of(context).settingsLanguage,
-=======
-                      SwitchListTile(
-                        title: new Text(
-                          .logo_menu,
-                          style: TextStyle(fontSize: 20.0),
-                        ),
-                        onChanged: _isLogoChange,
-                        value: _isLogo,
-                        activeColor: Theme.of(context).accentColor,
-                        secondary: new Icon(
-                          IconData(0xf6fb, fontFamily: "Material Design Icons"),
-                        ),
-                      ),
-                      ListTile(
-                        title: new Text(
-                          .language,
->>>>>>> Stashed changes
                           style: TextStyle(fontSize: 20.0),
                         ),
                         trailing: new Container(
@@ -512,24 +403,10 @@ class SettingsScreenState extends State<SettingsScreen> {
                         leading: new Icon(IconData(0xf1e7,
                             fontFamily: "Material Design Icons")),
                       ),
-<<<<<<< Updated upstream
                       !Platform.isIOS
                           ? new ListTile(
                               leading: new Icon(Icons.import_export),
                               title: new Text(I18n.of(context).export),
-=======
-                      new ListTile(
-                        leading: new Icon(Icons.info),
-                        title: new Text(.info),
-                        onTap: () {
-                          Navigator.pushNamed(context, "/about");
-                        },
-                      ),
-                      !Platform.isIOS
-                          ? new ListTile(
-                              leading: new Icon(Icons.import_export),
-                              title: new Text(.export),
->>>>>>> Stashed changes
                               onTap: () {
                                 Navigator.pushNamed(context, "/export");
                               },

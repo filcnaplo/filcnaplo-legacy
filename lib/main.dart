@@ -86,17 +86,11 @@ class _MyAppState extends State<MyApp> {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate
             ],
-<<<<<<< Updated upstream
             supportedLocales: i18n.supportedLocales,
             localeResolutionCallback:
                 i18n.resolution(fallback: new Locale("hu", "HU")),
             onGenerateTitle: (BuildContext context) =>
                 I18n.of(context).appTitle,
-=======
-            supportedLocales: S.delegate.supportedLocales,
-            locale: globals.lang != "auto" ? Locale(globals.lang) : null,
-            onGenerateTitle: (BuildContext context) => .title,
->>>>>>> Stashed changes
             title: "Filc Napló",
             theme: theme,
             routes: <String, WidgetBuilder>{

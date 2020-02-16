@@ -554,11 +554,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
             });
           },
           child: new Icon(Icons.sort, color: Colors.white),
-<<<<<<< Updated upstream
           tooltip: I18n.of(context).sort,
-=======
-          tooltip: .sort,
->>>>>>> Stashed changes
         ),
         body: (new Container(
             child: new Column(
@@ -598,11 +594,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
             new Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-<<<<<<< Updated upstream
                 new Text(capitalize(I18n.of(context).evaluationAverage) + ": "),
-=======
-                new Text(.average),
->>>>>>> Stashed changes
                 new Text(
                   avrString,
                   style: TextStyle(
@@ -614,12 +606,8 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                 ),
                 selectedAverage != null
                     ? selectedAverage.classValue != null
-<<<<<<< Updated upstream
                         ? new Text(
                             capitalize(I18n.of(context).evaluationAverageClass))
-=======
-                        ? new Text(.class_average)
->>>>>>> Stashed changes
                         : Container()
                     : Container(),
                 selectedAverage != null
@@ -678,11 +666,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           Icons.add,
           color: Colors.white,
         ),
-<<<<<<< Updated upstream
         tooltip: I18n.of(context).sort,
-=======
-        tooltip: .sort,
->>>>>>> Stashed changes
       ),
     );
 
@@ -761,12 +745,8 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
               onTap: switchToScreen,
             ),
             drawer: GDrawer(),
-<<<<<<< Updated upstream
             appBar: new AppBar(
                 title: new Text(capitalize(I18n.of(context).evaluationTitle))),
-=======
-            appBar: new AppBar(title: new Text(.evaluations)),
->>>>>>> Stashed changes
             body: (currentBody == 0
                 ? evaluationsBody
                 : (currentBody == 1 ? averageBody : dataBody))));
@@ -885,7 +865,6 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
             child: new ListBody(
               children: <Widget>[
                 evaluation.Theme != null
-<<<<<<< Updated upstream
                     ? new Text(capitalize(I18n.of(context).lessonTheme) +
                             ": " +
                             evaluation.Theme ??
@@ -920,33 +899,12 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                         ": " +
                         evaluation.FormName ??
                     ""),
-=======
-                    ? new Text(.theme + evaluation.Theme ?? "")
-                    : new Container(),
-                new Text(.teacher + evaluation.Teacher ?? ""),
-                new Text(
-                    .time + dateToHuman(evaluation.Date ?? "")),
-                evaluation.Mode != null
-                    ? new Text(.mode + evaluation.Mode)
-                    : new Container(),
-                new Text(.administration_time +
-                    dateToHuman(evaluation.CreatingTime ?? "")),
-                evaluation.Weight != null
-                    ? new Text(.weight + evaluation.Weight ?? "")
-                    : new Container(),
-                new Text(.value + evaluation.Value ?? ""),
-                new Text(.range + evaluation.FormName ?? ""),
->>>>>>> Stashed changes
               ],
             ),
           ),
           actions: <Widget>[
             new FlatButton(
-<<<<<<< Updated upstream
               child: new Text(I18n.of(context).dialogOk),
-=======
-              child: new Text(.ok),
->>>>>>> Stashed changes
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -989,11 +947,7 @@ class GradeDialogState extends State<GradeDialog> {
   Widget build(BuildContext context) {
     return new SimpleDialog(
       contentPadding: EdgeInsets.all(0),
-<<<<<<< Updated upstream
       title: new Text(I18n.of(context).evaluationIf),
-=======
-      title: new Text(.if_i_got),
->>>>>>> Stashed changes
       children: <Widget>[
         Container(
           child: Row(
@@ -1155,11 +1109,7 @@ class GradeDialogState extends State<GradeDialog> {
             });
           },
           child: new Text(
-<<<<<<< Updated upstream
             I18n.of(context).dialogDone,
-=======
-            .done,
->>>>>>> Stashed changes
             style: TextStyle(color: Theme.of(context).accentColor),
           ),
           padding: EdgeInsets.all(10),

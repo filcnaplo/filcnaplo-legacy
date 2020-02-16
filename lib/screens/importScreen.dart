@@ -14,19 +14,7 @@ import 'package:filcnaplo/Helpers/DBHelper.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
-<<<<<<< Updated upstream
   runApp(new MaterialApp(home: new ImportScreen()));
-=======
-  runApp(new MaterialApp(
-    home: new ImportScreen(),
-    localizationsDelegates: const <LocalizationsDelegate<WidgetsLocalizations>>[
-      S.delegate,
-      GlobalWidgetsLocalizations.delegate,
-    ],
-    supportedLocales: S.delegate.supportedLocales,
-    onGenerateTitle: (BuildContext context) => .title,
-  ));
->>>>>>> Stashed changes
 }
 
 class ImportScreen extends StatefulWidget {

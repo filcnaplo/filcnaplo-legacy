@@ -275,7 +275,5 @@
         "": "Error",
         "network": "Network error",
         "readAccount": "Error while reading user"
-    },
-
-    "pcs": ""
+    }
 }

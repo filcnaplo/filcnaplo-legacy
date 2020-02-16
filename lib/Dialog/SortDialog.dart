@@ -23,7 +23,6 @@ class SortDialogState extends State<SortDialog> {
 
   Widget build(BuildContext context) {
     List<String> sortOptionList = [
-<<<<<<< Updated upstream
       I18n.of(context).sortTime,
       I18n.of(context).sortEval,
       I18n.of(context).sortTimeReal,
@@ -31,15 +30,6 @@ class SortDialogState extends State<SortDialog> {
 
     return new SimpleDialog(
       title: new Text(capitalize(I18n.of(context).sort)),
-=======
-      .sort_time,
-      .sort_eval,
-      .sort_real_time,
-    ];
-
-    return new SimpleDialog(
-      title: new Text(.sort),
->>>>>>> Stashed changes
       contentPadding: const EdgeInsets.all(10.0),
       children: <Widget>[
         new PopupMenuButton<String>(

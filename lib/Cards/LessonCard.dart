@@ -176,11 +176,7 @@ class LessonCard extends StatelessWidget {
                 child: Wrap(
                   children: <Widget>[
                     new Text(
-<<<<<<< Updated upstream
                       capitalize(I18n.of(context).lessonNext) + ":",
-=======
-                      .next_lesson,
->>>>>>> Stashed changes
                       style: new TextStyle(
                         fontSize: 18.0,
                       ),
@@ -196,20 +192,12 @@ class LessonCard extends StatelessWidget {
                       padding: EdgeInsets.only(right: 5),
                       child: new Text(
                           getRemainingTime(
-<<<<<<< Updated upstream
                               I18n.of(context).timeHour, I18n.of(context).timeMinute),
-=======
-                              .hour, .minute),
->>>>>>> Stashed changes
                           style: new TextStyle(
                               fontSize: 18.0, color: globals.CurrentTextColor)),
                     ),
                     new Text(
-<<<<<<< Updated upstream
                       I18n.of(context).timeLater,
-=======
-                      .later,
->>>>>>> Stashed changes
                       style: new TextStyle(
                         fontSize: 18.0,
                       ),
