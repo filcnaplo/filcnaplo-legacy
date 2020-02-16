@@ -40,7 +40,7 @@ Reméljük olyan izgatott vagy mint mi!
 
 #### Formátum
 ```
-<tipus>(<hataskor>): targy
+<tipus> (<hataskor>): targy
 
 <hosszabb leiras ha kell>
 
