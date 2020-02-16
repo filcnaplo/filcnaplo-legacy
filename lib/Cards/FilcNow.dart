@@ -60,7 +60,7 @@ class _FilcNowCardState extends State<FilcNowCard> {
     else if (previousLesson.end.isBefore(now) && nextLesson.start.isAfter(now))
       filcNowState = 2;
 
-      print("############ " + filcNowState.toString());
+      print("FilcNow State: " + filcNowState.toString());
 
     if (filcNowState == 1) {
       //During a lesson, calculate previous and next break length
