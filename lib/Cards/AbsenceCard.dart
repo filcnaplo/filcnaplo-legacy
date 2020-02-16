@@ -14,30 +14,17 @@ class AbsenceCard extends StatelessWidget {
   Color color;
   BuildContext context;
   bool isSingle;
-  String cardText = "?";
+  String cardText;
 
   AbsenceCard(List<Absence> absence, bool isSingle, BuildContext context) {
     this.context = context;
     this.absences = absence;
     numOfAbsences = absence.length;
 
-    String realLang = globals.lang == "auto"
-        ? Localizations.localeOf(context).languageCode
-        : globals.lang;
     if (absence[0].DelayTimeMinutes != 0) {
-      //delay
-      if (realLang == "hu") {
-        cardText = "késés";
-      } else if (realLang == "en") {
-        cardText = "delay";
-      }
+      cardText = I18n.of(context).delay;
     } else {
-      //absence
-      if (realLang == "hu") {
-        cardText = "hiányzás";
-      } else if (realLang == "en") {
-        cardText = "absence(s)";
-      }
+      cardText = I18n.of(context).absence;
     }
 
     this.isSingle = isSingle;
@@ -124,14 +111,13 @@ class AbsenceCard extends StatelessWidget {
             new SingleChildScrollView(
               child: new ListBody(
                 children: <Widget>[
-                  new Text(I18n.of(context).lessonCount(numOfAbsences.toString())),
+                  new Text(
+                      I18n.of(context).lessonCount(numOfAbsences.toString())),
                   //new Text("mód: " + absence.modeName),
                   new Text(I18n.of(context).absenceTime +
-                      dateToHuman(absence.LessonStartTime) +
-                      dateToWeekDay(absence.LessonStartTime, context)),
+                      dateToHuman(absence.LessonStartTime)),
                   new Text(I18n.of(context).administrationTime +
-                      dateToHuman(absence.CreatingTime) +
-                      dateToWeekDay(absence.LessonStartTime, context)),
+                      dateToHuman(absence.CreatingTime)),
                   new Text(I18n.of(context).justificationState +
                       absence.JustificationStateName),
                   new Text(I18n.of(context).justificationMode +
@@ -205,8 +191,7 @@ class AbsenceCard extends StatelessWidget {
               !isSingle
                   ? new Container(
                       child: new Text(
-                          dateToHuman(absences[0].LessonStartTime) +
-                              dateToWeekDay(absences[0].LessonStartTime, context),
+                          dateToHuman(absences[0].LessonStartTime),
                           style: new TextStyle(
                             fontSize: 16.0,
                           )),
@@ -238,9 +223,7 @@ class AbsenceCard extends StatelessWidget {
                           ? new Expanded(
                               child: new Container(
                               child: new Text(
-                                  dateToHuman(absences[0].LessonStartTime) +
-                                      dateToWeekDay(
-                                          absences[0].LessonStartTime, context),
+                                  dateToHuman(absences[0].LessonStartTime),
                                   style: new TextStyle(
                                     fontSize: 18.0,
                                   )),

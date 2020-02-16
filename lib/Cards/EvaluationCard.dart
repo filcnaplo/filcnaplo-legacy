@@ -152,16 +152,6 @@ class EvaluationCard extends StatelessWidget {
       default:
         typeIcon = Icons.help;
         typeName = evaluation.Mode;
-        /*if (evaluation.Mode == null && !evaluation.isMidYear()) { //HELYETTE MÁSIK CARD KELL, EZEKET NEM MUTATJA KÜLÖN
-          if (evaluation.isEndYear())
-            typeName = "év végi";
-          if (evaluation.isHalfYear())
-            typeName = "félévi";
-          if (evaluation.isFirstQuarter())
-            typeName = "első negyedéves";
-          if (evaluation.isThirdQuarter())
-            typeName = "harmadik negyedéves";
-        }*/
         break;
     }
 

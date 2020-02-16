@@ -79,6 +79,7 @@
     },
 
     "delay": {
+        "": "késés",
         "mins": "késés mértéke",
         "all": "Összes késés: {count} perc"
     },
@@ -103,7 +104,8 @@
         "start": "óra kezdete",
         "end": "óra vége",
         "theme": "téma",
-        "subject": "tárgy"
+        "subject": "tárgy",
+        "tomorrow": "Holnap"
     },
 
     "homework": {
@@ -141,6 +143,7 @@
     },
 
     "absence": {
+        "": "hiányzás",
         "title": "Mulasztások",
         "time": "hiányzás ideje",
         "mode": "hiányzás módja",
@@ -263,5 +266,14 @@
         "limit": "{mins} percenként egyszer frissíthetsz!"
     },
 
-    "success": "Siker"
+    "success": {
+        "": "Siker",
+        "homework": "Házifeladat sikeresen feltöltve"
+    },
+
+    "error": {
+        "": "Hiba",
+        "network": "Hálózati hiba",
+        "readAccount": "Hiba a felhasználó olvasása közben"
+    }
 }

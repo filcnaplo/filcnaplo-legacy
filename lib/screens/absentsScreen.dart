@@ -12,15 +12,7 @@ import 'package:filcnaplo/Utils/StringFormatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
-  runApp(new MaterialApp(
-    home: new AbsentsScreen(),
-    localizationsDelegates: const <LocalizationsDelegate<WidgetsLocalizations>>[
-      I18n.delegate,
-      GlobalWidgetsLocalizations.delegate,
-    ],
-    supportedLocales: I18n.delegate.supportedLocales,
-    onGenerateTitle: (BuildContext context) => I18n.of(context).appTitle,
-  ));
+  runApp(new MaterialApp(home: new AbsentsScreen()));
 }
 
 class AbsentsScreen extends StatefulWidget {
@@ -279,12 +271,11 @@ class AbsentsScreenState extends State<AbsentsScreen> {
           ),
           new Container(
             padding: EdgeInsets.all(10),
-            child: new Text(
-                dateToHuman(thisAbsence[0].LessonStartTime) +
-                    dateToWeekDay(thisAbsence[0].LessonStartTime, context) +
-                    " (" +
-                    thisAbsence.length.toString() +
-                    " db)"),
+            child: new Text(dateToHuman(thisAbsence[0].LessonStartTime) +
+                dateToWeekDay(thisAbsence[0].LessonStartTime, context) +
+                " (" +
+                thisAbsence.length.toString() +
+                " db)"),
           ),
         ],
       ),

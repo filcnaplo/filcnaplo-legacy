@@ -17,15 +17,7 @@ import 'package:date_range_picker/date_range_picker.dart' as DateRagePicker;
 import 'package:filcnaplo/Helpers/TimetableHelper.dart';
 
 void main() {
-  runApp(new MaterialApp(
-    home: new ExportScreen(),
-    localizationsDelegates: const <LocalizationsDelegate<WidgetsLocalizations>>[
-      I18n.delegate,
-      GlobalWidgetsLocalizations.delegate,
-    ],
-    supportedLocales: I18n.delegate.supportedLocales,
-    onGenerateTitle: (BuildContext context) => I18n.of(context).appTitle,
-  ));
+  runApp(new MaterialApp(home: new ExportScreen()));
 }
 
 class ExportScreen extends StatefulWidget {

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:filcnaplo/Cards/TomorrowLessonCard.dart';
-import 'package:filcnaplo/Dialog/CardChooserDialog.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -281,17 +280,6 @@ class MainScreenState extends State<MainScreen> {
               title: new Text(globals.isSingle
                   ? globals.selectedAccount.user.name
                   : I18n.of(context).appTitle),
-              actions: <Widget>[
-                //TODO search maybe?
-                /*new IconButton(
-                  icon: new Icon(Icons.queue),
-                  onPressed: () {
-                    cardChooserDialog().then((b) {
-                      Navigator.pushNamed(context, "/main");
-                    });
-                  }
-                )*/
-              ],
             ),
             body: hasOfflineLoaded &&
                     globals.isColor != null &&
@@ -329,15 +317,6 @@ class MainScreenState extends State<MainScreen> {
                 : new Center(child: new CircularProgressIndicator())));
   }
 
-  Future<Null> cardChooserDialog() {
-    return showDialog(
-        barrierDismissible: true,
-        context: context,
-        builder: (BuildContext context) {
-          return new CardChooserDialog();
-        });
-  }
-
   Future<Null> _onRefresh(
       {bool offline = false, bool showErrors = true}) async {
     List<Evaluation> tempEvaluations = new List();
@@ -357,7 +336,7 @@ class MainScreenState extends State<MainScreen> {
         tempAbsents.addAll(globals.selectedAccount.absents);
       } catch (exception) {
         Fluttertoast.showToast(
-            msg: "Hiba",
+            msg: I18n.of(context).error,
             backgroundColor: Colors.red,
             textColor: Colors.white,
             fontSize: 16.0);

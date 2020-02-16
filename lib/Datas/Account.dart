@@ -18,6 +18,7 @@ import 'Note.dart';
 import 'Student.dart';
 import 'Test.dart';
 import 'User.dart';
+import 'package:filcnaplo/globals.dart' as globals;
 
 class Account {
   Student student;
@@ -52,7 +53,7 @@ class Account {
           _studentJson = await DBHelper().getStudentJson(user);
         } catch (e) {
           Fluttertoast.showToast(
-              msg: "Hiba a felhasználó olvasása közben",
+              msg: I18n.of(globals.context).errorReadAccount,
               backgroundColor: Colors.red,
               textColor: Colors.white,
               fontSize: 16.0);
@@ -77,7 +78,8 @@ class Account {
           .getAveragesFrom(json.encode(_studentJson), user);
 
       user.setRecentlyRefreshed("refreshStudentString");
-     } /*else {
+    }
+    /*else {
       Fluttertoast.showToast(
         msg: I18n.of(context).refreshLimit(User.RATE_LIMIT_MINUTES.toString()));
     } */
@@ -93,28 +95,13 @@ class Account {
         testString = await RequestHelper().getTests(
             await RequestHelper().getBearerToken(user, showErrors),
             user.schoolCode);
-        /*testString = """
-[
-  {
-    "Uid": "1234",
-    "Id": 1234,
-    "Datum": "2019-10-27T00:00:00Z",
-    "HetNapja": "Kedd",
-    "Oraszam": 4,
-    "Tantargy": "kémia",
-    "Tanar": "Xxxxxx Xxxxxx",
-    "SzamonkeresMegnevezese": "xxxxxxxxx",
-    "SzamonkeresModja": "Írásbeli röpdolgozat",
-    "BejelentesDatuma": "2019-10-27T00:00:00Z"
-  }
-]
-      """;*/
         testJson = json.decode(testString);
         tests = await TestHelper().getTestsFrom(testJson, user);
         DBHelper().addTestsJson(testJson, user);
       }
       user.setRecentlyRefreshed("refreshTests");
-     } /*else {
+    }
+    /*else {
       Fluttertoast.showToast(
         msg: I18n.of(context).refreshLimit(User.RATE_LIMIT_MINUTES.toString()));
     } */
@@ -128,7 +115,8 @@ class Account {
       else
         _eventsString = await RequestHelper().getEventsString(user, showErrors);
       user.setRecentlyRefreshed("_refreshEventsString");
-     } /*else {
+    }
+    /*else {
       Fluttertoast.showToast(
         msg: I18n.of(context).refreshLimit(User.RATE_LIMIT_MINUTES.toString()));
     } */
