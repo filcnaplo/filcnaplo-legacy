@@ -175,9 +175,14 @@ class MainScreenState extends State<MainScreen> {
 
     int prevBreakLength;
     int thisBreakLength;
+    int minutesUntilNext;
+    int minutesLeftOfThis;
+
     if (filcNowState == 1) { //During a lesson, calculate previous and next break length
       prevBreakLength = thisLesson.start.difference(previousLesson.end).inMinutes;
       thisBreakLength = nextLesson.start.difference(thisLesson.end).inMinutes;
+      minutesLeftOfThis = thisLesson.end.difference(now).inMinutes;
+      minutesUntilNext = nextLesson.start.difference(now).inMinutes;
     } else if (filcNowState == 2) { //During a break, calculate its length.
       prevBreakLength = 0;
       thisBreakLength = nextLesson.start.difference(previousLesson.end).inMinutes;
@@ -185,9 +190,6 @@ class MainScreenState extends State<MainScreen> {
       prevBreakLength = 0;
       thisBreakLength = 0;
     }
-
-    print("\nPrevious break: " + prevBreakLength.toString() + " This break: " + thisBreakLength.toString());
-
   }
 
   Future<List<Widget>> feedItems() async {
