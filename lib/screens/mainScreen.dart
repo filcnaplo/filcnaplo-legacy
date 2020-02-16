@@ -13,6 +13,7 @@ import 'package:filcnaplo/Cards/ChangedLessonCard.dart';
 import 'package:filcnaplo/Cards/EvaluationCard.dart';
 import 'package:filcnaplo/Cards/LessonCard.dart';
 import 'package:filcnaplo/Cards/NoteCard.dart';
+import '../Cards/FilcNow.dart';
 import 'package:filcnaplo/Datas/Account.dart';
 import 'package:filcnaplo/Datas/Lesson.dart';
 import 'package:filcnaplo/Datas/Note.dart';
@@ -149,49 +150,6 @@ class MainScreenState extends State<MainScreen> {
             });
   }
 
-  void _doFilcNow() {
-    Lesson previousLesson = lessons.lastWhere(
-        (Lesson lesson) => (lesson.end.isBefore(now)),
-        orElse: () => null);
-    Lesson thisLesson = lessons.lastWhere(
-        (Lesson lesson) =>
-            (lesson.start.isBefore(now) && lesson.end.isAfter(now)),
-        orElse: () => null);
-    Lesson nextLesson = lessons.firstWhere(
-        (Lesson lesson) => (lesson.start.isAfter(now)),
-        orElse: () => null);
-
-    int filcNowState;
-    //States: Before first / During lesson / During break / After last
-    //              0             1               2             3
-    if (lessons.first.start.isAfter(now))
-      filcNowState = 0;
-    else if (thisLesson != null)
-      filcNowState = 1;
-    else if (isLessonsTomorrow)
-      filcNowState = 3;
-    else if (previousLesson.end.isBefore(now) && nextLesson.start.isAfter(now))
-      filcNowState = 2;
-
-    int prevBreakLength;
-    int thisBreakLength;
-    int minutesUntilNext;
-    int minutesLeftOfThis;
-
-    if (filcNowState == 1) { //During a lesson, calculate previous and next break length
-      prevBreakLength = thisLesson.start.difference(previousLesson.end).inMinutes;
-      thisBreakLength = nextLesson.start.difference(thisLesson.end).inMinutes;
-      minutesLeftOfThis = thisLesson.end.difference(now).inMinutes;
-      minutesUntilNext = nextLesson.start.difference(now).inMinutes;
-    } else if (filcNowState == 2) { //During a break, calculate its length.
-      prevBreakLength = 0;
-      thisBreakLength = nextLesson.start.difference(previousLesson.end).inMinutes;
-    } else { //If before or after the school day, don't calculate breaks.
-      prevBreakLength = 0;
-      thisBreakLength = 0;
-    }
-  }
-
   Future<List<Widget>> feedItems() async {
     int maximumFeedLength = 100;
     List<Widget> feedCards = new List();
@@ -245,7 +203,7 @@ class MainScreenState extends State<MainScreen> {
         break;
       }
     }
-    if (realLessons.length > 0 && isLessonsToday) {
+    /*if (realLessons.length > 0 && isLessonsToday) {
       feedCards.add(new LessonCard(realLessons, context, now));
     }
     try {
@@ -254,8 +212,7 @@ class MainScreenState extends State<MainScreen> {
       });
     } catch (e) {
       print(e);
-    }
-
+    }*/
     for (Lesson l in realLessons) {
       if (l.start.isAfter(now) &&
           l.start.day == now.add(Duration(days: 1)).day) {
@@ -263,6 +220,17 @@ class MainScreenState extends State<MainScreen> {
         break;
       }
     }
+    if (realLessons.length > 0 && isLessonsToday) {
+      feedCards.add(new FilcNowCard(lessons, isLessonsTomorrow, context));
+    }
+    try {
+      feedCards.sort((Widget a, Widget b) {
+        return b.key.toString().compareTo(a.key.toString());
+      });
+    } catch (e) {
+      print(e);
+    }
+    
     if (realLessons.length > 0 && isLessonsTomorrow)
       feedCards.add(new TomorrowLessonCard(realLessons, context, now));
     try {
@@ -272,8 +240,6 @@ class MainScreenState extends State<MainScreen> {
     } catch (e) {
       print(e);
     }
-
-    _doFilcNow();
 
     if (maximumFeedLength > feedCards.length)
       maximumFeedLength = feedCards.length;
