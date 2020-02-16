@@ -239,14 +239,14 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
       summaryCardsToShow.add(new SummaryCard(firstQuarterEvaluations, context,
           1, false, true, false)); //localization
     if (halfYearEvaluations.isNotEmpty)
-      summaryCardsToShow.add(new SummaryCard(
-          halfYearEvaluations, context, 2, false, true, false));
+      summaryCardsToShow.add(
+          new SummaryCard(halfYearEvaluations, context, 2, false, true, false));
     if (thirdQuarterEvaluations.isNotEmpty)
-      summaryCardsToShow.add(new SummaryCard(thirdQuarterEvaluations, context,
-          3, false, true, false));
-    if (endYearEvaluations.isNotEmpty)
       summaryCardsToShow.add(new SummaryCard(
-          endYearEvaluations, context, 4, false, true, false));
+          thirdQuarterEvaluations, context, 3, false, true, false));
+    if (endYearEvaluations.isNotEmpty)
+      summaryCardsToShow.add(
+          new SummaryCard(endYearEvaluations, context, 4, false, true, false));
 
     if (summaryCardsToShow.isEmpty)
       summaryCardsToShow.add(Card(
@@ -517,9 +517,11 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                       "",
                   style: new TextStyle(fontWeight: FontWeight.bold)),
               subtitle: new Text(
-                (allEvals[index].Theme == "")
-                    ? allEvals[index].Mode
-                    : allEvals[index].Theme,
+                (allEvals[index].Mode != null)
+                    ? (allEvals[index].Theme == "")
+                        ? allEvals[index].Mode
+                        : allEvals[index].Theme
+                    : "",
                 style: new TextStyle(
                     fontStyle: (allEvals[index].Theme == "")
                         ? FontStyle.italic
@@ -690,7 +692,9 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                               children: <Widget>[
                                 new Column(
                                   children: <Widget>[
-                                    new Text(I18n.of(context).evaluationAverage + ": "), //localization
+                                    new Text(
+                                        I18n.of(context).evaluationAverage +
+                                            ": "), //localization
                                   ],
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                 ),
@@ -727,10 +731,11 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
                     icon: new Icon(Icons.list),
-                    title: new Text (I18n.of(context).evaluationNavigationAll)),
+                    title: new Text(I18n.of(context).evaluationNavigationAll)),
                 BottomNavigationBarItem(
                   icon: new Icon(Icons.show_chart),
-                  title: new Text(I18n.of(context).evaluationNavigationStatistics),
+                  title:
+                      new Text(I18n.of(context).evaluationNavigationStatistics),
                 ),
                 BottomNavigationBarItem(
                   icon: new Icon(Icons.assistant),
@@ -783,9 +788,11 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                     borderRadius: new BorderRadius.all(Radius.circular(40))),
               ),
               title: new Text(
-                (globals.currentEvals[index].Theme == "")
-                    ? globals.currentEvals[index].Mode
-                    : globals.currentEvals[index].Theme,
+                (globals.currentEvals[index].Mode != null)
+                    ? (globals.currentEvals[index].Theme == "")
+                        ? globals.currentEvals[index].Mode
+                        : globals.currentEvals[index].Theme
+                    : "",
                 style: new TextStyle(
                     fontStyle: (globals.currentEvals[index].Theme == "")
                         ? FontStyle.italic
@@ -797,7 +804,8 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                   new Column(
                     children: <Widget>[
                       new Text(dateToHuman(globals.currentEvals[index].Date)),
-                      new Text(dateToWeekDay(globals.currentEvals[index].Date, context)),
+                      new Text(dateToWeekDay(
+                          globals.currentEvals[index].Date, context)),
                     ],
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -866,7 +874,9 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                         ": " +
                         evaluation.Teacher ??
                     ""),
-                new Text(capitalize(I18n.of(context).time) + ": " + dateToHuman(evaluation.Date ?? "")),
+                new Text(capitalize(I18n.of(context).time) +
+                    ": " +
+                    dateToHuman(evaluation.Date ?? "")),
                 evaluation.Mode != null
                     ? new Text(capitalize(I18n.of(context).evaluationMode) +
                         ": " +
@@ -876,8 +886,10 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                     ": " +
                     dateToHuman(evaluation.CreatingTime ?? "")),
                 evaluation.Weight != null
-                    ? new Text(
-                        I18n.of(context).evaluationWeight + ": " + evaluation.Weight ?? "")
+                    ? new Text(I18n.of(context).evaluationWeight +
+                            ": " +
+                            evaluation.Weight ??
+                        "")
                     : new Container(),
                 new Text(capitalize(I18n.of(context).evaluationValue) +
                         ": " +
