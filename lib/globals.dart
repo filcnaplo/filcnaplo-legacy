@@ -11,6 +11,7 @@ import 'Datas/Homework.dart';
 import 'Datas/Lesson.dart';
 import 'Datas/Account.dart';
 
+BuildContext context;
 Color CurrentTextColor;
 String MAIN_WEBSITE = "https://www.filcnaplo.hu/";
 String SETTINGS_API_URL = MAIN_WEBSITE + "settings.json";

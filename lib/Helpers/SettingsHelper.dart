@@ -26,6 +26,7 @@ class SettingsHelper {
     } catch (e) {
       print(e);
     }
+
     settings[name] = value;
     await DBHelper().saveSettingsMap(settings);
     return null;
@@ -35,6 +36,7 @@ class SettingsHelper {
     Map<String, dynamic> settings = await DBHelper().getSettingsMap();
     if (settings == null) settings = new Map();
     if (settings.containsKey(name)) return (settings[name]);
+
     return defaultValue;
   }
 

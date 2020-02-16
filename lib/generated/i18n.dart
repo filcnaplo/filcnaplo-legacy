@@ -134,6 +134,8 @@ class I18n implements WidgetsLocalizations {
   String get dateWeekPrev => "előző hét";
   /// "következö hét"
   String get dateWeekNext => "következö hét";
+  /// "késés"
+  String get delay => "késés";
   /// "késés mértéke"
   String get delayMins => "késés mértéke";
   /// "Összes késés: ${count} perc"
@@ -166,6 +168,8 @@ class I18n implements WidgetsLocalizations {
   String get lessonTheme => "téma";
   /// "tárgy"
   String get lessonSubject => "tárgy";
+  /// "Holnap"
+  String get lessonTomorrow => "Holnap";
   /// "házi feladat"
   String get homework => "házi feladat";
   /// "házi hozzáadása"
@@ -198,6 +202,8 @@ class I18n implements WidgetsLocalizations {
   String get messageReceivers => "címzett";
   /// "statisztikák"
   String get statistics => "statisztikák";
+  /// "hiányzás"
+  String get absence => "hiányzás";
   /// "Mulasztások"
   String get absenceTitle => "Mulasztások";
   /// "hiányzás ideje"
@@ -350,6 +356,14 @@ class I18n implements WidgetsLocalizations {
   String refreshLimit(String mins) => "${mins} percenként egyszer frissíthetsz!";
   /// "Siker"
   String get success => "Siker";
+  /// "Házifeladat sikeresen feltöltve"
+  String get successHomework => "Házifeladat sikeresen feltöltve";
+  /// "Hiba"
+  String get error => "Hiba";
+  /// "Hálózati hiba"
+  String get errorNetwork => "Hálózati hiba";
+  /// "Hiba a felhasználó olvasása közben"
+  String get errorReadAccount => "Hiba a felhasználó olvasása közben";
 }
 
 class _I18n_hu_HU extends I18n {
@@ -515,6 +529,9 @@ class _I18n_en_US extends I18n {
   /// "next week"
   @override
   String get dateWeekNext => "next week";
+  /// "delay"
+  @override
+  String get delay => "delay";
   /// "delay in minutes"
   @override
   String get delayMins => "delay in minutes";
@@ -530,39 +547,42 @@ class _I18n_en_US extends I18n {
   /// "mode"
   @override
   String get justificationMode => "mode";
-  /// "óra"
+  /// "lesson"
   @override
-  String get lesson => "óra";
-  /// "${count} óra"
+  String get lesson => "lesson";
+  /// "${count} lesson"
   @override
-  String lessonCount(String count) => "${count} óra";
-  /// "következő óra"
+  String lessonCount(String count) => "${count} lesson";
+  /// "next lesson"
   @override
-  String get lessonNext => "következő óra";
-  /// "óra lesz"
+  String get lessonNext => "next lesson";
+  /// "lessons"
   @override
-  String get lessonHave => "óra lesz";
-  /// "terem"
+  String get lessonHave => "lessons";
+  /// "room"
   @override
-  String get lessonRoom => "terem";
-  /// "tanár"
+  String get lessonRoom => "room";
+  /// "teacher"
   @override
-  String get lessonTeacher => "tanár";
-  /// "osztály"
+  String get lessonTeacher => "teacher";
+  /// "class"
   @override
-  String get lessonClass => "osztály";
-  /// "óra kezdete"
+  String get lessonClass => "class";
+  /// "lesson start"
   @override
-  String get lessonStart => "óra kezdete";
-  /// "óra vége"
+  String get lessonStart => "lesson start";
+  /// "lesson end"
   @override
-  String get lessonEnd => "óra vége";
-  /// "téma"
+  String get lessonEnd => "lesson end";
+  /// "theme"
   @override
-  String get lessonTheme => "téma";
-  /// "tárgy"
+  String get lessonTheme => "theme";
+  /// "subject"
   @override
-  String get lessonSubject => "tárgy";
+  String get lessonSubject => "subject";
+  /// "Tomorrow there will be"
+  @override
+  String get lessonTomorrow => "Tomorrow there will be";
   /// "homework"
   @override
   String get homework => "homework";
@@ -575,15 +595,15 @@ class _I18n_en_US extends I18n {
   /// "deadline"
   @override
   String get homeworkDeadline => "deadline";
-  /// ""
+  /// "subject"
   @override
-  String get homeworkSubject => "";
-  /// ""
+  String get homeworkSubject => "subject";
+  /// "uploader"
   @override
-  String get homeworkUploadUser => "";
-  /// ""
+  String get homeworkUploadUser => "uploader";
+  /// "uploaded at"
   @override
-  String get homeworkUploadTime => "";
+  String get homeworkUploadTime => "uploaded at";
   /// "substitution"
   @override
   String get substitution => "substitution";
@@ -611,6 +631,9 @@ class _I18n_en_US extends I18n {
   /// "statistics"
   @override
   String get statistics => "statistics";
+  /// "absence"
+  @override
+  String get absence => "absence";
   /// "Absences"
   @override
   String get absenceTitle => "Absences";
@@ -836,9 +859,21 @@ class _I18n_en_US extends I18n {
   /// "You can only update every ${mins} minutes!"
   @override
   String refreshLimit(String mins) => "You can only update every ${mins} minutes!";
-  /// "Success!"
+  /// "Success"
   @override
-  String get success => "Success!";
+  String get success => "Success";
+  /// "Házifeladat sikeresen feltöltve"
+  @override
+  String get successHomework => "Házifeladat sikeresen feltöltve";
+  /// "Error"
+  @override
+  String get error => "Error";
+  /// "Network error"
+  @override
+  String get errorNetwork => "Network error";
+  /// "Error while reading user"
+  @override
+  String get errorReadAccount => "Error while reading user";
 
   @override
   TextDirection get textDirection => TextDirection.ltr;
@@ -1000,6 +1035,9 @@ class _I18n_de_DE extends I18n {
   /// "nächste Woche"
   @override
   String get dateWeekNext => "nächste Woche";
+  /// "Verspätungen"
+  @override
+  String get delay => "Verspätungen";
   /// "verspetete Zeit"
   @override
   String get delayMins => "verspetete Zeit";
@@ -1021,12 +1059,12 @@ class _I18n_de_DE extends I18n {
   /// "${count} Stunde"
   @override
   String lessonCount(String count) => "${count} Stunde";
-  /// "következő óra"
+  /// "Nächste Stunde"
   @override
-  String get lessonNext => "következő óra";
-  /// " Stunden."
+  String get lessonNext => "Nächste Stunde";
+  /// "Stunden"
   @override
-  String get lessonHave => " Stunden.";
+  String get lessonHave => "Stunden";
   /// "Raum"
   @override
   String get lessonRoom => "Raum";
@@ -1048,6 +1086,9 @@ class _I18n_de_DE extends I18n {
   /// "Fach"
   @override
   String get lessonSubject => "Fach";
+  /// "Morgen gibt es"
+  @override
+  String get lessonTomorrow => "Morgen gibt es";
   /// "Hausaufgabe"
   @override
   String get homework => "Hausaufgabe";
@@ -1096,6 +1137,9 @@ class _I18n_de_DE extends I18n {
   /// "Statistik"
   @override
   String get statistics => "Statistik";
+  /// "Auslassung"
+  @override
+  String get absence => "Auslassung";
   /// "Auslassungen"
   @override
   String get absenceTitle => "Auslassungen";
@@ -1324,6 +1368,18 @@ class _I18n_de_DE extends I18n {
   /// "Fertig"
   @override
   String get success => "Fertig";
+  /// "Házifeladat sikeresen feltöltve"
+  @override
+  String get successHomework => "Házifeladat sikeresen feltöltve";
+  /// "Hiba"
+  @override
+  String get error => "Hiba";
+  /// "Hálózati hiba"
+  @override
+  String get errorNetwork => "Hálózati hiba";
+  /// "Hiba a felhasználó olvasása közben"
+  @override
+  String get errorReadAccount => "Hiba a felhasználó olvasása közben";
 
   @override
   TextDirection get textDirection => TextDirection.ltr;
