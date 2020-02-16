@@ -12,6 +12,7 @@ import 'package:filcnaplo/Cards/ChangedLessonCard.dart';
 import 'package:filcnaplo/Cards/EvaluationCard.dart';
 import 'package:filcnaplo/Cards/LessonCard.dart';
 import 'package:filcnaplo/Cards/NoteCard.dart';
+import '../Cards/FilcNow.dart';
 import 'package:filcnaplo/Datas/Account.dart';
 import 'package:filcnaplo/Datas/Lesson.dart';
 import 'package:filcnaplo/Datas/Note.dart';
@@ -55,6 +56,9 @@ class MainScreenState extends State<MainScreen> {
   //DateTime startDate = DateTime.now();
   bool hasOfflineLoaded = false;
   bool hasLoaded = true;
+  List realLessons;
+  bool isLessonsToday = false;
+  bool isLessonsTomorrow = false;
 
   void _initSettings() async {
     DynamicTheme.of(context).setBrightness(await SettingsHelper().getDarkTheme()
@@ -165,17 +169,17 @@ class MainScreenState extends State<MainScreen> {
           .toList();
 
       if (firstQuarterEvaluations.isNotEmpty)
-        feedCards.add(new SummaryCard(firstQuarterEvaluations, context,
-            1, false, true, !globals.isSingle));
+        feedCards.add(new SummaryCard(firstQuarterEvaluations, context, 1,
+            false, true, !globals.isSingle));
       if (halfYearEvaluations.isNotEmpty)
-        feedCards.add(new SummaryCard(halfYearEvaluations, context,
-            2, false, true, !globals.isSingle));
+        feedCards.add(new SummaryCard(
+            halfYearEvaluations, context, 2, false, true, !globals.isSingle));
       if (thirdQuarterEvaluations.isNotEmpty)
-        feedCards.add(new SummaryCard(thirdQuarterEvaluations, context,
-            3, false, true, !globals.isSingle));
+        feedCards.add(new SummaryCard(thirdQuarterEvaluations, context, 3,
+            false, true, !globals.isSingle));
       if (endYearEvaluations.isNotEmpty)
-        feedCards.add(new SummaryCard(endYearEvaluations, context,
-            4, false, true, !globals.isSingle));
+        feedCards.add(new SummaryCard(
+            endYearEvaluations, context, 4, false, true, !globals.isSingle));
     }
 
     for (String day in absents.keys.toList())
@@ -190,16 +194,15 @@ class MainScreenState extends State<MainScreen> {
         (lesson.isMissed || lesson.isSubstitution) && lesson.date.isAfter(now)))
       feedCards.add(ChangedLessonCard(l, context));
 
-    List realLessons = lessons.where((Lesson l) => !l.isMissed).toList();
-    bool isLessonsToday = false;
-    bool isLessonsTomorrow = false;
+    realLessons = lessons.where((Lesson l) => !l.isMissed).toList();
+
     for (Lesson l in realLessons) {
       if (l.start.isAfter(now) && l.start.day == now.day) {
         isLessonsToday = true;
         break;
       }
     }
-    if (realLessons.length > 0 && isLessonsToday) {
+    /*if (realLessons.length > 0 && isLessonsToday) {
       feedCards.add(new LessonCard(realLessons, context, now));
     }
     try {
@@ -208,8 +211,7 @@ class MainScreenState extends State<MainScreen> {
       });
     } catch (e) {
       print(e);
-    }
-    //TODO homework cards
+    }*/
     for (Lesson l in realLessons) {
       if (l.start.isAfter(now) &&
           l.start.day == now.add(Duration(days: 1)).day) {
@@ -217,6 +219,17 @@ class MainScreenState extends State<MainScreen> {
         break;
       }
     }
+    if (realLessons.length > 0 && isLessonsToday) {
+      feedCards.add(new FilcNowCard(lessons, isLessonsTomorrow, context));
+    }
+    try {
+      feedCards.sort((Widget a, Widget b) {
+        return b.key.toString().compareTo(a.key.toString());
+      });
+    } catch (e) {
+      print(e);
+    }
+    
     if (realLessons.length > 0 && isLessonsTomorrow)
       feedCards.add(new TomorrowLessonCard(realLessons, context, now));
     try {
@@ -226,6 +239,7 @@ class MainScreenState extends State<MainScreen> {
     } catch (e) {
       print(e);
     }
+
     if (maximumFeedLength > feedCards.length)
       maximumFeedLength = feedCards.length;
     return feedCards.sublist(0, maximumFeedLength);
