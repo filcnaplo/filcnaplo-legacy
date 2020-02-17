@@ -76,7 +76,7 @@ class HomeworkDialogState extends State<HomeworkDialog> {
       actions: <Widget>[
         widget.lesson.homeworkEnabled
             ? new FlatButton(
-                child: new Text(I18n.of(context).homeworkAdd),
+                child: new Text(I18n.of(context).homeworkAdd.toUpperCase()),
                 onPressed: () {
                   Navigator.of(context).pop();
                   return showDialog(
@@ -91,7 +91,7 @@ class HomeworkDialogState extends State<HomeworkDialog> {
               )
             : Container(),
         new FlatButton(
-          child: new Text(I18n.of(context).dialogOk),
+          child: new Text(I18n.of(context).dialogOk.toUpperCase()),
           onPressed: () {
             Navigator.of(context).pop();
           },

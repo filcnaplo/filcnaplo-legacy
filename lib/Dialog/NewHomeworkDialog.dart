@@ -28,7 +28,7 @@ class NewHomeworkDialogState extends State<NewHomeworkDialog> {
           },
         ),
         MaterialButton(
-          child: Text(I18n.of(context).dialogOk),
+          child: Text(I18n.of(context).dialogOk.toUpperCase()),
           onPressed: () {
             RequestHelper().uploadHomework(
                 homework, widget.lesson, globals.selectedAccount.user);

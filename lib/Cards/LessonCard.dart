@@ -6,6 +6,8 @@ import 'package:filcnaplo/Datas/Lesson.dart';
 import 'package:filcnaplo/Utils/StringFormatter.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 
+import 'dart:async';
+
 class LessonCard extends StatefulWidget {
   List<Lesson> lessons;
   bool isLessonsTomorrow;
@@ -23,7 +25,9 @@ class LessonCard extends StatefulWidget {
 }
 
 class _LessonCardState extends State<LessonCard> {
+  String _now;
   DateTime now;
+  Timer _updater;
 
   Lesson previousLesson;
   Lesson thisLesson;
@@ -35,6 +39,19 @@ class _LessonCardState extends State<LessonCard> {
   int minutesLeftOfThis;
 
   int lessonCardState;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _now = DateTime.now().second.toString();
+
+    _updater = Timer.periodic(Duration(seconds: 10), (Timer t) {
+      setState(() {
+        _now = DateTime.now().second.toString();
+      });
+    });
+  }
 
   void _lessonCardBackend(
       DateTime now, List<Lesson> lessons, bool isLessonsTomorrow) {
@@ -60,7 +77,7 @@ class _LessonCardState extends State<LessonCard> {
     else if (previousLesson.end.isBefore(now) && nextLesson.start.isAfter(now))
       lessonCardState = 2;
 
-    print("FilcNow State: " + lessonCardState.toString());
+    //print("FilcNow State: " + lessonCardState.toString());
 
     if (lessonCardState == 1) {
       //During a lesson, calculate previous and next break length
@@ -97,7 +114,7 @@ class _LessonCardState extends State<LessonCard> {
                   false,
                   I18n.of(context).lessonCardPrevious,
                   "",
-                  previousLesson.count.toString(),
+                  (previousLesson.count == -1) ? "+" : previousLesson.count.toString(),
                   previousLesson.subject,
                   previousLesson.isMissed
                       ? I18n.of(context).substitutionMissed
@@ -118,7 +135,7 @@ class _LessonCardState extends State<LessonCard> {
                   (prevBreakLength.toString() +
                       " " +
                       I18n.of(context).timeMinute),
-                  thisLesson.count.toString(),
+                  (thisLesson.count == -1) ? "+" : thisLesson.count.toString(),
                   thisLesson.subject,
                   thisLesson.isMissed
                       ? I18n.of(context).substitutionMissed
@@ -139,7 +156,7 @@ class _LessonCardState extends State<LessonCard> {
                       : (thisBreakLength.toString() +
                           " " +
                           I18n.of(context).timeMinute),
-                  nextLesson.count.toString(),
+                  (nextLesson.count == -1) ? "+" : nextLesson.count.toString(),
                   nextLesson.subject,
                   nextLesson.isMissed
                       ? I18n.of(context).substitutionMissed

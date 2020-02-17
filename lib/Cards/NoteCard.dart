@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
@@ -66,7 +65,6 @@ class NoteCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(jsonEncode(note));
     return new GestureDetector(
       onTap: openDialog,
       child: new Card(

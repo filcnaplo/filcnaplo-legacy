@@ -222,7 +222,7 @@
 
     "close": {
         "title": "Alkalmazás bezárása",
-        "confirm": "Biztosan be akarod zárni az alkalmazást?"
+        "co()nfirm": "Biztosan be akarod zárni az alkalmazást?"
     },
 
     "info": {

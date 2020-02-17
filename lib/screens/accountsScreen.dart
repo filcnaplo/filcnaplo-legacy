@@ -69,13 +69,13 @@ class AccountsScreenState extends State<AccountsScreen> {
         content: content,
         actions: [
           FlatButton(
-            child: Text(I18n.of(context).dialogNo),
+            child: Text(I18n.of(context).dialogNo.toUpperCase()),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           FlatButton(
-            child: Text(I18n.of(context).dialogOk),
+            child: Text(I18n.of(context).dialogOk.toUpperCase()),
             onPressed: () async {
               Navigator.of(context).pop();
               users[users.map((User u) => u.id).toList().indexOf(user.id)]
@@ -191,13 +191,13 @@ class AccountsScreenState extends State<AccountsScreen> {
           ),
           actions: <Widget>[
             new FlatButton(
-              child: new Text(I18n.of(context).dialogNo),
+              child: new Text(I18n.of(context).dialogNo.toUpperCase()),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             new FlatButton(
-              child: new Text(I18n.of(context).dialogYes),
+              child: new Text(I18n.of(context).dialogYes.toUpperCase()),
               onPressed: () async {
                 await AccountManager().removeUser(user);
                 //             print("asd1");

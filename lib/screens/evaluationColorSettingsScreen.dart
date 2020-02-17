@@ -32,13 +32,13 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
         content: content,
         actions: [
           FlatButton(
-            child: Text(I18n.of(context).dialogNo),
+            child: Text(I18n.of(context).dialogNo.toUpperCase()),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           FlatButton(
-            child: Text(I18n.of(context).dialogOk),
+            child: Text(I18n.of(context).dialogOk.toUpperCase()),
             onPressed: () async {
               Navigator.of(context).pop();
               if (selected != null) {

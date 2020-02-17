@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:filcnaplo/Cards/LessonCard.dart';
 import 'package:filcnaplo/Cards/TomorrowLessonCard.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:filcnaplo/Cards/SummaryCard.dart';
 import 'package:filcnaplo/Cards/AbsenceCard.dart';
-import 'package:filcnaplo/Cards/LessonCard.dart';
 import 'package:filcnaplo/Cards/ChangedLessonCard.dart';
 import 'package:filcnaplo/Cards/EvaluationCard.dart';
 import 'package:filcnaplo/Cards/NoteCard.dart';
@@ -201,13 +201,7 @@ class MainScreenState extends State<MainScreen> {
         break;
       }
     }
-    for (Lesson l in realLessons) {
-      if (l.start.isAfter(now) &&
-          l.start.day == now.add(Duration(days: 1)).day) {
-        isLessonsTomorrow = true;
-        break;
-      }
-    }
+
     if (realLessons.length > 0 && isLessonsToday) {
       feedCards.add(new LessonCard(lessons, isLessonsTomorrow, context));
     }
@@ -217,6 +211,18 @@ class MainScreenState extends State<MainScreen> {
       });
     } catch (e) {
       print(e);
+    }
+
+    for (Lesson l in realLessons) {
+      if (l.start.isAfter(now) &&
+          l.start.day == now.add(Duration(days: 1)).day) {
+        isLessonsTomorrow = true;
+        break;
+      }
+    }
+
+    for (Lesson lesson in realLessons) {
+      print("\n" + lesson.subject);
     }
     
     if (realLessons.length > 0 && isLessonsTomorrow)
@@ -244,14 +250,14 @@ class MainScreenState extends State<MainScreen> {
           actions: <Widget>[
             new FlatButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: new Text(I18n.of(context).dialogNo),
+              child: new Text(I18n.of(context).dialogNo.toUpperCase()),
             ),
             new FlatButton(
               onPressed: () async {
                 await SystemChannels.platform
                     .invokeMethod<void>('SystemNavigator.pop');
               },
-              child: new Text(I18n.of(context).dialogYes),
+              child: new Text(I18n.of(context).dialogYes.toUpperCase()),
             ),
           ],
         );

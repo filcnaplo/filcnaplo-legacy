@@ -151,7 +151,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
           ),
           actions: <Widget>[
             new FlatButton(
-              child: new Text(I18n.of(context).dialogOk),
+              child: new Text(I18n.of(context).dialogOk.toUpperCase()),
               onPressed: () {
                 Navigator.of(context).pop();
               },

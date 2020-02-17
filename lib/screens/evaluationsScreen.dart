@@ -904,7 +904,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           ),
           actions: <Widget>[
             new FlatButton(
-              child: new Text(I18n.of(context).dialogOk),
+              child: new Text(I18n.of(context).dialogOk.toUpperCase()),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -1109,7 +1109,7 @@ class GradeDialogState extends State<GradeDialog> {
             });
           },
           child: new Text(
-            I18n.of(context).dialogDone,
+            I18n.of(context).dialogDone.toUpperCase(),
             style: TextStyle(color: Theme.of(context).accentColor),
           ),
           padding: EdgeInsets.all(10),
