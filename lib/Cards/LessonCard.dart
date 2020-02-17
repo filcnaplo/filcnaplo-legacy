@@ -5,6 +5,7 @@ import 'package:filcnaplo/globals.dart' as globals;
 import 'package:filcnaplo/Datas/Lesson.dart';
 import 'package:filcnaplo/Utils/StringFormatter.dart';
 import 'package:filcnaplo/generated/i18n.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 
 import 'dart:async';
 
@@ -14,9 +15,8 @@ class LessonCard extends StatefulWidget {
   BuildContext context;
 
   LessonCard(
-      List<Lesson> lessons, bool isLessonsTomorrow, BuildContext context) {
+      List<Lesson> lessons, BuildContext context) {
     this.lessons = lessons;
-    this.isLessonsTomorrow = isLessonsTomorrow;
     this.context = context;
   }
 
@@ -106,6 +106,78 @@ class _LessonCardState extends State<LessonCard> {
     _lessonCardBackend(now, widget.lessons, widget.isLessonsTomorrow);
     return Container(
       padding: EdgeInsets.all(5),
+      child: new SizedBox(
+        height: 100,
+        child: new SingleChildScrollView(
+          child: new Column(
+        children: <Widget>[
+          (previousLesson != null)
+              ? LessonTile(
+                  context,
+                  false,
+                  I18n.of(context).lessonCardPrevious,
+                  "",
+                  (previousLesson.count == -1) ? "+" : previousLesson.count.toString(),
+                  previousLesson.subject,
+                  previousLesson.isMissed
+                      ? I18n.of(context).substitutionMissed
+                      : previousLesson.teacher,
+                  (previousLesson.isSubstitution
+                      ? 1
+                      : previousLesson.isMissed ? 2 : 0),
+                  (previousLesson.homework != null) ? true : false,
+                  getLessonRangeText(previousLesson),
+                  previousLesson.room)
+              : Container(),
+          (thisLesson != null) //Only show this lesson card during a lesson
+              ? LessonTile(
+                  context,
+                  true,
+                  I18n.of(context)
+                      .lessonCardNow((minutesLeftOfThis + 1).toString()),
+                  (prevBreakLength.toString() +
+                      " " +
+                      I18n.of(context).timeMinute),
+                  (thisLesson.count == -1) ? "+" : thisLesson.count.toString(),
+                  thisLesson.subject,
+                  thisLesson.isMissed
+                      ? I18n.of(context).substitutionMissed
+                      : thisLesson.teacher,
+                  (thisLesson.isSubstitution ? 1 : thisLesson.isMissed ? 2 : 0),
+                  (thisLesson.homework != null) ? true : false,
+                  getLessonRangeText(thisLesson),
+                  thisLesson.room)
+              : Container(),
+          (nextLesson != null)
+              ? LessonTile(
+                  context,
+                  false,
+                  I18n.of(context)
+                      .lessonCardNext((minutesUntilNext + 1).toString()),
+                  (lessonCardState == 0)
+                      ? ""
+                      : (thisBreakLength.toString() +
+                          " " +
+                          I18n.of(context).timeMinute),
+                  (nextLesson.count == -1) ? "+" : nextLesson.count.toString(),
+                  nextLesson.subject,
+                  nextLesson.isMissed
+                      ? I18n.of(context).substitutionMissed
+                      : nextLesson.teacher,
+                  (nextLesson.isSubstitution ? 1 : nextLesson.isMissed ? 2 : 0),
+                  (nextLesson.homework != null) ? true : false,
+                  getLessonRangeText(nextLesson),
+                  nextLesson.room)
+              : Container(),
+        ],
+      ),
+        )
+      ),
+    );
+  }
+}
+
+    /*
       child: new Column(
         children: <Widget>[
           (previousLesson != null)
@@ -171,7 +243,7 @@ class _LessonCardState extends State<LessonCard> {
     );
   }
 }
-
+*/
 Widget LessonTile(
   //Builder of a single lesson in the 3 or 2 part list
   BuildContext context,

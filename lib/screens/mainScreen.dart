@@ -59,6 +59,9 @@ class MainScreenState extends State<MainScreen> {
   bool isLessonsToday = false;
   bool isLessonsTomorrow = false;
 
+  List<Lesson> lessonsToday;
+  List<Lesson> lessonsTomorrow;
+
   void _initSettings() async {
     DynamicTheme.of(context).setBrightness(await SettingsHelper().getDarkTheme()
         ? Brightness.dark
@@ -193,9 +196,31 @@ class MainScreenState extends State<MainScreen> {
         (lesson.isMissed || lesson.isSubstitution) && lesson.date.isAfter(now)))
       feedCards.add(ChangedLessonCard(l, context));
 
-    realLessons = lessons.where((Lesson l) => !l.isMissed).toList();
+    //realLessons = lessons.where((Lesson l) => !l.isMissed).toList();
+    lessonsToday = lessons.where((Lesson lesson) => (lesson.start.day == now.day)).toList();
+    lessonsTomorrow = lessons.where((Lesson lesson) => (lesson.start.day == now.add(Duration(days: 1)).day)).toList();
 
-    for (Lesson l in realLessons) {
+    if (lessonsToday.last.end.isAfter(now)) {
+      isLessonsToday = true;
+      isLessonsTomorrow = false;
+    }
+    else if (lessonsTomorrow.first.start.day == now.add(Duration(days: 1)).day) {
+      isLessonsToday = false;
+      isLessonsTomorrow = true;
+    }
+    else {
+      isLessonsToday = false;
+      isLessonsTomorrow = false;
+    }
+
+    if (isLessonsToday) feedCards.add(LessonCard(lessonsToday, context));
+    if (isLessonsTomorrow) feedCards.add(TomorrowLessonCard(lessonsTomorrow, context, now));
+
+    for (Lesson lesson in lessonsTomorrow) {
+      print("\n" + lesson.subject);
+    }
+
+    /*for (Lesson l in realLessons) {
       if (l.start.isAfter(now) && l.start.day == now.day) {
         isLessonsToday = true;
         break;
@@ -216,17 +241,13 @@ class MainScreenState extends State<MainScreen> {
     for (Lesson l in realLessons) {
       if (l.start.isAfter(now) &&
           l.start.day == now.add(Duration(days: 1)).day) {
-        isLessonsTomorrow = true;
+        isLessonsTomorrow = true; // <-- ludas matyi
         break;
       }
     }
-
-    for (Lesson lesson in realLessons) {
-      print("\n" + lesson.subject);
-    }
     
     if (realLessons.length > 0 && isLessonsTomorrow)
-      feedCards.add(new TomorrowLessonCard(realLessons, context, now));
+      feedCards.add(new TomorrowLessonCard(realLessons, context, now));*/
     try {
       feedCards.sort((Widget a, Widget b) {
         return b.key.toString().compareTo(a.key.toString());

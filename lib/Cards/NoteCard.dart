@@ -94,7 +94,7 @@ class NoteCard extends StatelessWidget {
               ),
               new Container(
                 child: new Text(note.content,
-                    maxLines: 2,
+                    maxLines: 4,
                     softWrap: true,
                     overflow: TextOverflow.ellipsis,
                     style: new TextStyle(
