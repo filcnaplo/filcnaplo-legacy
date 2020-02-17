@@ -91,7 +91,7 @@ class _FilcNowCardState extends State<FilcNowCard> {
       padding: EdgeInsets.all(5),
       child: new Column(
         children: <Widget>[
-          (filcNowState > 0)
+          (previousLesson != null)
               ? LessonTile(
                   context,
                   false,
@@ -107,7 +107,7 @@ class _FilcNowCardState extends State<FilcNowCard> {
                   getLessonRangeText(previousLesson),
                   previousLesson.room)
               : Container(),
-          (filcNowState == 1) //Only show this lesson card during a lesson
+          (thisLesson != null) //Only show this lesson card during a lesson
               ? LessonTile(
                   context,
                   true,
@@ -121,7 +121,8 @@ class _FilcNowCardState extends State<FilcNowCard> {
                   getLessonRangeText(thisLesson),
                   thisLesson.room)
               : Container(),
-          LessonTile(
+          (nextLesson != null)
+? LessonTile(
               context,
               false,
               I18n.of(context).filcNowNext((minutesUntilNext + 1).toString()),
@@ -132,7 +133,8 @@ class _FilcNowCardState extends State<FilcNowCard> {
               (nextLesson.isSubstitution ? 1 : nextLesson.isMissed ? 2 : 0),
               (nextLesson.homework != null) ? true : false,
               getLessonRangeText(nextLesson),
-              nextLesson.room),
+              nextLesson.room)
+: Container(),
         ],
       ),
     );
