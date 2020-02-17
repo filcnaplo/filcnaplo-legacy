@@ -190,7 +190,7 @@
         "endYear": "Év végi jegyek"
     },
 
-    "filcNow": {
+    "lessonCard": {
         "previous": "Volt",
         "now": "Épp - {min} perc van hátra",
         "next": "Lesz - {min} perc múlva",
@@ -207,7 +207,7 @@
         "passwordError": "Kérlek add meg a jelszavadat!",
         "schoolError": "Kérlek válassz egy iskolát!",
         "school": "Iskola",
-        "choose": "válassz",
+        "choose": "választás",
         "chooseSchool": "Válassz iskolát"
     },
 

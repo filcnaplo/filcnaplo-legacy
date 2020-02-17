@@ -284,7 +284,15 @@ class LoginScreenState extends State<LoginScreen> {
                                             decoration: InputDecoration(
                                               prefixIcon:
                                                   new Icon(Icons.person),
-                                              hintText: I18n.of(context).loginUsername,
+                                              suffixIcon: new IconButton(
+                                                  icon: helpIconSwitch,
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      helpToggle();
+                                                    });
+                                                  }),
+                                              hintText: I18n.of(context)
+                                                  .loginUsername,
                                               hintStyle: TextStyle(
                                                   color: Colors.white30),
                                               errorText: userError,
@@ -292,7 +300,8 @@ class LoginScreenState extends State<LoginScreen> {
                                                   40, 20, 20, 30),
                                               filled: true,
                                               helperText: helpSwitch
-                                                  ? I18n.of(context).loginUsernameHint
+                                                  ? I18n.of(context)
+                                                      .loginUsernameHint
                                                   : null,
                                               helperStyle: TextStyle(
                                                   color: Colors.white30),
@@ -311,13 +320,6 @@ class LoginScreenState extends State<LoginScreen> {
                                             ),
                                           ),
                                         ),
-                                        new IconButton(
-                                            icon: helpIconSwitch,
-                                            onPressed: () {
-                                              setState(() {
-                                                helpToggle();
-                                              });
-                                            })
                                       ])),
                               new Container(
                                   margin: EdgeInsets.only(top: 10.0),
@@ -330,15 +332,24 @@ class LoginScreenState extends State<LoginScreen> {
                                         obscureText: !showSwitch,
                                         decoration: InputDecoration(
                                           prefixIcon: new Icon(Icons.https),
+                                          suffixIcon: new IconButton(
+                                              icon: showIconSwitch,
+                                              onPressed: () {
+                                                setState(() {
+                                                  showToggle();
+                                                });
+                                              }),
                                           hintStyle:
                                               TextStyle(color: Colors.white30),
-                                          hintText: I18n.of(context).loginPassword,
+                                          hintText:
+                                              I18n.of(context).loginPassword,
                                           errorText: passwordError,
                                           fillColor:
                                               Color.fromARGB(40, 20, 20, 30),
                                           filled: true,
                                           helperText: helpSwitch
-                                              ? I18n.of(context).loginPasswordHint
+                                              ? I18n.of(context)
+                                                  .loginPasswordHint
                                               : null,
                                           helperStyle:
                                               TextStyle(color: Colors.white30),
@@ -355,13 +366,6 @@ class LoginScreenState extends State<LoginScreen> {
                                         ),
                                       ),
                                     ),
-                                    new IconButton(
-                                        icon: showIconSwitch,
-                                        onPressed: () {
-                                          setState(() {
-                                            showToggle();
-                                          });
-                                        }),
                                   ])),
                               new Column(children: <Widget>[
                                 new Container(
@@ -397,7 +401,7 @@ class LoginScreenState extends State<LoginScreen> {
                                             globals.selectedSchoolName ??
                                                 I18n.of(context).loginChoose,
                                             style: new TextStyle(
-                                                fontSize: 21.0,
+                                                fontSize: 18.0,
                                                 color: Colors.blue),
                                           ),
                                         ),
@@ -444,7 +448,8 @@ class LoginScreenState extends State<LoginScreen> {
                                     : null,
                                 disabledColor: Colors.blueGrey.shade800,
                                 disabledTextColor: Colors.blueGrey,
-                                child: new Text(capitalize(I18n.of(context).login)),
+                                child: new Text(
+                                    capitalize(I18n.of(context).login)),
                                 color: Colors.blue,
                                 //#2196F3
                                 textColor: Colors.white,

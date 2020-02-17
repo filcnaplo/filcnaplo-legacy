@@ -8,10 +8,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:filcnaplo/Cards/SummaryCard.dart';
 import 'package:filcnaplo/Cards/AbsenceCard.dart';
+import 'package:filcnaplo/Cards/LessonCard.dart';
 import 'package:filcnaplo/Cards/ChangedLessonCard.dart';
 import 'package:filcnaplo/Cards/EvaluationCard.dart';
 import 'package:filcnaplo/Cards/NoteCard.dart';
-import '../Cards/FilcNow.dart';
 import 'package:filcnaplo/Datas/Account.dart';
 import 'package:filcnaplo/Datas/Lesson.dart';
 import 'package:filcnaplo/Datas/Note.dart';
@@ -201,16 +201,6 @@ class MainScreenState extends State<MainScreen> {
         break;
       }
     }
-    /*if (realLessons.length > 0 && isLessonsToday) {
-      feedCards.add(new LessonCard(realLessons, context, now));
-    }
-    try {
-      feedCards.sort((Widget a, Widget b) {
-        return b.key.toString().compareTo(a.key.toString());
-      });
-    } catch (e) {
-      print(e);
-    }*/
     for (Lesson l in realLessons) {
       if (l.start.isAfter(now) &&
           l.start.day == now.add(Duration(days: 1)).day) {
@@ -219,7 +209,7 @@ class MainScreenState extends State<MainScreen> {
       }
     }
     if (realLessons.length > 0 && isLessonsToday) {
-      feedCards.add(new FilcNowCard(lessons, isLessonsTomorrow, context));
+      feedCards.add(new LessonCard(lessons, isLessonsTomorrow, context));
     }
     try {
       feedCards.sort((Widget a, Widget b) {

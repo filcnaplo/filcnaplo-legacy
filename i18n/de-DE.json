@@ -190,7 +190,7 @@
         "endYear": "Jahresendnoten"
     },
 
-    "filcNow": {
+    "lessonCard": {
         "previous": "Letzte",
         "now": "Läuft - {min} Minuten noch",
         "next": "Nächste - In {min} Minuten",

@@ -190,7 +190,7 @@
         "endYear": "End year evaluations"
     },
 
-    "filcNow": {
+    "lessonCard": {
         "previous": "Previous",
         "now": "Current - {min} minutes left",
         "next": "Next - Starts in {min} minutes",

@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
@@ -65,6 +66,7 @@ class NoteCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(jsonEncode(note));
     return new GestureDetector(
       onTap: openDialog,
       child: new Card(
@@ -94,6 +96,9 @@ class NoteCard extends StatelessWidget {
               ),
               new Container(
                 child: new Text(note.content,
+                    maxLines: 2,
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
                     style: new TextStyle(
                         fontSize: 17.0,
                         color: globals.isColor
@@ -139,7 +144,9 @@ class NoteCard extends StatelessWidget {
                         ),
                         new Container(
                           child: new Text(
-                            note.isEvent ? I18n.of(context).note2 : I18n.of(context).note,
+                            note.isEvent
+                                ? I18n.of(context).note2
+                                : I18n.of(context).note,
                             style: new TextStyle(fontSize: 18.0),
                           ),
                           padding: EdgeInsets.only(left: 8.0),

@@ -265,13 +265,13 @@ class I18n implements WidgetsLocalizations {
   /// "Év végi jegyek"
   String get summaryEndYear => "Év végi jegyek";
   /// "Volt"
-  String get filcNowPrevious => "Volt";
+  String get lessonCardPrevious => "Volt";
   /// "Épp - ${min} perc van hátra"
-  String filcNowNow(String min) => "Épp - ${min} perc van hátra";
+  String lessonCardNow(String min) => "Épp - ${min} perc van hátra";
   /// "Lesz - ${min} perc múlva"
-  String filcNowNext(String min) => "Lesz - ${min} perc múlva";
+  String lessonCardNext(String min) => "Lesz - ${min} perc múlva";
   /// "perc"
-  String get filcNowMinutes => "perc";
+  String get lessonCardMinutes => "perc";
   /// "bejelentkezés"
   String get login => "bejelentkezés";
   /// "Felhasználónév"
@@ -290,8 +290,8 @@ class I18n implements WidgetsLocalizations {
   String get loginSchoolError => "Kérlek válassz egy iskolát!";
   /// "Iskola"
   String get loginSchool => "Iskola";
-  /// "válassz"
-  String get loginChoose => "válassz";
+  /// "választás"
+  String get loginChoose => "választás";
   /// "Válassz iskolát"
   String get loginChooseSchool => "Válassz iskolát";
   /// "Exportálás"
@@ -744,16 +744,16 @@ class _I18n_en_US extends I18n {
   String get summaryEndYear => "End year evaluations";
   /// "Previous"
   @override
-  String get filcNowPrevious => "Previous";
+  String get lessonCardPrevious => "Previous";
   /// "Current - ${min} minutes left"
   @override
-  String filcNowNow(String min) => "Current - ${min} minutes left";
+  String lessonCardNow(String min) => "Current - ${min} minutes left";
   /// "Next - Starts in ${min} minutes"
   @override
-  String filcNowNext(String min) => "Next - Starts in ${min} minutes";
+  String lessonCardNext(String min) => "Next - Starts in ${min} minutes";
   /// "minutes"
   @override
-  String get filcNowMinutes => "minutes";
+  String get lessonCardMinutes => "minutes";
   /// "login"
   @override
   String get login => "login";
@@ -1277,16 +1277,16 @@ class _I18n_de_DE extends I18n {
   String get summaryEndYear => "Jahresendnoten";
   /// "Letzte"
   @override
-  String get filcNowPrevious => "Letzte";
+  String get lessonCardPrevious => "Letzte";
   /// "Läuft - ${min} Minuten noch"
   @override
-  String filcNowNow(String min) => "Läuft - ${min} Minuten noch";
+  String lessonCardNow(String min) => "Läuft - ${min} Minuten noch";
   /// "Nächste - In ${min} Minuten"
   @override
-  String filcNowNext(String min) => "Nächste - In ${min} Minuten";
+  String lessonCardNext(String min) => "Nächste - In ${min} Minuten";
   /// "Minuten"
   @override
-  String get filcNowMinutes => "Minuten";
+  String get lessonCardMinutes => "Minuten";
   /// "Anmeldung"
   @override
   String get login => "Anmeldung";

@@ -36,7 +36,7 @@ class SettingsScreenState extends State<SettingsScreen> {
   bool _smartUserAgent;
   bool nextLesson;
   String _lang = "";
-  static const List<String> LANG_LIST = ["en", "hu", "de"];
+  static const LANG_LIST = {"hu": "Magyar", "en": "English", "de": "Deutsch"};
   final List<int> refreshArray = [15, 60, 90, 120, 360, 720];
   int _refreshNotification;
   int _theme;
@@ -92,7 +92,7 @@ class SettingsScreenState extends State<SettingsScreen> {
     globals.lang = value;
     SettingsHelper().setLang(_lang);
 
-    var langs = {"en": en, "de": de, "hu": hu};
+    const langs = {"en": en, "de": de, "hu": hu};
     print(langs[value]);
     I18n.onLocaleChanged(langs[value]);
   }
@@ -383,13 +383,14 @@ class SettingsScreenState extends State<SettingsScreen> {
                         ),
                         trailing: new Container(
                           child: new DropdownButton<String>(
-                            items: LANG_LIST.map((String l) {
+                            items: LANG_LIST.keys.map((String lang) {
+                              String langName = LANG_LIST[lang];
                               return DropdownMenuItem<String>(
                                 child: Text(
-                                  l,
+                                  langName,
                                   textAlign: TextAlign.end,
                                 ),
-                                value: l,
+                                value: lang,
                               );
                             }).toList(),
                             onChanged: _setLang,
