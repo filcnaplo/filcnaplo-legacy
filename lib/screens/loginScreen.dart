@@ -29,7 +29,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 Icon helpIconSwitch = new Icon(
-  Icons.help,
+  IconData(0xf625, fontFamily: "Material Design Icons"),
   color: Colors.white12,
 );
 bool helpSwitch = false;
@@ -38,12 +38,12 @@ void helpToggle() {
   helpSwitch = !helpSwitch;
   if (helpSwitch) {
     helpIconSwitch = new Icon(
-      Icons.help,
+      IconData(0xf625, fontFamily: "Material Design Icons"),
       color: Colors.white,
     );
   } else {
     helpIconSwitch = new Icon(
-      Icons.help,
+      IconData(0xf625, fontFamily: "Material Design Icons"),
       color: Colors.white12,
     );
   }

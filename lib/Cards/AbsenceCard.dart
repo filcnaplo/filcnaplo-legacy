@@ -79,7 +79,7 @@ class AbsenceCard extends StatelessWidget {
         return Icons.person;
         break;
       default:
-        return Icons.help;
+      return IconData(0xf625, fontFamily: "Material Design Icons");
         break;
     }
   }

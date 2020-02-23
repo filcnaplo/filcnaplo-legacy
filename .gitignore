@@ -16,3 +16,4 @@ flutter_export_environment.sh
 keystore.file
 android/.gradle
 android/local.properties
+android/app/build.gradle

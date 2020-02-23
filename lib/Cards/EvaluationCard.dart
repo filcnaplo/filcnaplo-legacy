@@ -150,7 +150,7 @@ class EvaluationCard extends StatelessWidget {
         hastype = false;
         break;
       default:
-        typeIcon = Icons.help;
+        typeIcon = IconData(0xf625, fontFamily: "Material Design Icons");
         typeName = evaluation.Mode;
         break;
     }
