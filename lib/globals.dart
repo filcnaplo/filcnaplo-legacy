@@ -15,7 +15,7 @@ BuildContext context;
 Color CurrentTextColor;
 String ACTIVE_HOST = "https://www.filcnaplo.hu/";
 String SETTINGS_API_URL = ACTIVE_HOST + "settings.json";
-String INSTITUTES_API_URL = ACTIVE_HOST + "school-list.json";
+String INSTITUTES_API_URL = ACTIVE_HOST + "school_list.json";
 String clientId = "919e0c1c-76a2-4646-a2fb-7085bbbf3c56";
 bool firstMain = true;
 String version;
