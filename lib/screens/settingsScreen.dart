@@ -406,12 +406,19 @@ class SettingsScreenState extends State<SettingsScreen> {
                       !Platform.isIOS
                           ? new ListTile(
                               leading: new Icon(Icons.import_export),
-                              title: new Text(I18n.of(context).export),
+                              title: new Text(I18n.of(context).export, style: TextStyle(fontSize: 20.0)),
                               onTap: () {
                                 Navigator.pushNamed(context, "/export");
                               },
                             )
                           : Container(),
+                      ListTile(
+                        title: new Text(
+                          "ver." + globals.version,
+                          style: TextStyle(fontSize: 10.0),
+                        )
+                     )
+
                     ],
                     padding: EdgeInsets.all(10),
                   )
