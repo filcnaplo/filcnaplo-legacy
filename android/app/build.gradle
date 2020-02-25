@@ -20,7 +20,7 @@ android {
     lintOptions {
         disable 'InvalidPackage'
     }
-    //keytool -v -genkey -v -keystore ./keystore.file -alias someKindOfName -keyalg RSA -validity 10000
+    //keytool -v -genkey -v -keystore ./keystore.file -alias XXXX -keyalg RSA -validity 10000
     signingConfigs {
         release {
             keyAlias 'XXXX'
