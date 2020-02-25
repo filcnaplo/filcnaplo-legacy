@@ -13,9 +13,7 @@ import 'Datas/Account.dart';
 
 BuildContext context;
 Color CurrentTextColor;
-String MAIN_WEBSITE = "https://www.filcnaplo.hu/";
-String BACKUP_WEBSITE = "https://filcnaplo.github.io/";
-String ACTIVE_HOST = MAIN_WEBSITE;
+String ACTIVE_HOST = "https://www.filcnaplo.hu/";
 String SETTINGS_API_URL = ACTIVE_HOST + "settings.json";
 String INSTITUTES_API_URL = ACTIVE_HOST + "school_list.json";
 String clientId = "919e0c1c-76a2-4646-a2fb-7085bbbf3c56";
