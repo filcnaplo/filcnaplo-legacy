@@ -14,24 +14,19 @@ if (flutterRoot == null) {
 apply plugin: 'com.android.application'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
-def keystoreProperties = new Properties()
-def keystorePropertiesFile = rootProject.file('/mnt/enc/keys/filcnaplo.properties')
-if (keystorePropertiesFile.exists()) {
-    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-}
-
 android {
     compileSdkVersion 28
 
     lintOptions {
         disable 'InvalidPackage'
     }
+    //keytool -v -genkey -v -keystore ./keystore.file -alias someKindOfName -keyalg RSA -validity 10000
     signingConfigs {
         release {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            //storeFile file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
+            keyAlias 'XXXX'
+            keyPassword 'XXXX'
+            storePassword 'XXXX'
+            storeFile file('/home/[???]/filcnaplo/keystore.file')
         }
     }
     buildTypes {
@@ -43,7 +38,7 @@ android {
         applicationId "hu.filcnaplo.ellenorzo"
         minSdkVersion 18
         targetSdkVersion 28
-        versionCode 11
+        versionCode 10
         versionName "b1.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }

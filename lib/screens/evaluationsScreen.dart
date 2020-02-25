@@ -607,7 +607,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                 selectedAverage != null
                     ? selectedAverage.classValue != null
                         ? new Text(
-                            capitalize(I18n.of(context).evaluationAverageClass))
+                            capitalize(I18n.of(context).evaluationAverageClass) + ": ")
                         : Container()
                     : Container(),
                 selectedAverage != null
@@ -886,7 +886,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                     ": " +
                     dateToHuman(evaluation.CreatingTime ?? "")),
                 evaluation.Weight != null
-                    ? new Text(I18n.of(context).evaluationWeight +
+                    ? new Text(capitalize(I18n.of(context).evaluationWeight) +
                             ": " +
                             evaluation.Weight ??
                         "")
@@ -1037,7 +1037,7 @@ class GradeDialogState extends State<GradeDialog> {
           child: new Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new Text(I18n.of(context).evaluationWeight + ": "),
+              new Text(capitalize(I18n.of(context).evaluationWeight) + ": "),
               new Checkbox(
                 value: isTZ,
                 onChanged: (value) {

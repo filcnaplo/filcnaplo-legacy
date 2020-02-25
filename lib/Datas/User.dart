@@ -13,7 +13,7 @@ class User {
   String parentId;
   Color color;
   Map<String, String> lastRefreshMap = Map();
-  static const RATE_LIMIT_MINUTES = 5;
+  static const RATE_LIMIT_MINUTES = 1;
 
   User(this.id, this.username, this.password, this.name, this.schoolCode,
       this.schoolUrl, this.schoolName, this.parentName, this.parentId);
