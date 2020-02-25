@@ -43,7 +43,6 @@ List<int> timeData = [1, 7, 30, 60];
 Average selectedAverage;
 List<Evaluation> currentEvals = new List();
 int themeID = 0;
-String htmlFAQ = MAIN_WEBSITE;
 String userAgent;
 List<Account> accounts = new List();
 Account selectedAccount;
