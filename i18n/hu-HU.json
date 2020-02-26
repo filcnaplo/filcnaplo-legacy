@@ -192,9 +192,9 @@
     },
 
     "lessonCard": {
-        "previous": "Volt",
-        "now": "Épp - {min} perc van hátra",
-        "next": "Lesz - {min} perc múlva",
+        "previous": "Előző",
+        "now": "Jelenleg • {min} perc van hátra",
+        "next": "Következő • {min} perc múlva",
         "minutes": "perc"
     },
 
@@ -223,7 +223,7 @@
 
     "close": {
         "title": "Alkalmazás bezárása",
-        "co()nfirm": "Biztosan be akarod zárni az alkalmazást?"
+        "confirm": "Biztosan be akarod zárni az alkalmazást?"
     },
 
     "info": {
@@ -282,5 +282,5 @@
         "readAccount": "Hiba a felhasználó olvasása közben"
     },
 
-    "pcs": " db "
+    "pcs": "db"
 }

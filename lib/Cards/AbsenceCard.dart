@@ -171,7 +171,7 @@ class AbsenceCard extends StatelessWidget {
                     new Text(numOfAbsences.toString(),
                         style: new TextStyle(
                             fontSize: 18.0, color: globals.CurrentTextColor)),
-                    new Text(I18n.of(context).pcs,
+                    new Text(" " + I18n.of(context).pcs + " ",
                         style: new TextStyle(
                             fontSize: 18.0,
                             color:
