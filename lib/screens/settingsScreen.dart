@@ -93,7 +93,7 @@ class SettingsScreenState extends State<SettingsScreen> {
     SettingsHelper().setLang(_lang);
 
     const langs = {"en": en, "de": de, "hu": hu};
-    print(langs[value]);
+//    print(langs[value]);
     I18n.onLocaleChanged(langs[value]);
   }
 

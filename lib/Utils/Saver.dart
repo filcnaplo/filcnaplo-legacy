@@ -40,7 +40,7 @@ Future<String> readStudent(User user) async {
     String contents = await doDecrypt(await file.readAsString());
     return contents;
   } catch (e) {
-    print(e);
+    print("[E] Saver.readStudent(): " + e.toString());
   }
 }
 
@@ -61,7 +61,7 @@ Future<String> readEventsString(User user) async {
     String contents = await doDecrypt(await file.readAsString());
     return contents;
   } catch (e) {
-    print(e);
+    print("[E] Saver.readEventsString(): " + e.toString());
   }
 }
 
@@ -160,7 +160,7 @@ void migrate() async {
   List contents = dir.listSync();
   for (var fileOrDir in contents) {
     if (fileOrDir is File) {
-      print(fileOrDir.path);
+      //print(fileOrDir.path);
       if (fileOrDir.path.contains("/timetable_") ||
           fileOrDir.path.contains("/evaluations_") ||
           fileOrDir.path.contains("/events_") ||

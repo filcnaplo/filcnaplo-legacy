@@ -30,7 +30,7 @@ class DBHelper {
     try {
       studentJson = await getStudentJson(user);
     } catch (e) {
-      print(e);
+      print("[E] DBHelper.addStudentJson(): " + e.toString());
     }
     if (studentJson == null)
       await store.record(user.id.toString() + '_student_json').add(db, json);
@@ -48,7 +48,7 @@ class DBHelper {
     try {
       studentJson = await getMessagesJson(user);
     } catch (e) {
-      print(e);
+      print("[E] DBHelper.getMessagesJson(): " + e.toString());
     }
     if (studentJson == null)
       await store.record(user.id.toString() + '_messages_json').add(db, json);
@@ -68,7 +68,7 @@ class DBHelper {
     try {
       testsJson = await getTestsJson(user);
     } catch (e) {
-      print(e);
+      print("[E] DBHelper.addTestsJson(): " + e.toString());
     }
     if (testsJson == null)
       await store.record(user.id.toString() + '_tests_json').add(db, json);
@@ -87,7 +87,7 @@ class DBHelper {
     try {
       studentJson = await getMessageByIdJson(id, user);
     } catch (e) {
-      print(e);
+      print("[E] DBHelper.addMessageByIdJson(): " + e.toString());
     }
     String name = user.id.toString() + "-" + id.toString() + '_message_json';
     if (studentJson == null)
@@ -106,7 +106,7 @@ class DBHelper {
     try {
       settingsMap = await getSettingsMap();
     } catch (e) {
-      print(e);
+      print("[E] DBHelper.saveSettingsMap(): " + e.toString());
     }
     if (settingsMap == null)
       await store.record('settings').add(db, json);
@@ -124,7 +124,7 @@ class DBHelper {
     try {
       timetableMap = await getTimetableMap(time, user);
     } catch (e) {
-      print(e);
+      print("[E] DBHelper.saveTimetableMap(): " + e.toString());
     }
     if (timetableMap == null)
       await store

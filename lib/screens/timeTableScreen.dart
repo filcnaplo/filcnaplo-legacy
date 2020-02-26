@@ -96,7 +96,7 @@ class TimeTableScreenState extends State<TimeTableScreen>
                     ? index
                     : first ? week.dayList().length - 1 : 0);
           } catch (e) {
-            print(e);
+            print("[E] timeTableScreen.refreshWeek()1: " + e.toString());
           }
           ended = true;
         });
@@ -115,7 +115,7 @@ class TimeTableScreenState extends State<TimeTableScreen>
                     ? index
                     : first ? week.dayList().length - 1 : 0);
           } catch (e) {
-            print(e);
+            print("[E] timeTableScreen.refreshWeek()2: " + e.toString());
           }
           ended = true;
         });

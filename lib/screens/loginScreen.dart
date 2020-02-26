@@ -98,7 +98,7 @@ class LoginScreenState extends State<LoginScreen> {
     try {
       globals.jsonres = json.decode(data);
     } catch (e) {
-      print(e);
+      print("[E] loginScreen.initJson(): " + e.toString());
       Fluttertoast.showToast(
         msg: "Nem sikerült lekérni a Krétás iskolákat.",
         backgroundColor: Colors.red,
@@ -202,7 +202,7 @@ class LoginScreenState extends State<LoginScreen> {
             setState(() {
               loggingIn = false;
             });
-            print(e);
+            print("[E] loginScreen.login(): " + e.toString());
             setState(() {
               if (code == "invalid_grant") {
                 passwordError = "hibás felasználónév vagy jelszó";

@@ -25,7 +25,7 @@ class MessageHelper {
       }
       messages.sort((Message a, Message b) => b.date.compareTo(a.date));
     } catch (e) {
-      print(e);
+      print("[E] MessageHelper.getMessages(): " + e.toString());
     }
 
     return messages;
@@ -44,7 +44,7 @@ class MessageHelper {
       }
       messages.sort((Message a, Message b) => b.date.compareTo(a.date));
     } catch (e) {
-      print(e);
+      print("[E] MessageHelper.getMessagesOffline(): " + e.toString());
     }
 
     return messages;
@@ -61,7 +61,7 @@ class MessageHelper {
 
       message = Message.fromJson(messagesJson);
     } catch (e) {
-      print(e);
+      print("[E] MessageHelper.getMessageById(): " + e.toString());
     }
 
     return message;
@@ -74,7 +74,7 @@ class MessageHelper {
           await DBHelper().getMessageByIdJson(id, user);
       message = Message.fromJson(messagesJson);
     } catch (e) {
-      print(e);
+      print("[E] MessageHelper.getMessageByIdOffline(): " + e.toString());
     }
 
     return message;

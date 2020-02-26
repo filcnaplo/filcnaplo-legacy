@@ -26,7 +26,7 @@ Future<List<Lesson>> getLessonsOffline(
             to.day.toString(),
         user);
   } catch (e) {
-    print(e);
+    print("[E] TimetableHelper.GetLessonsOffline()1: " + e.toString());
   }
 
   List<Lesson> lessons = new List();
@@ -34,7 +34,7 @@ Future<List<Lesson>> getLessonsOffline(
   try {
     for (dynamic d in ttMap) lessons.add(Lesson.fromJson(d));
   } catch (e) {
-    print(e);
+    print("[E] TimetableHelper.GetLessonsOffline()2: " + e.toString());
   }
 
   return lessons;
@@ -56,7 +56,7 @@ Future<String> getLessonsJson(
 Future<List<Lesson>> getLessons(
     DateTime from, DateTime to, User user, bool showErrors) async {
   if (!user.getRecentlyRefreshed("getLessons" + fromToString(from, to))) {
-    print(user.lastRefreshMap);
+  //  print(user.lastRefreshMap);
     String code = await RequestHelper().getBearerToken(user, showErrors);
 
     String timetableString = await RequestHelper().getTimeTable(
@@ -75,7 +75,7 @@ Future<List<Lesson>> getLessons(
     }
 
     user.setRecentlyRefreshed("getLessons" + fromToString(from, to));
-    print(user.lastRefreshMap);
+  //  print(user.lastRefreshMap);
     return lessons;
   } else {
       Fluttertoast.showToast(

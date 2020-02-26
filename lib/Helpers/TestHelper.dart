@@ -14,7 +14,7 @@ class TestHelper {
 
       testsList.forEach((Test test) => test.owner = user);
     } catch (e) {
-      print(e);
+      print("[E] TestHelper.getTestsFrom():" + e.toString());
     }
 
     return testsList;
