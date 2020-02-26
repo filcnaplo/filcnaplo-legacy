@@ -250,11 +250,9 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
 
     if (summaryCardsToShow.isEmpty)
       summaryCardsToShow.add(Card(
-        child: Container(
-            padding: EdgeInsets.all(5),
-            child: new Text(
-                I18n.of(context).evaluationSummaryPlaceholder))
-      ));
+          child: Container(
+              padding: EdgeInsets.all(5),
+              child: new Text(I18n.of(context).evaluationSummaryPlaceholder))));
   }
 
   double getAllAverages() {
@@ -668,7 +666,8 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
       ),
     );
 
-    dataBody = ListView(children: <Widget>[ //"Eredmények" "Results"
+    dataBody = ListView(children: <Widget>[
+      //"Eredmények" "Results"
       new Table(
         children: [
           new TableRow(
@@ -1102,7 +1101,7 @@ class GradeDialogState extends State<GradeDialog> {
       }
     }
               """), globals.selectedUser);
-              globals.currentEvals.add(falseGrade);
+              globals.currentEvals.insert(0, falseGrade);
               this.widget.callback();
               Navigator.pop(context);
             });
