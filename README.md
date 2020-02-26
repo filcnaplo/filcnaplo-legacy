@@ -11,3 +11,4 @@ Nyílt forráskódú [Szivacs-Napló](https://github.com/boapps/Szivacs-Naplo) f
 [Ajánljuk figyelmedbe a Contributing Guideunkat.](https://github.com/filcnaplo/filcnaplo/blob/master/CONTRIBUTING.md)
 
 Első sikeres, lényegi változást tartalmazó commitod után meghívunk a fejlesztői Telegram csoportunkba.
+ 
