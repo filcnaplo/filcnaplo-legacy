@@ -242,6 +242,8 @@ class I18n implements WidgetsLocalizations {
   String get evaluationNavigationStatistics => "Statisztika";
   /// "Eredmények"
   String get evaluationNavigationResults => "Eredmények";
+  /// "Itt fognak megjelenni a negyedéves, félévi és év végi jegyeid."
+  String get evaluationSummaryPlaceholder => "Itt fognak megjelenni a negyedéves, félévi és év végi jegyeid.";
   /// "átlag"
   String get evaluationAverage => "átlag";
   /// "osztályátlag"
@@ -709,9 +711,12 @@ class _I18n_en_US extends I18n {
   /// "Results"
   @override
   String get evaluationNavigationResults => "Results";
-  /// "averages"
+  /// "You'll see your end-year, half-year and quarterly evaluations here."
   @override
-  String get evaluationAverage => "averages";
+  String get evaluationSummaryPlaceholder => "You'll see your end-year, half-year and quarterly evaluations here.";
+  /// "average"
+  @override
+  String get evaluationAverage => "average";
   /// "class average"
   @override
   String get evaluationAverageClass => "class average";
@@ -1239,6 +1244,9 @@ class _I18n_de_DE extends I18n {
   /// "Ergebnisse"
   @override
   String get evaluationNavigationResults => "Ergebnisse";
+  /// "Deine Jahresendnoten, Halbjahresnoten und Quartalnoten werden hier sein."
+  @override
+  String get evaluationSummaryPlaceholder => "Deine Jahresendnoten, Halbjahresnoten und Quartalnoten werden hier sein.";
   /// "Durchschnitt"
   @override
   String get evaluationAverage => "Durchschnitt";

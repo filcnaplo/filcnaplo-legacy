@@ -234,26 +234,26 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
     List<Evaluation> endYearEvaluations = (toSummaryEvals
         .where((Evaluation evaluation) => (evaluation.isEndYear()))
         .toList());
-
-    if (firstQuarterEvaluations.isNotEmpty)
-      summaryCardsToShow.add(new SummaryCard(firstQuarterEvaluations, context,
-          1, false, true, false)); //localization
-    if (halfYearEvaluations.isNotEmpty)
-      summaryCardsToShow.add(
-          new SummaryCard(halfYearEvaluations, context, 2, false, true, false));
-    if (thirdQuarterEvaluations.isNotEmpty)
-      summaryCardsToShow.add(new SummaryCard(
-          thirdQuarterEvaluations, context, 3, false, true, false));
+/*
     if (endYearEvaluations.isNotEmpty)
       summaryCardsToShow.add(
           new SummaryCard(endYearEvaluations, context, 4, false, true, false));
+    if (thirdQuarterEvaluations.isNotEmpty)
+      summaryCardsToShow.add(new SummaryCard(
+          thirdQuarterEvaluations, context, 3, false, true, false));
+    if (halfYearEvaluations.isNotEmpty)
+      summaryCardsToShow.add(
+          new SummaryCard(halfYearEvaluations, context, 2, false, true, false));
+    if (firstQuarterEvaluations.isNotEmpty)
+      summaryCardsToShow.add(new SummaryCard(firstQuarterEvaluations, context,
+          1, false, true, false)); //localization*/
 
     if (summaryCardsToShow.isEmpty)
       summaryCardsToShow.add(Card(
         child: Container(
             padding: EdgeInsets.all(5),
             child: new Text(
-                "Itt fognak megjelenni a negyedéves, félévi és év végi jegyeid.")), //localization
+                I18n.of(context).evaluationSummaryPlaceholder))
       ));
   }
 
@@ -606,8 +606,9 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                 ),
                 selectedAverage != null
                     ? selectedAverage.classValue != null
-                        ? new Text(
-                            capitalize(I18n.of(context).evaluationAverageClass) + ": ")
+                        ? new Text(capitalize(
+                                I18n.of(context).evaluationAverageClass) +
+                            ": ")
                         : Container()
                     : Container(),
                 selectedAverage != null
@@ -687,26 +688,27 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
               new Container(
                   child: new Card(
                       child: Container(
-                          child: FittedBox(
-                            child: new Row(
-                              children: <Widget>[
-                                new Column(
-                                  children: <Widget>[
-                                    new Text(
-                                        I18n.of(context).evaluationAverage +
-                                            ": "), //localization
-                                  ],
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                          child: new Column(
+                            children: <Widget>[
+                              new Text(I18n.of(context).evaluationAverage),
+                              Container(
+                                child: new Divider(
+                                  color: Colors.black45,
+                                  thickness: 1,
+                                  indent: 27,
+                                  endIndent: 27,
                                 ),
-                                new Column(
-                                  children: <Widget>[
-                                    new Text(allAverage.toStringAsFixed(2)),
-                                  ],
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                )
-                              ],
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            ),
+                                height: 5,
+                              ),
+                              new Text(
+                                allAverage.toStringAsFixed(2),
+                                style: new TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ],
+                            mainAxisAlignment: MainAxisAlignment.center,
                           ),
                           color:
                               globals.isDark ? Colors.black54 : Colors.white70),

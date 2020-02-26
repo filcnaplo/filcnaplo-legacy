@@ -174,7 +174,8 @@
             "statistics": "Statistics",
             "results": "Results"
         },
-        "average": "averages",
+        "summaryPlaceholder": "You'll see your end-year, half-year and quarterly evaluations here.",
+        "average": "average",
         "averageClass": "class average",
         "mode": "mode",
         "weight": "weight",
