@@ -234,7 +234,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
     List<Evaluation> endYearEvaluations = (toSummaryEvals
         .where((Evaluation evaluation) => (evaluation.isEndYear()))
         .toList());
-/*
+
     if (endYearEvaluations.isNotEmpty)
       summaryCardsToShow.add(
           new SummaryCard(endYearEvaluations, context, 4, false, true, false));
@@ -246,7 +246,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           new SummaryCard(halfYearEvaluations, context, 2, false, true, false));
     if (firstQuarterEvaluations.isNotEmpty)
       summaryCardsToShow.add(new SummaryCard(firstQuarterEvaluations, context,
-          1, false, true, false)); //localization*/
+          1, false, true, false)); //localization
 
     if (summaryCardsToShow.isEmpty)
       summaryCardsToShow.add(Card(
@@ -368,7 +368,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
       ];
     });
 
-    for (Evaluation e in evals.reversed) {
+    for (Evaluation e in evals) {
       if (e.NumberValue != 0) {
         if (average.subject == e.Subject) {
           globals.currentEvals.add(e);
@@ -545,7 +545,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
     }
 
     evaluationsBody = new Scaffold(
-        //"Összes"
+        //"Összes" "All"
         floatingActionButton: new FloatingActionButton(
           onPressed: () {
             showSortDialog().then((b) {
@@ -568,7 +568,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
         ))));
 
     averageBody = Scaffold(
-      //"Tárgyanként"
+      //"Statisztika" "Statistics"
       body: new Stack(children: <Widget>[
         new Column(
           children: <Widget>[
@@ -640,16 +640,13 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
             ),
             new Flexible(
               //Build list of evaluations below graph
-              child: new Container(
-                child: new ListView.builder(
-                  reverse: true,
-                  itemBuilder: _itemBuilder,
-                  itemCount: globals.currentEvals.length,
-                  shrinkWrap: true,
-                ),
+              child: new ListView.builder(
+                itemBuilder: _itemBuilder,
+                itemCount: globals.currentEvals.length,
               ),
             ),
           ],
+          mainAxisAlignment: MainAxisAlignment.start,
         ),
       ]),
       floatingActionButton: new FloatingActionButton(
@@ -671,7 +668,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
       ),
     );
 
-    dataBody = ListView(children: <Widget>[
+    dataBody = ListView(children: <Widget>[ //"Eredmények" "Results"
       new Table(
         children: [
           new TableRow(
