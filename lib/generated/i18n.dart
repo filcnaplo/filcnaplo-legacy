@@ -266,12 +266,12 @@ class I18n implements WidgetsLocalizations {
   String get summaryThirdQ => "Harmadik negyedévi jegyek";
   /// "Év végi jegyek"
   String get summaryEndYear => "Év végi jegyek";
-  /// "Volt"
-  String get lessonCardPrevious => "Volt";
-  /// "Épp - ${min} perc van hátra"
-  String lessonCardNow(String min) => "Épp - ${min} perc van hátra";
-  /// "Lesz - ${min} perc múlva"
-  String lessonCardNext(String min) => "Lesz - ${min} perc múlva";
+  /// "Előző"
+  String get lessonCardPrevious => "Előző";
+  /// "Jelenleg • ${min} perc van hátra"
+  String lessonCardNow(String min) => "Jelenleg • ${min} perc van hátra";
+  /// "Következő • ${min} perc múlva"
+  String lessonCardNext(String min) => "Következő • ${min} perc múlva";
   /// "perc"
   String get lessonCardMinutes => "perc";
   /// "bejelentkezés"
@@ -382,8 +382,8 @@ class I18n implements WidgetsLocalizations {
   String get errorNetwork => "Hálózati hiba";
   /// "Hiba a felhasználó olvasása közben"
   String get errorReadAccount => "Hiba a felhasználó olvasása közben";
-  /// " db "
-  String get pcs => " db ";
+  /// "db"
+  String get pcs => "db";
 }
 
 class _I18n_hu_HU extends I18n {
@@ -813,6 +813,9 @@ class _I18n_en_US extends I18n {
   /// "Close the application"
   @override
   String get closeTitle => "Close the application";
+  /// "Are you sure you want to exit?"
+  @override
+  String get closeConfirm => "Are you sure you want to exit?";
   /// "Birth date: "
   @override
   String get infoBirthdate => "Birth date: ";
@@ -918,9 +921,9 @@ class _I18n_en_US extends I18n {
   /// "Error while reading user"
   @override
   String get errorReadAccount => "Error while reading user";
-  /// "x "
+  /// "x"
   @override
-  String get pcs => "x ";
+  String get pcs => "x";
 
   @override
   TextDirection get textDirection => TextDirection.ltr;
@@ -1346,6 +1349,9 @@ class _I18n_de_DE extends I18n {
   /// "App schließen"
   @override
   String get closeTitle => "App schließen";
+  /// "Möchtest du den App wirklich schließen?"
+  @override
+  String get closeConfirm => "Möchtest du den App wirklich schließen?";
   /// "Geburtdatum: "
   @override
   String get infoBirthdate => "Geburtdatum: ";
@@ -1451,9 +1457,9 @@ class _I18n_de_DE extends I18n {
   /// "Konto konnte nicht geladen worden"
   @override
   String get errorReadAccount => "Konto konnte nicht geladen worden";
-  /// "x "
+  /// "x"
   @override
-  String get pcs => "x ";
+  String get pcs => "x";
 
   @override
   TextDirection get textDirection => TextDirection.ltr;
