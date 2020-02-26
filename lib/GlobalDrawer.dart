@@ -329,22 +329,22 @@ class GDrawerState extends State<GDrawer> {
                 Navigator.pushReplacementNamed(context, "/absents");
               },
             ),
-            // new ListTile(
-            //   leading: new Icon(
-            //     Icons.supervisor_account,
-            //     color: screen == 4 ? Theme.of(context).accentColor : null,
-            //   ),
-            //   title: new Text(
-            //     I18n.of(context).accounts,
-            //     style: TextStyle(
-            //         color: screen == 4 ? Theme.of(context).accentColor : null),
-            //   ),
-            //   onTap: () {
-            //     screen = 4;
-            //     Navigator.pop(context); // close the drawer
-            //     Navigator.pushReplacementNamed(context, "/accounts");
-            //   },
-            // ),
+             new ListTile(
+               leading: new Icon(
+                 Icons.supervisor_account,
+                 color: screen == 4 ? Theme.of(context).accentColor : null,
+               ),
+               title: new Text(
+                 capitalize(I18n.of(context).accountTitle),
+                 style: TextStyle(
+                     color: screen == 4 ? Theme.of(context).accentColor : null),
+               ),
+               onTap: () {
+                 screen = 4;
+                 Navigator.pop(context); // close the drawer
+                 Navigator.pushReplacementNamed(context, "/accounts");
+               },
+             ),
             new ListTile(
               leading: new Icon(
                 Icons.settings,
