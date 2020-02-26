@@ -64,8 +64,8 @@ class BackgroundHelper {
   void doNotes(List<Note> offlineNotes, List<Note> notes) async {
     for (Note n in notes) {
       if (!offlineNotes.map((Note note) => note.id).contains(n.id)) {
-        print(offlineNotes.map((Note note) => note.id).toList());
-        print(n.id);
+        //print(offlineNotes.map((Note note) => note.id).toList());
+        //print(n.id);
         var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
             'notes', 'feljegyzések', 'értesítések a feljegyzésekről',
             importance: Importance.Max,
@@ -161,17 +161,17 @@ class BackgroundHelper {
       for (Lesson lesson in lessons) {
         bool exist = false;
         // Értesítés a következő óráról WIP
-        print("1");
-        print(lesson.end);
+        //print("1");
+        //print(lesson.end);
         if (lesson.end.isAfter(DateTime.now()) &&
             lesson.id != lessons.last.id) {
-          print("2");
+          //print("2");
           int index = lessons.indexOf(lesson);
-          print("index: " + index.toString());
+          //print("index: " + index.toString());
           if (lessons[index].date == lessons[index + 1].date) {
-            print("3");
-            print(lesson.end.toIso8601String());
-            print(lessons[index + 1].subject);
+           // print("3");
+            //print(lesson.end.toIso8601String());
+            //print(lessons[index + 1].subject);
             var scheduledNotificationDateTime = lesson.end;
             var androidPlatformChannelSpecifics =
                 new AndroidNotificationDetails('next-lesson', 'Következő óra',
@@ -252,7 +252,7 @@ class BackgroundHelper {
       accounts.add(Account(user));
     for (Account account in accounts) {
       try {
-        print(account.user.name);
+     //   print(account.user.name);
         await account.refreshStudentString(true, false);
 
         List<Evaluation> offlineEvals = account.student.Evaluations;
@@ -275,13 +275,13 @@ class BackgroundHelper {
         doNotes(offlineNotes, notes);
         doAbsences(offlineAbsences, absences);
       } catch (e) {
-        print(e);
+        print("[E] BackgroundHelper.doBackground()1: " + e.toString());
       }
 
       try {
         doLessons(account);
       } catch (e) {
-        print(e);
+        print("[E] BackgroundHelper.doBackground()2: " + e.toString());
       }
     }
   }
@@ -294,7 +294,7 @@ class BackgroundHelper {
         if (result == ConnectivityResult.mobile && await canSyncOnData ||
             result == ConnectivityResult.wifi) doBackground();
       } catch (e) {
-        print(e);
+        print("[E] BackgroundHelper.backgroundTask(): " + e.toString());
       }
     });
 

@@ -200,25 +200,30 @@ class MainScreenState extends State<MainScreen> {
     lessonsToday = lessons.where((Lesson lesson) => (lesson.start.day == now.day)).toList();
     lessonsTomorrow = lessons.where((Lesson lesson) => (lesson.start.day == now.add(Duration(days: 1)).day)).toList();
 
-    if (lessonsToday.last.end.isAfter(now)) {
+    try {
+    	if (lessonsToday.last.end.isAfter(now)) {
       isLessonsToday = true;
       isLessonsTomorrow = false;
-    }
-    else if (lessonsTomorrow.first.start.day == now.add(Duration(days: 1)).day) {
-      isLessonsToday = false;
-      isLessonsTomorrow = true;
-    }
-    else {
-      isLessonsToday = false;
-      isLessonsTomorrow = false;
-    }
+	    }
+	    else if (lessonsTomorrow.first.start.day == now.add(Duration(days: 1)).day) {
+	      isLessonsToday = false;
+	      isLessonsTomorrow = true;
+	    }
+	    else {
+	      isLessonsToday = false;
+	      isLessonsTomorrow = false;
+	    }
 
-    if (isLessonsToday) feedCards.add(LessonCard(lessonsToday, context));
-    if (isLessonsTomorrow) feedCards.add(TomorrowLessonCard(lessonsTomorrow, context, now));
+	    if (isLessonsToday) feedCards.add(LessonCard(lessonsToday, context));
+	    if (isLessonsTomorrow) feedCards.add(TomorrowLessonCard(lessonsTomorrow, context, now));
 
-    for (Lesson lesson in lessonsTomorrow) {
-      print("\n" + lesson.subject);
+	    for (Lesson lesson in lessonsTomorrow) {
+	    //  print("\n" + lesson.subject);
+	    }
+	    } catch (e) {
+      print("[E] mainScreen.feedItems()1: " + e.toString());
     }
+    
 
     /*for (Lesson l in realLessons) {
       if (l.start.isAfter(now) && l.start.day == now.day) {
@@ -253,7 +258,7 @@ class MainScreenState extends State<MainScreen> {
         return b.key.toString().compareTo(a.key.toString());
       });
     } catch (e) {
-      print(e);
+      print("[E] mainScreen.feedItems()2: " + e.toString());
     }
 
     if (maximumFeedLength > feedCards.length)
@@ -356,7 +361,7 @@ class MainScreenState extends State<MainScreen> {
             backgroundColor: Colors.red,
             textColor: Colors.white,
             fontSize: 16.0);
-        print("singleexcp: " + exception.toString());
+      print("[E] mainScreen.onRefresh()1: " + exception.toString());
       }
     } else {
       for (Account account in globals.accounts) {
@@ -364,13 +369,13 @@ class MainScreenState extends State<MainScreen> {
           try {
             await account.refreshStudentString(offline, showErrors);
           } catch (e) {
-            print("error, needs relogin");
+      print("[E] mainScreen.onRefresh()2: " + e.toString());
           }
           tempEvaluations.addAll(account.student.Evaluations);
           tempNotes.addAll(account.notes);
           tempAbsents.addAll(account.absents);
         } catch (exception) {
-          print(exception);
+      print("[E] mainScreen.onRefresh()3: " + exception.toString());
         }
       }
     }
@@ -387,7 +392,7 @@ class MainScreenState extends State<MainScreen> {
           lessons = await getLessonsOffline(startDate,
               startDate.add(Duration(days: 6)), globals.selectedUser);
         } catch (exception) {
-          print(exception);
+      print("[E] mainScreen.onRefresh()4: " + exception.toString());
         }
         if (lessons.length > 0) globals.lessons.addAll(lessons);
       }
@@ -396,14 +401,14 @@ class MainScreenState extends State<MainScreen> {
         lessons = await getLessons(startDate, startDate.add(Duration(days: 6)),
             globals.selectedUser, showErrors);
       } catch (exception) {
-        print(exception);
+      print("[E] mainScreen.onRefresh()5: " + exception.toString());
       }
     }
     try {
       lessons.sort((Lesson a, Lesson b) => a.start.compareTo(b.start));
       if (lessons.length > 0) globals.lessons = lessons;
     } catch (e) {
-      print(e);
+      print("[E] mainScreen.onRefresh()6: " + e.toString());
     }
     Completer<Null> completer = new Completer<Null>();
     if (!offline) hasLoaded = true;

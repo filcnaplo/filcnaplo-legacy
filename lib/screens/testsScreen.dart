@@ -82,7 +82,7 @@ class TestsScreenState extends State<TestsScreen> {
       tests = globals.selectedAccount.tests;
       tests.sort((Test a, Test b) => b.creationDate.compareTo(a.creationDate));
     } catch (e) {
-      print(e);
+      print("[E] testScreen.onRefresh()0: " + e.toString());
     }
 
     hasLoaded = true;

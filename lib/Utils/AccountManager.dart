@@ -12,7 +12,7 @@ class AccountManager {
     try {
       usersJson = await readUsers();
     } catch (e) {
-      print(e);
+      print("[E] AccountManager.getUsers(): " + e.toString());
     }
     List<User> users = new List();
     if (usersJson.isNotEmpty)

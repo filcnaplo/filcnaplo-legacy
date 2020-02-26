@@ -163,7 +163,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
     try {
       average = double.parse(avrString);
     } catch (e) {
-      print(e);
+      print("[E] evaluationsScreen.getColorForAvarageString(): " + e.toString());
     }
 
     return getColorForAverage(average);
@@ -264,7 +264,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
         try {
           multiplier = double.parse(e.Weight.replaceAll("%", "")) / 100;
         } catch (e) {
-          print(e);
+      print("[E] evaluationsScreen.getAllAverages(): " + e.toString());
         }
         sum += e.NumberValue * multiplier;
         n += multiplier;
@@ -285,7 +285,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           multiplier =
               double.parse(evaluation.Weight.replaceAll("%", "")) / 100;
         } catch (e) {
-          print(e);
+      print("[E] evaluationsScreen.getAverage(): " + e.toString());
         }
         sum += evaluation.NumberValue * multiplier;
         db += multiplier;
@@ -400,7 +400,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           try {
             multiplier = double.parse(e.Weight.replaceAll("%", "")) / 100;
           } catch (e) {
-            print(e);
+      print("[E] evaluationsScreen.callback(): " + e.toString());
           }
 
           sum += e.NumberValue * multiplier;
@@ -841,6 +841,8 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                       backgroundColor: Colors.red,
                       textColor: Colors.white,
                       fontSize: 16.0);
+                      print("[E] evaluationsScreen._itemBuilder()1: " + exeption.toString());
+
                 }
               },
             ),
@@ -848,7 +850,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
         ],
       );
     } catch (e) {
-      print(e);
+      print("[E] evaluationsScreen._itemBuilder()2: " + e.toString());
     }
   }
 

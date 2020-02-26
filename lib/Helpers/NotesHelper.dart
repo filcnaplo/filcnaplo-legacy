@@ -22,7 +22,7 @@ class NotesHelper {
 
       notesList.forEach((Note n) => n.owner = user);
     } catch (e) {
-      print(e);
+      print("[E] NotesHelper.getNotesFrom(): " + e.toString());
     }
 
     return notesList;

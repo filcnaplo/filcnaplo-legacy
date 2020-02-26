@@ -71,7 +71,7 @@ class _MyAppState extends State<MyApp> {
     const Locale hu = Locale("hu", "HU");
     const Locale en = Locale("en", "US");
     var langs = {"en": en, "de": de, "hu": hu};
-    print(langs[globals.lang]);
+//    print(langs[globals.lang]);
     I18n.onLocaleChanged(langs[globals.lang]);
 
     globals.context = context;

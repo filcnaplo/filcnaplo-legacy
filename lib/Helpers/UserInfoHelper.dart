@@ -13,7 +13,7 @@ class UserInfoHelper {
     evaluationsMap =
         await _getEvaluationlist(instCode, userName, password, showErrors);
 
-    print(evaluationsMap);
+  //  print(evaluationsMap);
     String StudentId = evaluationsMap["StudentId"].toString();
     if (StudentId == null) StudentId = "";
     String StudentName = evaluationsMap["Name"].toString();
@@ -69,7 +69,7 @@ class UserInfoHelper {
 
     String evaluationsString =
         (await RequestHelper().getEvaluations(code, instCode));
-    print(evaluationsString);
+  //  print(evaluationsString);
     Map<String, dynamic> evaluationsMap = json.decode(evaluationsString);
 
     return evaluationsMap;

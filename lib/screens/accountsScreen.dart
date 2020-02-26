@@ -200,7 +200,6 @@ class AccountsScreenState extends State<AccountsScreen> {
               child: new Text(I18n.of(context).dialogYes.toUpperCase()),
               onPressed: () async {
                 await AccountManager().removeUser(user);
-                //             print("asd1");
                 setState(() {
                   globals.accounts
                       .removeWhere((Account a) => a.user.id == user.id);

@@ -24,7 +24,7 @@ class SettingsHelper {
     try {
       settings.addAll(await DBHelper().getSettingsMap());
     } catch (e) {
-      print(e);
+      print("[E] SettingsHelper._setPropertyBool(): " + e.toString());
     }
 
     settings[name] = value;

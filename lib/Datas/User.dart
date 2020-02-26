@@ -36,7 +36,7 @@ class User {
     try {
       lastRefreshMap = json["lastRefreshMap"] ?? Map();
     } catch (e) {
-      print(e);
+      print("[E] User.fromJson(): " + e.toString());
     }
   }
 
