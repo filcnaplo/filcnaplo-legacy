@@ -356,11 +356,13 @@ class MainScreenState extends State<MainScreen> {
         tempNotes.addAll(globals.selectedAccount.notes);
         tempAbsents.addAll(globals.selectedAccount.absents);
       } catch (exception) {
+      	/*
         Fluttertoast.showToast(
             msg: I18n.of(context).error,
             backgroundColor: Colors.red,
             textColor: Colors.white,
             fontSize: 16.0);
+           */
       print("[E] mainScreen.onRefresh()1: " + exception.toString());
       }
     } else {

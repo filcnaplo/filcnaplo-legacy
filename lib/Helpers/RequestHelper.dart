@@ -82,7 +82,7 @@ class RequestHelper {
         globals.userAgent = "FilcNaplo-" + globals.version;
       }
     } catch (e) {
-      print(e);
+      print("[E] RequestHelper.refreshAppSettings(): " + e.toString());
     }
   }
 
@@ -165,7 +165,10 @@ class RequestHelper {
           body: jsonBody);
       return response.body;
     } catch (e) {
-      if (showErrors) showError(I18n.of(globals.context).errorNetwork);
+      if (showErrors) {
+        print("[E] RequestHelper.getBearer(): " + e.toString());
+        showError(e.toString());
+      }
       return null;
     }
   }
@@ -198,8 +201,8 @@ class RequestHelper {
       else
         showError(I18n.of(globals.context).errorNetwork);
     } catch (e) {
-      print(e);
-      showError(I18n.of(globals.context).errorNetwork);
+      print("[E] RequestHelper.uploadHomework(): " + e.toString());
+      showError(e.toString()); //todo
       return null;
     }
   }
@@ -211,8 +214,7 @@ class RequestHelper {
             "grant_type=password&client_id=" +
         globals.clientId;
     try {
-      String bearerResponse =
-          await RequestHelper().getBearer(body, user.schoolCode, showErrors);
+      String bearerResponse = await RequestHelper().getBearer(body, user.schoolCode, showErrors);
       if (bearerResponse != null) {
         Map<String, dynamic> bearerMap = json.decode(bearerResponse);
         if (bearerMap["error"] == "invalid_grant" && showErrors)
@@ -221,8 +223,8 @@ class RequestHelper {
         return code;
       }
     } catch (e) {
-      if (showErrors) showError(I18n.of(globals.context).error);
-      print(e);
+      print("[E] RequestHelper.getBearerToken(): " + e.toString());
+      showError(e.toString()); //todo
     }
     return null;
   }
@@ -237,8 +239,8 @@ class RequestHelper {
           },
           body: "{\"isOlvasott\":true,\"uzenetAzonositoLista\":[$id]}");
     } catch (e) {
-      print(e);
-      showError(I18n.of(globals.context).errorNetwork);
+      print("[E] RequestHelper.seeMessage(): " + e.toString());
+      showError(e.toString());
       return null;
     }
   }
