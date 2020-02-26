@@ -213,7 +213,7 @@
 
     "export": {
         "": "Ausführen",
-        "grades": "Noten",
+        "grades": "Noten und alle andere",
         "lessons": "Stunden",
         "accounts": "Konten",
         "choose": "wähle eine Zeitabstand",
@@ -272,13 +272,13 @@
     
     "success": {
         "": "Fertig",
-        "homework": "Homework uploaded successfully"
+        "homework": "Hausaufgabe ist hochgeladen worden"
     },
 
     "error": {
         "": "Error",
-        "network": "Network error",
-        "readAccount": "Error while reading user"
+        "network": "Netzwerk fehler",
+        "readAccount": "Konto konnte nicht geladen worden"
     },
 
     "pcs": "x "

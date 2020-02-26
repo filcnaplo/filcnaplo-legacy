@@ -790,9 +790,9 @@ class _I18n_en_US extends I18n {
   /// "Export"
   @override
   String get export => "Export";
-  /// "grades"
+  /// "grades and everything else"
   @override
-  String get exportGrades => "grades";
+  String get exportGrades => "grades and everything else";
   /// "classes"
   @override
   String get exportLessons => "classes";
@@ -808,9 +808,6 @@ class _I18n_en_US extends I18n {
   /// "Close the application"
   @override
   String get closeTitle => "Close the application";
-  /// "Are you sure you want to exit?"
-  @override
-  String get closeConfirm => "Are you sure you want to exit?";
   /// "Birth date: "
   @override
   String get infoBirthdate => "Birth date: ";
@@ -1323,9 +1320,9 @@ class _I18n_de_DE extends I18n {
   /// "Ausführen"
   @override
   String get export => "Ausführen";
-  /// "Noten"
+  /// "Noten und alle andere"
   @override
-  String get exportGrades => "Noten";
+  String get exportGrades => "Noten und alle andere";
   /// "Stunden"
   @override
   String get exportLessons => "Stunden";
@@ -1341,9 +1338,6 @@ class _I18n_de_DE extends I18n {
   /// "App schließen"
   @override
   String get closeTitle => "App schließen";
-  /// "Möchtest du den App wirklich schließen?"
-  @override
-  String get closeConfirm => "Möchtest du den App wirklich schließen?";
   /// "Geburtdatum: "
   @override
   String get infoBirthdate => "Geburtdatum: ";
@@ -1437,18 +1431,18 @@ class _I18n_de_DE extends I18n {
   /// "Fertig"
   @override
   String get success => "Fertig";
-  /// "Homework uploaded successfully"
+  /// "Hausaufgabe ist hochgeladen worden"
   @override
-  String get successHomework => "Homework uploaded successfully";
+  String get successHomework => "Hausaufgabe ist hochgeladen worden";
   /// "Error"
   @override
   String get error => "Error";
-  /// "Network error"
+  /// "Netzwerk fehler"
   @override
-  String get errorNetwork => "Network error";
-  /// "Error while reading user"
+  String get errorNetwork => "Netzwerk fehler";
+  /// "Konto konnte nicht geladen worden"
   @override
-  String get errorReadAccount => "Error while reading user";
+  String get errorReadAccount => "Konto konnte nicht geladen worden";
   /// "x "
   @override
   String get pcs => "x ";

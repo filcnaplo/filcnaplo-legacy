@@ -414,8 +414,8 @@ class SettingsScreenState extends State<SettingsScreen> {
                           : Container(),
                       ListTile(
                         title: new Text(
-                          "ver." + globals.version,
-                          style: TextStyle(fontSize: 10.0),
+                          capitalize(I18n.of(context).appVersion) + ": " + globals.version,
+                          style: TextStyle(fontSize: 15.0),
                         )
                      )
 

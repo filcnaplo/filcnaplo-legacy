@@ -213,7 +213,7 @@
 
     "export": {
         "": "Export",
-        "grades": "grades",
+        "grades": "grades and everything else",
         "lessons": "classes",
         "accounts": "accounts",
         "choose": "choose an interval",
