@@ -13,3 +13,4 @@ Nyílt forráskódú [Szivacs-Napló](https://github.com/boapps/Szivacs-Naplo) f
 Első sikeres, lényegi változást tartalmazó commitod után meghívunk a fejlesztői Telegram csoportunkba.
  
  
+ 
