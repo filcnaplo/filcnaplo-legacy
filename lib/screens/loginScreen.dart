@@ -248,6 +248,7 @@ class LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    globals.context = context;
     return new WillPopScope(
         onWillPop: () {
           if (widget.fromApp)

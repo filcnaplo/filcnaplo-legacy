@@ -173,7 +173,7 @@ class RequestHelper {
     }
   }
 
-  void uploadHomework(String homework, Lesson lesson, User user) async {
+  Future<bool> uploadHomework(String homework, Lesson lesson, User user) async {
     Map body = {
       "OraId": lesson.id.toString(),
       "OraDate": dateToHuman(lesson.date) + "00:00:00",
@@ -196,14 +196,17 @@ class RequestHelper {
             "User-Agent": globals.userAgent
           },
           body: jsonBody);
-      if (response.statusCode == 200)
+      if (response.statusCode == 200) {
         showSuccess(I18n.of(globals.context).successHomework);
-      else
+        return true;
+      } else {
         showError(I18n.of(globals.context).errorNetwork);
+        return false;
+      }
     } catch (e) {
       print("[E] RequestHelper.uploadHomework(): " + e.toString());
       showError(e.toString()); //todo
-      return null;
+      return false;
     }
   }
 

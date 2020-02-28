@@ -57,8 +57,10 @@ class ExportScreenState extends State<ExportScreen> {
   String path = "";
   String selectedDate;
   List<DateTime> pickedDate;
+
   @override
   Widget build(BuildContext context) {
+    globals.context = context;
     return new WillPopScope(
         onWillPop: () {
           globals.screen = 0;

@@ -7,6 +7,7 @@ import 'package:filcnaplo/Datas/Account.dart';
 import 'package:filcnaplo/Datas/Student.dart';
 import 'package:filcnaplo/GlobalDrawer.dart';
 import 'package:filcnaplo/Utils/StringFormatter.dart';
+import '../globals.dart' as globals;
 
 class StudentScreen extends StatefulWidget {
   StudentScreen({this.account});
@@ -18,6 +19,7 @@ class StudentScreen extends StatefulWidget {
 class StudentScreenState extends State<StudentScreen> {
   @override
   Widget build(BuildContext context) {
+    globals.context = context;
     double c_width = MediaQuery.of(context).size.width * 0.5;
 
     return new Scaffold(

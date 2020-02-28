@@ -60,6 +60,7 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    globals.context = context;
     return new WillPopScope(
         onWillPop: () async {
           globals.screen = 7;

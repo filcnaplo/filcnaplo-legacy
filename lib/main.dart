@@ -74,7 +74,6 @@ class _MyAppState extends State<MyApp> {
 //    print(langs[globals.lang]);
     I18n.onLocaleChanged(langs[globals.lang]);
 
-    globals.context = context;
     return new DynamicTheme(
         defaultBrightness: Brightness.light,
         data: (brightness) => ColorManager().getTheme(brightness),

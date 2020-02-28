@@ -219,6 +219,7 @@ class AccountsScreenState extends State<AccountsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    globals.context = context;
     return new WillPopScope(
       onWillPop: () {
         globals.screen = 0;

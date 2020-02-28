@@ -33,6 +33,7 @@ class EvalCount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    globals.context = context;
     return new Container(
       child: new Card(
           child: Container(

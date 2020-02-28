@@ -88,6 +88,8 @@ class MainScreenState extends State<MainScreen> {
       globals.isSingle = true;
       SettingsHelper().setSingleUser(true);
     }
+
+    globals.context = context;
   }
 
   Future showUpdateDialog() async {
