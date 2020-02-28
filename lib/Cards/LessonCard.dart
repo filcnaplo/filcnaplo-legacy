@@ -14,10 +14,10 @@ class LessonCard extends StatefulWidget {
   bool isLessonsTomorrow;
   BuildContext context;
 
-  LessonCard(
-      List<Lesson> lessons, BuildContext context) {
+  LessonCard(List<Lesson> lessons, BuildContext context, bool isLessonsTomorrow) {
     this.lessons = lessons;
     this.context = context;
+    this.isLessonsTomorrow = isLessonsTomorrow;
   }
 
   @override
@@ -39,6 +39,10 @@ class _LessonCardState extends State<LessonCard> {
   int minutesLeftOfThis;
 
   int lessonCardState;
+
+  final double height1 =
+      100; //Size of lesson card when showing this number of cards
+  final double height2 = 200;
 
   @override
   void initState() {
@@ -68,24 +72,26 @@ class _LessonCardState extends State<LessonCard> {
 
     //States: Before first / During lesson / During break / After last
     //              0             1               2             3
+    //Size of card: 1             2               2             1
+    //Card count:   1            2-3              2             1
+    //Scrool to     -            end              -             -
+
     if (lessons.first.start.isAfter(now))
       lessonCardState = 0;
     else if (thisLesson != null)
       lessonCardState = 1;
-    /*else if (isLessonsTomorrow)
-      lessonCardState = 3;*/
+    else if (isLessonsTomorrow)
+      lessonCardState = 3;
     else if (previousLesson.end.isBefore(now) && nextLesson.start.isAfter(now))
       lessonCardState = 2;
 
-    //print("FilcNow State: " + lessonCardState.toString());
-
     if (lessonCardState == 1) {
       //During a lesson, calculate previous and next break length
-      prevBreakLength =
+      if (previousLesson != null) prevBreakLength =
           thisLesson.start.difference(previousLesson.end).inMinutes;
       thisBreakLength = nextLesson.start.difference(thisLesson.end).inMinutes;
       minutesLeftOfThis = thisLesson.end.difference(now).inMinutes;
-      minutesUntilNext = nextLesson.start.difference(now).inMinutes;
+      if (nextLesson != null) minutesUntilNext = nextLesson.start.difference(now).inMinutes;
     } else if (lessonCardState == 2) {
       //During a break, calculate its length.
       prevBreakLength = 0;
@@ -105,79 +111,90 @@ class _LessonCardState extends State<LessonCard> {
     now = new DateTime.now();
     _lessonCardBackend(now, widget.lessons, widget.isLessonsTomorrow);
     return Container(
-      padding: EdgeInsets.all(5),
-      child: new SizedBox(
-        height: 100,
-        child: new SingleChildScrollView(
-          child: new Column(
-        children: <Widget>[
-          (previousLesson != null)
-              ? LessonTile(
-                  context,
-                  false,
-                  I18n.of(context).lessonCardPrevious,
-                  "",
-                  (previousLesson.count == -1) ? "+" : previousLesson.count.toString(),
-                  previousLesson.subject,
-                  previousLesson.isMissed
-                      ? I18n.of(context).substitutionMissed
-                      : previousLesson.teacher,
-                  (previousLesson.isSubstitution
-                      ? 1
-                      : previousLesson.isMissed ? 2 : 0),
-                  (previousLesson.homework != null) ? true : false,
-                  getLessonRangeText(previousLesson),
-                  previousLesson.room)
-              : Container(),
-          (thisLesson != null) //Only show this lesson card during a lesson
-              ? LessonTile(
-                  context,
-                  true,
-                  I18n.of(context)
-                      .lessonCardNow((minutesLeftOfThis + 1).toString()),
-                  (prevBreakLength.toString() +
-                      " " +
-                      I18n.of(context).timeMinute),
-                  (thisLesson.count == -1) ? "+" : thisLesson.count.toString(),
-                  thisLesson.subject,
-                  thisLesson.isMissed
-                      ? I18n.of(context).substitutionMissed
-                      : thisLesson.teacher,
-                  (thisLesson.isSubstitution ? 1 : thisLesson.isMissed ? 2 : 0),
-                  (thisLesson.homework != null) ? true : false,
-                  getLessonRangeText(thisLesson),
-                  thisLesson.room)
-              : Container(),
-          (nextLesson != null)
-              ? LessonTile(
-                  context,
-                  false,
-                  I18n.of(context)
-                      .lessonCardNext((minutesUntilNext + 1).toString()),
-                  (lessonCardState == 0)
-                      ? ""
-                      : (thisBreakLength.toString() +
+        padding: EdgeInsets.all(5),
+        child: new SizedBox(
+          height: (lessonCardState == 0 || lessonCardState == 3)
+              ? height1
+              : height2,
+          child: new ListView(
+            shrinkWrap: true,
+            reverse: true,
+            children: <Widget>[
+              (nextLesson != null) //Next
+                  ? LessonTile(
+                      context,
+                      false,
+                      I18n.of(context)
+                          .lessonCardNext((minutesUntilNext + 1).toString()),
+                      (lessonCardState == 0)
+                          ? ""
+                          : (thisBreakLength.toString() +
+                              " " +
+                              I18n.of(context).timeMinute),
+                      (nextLesson.count == -1)
+                          ? "+"
+                          : nextLesson.count.toString(),
+                      nextLesson.subject,
+                      nextLesson.isMissed
+                          ? I18n.of(context).substitutionMissed
+                          : nextLesson.teacher,
+                      (nextLesson.isSubstitution
+                          ? 1
+                          : nextLesson.isMissed ? 2 : 0),
+                      (nextLesson.homework != null) ? true : false,
+                      getLessonRangeText(nextLesson),
+                      nextLesson.room)
+                  : Container(),
+              (thisLesson != null) //This
+                  ? LessonTile(
+                      context,
+                      true,
+                      I18n.of(context)
+                          .lessonCardNow((minutesLeftOfThis + 1).toString()),
+                      (prevBreakLength.toString() +
                           " " +
                           I18n.of(context).timeMinute),
-                  (nextLesson.count == -1) ? "+" : nextLesson.count.toString(),
-                  nextLesson.subject,
-                  nextLesson.isMissed
-                      ? I18n.of(context).substitutionMissed
-                      : nextLesson.teacher,
-                  (nextLesson.isSubstitution ? 1 : nextLesson.isMissed ? 2 : 0),
-                  (nextLesson.homework != null) ? true : false,
-                  getLessonRangeText(nextLesson),
-                  nextLesson.room)
-              : Container(),
-        ],
-      ),
-        )
-      ),
-    );
+                      (thisLesson.count == -1)
+                          ? "+"
+                          : thisLesson.count.toString(),
+                      thisLesson.subject,
+                      thisLesson.isMissed
+                          ? I18n.of(context).substitutionMissed
+                          : thisLesson.teacher,
+                      (thisLesson.isSubstitution
+                          ? 1
+                          : thisLesson.isMissed ? 2 : 0),
+                      (thisLesson.homework != null) ? true : false,
+                      getLessonRangeText(thisLesson),
+                      thisLesson.room)
+                  : Container(),
+              (previousLesson != null) //Previous
+                  ? LessonTile(
+                      context,
+                      false,
+                      I18n.of(context).lessonCardPrevious,
+                      "",
+                      (previousLesson.count == -1)
+                          ? "+"
+                          : previousLesson.count.toString(),
+                      previousLesson.subject,
+                      previousLesson.isMissed
+                          ? I18n.of(context).substitutionMissed
+                          : previousLesson.teacher,
+                      (previousLesson.isSubstitution
+                          ? 1
+                          : previousLesson.isMissed ? 2 : 0),
+                      (previousLesson.homework != null) ? true : false,
+                      getLessonRangeText(previousLesson),
+                      previousLesson.room)
+                  : Container(),
+            ],
+          ),
+        ));
   }
 }
 
-    /*
+/*
       child: new Column(
         children: <Widget>[
           (previousLesson != null)
