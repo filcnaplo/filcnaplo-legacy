@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:filcnaplo/Dialog/ChooseLessonDialog.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -76,6 +77,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
                     });
                   },
                 ),
+                new IconButton(icon: Icon(Icons.plus_one), onPressed: _openChooser,)
               ],
             ),
             body: new Container(
@@ -100,6 +102,16 @@ class HomeworkScreenState extends State<HomeworkScreen> {
                                 onRefresh: _onRefresh)),
                       ])
                     : new Center(child: new CircularProgressIndicator()))));
+  }
+
+  Future<bool> _openChooser() {
+    return showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (BuildContext context) {
+        return new ChooseLessonDialog();
+      }
+    );
   }
 
   Future<bool> timeDialog() {
