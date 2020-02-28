@@ -273,8 +273,9 @@
     },
     
     "success": {
-        "": "Fertig",
-        "homework": "Hausaufgabe ist hochgeladen worden"
+        "": "Erfolg",
+        "homework": "Hausaufgabe ist hochgeladen worden",
+        "homeworkDelete": "Hausaufgaben erfolgreich gelöscht"
     },
 
     "error": {

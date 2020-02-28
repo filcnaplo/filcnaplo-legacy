@@ -378,6 +378,8 @@ class I18n implements WidgetsLocalizations {
   String get success => "Siker";
   /// "Házifeladat sikeresen feltöltve"
   String get successHomework => "Házifeladat sikeresen feltöltve";
+  /// "Házifeladat sikeresen törölve"
+  String get successHomeworkDelete => "Házifeladat sikeresen törölve";
   /// "Hiba"
   String get error => "Hiba";
   /// "Hálózati hiba"
@@ -917,6 +919,9 @@ class _I18n_en_US extends I18n {
   /// "Homework uploaded successfully"
   @override
   String get successHomework => "Homework uploaded successfully";
+  /// "Homework deleted successfully"
+  @override
+  String get successHomeworkDelete => "Homework deleted successfully";
   /// "Error"
   @override
   String get error => "Error";
@@ -1450,12 +1455,15 @@ class _I18n_de_DE extends I18n {
   /// "Warte ${mins} Minue Zeit bevor du neu lädst!"
   @override
   String refreshLimit(String mins) => "Warte ${mins} Minue Zeit bevor du neu lädst!";
-  /// "Fertig"
+  /// "Erfolg"
   @override
-  String get success => "Fertig";
+  String get success => "Erfolg";
   /// "Hausaufgabe ist hochgeladen worden"
   @override
   String get successHomework => "Hausaufgabe ist hochgeladen worden";
+  /// "Hausaufgaben erfolgreich gelöscht"
+  @override
+  String get successHomeworkDelete => "Hausaufgaben erfolgreich gelöscht";
   /// "Error"
   @override
   String get error => "Error";

@@ -174,6 +174,9 @@ class RequestHelper {
   }
 
   Future<bool> uploadHomework(String homework, Lesson lesson, User user) async {
+    if (homework == null) {
+      return false;
+    }
     Map body = {
       "OraId": lesson.id.toString(),
       "OraDate": dateToHuman(lesson.date) + "00:00:00",
@@ -210,6 +213,37 @@ class RequestHelper {
     }
   }
 
+  Future<bool> deleteHomework(int id, User user) async {
+    if (id == null) {
+      return false;
+    }
+
+    String token = await getBearerToken(user, true);
+    try {
+        http.Response response = await http.post(
+            "https://" +
+                user.schoolCode +
+                ".e-kreta.hu/mapi/api/v1/HaziFeladat/CreateTanuloHaziFeladat",
+            headers: {
+              "HOST": user.schoolCode + ".e-kreta.hu",
+              "Authorization": "Bearer " + token,
+              "Content-Type": "application/json; charset=utf-8",
+              "User-Agent": globals.userAgent
+            });
+        if (response.statusCode == 200) {
+          showSuccess(I18n.of(globals.context).successHomeworkDelete);
+          return true;
+        } else {
+          showError(I18n.of(globals.context).errorNetwork);
+          return false;
+        }
+      } catch (e) {
+        print("[E] RequestHelper.deleteHomework(): " + e.toString());
+        showError(e.toString()); //todo
+        return false;
+      }
+    } 
+
   Future<String> getBearerToken(User user, bool showErrors) async {
     String body = "institute_code=${user.schoolCode}&"
             "userName=${user.username}&"
@@ -217,7 +251,8 @@ class RequestHelper {
             "grant_type=password&client_id=" +
         globals.clientId;
     try {
-      String bearerResponse = await RequestHelper().getBearer(body, user.schoolCode, showErrors);
+      String bearerResponse =
+          await RequestHelper().getBearer(body, user.schoolCode, showErrors);
       if (bearerResponse != null) {
         Map<String, dynamic> bearerMap = json.decode(bearerResponse);
         if (bearerMap["error"] == "invalid_grant" && showErrors)

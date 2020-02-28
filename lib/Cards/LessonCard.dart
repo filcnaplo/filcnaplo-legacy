@@ -238,41 +238,40 @@ class _LessonCardState extends State<LessonCard> {
   ) {
     return Container(
         child: new Row(children: <Widget>[
-          new Expanded(
-          child: new Container(
-            child: new Column(
-              children: <Widget>[
-                new Row(
-                  children: <Widget>[
-                    new Flexible(
-                      child: new Row(
-                        children: <Widget>[
-                          new Container(
-                            child: new Text(tabText,
-                                style: new TextStyle(
-                                    color: globals.isDark
-                                        ? Colors.white
-                                        : Colors.black)),
-                            padding: EdgeInsets.fromLTRB(8, 1, 8, 0),
-                            decoration: new BoxDecoration(
-                                color: globals.isDark
-                                    ? Color.fromARGB(255, 25, 25, 25)
-                                    : Colors.grey[350],
-                                boxShadow: [
-                                  new BoxShadow(blurRadius: 3, spreadRadius: -2)
-                                ],
-                                borderRadius: new BorderRadius.only(
-                                    topLeft: Radius.circular(4),
-                                    topRight: Radius.circular(4))),
-                          ),
-                        ],
-                      ),
+      new Expanded(
+        child: new Container(
+          child: new Column(
+            children: <Widget>[
+              new Row(
+                children: <Widget>[
+                  new Flexible(
+                    child: new Row(
+                      children: <Widget>[
+                        new Container(
+                          child: new Text(tabText,
+                              style: new TextStyle(
+                                  color: globals.isDark
+                                      ? Colors.white
+                                      : Colors.black)),
+                          padding: EdgeInsets.fromLTRB(8, 1, 8, 0),
+                          decoration: new BoxDecoration(
+                              color: globals.isDark
+                                  ? Color.fromARGB(255, 25, 25, 25)
+                                  : Colors.grey[350],
+                              boxShadow: [
+                                new BoxShadow(blurRadius: 3, spreadRadius: -2)
+                              ],
+                              borderRadius: new BorderRadius.only(
+                                  topLeft: Radius.circular(4),
+                                  topRight: Radius.circular(4))),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                Container(
-                  child: 
-                new GestureDetector(
+                  ),
+                ],
+              ),
+              Container(
+                child: new GestureDetector(
                   onTap: () {
                     _lessonDialog(lesson);
                   },
@@ -309,26 +308,28 @@ class _LessonCardState extends State<LessonCard> {
                       ),
                     ),
                     decoration: new BoxDecoration(
-                        color:
-                            globals.isDark ? Colors.grey[700] : Colors.grey[100],
+                        color: globals.isDark
+                            ? Colors.grey[700]
+                            : Colors.grey[100],
                         borderRadius: new BorderRadius.all(Radius.circular(6)),
                         boxShadow: [
                           new BoxShadow(blurRadius: 3, spreadRadius: -2)
                         ]),
-                  ),),
-                  decoration: new BoxDecoration(
-                    color: globals.isDark
-                        ? Color.fromARGB(255, 25, 25, 25)
-                        : Colors.grey[350],
-                    borderRadius: new BorderRadius.only(
-                        topRight: Radius.circular(6),
-                        bottomLeft: Radius.circular(6),
-                        bottomRight: Radius.circular(6)),
                   ),
                 ),
-              ],
-            ),
+                decoration: new BoxDecoration(
+                  color: globals.isDark
+                      ? Color.fromARGB(255, 25, 25, 25)
+                      : Colors.grey[350],
+                  borderRadius: new BorderRadius.only(
+                      topRight: Radius.circular(6),
+                      bottomLeft: Radius.circular(6),
+                      bottomRight: Radius.circular(6)),
+                ),
+              ),
+            ],
           ),
+        ),
       ),
       (breakLength != "")
           ? Container(

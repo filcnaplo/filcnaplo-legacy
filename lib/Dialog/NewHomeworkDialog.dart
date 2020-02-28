@@ -44,11 +44,12 @@ class NewHomeworkDialogState extends State<NewHomeworkDialog> {
             homework = text;
           },
         ),
-        uploading ? new LinearProgressIndicator()
-        : new MaterialButton(
-          child: Text(I18n.of(context).dialogOk.toUpperCase()),
-          onPressed: _uploadHomework,
-        )
+        uploading
+            ? new LinearProgressIndicator()
+            : new MaterialButton(
+                child: Text(I18n.of(context).dialogOk.toUpperCase()),
+                onPressed: _uploadHomework,
+              )
       ],
     );
   }
@@ -62,7 +63,9 @@ class NewHomeworkDialogState extends State<NewHomeworkDialog> {
         homework, widget.lesson, globals.selectedAccount.user)) {
       Navigator.of(context).pop();
     } else {
-      setState(() {uploading = false;});
+      setState(() {
+        uploading = false;
+      });
     }
   }
 

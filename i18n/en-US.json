@@ -274,7 +274,8 @@
 
     "success": {
         "": "Success",
-        "homework": "Homework uploaded successfully"
+        "homework": "Homework uploaded successfully",
+        "homeworkDelete": "Homework deleted successfully"
     },
 
     "error": {
