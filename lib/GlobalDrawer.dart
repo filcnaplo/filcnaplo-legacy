@@ -87,8 +87,8 @@ class GDrawerState extends State<GDrawer> {
                           ),
                           new Container(
                             child: new Text(
-                                I18n.of(context).appTitle,
-                                style: TextStyle(fontSize: 19.0),
+                              I18n.of(context).appTitle,
+                              style: TextStyle(fontSize: 19.0),
                             ),
                             padding: EdgeInsets.fromLTRB(5.0, 5.0, 0.0, 0.0),
                           ),
@@ -329,6 +329,7 @@ class GDrawerState extends State<GDrawer> {
                 Navigator.pushReplacementNamed(context, "/absents");
               },
             ),
+            /*
              new ListTile(
                leading: new Icon(
                  Icons.supervisor_account,
@@ -344,7 +345,7 @@ class GDrawerState extends State<GDrawer> {
                  Navigator.pop(context); // close the drawer
                  Navigator.pushReplacementNamed(context, "/accounts");
                },
-             ),
+             ),*/
             new ListTile(
               leading: new Icon(
                 Icons.settings,
