@@ -9,15 +9,16 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 
 import 'dart:async';
 
+List<Widget> quickLessons = [];
+
 class LessonCard extends StatefulWidget {
   List<Lesson> lessons;
   bool isLessonsTomorrow;
   BuildContext context;
 
-  LessonCard(List<Lesson> lessons, BuildContext context, bool isLessonsTomorrow) {
+  LessonCard(List<Lesson> lessons, BuildContext context) {
     this.lessons = lessons;
     this.context = context;
-    this.isLessonsTomorrow = isLessonsTomorrow;
   }
 
   @override
@@ -40,9 +41,12 @@ class _LessonCardState extends State<LessonCard> {
 
   int lessonCardState;
 
-  final double height1 =
-      100; //Size of lesson card when showing this number of cards
-  final double height2 = 200;
+  @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
 
   @override
   void initState() {
@@ -70,197 +74,163 @@ class _LessonCardState extends State<LessonCard> {
         (Lesson lesson) => (lesson.start.isAfter(now)),
         orElse: () => null);
 
-    //States: Before first / During lesson / During break / After last
-    //              0             1               2             3
-    //Size of card: 1             2               2             1
-    //Card count:   1            2-3              2             1
-    //Scrool to     -            end              -             -
-
+    //States: Before first / First lesson / During lesson / During break / Last lesson / After last
+    //              0             1               2             3               4            5
     if (lessons.first.start.isAfter(now))
       lessonCardState = 0;
-    else if (thisLesson != null)
+    else if (previousLesson == null)
       lessonCardState = 1;
-    else if (isLessonsTomorrow)
-      lessonCardState = 3;
-    else if (previousLesson.end.isBefore(now) && nextLesson.start.isAfter(now))
+    else if (thisLesson == null && nextLesson == null)
+      lessonCardState = 5;
+    else if (nextLesson == null)
+      lessonCardState = 4;
+    else if (thisLesson != null)
       lessonCardState = 2;
+    /*else if (isLessonsTomorrow)
+      lessonCardState = 3;*/
+    else if (previousLesson.end.isBefore(now) && nextLesson.start.isAfter(now))
+      lessonCardState = 3;
 
-    if (lessonCardState == 1) {
+    if (lessonCardState == 2) {
       //During a lesson, calculate previous and next break length
-      if (previousLesson != null) prevBreakLength =
+      prevBreakLength =
           thisLesson.start.difference(previousLesson.end).inMinutes;
       thisBreakLength = nextLesson.start.difference(thisLesson.end).inMinutes;
       minutesLeftOfThis = thisLesson.end.difference(now).inMinutes;
-      if (nextLesson != null) minutesUntilNext = nextLesson.start.difference(now).inMinutes;
-    } else if (lessonCardState == 2) {
+      minutesUntilNext = nextLesson.start.difference(now).inMinutes;
+    } else if (lessonCardState == 3) {
       //During a break, calculate its length.
       prevBreakLength = 0;
       thisBreakLength =
           nextLesson.start.difference(previousLesson.end).inMinutes;
       minutesUntilNext = nextLesson.start.difference(now).inMinutes;
+    } else if (lessonCardState == 4) {
+      //During the last lesson
+      prevBreakLength =
+          thisLesson.start.difference(previousLesson.end).inMinutes;
+      thisBreakLength = 0;
+      minutesLeftOfThis = thisLesson.end.difference(now).inMinutes;
+      minutesUntilNext = 0;
+    } else if (lessonCardState == 1) {
+      //During the first lesson
+      prevBreakLength = 0;
+      thisBreakLength = nextLesson.start.difference(thisLesson.end).inMinutes;
+      minutesLeftOfThis = thisLesson.end.difference(now).inMinutes;
+      minutesUntilNext = nextLesson.start.difference(now).inMinutes;
+    } else if (lessonCardState == 5) {
+      prevBreakLength = 0;
+      thisBreakLength = 0;
+      minutesUntilNext = 0;
     } else {
       //If before or after the school day, don't calculate breaks.
       prevBreakLength = 0;
       thisBreakLength = 0;
       minutesUntilNext = nextLesson.start.difference(now).inMinutes;
     }
+
+    quickLessons = [];
+
+    if (this.previousLesson != null && thisBreakLength != 0) {
+      quickLessons.add(
+        LessonTile(
+          context,
+          false,
+          I18n.of(context).lessonCardPrevious,
+          "",
+          (previousLesson.count == -1)
+              ? "+"
+              : previousLesson.count.toString(),
+          previousLesson.subject,
+          previousLesson.isMissed
+              ? I18n.of(context).substitutionMissed
+              : previousLesson.teacher,
+          (previousLesson.isSubstitution
+              ? 1
+              : previousLesson.isMissed ? 2 : 0),
+          (previousLesson.homework != null) ? true : false,
+          getLessonRangeText(previousLesson),
+          previousLesson.room));
+    }
+
+    if (thisLesson != null) {
+      quickLessons.add(
+        LessonTile(
+          context,
+          true,
+          I18n.of(context).lessonCardNow((minutesLeftOfThis + 1).toString()),
+          (prevBreakLength == 0)
+              ? ""
+              : (prevBreakLength.toString() +
+                  " " +
+                  I18n.of(context).timeMinute),
+          (thisLesson.count == -1) ? "+" : thisLesson.count.toString(),
+          thisLesson.subject,
+          thisLesson.isMissed
+              ? I18n.of(context).substitutionMissed
+              : thisLesson.teacher,
+          (thisLesson.isSubstitution ? 1 : thisLesson.isMissed ? 2 : 0),
+          (thisLesson.homework != null) ? true : false,
+          getLessonRangeText(thisLesson),
+          thisLesson.room));
+    }
+
+    if (nextLesson != null) {
+      quickLessons.add(
+        LessonTile(
+        context,
+        false,
+        I18n.of(context).lessonCardNext((minutesUntilNext + 1).toString()),
+        (lessonCardState == 0 && thisBreakLength == 0)
+            ? ""
+            : (thisBreakLength.toString() +
+                " " +
+                I18n.of(context).timeMinute),
+        (nextLesson.count == -1) ? "+" : nextLesson.count.toString(),
+        nextLesson.subject,
+        nextLesson.isMissed
+            ? I18n.of(context).substitutionMissed
+            : nextLesson.teacher,
+        (nextLesson.isSubstitution ? 1 : nextLesson.isMissed ? 2 : 0),
+        (nextLesson.homework != null) ? true : false,
+        getLessonRangeText(nextLesson),
+        nextLesson.room));
+    }
   }
+
 
   @override
   Widget build(BuildContext context) {
     now = new DateTime.now();
     _lessonCardBackend(now, widget.lessons, widget.isLessonsTomorrow);
     return Container(
-        padding: EdgeInsets.all(5),
-        child: new SizedBox(
-          height: (lessonCardState == 0 || lessonCardState == 3)
-              ? height1
-              : height2,
-          child: new ListView(
-            shrinkWrap: true,
-            reverse: true,
-            children: <Widget>[
-              (nextLesson != null) //Next
-                  ? LessonTile(
-                      context,
-                      false,
-                      I18n.of(context)
-                          .lessonCardNext((minutesUntilNext + 1).toString()),
-                      (lessonCardState == 0)
-                          ? ""
-                          : (thisBreakLength.toString() +
-                              " " +
-                              I18n.of(context).timeMinute),
-                      (nextLesson.count == -1)
-                          ? "+"
-                          : nextLesson.count.toString(),
-                      nextLesson.subject,
-                      nextLesson.isMissed
-                          ? I18n.of(context).substitutionMissed
-                          : nextLesson.teacher,
-                      (nextLesson.isSubstitution
-                          ? 1
-                          : nextLesson.isMissed ? 2 : 0),
-                      (nextLesson.homework != null) ? true : false,
-                      getLessonRangeText(nextLesson),
-                      nextLesson.room)
-                  : Container(),
-              (thisLesson != null) //This
-                  ? LessonTile(
-                      context,
-                      true,
-                      I18n.of(context)
-                          .lessonCardNow((minutesLeftOfThis + 1).toString()),
-                      (prevBreakLength.toString() +
-                          " " +
-                          I18n.of(context).timeMinute),
-                      (thisLesson.count == -1)
-                          ? "+"
-                          : thisLesson.count.toString(),
-                      thisLesson.subject,
-                      thisLesson.isMissed
-                          ? I18n.of(context).substitutionMissed
-                          : thisLesson.teacher,
-                      (thisLesson.isSubstitution
-                          ? 1
-                          : thisLesson.isMissed ? 2 : 0),
-                      (thisLesson.homework != null) ? true : false,
-                      getLessonRangeText(thisLesson),
-                      thisLesson.room)
-                  : Container(),
-              (previousLesson != null) //Previous
-                  ? LessonTile(
-                      context,
-                      false,
-                      I18n.of(context).lessonCardPrevious,
-                      "",
-                      (previousLesson.count == -1)
-                          ? "+"
-                          : previousLesson.count.toString(),
-                      previousLesson.subject,
-                      previousLesson.isMissed
-                          ? I18n.of(context).substitutionMissed
-                          : previousLesson.teacher,
-                      (previousLesson.isSubstitution
-                          ? 1
-                          : previousLesson.isMissed ? 2 : 0),
-                      (previousLesson.homework != null) ? true : false,
-                      getLessonRangeText(previousLesson),
-                      previousLesson.room)
-                  : Container(),
-            ],
-          ),
-        ));
-  }
-}
-
-/*
-      child: new Column(
-        children: <Widget>[
-          (previousLesson != null)
-              ? LessonTile(
-                  context,
-                  false,
-                  I18n.of(context).lessonCardPrevious,
-                  "",
-                  (previousLesson.count == -1) ? "+" : previousLesson.count.toString(),
-                  previousLesson.subject,
-                  previousLesson.isMissed
-                      ? I18n.of(context).substitutionMissed
-                      : previousLesson.teacher,
-                  (previousLesson.isSubstitution
-                      ? 1
-                      : previousLesson.isMissed ? 2 : 0),
-                  (previousLesson.homework != null) ? true : false,
-                  getLessonRangeText(previousLesson),
-                  previousLesson.room)
-              : Container(),
-          (thisLesson != null) //Only show this lesson card during a lesson
-              ? LessonTile(
-                  context,
-                  true,
-                  I18n.of(context)
-                      .lessonCardNow((minutesLeftOfThis + 1).toString()),
-                  (prevBreakLength.toString() +
-                      " " +
-                      I18n.of(context).timeMinute),
-                  (thisLesson.count == -1) ? "+" : thisLesson.count.toString(),
-                  thisLesson.subject,
-                  thisLesson.isMissed
-                      ? I18n.of(context).substitutionMissed
-                      : thisLesson.teacher,
-                  (thisLesson.isSubstitution ? 1 : thisLesson.isMissed ? 2 : 0),
-                  (thisLesson.homework != null) ? true : false,
-                  getLessonRangeText(thisLesson),
-                  thisLesson.room)
-              : Container(),
-          (nextLesson != null)
-              ? LessonTile(
-                  context,
-                  false,
-                  I18n.of(context)
-                      .lessonCardNext((minutesUntilNext + 1).toString()),
-                  (lessonCardState == 0)
-                      ? ""
-                      : (thisBreakLength.toString() +
-                          " " +
-                          I18n.of(context).timeMinute),
-                  (nextLesson.count == -1) ? "+" : nextLesson.count.toString(),
-                  nextLesson.subject,
-                  nextLesson.isMissed
-                      ? I18n.of(context).substitutionMissed
-                      : nextLesson.teacher,
-                  (nextLesson.isSubstitution ? 1 : nextLesson.isMissed ? 2 : 0),
-                  (nextLesson.homework != null) ? true : false,
-                  getLessonRangeText(nextLesson),
-                  nextLesson.room)
-              : Container(),
-        ],
-      ),
+      padding: EdgeInsets.all(5.0),
+      child: new SizedBox(
+          height: 120,
+          child: new Swiper(
+            itemBuilder: (BuildContext context, int index) {
+              return new Container(
+                  margin: EdgeInsets.all(4.0), child: quickLessons[index]);
+            },
+            itemCount: quickLessons.length,
+            viewportFraction: 0.8,
+            scale: 0.9,
+            loop: false,
+            pagination: new SwiperCustomPagination(
+                builder: (BuildContext context, SwiperPluginConfig config) {
+              return new Align(
+                  alignment: Alignment.bottomCenter,
+                  child: DotSwiperPaginationBuilder(
+                          activeColor: globals.isDark ? Colors.white24 : Colors.black26,
+                          color: globals.isDark ? Colors.white12 : Colors.black12,
+                          size: 8.0,
+                          activeSize: 12.0)
+                      .build(context, config));
+            }),
+          )),
     );
   }
 }
-*/
+
 Widget LessonTile(
   //Builder of a single lesson in the 3 or 2 part list
   BuildContext context,

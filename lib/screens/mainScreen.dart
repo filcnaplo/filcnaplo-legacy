@@ -216,14 +216,10 @@ class MainScreenState extends State<MainScreen> {
 	      isLessonsTomorrow = false;
 	    }
 
-	    if (isLessonsToday) feedCards.add(LessonCard(lessonsToday, context, isLessonsTomorrow));
-	    if (isLessonsTomorrow) feedCards.add(TomorrowLessonCard(lessonsTomorrow, context, now));
-
-	    for (Lesson lesson in lessonsTomorrow) {
-	    //  print("\n" + lesson.subject);
-	    }
-	    } catch (e) {
-      print("[E] mainScreen.feedItems()1: " + e.toString());
+      if (isLessonsToday) feedCards.add(LessonCard(lessonsToday, context));
+      if (isLessonsTomorrow) feedCards.add(TomorrowLessonCard(lessonsTomorrow, context, now));
+    } catch (e) {
+      print("[E] mainScreen.feedItems() (1): " + e.toString());
     }
     
 
