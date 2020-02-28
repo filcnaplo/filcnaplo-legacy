@@ -21,6 +21,8 @@ class ChooseLessonDialogState extends State<ChooseLessonDialog> {
   List<String> subjects = [];
   List<Lesson> lessons = [];
   DateTime now = new DateTime.now();
+  String _subject;
+  
 
   Widget build(BuildContext context) {
     if (subjects.isEmpty) _getLessons();
@@ -58,7 +60,23 @@ class ChooseLessonDialogState extends State<ChooseLessonDialog> {
                           });
                         },
                       ),
-                      title: new Text("a legutóbbi"))
+                      title: new Text("a legutóbbi")),
+                  new Container(
+                    child: new DropdownButton<String>(
+                      value: _subject,
+                      items: subjects.map((String subject) {
+                        return DropdownMenuItem<String>(
+                          value: subject,
+                          child: Text(capitalize(subject))
+                          );
+                      }).toList(),
+                    onChanged: (String selectedSubject) {
+                      setState(() {
+                        _subject = selectedSubject;
+                      });
+                    },
+                    ),
+                  )
                 ],
               ),
       ],
