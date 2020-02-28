@@ -78,7 +78,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
                     });
                   },
                 ),
-                new IconButton(icon: Icon(Icons.plus_one), onPressed: _openChooser,)
+                //new IconButton(icon: Icon(Icons.plus_one), onPressed: _openChooser,)
               ],
             ),
             body: new Container(
