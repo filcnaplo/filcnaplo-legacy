@@ -154,7 +154,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
                 new Text(capitalize(I18n.of(context).homeworkUploadTime) +
                     ": " +
                     homework.uploadDate
-                        .substring(0, 16)
+                        .substring(0, 11)
                         .replaceAll("-", '. ')
                         .replaceAll("T", ". ")),
                 new Divider(

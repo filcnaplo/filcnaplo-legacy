@@ -49,9 +49,9 @@ class Homework {
     deadline = json["Hatarido"];
     //isStudentHomeworkEnabled = json["IsTanuloHaziFeladatEnabled"] as String;
     owner = json["user"];
-    if (json["TanuloAltalTorolt"]) {
+    if (json["TanuloAltalTorolt"] == true) {
       deletedBy = 1;
-    } else if (json["TanarAltalTorolt"]) {
+    } else if (json["TanarAltalTorolt"] == true) {
       deletedBy = 2;
     } else {
       deletedBy = 0;

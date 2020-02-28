@@ -64,7 +64,7 @@ Future<List<Lesson>> getLessons(
         to.toIso8601String().substring(0, 10),
         code,
         user.schoolCode);
-
+    
     List<dynamic> ttMap = json.decode(timetableString);
 
     await DBHelper().saveTimetableMap(fromToString(from, to), user, ttMap);
