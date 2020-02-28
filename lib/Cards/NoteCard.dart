@@ -77,7 +77,7 @@ class NoteCard extends StatelessWidget {
         ),
         margin: EdgeInsets.all(6.0),
         color: globals.isColor
-            ? note.isEvent ? Colors.cyan : Colors.lightBlueAccent[700]
+            ? note.isEvent ? Colors.lightBlueAccent[400] : Colors.blue[600]
             : globals.isDark ? Color.fromARGB(255, 25, 25, 25) : Colors.white,
         child: Container(
           child: new Column(
@@ -184,7 +184,7 @@ class NoteCard extends StatelessWidget {
           decoration: new BoxDecoration(
             border: Border.all(
                 color: globals.isColor
-                    ? note.isEvent ? Colors.cyan : Colors.lightBlueAccent[700]
+                    ? note.isEvent ? Colors.lightBlueAccent[400] : Colors.blue[600]
                     : globals.isDark
                         ? Color.fromARGB(255, 25, 25, 25)
                         : Colors.white,

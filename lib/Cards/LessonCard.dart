@@ -1,5 +1,3 @@
-//Contributed by RedyAu
-
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 import 'package:filcnaplo/Datas/Lesson.dart';
@@ -95,7 +93,8 @@ class _LessonCardState extends State<LessonCard> {
       //During a lesson, calculate previous and next break length
       prevBreakLength =
           thisLesson.start.difference(previousLesson.end).inMinutes;
-      if (nextLesson != null) thisBreakLength = nextLesson.start.difference(thisLesson.end).inMinutes;
+      if (nextLesson != null)
+        thisBreakLength = nextLesson.start.difference(thisLesson.end).inMinutes;
       minutesLeftOfThis = thisLesson.end.difference(now).inMinutes;
       minutesUntilNext = nextLesson.start.difference(now).inMinutes;
     } else if (lessonCardState == 3) {
@@ -130,39 +129,27 @@ class _LessonCardState extends State<LessonCard> {
 
     quickLessons = [];
 
-    if (this.previousLesson != null && thisBreakLength != 0) {
-      quickLessons.add(
-        LessonTile(
+    if (previousLesson != null) {
+      quickLessons.add(LessonTile(
           context,
-          false,
           I18n.of(context).lessonCardPrevious,
           "",
-          (previousLesson.count == -1)
-              ? "+"
-              : previousLesson.count.toString(),
+          (previousLesson.count == -1) ? "+" : previousLesson.count.toString(),
           previousLesson.subject,
           previousLesson.isMissed
               ? I18n.of(context).substitutionMissed
               : previousLesson.teacher,
-          (previousLesson.isSubstitution
-              ? 1
-              : previousLesson.isMissed ? 2 : 0),
+          (previousLesson.isSubstitution ? 1 : previousLesson.isMissed ? 2 : 0),
           (previousLesson.homework != null) ? true : false,
           getLessonRangeText(previousLesson),
           previousLesson.room));
     }
 
     if (thisLesson != null) {
-      quickLessons.add(
-        LessonTile(
+      quickLessons.add(LessonTile(
           context,
-          true,
           I18n.of(context).lessonCardNow((minutesLeftOfThis + 1).toString()),
-          (prevBreakLength == 0)
-              ? ""
-              : (prevBreakLength.toString() +
-                  " " +
-                  I18n.of(context).timeMinute),
+          (prevBreakLength == 0) ? "" : (prevBreakLength.toString() + " "),
           (thisLesson.count == -1) ? "+" : thisLesson.count.toString(),
           thisLesson.subject,
           thisLesson.isMissed
@@ -175,66 +162,66 @@ class _LessonCardState extends State<LessonCard> {
     }
 
     if (nextLesson != null) {
-      quickLessons.add(
-        LessonTile(
-        context,
-        false,
-        I18n.of(context).lessonCardNext((minutesUntilNext + 1).toString()),
-        (lessonCardState == 0 && thisBreakLength == 0)
-            ? ""
-            : (thisBreakLength.toString() +
-                " " +
-                I18n.of(context).timeMinute),
-        (nextLesson.count == -1) ? "+" : nextLesson.count.toString(),
-        nextLesson.subject,
-        nextLesson.isMissed
-            ? I18n.of(context).substitutionMissed
-            : nextLesson.teacher,
-        (nextLesson.isSubstitution ? 1 : nextLesson.isMissed ? 2 : 0),
-        (nextLesson.homework != null) ? true : false,
-        getLessonRangeText(nextLesson),
-        nextLesson.room));
+      quickLessons.add(LessonTile(
+          context,
+          I18n.of(context).lessonCardNext((minutesUntilNext + 1).toString()),
+          (lessonCardState == 0 && thisBreakLength == 0)
+              ? ""
+              : (thisBreakLength.toString() + " "),
+          (nextLesson.count == -1) ? "+" : nextLesson.count.toString(),
+          nextLesson.subject,
+          nextLesson.isMissed
+              ? I18n.of(context).substitutionMissed
+              : nextLesson.teacher,
+          (nextLesson.isSubstitution ? 1 : nextLesson.isMissed ? 2 : 0),
+          (nextLesson.homework != null) ? true : false,
+          getLessonRangeText(nextLesson),
+          nextLesson.room));
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
     now = new DateTime.now();
     _lessonCardBackend(now, widget.lessons, widget.isLessonsTomorrow);
-    return Container(
-      padding: EdgeInsets.all(5.0),
-      child: new SizedBox(
-          height: 120,
-          child: new Swiper(
-            itemBuilder: (BuildContext context, int index) {
-              return new Container(
-                  margin: EdgeInsets.all(4.0), child: quickLessons[index]);
-            },
-            itemCount: quickLessons.length,
-            viewportFraction: 0.8,
-            scale: 0.9,
-            loop: false,
-            pagination: new SwiperCustomPagination(
-                builder: (BuildContext context, SwiperPluginConfig config) {
-              return new Align(
-                  alignment: Alignment.bottomCenter,
-                  child: DotSwiperPaginationBuilder(
-                          activeColor: globals.isDark ? Colors.white24 : Colors.black26,
-                          color: globals.isDark ? Colors.white12 : Colors.black12,
-                          size: 8.0,
-                          activeSize: 12.0)
-                      .build(context, config));
-            }),
-          )),
-    );
+    return (quickLessons.length > 0)
+        ? Container(
+            padding: EdgeInsets.all(5.0),
+            child: new SizedBox(
+                height: 125,
+                child: new Swiper(
+                  itemBuilder: (BuildContext context, int index) {
+                    return new Container(
+                        margin: EdgeInsets.all(4.0),
+                        child: quickLessons[index]);
+                  },
+                  itemCount: quickLessons.length,
+                  viewportFraction: 0.95,
+                  scale: 0.9,
+                  loop: false,
+                  pagination: new SwiperCustomPagination(builder:
+                      (BuildContext context, SwiperPluginConfig config) {
+                    return new Align(
+                        alignment: Alignment.bottomCenter,
+                        child: DotSwiperPaginationBuilder(
+                                activeColor: globals.isDark
+                                    ? Colors.white24
+                                    : Colors.black26,
+                                color: globals.isDark
+                                    ? Colors.white12
+                                    : Colors.black12,
+                                size: 8.0,
+                                activeSize: 12.0)
+                            .build(context, config));
+                  }),
+                )),
+          )
+        : Container();
   }
 }
 
 Widget LessonTile(
-  //Builder of a single lesson in the 3 or 2 part list
   BuildContext context,
-  bool isThis,
   String tabText,
   String breakLength,
   String lessonNumber,
@@ -246,81 +233,112 @@ Widget LessonTile(
   String room,
 ) {
   return Container(
-    child: new Column(
-      children: <Widget>[
-        new SizedBox(height: 3),
-        new Row(
+      child: new Row(children: <Widget>[
+    new Expanded(
+      child: new Container(
+        child: new Column(
           children: <Widget>[
-            new Flexible(
-              child: new Row(
-                children: <Widget>[
-                  new SizedBox(width: 20),
-                  new Container(
-                    child: new Text(tabText,
-                        style: new TextStyle(
-                            color: (isThis !=
-                                    globals
-                                        .isDark) //Very complicated, don't question it. Explanatory sheet at issue #46
-                                ? Colors.white
-                                : Colors.black)),
-                    padding: EdgeInsets.fromLTRB(8, 1, 8, 0),
-                    decoration: new BoxDecoration(
-                        color: isThis
-                            ? globals.isDark
-                                ? Colors.grey[350]
-                                : Colors.grey[900]
-                            : globals.isDark
-                                ? Colors.grey[600]
-                                : Colors.grey[400],
-                        boxShadow: [
-                          new BoxShadow(blurRadius: 3, spreadRadius: -2)
-                        ],
-                        borderRadius: new BorderRadius.only(
-                            topLeft: Radius.circular(4),
-                            topRight: Radius.circular(4))),
-                  ),
-                ],
-              ),
-            ),
-            Transform.translate(
-                offset: Offset(-7, -3), child: new Text(breakLength)),
-          ],
-        ),
-        Container(
-          child: new ListTile(
-            leading: new Text(lessonNumber,
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-            title: new Text(capitalize(lessonSubject),
-                style: TextStyle(fontWeight: FontWeight.bold)),
-            subtitle: new Text(lessonSubtitle),
-            trailing: new Row(
-              mainAxisSize: MainAxisSize.min,
+            new Row(
               children: <Widget>[
-                hasHomework
-                    ? new Container(
-                        child: new Icon(Icons.home), padding: EdgeInsets.all(5))
-                    : new Container(),
-                new Column(
-                  children: <Widget>[new Text(startTime), new Text(room)],
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                new Flexible(
+                  child: new Row(
+                    children: <Widget>[
+                      new Container(
+                        child: new Text(tabText,
+                            style: new TextStyle(
+                                color: globals.isDark
+                                    ? Colors.white
+                                    : Colors.black)),
+                        padding: EdgeInsets.fromLTRB(8, 1, 8, 0),
+                        decoration: new BoxDecoration(
+                            color: globals.isDark
+                                ? Color.fromARGB(255, 25, 25, 25)
+                                : Colors.grey[350],
+                            boxShadow: [
+                              new BoxShadow(blurRadius: 3, spreadRadius: -2)
+                            ],
+                            borderRadius: new BorderRadius.only(
+                                topLeft: Radius.circular(4),
+                                topRight: Radius.circular(4))),
+                      ),
+                    ],
+                  ),
                 ),
-                //new IconButton(icon: Icon(Icons.home), onPressed: null)
               ],
             ),
-          ),
-          decoration: new BoxDecoration(
-              /*color: isThis
-              ? Theme.of(context).
-              :,*/
-              color: isThis
-                  ? globals.isDark ? Colors.grey[700] : Colors.grey[350]
-                  : globals.isDark ? Colors.grey[800] : Colors.white,
-              borderRadius: new BorderRadius.all(Radius.circular(6)),
-              boxShadow: [new BoxShadow(blurRadius: 3, spreadRadius: -2)]),
+            Container(
+              child: Container(
+                child: new ListTile(
+                  leading: new Text(lessonNumber,
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+                  title: new Text(capitalize(lessonSubject),
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  subtitle: new Text(
+                    lessonSubtitle,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    softWrap: false,
+                  ),
+                  trailing: new Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      hasHomework
+                          ? new Container(
+                              child: new Icon(Icons.home),
+                              padding: EdgeInsets.all(5))
+                          : new Container(),
+                      new Column(
+                        children: <Widget>[new Text(startTime), new Text(room)],
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                      ),
+                    ],
+                  ),
+                ),
+                decoration: new BoxDecoration(
+                    color: globals.isDark ? Colors.grey[700] : Colors.grey[100],
+                    borderRadius: new BorderRadius.all(Radius.circular(6)),
+                    boxShadow: [
+                      new BoxShadow(blurRadius: 3, spreadRadius: -2)
+                    ]),
+              ),
+              decoration: new BoxDecoration(
+                color: globals.isDark
+                    ? Color.fromARGB(255, 25, 25, 25)
+                    : Colors.grey[350],
+                borderRadius: new BorderRadius.only(
+                    topRight: Radius.circular(6),
+                    bottomLeft: Radius.circular(6),
+                    bottomRight: Radius.circular(6)),
+              ),
+            ),
+          ],
         ),
-        new SizedBox(height: 3),
-      ],
+      ),
     ),
-  );
+    (breakLength != "")
+        ? Container(
+            child: new Text(
+              breakLength,
+              style: TextStyle(
+                  fontSize: 18.0,
+                  color: globals.isDark ? Colors.white : Colors.black),
+              textAlign: TextAlign.center,
+            ),
+            width: 40.0,
+            height: 35.0,
+            margin: EdgeInsets.only(left: 8.0),
+            decoration: new BoxDecoration(
+              color: globals.isDark ? Colors.grey[600] : Colors.grey[200],
+              shape: BoxShape.circle,
+              boxShadow: [
+                new BoxShadow(blurRadius: 3, spreadRadius: -2)
+              ]
+            ),
+            padding: EdgeInsets.all(4.0),
+            alignment: new Alignment(0, 0),
+          )
+        : Container(),
+  ]));
 }
