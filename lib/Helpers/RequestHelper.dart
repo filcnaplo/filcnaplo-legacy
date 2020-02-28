@@ -220,29 +220,33 @@ class RequestHelper {
 
     String token = await getBearerToken(user, true);
     try {
-        http.Response response = await http.post(
-            "https://" +
-                user.schoolCode +
-                ".e-kreta.hu/mapi/api/v1/HaziFeladat/DeleteTanuloHaziFeladat/$id",
-            headers: {
-              "HOST": user.schoolCode + ".e-kreta.hu",
-              "Authorization": "Bearer " + token,
-              "Content-Type": "application/json; charset=utf-8",
-              "User-Agent": globals.userAgent
-            });
-        if (response.statusCode == 200) {
-          showSuccess(I18n.of(globals.context).successHomeworkDelete);
-          return true;
-        } else {
-          showError(I18n.of(globals.context).errorNetwork);
-          return false;
-        }
-      } catch (e) {
-        print("[E] RequestHelper.deleteHomework(): " + e.toString());
-        showError(e.toString()); //todo
+      http.Response response = await http.delete(
+          "https://" +
+              user.schoolCode +
+              ".e-kreta.hu/mapi/api/v1/HaziFeladat/DeleteTanuloHaziFeladat/" +
+              id.toString(),
+          headers: {
+            "HOST": user.schoolCode + ".e-kreta.hu",
+            "Authorization": "Bearer " + token,
+            "Accept": "application/json",
+            "Content-Type": "application/json; charset=utf-8",
+            "User-Agent": globals.userAgent
+          });
+      if (response.statusCode == 200) {
+        showSuccess(I18n.of(globals.context).successHomeworkDelete);
+        return true;
+      } else {
+        print(response.statusCode);
+        print(id.toString());
+        showError(I18n.of(globals.context).errorNetwork);
         return false;
       }
-    } 
+    } catch (e) {
+      print("[E] RequestHelper.deleteHomework(): " + e.toString());
+      showError(e.toString()); //todo
+      return false;
+    }
+  }
 
   Future<String> getBearerToken(User user, bool showErrors) async {
     String body = "institute_code=${user.schoolCode}&"
