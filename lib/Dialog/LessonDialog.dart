@@ -40,7 +40,7 @@ class HomeworkDialogState extends State<HomeworkDialog> {
                 ": " +
                 getLessonEndText(widget.lesson)),
             widget.lesson.isMissed
-                ? new Text(I18n.of(context).state + widget.lesson.stateName)
+                ? new Text(capitalize(I18n.of(context).state) + ": " + widget.lesson.stateName)
                 : new Container(),
             (widget.lesson.theme != "" && widget.lesson.theme != null)
                 ? new Text(
@@ -74,9 +74,9 @@ class HomeworkDialogState extends State<HomeworkDialog> {
         ),
       ),
       actions: <Widget>[
-        widget.lesson.homeworkEnabled
+        (widget.lesson.homeworkEnabled && !widget.lesson.isMissed)
             ? new FlatButton(
-                child: new Text(I18n.of(context).homeworkAdd.toUpperCase()),
+                child: Icon(Icons.home),
                 onPressed: () {
                   Navigator.of(context).pop();
                   return showDialog(
