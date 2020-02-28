@@ -223,7 +223,7 @@ class RequestHelper {
         http.Response response = await http.post(
             "https://" +
                 user.schoolCode +
-                ".e-kreta.hu/mapi/api/v1/HaziFeladat/CreateTanuloHaziFeladat",
+                ".e-kreta.hu/mapi/api/v1/HaziFeladat/DeleteTanuloHaziFeladat/$id",
             headers: {
               "HOST": user.schoolCode + ".e-kreta.hu",
               "Authorization": "Bearer " + token,
