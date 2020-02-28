@@ -40,7 +40,9 @@ class HomeworkDialogState extends State<HomeworkDialog> {
                 ": " +
                 getLessonEndText(widget.lesson)),
             widget.lesson.isMissed
-                ? new Text(capitalize(I18n.of(context).state) + ": " + widget.lesson.stateName)
+                ? new Text(capitalize(I18n.of(context).state) +
+                    ": " +
+                    widget.lesson.stateName)
                 : new Container(),
             (widget.lesson.theme != "" && widget.lesson.theme != null)
                 ? new Text(
@@ -54,22 +56,36 @@ class HomeworkDialogState extends State<HomeworkDialog> {
                     color: Colors.blueGrey,
                   )
                 : Container(),
-            widget.lesson.homework != null 
-            ? Column(
-              children: globals.currentHomeworks.isEmpty
-                  ? <Widget> [Container(child: CircularProgressIndicator(), padding: EdgeInsets.all(20),)]
-                  : globals.currentHomeworks.map<Widget>((Homework homework) {
-                      return ListTile(
-                        title:
-                            Html(data: HtmlUnescape().convert(homework.text)),
-                        subtitle: Text(homework.uploader +
-                            " | " +
-                            homework.uploadDate.substring(0,
-                                10)), //, style: TextStyle(color: homework.byTeacher ? Colors.green:null),),
-                      );
-                    }).toList(),
-            )
-            : Container(),
+            widget.lesson.homework != null
+                ? Column(
+                    children: globals.currentHomeworks.isEmpty
+                        ? <Widget>[
+                            Container(
+                              child: CircularProgressIndicator(),
+                              padding: EdgeInsets.all(20),
+                            )
+                          ]
+                        : globals.currentHomeworks
+                            .map<Widget>((Homework homework) {
+                            return ListTile(
+                              title: Html(
+                                  data: HtmlUnescape().convert(homework.text)),
+                              subtitle: Row(children: [
+                                Text(
+                                  homework.uploader,
+                                  style: TextStyle(
+                                      color: homework.byTeacher
+                                          ? Colors.green
+                                          : Colors.grey),
+                                ),
+                                Text(
+                                  " | " + homework.uploadDate.substring(0, 10),
+                                ),
+                              ]),
+                            );
+                          }).toList(),
+                  )
+                : Container(),
           ],
         ),
       ),

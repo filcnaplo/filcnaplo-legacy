@@ -204,7 +204,6 @@ class AccountsScreenState extends State<AccountsScreen> {
                   globals.accounts
                       .removeWhere((Account a) => a.user.id == user.id);
                   Navigator.of(context).pop();
-                  Navigator.pop(context); // close the drawer
                   Navigator.pushReplacementNamed(context, "/accounts");
                 });
               },

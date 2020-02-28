@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:filcnaplo/Dialog/ChooseLessonDialog.dart';
+import 'package:filcnaplo/Helpers/RequestHelper.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -126,6 +127,10 @@ class HomeworkScreenState extends State<HomeworkScreen> {
   }
 
   Future<Null> homeworksDialog(Homework homework) async {
+    if (homework.deletedBy > 0) {
+      homework.text = "<strike>${homework.text}</strike>";
+    }
+
     return showDialog<Null>(
       context: context,
       barrierDismissible: true, // user must tap button!
@@ -149,7 +154,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
                 new Text(capitalize(I18n.of(context).homeworkUploadTime) +
                     ": " +
                     homework.uploadDate
-                        .substring(0, 16)
+                        .substring(0, 11)
                         .replaceAll("-", '. ')
                         .replaceAll("T", ". ")),
                 new Divider(
@@ -163,6 +168,12 @@ class HomeworkScreenState extends State<HomeworkScreen> {
             ),
           ),
           actions: <Widget>[
+            new FlatButton(
+              child: Icon(Icons.delete),
+              onPressed: () {
+                RequestHelper().deleteHomework(homework.id, globals.selectedUser);
+              },
+            ),
             new FlatButton(
               child: new Text(I18n.of(context).dialogOk.toUpperCase()),
               onPressed: () {

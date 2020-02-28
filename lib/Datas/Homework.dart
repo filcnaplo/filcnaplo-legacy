@@ -13,6 +13,7 @@ class Homework {
   String deadline;
   String isStudentHomeworkEnabled;
   User owner;
+  int deletedBy;
 
   Homework(
       this.id,
@@ -25,7 +26,8 @@ class Homework {
       this.uploadDate,
       this.deadline,
       this.isStudentHomeworkEnabled,
-      this.owner);
+      this.owner,
+      this.deletedBy);
 
   Homework.fromJson(Map json) {
     id = json["Id"];
@@ -34,7 +36,11 @@ class Homework {
     if (subject == null) subject = json["subject"];
     uploader = json["Rogzito"];
     if (uploader == null) uploader = json["TanuloNev"];
-    byTeacher = json["IsTanarRogzitette"];
+    if (json["isTanarRogzitette"] == null) {
+      byTeacher = false;
+    } else {
+      byTeacher = json["IsTanarRogzitette"];
+    }
     lessonCount = json["Oraszam"];
     lessonId = json["TanitasiOraId"];
     text = json["Szoveg"];
@@ -43,5 +49,12 @@ class Homework {
     deadline = json["Hatarido"];
     //isStudentHomeworkEnabled = json["IsTanuloHaziFeladatEnabled"] as String;
     owner = json["user"];
+    if (json["TanuloAltalTorolt"] == true) {
+      deletedBy = 1;
+    } else if (json["TanarAltalTorolt"] == true) {
+      deletedBy = 2;
+    } else {
+      deletedBy = 0;
+    }
   }
 }
