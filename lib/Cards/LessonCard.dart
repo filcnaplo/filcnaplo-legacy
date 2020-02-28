@@ -89,7 +89,7 @@ class _LessonCardState extends State<LessonCard> {
       //During a lesson, calculate previous and next break length
       if (previousLesson != null) prevBreakLength =
           thisLesson.start.difference(previousLesson.end).inMinutes;
-      thisBreakLength = nextLesson.start.difference(thisLesson.end).inMinutes;
+      if (nextLesson != null) thisBreakLength = nextLesson.start.difference(thisLesson.end).inMinutes;
       minutesLeftOfThis = thisLesson.end.difference(now).inMinutes;
       if (nextLesson != null) minutesUntilNext = nextLesson.start.difference(now).inMinutes;
     } else if (lessonCardState == 2) {
