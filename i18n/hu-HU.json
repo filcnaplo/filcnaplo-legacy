@@ -260,7 +260,8 @@
         "notifications": "Értesítések",
         "nextLesson": "Következő óra",
         "syncFrequency": "Szinkronizálás gyakorisága: {n}",
-        "language": "Nyelv (Sprache, Language)"
+        "language": "Nyelv (Sprache, Language)",
+        "bugreport": "hibajelentés" 
     },
 
     "notification": {

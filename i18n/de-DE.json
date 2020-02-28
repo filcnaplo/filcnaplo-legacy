@@ -260,7 +260,8 @@
         "notifications": "Push-Benachrichtigung",
         "nextLesson": "Nächster Stunde",
         "syncFrequency": "Häufigkeit der Synchronisierung: Alle {n} Minuten",
-        "language": "Sprache (Nyelv, Language)"
+        "language": "Sprache (Nyelv, Language)",
+        "bugreport": "Problembericht"
     },
 
     "notification": {

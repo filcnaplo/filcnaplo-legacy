@@ -15,6 +15,7 @@ import 'package:filcnaplo/Helpers/RequestHelper.dart';
 import 'package:filcnaplo/Utils/ColorManager.dart';
 import 'package:filcnaplo/Utils/StringFormatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(new MaterialApp(home: new SettingsScreen()));
@@ -403,27 +404,49 @@ class SettingsScreenState extends State<SettingsScreen> {
                         leading: new Icon(IconData(0xf1e7,
                             fontFamily: "Material Design Icons")),
                       ),
+                      new Divider(color: globals.isDark ? Colors.grey : Colors.black54),
                       !Platform.isIOS
                           ? new ListTile(
                               leading: new Icon(Icons.import_export),
-                              title: new Text(I18n.of(context).export, style: TextStyle(fontSize: 20.0)),
+                              title: new Text(
+                                  I18n.of(context).export.toUpperCase(),
+                                  style: TextStyle(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.bold)),
                               onTap: () {
                                 Navigator.pushNamed(context, "/export");
                               },
                             )
                           : Container(),
-                      ListTile(
-                        title: new Text(
-                          capitalize(I18n.of(context).appVersion) + ": " + globals.version,
-                          style: TextStyle(fontSize: 15.0),
-                        )
-                     )
+                      new ListTile(
+                        leading: new Icon(Icons.bug_report),
+                        title: new Text(I18n.of(context).settingsBugreport.toUpperCase(),
+                            style: TextStyle(
+                                fontSize: 15.0, fontWeight: FontWeight.bold)),
+                        onTap: _openBugReport,
+                      ),
 
+                      new ListTile(
+                          title: new Text(
+                        capitalize(I18n.of(context).appVersion) +
+                            ": " +
+                            globals.version,
+                        style: TextStyle(fontSize: 15.0),
+                        textAlign: TextAlign.right,
+                      ))
                     ],
                     padding: EdgeInsets.all(10),
                   )
                 : new Container(),
           ),
         ));
+  }
+  _openBugReport() async {
+    const url = "https://github.com/filcnaplo/filcnaplo/issues/new";
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

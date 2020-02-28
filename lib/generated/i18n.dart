@@ -368,6 +368,8 @@ class I18n implements WidgetsLocalizations {
   String settingsSyncFrequency(String n) => "Szinkronizálás gyakorisága: ${n}";
   /// "Nyelv (Sprache, Language)"
   String get settingsLanguage => "Nyelv (Sprache, Language)";
+  /// "hibajelentés"
+  String get settingsBugreport => "hibajelentés";
   /// "Nem sikerült bekapcsolni az értesítéseket"
   String get notificationFailed => "Nem sikerült bekapcsolni az értesítéseket";
   /// "${mins} percenként egyszer frissíthetsz!"
@@ -900,6 +902,9 @@ class _I18n_en_US extends I18n {
   /// "Language (Nyelv, Sprache)"
   @override
   String get settingsLanguage => "Language (Nyelv, Sprache)";
+  /// "bug report"
+  @override
+  String get settingsBugreport => "bug report";
   /// "Failed to turn on notifications, please try again!"
   @override
   String get notificationFailed => "Failed to turn on notifications, please try again!";
@@ -1436,6 +1441,9 @@ class _I18n_de_DE extends I18n {
   /// "Sprache (Nyelv, Language)"
   @override
   String get settingsLanguage => "Sprache (Nyelv, Language)";
+  /// "Problembericht"
+  @override
+  String get settingsBugreport => "Problembericht";
   /// "Benachrichtigungen konnten nich eingeschaltet werden"
   @override
   String get notificationFailed => "Benachrichtigungen konnten nich eingeschaltet werden";

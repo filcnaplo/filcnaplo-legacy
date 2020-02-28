@@ -260,7 +260,8 @@
         "notifications": "Notifications",
         "nextLesson": "Next class",
         "syncFrequency": "Sync frequency: {n}",
-        "language": "Language (Nyelv, Sprache)"
+        "language": "Language (Nyelv, Sprache)",
+        "bugreport": "bug report"
     },
 
     "notification": {
