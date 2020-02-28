@@ -1,3 +1,6 @@
+import 'dart:html';
+
+import 'package:filcnaplo/Dialog/ChooseLessonDialog.dart';
 import 'package:filcnaplo/Helpers/RequestHelper.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
