@@ -4,6 +4,7 @@ import 'package:filcnaplo/Datas/Lesson.dart';
 import 'package:filcnaplo/Utils/StringFormatter.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:filcnaplo/Dialog/LessonDialog.dart';
 
 import 'dart:async';
 
@@ -132,6 +133,7 @@ class _LessonCardState extends State<LessonCard> {
     if (previousLesson != null) {
       quickLessons.add(LessonTile(
           context,
+          previousLesson,
           I18n.of(context).lessonCardPrevious,
           "",
           (previousLesson.count == -1) ? "+" : previousLesson.count.toString(),
@@ -148,6 +150,7 @@ class _LessonCardState extends State<LessonCard> {
     if (thisLesson != null) {
       quickLessons.add(LessonTile(
           context,
+          thisLesson,
           I18n.of(context).lessonCardNow((minutesLeftOfThis + 1).toString()),
           (prevBreakLength == 0) ? "" : (prevBreakLength.toString() + " "),
           (thisLesson.count == -1) ? "+" : thisLesson.count.toString(),
@@ -164,6 +167,7 @@ class _LessonCardState extends State<LessonCard> {
     if (nextLesson != null) {
       quickLessons.add(LessonTile(
           context,
+          nextLesson,
           I18n.of(context).lessonCardNext((minutesUntilNext + 1).toString()),
           (lessonCardState == 0 && thisBreakLength == 0)
               ? ""
@@ -218,127 +222,145 @@ class _LessonCardState extends State<LessonCard> {
           )
         : Container();
   }
-}
 
-Widget LessonTile(
-  BuildContext context,
-  String tabText,
-  String breakLength,
-  String lessonNumber,
-  String lessonSubject,
-  String lessonSubtitle,
-  int lessonState, //0: normally held, 1: substituted, 2: not held
-  bool hasHomework,
-  String startTime,
-  String room,
-) {
-  return Container(
-      child: new Row(children: <Widget>[
-    new Expanded(
-      child: new Container(
-        child: new Column(
-          children: <Widget>[
-            new Row(
+  Widget LessonTile(
+    BuildContext context,
+    Lesson lesson,
+    String tabText,
+    String breakLength,
+    String lessonNumber,
+    String lessonSubject,
+    String lessonSubtitle,
+    int lessonState, //0: normally held, 1: substituted, 2: not held
+    bool hasHomework,
+    String startTime,
+    String room,
+  ) {
+    return Container(
+        child: new Row(children: <Widget>[
+          new Expanded(
+          child: new Container(
+            child: new Column(
               children: <Widget>[
-                new Flexible(
-                  child: new Row(
-                    children: <Widget>[
-                      new Container(
-                        child: new Text(tabText,
-                            style: new TextStyle(
+                new Row(
+                  children: <Widget>[
+                    new Flexible(
+                      child: new Row(
+                        children: <Widget>[
+                          new Container(
+                            child: new Text(tabText,
+                                style: new TextStyle(
+                                    color: globals.isDark
+                                        ? Colors.white
+                                        : Colors.black)),
+                            padding: EdgeInsets.fromLTRB(8, 1, 8, 0),
+                            decoration: new BoxDecoration(
                                 color: globals.isDark
-                                    ? Colors.white
-                                    : Colors.black)),
-                        padding: EdgeInsets.fromLTRB(8, 1, 8, 0),
-                        decoration: new BoxDecoration(
-                            color: globals.isDark
-                                ? Color.fromARGB(255, 25, 25, 25)
-                                : Colors.grey[350],
-                            boxShadow: [
-                              new BoxShadow(blurRadius: 3, spreadRadius: -2)
-                            ],
-                            borderRadius: new BorderRadius.only(
-                                topLeft: Radius.circular(4),
-                                topRight: Radius.circular(4))),
+                                    ? Color.fromARGB(255, 25, 25, 25)
+                                    : Colors.grey[350],
+                                boxShadow: [
+                                  new BoxShadow(blurRadius: 3, spreadRadius: -2)
+                                ],
+                                borderRadius: new BorderRadius.only(
+                                    topLeft: Radius.circular(4),
+                                    topRight: Radius.circular(4))),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
+                  ],
+                ),
+                Container(
+                  child: 
+                new GestureDetector(
+                  onTap: () {
+                    _lessonDialog(lesson);
+                  },
+                  child: Container(
+                    child: new ListTile(
+                      leading: new Text(lessonNumber,
+                          style: TextStyle(
+                              fontSize: 30, fontWeight: FontWeight.bold)),
+                      title: new Text(capitalize(lessonSubject),
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      subtitle: new Text(
+                        lessonSubtitle,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: false,
+                      ),
+                      trailing: new Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          hasHomework
+                              ? new Container(
+                                  child: new Icon(Icons.home),
+                                  padding: EdgeInsets.all(5))
+                              : new Container(),
+                          new Column(
+                            children: <Widget>[
+                              new Text(startTime),
+                              new Text(room)
+                            ],
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                          ),
+                        ],
+                      ),
+                    ),
+                    decoration: new BoxDecoration(
+                        color:
+                            globals.isDark ? Colors.grey[700] : Colors.grey[100],
+                        borderRadius: new BorderRadius.all(Radius.circular(6)),
+                        boxShadow: [
+                          new BoxShadow(blurRadius: 3, spreadRadius: -2)
+                        ]),
+                  ),),
+                  decoration: new BoxDecoration(
+                    color: globals.isDark
+                        ? Color.fromARGB(255, 25, 25, 25)
+                        : Colors.grey[350],
+                    borderRadius: new BorderRadius.only(
+                        topRight: Radius.circular(6),
+                        bottomLeft: Radius.circular(6),
+                        bottomRight: Radius.circular(6)),
                   ),
                 ),
               ],
             ),
-            Container(
-              child: Container(
-                child: new ListTile(
-                  leading: new Text(lessonNumber,
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-                  title: new Text(capitalize(lessonSubject),
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                  subtitle: new Text(
-                    lessonSubtitle,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    softWrap: false,
-                  ),
-                  trailing: new Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      hasHomework
-                          ? new Container(
-                              child: new Icon(Icons.home),
-                              padding: EdgeInsets.all(5))
-                          : new Container(),
-                      new Column(
-                        children: <Widget>[new Text(startTime), new Text(room)],
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                      ),
-                    ],
-                  ),
-                ),
-                decoration: new BoxDecoration(
-                    color: globals.isDark ? Colors.grey[700] : Colors.grey[100],
-                    borderRadius: new BorderRadius.all(Radius.circular(6)),
-                    boxShadow: [
-                      new BoxShadow(blurRadius: 3, spreadRadius: -2)
-                    ]),
-              ),
-              decoration: new BoxDecoration(
-                color: globals.isDark
-                    ? Color.fromARGB(255, 25, 25, 25)
-                    : Colors.grey[350],
-                borderRadius: new BorderRadius.only(
-                    topRight: Radius.circular(6),
-                    bottomLeft: Radius.circular(6),
-                    bottomRight: Radius.circular(6)),
-              ),
-            ),
-          ],
-        ),
+          ),
       ),
-    ),
-    (breakLength != "")
-        ? Container(
-            child: new Text(
-              breakLength,
-              style: TextStyle(
-                  fontSize: 18.0,
-                  color: globals.isDark ? Colors.white : Colors.black),
-              textAlign: TextAlign.center,
-            ),
-            width: 40.0,
-            height: 35.0,
-            margin: EdgeInsets.only(left: 8.0),
-            decoration: new BoxDecoration(
-              color: globals.isDark ? Colors.grey[600] : Colors.grey[200],
-              shape: BoxShape.circle,
-              boxShadow: [
-                new BoxShadow(blurRadius: 3, spreadRadius: -2)
-              ]
-            ),
-            padding: EdgeInsets.all(4.0),
-            alignment: new Alignment(0, 0),
-          )
-        : Container(),
-  ]));
+      (breakLength != "")
+          ? Container(
+              child: new Text(
+                breakLength,
+                style: TextStyle(
+                    fontSize: 18.0,
+                    color: globals.isDark ? Colors.white : Colors.black),
+                textAlign: TextAlign.center,
+              ),
+              width: 40.0,
+              height: 35.0,
+              margin: EdgeInsets.only(left: 8.0),
+              decoration: new BoxDecoration(
+                  color: globals.isDark ? Colors.grey[600] : Colors.grey[200],
+                  shape: BoxShape.circle,
+                  boxShadow: [new BoxShadow(blurRadius: 3, spreadRadius: -2)]),
+              padding: EdgeInsets.all(4.0),
+              alignment: new Alignment(0, 0),
+            )
+          : Container(),
+    ]));
+  }
+
+  Future<Null> _lessonDialog(Lesson lesson) async {
+    return showDialog(
+          barrierDismissible: true,
+          context: context,
+          builder: (BuildContext context) {
+            return new HomeworkDialog(lesson);
+          },
+        ) ??
+        false;
+  }
 }

@@ -180,7 +180,7 @@ class RequestHelper {
       "OraType": lesson.calendarOraType,
       "HataridoUtc":
           dateToHuman(lesson.date.add(Duration(days: 2))) + "23:00:00",
-      "FeladatSzovege": homework
+      "FeladatSzovege": homework.replaceAll("\n", "&lt;br/&gt;")
     };
     String token = await getBearerToken(user, true);
     String jsonBody = json.encode(body);
