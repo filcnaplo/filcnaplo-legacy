@@ -39,9 +39,11 @@ class _LessonCardState extends State<LessonCard> {
   int minutesLeftOfThis;
 
   int lessonCardState;
+  bool isInit;
 
   @override
   void setState(fn) {
+    isInit = false;
     if (mounted) {
       super.setState(fn);
     }
@@ -50,6 +52,7 @@ class _LessonCardState extends State<LessonCard> {
   @override
   void initState() {
     super.initState();
+    isInit = true;
 
     _now = DateTime.now().second.toString();
 
@@ -100,9 +103,9 @@ class _LessonCardState extends State<LessonCard> {
       minutesUntilNext = nextLesson.start.difference(now).inMinutes;
     } else if (lessonCardState == 3) {
       //During a break, calculate its length.
-      prevBreakLength = 0;
-      thisBreakLength =
+      prevBreakLength =
           nextLesson.start.difference(previousLesson.end).inMinutes;
+      thisBreakLength = 0;
       minutesUntilNext = nextLesson.start.difference(now).inMinutes;
     } else if (lessonCardState == 4) {
       //During the last lesson
@@ -135,7 +138,7 @@ class _LessonCardState extends State<LessonCard> {
           context,
           previousLesson,
           I18n.of(context).lessonCardPrevious,
-          "",
+          (prevBreakLength == 0) ? "" : prevBreakLength.toString(),
           (previousLesson.count == -1) ? "+" : previousLesson.count.toString(),
           previousLesson.subject,
           previousLesson.isMissed
@@ -152,7 +155,9 @@ class _LessonCardState extends State<LessonCard> {
           context,
           thisLesson,
           I18n.of(context).lessonCardNow((minutesLeftOfThis + 1).toString()),
-          (prevBreakLength == 0) ? "" : (prevBreakLength.toString() + " "),
+          (thisBreakLength == 0)
+              ? ""
+              : thisBreakLength.toString(),
           (thisLesson.count == -1) ? "+" : thisLesson.count.toString(),
           thisLesson.subject,
           thisLesson.isMissed
@@ -169,9 +174,7 @@ class _LessonCardState extends State<LessonCard> {
           context,
           nextLesson,
           I18n.of(context).lessonCardNext((minutesUntilNext + 1).toString()),
-          (lessonCardState == 0 && thisBreakLength == 0)
-              ? ""
-              : (thisBreakLength.toString() + " "),
+          "",
           (nextLesson.count == -1) ? "+" : nextLesson.count.toString(),
           nextLesson.subject,
           nextLesson.isMissed
@@ -203,6 +206,7 @@ class _LessonCardState extends State<LessonCard> {
                   viewportFraction: 0.95,
                   scale: 0.9,
                   loop: false,
+                  index: isInit ? 1 : null,
                   pagination: new SwiperCustomPagination(builder:
                       (BuildContext context, SwiperPluginConfig config) {
                     return new Align(
@@ -259,7 +263,7 @@ class _LessonCardState extends State<LessonCard> {
                                   ? Color.fromARGB(255, 25, 25, 25)
                                   : Colors.grey[350],
                               boxShadow: [
-                                new BoxShadow(blurRadius: 3, spreadRadius: -2)
+                                new BoxShadow(blurRadius: 2, spreadRadius: -2)
                               ],
                               borderRadius: new BorderRadius.only(
                                   topLeft: Radius.circular(4),
@@ -313,7 +317,7 @@ class _LessonCardState extends State<LessonCard> {
                             : Colors.grey[100],
                         borderRadius: new BorderRadius.all(Radius.circular(6)),
                         boxShadow: [
-                          new BoxShadow(blurRadius: 3, spreadRadius: -2)
+                          new BoxShadow(blurRadius: 2.5, spreadRadius: -2)
                         ]),
                   ),
                 ),
@@ -340,7 +344,7 @@ class _LessonCardState extends State<LessonCard> {
                     color: globals.isDark ? Colors.white : Colors.black),
                 textAlign: TextAlign.center,
               ),
-              width: 40.0,
+              width: 35.0,
               height: 35.0,
               margin: EdgeInsets.only(left: 8.0),
               decoration: new BoxDecoration(

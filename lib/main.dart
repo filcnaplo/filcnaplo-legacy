@@ -139,7 +139,7 @@ void main({bool noReset = false}) async {
   } else {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     globals.version = packageInfo.version;
-    globals.isBeta = globals.version.startsWith("b");
+    globals.isBeta = globals.version.endsWith("-beta");
     List<User> users = await AccountManager().getUsers();
     isNew = (users.isEmpty);
     globals.isLogo = await SettingsHelper().getLogo();
