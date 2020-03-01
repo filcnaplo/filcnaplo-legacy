@@ -102,9 +102,9 @@ class ColorManager {
                 primary = Colors.black;
                 background = Colors.black;
             }
-            return new ThemeData(primarySwatch: Colors.blue, accentColor: accent, brightness: brightness, primaryColor: primary, primaryColorLight: primaryLight, primaryColorDark: primaryDark, appBarTheme: AppBarTheme(color: primary, ), scaffoldBackgroundColor: background, dialogBackgroundColor: background, cardColor: brightness.index == 0 ? Color.fromARGB(255, 25, 25, 25) : null, fontFamily: 'Quicksand', );
+            return ThemeData(primarySwatch: Colors.blue, accentColor: accent, brightness: brightness, primaryColor: primary, primaryColorLight: primaryLight, primaryColorDark: primaryDark, appBarTheme: AppBarTheme(color: primary, ), scaffoldBackgroundColor: background, dialogBackgroundColor: background, cardColor: brightness.index == 0 ? Color.fromARGB(255, 25, 25, 25) : null, fontFamily: 'Quicksand', );
         } else {
-            return new ThemeData(primarySwatch: Colors.blue, accentColor: accent, primaryColor: primary, primaryColorLight: primaryLight, primaryColorDark: primaryDark, appBarTheme: AppBarTheme(color: primary, ), scaffoldBackgroundColor: background, dialogBackgroundColor: background, fontFamily: 'Quicksand', );
+            return ThemeData(primarySwatch: Colors.blue, accentColor: accent, primaryColor: primary, primaryColorLight: primaryLight, primaryColorDark: primaryDark, appBarTheme: AppBarTheme(color: primary, ), scaffoldBackgroundColor: background, dialogBackgroundColor: background, fontFamily: 'Quicksand', );
         }
     }
 }

@@ -16,12 +16,12 @@ import "../Utils/StringFormatter.dart";
 import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
-  runApp(new MaterialApp(home: new TimeTableScreen()));
+  runApp(MaterialApp(home: TimeTableScreen()));
 }
 
 class TimeTableScreen extends StatefulWidget {
   @override
-  TimeTableScreenState createState() => new TimeTableScreenState();
+  TimeTableScreenState createState() => TimeTableScreenState();
 }
 
 class TimeTableScreenState extends State<TimeTableScreen>
@@ -76,7 +76,7 @@ class TimeTableScreenState extends State<TimeTableScreen>
     ended = false;
     DateTime startDate = now;
     startDate = startDate.add(
-        new Duration(days: (-1 * startDate.weekday + 1 + 7 * relativeWeek)));
+        Duration(days: (-1 * startDate.weekday + 1 + 7 * relativeWeek)));
 
     setState(() {
       lessonsWeek = null;
@@ -89,7 +89,7 @@ class TimeTableScreenState extends State<TimeTableScreen>
           try {
             lessonsWeek = week;
             int index = getInitIndex(lessonsWeek, now);
-            _tabController = new TabController(
+            _tabController = TabController(
                 vsync: this,
                 length: lessonsWeek.dayList().length,
                 initialIndex: first && index < week.dayList().length
@@ -108,7 +108,7 @@ class TimeTableScreenState extends State<TimeTableScreen>
           try {
             lessonsWeek = week;
             int index = getInitIndex(lessonsWeek, now);
-            _tabController = new TabController(
+            _tabController = TabController(
                 vsync: this,
                 length: lessonsWeek.dayList().length,
                 initialIndex: first && index < week.dayList().length
@@ -134,7 +134,7 @@ class TimeTableScreenState extends State<TimeTableScreen>
 
     initSelectedUser();
     startDateText = now;
-    startDateText = startDateText.add(new Duration(
+    startDateText = startDateText.add(Duration(
         days: (-1 * startDateText.weekday + 1 + 7 * relativeWeek)));
     refreshWeek(first: true);
   }
@@ -155,32 +155,32 @@ class TimeTableScreenState extends State<TimeTableScreen>
   Widget build(BuildContext context) {
     globals.context = context;
     
-    return new WillPopScope(
+    return WillPopScope(
       onWillPop: () {
         globals.screen = 0;
         Navigator.pushReplacementNamed(context, "/main");
       },
-      child: new DefaultTabController(
+      child: DefaultTabController(
         length: tabLength,
-        child: new Scaffold(
+        child: Scaffold(
             drawer: GDrawer(),
-            appBar: new AppBar(
-              title: new Text(capitalize(I18n.of(context).timetable) +
+            appBar: AppBar(
+              title: Text(capitalize(I18n.of(context).timetable) +
                   getTimetableText(startDateText)),
             ),
-            body: new Column(
+            body: Column(
               children: <Widget>[
-                new Expanded(
+                Expanded(
                   child: (ended)
                       ? (lessonsWeek != null)
                           ? (lessonsWeek.dayList().isNotEmpty)
-                              ? new TabBarView(
+                              ? TabBarView(
                                   controller: _tabController,
                                   children: (lessonsWeek != null)
                                       ? lessonsWeek
                                           .dayList()
                                           .map((List<Lesson> lessonList) {
-                                          return new ListView.builder(
+                                          return ListView.builder(
                                             itemBuilder: (BuildContext context,
                                                 int index) {
                                               return _itemBuilderLessonList(
@@ -192,46 +192,46 @@ class TimeTableScreenState extends State<TimeTableScreen>
                                           );
                                         }).toList()
                                       : <Widget>[
-                                          new Container(
-                                              child: new Center(
+                                          Container(
+                                              child: Center(
                                                   child:
-                                                      new CircularProgressIndicator()),
+                                                      CircularProgressIndicator()),
                                               height: 20.0,
                                               width: 20.0),
-                                          new Container(
-                                              child: new Center(
+                                          Container(
+                                              child: Center(
                                                   child:
-                                                      new CircularProgressIndicator()),
+                                                      CircularProgressIndicator()),
                                               height: 20.0,
                                               width: 20.0),
-                                          new Container(
-                                              child: new Center(
+                                          Container(
+                                              child: Center(
                                                   child:
-                                                      new CircularProgressIndicator()),
+                                                      CircularProgressIndicator()),
                                               height: 20.0,
                                               width: 20.0),
-                                          new Container(
-                                              child: new Center(
+                                          Container(
+                                              child: Center(
                                                   child:
-                                                      new CircularProgressIndicator()),
+                                                      CircularProgressIndicator()),
                                               height: 20.0,
                                               width: 20.0),
-                                          new Container(
-                                              child: new Center(
+                                          Container(
+                                              child: Center(
                                                   child:
-                                                      new CircularProgressIndicator()),
+                                                      CircularProgressIndicator()),
                                               height: 20.0,
                                               width: 20.0),
-                                          new Container(
-                                              child: new Center(
+                                          Container(
+                                              child: Center(
                                                   child:
-                                                      new CircularProgressIndicator()),
+                                                      CircularProgressIndicator()),
                                               height: 20.0,
                                               width: 20.0),
-                                          new Container(
-                                              child: new Center(
+                                          Container(
+                                              child: Center(
                                                   child:
-                                                      new CircularProgressIndicator()),
+                                                      CircularProgressIndicator()),
                                               height: 20.0,
                                               width: 20.0),
                                         ])
@@ -245,14 +245,14 @@ class TimeTableScreenState extends State<TimeTableScreen>
                           ),
                         ),
                 ),
-                new Container(
+                Container(
                   height: 54.0,
                   color: Theme.of(context).primaryColor,
-                  child: new Row(
+                  child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      new IconButton(
+                      IconButton(
                         tooltip: capitalize(I18n.of(context).dateWeekPrev),
                         icon: const Icon(
                           Icons.skip_previous,
@@ -265,10 +265,10 @@ class TimeTableScreenState extends State<TimeTableScreen>
                         },
                         padding: EdgeInsets.all(0),
                       ),
-                      new Flexible(
-                        child: new SingleChildScrollView(
+                      Flexible(
+                        child: SingleChildScrollView(
                           child: lessonsWeek != null
-                              ? new MT.TabPageSelector(
+                              ? MT.TabPageSelector(
                                   controller: _tabController,
                                   indicatorSize: 25,
                                   selectedColor: Theme.of(context).brightness ==
@@ -280,12 +280,12 @@ class TimeTableScreenState extends State<TimeTableScreen>
                                   color: Colors.black26,
                                   days: lessonsWeek.dayStrings(context),
                                 )
-                              : new Container(),
+                              : Container(),
                           scrollDirection: Axis.horizontal,
                           padding: EdgeInsets.all(0),
                         ),
                       ),
-                      new IconButton(
+                      IconButton(
                         icon: const Icon(
                           Icons.skip_next,
                           size: 20,
@@ -312,17 +312,17 @@ class TimeTableScreenState extends State<TimeTableScreen>
 
   Widget _itemBuilderLessonList(
       BuildContext context, int index, List<Lesson> lessonList) {
-    return new ListTile(
+    return ListTile(
       leading: lessonList[index].count >= 0
-          ? new Text(
+          ? Text(
               lessonList[index].count.toString(),
               textScaleFactor: 2.0,
             )
-          : new Text(
+          : Text(
               "+",
               textScaleFactor: 2.0,
             ),
-      title: new Text(
+      title: Text(
         lessonList[index].subject +
             (lessonList[index].isMissed
                 ? " (${I18n.of(context).substitutionMissed})"
@@ -337,22 +337,22 @@ class TimeTableScreenState extends State<TimeTableScreen>
                     ? Colors.deepOrange
                     : null),
       ),
-      subtitle: new Text(lessonList[index].theme),
-      trailing: new Row(
+      subtitle: Text(lessonList[index].theme),
+      trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           lessonList[index].homework != null
-              ? new Container(
-                  child: new Icon(Icons.home),
+              ? Container(
+                  child: Icon(Icons.home),
                   margin: EdgeInsets.all(8),
                 )
               : Container(),
-          new Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              new Text(lessonList[index].room),
-              new Text(getLessonRangeText(lessonList[index])),
+              Text(lessonList[index].room),
+              Text(getLessonRangeText(lessonList[index])),
             ],
           ),
         ],
@@ -368,7 +368,7 @@ class TimeTableScreenState extends State<TimeTableScreen>
           barrierDismissible: true,
           context: context,
           builder: (BuildContext context) {
-            return new HomeworkDialog(lesson);
+            return HomeworkDialog(lesson);
           },
         ) ??
         false;
@@ -379,18 +379,18 @@ class TimeTableScreenState extends State<TimeTableScreen>
     List<Lesson> list;
     if (offline)
       list = await getLessonsOffline(startDate,
-          startDate.add(new Duration(days: 6)), globals.selectedUser);
+          startDate.add(Duration(days: 6)), globals.selectedUser);
     else
-      list = await getLessons(startDate, startDate.add(new Duration(days: 6)),
+      list = await getLessons(startDate, startDate.add(Duration(days: 6)),
           globals.selectedUser, showErrors);
 
-    List<Lesson> monday = new List();
-    List<Lesson> tuesday = new List();
-    List<Lesson> wednesday = new List();
-    List<Lesson> thursday = new List();
-    List<Lesson> friday = new List<Lesson>();
-    List<Lesson> saturday = new List();
-    List<Lesson> sunday = new List();
+    List<Lesson> monday = List();
+    List<Lesson> tuesday = List();
+    List<Lesson> wednesday = List();
+    List<Lesson> thursday = List();
+    List<Lesson> friday = List<Lesson>();
+    List<Lesson> saturday = List();
+    List<Lesson> sunday = List();
 
     setState(() {
       for (Lesson lesson in list) {
@@ -428,7 +428,7 @@ class TimeTableScreenState extends State<TimeTableScreen>
     saturday.sort((Lesson a, Lesson b) => a.start.compareTo(b.start));
     sunday.sort((Lesson a, Lesson b) => a.start.compareTo(b.start));
 
-    return new Week(monday, tuesday, wednesday, thursday, friday, saturday,
+    return Week(monday, tuesday, wednesday, thursday, friday, saturday,
         sunday, startDate);
   }
 }

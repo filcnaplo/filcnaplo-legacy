@@ -12,12 +12,12 @@ import 'package:filcnaplo/Helpers/DBHelper.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
-  runApp(new MaterialApp(home: new ImportScreen()));
+  runApp(MaterialApp(home: ImportScreen()));
 }
 
 class ImportScreen extends StatefulWidget {
   @override
-  ImportScreenState createState() => new ImportScreenState();
+  ImportScreenState createState() => ImportScreenState();
 }
 
 class ImportScreenState extends State<ImportScreen> {
@@ -38,12 +38,12 @@ class ImportScreenState extends State<ImportScreen> {
       builder: (BuildContext context) {
         // return object of type Dialog
         return AlertDialog(
-          title: new Text("Figyelem"),
-          content: new Text("Ez kitöröl minden meglévő felhasználót! (ha van)"),
+          title: Text("Figyelem"),
+          content: Text("Ez kitöröl minden meglévő felhasználót! (ha van)"),
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
-            new FlatButton(
-              child: new Text("OK"),
+            FlatButton(
+              child: Text("OK"),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -59,51 +59,51 @@ class ImportScreenState extends State<ImportScreen> {
     controller.text = path;
   }
 
-  TextEditingController controller = new TextEditingController();
+  TextEditingController controller = TextEditingController();
   String path = "";
 
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    return new WillPopScope(
+    return WillPopScope(
         onWillPop: () {
           globals.screen = 0;
           Navigator.pushReplacementNamed(context, "/login");
         },
         child: Scaffold(
-          appBar: new AppBar(
-            title: new Text("Import"),
+          appBar: AppBar(
+            title: Text("Import"),
             actions: <Widget>[],
           ),
-          body: new Center(
+          body: Center(
             child: Container(
               padding: EdgeInsets.all(20),
-              child: new Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  new TextField(
+                  TextField(
                     onChanged: (text) {
                       path = text;
                     },
                     controller: controller,
                   ),
-                  new Container(
-                    child: new RaisedButton(
+                  Container(
+                    child: RaisedButton(
                       onPressed: () async {
                         PermissionHandler()
                             .requestPermissions([PermissionGroup.storage]).then(
                                 (Map<PermissionGroup, PermissionStatus>
                                     permissions) async {
-                          File importFile = new File(path);
-                          List<Map<String, dynamic>> userMap = new List();
+                          File importFile = File(path);
+                          List<Map<String, dynamic>> userMap = List();
                           String data = importFile.readAsStringSync();
                           List<dynamic> userList = json.decode(data);
                           for (dynamic d in userList)
                             userMap.add(d as Map<String, dynamic>);
 
-                          List<User> users = new List();
+                          List<User> users = List();
                           if (userMap.isNotEmpty)
                             for (Map<String, dynamic> m in userMap)
                               users.add(User.fromJson(m));
@@ -127,7 +127,7 @@ class ImportScreenState extends State<ImportScreen> {
                               .invokeMethod('SystemNavigator.pop');
                         });
                       },
-                      child: new Text(
+                      child: Text(
                         "Import",
                         style: TextStyle(color: Colors.white),
                       ),

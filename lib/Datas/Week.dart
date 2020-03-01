@@ -13,7 +13,7 @@ class Week {
   DateTime startDay;
 
   List<List<Lesson>> dayList() {
-    List<List<Lesson>> days = new List();
+    List<List<Lesson>> days = List();
     if (monday.isNotEmpty) days.add(monday);
     if (tuesday.isNotEmpty) days.add(tuesday);
     if (wednesday.isNotEmpty) days.add(wednesday);
@@ -25,7 +25,7 @@ class Week {
   }
 
   List<String> dayStrings(BuildContext context) {
-    List<String> days = new List();
+    List<String> days = List();
     if (monday.isNotEmpty) days.add(I18n.of(context).dateMondayShort);
     if (tuesday.isNotEmpty) days.add(I18n.of(context).dateTuesdayShort);
     if (wednesday.isNotEmpty) days.add(I18n.of(context).dateWednesdayShort);

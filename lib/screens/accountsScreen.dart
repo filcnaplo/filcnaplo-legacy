@@ -19,12 +19,12 @@ import 'package:filcnaplo/screens/loginScreen.dart';
 import 'package:filcnaplo/Utils/StringFormatter.dart';
 
 void main() {
-  runApp(new MaterialApp(home: new AccountsScreen()));
+  runApp(MaterialApp(home: AccountsScreen()));
 }
 
 class AccountsScreen extends StatefulWidget {
   @override
-  AccountsScreenState createState() => new AccountsScreenState();
+  AccountsScreenState createState() => AccountsScreenState();
 }
 
 class AccountsScreenState extends State<AccountsScreen> {
@@ -98,17 +98,17 @@ class AccountsScreenState extends State<AccountsScreen> {
 
   Future<void> _getListWidgets() async {
     if (users.isEmpty) Navigator.pushNamed(context, "/login");
-    accountListWidgets = new List();
+    accountListWidgets = List();
     for (Account a in globals.accounts) {
       setState(() {
         accountListWidgets.add(
-          new ListTile(
-            trailing: new Row(
+          ListTile(
+            trailing: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                new Container(
-                  child: new FlatButton(
+                Container(
+                  child: FlatButton(
                     onPressed: () {
                       _openDialog(
                           I18n.of(context).color,
@@ -118,13 +118,13 @@ class AccountsScreenState extends State<AccountsScreen> {
                           ),
                           a.user);
                     },
-                    child: new Icon(
+                    child: Icon(
                       Icons.color_lens,
                       color: a.user.color,
                     ),
                   ),
                 ),
-                new FlatButton(
+                FlatButton(
                   onPressed: () async {
                     _removeUserDialog(a.user).then((nul) async {
                       users = await AccountManager().getUsers();
@@ -135,22 +135,22 @@ class AccountsScreenState extends State<AccountsScreen> {
                           () {}); //TODO Ez így lehet hogy full felesleges, delete this line if so
                     });
                   },
-                  child: new Icon(
+                  child: Icon(
                     Icons.clear,
                     color: Colors.red,
                   ),
                 ),
               ],
             ),
-            title: new Text(a.user.name),
+            title: Text(a.user.name),
             leading: GestureDetector(
               child: Icon(Icons.person_outline),
               onTap: () async {
                 await a.refreshStudentString(true, false);
                 Navigator.push(
                     context,
-                    new MaterialPageRoute(
-                        builder: (BuildContext context) => new StudentScreen(
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => StudentScreen(
                               account: a,
                             )));
               },
@@ -158,7 +158,7 @@ class AccountsScreenState extends State<AccountsScreen> {
           ),
         );
         accountListWidgets.add(
-          new Divider(
+          Divider(
             height: 1.0,
           ),
         );
@@ -166,9 +166,9 @@ class AccountsScreenState extends State<AccountsScreen> {
     }
 
     setState(() {
-      accountListWidgets.add(new FlatButton(
+      accountListWidgets.add(FlatButton(
           onPressed: addPressed,
-          child: new Icon(
+          child: Icon(
             Icons.add,
             color: globals.CurrentTextColor,
           )));
@@ -180,24 +180,24 @@ class AccountsScreenState extends State<AccountsScreen> {
       context: context,
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
-        return new AlertDialog(
-          title: new Text(capitalize(I18n.of(context).accountDelete)),
-          content: new SingleChildScrollView(
-            child: new ListBody(
+        return AlertDialog(
+          title: Text(capitalize(I18n.of(context).accountDelete)),
+          content: SingleChildScrollView(
+            child: ListBody(
               children: <Widget>[
-                new Text(I18n.of(context).accountDeleteConfirm(user.name)),
+                Text(I18n.of(context).accountDeleteConfirm(user.name)),
               ],
             ),
           ),
           actions: <Widget>[
-            new FlatButton(
-              child: new Text(I18n.of(context).dialogNo.toUpperCase()),
+            FlatButton(
+              child: Text(I18n.of(context).dialogNo.toUpperCase()),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
-            new FlatButton(
-              child: new Text(I18n.of(context).dialogYes.toUpperCase()),
+            FlatButton(
+              child: Text(I18n.of(context).dialogYes.toUpperCase()),
               onPressed: () async {
                 await AccountManager().removeUser(user);
                 setState(() {
@@ -219,25 +219,25 @@ class AccountsScreenState extends State<AccountsScreen> {
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    return new WillPopScope(
+    return WillPopScope(
       onWillPop: () {
         globals.screen = 0;
         Navigator.pushReplacementNamed(context, "/main");
       },
       child: Scaffold(
         drawer: GDrawer(),
-        appBar: new AppBar(
-          title: new Text(capitalize(I18n.of(context).accountTitle)),
+        appBar: AppBar(
+          title: Text(capitalize(I18n.of(context).accountTitle)),
           actions: <Widget>[],
         ),
-        body: new Column(children: <Widget>[
-          new Expanded(
-            child: new Container(
+        body: Column(children: <Widget>[
+          Expanded(
+            child: Container(
                 child: accountListWidgets != null
-                    ? new ListView(
+                    ? ListView(
                         children: accountListWidgets,
                       )
-                    : new CircularProgressIndicator()),
+                    : CircularProgressIndicator()),
           ),
         ]),
       ),

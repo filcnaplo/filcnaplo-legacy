@@ -16,12 +16,12 @@ import 'package:filcnaplo/Utils/StringFormatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
-  runApp(new MaterialApp(home: new HomeworkScreen()));
+  runApp(MaterialApp(home: HomeworkScreen()));
 }
 
 class HomeworkScreen extends StatefulWidget {
   @override
-  HomeworkScreenState createState() => new HomeworkScreenState();
+  HomeworkScreenState createState() => HomeworkScreenState();
 }
 
 class HomeworkScreenState extends State<HomeworkScreen> {
@@ -30,8 +30,8 @@ class HomeworkScreenState extends State<HomeworkScreen> {
   bool hasLoaded = true;
   bool hasOfflineLoaded = false;
 
-  List<Homework> homeworks = new List();
-  List<Homework> selectedHomework = new List();
+  List<Homework> homeworks = List();
+  List<Homework> selectedHomework = List();
 
   @override
   void initState() {
@@ -57,18 +57,18 @@ class HomeworkScreenState extends State<HomeworkScreen> {
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    return new WillPopScope(
+    return WillPopScope(
         onWillPop: () {
           globals.screen = 0;
           Navigator.pushReplacementNamed(context, "/main");
         },
         child: Scaffold(
             drawer: GDrawer(),
-            appBar: new AppBar(
-              title: new Text(capitalize(I18n.of(context).homeworkTitle)),
+            appBar: AppBar(
+              title: Text(capitalize(I18n.of(context).homeworkTitle)),
               actions: <Widget>[
-                new IconButton(
-                  icon: new Icon(Icons.access_time),
+                IconButton(
+                  icon: Icon(Icons.access_time),
                   onPressed: () {
                     timeDialog().then((b) {
                       _onRefreshOffline();
@@ -78,15 +78,15 @@ class HomeworkScreenState extends State<HomeworkScreen> {
                     });
                   },
                 ),
-                new IconButton(icon: Icon(Icons.plus_one), onPressed: _openChooser,)
+                IconButton(icon: Icon(Icons.plus_one), onPressed: _openChooser,)
               ],
             ),
-            body: new Container(
+            body: Container(
                 child: hasOfflineLoaded
-                    ? new Column(children: <Widget>[
+                    ? Column(children: <Widget>[
                         !hasLoaded
                             ? Container(
-                                child: new LinearProgressIndicator(
+                                child: LinearProgressIndicator(
                                   value: null,
                                 ),
                                 height: 3,
@@ -94,15 +94,15 @@ class HomeworkScreenState extends State<HomeworkScreen> {
                             : Container(
                                 height: 3,
                               ),
-                        new Expanded(
-                            child: new RefreshIndicator(
-                                child: new ListView.builder(
+                        Expanded(
+                            child: RefreshIndicator(
+                                child: ListView.builder(
                                   itemBuilder: _itemBuilder,
                                   itemCount: selectedHomework.length,
                                 ),
                                 onRefresh: _onRefresh)),
                       ])
-                    : new Center(child: new CircularProgressIndicator()))));
+                    : Center(child: CircularProgressIndicator()))));
   }
 
   Future<bool> _openChooser() {
@@ -110,7 +110,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
       barrierDismissible: true,
       context: context,
       builder: (BuildContext context) {
-        return new ChooseLessonDialog();
+        return ChooseLessonDialog();
       }
     );
   }
@@ -120,7 +120,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
           barrierDismissible: true,
           context: context,
           builder: (BuildContext context) {
-            return new TimeSelectDialog();
+            return TimeSelectDialog();
           },
         ) ?? 
         false;
@@ -135,47 +135,47 @@ class HomeworkScreenState extends State<HomeworkScreen> {
       context: context,
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
-        return new AlertDialog(
-          title: new Text(homework.subject + " " + I18n.of(context).homework),
-          content: new SingleChildScrollView(
-            child: new ListBody(
+        return AlertDialog(
+          title: Text(homework.subject + " " + I18n.of(context).homework),
+          content: SingleChildScrollView(
+            child: ListBody(
               children: <Widget>[
                 homework.deadline != null
-                    ? new Text(capitalize(I18n.of(context).homeworkDeadline) +
+                    ? Text(capitalize(I18n.of(context).homeworkDeadline) +
                         ": " +
                         homework.deadline)
-                    : new Container(),
-                new Text(capitalize(I18n.of(context).homeworkSubject) +
+                    : Container(),
+                Text(capitalize(I18n.of(context).homeworkSubject) +
                     ": " +
                     homework.subject),
-                new Text(capitalize(I18n.of(context).homeworkUploadUser) +
+                Text(capitalize(I18n.of(context).homeworkUploadUser) +
                     ": " +
                     homework.uploader),
-                new Text(capitalize(I18n.of(context).homeworkUploadTime) +
+                Text(capitalize(I18n.of(context).homeworkUploadTime) +
                     ": " +
                     homework.uploadDate
                         .substring(0, 11)
                         .replaceAll("-", '. ')
                         .replaceAll("T", ". ")),
-                new Divider(
+                Divider(
                   height: 4.0,
                 ),
                 Container(
                   padding: EdgeInsets.only(top: 10),
                 ),
-                new Html(data: HtmlUnescape().convert(homework.text)),
+                Html(data: HtmlUnescape().convert(homework.text)),
               ],
             ),
           ),
           actions: <Widget>[
-            new FlatButton(
+            FlatButton(
               child: Icon(Icons.delete),
               onPressed: () {
                 RequestHelper().deleteHomework(homework.id, globals.selectedUser);
               },
             ),
-            new FlatButton(
-              child: new Text(I18n.of(context).dialogOk.toUpperCase()),
+            FlatButton(
+              child: Text(I18n.of(context).dialogOk.toUpperCase()),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -190,8 +190,8 @@ class HomeworkScreenState extends State<HomeworkScreen> {
     setState(() {
       hasLoaded = false;
     });
-    Completer<Null> completer = new Completer<Null>();
-    List<Homework> homeworksNew = await HomeworkHelper().getHomeworks(
+    Completer<Null> completer = Completer<Null>();
+    List<Homework> homeworks= await HomeworkHelper().getHomeworks(
         globals.timeData[globals.selectedTimeForHomework], showErrors);
     if (homeworksNew.length > homeworks.length) homeworks = homeworksNew;
     homeworks
@@ -210,7 +210,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
     setState(() {
       hasOfflineLoaded = false;
     });
-    Completer<Null> completer = new Completer<Null>();
+    Completer<Null> completer = Completer<Null>();
     homeworks = await HomeworkHelper()
         .getHomeworksOffline(globals.timeData[globals.selectedTimeForHomework]);
     homeworks
@@ -225,10 +225,10 @@ class HomeworkScreenState extends State<HomeworkScreen> {
   }
 
   Widget _itemBuilder(BuildContext context, int index) {
-    return new Column(
+    return Column(
       children: <Widget>[
-        new ListTile(
-          title: new Text(
+        ListTile(
+          title: Text(
             selectedHomework[index].uploadDate.substring(0, 10) +
                 " " +
                 dateToWeekDay(
@@ -239,14 +239,14 @@ class HomeworkScreenState extends State<HomeworkScreen> {
                     : (" - " + selectedHomework[index].subject)),
             style: TextStyle(fontSize: 20.0),
           ),
-          subtitle: new Html(
+          subtitle: Html(
               data: HtmlUnescape().convert(selectedHomework[index].text)),
           isThreeLine: true,
           onTap: () {
             homeworksDialog(selectedHomework[index]);
           },
         ),
-        new Divider(
+        Divider(
           height: 5.0,
         ),
       ],

@@ -189,16 +189,16 @@ class _LessonCardState extends State<LessonCard> {
 
   @override
   Widget build(BuildContext context) {
-    now = new DateTime.now();
+    now = DateTime.now();
     _lessonCardBackend(now, widget.lessons, widget.isLessonsTomorrow);
     return (quickLessons.length > 0)
         ? Container(
             padding: EdgeInsets.all(5.0),
-            child: new SizedBox(
+            child: SizedBox(
                 height: 125,
-                child: new Swiper(
+                child: Swiper(
                   itemBuilder: (BuildContext context, int index) {
-                    return new Container(
+                    return Container(
                         margin: EdgeInsets.all(4.0),
                         child: quickLessons[index]);
                   },
@@ -207,9 +207,9 @@ class _LessonCardState extends State<LessonCard> {
                   scale: 0.9,
                   loop: false,
                   index: isInit ? 1 : null,
-                  pagination: new SwiperCustomPagination(builder:
+                  pagination: SwiperCustomPagination(builder:
                       (BuildContext context, SwiperPluginConfig config) {
-                    return new Align(
+                    return Align(
                         alignment: Alignment.bottomCenter,
                         child: DotSwiperPaginationBuilder(
                                 activeColor: globals.isDark
@@ -241,31 +241,31 @@ class _LessonCardState extends State<LessonCard> {
     String room,
   ) {
     return Container(
-        child: new Row(children: <Widget>[
-      new Expanded(
-        child: new Container(
-          child: new Column(
+        child: Row(children: <Widget>[
+      Expanded(
+        child: Container(
+          child: Column(
             children: <Widget>[
-              new Row(
+              Row(
                 children: <Widget>[
-                  new Flexible(
-                    child: new Row(
+                  Flexible(
+                    child: Row(
                       children: <Widget>[
-                        new Container(
-                          child: new Text(tabText,
-                              style: new TextStyle(
+                        Container(
+                          child: Text(tabText,
+                              style: TextStyle(
                                   color: globals.isDark
                                       ? Colors.white
                                       : Colors.black)),
                           padding: EdgeInsets.fromLTRB(8, 1, 8, 0),
-                          decoration: new BoxDecoration(
+                          decoration: BoxDecoration(
                               color: globals.isDark
                                   ? Color.fromARGB(255, 25, 25, 25)
                                   : Colors.grey[350],
                               boxShadow: [
-                                new BoxShadow(blurRadius: 2, spreadRadius: -2)
+                                BoxShadow(blurRadius: 2, spreadRadius: -2)
                               ],
-                              borderRadius: new BorderRadius.only(
+                              borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(4),
                                   topRight: Radius.circular(4))),
                         ),
@@ -275,35 +275,35 @@ class _LessonCardState extends State<LessonCard> {
                 ],
               ),
               Container(
-                child: new GestureDetector(
+                child: GestureDetector(
                   onTap: () {
                     _lessonDialog(lesson);
                   },
                   child: Container(
-                    child: new ListTile(
-                      leading: new Text(lessonNumber,
+                    child: ListTile(
+                      leading: Text(lessonNumber,
                           style: TextStyle(
                               fontSize: 30, fontWeight: FontWeight.bold)),
-                      title: new Text(capitalize(lessonSubject),
+                      title: Text(capitalize(lessonSubject),
                           style: TextStyle(fontWeight: FontWeight.bold)),
-                      subtitle: new Text(
+                      subtitle: Text(
                         lessonSubtitle,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         softWrap: false,
                       ),
-                      trailing: new Row(
+                      trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           hasHomework
-                              ? new Container(
-                                  child: new Icon(Icons.home),
+                              ? Container(
+                                  child: Icon(Icons.home),
                                   padding: EdgeInsets.all(5))
-                              : new Container(),
-                          new Column(
+                              : Container(),
+                          Column(
                             children: <Widget>[
-                              new Text(startTime),
-                              new Text(room)
+                              Text(startTime),
+                              Text(room)
                             ],
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.end,
@@ -311,21 +311,21 @@ class _LessonCardState extends State<LessonCard> {
                         ],
                       ),
                     ),
-                    decoration: new BoxDecoration(
+                    decoration: BoxDecoration(
                         color: globals.isDark
                             ? Colors.grey[700]
                             : Colors.grey[100],
-                        borderRadius: new BorderRadius.all(Radius.circular(6)),
+                        borderRadius: BorderRadius.all(Radius.circular(6)),
                         boxShadow: [
-                          new BoxShadow(blurRadius: 2.5, spreadRadius: -2)
+                          BoxShadow(blurRadius: 2.5, spreadRadius: -2)
                         ]),
                   ),
                 ),
-                decoration: new BoxDecoration(
+                decoration: BoxDecoration(
                   color: globals.isDark
                       ? Color.fromARGB(255, 25, 25, 25)
                       : Colors.grey[350],
-                  borderRadius: new BorderRadius.only(
+                  borderRadius: BorderRadius.only(
                       topRight: Radius.circular(6),
                       bottomLeft: Radius.circular(6),
                       bottomRight: Radius.circular(6)),
@@ -337,7 +337,7 @@ class _LessonCardState extends State<LessonCard> {
       ),
       (breakLength != "")
           ? Container(
-              child: new Text(
+              child: Text(
                 breakLength,
                 style: TextStyle(
                     fontSize: 18.0,
@@ -347,12 +347,12 @@ class _LessonCardState extends State<LessonCard> {
               width: 35.0,
               height: 35.0,
               margin: EdgeInsets.only(left: 8.0),
-              decoration: new BoxDecoration(
+              decoration: BoxDecoration(
                   color: globals.isDark ? Colors.grey[600] : Colors.grey[200],
                   shape: BoxShape.circle,
-                  boxShadow: [new BoxShadow(blurRadius: 3, spreadRadius: -2)]),
+                  boxShadow: [BoxShadow(blurRadius: 3, spreadRadius: -2)]),
               padding: EdgeInsets.all(4.0),
-              alignment: new Alignment(0, 0),
+              alignment: Alignment(0, 0),
             )
           : Container(),
     ]));
@@ -363,7 +363,7 @@ class _LessonCardState extends State<LessonCard> {
           barrierDismissible: true,
           context: context,
           builder: (BuildContext context) {
-            return new HomeworkDialog(lesson);
+            return HomeworkDialog(lesson);
           },
         ) ??
         false;

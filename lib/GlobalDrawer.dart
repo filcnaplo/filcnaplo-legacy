@@ -14,7 +14,7 @@ class GDrawer extends StatefulWidget {
 
   @override
   GDrawerState createState() {
-    myState = new GDrawerState();
+    myState = GDrawerState();
     return myState;
   }
 }
@@ -70,43 +70,43 @@ class GDrawerState extends State<GDrawer> {
   Widget build(BuildContext context) {
     double c_width = MediaQuery.of(context).size.width * 0.5;
     // TODO: implement build
-    return new Drawer(
-      child: new Container(
+    return Drawer(
+      child: Container(
         color: Theme.of(context).scaffoldBackgroundColor,
-        child: new ListView(
+        child: ListView(
           children: <Widget>[
             isLogo
-                ? new Container(
-                    child: new DrawerHeader(
-                      child: new Column(
+                ? Container(
+                    child: DrawerHeader(
+                      child: Column(
                         children: <Widget>[
                           Image.asset(
                             "assets/icon.png",
                             height: 120.0,
                             width: 120.0,
                           ),
-                          new Container(
-                            child: new Text(
+                          Container(
+                            child: Text(
                               I18n.of(context).appTitle,
                               style: TextStyle(fontSize: 19.0),
                             ),
                             padding: EdgeInsets.fromLTRB(5.0, 5.0, 0.0, 0.0),
                           ),
                           version != latestVersion && latestVersion != ""
-                              ? new Card(
+                              ? Card(
                                   child: Container(
-                                    child: new Text(
+                                    child: Text(
                                         "Új verzió elérhető: " + latestVersion,
-                                        style: new TextStyle(
+                                        style: TextStyle(
                                             color: Colors.redAccent[100],
                                             fontWeight: FontWeight.bold)),
                                     padding: EdgeInsets.all(5),
-                                    decoration: new BoxDecoration(
+                                    decoration: BoxDecoration(
                                         border: Border.all(
                                             width: 2, color: Colors.redAccent)),
                                   ),
                                 )
-                              : new Container(),
+                              : Container(),
                         ],
                         crossAxisAlignment: CrossAxisAlignment.start,
                       ),
@@ -116,37 +116,37 @@ class GDrawerState extends State<GDrawer> {
                         ? 205.0
                         : 170.0,
                     padding: EdgeInsets.only(left: 10))
-                : new Container(
+                : Container(
                     height: 5,
                   ),
             selectedUser != null && multiAccount
-                ? new Container(
-                    child: new DrawerHeader(
+                ? Container(
+                    child: DrawerHeader(
                       child: Row(
                         children: <Widget>[
-                          new PopupMenuButton<User>(
-                            child: new Container(
-                              child: new Row(
+                          PopupMenuButton<User>(
+                            child: Container(
+                              child: Row(
                                 children: <Widget>[
-                                  new Container(
-                                    child: new Icon(
+                                  Container(
+                                    child: Icon(
                                       Icons.account_circle,
                                       color: selectedUser.color,
                                       size: 40,
                                     ),
                                     margin: EdgeInsets.only(right: 5),
                                   ),
-                                  new Container(
+                                  Container(
                                     width: 170,
                                     child: Text(
                                       selectedUser.name,
-                                      style: new TextStyle(
+                                      style: TextStyle(
                                         color: null,
                                         fontSize: 16.0,
                                       ),
                                     ),
                                   ),
-                                  new Icon(
+                                  Icon(
                                     Icons.arrow_drop_down,
                                     color: null,
                                   ),
@@ -157,15 +157,15 @@ class GDrawerState extends State<GDrawer> {
                             onSelected: _onSelect,
                             itemBuilder: (BuildContext context) {
                               return users.map((User user) {
-                                return new PopupMenuItem<User>(
+                                return PopupMenuItem<User>(
                                   value: user,
-                                  child: new Row(
+                                  child: Row(
                                     children: <Widget>[
-                                      new Icon(
+                                      Icon(
                                         Icons.account_circle,
                                         color: user.color,
                                       ),
-                                      new Text(user.name),
+                                      Text(user.name),
                                     ],
                                   ),
                                 );
@@ -182,9 +182,9 @@ class GDrawerState extends State<GDrawer> {
                               Navigator.pop(context); // close the drawer
                               Navigator.push(
                                   context,
-                                  new MaterialPageRoute(
+                                  MaterialPageRoute(
                                       builder: (BuildContext context) =>
-                                          new StudentScreen(
+                                          StudentScreen(
                                             account: selectedAccount,
                                           )));
                             },
@@ -200,13 +200,13 @@ class GDrawerState extends State<GDrawer> {
                     padding: EdgeInsets.all(0),
                     margin: EdgeInsets.all(0),
                   )
-                : new Container(),
-            new ListTile(
-              leading: new Icon(
+                : Container(),
+            ListTile(
+              leading: Icon(
                 Icons.dashboard,
                 color: screen == 0 ? Theme.of(context).accentColor : null,
               ),
-              title: new Text(
+              title: Text(
                 capitalize(I18n.of(context).drawerHome),
                 style: TextStyle(
                     color: screen == 0 ? Theme.of(context).accentColor : null),
@@ -217,12 +217,12 @@ class GDrawerState extends State<GDrawer> {
                 Navigator.pushReplacementNamed(context, "/main");
               },
             ),
-            new ListTile(
-              leading: new Icon(
+            ListTile(
+              leading: Icon(
                 IconData(0xF474, fontFamily: "Material Design Icons"),
                 color: screen == 1 ? Theme.of(context).accentColor : null,
               ),
-              title: new Text(
+              title: Text(
                 capitalize(I18n.of(context).drawerEvaluations),
                 style: TextStyle(
                     color: screen == 1 ? Theme.of(context).accentColor : null),
@@ -233,12 +233,12 @@ class GDrawerState extends State<GDrawer> {
                 Navigator.pushReplacementNamed(context, "/evaluations");
               },
             ),
-            new ListTile(
-              leading: new Icon(
+            ListTile(
+              leading: Icon(
                 IconData(0xf520, fontFamily: "Material Design Icons"),
                 color: screen == 2 ? Theme.of(context).accentColor : null,
               ),
-              title: new Text(
+              title: Text(
                 capitalize(I18n.of(context).timetable),
                 style: TextStyle(
                     color: screen == 2 ? Theme.of(context).accentColor : null),
@@ -249,12 +249,12 @@ class GDrawerState extends State<GDrawer> {
                 Navigator.pushReplacementNamed(context, "/timetable");
               },
             ),
-            new ListTile(
-              leading: new Icon(
+            ListTile(
+              leading: Icon(
                 IconData(0xf2dc, fontFamily: "Material Design Icons"),
                 color: screen == 8 ? Theme.of(context).accentColor : null,
               ),
-              title: new Text(
+              title: Text(
                 capitalize(I18n.of(context).drawerHomeworks),
                 style: TextStyle(
                     color: screen == 8 ? Theme.of(context).accentColor : null),
@@ -265,12 +265,12 @@ class GDrawerState extends State<GDrawer> {
                 Navigator.pushReplacementNamed(context, "/homework");
               },
             ),
-            new ListTile(
-              leading: new Icon(
+            ListTile(
+              leading: Icon(
                 IconData(0xf0e5, fontFamily: "Material Design Icons"),
                 color: screen == 3 ? Theme.of(context).accentColor : null,
               ),
-              title: new Text(
+              title: Text(
                 capitalize(I18n.of(context).drawerNotes),
                 style: TextStyle(
                     color: screen == 3 ? Theme.of(context).accentColor : null),
@@ -281,12 +281,12 @@ class GDrawerState extends State<GDrawer> {
                 Navigator.pushReplacementNamed(context, "/notes");
               },
             ),
-            new ListTile(
-              leading: new Icon(
+            ListTile(
+              leading: Icon(
                 Icons.assignment,
                 color: screen == 10 ? Theme.of(context).accentColor : null,
               ),
-              title: new Text(
+              title: Text(
                 capitalize(I18n.of(context).drawerTests),
                 style: TextStyle(
                     color: screen == 10 ? Theme.of(context).accentColor : null),
@@ -297,12 +297,12 @@ class GDrawerState extends State<GDrawer> {
                 Navigator.pushReplacementNamed(context, "/tests");
               },
             ),
-            new ListTile(
-              leading: new Icon(
+            ListTile(
+              leading: Icon(
                 IconData(0xF361, fontFamily: "Material Design Icons"),
                 color: screen == 11 ? Theme.of(context).accentColor : null,
               ),
-              title: new Text(
+              title: Text(
                 capitalize(I18n.of(context).drawerMessages),
                 style: TextStyle(
                     color: screen == 11 ? Theme.of(context).accentColor : null),
@@ -313,12 +313,12 @@ class GDrawerState extends State<GDrawer> {
                 Navigator.pushReplacementNamed(context, "/messages");
               },
             ),
-            new ListTile(
-              leading: new Icon(
+            ListTile(
+              leading: Icon(
                 Icons.block,
                 color: screen == 5 ? Theme.of(context).accentColor : null,
               ),
-              title: new Text(
+              title: Text(
                 capitalize(I18n.of(context).drawerAbsences),
                 style: TextStyle(
                     color: screen == 5 ? Theme.of(context).accentColor : null),
@@ -330,12 +330,12 @@ class GDrawerState extends State<GDrawer> {
               },
             ),
             
-             new ListTile(
-               leading: new Icon(
+             ListTile(
+               leading: Icon(
                  Icons.supervisor_account,
                  color: screen == 4 ? Theme.of(context).accentColor : null,
                ),
-               title: new Text(
+               title: Text(
                  capitalize(I18n.of(context).accountTitle),
                  style: TextStyle(
                      color: screen == 4 ? Theme.of(context).accentColor : null),
@@ -346,12 +346,12 @@ class GDrawerState extends State<GDrawer> {
                  Navigator.pushReplacementNamed(context, "/accounts");
                },
              ),
-            new ListTile(
-              leading: new Icon(
+            ListTile(
+              leading: Icon(
                 Icons.settings,
                 color: screen == 7 ? Theme.of(context).accentColor : null,
               ),
-              title: new Text(
+              title: Text(
                 capitalize(I18n.of(context).drawerSettings),
                 style: TextStyle(
                     color: screen == 7 ? Theme.of(context).accentColor : null),

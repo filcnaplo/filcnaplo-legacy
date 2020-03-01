@@ -12,7 +12,7 @@ import '../Dialog/NewHomeworkDialog.dart';
 
 class ChooseLessonDialog extends StatefulWidget {
   @override
-  ChooseLessonDialogState createState() => new ChooseLessonDialogState();
+  ChooseLessonDialogState createState() => ChooseLessonDialogState();
 }
 
 enum SearchFor { next, previous }
@@ -21,14 +21,14 @@ class ChooseLessonDialogState extends State<ChooseLessonDialog> {
   SearchFor _searchFor = SearchFor.next;
   List<String> subjects = [];
   List<Lesson> lessons = [];
-  DateTime now = new DateTime.now();
+  DateTime now = DateTime.now();
   String _subject = "...";
 
   Widget build(BuildContext context) {
     if (subjects.isEmpty) _getLessons();
 
-    return new SimpleDialog(
-      title: new Text(capitalize(I18n.of(context).homeworkAdd) + "..."),
+    return SimpleDialog(
+      title: Text(capitalize(I18n.of(context).homeworkAdd) + "..."),
       children: <Widget>[
         subjects.isEmpty
             ? Column(
@@ -44,8 +44,8 @@ class ChooseLessonDialogState extends State<ChooseLessonDialog> {
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  new ListTile(
-                      leading: new Radio(
+                  ListTile(
+                      leading: Radio(
                         value: SearchFor.next,
                         groupValue: _searchFor,
                         onChanged: (SearchFor value) {
@@ -54,9 +54,9 @@ class ChooseLessonDialogState extends State<ChooseLessonDialog> {
                           });
                         },
                       ),
-                      title: new Text("a következő")),
-                  new ListTile(
-                      leading: new Radio(
+                      title: Text("a következő")),
+                  ListTile(
+                      leading: Radio(
                         value: SearchFor.previous,
                         groupValue: _searchFor,
                         onChanged: (SearchFor value) {
@@ -65,9 +65,9 @@ class ChooseLessonDialogState extends State<ChooseLessonDialog> {
                           });
                         },
                       ),
-                      title: new Text("a legutóbbi")),
-                  new Container(
-                    child: new DropdownButton<String>(
+                      title: Text("a legutóbbi")),
+                  Container(
+                    child: DropdownButton<String>(
                       value: _subject,
                       items: subjects.map((String subject) {
                         return DropdownMenuItem<String>(
@@ -80,14 +80,14 @@ class ChooseLessonDialogState extends State<ChooseLessonDialog> {
                       },
                     ),
                   ),
-                  new Text(
+                  Text(
                     "órához",
-                    style: new TextStyle(fontSize: 15),
+                    style: TextStyle(fontSize: 15),
                   ),
                   Container(
-                    child: new FlatButton(
-                      child: new Text("MEGNYITÁS",
-                          style: new TextStyle(
+                    child: FlatButton(
+                      child: Text("MEGNYITÁS",
+                          style: TextStyle(
                               color: (_subject == "...")
                                   ? Colors.grey
                                   : Theme.of(context).accentColor,
@@ -95,7 +95,7 @@ class ChooseLessonDialogState extends State<ChooseLessonDialog> {
                       onPressed:
                           (_subject == "...") ? null : _openHomeworkDialog,
                     ),
-                    margin: new EdgeInsets.only(top: 10),
+                    margin: EdgeInsets.only(top: 10),
                   )
                 ],
               ),
@@ -113,7 +113,7 @@ class ChooseLessonDialogState extends State<ChooseLessonDialog> {
           barrierDismissible: true,
           context: context,
           builder: (BuildContext context) {
-            return new NewHomeworkDialog(lessons
+            return NewHomeworkDialog(lessons
                 .firstWhere((Lesson lesson) => (lesson.subject == _subject)));
           });
     } else {
@@ -127,7 +127,7 @@ class ChooseLessonDialogState extends State<ChooseLessonDialog> {
           barrierDismissible: true,
           context: context,
           builder: (BuildContext context) {
-            return new NewHomeworkDialog(lessons
+            return NewHomeworkDialog(lessons
                 .lastWhere((Lesson lesson) => (lesson.subject == _subject)));
           });
     }

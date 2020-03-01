@@ -5,7 +5,7 @@ import 'package:filcnaplo/generated/i18n.dart';
 class TimeSelectDialog extends StatefulWidget {
   const TimeSelectDialog();
   @override
-  TimeSelectDialogState createState() => new TimeSelectDialogState();
+  TimeSelectDialogState createState() => TimeSelectDialogState();
 }
 
 class TimeSelectDialogState extends State<TimeSelectDialog> {
@@ -27,19 +27,19 @@ class TimeSelectDialogState extends State<TimeSelectDialog> {
       I18n.of(context).dateMonth2
     ];
 
-    return new SimpleDialog(
-      title: new Text(I18n.of(context).time),
+    return SimpleDialog(
+      title: Text(I18n.of(context).time),
       contentPadding: const EdgeInsets.all(10.0),
       children: <Widget>[
-        new PopupMenuButton<String>(
-          child: new Container(
-            child: new Row(
+        PopupMenuButton<String>(
+          child: Container(
+            child: Row(
               children: <Widget>[
-                new Text(
+                Text(
                   timeOptionList[globals.selectedTimeForHomework],
-                  style: new TextStyle(color: null, fontSize: 17.0),
+                  style: TextStyle(color: null, fontSize: 17.0),
                 ),
-                new Icon(
+                Icon(
                   Icons.arrow_drop_down,
                   color: null,
                 ),
@@ -52,9 +52,9 @@ class TimeSelectDialogState extends State<TimeSelectDialog> {
           },
           itemBuilder: (BuildContext context) {
             return timeOptionList.map((String sor) {
-              return new PopupMenuItem<String>(
+              return PopupMenuItem<String>(
                 value: sor,
-                child: new Text(sor),
+                child: Text(sor),
               );
             }).toList();
           },

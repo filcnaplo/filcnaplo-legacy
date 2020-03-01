@@ -24,7 +24,7 @@ class NoteCard extends StatelessWidget {
   }
 
   @override
-  Key get key => new Key(getDate());
+  Key get key => Key(getDate());
 
   void openDialog() {
     _noteDialog(note);
@@ -35,15 +35,15 @@ class NoteCard extends StatelessWidget {
       context: context,
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
-        return new SimpleDialog(
+        return SimpleDialog(
           children: <Widget>[
-            new SingleChildScrollView(
-              child: new Linkify(
+            SingleChildScrollView(
+              child: Linkify(
                 text: note.content,
                 onOpen: (String url) {
                   launcher.launch(url);
                 },
-                style: new TextStyle(fontSize: 18.0),
+                style: TextStyle(fontSize: 18.0),
               ),
             ),
           ],
@@ -65,9 +65,9 @@ class NoteCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new GestureDetector(
+    return GestureDetector(
       onTap: openDialog,
-      child: new Card(
+      child: Card(
         shape: RoundedRectangleBorder(
           side: BorderSide(
             style: BorderStyle.none,
@@ -80,24 +80,24 @@ class NoteCard extends StatelessWidget {
             ? note.isEvent ? Colors.lightBlueAccent[400] : Colors.blue[600]
             : globals.isDark ? Color.fromARGB(255, 25, 25, 25) : Colors.white,
         child: Container(
-          child: new Column(
+          child: Column(
             children: <Widget>[
-              new Container(
-                child: new Text(
+              Container(
+                child: Text(
                   note.title,
-                  style: new TextStyle(
+                  style: TextStyle(
                       fontSize: 21.0,
                       color: Colors.white,
                       fontWeight: FontWeight.bold),
                 ),
                 margin: EdgeInsets.all(10.0),
               ),
-              new Container(
-                child: new Text(note.content,
+              Container(
+                child: Text(note.content,
                     maxLines: 4,
                     softWrap: true,
                     overflow: TextOverflow.ellipsis,
-                    style: new TextStyle(
+                    style: TextStyle(
                         fontSize: 17.0,
                         color: globals.isColor
                             ? Colors.white
@@ -105,15 +105,15 @@ class NoteCard extends StatelessWidget {
                 padding: EdgeInsets.all(10.0),
               ),
               !isSingle
-                  ? new Container(
-                      child: new Text(dateToHuman(note.date),
-                          style: new TextStyle(
+                  ? Container(
+                      child: Text(dateToHuman(note.date),
+                          style: TextStyle(
                               fontSize: 16.0, color: Colors.white)),
                       alignment: Alignment(1.0, -1.0),
                       padding: EdgeInsets.fromLTRB(5.0, 5.0, 10.0, 5.0),
                     )
-                  : new Container(),
-              new Container(
+                  : Container(),
+              Container(
                   decoration: ShapeDecoration(
                     shape: RoundedRectangleBorder(
                       side: BorderSide(
@@ -126,13 +126,13 @@ class NoteCard extends StatelessWidget {
                         ? Color.fromARGB(255, 25, 25, 25)
                         : Colors.white,
                   ),
-                  child: new Padding(
-                    padding: new EdgeInsets.all(10.0),
-                    child: new Row(
+                  child: Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Row(
                       children: <Widget>[
-                        new Container(
-                          padding: new EdgeInsets.only(left: 2),
-                          child: new Icon(
+                        Container(
+                          padding: EdgeInsets.only(left: 2),
+                          child: Icon(
                             note.isEvent
                                 ? IconData(0xf0e5,
                                     fontFamily: "Material Design Icons")
@@ -140,33 +140,33 @@ class NoteCard extends StatelessWidget {
                             color: globals.isDark ? Colors.white : Colors.black,
                           ),
                         ),
-                        new Container(
-                          child: new Text(
+                        Container(
+                          child: Text(
                             note.isEvent
                                 ? I18n.of(context).note2
                                 : I18n.of(context).note,
-                            style: new TextStyle(fontSize: 18.0),
+                            style: TextStyle(fontSize: 18.0),
                           ),
                           padding: EdgeInsets.only(left: 8.0),
                         ),
-                        new Divider(),
+                        Divider(),
                         isSingle
-                            ? new Expanded(
-                                child: new Container(
-                                child: new Text(dateToHuman(note.date),
-                                    style: new TextStyle(
+                            ? Expanded(
+                                child: Container(
+                                child: Text(dateToHuman(note.date),
+                                    style: TextStyle(
                                         fontSize: 16.0,
                                         color: globals.isDark
                                             ? Colors.white
                                             : Colors.grey[900])),
                                 alignment: Alignment(1.0, 0.0),
                               ))
-                            : new Container(),
+                            : Container(),
                         !isSingle
-                            ? new Expanded(
-                                child: new Container(
-                                  child: new Text(note.owner.name,
-                                      style: new TextStyle(
+                            ? Expanded(
+                                child: Container(
+                                  child: Text(note.owner.name,
+                                      style: TextStyle(
                                           color: note.owner.color ??
                                               (globals.isDark
                                                   ? Colors.white
@@ -175,13 +175,13 @@ class NoteCard extends StatelessWidget {
                                   alignment: Alignment(1.0, -1.0),
                                 ),
                               )
-                            : new Container(),
+                            : Container(),
                       ],
                     ),
                   )),
             ],
           ),
-          decoration: new BoxDecoration(
+          decoration: BoxDecoration(
             border: Border.all(
                 color: globals.isColor
                     ? note.isEvent ? Colors.lightBlueAccent[400] : Colors.blue[600]
@@ -189,7 +189,7 @@ class NoteCard extends StatelessWidget {
                         ? Color.fromARGB(255, 25, 25, 25)
                         : Colors.white,
                 width: 2.5),
-            borderRadius: new BorderRadius.all(Radius.circular(5)),
+            borderRadius: BorderRadius.all(Radius.circular(5)),
           ),
         ),
       ),

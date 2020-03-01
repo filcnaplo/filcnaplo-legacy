@@ -29,7 +29,7 @@ Future<List<Lesson>> getLessonsOffline(
     print("[E] TimetableHelper.GetLessonsOffline()1: " + e.toString());
   }
 
-  List<Lesson> lessons = new List();
+  List<Lesson> lessons = List();
 
   try {
     for (dynamic d in ttMap) lessons.add(Lesson.fromJson(d));
@@ -69,7 +69,7 @@ Future<List<Lesson>> getLessons(
 
     await DBHelper().saveTimetableMap(fromToString(from, to), user, ttMap);
 
-    List<Lesson> lessons = new List();
+    List<Lesson> lessons = List();
     for (dynamic d in ttMap) {
       lessons.add(Lesson.fromJson(d));
     }

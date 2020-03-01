@@ -22,7 +22,7 @@ class TomorrowLessonCard extends StatelessWidget {
   }
 
   @override
-  Key get key => new Key(getDate());
+  Key get key => Key(getDate());
 
   String getDate() {
     return "c";
@@ -45,7 +45,7 @@ class TomorrowLessonCard extends StatelessWidget {
           barrierDismissible: true,
           context: context,
           builder: (BuildContext context) {
-            return new HomeworkDialog(lesson);
+            return HomeworkDialog(lesson);
           },
         ) ??
         false;
@@ -56,16 +56,16 @@ class TomorrowLessonCard extends StatelessWidget {
       context: context,
       barrierDismissible: true,
       builder: (BuildContext context) {
-        return new SimpleDialog(
+        return SimpleDialog(
           children: <Widget>[
-            new SingleChildScrollView(
-              child: new ListBody(
+            SingleChildScrollView(
+              child: ListBody(
                   children: lessons.map((Lesson lesson) {
-                return new Column(children: <Widget>[
-                  new ListTile(
-                    title: new Text(
+                return Column(children: <Widget>[
+                  ListTile(
+                    title: Text(
                       lesson.subject,
-                      style: new TextStyle(
+                      style: TextStyle(
                           color:
                               (lesson.end.isBefore(now)) ? Colors.grey : null),
                     ),
@@ -73,16 +73,16 @@ class TomorrowLessonCard extends StatelessWidget {
                     onTap: () {
                       _lessonInfoDialog(lesson);
                     },
-                    subtitle: new Text(
+                    subtitle: Text(
                       lesson.teacher,
-                      style: new TextStyle(
+                      style: TextStyle(
                           color:
                               (lesson.end.isBefore(now)) ? Colors.grey : null),
                     ),
-                    leading: new Container(
-                      child: new Text(
+                    leading: Container(
+                      child: Text(
                         lesson.count != -1 ? lesson.count.toString() : "+",
-                        style: new TextStyle(
+                        style: TextStyle(
                             color:
                                 (lesson.end.isBefore(now)) ? Colors.grey : null,
                             fontSize: 21),
@@ -92,7 +92,7 @@ class TomorrowLessonCard extends StatelessWidget {
                       width: 20,
                     ),
                   ),
-                  new Row(
+                  Row(
                     //Bottom row containing room number and a house icon if there is homework set for the lesson.
                     children: <Widget>[
                       Expanded(
@@ -103,7 +103,7 @@ class TomorrowLessonCard extends StatelessWidget {
                       Expanded(
                         child: Text(
                           lesson.room,
-                          style: new TextStyle(
+                          style: TextStyle(
                               color: (lesson.end.isBefore(now))
                                   ? Colors.grey
                                   : null),
@@ -112,7 +112,7 @@ class TomorrowLessonCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  new Divider(
+                  Divider(
                     color: Colors.blueGrey,
                   ),
                 ]);
@@ -138,28 +138,28 @@ class TomorrowLessonCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: openDialog,
-      child: new Card(
+      child: Card(
         margin: EdgeInsets.all(6.0),
-        child: new Column(
+        child: Column(
           children: <Widget>[
-            new Container(
+            Container(
               child: Wrap(
                 children: <Widget>[
-                  new Text(
+                  Text(
                     capitalize(I18n.of(context).lessonTomorrow),
-                    style: new TextStyle(
+                    style: TextStyle(
                       fontSize: 18.0,
                     ),
                   ),
                   Container(
                     padding: EdgeInsets.only(right: 5, left: 5),
-                    child: new Text(lessons.length.toString(),
-                        style: new TextStyle(
+                    child: Text(lessons.length.toString(),
+                        style: TextStyle(
                             fontSize: 18.0, color: globals.CurrentTextColor)),
                   ),
-                  new Text(
+                  Text(
                     I18n.of(context).lessonHave,
-                    style: new TextStyle(
+                    style: TextStyle(
                       fontSize: 18.0,
                     ),
                     softWrap: false,

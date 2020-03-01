@@ -11,12 +11,12 @@ import 'package:filcnaplo/Utils/StringFormatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
-  runApp(new MaterialApp(home: new TestsScreen()));
+  runApp(MaterialApp(home: TestsScreen()));
 }
 
 class TestsScreen extends StatefulWidget {
   @override
-  TestsScreenState createState() => new TestsScreenState();
+  TestsScreenState createState() => TestsScreenState();
 }
 
 class TestsScreenState extends State<TestsScreen> {
@@ -30,29 +30,29 @@ class TestsScreenState extends State<TestsScreen> {
   bool hasOfflineLoaded = false;
   bool hasLoaded = true;
 
-  List<Test> tests = new List();
+  List<Test> tests = List();
 
   @override
   Widget build(BuildContext context) {
     globals.context = context;
     
-    return new WillPopScope(
+    return WillPopScope(
         onWillPop: () {
           globals.screen = 0;
           Navigator.pushReplacementNamed(context, "/main");
         },
         child: Scaffold(
             drawer: GDrawer(),
-            appBar: new AppBar(
-              title: new Text(I18n.of(context).testTitle),
+            appBar: AppBar(
+              title: Text(I18n.of(context).testTitle),
               actions: <Widget>[],
             ),
-            body: new Container(
+            body: Container(
                 child: (hasOfflineLoaded && tests != null)
-                    ? new Column(children: <Widget>[
+                    ? Column(children: <Widget>[
                         !hasLoaded
                             ? Container(
-                                child: new LinearProgressIndicator(
+                                child: LinearProgressIndicator(
                                   value: null,
                                 ),
                                 height: 3,
@@ -60,9 +60,9 @@ class TestsScreenState extends State<TestsScreen> {
                             : Container(
                                 height: 3,
                               ),
-                        new Expanded(
-                          child: new RefreshIndicator(
-                            child: new ListView.builder(
+                        Expanded(
+                          child: RefreshIndicator(
+                            child: ListView.builder(
                               itemBuilder: _itemBuilder,
                               itemCount: tests.length,
                             ),
@@ -70,14 +70,14 @@ class TestsScreenState extends State<TestsScreen> {
                           ),
                         ),
                       ])
-                    : new Center(child: new CircularProgressIndicator()))));
+                    : Center(child: CircularProgressIndicator()))));
   }
 
   Future<Null> _onRefresh({bool showErrors}) async {
     setState(() {
       hasLoaded = false;
     });
-    Completer<Null> completer = new Completer<Null>();
+    Completer<Null> completer = Completer<Null>();
 
     try {
       await globals.selectedAccount.refreshTests(false, showErrors);
@@ -99,7 +99,7 @@ class TestsScreenState extends State<TestsScreen> {
     setState(() {
       hasOfflineLoaded = false;
     });
-    Completer<Null> completer = new Completer<Null>();
+    Completer<Null> completer = Completer<Null>();
 
     await globals.selectedAccount.refreshTests(true, false);
     tests = globals.selectedAccount.tests;
@@ -113,17 +113,17 @@ class TestsScreenState extends State<TestsScreen> {
   }
 
   Widget _itemBuilder(BuildContext context, int index) {
-    return new Column(
+    return Column(
       children: <Widget>[
-        new ListTile(
+        ListTile(
           title: tests[index].title != null && tests[index].title != ""
-              ? new Text(
+              ? Text(
                   tests[index].title,
                   style: TextStyle(fontSize: 22),
                 )
               : null,
-          subtitle: new Column(children: <Widget>[
-            new Container(
+          subtitle: Column(children: <Widget>[
+            Container(
               padding: EdgeInsets.all(5),
               child: Linkify(
                 style: TextStyle(fontSize: 16),
@@ -133,21 +133,21 @@ class TestsScreenState extends State<TestsScreen> {
                 },
               ),
             ),
-            new Container(
-              child: new Text(dateToHuman(tests[index].date) +
+            Container(
+              child: Text(dateToHuman(tests[index].date) +
                   dateToWeekDay(tests[index].date, context)),
               alignment: Alignment(1, -1),
             ),
             tests[index].teacher != null
-                ? new Container(
-                    child: new Text(tests[index].teacher),
+                ? Container(
+                    child: Text(tests[index].teacher),
                     alignment: Alignment(1, -1),
                   )
-                : new Container(),
+                : Container(),
           ]),
           isThreeLine: true,
         ),
-        new Divider(
+        Divider(
           height: 10.0,
         ),
       ],

@@ -11,13 +11,13 @@ class DBHelper {
   }
 
   Future<void> saveUsersJson(List<User> users) async {
-    List<Map<String, dynamic>> userMap = new List();
+    List<Map<String, dynamic>> userMap = List();
     for (User user in users) userMap.add(user.toMap());
     await store.record('users_json').put(db, userMap);
   }
 
   Future<List<Map<String, dynamic>>> getUserJson() async {
-    List<Map<String, dynamic>> userMap = new List();
+    List<Map<String, dynamic>> userMap = List();
     try {
       List<dynamic> userList = await store.record('users_json').get(db) as List;
       for (dynamic d in userList) userMap.add(d as Map<String, dynamic>);
