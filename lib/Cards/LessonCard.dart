@@ -241,7 +241,6 @@ class _LessonCardState extends State<LessonCard> {
             children: <Widget>[
               MaterialButton(
                 child: Icon(IconData(0xf520, fontFamily: "Material Design Icons"),),
-                color: Colors.grey[200],
                 onPressed: () {Navigator.of(context).pushNamed("/timetable");},
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30), side: BorderSide(color: Theme.of(context).accentColor, width: 2)),
               ),
@@ -255,7 +254,6 @@ class _LessonCardState extends State<LessonCard> {
                       Text(" • " + capitalize(homeworkToThisSubject)),
                     ],
                   ),
-                  color: Colors.grey[200],
                   onPressed: _addHomeworkToThisSubject,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30), side: BorderSide(color: Theme.of(context).accentColor, width: 2)),
                 ),
