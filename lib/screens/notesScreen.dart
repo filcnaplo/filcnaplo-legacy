@@ -6,7 +6,7 @@ import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart' as launcher;
 
 import 'package:filcnaplo/Datas/Note.dart';
-import 'package:filcnaplo/GlobalDrawer.dart';
+import 'package:filcnaplo/screens/Screen.dart';
 import 'package:filcnaplo/Utils/StringFormatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 
@@ -35,41 +35,34 @@ class NotesScreenState extends State<NotesScreen> {
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    return WillPopScope(
-        onWillPop: () {
-          globals.screen = 0;
-          Navigator.pushReplacementNamed(context, "/home");
-        },
-        child: Scaffold(
-            drawer: GDrawer(),
-            appBar: AppBar(
-              title: Text(capitalize(I18n.of(context).noteTitle)),
-              actions: <Widget>[],
-            ),
-            body: Container(
-                child: hasOfflineLoaded
-                    ? Column(children: <Widget>[
-                        !hasLoaded
-                            ? Container(
-                                child: LinearProgressIndicator(
-                                  value: null,
-                                ),
-                                height: 3,
-                              )
-                            : Container(
-                                height: 3,
-                              ),
-                        Expanded(
-                          child: RefreshIndicator(
-                            child: ListView.builder(
-                              itemBuilder: _itemBuilder,
-                              itemCount: notes.length,
+    return new Screen(
+        new Text(capitalize(I18n.of(context).noteTitle)),
+        new Container(
+            child: hasOfflineLoaded
+                ? new Column(children: <Widget>[
+                    !hasLoaded
+                        ? Container(
+                            child: new LinearProgressIndicator(
+                              value: null,
                             ),
-                            onRefresh: _onRefresh,
+                            height: 3,
+                          )
+                        : Container(
+                            height: 3,
                           ),
+                    new Expanded(
+                      child: new RefreshIndicator(
+                        child: new ListView.builder(
+                          itemBuilder: _itemBuilder,
+                          itemCount: notes.length,
                         ),
-                      ])
-                    : Center(child: CircularProgressIndicator()))));
+                        onRefresh: _onRefresh,
+                      ),
+                    ),
+                  ])
+                : new Center(child: new CircularProgressIndicator())),
+        "/home",
+        <Widget>[]);
   }
 
   Future<Null> _onRefresh({bool showErrors = true}) async {

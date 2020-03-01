@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:filcnaplo/Datas/Message.dart';
 import 'package:filcnaplo/Dialog/MessageDialog.dart';
 import 'package:filcnaplo/Helpers/RequestHelper.dart';
+import 'package:filcnaplo/screens/Screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:filcnaplo/GlobalDrawer.dart';
@@ -34,40 +35,34 @@ class MessageScreenState extends State<MessageScreen> {
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    return WillPopScope(
-        onWillPop: () {
-          globals.screen = 0;
-          Navigator.pushReplacementNamed(context, "/home");
-        },
-        child: Scaffold(
-            drawer: GDrawer(),
-            appBar: AppBar(
-              title: Text(I18n.of(context).messageTitle),
-              actions: <Widget>[],
-            ),
-            body: Container(
-                child: hasOfflineLoaded & (messages != null)
-                    ? Column(children: <Widget>[
-                        !hasLoaded
-                            ? Container(
-                                child: LinearProgressIndicator(
-                                  value: null,
-                                ),
-                                height: 3,
-                              )
-                            : Container(
-                                height: 3,
-                              ),
-                        Expanded(
-                          child: RefreshIndicator(
-                              child: ListView.builder(
-                                itemBuilder: _itemBuilder,
-                                itemCount: messages.length,
-                              ),
-                              onRefresh: _onRefresh),
-                        ),
-                      ])
-                    : Center(child: CircularProgressIndicator()))));
+    return new Screen(
+        new Text(I18n.of(context).messageTitle),
+        new Container(
+            child: hasOfflineLoaded & (messages != null)
+                ? new Column(children: <Widget>[
+              !hasLoaded
+                  ? Container(
+                child: new LinearProgressIndicator(
+                  value: null,
+                ),
+                height: 3,
+              )
+                  : Container(
+                height: 3,
+              ),
+              new Expanded(
+                child: new RefreshIndicator(
+                    child: new ListView.builder(
+                      itemBuilder: _itemBuilder,
+                      itemCount: messages.length,
+                    ),
+                    onRefresh: _onRefresh),
+              ),
+            ])
+                : new Center(child: new CircularProgressIndicator())),
+        "/home",
+        <Widget>[]
+    );
   }
 
   Future<Null> _onRefresh({bool showErrors = true}) async {

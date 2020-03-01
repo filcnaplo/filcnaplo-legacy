@@ -18,6 +18,7 @@ import 'package:filcnaplo/screens/studentScreen.dart';
 import 'package:filcnaplo/screens/loginScreen.dart';
 import 'package:filcnaplo/Utils/StringFormatter.dart';
 
+import 'package:filcnaplo/screens/Screen.dart';
 void main() {
   runApp(MaterialApp(home: AccountsScreen()));
 }
@@ -219,20 +220,11 @@ class AccountsScreenState extends State<AccountsScreen> {
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    return WillPopScope(
-      onWillPop: () {
-        globals.screen = 0;
-        Navigator.pushReplacementNamed(context, "/home");
-      },
-      child: Scaffold(
-        drawer: GDrawer(),
-        appBar: AppBar(
-          title: Text(capitalize(I18n.of(context).accountTitle)),
-          actions: <Widget>[],
-        ),
-        body: Column(children: <Widget>[
-          Expanded(
-            child: Container(
+    return new Screen(
+        new Text(capitalize(I18n.of(context).accountTitle)),
+        new Column(children: <Widget>[
+          new Expanded(
+            child: new Container(
                 child: accountListWidgets != null
                     ? ListView(
                         children: accountListWidgets,
@@ -240,7 +232,8 @@ class AccountsScreenState extends State<AccountsScreen> {
                     : CircularProgressIndicator()),
           ),
         ]),
-      ),
+      "/home",
+      []
     );
   }
 }

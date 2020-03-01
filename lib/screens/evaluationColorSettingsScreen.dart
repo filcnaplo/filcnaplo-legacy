@@ -8,6 +8,8 @@ import 'package:filcnaplo/GlobalDrawer.dart';
 import 'package:filcnaplo/Helpers/SettingsHelper.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 
+import 'package:filcnaplo/screens/Screen.dart';
+
 class colorSettingsScreen extends StatefulWidget {
   @override
   colorSettingsScreenState createState() => colorSettingsScreenState();
@@ -61,108 +63,106 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    return WillPopScope(
-        onWillPop: () async {
-          globals.screen = 7;
-          Navigator.pushReplacementNamed(context, "/settings");
-        },
-        child: Scaffold(
-          drawer: GDrawer(),
-          appBar: AppBar(
-            title: Text(I18n.of(context).appTitle),
-            actions: <Widget>[],
+    return new Screen(
+        new Text(I18n.of(context).appTitle),
+        new Center(
+          child: Column(
+            children: <Widget>[
+              ListTile(
+                title: Text(
+                    I18n.of(context).grade1 + " " + I18n.of(context).grade),
+                trailing: new Container(
+                  child: new FlatButton(
+                    onPressed: () {
+                      _openDialog(
+                          I18n.of(context).color,
+                          MaterialColorPicker(
+                            selectedColor: selected,
+                            onColorChange: (Color c) => selected = c,
+                          ),
+                          0);
+                    },
+                    child: new Icon(Icons.color_lens, color: globals.color1),
+                  ),
+                ),
+              ),
+              ListTile(
+                title: Text(
+                    I18n.of(context).grade2 + " " + I18n.of(context).grade),
+                trailing: new Container(
+                  child: new FlatButton(
+                    onPressed: () {
+                      _openDialog(
+                          I18n.of(context).color,
+                          MaterialColorPicker(
+                            selectedColor: selected,
+                            onColorChange: (Color c) => selected = c,
+                          ),
+                          1);
+                    },
+                    child: new Icon(Icons.color_lens, color: globals.color2),
+                  ),
+                ),
+              ),
+              ListTile(
+                title: Text(
+                    I18n.of(context).grade3 + " " + I18n.of(context).grade),
+                trailing: new Container(
+                  child: new FlatButton(
+                    onPressed: () {
+                      _openDialog(
+                          I18n.of(context).color,
+                          MaterialColorPicker(
+                            selectedColor: selected,
+                            onColorChange: (Color c) => selected = c,
+                          ),
+                          2);
+                    },
+                    child: new Icon(Icons.color_lens, color: globals.color3),
+                  ),
+                ),
+              ),
+              ListTile(
+                title: Text(
+                    I18n.of(context).grade4 + " " + I18n.of(context).grade),
+                trailing: new Container(
+                  child: new FlatButton(
+                    onPressed: () {
+                      _openDialog(
+                          I18n.of(context).color,
+                          MaterialColorPicker(
+                            selectedColor: selected,
+                            onColorChange: (Color c) => selected = c,
+                          ),
+                          3);
+                    },
+                    child: new Icon(Icons.color_lens, color: globals.color4),
+                  ),
+                ),
+              ),
+              ListTile(
+                title: Text(
+                    I18n.of(context).grade5 + " " + I18n.of(context).grade),
+                trailing: new Container(
+                  child: new FlatButton(
+                    onPressed: () {
+                      _openDialog(
+                          I18n.of(context).color,
+                          MaterialColorPicker(
+                            selectedColor: selected,
+                            onColorChange: (Color c) => selected = c,
+                          ),
+                          4);
+                    },
+                    child: new Icon(Icons.color_lens, color: globals.color5)
+                  ),
+                ),
+              ),
+            ],
           ),
-          body: Center(
-            child: Column(
-              children: <Widget>[
-                ListTile(
-                  title: Text(I18n.of(context).grade1 + " " + I18n.of(context).grade),
-                  trailing: Container(
-                    child: FlatButton(
-                      onPressed: () {
-                        _openDialog(
-                            I18n.of(context).color,
-                            MaterialColorPicker(
-                              selectedColor: selected,
-                              onColorChange: (Color c) => selected = c,
-                            ),
-                            0);
-                      },
-                      child: Icon(Icons.color_lens, color: globals.color1),
-                    ),
-                  ),
-                ),
-                ListTile(
-                  title: Text(I18n.of(context).grade2 + " " + I18n.of(context).grade),
-                  trailing: Container(
-                    child: FlatButton(
-                      onPressed: () {
-                        _openDialog(
-                            I18n.of(context).color,
-                            MaterialColorPicker(
-                              selectedColor: selected,
-                              onColorChange: (Color c) => selected = c,
-                            ),
-                            1);
-                      },
-                      child: Icon(Icons.color_lens, color: globals.color2),
-                    ),
-                  ),
-                ),
-                ListTile(
-                  title: Text(I18n.of(context).grade3 + " " + I18n.of(context).grade),
-                  trailing: Container(
-                    child: FlatButton(
-                      onPressed: () {
-                        _openDialog(
-                            I18n.of(context).color,
-                            MaterialColorPicker(
-                              selectedColor: selected,
-                              onColorChange: (Color c) => selected = c,
-                            ),
-                            2);
-                      },
-                      child: Icon(Icons.color_lens, color: globals.color3),
-                    ),
-                  ),
-                ),
-                ListTile(
-                  title: Text(I18n.of(context).grade4 + " " + I18n.of(context).grade),
-                  trailing: Container(
-                    child: FlatButton(
-                      onPressed: () {
-                        _openDialog(
-                            I18n.of(context).color,
-                            MaterialColorPicker(
-                              selectedColor: selected,
-                              onColorChange: (Color c) => selected = c,
-                            ),
-                            3);
-                      },
-                      child: Icon(Icons.color_lens, color: globals.color4),
-                    ),
-                  ),
-                ),
-                ListTile(
-                  title: Text(I18n.of(context).grade5 + " " + I18n.of(context).grade),
-                  trailing: Container(
-                    child: FlatButton(
-                      onPressed: () {
-                        _openDialog(
-                            I18n.of(context).color,
-                            MaterialColorPicker(
-                              selectedColor: selected,
-                              onColorChange: (Color c) => selected = c,
-                            ),
-                            4);
-                      },
-                      child: Icon(Icons.color_lens, color: globals.color5),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ));
+        ),
+        "/settings",
+        []
+    );
   }
 }
