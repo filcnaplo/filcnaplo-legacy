@@ -110,7 +110,7 @@ class _MyAppState extends State<MyApp> {
               '/tests': (_) => TestsScreen(),
             },
             navigatorKey: navigatorKey,
-            home: isNew? LoginScreen() : MainScreen(),
+            home: isNew ? LoginScreen() : MainScreen(),
           );
         });
   }

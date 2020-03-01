@@ -78,8 +78,15 @@ class HomeworkScreenState extends State<HomeworkScreen> {
                     });
                   },
                 ),
-                IconButton(icon: Icon(Icons.plus_one), onPressed: _openChooser,)
               ],
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: _openChooser,
+              child: Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+              tooltip: "Házi hozzáadása",//TODO: I18n
             ),
             body: Container(
                 child: hasOfflineLoaded
@@ -122,7 +129,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
           builder: (BuildContext context) {
             return TimeSelectDialog();
           },
-        ) ?? 
+        ) ??
         false;
   }
 
@@ -171,7 +178,8 @@ class HomeworkScreenState extends State<HomeworkScreen> {
             FlatButton(
               child: Icon(Icons.delete),
               onPressed: () {
-                RequestHelper().deleteHomework(homework.id, globals.selectedUser);
+                RequestHelper()
+                    .deleteHomework(homework.id, globals.selectedUser);
               },
             ),
             FlatButton(
@@ -191,10 +199,10 @@ class HomeworkScreenState extends State<HomeworkScreen> {
       hasLoaded = false;
     });
     Completer<Null> completer = Completer<Null>();
-    List<Homework> homeworks= await HomeworkHelper().getHomeworks(
+    List<Homework> homeworksNew = await HomeworkHelper().getHomeworks(
         globals.timeData[globals.selectedTimeForHomework], showErrors);
-    if (homeworksNew.length > homeworks.length) homeworks = homeworksNew;
-    homeworks
+    if (homeworksNew.length > homeworksNew.length) homeworksNew = homeworksNew;
+    homeworksNew
         .sort((Homework a, Homework b) => b.uploadDate.compareTo(a.uploadDate));
     if (mounted)
       setState(() {

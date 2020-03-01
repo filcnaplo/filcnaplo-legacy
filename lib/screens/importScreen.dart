@@ -31,17 +31,14 @@ class ImportScreenState extends State<ImportScreen> {
   }
 
   void _showDialog() async {
-    // flutter defined function
     await Future.delayed(Duration(milliseconds: 50));
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        // return object of type Dialog
         return AlertDialog(
           title: Text("Figyelem"),
           content: Text("Ez kitöröl minden meglévő felhasználót! (ha van)"),
           actions: <Widget>[
-            // usually buttons at the bottom of the dialog
             FlatButton(
               child: Text("OK"),
               onPressed: () {

@@ -122,6 +122,15 @@
         "uploadTime": "feltöltés ideje"
     },
 
+    "choose": {
+        "subjectNotFound": "Nincs ilyen tantárgyú órád a következő 7 napban.",
+        "loading": "Órák betöltése...",
+        "next": "a következő",
+        "previous": "a legutóbbi",
+        "forLesson": "órához",
+        "open": "megnyitás"
+    },
+
     "substitution": {
         "": "helyettesítés",
         "missed": "elmarad"
