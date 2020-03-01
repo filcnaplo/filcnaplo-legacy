@@ -122,6 +122,15 @@
         "uploadTime": "uploaded at"
     },
 
+    "choose": {
+        "subjectNotFound": "You don't have a lesson with that subject in the following 7 days.",
+        "loading": "Loading lessons...",
+        "next": "to the next",
+        "previous": "to the previous",
+        "forLesson": "lesson",
+        "open": "open"
+    },
+
     "substitution": {
         "": "substitution",
         "missed": "not held"

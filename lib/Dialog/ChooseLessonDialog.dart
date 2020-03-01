@@ -57,7 +57,7 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
         widget._subject != "...") {
       Navigator.of(context).pop();
       Fluttertoast.showToast(
-          msg: "Nincs ilyen tantárgyú órád a következő 7 napban.");
+          msg: I18n.of(context).chooseSubjectNotFound);
       throw ("No lesson is recorded with '" +
           widget._subject +
           "' subject next week.");
@@ -74,7 +74,7 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
                       height: 45,
                       padding: EdgeInsets.all(10),
                       child: CircularProgressIndicator()),
-                  Text("Órák betöltése..."),
+                  Text(I18n.of(context).chooseLoading),
                 ],
               )
             : Column(
@@ -90,7 +90,7 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
                           });
                         },
                       ),
-                      title: new Text("a következő")),
+                      title: new Text(I18n.of(context).chooseNext)),
                   new ListTile(
                       leading: new Radio(
                         value: SearchFor.previous,
@@ -101,7 +101,7 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
                           });
                         },
                       ),
-                      title: new Text("a legutóbbi")),
+                      title: new Text(I18n.of(context).choosePrevious)),
                   new Container(
                     child: new DropdownButton<String>(
                       value: widget._subject,
@@ -117,12 +117,12 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
                     ),
                   ),
                   new Text(
-                    "órához",
+                    I18n.of(context).chooseForLesson,
                     style: new TextStyle(fontSize: 15),
                   ),
                   Container(
                     child: new FlatButton(
-                      child: new Text("MEGNYITÁS",
+                      child: new Text(I18n.of(context).chooseOpen.toUpperCase(),
                           style: new TextStyle(
                               color: (widget._subject == "...")
                                   ? Colors.grey
