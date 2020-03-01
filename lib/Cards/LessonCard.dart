@@ -1,3 +1,4 @@
+import 'package:filcnaplo/Dialog/ChooseLessonDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 import 'package:filcnaplo/Datas/Lesson.dart';
@@ -40,6 +41,8 @@ class _LessonCardState extends State<LessonCard> {
 
   int lessonCardState;
   bool isInit;
+
+  String homeworkToThisSubject;
 
   @override
   void setState(fn) {
@@ -88,8 +91,6 @@ class _LessonCardState extends State<LessonCard> {
       lessonCardState = 4;
     else if (thisLesson != null)
       lessonCardState = 2;
-    /*else if (isLessonsTomorrow)
-      lessonCardState = 3;*/
     else if (previousLesson.end.isBefore(now) && nextLesson.start.isAfter(now))
       lessonCardState = 3;
 
@@ -185,46 +186,86 @@ class _LessonCardState extends State<LessonCard> {
           getLessonRangeText(nextLesson),
           nextLesson.room));
     }
+
+    //Decide which subject to add homework to
+    /*
+    If during lesson, that subject.
+    If after lesson, previous subject.
+    Otherwise, null.
+    */
+    if ([1, 2, 4].contains(lessonCardState)) homeworkToThisSubject = thisLesson.subject;
+    else if ([3, 5].contains(lessonCardState)) homeworkToThisSubject = previousLesson.subject;
   }
 
   @override
   Widget build(BuildContext context) {
     now = new DateTime.now();
     _lessonCardBackend(now, widget.lessons, widget.isLessonsTomorrow);
-    return (quickLessons.length > 0)
-        ? Container(
-            padding: EdgeInsets.all(5.0),
-            child: new SizedBox(
-                height: 125,
-                child: new Swiper(
-                  itemBuilder: (BuildContext context, int index) {
-                    return new Container(
-                        margin: EdgeInsets.all(4.0),
-                        child: quickLessons[index]);
-                  },
-                  itemCount: quickLessons.length,
-                  viewportFraction: 0.95,
-                  scale: 0.9,
-                  loop: false,
-                  index: isInit ? 1 : null,
-                  pagination: new SwiperCustomPagination(builder:
-                      (BuildContext context, SwiperPluginConfig config) {
-                    return new Align(
-                        alignment: Alignment.bottomCenter,
-                        child: DotSwiperPaginationBuilder(
-                                activeColor: globals.isDark
-                                    ? Colors.white24
-                                    : Colors.black26,
-                                color: globals.isDark
-                                    ? Colors.white12
-                                    : Colors.black12,
-                                size: 8.0,
-                                activeSize: 12.0)
-                            .build(context, config));
-                  }),
-                )),
+    return Column(
+      children: <Widget>[
+        (quickLessons.length > 0)
+            ? new Container(
+                padding: EdgeInsets.all(5.0),
+                child: new SizedBox(
+                    height: 125,
+                    child: new Swiper(
+                      itemBuilder: (BuildContext context, int index) {
+                        return new Container(
+                            margin: EdgeInsets.all(4.0),
+                            child: quickLessons[index]);
+                      },
+                      itemCount: quickLessons.length,
+                      viewportFraction: 0.95,
+                      scale: 0.9,
+                      loop: false,
+                      index: isInit ? 1 : null,
+                      pagination: new SwiperCustomPagination(builder:
+                          (BuildContext context, SwiperPluginConfig config) {
+                        return new Align(
+                            alignment: Alignment.bottomCenter,
+                            child: DotSwiperPaginationBuilder(
+                                    activeColor: globals.isDark
+                                        ? Colors.white24
+                                        : Colors.black26,
+                                    color: globals.isDark
+                                        ? Colors.white12
+                                        : Colors.black12,
+                                    size: 8.0,
+                                    activeSize: 12.0)
+                                .build(context, config));
+                      }),
+                    )),
+              )
+            : new Container(),
+          new Row(
+            children: <Widget>[
+              new MaterialButton(
+                child: new Icon(IconData(0xf520, fontFamily: "Material Design Icons"),), //TODO I18n
+                color: Colors.grey[200],
+                onPressed: () {Navigator.of(context).pushNamed("/timetable");},
+                shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30), side: BorderSide(color: Theme.of(context).accentColor, width: 2)),
+              ),
+              (homeworkToThisSubject != null)
+              ? Container(
+                margin: EdgeInsets.only(left: 10),
+                child: new MaterialButton(
+                  child: Row(
+                    children: <Widget>[
+                      Icon(Icons.home),
+                      Text(" • " + capitalize(homeworkToThisSubject)),
+                    ],
+                  ), //TODO I18n
+                  color: Colors.grey[200],
+                  onPressed: _addHomeworkToThisSubject,
+                  shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30), side: BorderSide(color: Theme.of(context).accentColor, width: 2)),
+                ),
+              )
+              : Container(),
+            ],
+            mainAxisAlignment: MainAxisAlignment.center,
           )
-        : Container();
+      ],
+    );
   }
 
   Widget LessonTile(
@@ -356,6 +397,15 @@ class _LessonCardState extends State<LessonCard> {
             )
           : Container(),
     ]));
+  }
+
+  Future<bool> _addHomeworkToThisSubject() {
+    return showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (BuildContext context) {
+          return new ChooseLessonDialog(0, homeworkToThisSubject);
+        });
   }
 
   Future<Null> _lessonDialog(Lesson lesson) async {

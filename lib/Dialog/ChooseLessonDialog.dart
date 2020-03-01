@@ -12,13 +12,15 @@ import '../Helpers/TimetableHelper.dart';
 import '../Dialog/NewHomeworkDialog.dart';
 
 enum SearchFor { next, previous }
-bool suppliedData = true;
+bool suppliedData;
 
 class ChooseLessonDialog extends StatefulWidget {
   int searchForInt; //0: next, 1: previous
   String _subject;
 
   ChooseLessonDialog([int searchForInt, String _subject]) {
+    suppliedData = true;
+
     if (searchForInt == null) {
       searchForInt = 0;
       suppliedData = false;
@@ -146,7 +148,7 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
           context: context,
           builder: (BuildContext context) {
             return new NewHomeworkDialog(lessons.firstWhere(
-                (Lesson lesson) => (lesson.subject == widget._subject)));
+                (Lesson lesson) => (lesson.subject == widget._subject && lesson.start.isAfter(now))));
           });
     } else {
       lessons.clear();
@@ -157,7 +159,7 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
           context: context,
           builder: (BuildContext context) {
             return new NewHomeworkDialog(lessons.lastWhere(
-                (Lesson lesson) => (lesson.subject == widget._subject)));
+                (Lesson lesson) => (lesson.subject == widget._subject && lesson.end.isBefore(now))));
           });
     }
   }
@@ -171,6 +173,7 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
     subjects.sort((a, b) => a.compareTo(b));
     subjects.insert(0, "...");
     setState(() {});
+
     if (suppliedData) {
       _openHomeworkDialog();
     }
