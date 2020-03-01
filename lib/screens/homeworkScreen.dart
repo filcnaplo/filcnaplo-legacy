@@ -30,7 +30,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
   bool hasLoaded = true;
   bool hasOfflineLoaded = false;
 
-  List<Homework> homeworksNew = List();
+  List<Homework> homeworks = List();
   List<Homework> selectedHomework = List();
 
   @override
@@ -45,7 +45,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
       selectedHomework.clear();
     });
 
-    for (Homework n in homeworksNew) {
+    for (Homework n in homeworks) {
       if (n.owner.id == globals.selectedUser.id) {
         setState(() {
           selectedHomework.add(n);
@@ -78,15 +78,8 @@ class HomeworkScreenState extends State<HomeworkScreen> {
                     });
                   },
                 ),
+                IconButton(icon: Icon(Icons.plus_one), onPressed: _openChooser,)
               ],
-            ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: _openChooser,
-              child: Icon(
-                Icons.add,
-                color: Colors.white,
-              ),
-              tooltip: I18n.of(context).homeworkAdd,
             ),
             body: Container(
                 child: hasOfflineLoaded
@@ -129,7 +122,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
           builder: (BuildContext context) {
             return TimeSelectDialog();
           },
-        ) ??
+        ) ?? 
         false;
   }
 
@@ -178,8 +171,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
             FlatButton(
               child: Icon(Icons.delete),
               onPressed: () {
-                RequestHelper()
-                    .deleteHomework(homework.id, globals.selectedUser);
+                RequestHelper().deleteHomework(homework.id, globals.selectedUser);
               },
             ),
             FlatButton(
@@ -201,8 +193,8 @@ class HomeworkScreenState extends State<HomeworkScreen> {
     Completer<Null> completer = Completer<Null>();
     List<Homework> homeworksNew = await HomeworkHelper().getHomeworks(
         globals.timeData[globals.selectedTimeForHomework], showErrors);
-    if (homeworksNew.length > homeworksNew.length) homeworksNew = homeworksNew;
-    homeworksNew
+    if (homeworksNew.length > homeworks.length) homeworks = homeworksNew;
+    homeworks
         .sort((Homework a, Homework b) => b.uploadDate.compareTo(a.uploadDate));
     if (mounted)
       setState(() {
@@ -219,9 +211,9 @@ class HomeworkScreenState extends State<HomeworkScreen> {
       hasOfflineLoaded = false;
     });
     Completer<Null> completer = Completer<Null>();
-    homeworksNew = await HomeworkHelper()
+    homeworks = await HomeworkHelper()
         .getHomeworksOffline(globals.timeData[globals.selectedTimeForHomework]);
-    homeworksNew
+    homeworks
         .sort((Homework a, Homework b) => b.uploadDate.compareTo(a.uploadDate));
     if (mounted)
       setState(() {
