@@ -42,14 +42,14 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
   List<String> subjects = [];
   List<Lesson> lessons = [];
   DateTime now = DateTime.now();
-  SearchFor _searchFor;
+  SearchFor _searchFor = SearchFor.next;
 
   Widget build(BuildContext context) {
     if (suppliedData) {
       if (widget.searchForInt == 0)
         _searchFor = SearchFor.next;
       else if (widget.searchForInt == 1) _searchFor = SearchFor.previous;
-    } else _searchFor = SearchFor.next;
+    }
 
     if (subjects.isEmpty) _getLessons();
     if (subjects.isNotEmpty &&
@@ -141,8 +141,8 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
   }
 
   void _openHomeworkDialog() async {
-    Navigator.of(context).pop();
     if (_searchFor == SearchFor.next) {
+      Navigator.of(context).pop();
       return showDialog(
           barrierDismissible: true,
           context: context,
@@ -154,6 +154,7 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
       lessons.clear();
       lessons = await getLessons(
           now.subtract(Duration(days: 7)), now, globals.selectedUser, false);
+      Navigator.of(context).pop();
       return showDialog(
           barrierDismissible: true,
           context: context,
