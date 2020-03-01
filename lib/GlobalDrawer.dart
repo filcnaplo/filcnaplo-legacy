@@ -329,7 +329,7 @@ class GDrawerState extends State<GDrawer> {
                 Navigator.pushReplacementNamed(context, "/absents");
               },
             ),
-            /*
+            
              new ListTile(
                leading: new Icon(
                  Icons.supervisor_account,
@@ -345,7 +345,7 @@ class GDrawerState extends State<GDrawer> {
                  Navigator.pop(context); // close the drawer
                  Navigator.pushReplacementNamed(context, "/accounts");
                },
-             ),*/
+             ),
             new ListTile(
               leading: new Icon(
                 Icons.settings,
