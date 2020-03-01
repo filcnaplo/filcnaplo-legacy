@@ -86,7 +86,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
                 Icons.add,
                 color: Colors.white,
               ),
-              tooltip: "Házi hozzáadása",//TODO: I18n
+              tooltip: I18n.of(context).homeworkAdd,
             ),
             body: Container(
                 child: hasOfflineLoaded
