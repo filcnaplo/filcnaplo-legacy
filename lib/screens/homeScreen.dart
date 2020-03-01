@@ -124,7 +124,7 @@ class HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if ("globals.version" != globals.latestVersion &&
+      if (globals.version != globals.latestVersion &&
           globals.latestVersion != "") showUpdateDialog();
     });
 
