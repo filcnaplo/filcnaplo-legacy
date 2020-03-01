@@ -30,7 +30,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
   bool hasLoaded = true;
   bool hasOfflineLoaded = false;
 
-  List<Homework> homeworks = List();
+  List<Homework> homeworksNew = List();
   List<Homework> selectedHomework = List();
 
   @override
@@ -45,7 +45,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
       selectedHomework.clear();
     });
 
-    for (Homework n in homeworks) {
+    for (Homework n in homeworksNew) {
       if (n.owner.id == globals.selectedUser.id) {
         setState(() {
           selectedHomework.add(n);
@@ -211,9 +211,9 @@ class HomeworkScreenState extends State<HomeworkScreen> {
       hasOfflineLoaded = false;
     });
     Completer<Null> completer = Completer<Null>();
-    homeworks = await HomeworkHelper()
+    homeworksNew = await HomeworkHelper()
         .getHomeworksOffline(globals.timeData[globals.selectedTimeForHomework]);
-    homeworks
+    homeworksNew
         .sort((Homework a, Homework b) => b.uploadDate.compareTo(a.uploadDate));
     if (mounted)
       setState(() {
