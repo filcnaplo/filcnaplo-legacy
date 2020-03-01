@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/globals.dart' as globals;
-import 'package:filcnaplo/GlobalDrawer.dart';
+import 'package:filcnaplo/global_drawer.dart';
 
 class Screen extends StatelessWidget {
 

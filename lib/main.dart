@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:background_fetch/background_fetch.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:filcnaplo/generated/i18n.dart';
-import 'package:filcnaplo/screens/messageScreen.dart';
+import 'package:filcnaplo/screens/message_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -11,35 +11,35 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:package_info/package_info.dart';
 import 'package:flutter/services.dart';
 
-import 'Datas/Account.dart';
-import 'Datas/User.dart';
+import 'package:filcnaplo/datas/account.dart';
+import 'package:filcnaplo/datas/user.dart';
 
-import 'Helpers/BackgroundHelper.dart';
-import 'Helpers/DBHelper.dart';
-import 'Helpers/RequestHelper.dart';
-import 'Helpers/SettingsHelper.dart';
-import 'Helpers/encrypt_codec.dart';
+import 'package:filcnaplo/helpers/background_helper.dart';
+import 'package:filcnaplo/helpers/database_helper.dart';
+import 'package:filcnaplo/helpers/request_helper.dart';
+import 'package:filcnaplo/helpers/settings_helper.dart';
+import 'package:filcnaplo/helpers/encrypt_codec.dart';
 
-import 'Utils/AccountManager.dart';
-import 'Utils/ColorManager.dart';
-import 'Utils/Saver.dart' as Saver;
+import 'package:filcnaplo/utils/account_manager.dart';
+import 'package:filcnaplo/utils/color_manager.dart';
+import 'package:filcnaplo/utils/saver.dart' as Saver;
 
 import 'globals.dart' as globals;
 
-import 'screens/absentsScreen.dart';
-import 'screens/accountsScreen.dart';
-import 'screens/evaluationColorSettingsScreen.dart';
-import 'screens/evaluationsScreen.dart';
-import 'screens/exportScreen.dart';
-import 'screens/homeworkScreen.dart';
-import 'screens/importScreen.dart';
-import 'screens/homeScreen.dart';
-import 'screens/notesScreen.dart';
-import 'screens/settingsScreen.dart';
-import 'screens/studentScreen.dart';
-import 'screens/timeTableScreen.dart';
-import 'screens/testsScreen.dart';
-import 'screens/loginScreen.dart';
+import 'package:filcnaplo/screens/absents_screen.dart';
+import 'package:filcnaplo/screens/accounts_screen.dart';
+import 'package:filcnaplo/screens/evaluation_colors_screen.dart';
+import 'package:filcnaplo/screens/evaluations_screen.dart';
+import 'package:filcnaplo/screens/export_screen.dart';
+import 'package:filcnaplo/screens/homework_screen.dart';
+import 'package:filcnaplo/screens/import_screen.dart';
+import 'package:filcnaplo/screens/home_screen.dart';
+import 'package:filcnaplo/screens/notes_screen.dart';
+import 'package:filcnaplo/screens/settings_screen.dart';
+import 'package:filcnaplo/screens/student_screen.dart';
+import 'package:filcnaplo/screens/timetable_screen.dart';
+import 'package:filcnaplo/screens/tests_screen.dart';
+import 'package:filcnaplo/screens/login_screen.dart';
 
 bool isNew = true;
 
