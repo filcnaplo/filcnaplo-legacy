@@ -61,26 +61,26 @@ class ExportScreenState extends State<ExportScreen> {
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    return new WillPopScope(
+    return WillPopScope(
         onWillPop: () {
           globals.screen = 0;
           Navigator.pushReplacementNamed(context, "/settings");
         },
         child: Scaffold(
           drawer: GDrawer(),
-          appBar: new AppBar(
-            title: new Text(I18n.of(context).appTitle),
+          appBar: AppBar(
+            title: Text(I18n.of(context).appTitle),
             actions: <Widget>[],
           ),
-          body: new Center(
+          body: Center(
             child: SingleChildScrollView(
               padding: EdgeInsets.all(20),
-              child: new Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  new DropdownButton(
+                  DropdownButton(
                     items: exportOptions.map((String exportData) {
                       return DropdownMenuItem(
                         child: Text(exportData),
@@ -114,7 +114,7 @@ class ExportScreenState extends State<ExportScreen> {
                     value: exportOptions[selectedData],
                   ),
                   (selectedData != 2)
-                      ? new DropdownButton(
+                      ? DropdownButton(
                           items: globals.users.map((User user) {
                             return DropdownMenuItem(
                               child: Text(user.name),
@@ -128,9 +128,9 @@ class ExportScreenState extends State<ExportScreen> {
                           },
                           value: selectedUser,
                         )
-                      : new Container(),
+                      : Container(),
                   (selectedData == 1)
-                      ? new MaterialButton(
+                      ? MaterialButton(
                           color: selectedDate == null
                               ? Colors.deepOrangeAccent
                               : Colors.green,
@@ -138,14 +138,14 @@ class ExportScreenState extends State<ExportScreen> {
                             final List<DateTime> picked =
                                 await DateRagePicker.showDatePicker(
                                     context: context,
-                                    initialFirstDate: new DateTime.now()
+                                    initialFirstDate: DateTime.now()
                                         .subtract(Duration(
                                             days: DateTime.now().weekday - 1)),
-                                    initialLastDate: new DateTime.now()
+                                    initialLastDate: DateTime.now()
                                         .subtract(Duration(
                                             days: DateTime.now().weekday - 7)),
-                                    firstDate: new DateTime(2018),
-                                    lastDate: new DateTime(2025));
+                                    firstDate: DateTime(2018),
+                                    lastDate: DateTime(2025));
                             if (picked != null && picked.length == 2) {
                               pickedDate = picked;
                               selectedDate = picked[0]
@@ -156,12 +156,12 @@ class ExportScreenState extends State<ExportScreen> {
                               setState(() {});
                             }
                           },
-                          child: new Text(
+                          child: Text(
                               selectedDate ?? I18n.of(context).exportChoose),
                         )
-                      : new Container(),
+                      : Container(),
                   (selectedData != 2)
-                      ? new DropdownButton(
+                      ? DropdownButton(
                           items: formatOptions.map((String exportFormat) {
                             return DropdownMenuItem(
                               child: Text(exportFormat),
@@ -199,15 +199,15 @@ class ExportScreenState extends State<ExportScreen> {
                           },
                           value: formatOptions[selectedFormat],
                         )
-                      : new Container(),
-                  new TextField(
+                      : Container(),
+                  TextField(
                     onChanged: (text) {
                       path = text;
                     },
                     controller: controller,
                   ),
-                  new Container(
-                    child: new RaisedButton(
+                  Container(
+                    child: RaisedButton(
                       onPressed: () async {
                         switch (selectedData) {
                           case 0:
@@ -429,7 +429,7 @@ class ExportScreenState extends State<ExportScreen> {
                             }
                         }
                       },
-                      child: new Text(
+                      child: Text(
                         I18n.of(context).export,
                         style: TextStyle(color: Colors.white),
                       ),

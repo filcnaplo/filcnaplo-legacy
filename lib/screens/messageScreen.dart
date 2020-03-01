@@ -34,23 +34,23 @@ class MessageScreenState extends State<MessageScreen> {
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    return new WillPopScope(
+    return WillPopScope(
         onWillPop: () {
           globals.screen = 0;
           Navigator.pushReplacementNamed(context, "/main");
         },
         child: Scaffold(
             drawer: GDrawer(),
-            appBar: new AppBar(
-              title: new Text(I18n.of(context).messageTitle),
+            appBar: AppBar(
+              title: Text(I18n.of(context).messageTitle),
               actions: <Widget>[],
             ),
-            body: new Container(
+            body: Container(
                 child: hasOfflineLoaded & (messages != null)
-                    ? new Column(children: <Widget>[
+                    ? Column(children: <Widget>[
                         !hasLoaded
                             ? Container(
-                                child: new LinearProgressIndicator(
+                                child: LinearProgressIndicator(
                                   value: null,
                                 ),
                                 height: 3,
@@ -58,16 +58,16 @@ class MessageScreenState extends State<MessageScreen> {
                             : Container(
                                 height: 3,
                               ),
-                        new Expanded(
-                          child: new RefreshIndicator(
-                              child: new ListView.builder(
+                        Expanded(
+                          child: RefreshIndicator(
+                              child: ListView.builder(
                                 itemBuilder: _itemBuilder,
                                 itemCount: messages.length,
                               ),
                               onRefresh: _onRefresh),
                         ),
                       ])
-                    : new Center(child: new CircularProgressIndicator()))));
+                    : Center(child: CircularProgressIndicator()))));
   }
 
   Future<Null> _onRefresh({bool showErrors = true}) async {
@@ -75,7 +75,7 @@ class MessageScreenState extends State<MessageScreen> {
       hasLoaded = false;
     });
 
-    Completer<Null> completer = new Completer<Null>();
+    Completer<Null> completer = Completer<Null>();
 
     await globals.selectedAccount.refreshStudentString(false, showErrors);
 
@@ -86,40 +86,40 @@ class MessageScreenState extends State<MessageScreen> {
   }
 
   Widget _itemBuilder(BuildContext context, int index) {
-    Widget sep = new Container();
+    Widget sep = Container();
 
-    return new Column(
+    return Column(
       children: <Widget>[
         sep,
-        new Divider(
+        Divider(
           height: index != 0 ? 2.0 : 0.0,
         ),
-        new ListTile(
-          //leading: new Container(),
-          title: new Text(
+        ListTile(
+          //leading: Container(),
+          title: Text(
             messages[index].subject,
             style: TextStyle(
                 fontWeight: !messages[index].seen
                     ? FontWeight.bold
                     : FontWeight.normal),
           ),
-          subtitle: new Text(
+          subtitle: Text(
             messages[index].senderName,
             style: TextStyle(
                 fontWeight: !messages[index].seen
                     ? FontWeight.bold
                     : FontWeight.normal),
           ),
-          trailing: new Column(
+          trailing: Column(
             children: <Widget>[
-              new Text(
+              Text(
                 dateToHuman(messages[index].date),
                 style: TextStyle(
                     fontWeight: !messages[index].seen
                         ? FontWeight.bold
                         : FontWeight.normal),
               ),
-              new Text(
+              Text(
                 dateToWeekDay(messages[index].date, context),
                 style: TextStyle(
                     fontWeight: !messages[index].seen
@@ -140,7 +140,7 @@ class MessageScreenState extends State<MessageScreen> {
                   barrierDismissible: true,
                   context: context,
                   builder: (BuildContext context) {
-                    return new MessageDialog(messages[index]);
+                    return MessageDialog(messages[index]);
                   },
                 ) ??
                 false;

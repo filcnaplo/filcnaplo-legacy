@@ -96,20 +96,20 @@ class MainScreenState extends State<MainScreen> {
     return showDialog<bool>(
         context: context,
         builder: (BuildContext context) {
-          return new SimpleDialog(
+          return SimpleDialog(
               children: <Widget>[
-                new Text(
+                Text(
                     "Töltsd le most a legújabb verziót:"), //TODO: Make use translation DB everywhere
-                new Text(
+                Text(
                   globals.latestVersion + "\n",
-                  style: new TextStyle(
+                  style: TextStyle(
                       color: Theme.of(context).accentColor,
                       fontWeight: FontWeight.bold,
                       fontSize: 20),
                 ),
-                new Row(
+                Row(
                   children: <Widget>[
-                    new RaisedButton(
+                    RaisedButton(
                       onPressed: _launchDownloadWebsite,
                       child: Text("Letöltés"),
                     )
@@ -173,27 +173,27 @@ class MainScreenState extends State<MainScreen> {
           .toList();
 
       if (firstQuarterEvaluations.isNotEmpty)
-        feedCards.add(new SummaryCard(firstQuarterEvaluations, context, 1,
+        feedCards.add(SummaryCard(firstQuarterEvaluations, context, 1,
             false, true, !globals.isSingle));
       if (halfYearEvaluations.isNotEmpty)
-        feedCards.add(new SummaryCard(
+        feedCards.add(SummaryCard(
             halfYearEvaluations, context, 2, false, true, !globals.isSingle));
       if (thirdQuarterEvaluations.isNotEmpty)
-        feedCards.add(new SummaryCard(thirdQuarterEvaluations, context, 3,
+        feedCards.add(SummaryCard(thirdQuarterEvaluations, context, 3,
             false, true, !globals.isSingle));
       if (endYearEvaluations.isNotEmpty)
-        feedCards.add(new SummaryCard(
+        feedCards.add(SummaryCard(
             endYearEvaluations, context, 4, false, true, !globals.isSingle));
     }
 
     for (String day in absents.keys.toList())
-      feedCards.add(new AbsenceCard(absents[day], globals.isSingle, context));
+      feedCards.add(AbsenceCard(absents[day], globals.isSingle, context));
     for (Evaluation evaluation in evaluations.where((Evaluation evaluation) =>
         !evaluation.isSummaryEvaluation())) //Only add non-summary evals
-      feedCards.add(new EvaluationCard(
+      feedCards.add(EvaluationCard(
           evaluation, globals.isColor, globals.isSingle, context));
     for (Note note in notes)
-      feedCards.add(new NoteCard(note, globals.isSingle, context));
+      feedCards.add(NoteCard(note, globals.isSingle, context));
     for (Lesson l in lessons.where((Lesson lesson) =>
         (lesson.isMissed || lesson.isSubstitution) && lesson.date.isAfter(now)))
       feedCards.add(ChangedLessonCard(l, context));
@@ -231,7 +231,7 @@ class MainScreenState extends State<MainScreen> {
     }
 
     if (realLessons.length > 0 && isLessonsToday) {
-      feedCards.add(new LessonCard(lessons, isLessonsTomorrow, context));
+      feedCards.add(LessonCard(lessons, isLessonsTomorrow, context));
     }
     try {
       feedCards.sort((Widget a, Widget b) {
@@ -250,7 +250,7 @@ class MainScreenState extends State<MainScreen> {
     }
     
     if (realLessons.length > 0 && isLessonsTomorrow)
-      feedCards.add(new TomorrowLessonCard(realLessons, context, now));*/
+      feedCards.add(TomorrowLessonCard(realLessons, context, now));*/
     try {
       feedCards.sort((Widget a, Widget b) {
         return b.key.toString().compareTo(a.key.toString());
@@ -268,20 +268,20 @@ class MainScreenState extends State<MainScreen> {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
-        return new AlertDialog(
-          title: new Text(I18n.of(context).closeTitle),
-          content: new Text(I18n.of(context).closeConfirm),
+        return AlertDialog(
+          title: Text(I18n.of(context).closeTitle),
+          content: Text(I18n.of(context).closeConfirm),
           actions: <Widget>[
-            new FlatButton(
+            FlatButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: new Text(I18n.of(context).dialogNo.toUpperCase()),
+              child: Text(I18n.of(context).dialogNo.toUpperCase()),
             ),
-            new FlatButton(
+            FlatButton(
               onPressed: () async {
                 await SystemChannels.platform
                     .invokeMethod<void>('SystemNavigator.pop');
               },
-              child: new Text(I18n.of(context).dialogYes.toUpperCase()),
+              child: Text(I18n.of(context).dialogYes.toUpperCase()),
             ),
           ],
         );
@@ -291,23 +291,23 @@ class MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return new WillPopScope(
+    return WillPopScope(
         onWillPop: _onWillPop,
         child: Scaffold(
             drawer: GDrawer(),
-            appBar: new AppBar(
-              title: new Text(globals.isSingle
+            appBar: AppBar(
+              title: Text(globals.isSingle
                   ? globals.selectedAccount.user.name
                   : I18n.of(context).appTitle),
             ),
             body: hasOfflineLoaded &&
                     globals.isColor != null &&
                     mainScreenCards != null
-                ? new Container(
+                ? Container(
                     child: Column(children: <Widget>[
                     !hasLoaded
                         ? Container(
-                            child: new LinearProgressIndicator(
+                            child: LinearProgressIndicator(
                               value: null,
                             ),
                             height: 3,
@@ -315,13 +315,13 @@ class MainScreenState extends State<MainScreen> {
                         : Container(
                             height: 3,
                           ),
-                    new Expanded(
-                      child: new RefreshIndicator(
-                        child: new ListView(
+                    Expanded(
+                      child: RefreshIndicator(
+                        child: ListView(
                           children: mainScreenCards,
                         ),
                         onRefresh: () {
-                          Completer<Null> completer = new Completer<Null>();
+                          Completer<Null> completer = Completer<Null>();
                           _onRefresh().then((bool b) async {
                             mainScreenCards = await feedItems();
                             setState(() {
@@ -333,14 +333,14 @@ class MainScreenState extends State<MainScreen> {
                       ),
                     ),
                   ]))
-                : new Center(child: new CircularProgressIndicator())));
+                : Center(child: CircularProgressIndicator())));
   }
 
   Future<Null> _onRefresh(
       {bool offline = false, bool showErrors = true}) async {
-    List<Evaluation> tempEvaluations = new List();
-    Map<String, List<Absence>> tempAbsents = new Map();
-    List<Note> tempNotes = new List();
+    List<Evaluation> tempEvaluations = List();
+    Map<String, List<Absence>> tempAbsents = Map();
+    List<Note> tempNotes = List();
     setState(() {
       if (offline)
         hasOfflineLoaded = false;
@@ -383,7 +383,7 @@ class MainScreenState extends State<MainScreen> {
     if (tempAbsents.length > 0) absents = tempAbsents;
     if (tempNotes.length > 0) notes = tempNotes;
     startDate = now;
-    //startDate = startDate.add(new Duration(days: (-1 * startDate.weekday + 1)));
+    //startDate = startDate.add(Duration(days: (-1 * startDate.weekday + 1)));
     if (offline) {
       if (globals.lessons.length > 0) {
         lessons.addAll(globals.lessons);
@@ -410,7 +410,7 @@ class MainScreenState extends State<MainScreen> {
     } catch (e) {
       print("[E] mainScreen.onRefresh()6: " + e.toString());
     }
-    Completer<Null> completer = new Completer<Null>();
+    Completer<Null> completer = Completer<Null>();
     if (!offline) hasLoaded = true;
     hasOfflineLoaded = true;
     if (mounted) {

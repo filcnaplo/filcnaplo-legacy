@@ -22,15 +22,15 @@ class StudentScreenState extends State<StudentScreen> {
     globals.context = context;
     double c_width = MediaQuery.of(context).size.width * 0.5;
 
-    return new Scaffold(
+    return Scaffold(
       drawer: GDrawer(),
-      appBar: new AppBar(
-        title: new Text(this.widget.account.student != null
+      appBar: AppBar(
+        title: Text(this.widget.account.student != null
             ? this.widget.account.student.Name ?? ""
             : ""),
         actions: <Widget>[],
       ),
-      body: new Center(
+      body: Center(
         child: ListView(
           children: <Widget>[
             Card(

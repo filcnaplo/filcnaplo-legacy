@@ -35,23 +35,23 @@ class NotesScreenState extends State<NotesScreen> {
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    return new WillPopScope(
+    return WillPopScope(
         onWillPop: () {
           globals.screen = 0;
           Navigator.pushReplacementNamed(context, "/main");
         },
         child: Scaffold(
             drawer: GDrawer(),
-            appBar: new AppBar(
-              title: new Text(capitalize(I18n.of(context).noteTitle)),
+            appBar: AppBar(
+              title: Text(capitalize(I18n.of(context).noteTitle)),
               actions: <Widget>[],
             ),
-            body: new Container(
+            body: Container(
                 child: hasOfflineLoaded
-                    ? new Column(children: <Widget>[
+                    ? Column(children: <Widget>[
                         !hasLoaded
                             ? Container(
-                                child: new LinearProgressIndicator(
+                                child: LinearProgressIndicator(
                                   value: null,
                                 ),
                                 height: 3,
@@ -59,9 +59,9 @@ class NotesScreenState extends State<NotesScreen> {
                             : Container(
                                 height: 3,
                               ),
-                        new Expanded(
-                          child: new RefreshIndicator(
-                            child: new ListView.builder(
+                        Expanded(
+                          child: RefreshIndicator(
+                            child: ListView.builder(
                               itemBuilder: _itemBuilder,
                               itemCount: notes.length,
                             ),
@@ -69,7 +69,7 @@ class NotesScreenState extends State<NotesScreen> {
                           ),
                         ),
                       ])
-                    : new Center(child: new CircularProgressIndicator()))));
+                    : Center(child: CircularProgressIndicator()))));
   }
 
   Future<Null> _onRefresh({bool showErrors = true}) async {
@@ -107,17 +107,17 @@ class NotesScreenState extends State<NotesScreen> {
   }
 
   Widget _itemBuilder(BuildContext context, int index) {
-    return new Column(
+    return Column(
       children: <Widget>[
-        new ListTile(
+        ListTile(
           title: notes[index].title != null && notes[index].title != ""
-              ? new Text(
+              ? Text(
                   notes[index].title,
                   style: TextStyle(fontSize: 22),
                 )
               : null,
-          subtitle: new Column(children: <Widget>[
-            new Container(
+          subtitle: Column(children: <Widget>[
+            Container(
               padding: EdgeInsets.all(5),
               child: Linkify(
                 style: TextStyle(fontSize: 16),
@@ -127,21 +127,21 @@ class NotesScreenState extends State<NotesScreen> {
                 },
               ),
             ),
-            new Container(
-              child: new Text(dateToHuman(notes[index].date) +
+            Container(
+              child: Text(dateToHuman(notes[index].date) +
                   dateToWeekDay(notes[index].date, context)),
               alignment: Alignment(1, -1),
             ),
             notes[index].teacher != null
-                ? new Container(
-                    child: new Text(notes[index].teacher),
+                ? Container(
+                    child: Text(notes[index].teacher),
                     alignment: Alignment(1, -1),
                   )
-                : new Container(),
+                : Container(),
           ]),
           isThreeLine: true,
         ),
-        new Divider(
+        Divider(
           height: 10.0,
         ),
       ],

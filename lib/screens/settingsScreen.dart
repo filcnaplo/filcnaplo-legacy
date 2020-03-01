@@ -42,7 +42,7 @@ class SettingsScreenState extends State<SettingsScreen> {
   int _refreshNotification;
   int _theme;
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      new FlutterLocalNotificationsPlugin();
+      FlutterLocalNotificationsPlugin();
   void _initSet() async {
     _isColor = await SettingsHelper().getColoredMainPage();
     _isDark = await SettingsHelper().getDarkTheme();
@@ -66,11 +66,11 @@ class SettingsScreenState extends State<SettingsScreen> {
     BackgroundHelper().configure();
     super.initState();
     var initializationSettingsAndroid =
-        new AndroidInitializationSettings('notification_icon');
-    var initializationSettingsIOS = new IOSInitializationSettings();
-    var initializationSettings = new InitializationSettings(
+        AndroidInitializationSettings('notification_icon');
+    var initializationSettingsIOS = IOSInitializationSettings();
+    var initializationSettings = InitializationSettings(
         initializationSettingsAndroid, initializationSettingsIOS);
-    flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+    flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
   }
 
@@ -218,79 +218,79 @@ class SettingsScreenState extends State<SettingsScreen> {
       I18n.of(context).colorPurple,
       I18n.of(context).colorTeal
     ];
-    return new WillPopScope(
+    return WillPopScope(
         onWillPop: () {
           globals.screen = 0;
           Navigator.pushReplacementNamed(context, "/main");
         },
         child: Scaffold(
           drawer: GDrawer(),
-          appBar: new AppBar(
-            title: new Text(I18n.of(context).settingsTitle),
+          appBar: AppBar(
+            title: Text(I18n.of(context).settingsTitle),
           ),
-          body: new Container(
+          body: Container(
             child: _isColor != null
-                ? new ListView(
+                ? ListView(
                     children: <Widget>[
                       SwitchListTile(
-                        title: new Text(
+                        title: Text(
                           I18n.of(context).settingsColorful,
                           style: TextStyle(fontSize: 20.0),
                         ),
                         activeColor: Theme.of(context).accentColor,
                         value: _isColor,
                         onChanged: _isColorChange,
-                        secondary: new Icon(IconData(0xf266,
+                        secondary: Icon(IconData(0xf266,
                             fontFamily: "Material Design Icons")),
                       ),
                       SwitchListTile(
-                        title: new Text(
+                        title: Text(
                           I18n.of(context).settingsDarkTheme,
                           style: TextStyle(fontSize: 20.0),
                         ),
                         activeColor: Theme.of(context).accentColor,
                         value: _isDark,
                         onChanged: _isDarkChange,
-                        secondary: new Icon(IconData(0xf50e,
+                        secondary: Icon(IconData(0xf50e,
                             fontFamily: "Material Design Icons")),
                       ),
                       SwitchListTile(
-                        title: new Text(
+                        title: Text(
                           I18n.of(context).settingsAmoled,
                           style: TextStyle(fontSize: 20.0),
                         ),
                         activeColor: Theme.of(context).accentColor,
                         value: _isDark ? _amoled : false,
                         onChanged: _isDark ? _setAmoled : null,
-                        secondary: new Icon(IconData(0xf301,
+                        secondary: Icon(IconData(0xf301,
                             fontFamily: "Material Design Icons")),
                       ),
                       SwitchListTile(
-                        title: new Text(
+                        title: Text(
                           I18n.of(context).settingsSmart,
                           style: TextStyle(fontSize: 20.0),
                         ),
                         activeColor: Theme.of(context).accentColor,
                         value: _smartUserAgent,
                         onChanged: _smartUserAgentChange,
-                        secondary: new Icon(IconData(0xfcbf,
+                        secondary: Icon(IconData(0xfcbf,
                             fontFamily: "Material Design Icons")),
                       ),
                       ListTile(
-                        title: new Text(
+                        title: Text(
                           I18n.of(context).settingsEvaluationColors,
                           style: TextStyle(fontSize: 20.0),
                         ),
                         onTap: () {
                           Navigator.pushNamed(context, "/evalcolor");
                         },
-                        leading: new Icon(Icons.color_lens),
+                        leading: Icon(Icons.color_lens),
                       ),
                       ListTile(
-                        title: new PopupMenuButton<int>(
-                          child: new ListTile(
+                        title: PopupMenuButton<int>(
+                          child: ListTile(
                             contentPadding: EdgeInsets.all(0),
-                            title: new Text(
+                            title: Text(
                               capitalize(I18n.of(context).color) +
                                   ": " +
                                   themes[_theme],
@@ -301,11 +301,11 @@ class SettingsScreenState extends State<SettingsScreen> {
                           itemBuilder: (BuildContext context) {
                             return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
                                 .map((int integer) {
-                              return new PopupMenuItem<int>(
+                              return PopupMenuItem<int>(
                                   value: integer,
-                                  child: new Row(
+                                  child: Row(
                                     children: <Widget>[
-                                      new Container(
+                                      Container(
                                         decoration: ShapeDecoration(
                                             shape: CircleBorder(),
                                             color: ColorManager()
@@ -314,54 +314,54 @@ class SettingsScreenState extends State<SettingsScreen> {
                                         width: 16,
                                         margin: EdgeInsets.only(right: 4),
                                       ),
-                                      new Text(themes[integer]),
+                                      Text(themes[integer]),
                                     ],
                                   ));
                             }).toList();
                           },
                         ),
-                        leading: new Icon(Icons.color_lens),
+                        leading: Icon(Icons.color_lens),
                       ),
                       SwitchListTile(
-                        title: new Text(
+                        title: Text(
                           I18n.of(context).settingsNotifications,
                           style: TextStyle(fontSize: 20.0),
                         ),
                         activeColor: Theme.of(context).accentColor,
                         value: _isNotification,
                         onChanged: _isNotificationChange,
-                        secondary: new Icon(IconData(0xf09a,
+                        secondary: Icon(IconData(0xf09a,
                             fontFamily: "Material Design Icons")),
                       ),
                       SwitchListTile(
-                        title: new Text(
+                        title: Text(
                           I18n.of(context).settingsNextLesson,
                           style: TextStyle(fontSize: 20.0),
                         ),
                         value: nextLesson,
                         activeColor: Theme.of(context).accentColor,
                         onChanged: _isNotification ? _setNextLesson : null,
-                        secondary: new Icon(Icons.access_time),
+                        secondary: Icon(Icons.access_time),
                       ),
                       _isNotification
-                          ? new PopupMenuButton<int>(
-                              child: new ListTile(
-                                title: new Text(
+                          ? PopupMenuButton<int>(
+                              child: ListTile(
+                                title: Text(
                                   I18n.of(context).settingsSyncFrequency(
                                       _refreshNotification.toString()),
                                   style: TextStyle(fontSize: 20.0),
                                 ),
-                                leading: new Icon(IconData(0xf4e6,
+                                leading: Icon(IconData(0xf4e6,
                                     fontFamily: "Material Design Icons")),
                               ),
                               onSelected: _refreshNotificationChange,
                               itemBuilder: (BuildContext context) {
                                 return refreshArray.map((int integer) {
-                                  return new PopupMenuItem<int>(
+                                  return PopupMenuItem<int>(
                                       value: integer,
-                                      child: new Row(
+                                      child: Row(
                                         children: <Widget>[
-                                          new Text(integer.toString() +
+                                          Text(integer.toString() +
                                               " " +
                                               I18n.of(context).timeMinute),
                                         ],
@@ -369,23 +369,23 @@ class SettingsScreenState extends State<SettingsScreen> {
                                 }).toList();
                               },
                             )
-                          : new ListTile(
-                              title: new Text(
+                          : ListTile(
+                              title: Text(
                                 I18n.of(context).settingsSyncFrequency(
                                     _refreshNotification.toString()),
                                 style: TextStyle(fontSize: 20.0),
                               ),
                               enabled: false,
-                              leading: new Icon(IconData(0xf4e6,
+                              leading: Icon(IconData(0xf4e6,
                                   fontFamily: "Material Design Icons")),
                             ),
                       ListTile(
-                        title: new Text(
+                        title: Text(
                           I18n.of(context).settingsLanguage,
                           style: TextStyle(fontSize: 20.0),
                         ),
-                        trailing: new Container(
-                          child: new DropdownButton<String>(
+                        trailing: Container(
+                          child: DropdownButton<String>(
                             items: LANG_LIST.keys.map((String lang) {
                               String langName = LANG_LIST[lang];
                               return DropdownMenuItem<String>(
@@ -403,14 +403,14 @@ class SettingsScreenState extends State<SettingsScreen> {
                           width: 120,
                           alignment: Alignment(1, 0),
                         ),
-                        leading: new Icon(IconData(0xf1e7,
+                        leading: Icon(IconData(0xf1e7,
                             fontFamily: "Material Design Icons")),
                       ),
-                      new Divider(color: globals.isDark ? Colors.grey : Colors.black54),
+                      Divider(color: globals.isDark ? Colors.grey : Colors.black54),
                       !Platform.isIOS
-                          ? new ListTile(
-                              leading: new Icon(Icons.import_export),
-                              title: new Text(
+                          ? ListTile(
+                              leading: Icon(Icons.import_export),
+                              title: Text(
                                   I18n.of(context).export.toUpperCase(),
                                   style: TextStyle(
                                       fontSize: 15.0,
@@ -420,16 +420,16 @@ class SettingsScreenState extends State<SettingsScreen> {
                               },
                             )
                           : Container(),
-                      new ListTile(
-                        leading: new Icon(Icons.bug_report),
-                        title: new Text(I18n.of(context).settingsBugreport.toUpperCase(),
+                      ListTile(
+                        leading: Icon(Icons.bug_report),
+                        title: Text(I18n.of(context).settingsBugreport.toUpperCase(),
                             style: TextStyle(
                                 fontSize: 15.0, fontWeight: FontWeight.bold)),
                         onTap: _openBugReport,
                       ),
 
-                      new ListTile(
-                          title: new Text(
+                      ListTile(
+                          title: Text(
                         capitalize(I18n.of(context).appVersion) +
                             ": " +
                             globals.version,
@@ -439,7 +439,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                     ],
                     padding: EdgeInsets.all(10),
                   )
-                : new Container(),
+                : Container(),
           ),
         ));
   }
