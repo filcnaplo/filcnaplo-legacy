@@ -1,8 +1,8 @@
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 
-import 'package:filcnaplo/datas/account.dart';
-import 'package:filcnaplo/datas/user.dart';
+import 'package:filcnaplo/models/account.dart';
+import 'package:filcnaplo/models/user.dart';
 import 'package:filcnaplo/globals.dart';
 import 'package:filcnaplo/screens/student_screen.dart';
 import 'package:filcnaplo/utils/string_formatter.dart';

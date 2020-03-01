@@ -4,8 +4,8 @@ import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 
-import 'package:filcnaplo/datas/account.dart';
-import 'package:filcnaplo/datas/user.dart';
+import 'package:filcnaplo/models/account.dart';
+import 'package:filcnaplo/models/user.dart';
 
 import 'package:filcnaplo/utils/account_manager.dart';
 import 'package:filcnaplo/utils/saver.dart';

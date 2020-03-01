@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/globals.dart' as globals;
-import 'package:filcnaplo/models/user.dart';
+import 'user.dart';
 
 class Student {
   int StudentId;

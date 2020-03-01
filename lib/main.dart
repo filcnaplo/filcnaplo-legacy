@@ -11,8 +11,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:package_info/package_info.dart';
 import 'package:flutter/services.dart';
 
-import 'package:filcnaplo/datas/account.dart';
-import 'package:filcnaplo/datas/user.dart';
+import 'package:filcnaplo/models/account.dart';
+import 'package:filcnaplo/models/user.dart';
 
 import 'package:filcnaplo/helpers/background_helper.dart';
 import 'package:filcnaplo/helpers/database_helper.dart';

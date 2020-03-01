@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart' as launcher;
 
-import 'package:filcnaplo/datas/note.dart';
+import 'package:filcnaplo/models/note.dart';
 import 'package:filcnaplo/screens/Screen.dart';
 import 'package:filcnaplo/utils/string_formatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;

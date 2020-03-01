@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import 'package:filcnaplo/datas/user.dart';
+import 'package:filcnaplo/models/user.dart';
 import 'package:filcnaplo/helpers/database_helper.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 

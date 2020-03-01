@@ -12,12 +12,12 @@ import 'package:filcnaplo/helpers/request_helper.dart';
 import 'package:filcnaplo/helpers/test_helper.dart';
 import 'package:filcnaplo/utils/saver.dart';
 import 'package:filcnaplo/generated/i18n.dart';
-import 'package:filcnaplo/datas/average.dart';
-import 'package:filcnaplo/datas/message.dart';
-import 'package:filcnaplo/datas/note.dart';
-import 'package:filcnaplo/datas/student.dart';
-import 'package:filcnaplo/datas/test.dart';
-import 'package:filcnaplo/datas/user.dart';
+import 'package:filcnaplo/models/average.dart';
+import 'package:filcnaplo/models/message.dart';
+import 'package:filcnaplo/models/note.dart';
+import 'package:filcnaplo/models/student.dart';
+import 'package:filcnaplo/models/test.dart';
+import 'package:filcnaplo/models/user.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 
 class Account {

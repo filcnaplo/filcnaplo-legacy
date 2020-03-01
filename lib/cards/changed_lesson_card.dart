@@ -1,7 +1,7 @@
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 
-import 'package:filcnaplo/datas/lesson.dart';
+import 'package:filcnaplo/models/lesson.dart';
 import 'package:filcnaplo/utils/string_formatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 

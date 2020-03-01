@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:convert' show json;
-import 'package:filcnaplo/datas/user.dart';
-import 'package:filcnaplo/datas/homework.dart';
+import 'package:filcnaplo/models/user.dart';
+import 'package:filcnaplo/models/homework.dart';
 import 'package:filcnaplo/utils/account_manager.dart';
 import 'package:filcnaplo/utils/saver.dart';
-import 'package:filcnaplo/datas/lesson.dart';
+import 'package:filcnaplo/models/lesson.dart';
 import 'request_helper.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 

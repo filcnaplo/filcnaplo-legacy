@@ -3,7 +3,7 @@ import 'dart:core';
 import 'package:filcnaplo/globals.dart' as globals;
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/utils/saver.dart';
-import 'package:filcnaplo/datas/user.dart';
+import 'package:filcnaplo/models/user.dart';
 import 'package:filcnaplo/helpers/settings_helper.dart';
 
 class AccountManager {

@@ -5,9 +5,9 @@ import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import 'package:filcnaplo/datas/account.dart';
-import 'package:filcnaplo/datas/institution.dart';
-import 'package:filcnaplo/datas/user.dart';
+import 'package:filcnaplo/models/account.dart';
+import 'package:filcnaplo/models/institution.dart';
+import 'package:filcnaplo/models/user.dart';
 
 import 'package:filcnaplo/helpers/request_helper.dart';
 import 'package:filcnaplo/helpers/user_info_helper.dart';

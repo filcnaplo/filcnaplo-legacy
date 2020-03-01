@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:convert' show json, utf8;
-import 'package:filcnaplo/datas/lesson.dart';
+import 'package:filcnaplo/models/lesson.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
-import 'package:filcnaplo/datas/user.dart';
+import 'package:filcnaplo/models/user.dart';
 import 'package:filcnaplo/utils/saver.dart';
 import 'package:filcnaplo/utils/string_formatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;

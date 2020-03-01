@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'dart:convert' show utf8, json;
 
-import 'package:filcnaplo/datas/lesson.dart';
+import 'package:filcnaplo/models/lesson.dart';
 import 'package:filcnaplo/helpers/request_helper.dart';
 import 'package:filcnaplo/helpers/database_helper.dart';
-import 'package:filcnaplo/datas/user.dart';
+import 'package:filcnaplo/models/user.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 Future<List<Lesson>> getLessonsOffline(

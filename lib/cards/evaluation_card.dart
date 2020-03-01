@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'package:filcnaplo/datas/student.dart';
+import 'package:filcnaplo/models/student.dart';
 import 'package:filcnaplo/helpers/settings_helper.dart';
 import 'package:filcnaplo/utils/string_formatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;

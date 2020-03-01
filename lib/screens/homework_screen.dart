@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:html_unescape/html_unescape.dart';
 
-import 'package:filcnaplo/datas/homework.dart';
-import 'package:filcnaplo/datas/user.dart';
+import 'package:filcnaplo/models/homework.dart';
+import 'package:filcnaplo/models/user.dart';
 import 'package:filcnaplo/dialogs/select_time_dialog.dart';
 import 'package:filcnaplo/helpers/homework_helper.dart';
 import 'package:filcnaplo/utils/string_formatter.dart';

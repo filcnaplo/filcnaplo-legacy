@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:filcnaplo/datas/lesson.dart';
+import 'package:filcnaplo/models/lesson.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 
 String getTimetableText(DateTime startDateText) {

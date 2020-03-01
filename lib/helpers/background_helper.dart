@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import 'package:filcnaplo/datas/account.dart';
-import 'package:filcnaplo/datas/lesson.dart';
-import 'package:filcnaplo/datas/note.dart';
-import 'package:filcnaplo/datas/student.dart';
-import 'package:filcnaplo/datas/user.dart';
+import 'package:filcnaplo/models/account.dart';
+import 'package:filcnaplo/models/lesson.dart';
+import 'package:filcnaplo/models/note.dart';
+import 'package:filcnaplo/models/student.dart';
+import 'package:filcnaplo/models/user.dart';
 import 'package:filcnaplo/helpers/database_helper.dart';
 import 'package:filcnaplo/helpers/settings_helper.dart';
 import 'package:filcnaplo/helpers/timetable_helper.dart';

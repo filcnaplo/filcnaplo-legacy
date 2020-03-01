@@ -1,8 +1,8 @@
 import 'dart:ui';
-import 'package:filcnaplo/datas/account.dart';
+import 'package:filcnaplo/models/account.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/generated/i18n.dart';
-import 'package:filcnaplo/datas/user.dart';
+import 'package:filcnaplo/models/user.dart';
 import 'package:filcnaplo/utils/saver.dart' as Saver;
 import 'package:filcnaplo/globals.dart' as globals;
 import 'package:path_provider/path_provider.dart';

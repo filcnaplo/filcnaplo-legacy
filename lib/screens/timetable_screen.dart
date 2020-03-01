@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:filcnaplo/dialogs/lesson_dialog.dart';
-import 'package:filcnaplo/datas/lesson.dart';
-import 'package:filcnaplo/datas/user.dart';
-import 'package:filcnaplo/datas/week.dart';
+import 'package:filcnaplo/models/lesson.dart';
+import 'package:filcnaplo/models/user.dart';
+import 'package:filcnaplo/models/week.dart';
 import 'package:filcnaplo/global_drawer.dart';
 import 'package:filcnaplo/helpers/timetable_helper.dart';
 import 'package:filcnaplo/utils/modded_tabs.dart' as MT;

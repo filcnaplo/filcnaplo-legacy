@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert' show json, ascii, base64, utf8;
 import 'dart:io';
 
-import 'package:filcnaplo/datas/user.dart';
+import 'package:filcnaplo/models/user.dart';
 import 'package:filcnaplo/helpers/database_helper.dart';
 import 'package:filcnaplo/main.dart';
 import 'package:flutter/material.dart';

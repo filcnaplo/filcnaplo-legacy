@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:filcnaplo/datas/student.dart';
+import 'package:filcnaplo/models/student.dart';
 
 class AbsentHelper {
   Future<Map<String, List<Absence>>> getAbsentsFrom(

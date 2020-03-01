@@ -6,14 +6,14 @@ import 'package:filcnaplo/utils/color_manager.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:filcnaplo/datas/average.dart';
-import 'package:filcnaplo/datas/student.dart';
+import 'package:filcnaplo/models/average.dart';
+import 'package:filcnaplo/models/student.dart';
 import 'package:filcnaplo/global_drawer.dart';
 import 'package:filcnaplo/utils/string_formatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 import 'dart:ui' as dart_ui;
 import 'package:filcnaplo/dialogs/sort_dialog.dart';
-import 'package:filcnaplo/datas/user.dart';
+import 'package:filcnaplo/models/user.dart';
 import 'package:filcnaplo/cards/summary_card.dart';
 
 void main() {

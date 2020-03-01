@@ -1,4 +1,5 @@
-import 'package:filcnaplo/models/user.dart';
+// for upcoming test
+import 'user.dart';
 
 class Test {
   String uid; //Uid

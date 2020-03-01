@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:filcnaplo/datas/test.dart';
-import 'package:filcnaplo/datas/user.dart';
+import 'package:filcnaplo/models/test.dart';
+import 'package:filcnaplo/models/user.dart';
 
 class TestHelper {
   List<dynamic> testsMap;

@@ -1,4 +1,4 @@
-import 'package:filcnaplo/models/user.dart';
+import 'user.dart';
 
 class Homework {
   int id;

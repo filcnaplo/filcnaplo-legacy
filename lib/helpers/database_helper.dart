@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:path_provider/path_provider.dart';
-import 'package:filcnaplo/datas/user.dart';
+import 'package:filcnaplo/models/user.dart';
 import 'package:filcnaplo/globals.dart';
 
 class DBHelper {

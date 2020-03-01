@@ -1,4 +1,4 @@
-import 'package:filcnaplo/datas/message.dart';
+import 'package:filcnaplo/models/message.dart';
 import 'package:filcnaplo/helpers/message_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
