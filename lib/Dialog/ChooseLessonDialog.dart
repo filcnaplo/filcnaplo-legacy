@@ -5,27 +5,54 @@ import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/Datas/Lesson.dart';
 import 'package:filcnaplo/globals.dart' as globals;
+import 'package:fluttertoast/fluttertoast.dart';
 import '../Utils/StringFormatter.dart';
 import '../Datas/Lesson.dart';
 import '../Helpers/TimetableHelper.dart';
 import '../Dialog/NewHomeworkDialog.dart';
 
+enum SearchFor { next, previous }
+bool suppliedData = true;
+
 class ChooseLessonDialog extends StatefulWidget {
+  
+  int searchForInt; //0: next, 1: previous
+  String _subject;
+
+  ChooseLessonDialog([int searchForInt, String _subject]) {
+    if (searchForInt == null) {
+      searchForInt = 0;
+      suppliedData = false;
+    }
+    this.searchForInt = searchForInt;
+
+    if (_subject == null) {
+      _subject = "...";
+      suppliedData = false;
+    }
+    this._subject = _subject;
+  }
+
   @override
-  ChooseLessonDialogState createState() => new ChooseLessonDialogState();
+  _ChooseLessonDialogState createState() => new _ChooseLessonDialogState();
 }
 
-enum SearchFor { next, previous }
-
-class ChooseLessonDialogState extends State<ChooseLessonDialog> {
-  SearchFor _searchFor = SearchFor.next;
+class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
   List<String> subjects = [];
   List<Lesson> lessons = [];
   DateTime now = new DateTime.now();
-  String _subject = "...";
+  SearchFor _searchFor;
 
   Widget build(BuildContext context) {
+    if (widget.searchForInt == 0) _searchFor = SearchFor.next;
+    else if (widget.searchForInt == 1) _searchFor = SearchFor.previous;
+
     if (subjects.isEmpty) _getLessons();
+    if (subjects.isNotEmpty && !subjects.contains(widget._subject) && widget._subject != "...") {
+      Navigator.of(context).pop();
+      Fluttertoast.showToast(msg: "Nincs ilyen tantárgyú órád a következő 7 napban.");
+      throw("No lesson is recorded with '" + widget._subject + "' subject next week.");
+    }
 
     return new SimpleDialog(
       title: new Text(capitalize(I18n.of(context).homeworkAdd) + "..."),
@@ -68,14 +95,14 @@ class ChooseLessonDialogState extends State<ChooseLessonDialog> {
                       title: new Text("a legutóbbi")),
                   new Container(
                     child: new DropdownButton<String>(
-                      value: _subject,
+                      value: widget._subject,
                       items: subjects.map((String subject) {
                         return DropdownMenuItem<String>(
                             value: subject, child: Text(capitalize(subject)));
                       }).toList(),
                       onChanged: (String selectedSubject) {
                         setState(() {
-                          _subject = selectedSubject;
+                          widget._subject = selectedSubject;
                         });
                       },
                     ),
@@ -88,12 +115,12 @@ class ChooseLessonDialogState extends State<ChooseLessonDialog> {
                     child: new FlatButton(
                       child: new Text("MEGNYITÁS",
                           style: new TextStyle(
-                              color: (_subject == "...")
+                              color: (widget._subject == "...")
                                   ? Colors.grey
                                   : Theme.of(context).accentColor,
                               fontWeight: FontWeight.bold)),
                       onPressed:
-                          (_subject == "...") ? null : _openHomeworkDialog,
+                          (widget._subject == "...") ? null : _openHomeworkDialog,
                     ),
                     margin: new EdgeInsets.only(top: 10),
                   )
@@ -104,31 +131,24 @@ class ChooseLessonDialogState extends State<ChooseLessonDialog> {
   }
 
   void _openHomeworkDialog() async {
-    print(_subject);
     if (_searchFor == SearchFor.next) {
-      print(lessons
-          .firstWhere((Lesson lesson) => (lesson.subject == _subject))
-          .date);
       return showDialog(
           barrierDismissible: true,
           context: context,
           builder: (BuildContext context) {
             return new NewHomeworkDialog(lessons
-                .firstWhere((Lesson lesson) => (lesson.subject == _subject)));
+                .firstWhere((Lesson lesson) => (lesson.subject == widget._subject)));
           });
     } else {
       lessons.clear();
       lessons = await getLessons(
           now.subtract(Duration(days: 7)), now, globals.selectedUser, false);
-      print(lessons
-          .lastWhere((Lesson lesson) => (lesson.subject == _subject))
-          .date);
       return showDialog(
           barrierDismissible: true,
           context: context,
           builder: (BuildContext context) {
             return new NewHomeworkDialog(lessons
-                .lastWhere((Lesson lesson) => (lesson.subject == _subject)));
+                .lastWhere((Lesson lesson) => (lesson.subject == widget._subject)));
           });
     }
   }
@@ -142,7 +162,10 @@ class ChooseLessonDialogState extends State<ChooseLessonDialog> {
     subjects.sort((a, b) => a.compareTo(b));
     subjects.insert(0, "...");
     setState(() {});
-    //for (String s in subjects) print(s + "\n");
+    if (suppliedData) {
+      Navigator.of(context).pop();
+      _openHomeworkDialog();
+    }
   }
 
   @override

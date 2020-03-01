@@ -110,7 +110,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
       barrierDismissible: true,
       context: context,
       builder: (BuildContext context) {
-        return new ChooseLessonDialog();
+        return new ChooseLessonDialog(0, "Magyar nyelv");
       }
     );
   }
