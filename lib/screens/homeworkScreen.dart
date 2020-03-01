@@ -80,6 +80,10 @@ class HomeworkScreenState extends State<HomeworkScreen> {
                 ),
               ],
             ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: _openChooser,
+              child: Icon(Icons.add, color: Colors.white),
+            ),
             body: Container(
                 child: hasOfflineLoaded
                     ? Column(children: <Widget>[
@@ -106,12 +110,11 @@ class HomeworkScreenState extends State<HomeworkScreen> {
 
   Future<bool> _openChooser() {
     return showDialog(
-      barrierDismissible: true,
-      context: context,
-      builder: (BuildContext context) {
-        return ChooseLessonDialog();
-      }
-    );
+        barrierDismissible: true,
+        context: context,
+        builder: (BuildContext context) {
+          return ChooseLessonDialog();
+        });
   }
 
   Future<bool> timeDialog() {
@@ -121,7 +124,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
           builder: (BuildContext context) {
             return TimeSelectDialog();
           },
-        ) ?? 
+        ) ??
         false;
   }
 
@@ -170,7 +173,8 @@ class HomeworkScreenState extends State<HomeworkScreen> {
             FlatButton(
               child: Icon(Icons.delete),
               onPressed: () {
-                RequestHelper().deleteHomework(homework.id, globals.selectedUser);
+                RequestHelper()
+                    .deleteHomework(homework.id, globals.selectedUser);
               },
             ),
             FlatButton(
@@ -238,8 +242,8 @@ class HomeworkScreenState extends State<HomeworkScreen> {
                     : (" - " + selectedHomework[index].subject)),
             style: TextStyle(fontSize: 20.0),
           ),
-          subtitle: Html(
-              data: HtmlUnescape().convert(selectedHomework[index].text)),
+          subtitle:
+              Html(data: HtmlUnescape().convert(selectedHomework[index].text)),
           isThreeLine: true,
           onTap: () {
             homeworksDialog(selectedHomework[index]);
