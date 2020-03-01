@@ -204,6 +204,7 @@ class RequestHelper {
         return true;
       } else {
         showError(I18n.of(globals.context).errorNetwork);
+        print(response.statusCode.toString() + " " + response.body);
         return false;
       }
     } catch (e) {
@@ -236,9 +237,8 @@ class RequestHelper {
         showSuccess(I18n.of(globals.context).successHomeworkDelete);
         return true;
       } else {
-        print(response.statusCode);
-        print(id.toString());
         showError(I18n.of(globals.context).errorNetwork);
+        print(response.statusCode.toString() + " " + response.body);
         return false;
       }
     } catch (e) {
