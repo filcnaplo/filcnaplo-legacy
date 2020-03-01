@@ -17,7 +17,7 @@ import 'package:filcnaplo/Datas/User.dart';
 import 'package:filcnaplo/Cards/SummaryCard.dart';
 
 void main() {
-  runApp(new MaterialApp(home: new EvaluationsScreen()));
+  runApp(MaterialApp(home: EvaluationsScreen()));
 }
 
 class EvalCount extends StatelessWidget {
@@ -34,14 +34,14 @@ class EvalCount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    return new Container(
-      child: new Card(
+    return Container(
+      child: Card(
           child: Container(
-              child: new Row(
+              child: Row(
                 children: <Widget>[
-                  new Container(
-                    child: new Text(value.toString(),
-                        style: new TextStyle(
+                  Container(
+                    child: Text(value.toString(),
+                        style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
                           color: getColors(context, value, false),
@@ -49,16 +49,16 @@ class EvalCount extends StatelessWidget {
                     alignment: Alignment(0, 0),
                     height: 40,
                     width: 40,
-                    decoration: new BoxDecoration(
+                    decoration: BoxDecoration(
                         color: getColors(context, value, true),
                         borderRadius:
-                            new BorderRadius.all(Radius.circular(40))),
+                            BorderRadius.all(Radius.circular(40))),
                   ),
-                  new Row(
+                  Row(
                     children: <Widget>[
-                      new Text(count.toString() ?? "0",
-                          style: new TextStyle(fontSize: 20)),
-                      new Text(" " + I18n.of(context).pcs)
+                      Text(count.toString() ?? "0",
+                          style: TextStyle(fontSize: 20)),
+                      Text(" " + I18n.of(context).pcs)
                     ],
                     crossAxisAlignment: CrossAxisAlignment.end,
                   ),
@@ -75,20 +75,20 @@ class EvalCount extends StatelessWidget {
 
 class EvaluationsScreen extends StatefulWidget {
   @override
-  EvaluationsScreenState createState() => new EvaluationsScreenState();
+  EvaluationsScreenState createState() => EvaluationsScreenState();
 }
 
 //TODO refactor this file
-List<Average> averages = new List();
-List<TimeAverage> timeData = new List();
+List<Average> averages = List();
+List<TimeAverage> timeData = List();
 var series;
 
 class EvaluationsScreenState extends State<EvaluationsScreen> {
   Average selectedAverage;
-  final List<Series<TimeAverage, DateTime>> seriesList = new List();
-  List<Evaluation> evals = new List();
-  List<Evaluation> toSummaryEvals = new List();
-  List<Evaluation> allEvals = new List();
+  final List<Series<TimeAverage, DateTime>> seriesList = List();
+  List<Evaluation> evals = List();
+  List<Evaluation> toSummaryEvals = List();
+  List<Evaluation> allEvals = List();
   String avrString = "";
   String classAvrString = "";
   int db1 = 0;
@@ -97,7 +97,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
   int db4 = 0;
   int db5 = 0;
   double allAverage;
-  List<Widget> summaryCardsToShow = new List();
+  List<Widget> summaryCardsToShow = List();
 
   bool hasOfflineLoaded = false;
   bool hasLoaded = true;
@@ -109,7 +109,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           barrierDismissible: true,
           context: context,
           builder: (BuildContext context) {
-            return new SortDialog();
+            return SortDialog();
           },
         ) ??
         false;
@@ -238,22 +238,22 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
 
     if (endYearEvaluations.isNotEmpty)
       summaryCardsToShow.add(
-          new SummaryCard(endYearEvaluations, context, 4, false, true, false));
+          SummaryCard(endYearEvaluations, context, 4, false, true, false));
     if (thirdQuarterEvaluations.isNotEmpty)
-      summaryCardsToShow.add(new SummaryCard(
+      summaryCardsToShow.add(SummaryCard(
           thirdQuarterEvaluations, context, 3, false, true, false));
     if (halfYearEvaluations.isNotEmpty)
       summaryCardsToShow.add(
-          new SummaryCard(halfYearEvaluations, context, 2, false, true, false));
+          SummaryCard(halfYearEvaluations, context, 2, false, true, false));
     if (firstQuarterEvaluations.isNotEmpty)
-      summaryCardsToShow.add(new SummaryCard(firstQuarterEvaluations, context,
+      summaryCardsToShow.add(SummaryCard(firstQuarterEvaluations, context,
           1, false, true, false)); //localization
 
     if (summaryCardsToShow.isEmpty)
       summaryCardsToShow.add(Card(
           child: Container(
               padding: EdgeInsets.all(5),
-              child: new Text(I18n.of(context).evaluationSummaryPlaceholder))));
+              child: Text(I18n.of(context).evaluationSummaryPlaceholder))));
   }
 
   double getAllAverages() {
@@ -312,7 +312,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
         }
 
         evaluationsBySubject.forEach((String subject, List evaluations) {
-          averages.add(new Average(
+          averages.add(Average(
               subject,
               evaluations[0].SubjectCategory,
               evaluations[0].SubjectCategoryName,
@@ -356,7 +356,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
       globals.currentEvals.clear();
       timeData.clear();
       series = [
-        new Series(
+        Series(
           displayName: "asd",
           id: "averages",
           colorFn: (_, __) => color,
@@ -372,9 +372,9 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
         if (average.subject == e.Subject) {
           globals.currentEvals.add(e);
           setState(() {
-            timeData.add(new TimeAverage(e.CreatingTime, e.NumberValue));
+            timeData.add(TimeAverage(e.CreatingTime, e.NumberValue));
             series = [
-              new Series(
+              Series(
                 displayName: "asd",
                 id: "averages",
                 colorFn: (_, __) => color,
@@ -408,9 +408,9 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           n += multiplier;
 
           setState(() {
-            timeData.add(new TimeAverage(e.CreatingTime, e.NumberValue));
+            timeData.add(TimeAverage(e.CreatingTime, e.NumberValue));
             series = [
-              new Series(
+              Series(
                 displayName: "asd",
                 id: "averages",
                 colorFn: (_, __) => color,
@@ -454,7 +454,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
   @override
   Widget build(BuildContext context) {
     series = [
-      new Series(
+      Series(
         displayName: "asd",
         id: "averages",
         colorFn: (_, __) => color,
@@ -465,7 +465,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
     ];
 
     Widget _allBuilder(BuildContext context, int index) {
-      Widget sep = new Container();
+      Widget sep = Container();
       if (globals.sort == 1) {
         if (((index == 0) && (allEvals[index].Value.length < 16) ||
             (allEvals[index].Value != allEvals[index - 1].Value &&
@@ -473,7 +473,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           sep = Card(
               color: globals.isDark ? Colors.grey[1000] : Colors.grey[300],
               child: Container(
-                child: new Text(
+                child: Text(
                   allEvals[index].Value,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
@@ -483,15 +483,15 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
               margin: EdgeInsets.only(top: 10, left: 30, right: 30, bottom: 3));
       }
 
-      return new Column(
+      return Column(
         children: <Widget>[
           sep,
-          new Card(
-            child: new ListTile(
-              leading: new Container(
-                child: new Text(
+          Card(
+            child: ListTile(
+              leading: Container(
+                child: Text(
                   allEvals[index].realValue.toString() ?? "",
-                  style: new TextStyle(
+                  style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                       color:
@@ -500,7 +500,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                 alignment: Alignment(0, 0),
                 height: 45,
                 width: 45,
-                decoration: new BoxDecoration(
+                decoration: BoxDecoration(
                     color: getColors(context, allEvals[index].realValue, true),
                     border: Border.all(
                         color: (allEvals[index].Weight != "100%" &&
@@ -508,28 +508,28 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                             ? globals.isDark ? Colors.white38 : Colors.black38
                             : Colors.transparent,
                         width: 3),
-                    borderRadius: new BorderRadius.all(Radius.circular(40))),
+                    borderRadius: BorderRadius.all(Radius.circular(40))),
               ),
-              title: new Text(
+              title: Text(
                   allEvals[index].Subject ??
                       allEvals[index].Jelleg.Leiras ??
                       "",
-                  style: new TextStyle(fontWeight: FontWeight.bold)),
-              subtitle: new Text(
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              subtitle: Text(
                 (allEvals[index].Mode != null)
                     ? (allEvals[index].Theme == "")
                         ? allEvals[index].Mode
                         : allEvals[index].Theme
                     : "",
-                style: new TextStyle(
+                style: TextStyle(
                     fontStyle: (allEvals[index].Theme == "")
                         ? FontStyle.italic
                         : FontStyle.normal),
               ),
-              trailing: new Column(
+              trailing: Column(
                 children: <Widget>[
-                  new Text(dateToHuman(allEvals[index].Date)) ?? "",
-                  new Text(dateToWeekDay(allEvals[index].Date, context)) ?? "",
+                  Text(dateToHuman(allEvals[index].Date)) ?? "",
+                  Text(dateToWeekDay(allEvals[index].Date, context)) ?? "",
                 ],
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -543,23 +543,23 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
       );
     }
 
-    evaluationsBody = new Scaffold(
+    evaluationsBody = Scaffold(
         //"Összes" "All"
-        floatingActionButton: new FloatingActionButton(
+        floatingActionButton: FloatingActionButton(
           onPressed: () {
             showSortDialog().then((b) {
               refreshSort();
               switchToScreen(0);
             });
           },
-          child: new Icon(Icons.sort, color: Colors.white),
+          child: Icon(Icons.sort, color: Colors.white),
           tooltip: I18n.of(context).sort,
         ),
-        body: (new Container(
-            child: new Column(
+        body: (Container(
+            child: Column(
           children: <Widget>[
-            new Expanded(
-                child: new ListView.builder(
+            Expanded(
+                child: ListView.builder(
               itemBuilder: _allBuilder,
               itemCount: allEvals.length,
             ))
@@ -568,51 +568,51 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
 
     averageBody = Scaffold(
       //"Statisztika" "Statistics"
-      body: new Stack(children: <Widget>[
-        new Column(
+      body: Stack(children: <Widget>[
+        Column(
           children: <Widget>[
-            new Container(
+            Container(
               child: selectedAverage != null
-                  ? new DropdownButton(
+                  ? DropdownButton(
                       items: averages.map((Average average) {
-                        return new DropdownMenuItem<Average>(
+                        return DropdownMenuItem<Average>(
                             value: average,
-                            child: new Row(
+                            child: Row(
                               children: <Widget>[
-                                new Text(average.subject),
+                                Text(average.subject),
                               ],
                             ));
                       }).toList(),
                       onChanged: _onSelect,
                       value: selectedAverage,
                     )
-                  : new Container(),
+                  : Container(),
               alignment: Alignment(0, 0),
               margin: EdgeInsets.all(5),
             ),
-            new Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                new Text(capitalize(I18n.of(context).evaluationAverage) + ": "),
-                new Text(
+                Text(capitalize(I18n.of(context).evaluationAverage) + ": "),
+                Text(
                   avrString,
                   style: TextStyle(
                       color: getColorForAverageString(avrString),
                       fontWeight: FontWeight.bold),
                 ),
-                new Container(
+                Container(
                   padding: EdgeInsets.only(left: 10),
                 ),
                 selectedAverage != null
                     ? selectedAverage.classValue != null
-                        ? new Text(capitalize(
+                        ? Text(capitalize(
                                 I18n.of(context).evaluationAverageClass) +
                             ": ")
                         : Container()
                     : Container(),
                 selectedAverage != null
                     ? selectedAverage.classValue != null
-                        ? new Text(
+                        ? Text(
                             selectedAverage.classValue != 0
                                 ? selectedAverage.classValue.toString()
                                 : r"¯\_(ツ)_/¯",
@@ -625,9 +625,9 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                     : Container(),
               ],
             ),
-            new Container(
-              child: new SizedBox(
-                child: new TimeSeriesChart(
+            Container(
+              child: SizedBox(
+                child: TimeSeriesChart(
                   series,
                   animate: true,
                   primaryMeasureAxis: NumericAxisSpec(
@@ -637,9 +637,9 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                 height: 150,
               ),
             ),
-            new Flexible(
+            Flexible(
               //Build list of evaluations below graph
-              child: new ListView.builder(
+              child: ListView.builder(
                 itemBuilder: _itemBuilder,
                 itemCount: globals.currentEvals.length,
               ),
@@ -648,13 +648,13 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
         ),
       ]),
-      floatingActionButton: new FloatingActionButton(
+      floatingActionButton: FloatingActionButton(
         onPressed: () {
           return showDialog(
                 barrierDismissible: true,
                 context: context,
                 builder: (BuildContext context) {
-                  return new GradeDialog(this.callback);
+                  return GradeDialog(this.callback);
                 },
               ) ??
               false;
@@ -669,27 +669,27 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
 
     dataBody = ListView(children: <Widget>[
       //"Eredmények" "Results"
-      new Table(
+      Table(
         children: [
-          new TableRow(
+          TableRow(
             children: <Widget>[
-              new EvalCount(context, 5, db5),
-              new EvalCount(context, 4, db4),
-              new EvalCount(context, 3, db3)
+              EvalCount(context, 5, db5),
+              EvalCount(context, 4, db4),
+              EvalCount(context, 3, db3)
             ],
           ),
-          new TableRow(
+          TableRow(
             children: <Widget>[
-              new EvalCount(context, 2, db2),
-              new EvalCount(context, 1, db1),
-              new Container(
-                  child: new Card(
+              EvalCount(context, 2, db2),
+              EvalCount(context, 1, db1),
+              Container(
+                  child: Card(
                       child: Container(
-                          child: new Column(
+                          child: Column(
                             children: <Widget>[
-                              new Text(I18n.of(context).evaluationAverage),
+                              Text(I18n.of(context).evaluationAverage),
                               Container(
-                                child: new Divider(
+                                child: Divider(
                                   color: Colors.black45,
                                   thickness: 1,
                                   indent: 27,
@@ -697,9 +697,9 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                                 ),
                                 height: 5,
                               ),
-                              new Text(
+                              Text(
                                 allAverage.toStringAsFixed(2),
-                                style: new TextStyle(
+                                style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
                                 ),
@@ -716,36 +716,36 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
         ],
         defaultVerticalAlignment: TableCellVerticalAlignment.middle,
       ),
-      new Column(children: summaryCardsToShow)
+      Column(children: summaryCardsToShow)
     ]);
 
-    return new WillPopScope(
+    return WillPopScope(
         onWillPop: () {
           globals.screen = 0;
-          Navigator.pushReplacementNamed(context, "/main");
+          Navigator.pushReplacementNamed(context, "/home");
         },
         child: Scaffold(
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: currentBody,
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
-                    icon: new Icon(Icons.list),
-                    title: new Text(I18n.of(context).evaluationNavigationAll)),
+                    icon: Icon(Icons.list),
+                    title: Text(I18n.of(context).evaluationNavigationAll)),
                 BottomNavigationBarItem(
-                  icon: new Icon(Icons.show_chart),
+                  icon: Icon(Icons.show_chart),
                   title:
-                      new Text(I18n.of(context).evaluationNavigationStatistics),
+                      Text(I18n.of(context).evaluationNavigationStatistics),
                 ),
                 BottomNavigationBarItem(
-                  icon: new Icon(Icons.assistant),
-                  title: new Text(I18n.of(context).evaluationNavigationResults),
+                  icon: Icon(Icons.assistant),
+                  title: Text(I18n.of(context).evaluationNavigationResults),
                 ),
               ],
               onTap: switchToScreen,
             ),
             drawer: GDrawer(),
-            appBar: new AppBar(
-                title: new Text(capitalize(I18n.of(context).evaluationTitle))),
+            appBar: AppBar(
+                title: Text(capitalize(I18n.of(context).evaluationTitle))),
             body: (currentBody == 0
                 ? evaluationsBody
                 : (currentBody == 1 ? averageBody : dataBody))));
@@ -759,14 +759,14 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
 
   Widget _itemBuilder(BuildContext context, int index) {
     try {
-      return new Column(
+      return Column(
         children: <Widget>[
-          new Card(
-            child: new ListTile(
-              leading: new Container(
-                child: new Text(
+          Card(
+            child: ListTile(
+              leading: Container(
+                child: Text(
                   globals.currentEvals[index].realValue.toString(),
-                  style: new TextStyle(
+                  style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                       color: getColors(context,
@@ -775,7 +775,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                 alignment: Alignment(0, 0),
                 height: 45,
                 width: 45,
-                decoration: new BoxDecoration(
+                decoration: BoxDecoration(
                     color: getColors(
                         context, globals.currentEvals[index].realValue, true),
                     border: Border.all(
@@ -784,45 +784,45 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                             ? globals.isDark ? Colors.white38 : Colors.black38
                             : Colors.transparent,
                         width: 3),
-                    borderRadius: new BorderRadius.all(Radius.circular(40))),
+                    borderRadius: BorderRadius.all(Radius.circular(40))),
               ),
-              title: new Text(
+              title: Text(
                 (globals.currentEvals[index].Mode != null)
                     ? (globals.currentEvals[index].Theme == "")
                         ? globals.currentEvals[index].Mode
                         : globals.currentEvals[index].Theme
                     : "",
-                style: new TextStyle(
+                style: TextStyle(
                     fontStyle: (globals.currentEvals[index].Theme == "")
                         ? FontStyle.italic
                         : FontStyle.normal),
               ),
-              trailing: new Row(
+              trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  new Column(
+                  Column(
                     children: <Widget>[
-                      new Text(dateToHuman(globals.currentEvals[index].Date)),
-                      new Text(dateToWeekDay(
+                      Text(dateToHuman(globals.currentEvals[index].Date)),
+                      Text(dateToWeekDay(
                           globals.currentEvals[index].Date, context)),
                     ],
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.end,
                   ),
                   globals.currentEvals[index].Mode == "Hamis"
-                      ? new Container(
+                      ? Container(
                           padding: EdgeInsets.all(0.0),
                           margin: EdgeInsets.all(0),
                           height: 40,
                           width: 40,
-                          child: new FlatButton(
+                          child: FlatButton(
                             onPressed: () {
                               setState(() {
                                 globals.currentEvals.removeAt(index);
                                 callback();
                               });
                             },
-                            child: new Icon(
+                            child: Icon(
                               Icons.clear,
                               color: Colors.redAccent,
                               size: 30,
@@ -830,7 +830,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                             padding: EdgeInsets.all(0.0),
                           ),
                         )
-                      : new Container(),
+                      : Container(),
                 ],
               ),
               onTap: () {
@@ -860,43 +860,43 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
       context: context,
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
-        return new AlertDialog(
-          title: new Text(evaluation.Subject ?? "" + evaluation.Value ?? ""),
-          content: new SingleChildScrollView(
-            child: new ListBody(
+        return AlertDialog(
+          title: Text(evaluation.Subject ?? "" + evaluation.Value ?? ""),
+          content: SingleChildScrollView(
+            child: ListBody(
               children: <Widget>[
                 evaluation.Theme != null
-                    ? new Text(capitalize(I18n.of(context).lessonTheme) +
+                    ? Text(capitalize(I18n.of(context).lessonTheme) +
                             ": " +
                             evaluation.Theme ??
                         "")
-                    : new Container(),
-                new Text(capitalize(I18n.of(context).lessonTeacher) +
+                    : Container(),
+                Text(capitalize(I18n.of(context).lessonTeacher) +
                         ": " +
                         evaluation.Teacher ??
                     ""),
-                new Text(capitalize(I18n.of(context).time) +
+                Text(capitalize(I18n.of(context).time) +
                     ": " +
                     dateToHuman(evaluation.Date ?? "")),
                 evaluation.Mode != null
-                    ? new Text(capitalize(I18n.of(context).evaluationMode) +
+                    ? Text(capitalize(I18n.of(context).evaluationMode) +
                         ": " +
                         evaluation.Mode)
-                    : new Container(),
-                new Text(capitalize(I18n.of(context).administrationTime) +
+                    : Container(),
+                Text(capitalize(I18n.of(context).administrationTime) +
                     ": " +
                     dateToHuman(evaluation.CreatingTime ?? "")),
                 evaluation.Weight != null
-                    ? new Text(capitalize(I18n.of(context).evaluationWeight) +
+                    ? Text(capitalize(I18n.of(context).evaluationWeight) +
                             ": " +
                             evaluation.Weight ??
                         "")
-                    : new Container(),
-                new Text(capitalize(I18n.of(context).evaluationValue) +
+                    : Container(),
+                Text(capitalize(I18n.of(context).evaluationValue) +
                         ": " +
                         evaluation.Value ??
                     ""),
-                new Text(capitalize(I18n.of(context).evaluationRange) +
+                Text(capitalize(I18n.of(context).evaluationRange) +
                         ": " +
                         evaluation.FormName ??
                     ""),
@@ -904,8 +904,8 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
             ),
           ),
           actions: <Widget>[
-            new FlatButton(
-              child: new Text(I18n.of(context).dialogOk.toUpperCase()),
+            FlatButton(
+              child: Text(I18n.of(context).dialogOk.toUpperCase()),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -928,7 +928,7 @@ class GradeDialog extends StatefulWidget {
   Function callback;
   GradeDialog(this.callback);
   @override
-  GradeDialogState createState() => new GradeDialogState();
+  GradeDialogState createState() => GradeDialogState();
 }
 
 class GradeDialogState extends State<GradeDialog> {
@@ -946,9 +946,9 @@ class GradeDialogState extends State<GradeDialog> {
   }
 
   Widget build(BuildContext context) {
-    return new SimpleDialog(
+    return SimpleDialog(
       contentPadding: EdgeInsets.all(0),
-      title: new Text(I18n.of(context).evaluationIf),
+      title: Text(I18n.of(context).evaluationIf),
       children: <Widget>[
         Container(
           child: Row(
@@ -1034,12 +1034,12 @@ class GradeDialogState extends State<GradeDialog> {
                 textAlign: TextAlign.center,
               ),
             ])),
-        new Center(
-          child: new Row(
+        Center(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new Text(capitalize(I18n.of(context).evaluationWeight) + ": "),
-              new Checkbox(
+              Text(capitalize(I18n.of(context).evaluationWeight) + ": "),
+              Checkbox(
                 value: isTZ,
                 onChanged: (value) {
                   setState(() {
@@ -1052,9 +1052,9 @@ class GradeDialogState extends State<GradeDialog> {
                 },
                 activeColor: Theme.of(context).accentColor,
               ),
-              new Container(
+              Container(
                 width: 60,
-                child: new TextField(
+                child: TextField(
                   maxLines: 1,
                   onChanged: _onWeightInput,
                   autocorrect: false,
@@ -1068,7 +1068,7 @@ class GradeDialogState extends State<GradeDialog> {
             ],
           ),
         ),
-        new FlatButton(
+        FlatButton(
           onPressed: () {
             setState(() {
               Evaluation falseGrade = Evaluation.fromMap(json.decode("""
@@ -1109,7 +1109,7 @@ class GradeDialogState extends State<GradeDialog> {
               Navigator.pop(context);
             });
           },
-          child: new Text(
+          child: Text(
             I18n.of(context).dialogDone.toUpperCase(),
             style: TextStyle(color: Theme.of(context).accentColor),
           ),

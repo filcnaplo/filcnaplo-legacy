@@ -20,7 +20,7 @@ Map defaultShowCardType = {
 
 class SettingsHelper {
   Future<void> _setPropertyBool(String name, dynamic value) async {
-    Map<String, dynamic> settings = new Map();
+    Map<String, dynamic> settings = Map();
     try {
       settings.addAll(await DBHelper().getSettingsMap());
     } catch (e) {
@@ -34,7 +34,7 @@ class SettingsHelper {
 
   dynamic _getProperty(String name, dynamic defaultValue) async {
     Map<String, dynamic> settings = await DBHelper().getSettingsMap();
-    if (settings == null) settings = new Map();
+    if (settings == null) settings = Map();
     if (settings.containsKey(name)) return (settings[name]);
 
     return defaultValue;

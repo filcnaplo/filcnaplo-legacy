@@ -5,8 +5,8 @@ import 'package:filcnaplo/Datas/Student.dart';
 class AbsentHelper {
   Future<Map<String, List<Absence>>> getAbsentsFrom(
       List<Absence> absenceList) async {
-    Map<String, List<Absence>> absents = new Map<String, List<Absence>>();
-    Set<String> uniqueAbsence = new Set<String>();
+    Map<String, List<Absence>> absents = Map<String, List<Absence>>();
+    Set<String> uniqueAbsence = Set<String>();
     absenceList.sort((Absence a, Absence b) {
       return b.LessonStartTime.compareTo(a.LessonStartTime);
     });
@@ -28,7 +28,7 @@ class AbsentHelper {
           .add(a.LessonStartTime.toIso8601String() + a.owner.id.toString());
     }
     for (String s in uniqueAbsence) {
-      List<Absence> theseAbsences = new List();
+      List<Absence> theseAbsences = List();
       for (Absence a in absenceList)
         if (a.LessonStartTime.toIso8601String() + a.owner.id.toString() == s)
           theseAbsences.add(a);

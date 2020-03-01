@@ -32,7 +32,7 @@ import 'screens/evaluationsScreen.dart';
 import 'screens/exportScreen.dart';
 import 'screens/homeworkScreen.dart';
 import 'screens/importScreen.dart';
-import 'screens/mainScreen.dart';
+import 'screens/homeScreen.dart';
 import 'screens/notesScreen.dart';
 import 'screens/settingsScreen.dart';
 import 'screens/studentScreen.dart';
@@ -56,6 +56,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+
     I18n.onLocaleChanged = onLocaleChange;
   }
 
@@ -67,18 +68,19 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    globals.context = context;
+
     const Locale de = Locale("de", "DE");
     const Locale hu = Locale("hu", "HU");
     const Locale en = Locale("en", "US");
     var langs = {"en": en, "de": de, "hu": hu};
-//    print(langs[globals.lang]);
     I18n.onLocaleChanged(langs[globals.lang]);
 
-    return new DynamicTheme(
+    return DynamicTheme(
         defaultBrightness: Brightness.light,
         data: (brightness) => ColorManager().getTheme(brightness),
         themedWidgetBuilder: (context, theme) {
-          return new MaterialApp(
+          return MaterialApp(
             localizationsDelegates: [
               i18n,
               GlobalMaterialLocalizations.delegate,
@@ -87,30 +89,30 @@ class _MyAppState extends State<MyApp> {
             ],
             supportedLocales: i18n.supportedLocales,
             localeResolutionCallback:
-                i18n.resolution(fallback: new Locale("hu", "HU")),
+                i18n.resolution(fallback: Locale("hu", "HU")),
             onGenerateTitle: (BuildContext context) =>
                 I18n.of(context).appTitle,
             title: "Filc Napló",
             theme: theme,
             routes: <String, WidgetBuilder>{
-              '/main': (_) => new MainScreen(),
-              '/login': (_) => new LoginScreen(),
-              '/timetable': (_) => new TimeTableScreen(),
-              '/homework': (_) => new HomeworkScreen(),
-              '/notes': (_) => new NotesScreen(),
-              '/messages': (_) => new MessageScreen(),
-              '/absents': (_) => new AbsentsScreen(),
-              '/accounts': (_) => new AccountsScreen(),
-              '/settings': (_) => new SettingsScreen(),
-              '/evaluations': (_) => new EvaluationsScreen(),
-              '/export': (_) => new ExportScreen(),
-              '/import': (_) => new ImportScreen(),
-              '/evalcolor': (_) => new colorSettingsScreen(),
-              '/student': (_) => new StudentScreen(),
-              '/tests': (_) => new TestsScreen(),
+              '/home': (_) => HomeScreen(),
+              '/login': (_) => LoginScreen(),
+              '/timetable': (_) => TimeTableScreen(),
+              '/homework': (_) => HomeworkScreen(),
+              '/notes': (_) => NotesScreen(),
+              '/messages': (_) => MessageScreen(),
+              '/absents': (_) => AbsentsScreen(),
+              '/accounts': (_) => AccountsScreen(),
+              '/settings': (_) => SettingsScreen(),
+              '/evaluations': (_) => EvaluationsScreen(),
+              '/export': (_) => ExportScreen(),
+              '/import': (_) => ImportScreen(),
+              '/evalcolor': (_) => colorSettingsScreen(),
+              '/student': (_) => StudentScreen(),
+              '/tests': (_) => TestsScreen(),
             },
             navigatorKey: navigatorKey,
-            home: isNew ? new LoginScreen() : MainScreen(),
+            home: isNew ? LoginScreen() : HomeScreen(),
           );
         });
   }
@@ -120,7 +122,7 @@ void main({bool noReset = false}) async {
   WidgetsFlutterBinding.ensureInitialized();
 
   if (!noReset) {
-    final storage = new FlutterSecureStorage();
+    final storage = FlutterSecureStorage();
     String value = await storage.read(key: "db_key");
     if (value == null) {
       int randomNumber = Random.secure().nextInt(4294967296);
@@ -139,7 +141,7 @@ void main({bool noReset = false}) async {
   } else {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     globals.version = packageInfo.version;
-    globals.isBeta = globals.version.startsWith("b");
+    globals.isBeta = globals.version.endsWith("-beta");
     List<User> users = await AccountManager().getUsers();
     isNew = (users.isEmpty);
     globals.isLogo = await SettingsHelper().getLogo();
@@ -183,15 +185,15 @@ Future<void> reInit() async {
 }
 
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    new FlutterLocalNotificationsPlugin();
+    FlutterLocalNotificationsPlugin();
 
 void backgroundFetchHeadlessTask() async {
   var initializationSettingsAndroid =
-      new AndroidInitializationSettings('notification_icon');
-  var initializationSettingsIOS = new IOSInitializationSettings();
-  var initializationSettings = new InitializationSettings(
+      AndroidInitializationSettings('notification_icon');
+  var initializationSettingsIOS = IOSInitializationSettings();
+  var initializationSettings = InitializationSettings(
       initializationSettingsAndroid, initializationSettingsIOS);
-  flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+  flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
   flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
   await BackgroundHelper().backgroundTask().then((int finished) {

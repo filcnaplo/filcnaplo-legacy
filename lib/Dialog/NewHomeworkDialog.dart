@@ -1,20 +1,16 @@
-import 'dart:html';
-
-import 'package:filcnaplo/Dialog/ChooseLessonDialog.dart';
 import 'package:filcnaplo/Helpers/RequestHelper.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/Datas/Lesson.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 import '../Utils/StringFormatter.dart';
-import '../Datas/User.dart';
 
 class NewHomeworkDialog extends StatefulWidget {
   const NewHomeworkDialog(this.lesson);
   final Lesson lesson;
 
   @override
-  NewHomeworkDialogState createState() => new NewHomeworkDialogState();
+  NewHomeworkDialogState createState() => NewHomeworkDialogState();
 }
 
 class NewHomeworkDialogState extends State<NewHomeworkDialog> {
@@ -22,25 +18,25 @@ class NewHomeworkDialogState extends State<NewHomeworkDialog> {
   bool uploading = false;
 
   Widget build(BuildContext context) {
-    return new SimpleDialog(
+    return SimpleDialog(
       title: Column(
         children: <Widget>[
-          new Text(capitalize(I18n.of(context).homeworkAdd)),
-          new Text(
+          Text(capitalize(I18n.of(context).homeworkAdd)),
+          Text(
               widget.lesson.subject +
                   " • " +
                   lessonToHuman(widget.lesson) +
                   capitalize(dateToWeekDay(widget.lesson.start, context)),
-              style: new TextStyle(
+              style: TextStyle(
                   fontSize: 15,
                   color: globals.isDark ? Colors.grey : Colors.black54)),
-          new Divider(color: globals.isDark ? Colors.grey : Colors.black54)
+          Divider(color: globals.isDark ? Colors.grey : Colors.black54)
         ],
         crossAxisAlignment: CrossAxisAlignment.start,
       ),
       contentPadding: const EdgeInsets.all(10.0),
       children: <Widget>[
-        new TextField(
+        TextField(
           keyboardType: TextInputType.multiline,
           maxLines: 10,
           onChanged: (String text) {
@@ -48,8 +44,8 @@ class NewHomeworkDialogState extends State<NewHomeworkDialog> {
           },
         ),
         uploading
-            ? new LinearProgressIndicator()
-            : new MaterialButton(
+            ? LinearProgressIndicator()
+            : MaterialButton(
                 child: Text(I18n.of(context).dialogOk.toUpperCase()),
                 onPressed: _uploadHomework,
               )

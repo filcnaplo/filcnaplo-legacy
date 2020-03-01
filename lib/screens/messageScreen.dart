@@ -12,12 +12,12 @@ import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
-  runApp(new MaterialApp(home: new MessageScreen()));
+  runApp(MaterialApp(home: MessageScreen()));
 }
 
 class MessageScreen extends StatefulWidget {
   @override
-  MessageScreenState createState() => new MessageScreenState();
+  MessageScreenState createState() => MessageScreenState();
 }
 
 class MessageScreenState extends State<MessageScreen> {
@@ -60,7 +60,7 @@ class MessageScreenState extends State<MessageScreen> {
               ),
             ])
                 : new Center(child: new CircularProgressIndicator())),
-        "/main",
+        "/home",
         <Widget>[]
     );
   }
@@ -70,7 +70,7 @@ class MessageScreenState extends State<MessageScreen> {
       hasLoaded = false;
     });
 
-    Completer<Null> completer = new Completer<Null>();
+    Completer<Null> completer = Completer<Null>();
 
     await globals.selectedAccount.refreshStudentString(false, showErrors);
 
@@ -81,40 +81,40 @@ class MessageScreenState extends State<MessageScreen> {
   }
 
   Widget _itemBuilder(BuildContext context, int index) {
-    Widget sep = new Container();
+    Widget sep = Container();
 
-    return new Column(
+    return Column(
       children: <Widget>[
         sep,
-        new Divider(
+        Divider(
           height: index != 0 ? 2.0 : 0.0,
         ),
-        new ListTile(
-          //leading: new Container(),
-          title: new Text(
+        ListTile(
+          //leading: Container(),
+          title: Text(
             messages[index].subject,
             style: TextStyle(
                 fontWeight: !messages[index].seen
                     ? FontWeight.bold
                     : FontWeight.normal),
           ),
-          subtitle: new Text(
+          subtitle: Text(
             messages[index].senderName,
             style: TextStyle(
                 fontWeight: !messages[index].seen
                     ? FontWeight.bold
                     : FontWeight.normal),
           ),
-          trailing: new Column(
+          trailing: Column(
             children: <Widget>[
-              new Text(
+              Text(
                 dateToHuman(messages[index].date),
                 style: TextStyle(
                     fontWeight: !messages[index].seen
                         ? FontWeight.bold
                         : FontWeight.normal),
               ),
-              new Text(
+              Text(
                 dateToWeekDay(messages[index].date, context),
                 style: TextStyle(
                     fontWeight: !messages[index].seen
@@ -135,7 +135,7 @@ class MessageScreenState extends State<MessageScreen> {
                   barrierDismissible: true,
                   context: context,
                   builder: (BuildContext context) {
-                    return new MessageDialog(messages[index]);
+                    return MessageDialog(messages[index]);
                   },
                 ) ??
                 false;

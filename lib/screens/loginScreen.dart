@@ -17,7 +17,7 @@ import 'package:filcnaplo/Utils/AccountManager.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 import 'package:filcnaplo/Utils/StringFormatter.dart';
 
-LoginScreenState loginScreenState = new LoginScreenState();
+LoginScreenState loginScreenState = LoginScreenState();
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({this.fromApp});
@@ -28,7 +28,7 @@ class LoginScreen extends StatefulWidget {
   LoginScreenState createState() => LoginScreenState();
 }
 
-Icon helpIconSwitch = new Icon(
+Icon helpIconSwitch = Icon(
   IconData(0xf625, fontFamily: "Material Design Icons"),
   color: Colors.white12,
 );
@@ -37,12 +37,12 @@ bool helpSwitch = false;
 void helpToggle() {
   helpSwitch = !helpSwitch;
   if (helpSwitch) {
-    helpIconSwitch = new Icon(
+    helpIconSwitch = Icon(
       IconData(0xf625, fontFamily: "Material Design Icons"),
       color: Colors.white,
     );
   } else {
-    helpIconSwitch = new Icon(
+    helpIconSwitch = Icon(
       IconData(0xf625, fontFamily: "Material Design Icons"),
       color: Colors.white12,
     );
@@ -52,19 +52,19 @@ void helpToggle() {
 void showToggle() {
   showSwitch = !showSwitch;
   if (showSwitch) {
-    showIconSwitch = new Icon(
+    showIconSwitch = Icon(
       Icons.remove_red_eye,
       color: Colors.white,
     );
   } else {
-    showIconSwitch = new Icon(
+    showIconSwitch = Icon(
       Icons.remove_red_eye,
       color: Colors.white12,
     );
   }
 }
 
-Icon showIconSwitch = new Icon(
+Icon showIconSwitch = Icon(
   Icons.remove_red_eye,
   color: Colors.white12,
 );
@@ -83,8 +83,8 @@ bool isDialog = false;
 
 bool loggingIn = false;
 
-final userNameController = new TextEditingController();
-final passwordController = new TextEditingController();
+final userNameController = TextEditingController();
+final passwordController = TextEditingController();
 
 class LoginScreenState extends State<LoginScreen> {
   @override
@@ -173,7 +173,7 @@ class LoginScreenState extends State<LoginScreen> {
                 .getInfo(instCode, userName, password, false);
 
             setState(() {
-              User user = new User(
+              User user = User(
                   int.parse(userInfo["StudentId"]),
                   userName,
                   password,
@@ -231,11 +231,11 @@ class LoginScreenState extends State<LoginScreen> {
   void showSelectDialog() {
     initJson();
     setState(() {
-      myDialogState = new MyDialogState();
+      myDialogState = MyDialogState();
       showDialog<Institution>(
           context: context,
           builder: (BuildContext context) {
-            return new MyDialog();
+            return MyDialog();
           }).then((dynamic) {
         setState(() {});
       });
@@ -249,43 +249,43 @@ class LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    return new WillPopScope(
+    return WillPopScope(
         onWillPop: () {
           if (widget.fromApp)
             Navigator.pushReplacementNamed(context, "/accounts");
         },
         child: Scaffold(
-            body: new Container(
+            body: Container(
                 color: Colors.black87,
-                child: new Center(
+                child: Center(
                     child: !loggingIn
-                        ? new Container(
-                            child: new ListView(
+                        ? Container(
+                            child: ListView(
                             reverse: true,
                             padding:
                                 EdgeInsets.fromLTRB(20.0, 50.0, 20.0, 20.0),
                             children: <Widget>[
-                              new Container(
-                                padding: new EdgeInsets.only(
+                              Container(
+                                padding: EdgeInsets.only(
                                     left: 40.0, right: 40.0),
                                 child: Image.asset("assets/icon.png"),
                                 height: kbSize,
                               ),
-                              new Container(
+                              Container(
                                   margin: EdgeInsets.only(top: 5.0),
-                                  child: new Row(
+                                  child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       children: <Widget>[
-                                        new Flexible(
-                                          child: new TextFormField(
+                                        Flexible(
+                                          child: TextFormField(
                                             style:
                                                 TextStyle(color: Colors.white),
                                             controller: userNameController,
                                             decoration: InputDecoration(
                                               prefixIcon:
-                                                  new Icon(Icons.person),
-                                              suffixIcon: new IconButton(
+                                                  Icon(Icons.person),
+                                              suffixIcon: IconButton(
                                                   icon: helpIconSwitch,
                                                   onPressed: () {
                                                     setState(() {
@@ -322,18 +322,18 @@ class LoginScreenState extends State<LoginScreen> {
                                           ),
                                         ),
                                       ])),
-                              new Container(
+                              Container(
                                   margin: EdgeInsets.only(top: 10.0),
-                                  child: new Row(children: <Widget>[
-                                    new Flexible(
-                                      child: new TextFormField(
+                                  child: Row(children: <Widget>[
+                                    Flexible(
+                                      child: TextFormField(
                                         style: TextStyle(color: Colors.white),
                                         controller: passwordController,
                                         keyboardType: TextInputType.text,
                                         obscureText: !showSwitch,
                                         decoration: InputDecoration(
-                                          prefixIcon: new Icon(Icons.https),
-                                          suffixIcon: new IconButton(
+                                          prefixIcon: Icon(Icons.https),
+                                          suffixIcon: IconButton(
                                               icon: showIconSwitch,
                                               onPressed: () {
                                                 setState(() {
@@ -368,40 +368,40 @@ class LoginScreenState extends State<LoginScreen> {
                                       ),
                                     ),
                                   ])),
-                              new Column(children: <Widget>[
-                                new Container(
-                                  margin: new EdgeInsets.fromLTRB(
+                              Column(children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.fromLTRB(
                                       0.0, 10.0, 0.0, 5.0),
-                                  padding: new EdgeInsets.fromLTRB(
+                                  padding: EdgeInsets.fromLTRB(
                                       10.0, 4.0, 10.0, 4.0),
-                                  decoration: new BoxDecoration(
+                                  decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5.0),
                                     color: Color.fromARGB(40, 20, 20, 30),
-                                    border: new Border.all(
+                                    border: Border.all(
                                       color: schoolSelected
                                           ? Colors.black87
                                           : Colors.red,
                                       width: 1.0,
                                     ),
                                   ),
-                                  child: new Row(
+                                  child: Row(
                                     children: <Widget>[
-                                      new Text(
+                                      Text(
                                         I18n.of(context).loginSchool + ": ",
-                                        style: new TextStyle(
+                                        style: TextStyle(
                                             fontSize: 21.0,
                                             color: Colors.white30),
                                       ),
-                                      new Expanded(
-                                        child: new FlatButton(
+                                      Expanded(
+                                        child: FlatButton(
                                           onPressed: () {
                                             showSelectDialog();
                                             setState(() {});
                                           },
-                                          child: new Text(
+                                          child: Text(
                                             globals.selectedSchoolName ??
                                                 I18n.of(context).loginChoose,
-                                            style: new TextStyle(
+                                            style: TextStyle(
                                                 fontSize: 18.0,
                                                 color: Colors.blue),
                                           ),
@@ -411,23 +411,23 @@ class LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                                 !schoolSelected
-                                    ? new Text(
+                                    ? Text(
                                         I18n.of(context).loginSchoolError,
-                                        style: new TextStyle(color: Colors.red),
+                                        style: TextStyle(color: Colors.red),
                                       )
-                                    : new Container(),
+                                    : Container(),
                               ]),
-                              new Row(
+                              Row(
                                 children: <Widget>[
                                   !Platform.isIOS
                                       ? Expanded(
-                                          child: new Container(
+                                          child: Container(
                                           child: FlatButton(
                                             onPressed: () {
                                               Navigator.pushNamed(
                                                   context, "/import");
                                             },
-                                            child: new Text("Import"),
+                                            child: Text("Import"),
                                             disabledColor: Colors.blueGrey[800],
                                             disabledTextColor: Colors.blueGrey,
                                             color: Colors.green,
@@ -438,7 +438,7 @@ class LoginScreenState extends State<LoginScreen> {
                                       : Container(),
                                 ],
                               ),
-                              new FlatButton(
+                              FlatButton(
                                 onPressed: !loggingIn
                                     ? () {
                                         setState(() {
@@ -449,7 +449,7 @@ class LoginScreenState extends State<LoginScreen> {
                                     : null,
                                 disabledColor: Colors.blueGrey.shade800,
                                 disabledTextColor: Colors.blueGrey,
-                                child: new Text(
+                                child: Text(
                                     capitalize(I18n.of(context).login)),
                                 color: Colors.blue,
                                 //#2196F3
@@ -457,8 +457,8 @@ class LoginScreenState extends State<LoginScreen> {
                               ),
                             ].reversed.toList(),
                           ))
-                        : new Container(
-                            child: new CircularProgressIndicator(),
+                        : Container(
+                            child: CircularProgressIndicator(),
                           )))));
   }
 
@@ -478,7 +478,7 @@ class MyDialog extends StatefulWidget {
   }
 }
 
-MyDialogState myDialogState = new MyDialogState();
+MyDialogState myDialogState = MyDialogState();
 
 class MyDialogState extends State<MyDialog> {
   @override
@@ -495,12 +495,12 @@ class MyDialogState extends State<MyDialog> {
   }
 
   Widget build(BuildContext context) {
-    return new SimpleDialog(
-      title: new Text(I18n.of(context).loginChooseSchool + ":"),
+    return SimpleDialog(
+      title: Text(I18n.of(context).loginChooseSchool + ":"),
       contentPadding: const EdgeInsets.all(10.0),
       children: <Widget>[
-        new Container(
-          child: new TextField(
+        Container(
+          child: TextField(
               maxLines: 1,
               autofocus: true,
               onChanged: (String search) {
@@ -508,15 +508,15 @@ class MyDialogState extends State<MyDialog> {
                   updateSearch(search);
                 });
               }),
-          margin: new EdgeInsets.all(10.0),
+          margin: EdgeInsets.all(10.0),
         ),
-        new Container(
+        Container(
           child: globals.searchres != null
-              ? new ListView.builder(
+              ? ListView.builder(
                   itemBuilder: _itemBuilder,
                   itemCount: globals.searchres.length,
                 )
-              : new Container(),
+              : Container(),
           width: 320.0,
           height: 400.0,
         )
@@ -540,11 +540,11 @@ class MyDialogState extends State<MyDialog> {
   }
 
   Widget _itemBuilder(BuildContext context, int index) {
-    return new Column(
+    return Column(
       children: <Widget>[
         ListTile(
-          title: new Text(globals.searchres[index]["Name"]),
-          subtitle: new Text(globals.searchres[index]["Url"]),
+          title: Text(globals.searchres[index]["Name"]),
+          subtitle: Text(globals.searchres[index]["Url"]),
           onTap: () {
             setState(() {
               globals.selectedSchoolCode =
@@ -555,9 +555,9 @@ class MyDialogState extends State<MyDialog> {
             });
           },
         ),
-        new Container(
-          child: new Text(globals.searchres[index]["City"]),
-          alignment: new Alignment(1.0, 0.0),
+        Container(
+          child: Text(globals.searchres[index]["City"]),
+          alignment: Alignment(1.0, 0.0),
         )
       ],
     );

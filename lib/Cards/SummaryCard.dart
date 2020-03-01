@@ -47,7 +47,7 @@ class SummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Card(
+    return Card(
         color: !showColor
             ? globals.isDark ? Color.fromARGB(255, 25, 25, 25) : Colors.grey[300]
             : summaryEvaluations.first.owner.color ??
@@ -56,22 +56,22 @@ class SummaryCard extends StatelessWidget {
                     : Colors
                         .grey[300]), //If a user logs in, default color is null.
         margin: EdgeInsets.all(6.0),
-        child: new Container(
-          child: new Column(
+        child: Container(
+          child: Column(
             children: <Widget>[
               showTitle
-                  ? new Container(
-                      child: new Row(
+                  ? Container(
+                      child: Row(
                         children: <Widget>[
-                          new Text(
+                          Text(
                             title,
-                            style: new TextStyle(
+                            style: TextStyle(
                                 fontSize: 17, fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),
                           !showColor
-                              ? new Container()
-                              : new Text(
+                              ? Container()
+                              : Text(
                                   summaryEvaluations.first.owner.name,
                                   textAlign: TextAlign.center,
                                 )
@@ -83,8 +83,8 @@ class SummaryCard extends StatelessWidget {
                       padding: EdgeInsets.all(7),
                       constraints: BoxConstraints.expand(height: 36),
                     )
-                  : new Container(),
-              new Container(
+                  : Container(),
+              Container(
                 child: evaluationList(context),
                 padding: EdgeInsets.fromLTRB(0.0, 6.0, 0.0, 6.0),
                 decoration: ShapeDecoration(
@@ -104,14 +104,14 @@ class SummaryCard extends StatelessWidget {
               )
             ],
           ),
-          decoration: new BoxDecoration(
+          decoration: BoxDecoration(
             border: Border.all(
                 color: !showColor
                     ? globals.isDark ? Color.fromARGB(255, 25, 25, 25) : Colors.grey[300]
                     : summaryEvaluations.first.owner.color ??
                         (globals.isDark ? Color.fromARGB(255, 25, 25, 25) : Colors.grey[300]),
                 width: 2.5),
-            borderRadius: new BorderRadius.all(Radius.circular(5)),
+            borderRadius: BorderRadius.all(Radius.circular(5)),
           ),
         ),
         shape: RoundedRectangleBorder(
@@ -131,15 +131,15 @@ class SummaryCard extends StatelessWidget {
   }
 
   @override
-  Key get key => new Key(getDate());
+  Key get key => Key(getDate());
 
   Widget evaluationList(BuildContext context) {
     return Column(children: <Widget>[
       for (Evaluation evaluation in summaryEvaluations)
-        new ListTile(
-          leading: new Container(
-            child: new Text(evaluation.realValue.toString(),
-                style: new TextStyle(
+        ListTile(
+          leading: Container(
+            child: Text(evaluation.realValue.toString(),
+                style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
                   color: globals.isColor
@@ -149,18 +149,18 @@ class SummaryCard extends StatelessWidget {
             alignment: Alignment(0, 0),
             height: 40,
             width: 40,
-            decoration: new BoxDecoration(
+            decoration: BoxDecoration(
                 color: globals.isColor
                     ? getColors(context, evaluation.realValue, true)
                     : Color.fromARGB(255, 15, 15, 15),
-                borderRadius: new BorderRadius.all(Radius.circular(40))),
+                borderRadius: BorderRadius.all(Radius.circular(40))),
           ),
-          title: new Text(
+          title: Text(
             evaluation.Subject ?? evaluation.Jelleg.Leiras,
-            style: new TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          subtitle: new Text(evaluation.Teacher),
-          trailing: new Text(dateToHuman(evaluation.Date)),
+          subtitle: Text(evaluation.Teacher),
+          trailing: Text(dateToHuman(evaluation.Date)),
           onTap: () {
             openDialog(evaluation);
           },
@@ -172,8 +172,8 @@ class SummaryCard extends StatelessWidget {
     _evaluationDialog(evaluation);
   }
 
-  Widget listEntry(String data, {bold = false, right = false}) => new Container(
-        child: new Text(
+  Widget listEntry(String data, {bold = false, right = false}) => Container(
+        child: Text(
           data,
           style: TextStyle(
               fontSize: right ? 16 : 19,
@@ -188,33 +188,33 @@ class SummaryCard extends StatelessWidget {
       context: context,
       barrierDismissible: true,
       builder: (BuildContext context) {
-        return new SimpleDialog(
+        return SimpleDialog(
           children: <Widget>[
-            new SingleChildScrollView(
-              child: new ListBody(
+            SingleChildScrollView(
+              child: ListBody(
                 children: <Widget>[
                   evaluation.Value != null
                       ? listEntry(evaluation.Value)
-                      : new Container(),
+                      : Container(),
                   evaluation.Weight != "" &&
                           evaluation.Weight != "100%" &&
                           evaluation.Weight != null
                       ? listEntry(evaluation.Weight,
                           bold: ["200%", "300%"].contains(evaluation.Weight))
-                      : new Container(),
+                      : Container(),
                   evaluation.Theme != "" && evaluation.Theme != null
                       ? listEntry(evaluation.Theme)
-                      : new Container(),
+                      : Container(),
                   evaluation.Mode != "" && evaluation.Theme != null
                       ? listEntry(evaluation.Mode)
-                      : new Container(),
+                      : Container(),
                   evaluation.CreatingTime != null
                       ? listEntry(dateToHuman(evaluation.CreatingTime),
                           right: true)
-                      : new Container(),
+                      : Container(),
                   evaluation.Teacher != null
                       ? listEntry(evaluation.Teacher, right: true)
-                      : new Container(),
+                      : Container(),
                 ],
               ),
             ),
@@ -223,7 +223,7 @@ class SummaryCard extends StatelessWidget {
               ? Text(evaluation.Subject)
               : evaluation.Jelleg.Leiras != null
                   ? Text(evaluation.Jelleg.Leiras)
-                  : new Container(),
+                  : Container(),
           contentPadding: EdgeInsets.all(20),
           shape: RoundedRectangleBorder(
             side: BorderSide(

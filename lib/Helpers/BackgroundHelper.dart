@@ -24,7 +24,7 @@ class BackgroundHelper {
   Future<bool> get canSyncOnData async =>
       await SettingsHelper().getCanSyncOnData();
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      new FlutterLocalNotificationsPlugin();
+      FlutterLocalNotificationsPlugin();
 
   void doEvaluations(
       List<Evaluation> offlineEvals, List<Evaluation> evals) async {
@@ -34,7 +34,7 @@ class BackgroundHelper {
       for (Evaluation o in offlineEvals)
         if (e.trueID() == o.trueID()) exist = true;
       if (!exist) {
-        var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+        var androidPlatformChannelSpecifics = AndroidNotificationDetails(
           'evaluations',
           'jegyek',
           'értesítések a jegyekről',
@@ -42,8 +42,8 @@ class BackgroundHelper {
           priority: Priority.High,
           color: Colors.grey,
         );
-        var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
-        var platformChannelSpecifics = new NotificationDetails(
+        var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+        var platformChannelSpecifics = NotificationDetails(
             androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
         flutterLocalNotificationsPlugin.show(
             e.trueID(),
@@ -66,13 +66,13 @@ class BackgroundHelper {
       if (!offlineNotes.map((Note note) => note.id).contains(n.id)) {
         //print(offlineNotes.map((Note note) => note.id).toList());
         //print(n.id);
-        var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+        var androidPlatformChannelSpecifics = AndroidNotificationDetails(
             'notes', 'feljegyzések', 'értesítések a feljegyzésekről',
             importance: Importance.Max,
             priority: Priority.High,
             color: Colors.blue);
-        var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
-        var platformChannelSpecifics = new NotificationDetails(
+        var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+        var platformChannelSpecifics = NotificationDetails(
             androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
         flutterLocalNotificationsPlugin.show(
             n.id, n.title + " - " + n.type, n.content, platformChannelSpecifics,
@@ -94,7 +94,7 @@ class BackgroundHelper {
           });
           if (!exist) {
             var androidPlatformChannelSpecifics =
-                new AndroidNotificationDetails(
+                AndroidNotificationDetails(
               'absences',
               'mulasztások',
               'értesítések a hiányzásokról',
@@ -103,8 +103,8 @@ class BackgroundHelper {
               color: Colors.blue,
               groupKey: absenceList.first.owner.id.toString() + absence.Type,
             );
-            var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
-            var platformChannelSpecifics = new NotificationDetails(
+            var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+            var platformChannelSpecifics = NotificationDetails(
                 androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
             flutterLocalNotificationsPlugin.show(
               absence.AbsenceId,
@@ -124,11 +124,11 @@ class BackgroundHelper {
   }
 
   void cancelNextLesson() async {
-    DateTime startDate = new DateTime.now();
-    startDate = startDate.add(new Duration(days: (-1 * startDate.weekday + 1)));
+    DateTime startDate = DateTime.now();
+    startDate = startDate.add(Duration(days: (-1 * startDate.weekday + 1)));
 
     List<Lesson> lessons = await getLessonsOffline(startDate,
-        startDate.add(new Duration(days: 7)), globals.selectedAccount.user);
+        startDate.add(Duration(days: 7)), globals.selectedAccount.user);
 
     bool nextLesson = await SettingsHelper().getNextLesson();
     if (nextLesson)
@@ -148,13 +148,13 @@ class BackgroundHelper {
   }
 
   void doLessons(Account account) async {
-    DateTime startDate = new DateTime.now();
-    startDate = startDate.add(new Duration(days: (-1 * startDate.weekday + 1)));
+    DateTime startDate = DateTime.now();
+    startDate = startDate.add(Duration(days: (-1 * startDate.weekday + 1)));
 
     List<Lesson> lessonsOffline = await getLessonsOffline(
-        startDate, startDate.add(new Duration(days: 7)), account.user);
+        startDate, startDate.add(Duration(days: 7)), account.user);
     List<Lesson> lessons = await getLessons(
-        startDate, startDate.add(new Duration(days: 7)), account.user, false);
+        startDate, startDate.add(Duration(days: 7)), account.user, false);
 
     bool nextLesson = await SettingsHelper().getNextLesson();
     if (nextLesson) if (account.user.id == globals.accounts[0].user.id)
@@ -174,14 +174,14 @@ class BackgroundHelper {
             //print(lessons[index + 1].subject);
             var scheduledNotificationDateTime = lesson.end;
             var androidPlatformChannelSpecifics =
-                new AndroidNotificationDetails('next-lesson', 'Következő óra',
+                AndroidNotificationDetails('next-lesson', 'Következő óra',
                     'Értesítés a következő óráról',
                     playSound: false,
                     enableVibration: false,
                     color: Colors.blue);
-            var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
+            var iOSPlatformChannelSpecifics = IOSNotificationDetails();
             NotificationDetails platformChannelSpecifics =
-                new NotificationDetails(androidPlatformChannelSpecifics,
+                NotificationDetails(androidPlatformChannelSpecifics,
                     iOSPlatformChannelSpecifics);
             await flutterLocalNotificationsPlugin.schedule(
                 lesson.end.weekday * 24 * 3600 +
@@ -211,14 +211,14 @@ class BackgroundHelper {
                   (lesson.isSubstitution && !offlineLesson.isSubstitution)));
         }
         if (exist) {
-          var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+          var androidPlatformChannelSpecifics = AndroidNotificationDetails(
               'lessons', 'órák', 'értesítések elmaradt/helyettesített órákról',
               importance: Importance.Max,
               priority: Priority.High,
               style: AndroidNotificationStyle.BigText,
               color: Colors.blue);
-          var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
-          var platformChannelSpecifics = new NotificationDetails(
+          var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+          var platformChannelSpecifics = NotificationDetails(
               androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
           flutterLocalNotificationsPlugin.show(
               lesson.id,
@@ -233,7 +233,7 @@ class BackgroundHelper {
   }
 
   void doBackground() async {
-    final storage = new FlutterSecureStorage();
+    final storage = FlutterSecureStorage();
     String value = await storage.read(key: "db_key");
     if (value == null) {
       int randomNumber = Random.secure().nextInt(4294967296);
@@ -303,11 +303,11 @@ class BackgroundHelper {
 
   void backgroundFetchHeadlessTask() async {
     var initializationSettingsAndroid =
-        new AndroidInitializationSettings('notification_icon');
-    var initializationSettingsIOS = new IOSInitializationSettings();
-    var initializationSettings = new InitializationSettings(
+        AndroidInitializationSettings('notification_icon');
+    var initializationSettingsIOS = IOSInitializationSettings();
+    var initializationSettings = InitializationSettings(
         initializationSettingsAndroid, initializationSettingsIOS);
-    flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+    flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
     await backgroundTask().then((int finished) {

@@ -19,13 +19,13 @@ import 'package:filcnaplo/globals.dart' as globals;
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
-  runApp(new MaterialApp(home: new SettingsScreen()));
+  runApp(MaterialApp(home: SettingsScreen()));
   BackgroundHelper().register();
 }
 
 class SettingsScreen extends StatefulWidget {
   @override
-  SettingsScreenState createState() => new SettingsScreenState();
+  SettingsScreenState createState() => SettingsScreenState();
 }
 
 class SettingsScreenState extends State<SettingsScreen> {
@@ -43,7 +43,7 @@ class SettingsScreenState extends State<SettingsScreen> {
   int _refreshNotification;
   int _theme;
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      new FlutterLocalNotificationsPlugin();
+      FlutterLocalNotificationsPlugin();
   void _initSet() async {
     _isColor = await SettingsHelper().getColoredMainPage();
     _isDark = await SettingsHelper().getDarkTheme();
@@ -67,11 +67,11 @@ class SettingsScreenState extends State<SettingsScreen> {
     BackgroundHelper().configure();
     super.initState();
     var initializationSettingsAndroid =
-        new AndroidInitializationSettings('notification_icon');
-    var initializationSettingsIOS = new IOSInitializationSettings();
-    var initializationSettings = new InitializationSettings(
+        AndroidInitializationSettings('notification_icon');
+    var initializationSettingsIOS = IOSInitializationSettings();
+    var initializationSettings = InitializationSettings(
         initializationSettingsAndroid, initializationSettingsIOS);
-    flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+    flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
   }
 
@@ -434,7 +434,7 @@ class SettingsScreenState extends State<SettingsScreen> {
           )
               : new Container(),
         ),
-        "/main",
+        "/home",
         <Widget>[]
     )
   }

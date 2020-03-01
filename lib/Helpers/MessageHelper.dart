@@ -9,7 +9,7 @@ import 'package:filcnaplo/Helpers/DBHelper.dart';
 
 class MessageHelper {
   Future<List<Message>> getMessages(User user, bool showErrors) async {
-    List<Message> messages = new List();
+    List<Message> messages = List();
     try {
       String code = await RequestHelper().getBearerToken(user, showErrors);
       String messageSting =
@@ -32,7 +32,7 @@ class MessageHelper {
   }
 
   Future<List<Message>> getMessagesOffline(User user) async {
-    List<Message> messages = new List();
+    List<Message> messages = List();
     try {
       List messagesJson = await DBHelper().getMessagesJson(user);
 

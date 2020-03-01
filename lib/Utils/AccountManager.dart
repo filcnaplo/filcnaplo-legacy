@@ -8,13 +8,13 @@ import 'package:filcnaplo/Helpers/SettingsHelper.dart';
 
 class AccountManager {
   Future<List<User>> getUsers() async {
-    List<Map<String, dynamic>> usersJson = new List();
+    List<Map<String, dynamic>> usersJson = List();
     try {
       usersJson = await readUsers();
     } catch (e) {
       print("[E] AccountManager.getUsers(): " + e.toString());
     }
-    List<User> users = new List();
+    List<User> users = List();
     if (usersJson.isNotEmpty)
       for (Map<String, dynamic> m in usersJson)
         users.add(User.fromJson(m));
@@ -42,7 +42,7 @@ class AccountManager {
       SettingsHelper().setSingleUser(false);
 
     } catch (e) { //Logging in with the first account
-      List<User> users = new List();
+      List<User> users = List();
       users.add(user);
       globals.users = users;
       saveUsers(users);
@@ -54,7 +54,7 @@ class AccountManager {
 
   Future<void> removeUser(User user) async{
     List<User> users = await getUsers();
-    List<User> newUsers = new List();
+    List<User> newUsers = List();
     for (User u in users)
       if (u.id!=user.id)
         newUsers.add(u);

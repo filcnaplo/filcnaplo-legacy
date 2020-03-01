@@ -22,7 +22,7 @@ class HomeworkHelper {
           "]";
     String ctargy = lesson.subject;
     List<dynamic> homeworksJson = json.decode(homeworkString);
-    List<Map<String, dynamic>> hwmapuser = new List();
+    List<Map<String, dynamic>> hwmapuser = List();
 
     for (dynamic d in homeworksJson) {
       Map<String, String> lessonProperty = <String, String>{"subject": ctargy};
@@ -42,8 +42,8 @@ class HomeworkHelper {
 
   Future<List<Homework>> getHomeworks(int time, bool showErrors) async {
     List<Map<String, dynamic>> evaluationsMap =
-        new List<Map<String, dynamic>>();
-    List<Homework> homeworks = new List<Homework>();
+        List<Map<String, dynamic>>();
+    List<Homework> homeworks = List<Homework>();
 
     evaluationsMap = await getHomeworkList(time, showErrors);
     homeworks.clear();
@@ -60,8 +60,8 @@ class HomeworkHelper {
 
   Future<List<Homework>> getHomeworksOffline(int time) async {
     List<Map<String, dynamic>> evaluationsMap =
-        new List<Map<String, dynamic>>();
-    List<Homework> homeworks = new List<Homework>();
+        List<Map<String, dynamic>>();
+    List<Homework> homeworks = List<Homework>();
     List<User> users = await AccountManager().getUsers();
     for (User user in users) {
       Map<String, User> userProperty = <String, User>{"user": user};
@@ -73,7 +73,7 @@ class HomeworkHelper {
     homeworks.clear();
     if (evaluationsMap != null)
       for (int n = 0; n < evaluationsMap.length; n++) {
-        Homework homework = new Homework.fromJson(evaluationsMap[n]);
+        Homework homework = Homework.fromJson(evaluationsMap[n]);
         homework.owner = evaluationsMap[n]["user"];
         homeworks.add(homework);
       }
@@ -85,14 +85,14 @@ class HomeworkHelper {
 
   Future<List<Map<String, dynamic>>> getHomeworkList(
       int time, bool showErrors) async {
-    List<Map<String, dynamic>> homeworkMap = new List<Map<String, dynamic>>();
+    List<Map<String, dynamic>> homeworkMap = List<Map<String, dynamic>>();
     List<User> users = await AccountManager().getUsers();
 
     for (User user in users) {
       String code = await RequestHelper().getBearerToken(user, showErrors);
 
-      DateTime startDate = new DateTime.now();
-      DateTime from = startDate.subtract(new Duration(days: time));
+      DateTime startDate = DateTime.now();
+      DateTime from = startDate.subtract(Duration(days: time));
       DateTime to = startDate;
 
       String timetableString = (await RequestHelper().getTimeTable(
@@ -102,7 +102,7 @@ class HomeworkHelper {
           user.schoolCode));
       if (timetableString != null) {
         List<dynamic> ttMap = json.decode(timetableString);
-        List<Map<String, dynamic>> hwmapuser = new List();
+        List<Map<String, dynamic>> hwmapuser = List();
 
         for (dynamic d in ttMap) {
           if (d["TeacherHomeworkId"] != null) {

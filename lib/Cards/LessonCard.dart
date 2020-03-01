@@ -1,3 +1,4 @@
+import 'package:filcnaplo/Dialog/ChooseLessonDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 import 'package:filcnaplo/Datas/Lesson.dart';
@@ -39,9 +40,13 @@ class _LessonCardState extends State<LessonCard> {
   int minutesLeftOfThis;
 
   int lessonCardState;
+  bool isInit;
+
+  String homeworkToThisSubject;
 
   @override
   void setState(fn) {
+    isInit = false;
     if (mounted) {
       super.setState(fn);
     }
@@ -50,6 +55,7 @@ class _LessonCardState extends State<LessonCard> {
   @override
   void initState() {
     super.initState();
+    isInit = true;
 
     _now = DateTime.now().second.toString();
 
@@ -85,8 +91,6 @@ class _LessonCardState extends State<LessonCard> {
       lessonCardState = 4;
     else if (thisLesson != null)
       lessonCardState = 2;
-    /*else if (isLessonsTomorrow)
-      lessonCardState = 3;*/
     else if (previousLesson.end.isBefore(now) && nextLesson.start.isAfter(now))
       lessonCardState = 3;
 
@@ -100,9 +104,9 @@ class _LessonCardState extends State<LessonCard> {
       minutesUntilNext = nextLesson.start.difference(now).inMinutes;
     } else if (lessonCardState == 3) {
       //During a break, calculate its length.
-      prevBreakLength = 0;
-      thisBreakLength =
+      prevBreakLength =
           nextLesson.start.difference(previousLesson.end).inMinutes;
+      thisBreakLength = 0;
       minutesUntilNext = nextLesson.start.difference(now).inMinutes;
     } else if (lessonCardState == 4) {
       //During the last lesson
@@ -135,7 +139,7 @@ class _LessonCardState extends State<LessonCard> {
           context,
           previousLesson,
           I18n.of(context).lessonCardPrevious,
-          "",
+          (prevBreakLength == 0) ? "" : prevBreakLength.toString(),
           (previousLesson.count == -1) ? "+" : previousLesson.count.toString(),
           previousLesson.subject,
           previousLesson.isMissed
@@ -152,7 +156,7 @@ class _LessonCardState extends State<LessonCard> {
           context,
           thisLesson,
           I18n.of(context).lessonCardNow((minutesLeftOfThis + 1).toString()),
-          (prevBreakLength == 0) ? "" : (prevBreakLength.toString() + " "),
+          (thisBreakLength == 0) ? "" : thisBreakLength.toString(),
           (thisLesson.count == -1) ? "+" : thisLesson.count.toString(),
           thisLesson.subject,
           thisLesson.isMissed
@@ -169,9 +173,7 @@ class _LessonCardState extends State<LessonCard> {
           context,
           nextLesson,
           I18n.of(context).lessonCardNext((minutesUntilNext + 1).toString()),
-          (lessonCardState == 0 && thisBreakLength == 0)
-              ? ""
-              : (thisBreakLength.toString() + " "),
+          "",
           (nextLesson.count == -1) ? "+" : nextLesson.count.toString(),
           nextLesson.subject,
           nextLesson.isMissed
@@ -182,45 +184,85 @@ class _LessonCardState extends State<LessonCard> {
           getLessonRangeText(nextLesson),
           nextLesson.room));
     }
+
+    //Decide which subject to add homework to
+    /*
+    If during lesson, that subject.
+    If after lesson, previous subject.
+    Otherwise, null.
+    */
+    if ([1, 2, 4].contains(lessonCardState))
+      homeworkToThisSubject = thisLesson.subject;
+    else if ([3, 5].contains(lessonCardState))
+      homeworkToThisSubject = previousLesson.subject;
   }
 
   @override
   Widget build(BuildContext context) {
-    now = new DateTime.now();
+    now = DateTime.now();
     _lessonCardBackend(now, widget.lessons, widget.isLessonsTomorrow);
-    return (quickLessons.length > 0)
-        ? Container(
-            padding: EdgeInsets.all(5.0),
-            child: new SizedBox(
-                height: 125,
-                child: new Swiper(
-                  itemBuilder: (BuildContext context, int index) {
-                    return new Container(
-                        margin: EdgeInsets.all(4.0),
-                        child: quickLessons[index]);
-                  },
-                  itemCount: quickLessons.length,
-                  viewportFraction: 0.95,
-                  scale: 0.9,
-                  loop: false,
-                  pagination: new SwiperCustomPagination(builder:
-                      (BuildContext context, SwiperPluginConfig config) {
-                    return new Align(
-                        alignment: Alignment.bottomCenter,
-                        child: DotSwiperPaginationBuilder(
-                                activeColor: globals.isDark
-                                    ? Colors.white24
-                                    : Colors.black26,
-                                color: globals.isDark
-                                    ? Colors.white12
-                                    : Colors.black12,
-                                size: 8.0,
-                                activeSize: 12.0)
-                            .build(context, config));
-                  }),
-                )),
-          )
-        : Container();
+    return Column(
+      children: <Widget>[
+        (quickLessons.length > 0)
+            ? Container(
+                padding: EdgeInsets.all(5.0),
+                child: SizedBox(
+                    height: 125,
+                    child: Swiper(
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                            margin: EdgeInsets.all(4.0),
+                            child: quickLessons[index]);
+                      },
+                      itemCount: quickLessons.length,
+                      viewportFraction: 0.95,
+                      scale: 0.9,
+                      loop: false,
+                      index: isInit ? 1 : null,
+                      pagination: SwiperCustomPagination(builder:
+                          (BuildContext context, SwiperPluginConfig config) {
+                        return Align(
+                            alignment: Alignment.bottomCenter,
+                            child: DotSwiperPaginationBuilder(
+                                    activeColor: globals.isDark
+                                        ? Colors.white24
+                                        : Colors.black26,
+                                    color: globals.isDark
+                                        ? Colors.white12
+                                        : Colors.black12,
+                                    size: 8.0,
+                                    activeSize: 12.0)
+                                .build(context, config));
+                      }),
+                    )),
+              )
+            : Container(),
+        Row(
+          children: <Widget>[
+            (homeworkToThisSubject != null &&
+                    [1, 2, 4].contains(lessonCardState))
+                ? Container(
+                    margin: EdgeInsets.only(left: 10),
+                    child: MaterialButton(
+                      child: Row(
+                        children: <Widget>[
+                          Icon(Icons.home),
+                          Text("+ " + I18n.of(context).homeworkAdd),
+                        ],
+                      ),
+                      onPressed: _addHomeworkToThisSubject,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          side: BorderSide(
+                              color: Theme.of(context).accentColor, width: 2)),
+                    ),
+                  )
+                : Container(),
+          ],
+          mainAxisAlignment: MainAxisAlignment.center,
+        )
+      ],
+    );
   }
 
   Widget LessonTile(
@@ -237,31 +279,31 @@ class _LessonCardState extends State<LessonCard> {
     String room,
   ) {
     return Container(
-        child: new Row(children: <Widget>[
-      new Expanded(
-        child: new Container(
-          child: new Column(
+        child: Row(children: <Widget>[
+      Expanded(
+        child: Container(
+          child: Column(
             children: <Widget>[
-              new Row(
+              Row(
                 children: <Widget>[
-                  new Flexible(
-                    child: new Row(
+                  Flexible(
+                    child: Row(
                       children: <Widget>[
-                        new Container(
-                          child: new Text(tabText,
-                              style: new TextStyle(
+                        Container(
+                          child: Text(tabText,
+                              style: TextStyle(
                                   color: globals.isDark
                                       ? Colors.white
                                       : Colors.black)),
                           padding: EdgeInsets.fromLTRB(8, 1, 8, 0),
-                          decoration: new BoxDecoration(
+                          decoration: BoxDecoration(
                               color: globals.isDark
                                   ? Color.fromARGB(255, 25, 25, 25)
                                   : Colors.grey[350],
                               boxShadow: [
-                                new BoxShadow(blurRadius: 3, spreadRadius: -2)
+                                BoxShadow(blurRadius: 2, spreadRadius: -2)
                               ],
-                              borderRadius: new BorderRadius.only(
+                              borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(4),
                                   topRight: Radius.circular(4))),
                         ),
@@ -271,57 +313,54 @@ class _LessonCardState extends State<LessonCard> {
                 ],
               ),
               Container(
-                child: new GestureDetector(
+                child: GestureDetector(
                   onTap: () {
                     _lessonDialog(lesson);
                   },
                   child: Container(
-                    child: new ListTile(
-                      leading: new Text(lessonNumber,
+                    child: ListTile(
+                      leading: Text(lessonNumber,
                           style: TextStyle(
                               fontSize: 30, fontWeight: FontWeight.bold)),
-                      title: new Text(capitalize(lessonSubject),
+                      title: Text(capitalize(lessonSubject),
                           style: TextStyle(fontWeight: FontWeight.bold)),
-                      subtitle: new Text(
+                      subtitle: Text(
                         lessonSubtitle,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         softWrap: false,
                       ),
-                      trailing: new Row(
+                      trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           hasHomework
-                              ? new Container(
-                                  child: new Icon(Icons.home),
+                              ? Container(
+                                  child: Icon(Icons.home),
                                   padding: EdgeInsets.all(5))
-                              : new Container(),
-                          new Column(
-                            children: <Widget>[
-                              new Text(startTime),
-                              new Text(room)
-                            ],
+                              : Container(),
+                          Column(
+                            children: <Widget>[Text(startTime), Text(room)],
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.end,
                           ),
                         ],
                       ),
                     ),
-                    decoration: new BoxDecoration(
+                    decoration: BoxDecoration(
                         color: globals.isDark
                             ? Colors.grey[700]
                             : Colors.grey[100],
-                        borderRadius: new BorderRadius.all(Radius.circular(6)),
+                        borderRadius: BorderRadius.all(Radius.circular(6)),
                         boxShadow: [
-                          new BoxShadow(blurRadius: 3, spreadRadius: -2)
+                          BoxShadow(blurRadius: 2.5, spreadRadius: -2)
                         ]),
                   ),
                 ),
-                decoration: new BoxDecoration(
+                decoration: BoxDecoration(
                   color: globals.isDark
                       ? Color.fromARGB(255, 25, 25, 25)
                       : Colors.grey[350],
-                  borderRadius: new BorderRadius.only(
+                  borderRadius: BorderRadius.only(
                       topRight: Radius.circular(6),
                       bottomLeft: Radius.circular(6),
                       bottomRight: Radius.circular(6)),
@@ -333,25 +372,34 @@ class _LessonCardState extends State<LessonCard> {
       ),
       (breakLength != "")
           ? Container(
-              child: new Text(
+              child: Text(
                 breakLength,
                 style: TextStyle(
                     fontSize: 18.0,
                     color: globals.isDark ? Colors.white : Colors.black),
                 textAlign: TextAlign.center,
               ),
-              width: 40.0,
+              width: 35.0,
               height: 35.0,
               margin: EdgeInsets.only(left: 8.0),
-              decoration: new BoxDecoration(
+              decoration: BoxDecoration(
                   color: globals.isDark ? Colors.grey[600] : Colors.grey[200],
                   shape: BoxShape.circle,
-                  boxShadow: [new BoxShadow(blurRadius: 3, spreadRadius: -2)]),
+                  boxShadow: [BoxShadow(blurRadius: 3, spreadRadius: -2)]),
               padding: EdgeInsets.all(4.0),
-              alignment: new Alignment(0, 0),
+              alignment: Alignment(0, 0),
             )
           : Container(),
     ]));
+  }
+
+  Future<bool> _addHomeworkToThisSubject() {
+    return showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (BuildContext context) {
+          return ChooseLessonDialog(0, homeworkToThisSubject);
+        });
   }
 
   Future<Null> _lessonDialog(Lesson lesson) async {
@@ -359,7 +407,7 @@ class _LessonCardState extends State<LessonCard> {
           barrierDismissible: true,
           context: context,
           builder: (BuildContext context) {
-            return new HomeworkDialog(lesson);
+            return HomeworkDialog(lesson);
           },
         ) ??
         false;

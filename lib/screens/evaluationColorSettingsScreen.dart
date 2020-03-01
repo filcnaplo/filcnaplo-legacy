@@ -12,7 +12,7 @@ import 'package:filcnaplo/screens/Screen.dart';
 
 class colorSettingsScreen extends StatefulWidget {
   @override
-  colorSettingsScreenState createState() => new colorSettingsScreenState();
+  colorSettingsScreenState createState() => colorSettingsScreenState();
 }
 
 class colorSettingsScreenState extends State<colorSettingsScreen> {
@@ -154,7 +154,7 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
                           ),
                           4);
                     },
-                    child: new Icon(Icons.color_lens, color: globals.color5),
+                    child: new Icon(Icons.color_lens, color: globals.color5)
                   ),
                 ),
               ),

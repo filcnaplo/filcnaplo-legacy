@@ -17,12 +17,12 @@ import 'package:filcnaplo/Helpers/TimetableHelper.dart';
 import "package:filcnaplo/screens/Screen.dart";
 
 void main() {
-  runApp(new MaterialApp(home: new ExportScreen()));
+  runApp(MaterialApp(home: ExportScreen()));
 }
 
 class ExportScreen extends StatefulWidget {
   @override
-  ExportScreenState createState() => new ExportScreenState();
+  ExportScreenState createState() => ExportScreenState();
 }
 
 class ExportScreenState extends State<ExportScreen> {
@@ -44,7 +44,7 @@ class ExportScreenState extends State<ExportScreen> {
     controller.text = path;
   }
 
-  TextEditingController controller = new TextEditingController();
+  TextEditingController controller = TextEditingController();
   User selectedUser = globals.users[0];
   List<String> get exportOptions => [
         I18n.of(context).exportGrades,
@@ -412,13 +412,14 @@ class ExportScreenState extends State<ExportScreen> {
                                         textColor: Colors.white,
                                         fontSize: 16.0);
                                 });
-                              });
-                          }
-                      }
-                    },
-                    child: new Text(
-                      I18n.of(context).export,
-                      style: TextStyle(color: Colors.white),
+                            }
+                        }
+                      },
+                      child: Text(
+                        I18n.of(context).export,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      color: Colors.blue[700],
                     ),
                     color: Colors.blue[700],
                   ),

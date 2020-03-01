@@ -57,7 +57,7 @@ class AbsenceCard extends StatelessWidget {
   }
 
   @override
-  Key get key => new Key(getDate());
+  Key get key => Key(getDate());
 
   String getDate() {
     return absences[0].CreatingTime.toIso8601String();
@@ -106,35 +106,35 @@ class AbsenceCard extends StatelessWidget {
       context: context,
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
-        return new SimpleDialog(
+        return SimpleDialog(
           children: <Widget>[
-            new SingleChildScrollView(
-              child: new ListBody(
+            SingleChildScrollView(
+              child: ListBody(
                 children: <Widget>[
-                  new Text(
+                  Text(
                       I18n.of(context).lessonCount(numOfAbsences.toString())),
-                  new Text(I18n.of(context).absenceTime + ": " +
+                  Text(I18n.of(context).absenceTime + ": " +
                       dateToHuman(absence.LessonStartTime)),
-                  new Text(I18n.of(context).administrationTime + ": " +
+                  Text(I18n.of(context).administrationTime + ": " +
                       dateToHuman(absence.CreatingTime)),
-                  new Text(I18n.of(context).justificationState + ": " +
+                  Text(I18n.of(context).justificationState + ": " +
                       absence.JustificationStateName),
-                  new Text(I18n.of(context).justificationMode + ": " +
+                  Text(I18n.of(context).justificationMode + ": " +
                       absence.JustificationTypeName),
                   absence.DelayTimeMinutes != 0
-                      ? new Text(I18n.of(context).delayMins +
+                      ? Text(I18n.of(context).delayMins +
                           absence.DelayTimeMinutes.toString() +
                           " " + I18n.of(context).timeMinute)
-                      : new Container(),
+                      : Container(),
                 ].followedBy(absences.map((Absence absence) {
                   return ListTile(
-                    leading: new Icon(
+                    leading: Icon(
                         absence.DelayTimeMinutes == 0
                             ? iconifyState(absence.JustificationState)
                             : (Icons.watch_later),
                         color: colorifyState(absence.JustificationState)),
-                    title: new Text(absence.Subject),
-                    subtitle: new Text(dateToHuman(absence.LessonStartTime)),
+                    title: Text(absence.Subject),
+                    subtitle: Text(dateToHuman(absence.LessonStartTime)),
                   );
                 })).toList(),
               ),
@@ -160,26 +160,26 @@ class AbsenceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: openDialog,
-      child: new Card(
+      child: Card(
         margin: EdgeInsets.all(6.0),
-        child: new Container(
-          child: new Column(
+        child: Container(
+          child: Column(
             children: <Widget>[
-              new Container(
-                child: new Row(
+              Container(
+                child: Row(
                   children: <Widget>[
-                    new Text(numOfAbsences.toString(),
-                        style: new TextStyle(
+                    Text(numOfAbsences.toString(),
+                        style: TextStyle(
                             fontSize: 18.0, color: globals.CurrentTextColor)),
-                    new Text(" " + I18n.of(context).pcs + " ",
-                        style: new TextStyle(
+                    Text(" " + I18n.of(context).pcs + " ",
+                        style: TextStyle(
                             fontSize: 18.0,
                             color:
                                 globals.isDark ? Colors.white : Colors.black)),
-                    new Text("$state ",
-                        style: new TextStyle(fontSize: 18.0, color: color)),
-                    new Text(cardText,
-                        style: new TextStyle(
+                    Text("$state ",
+                        style: TextStyle(fontSize: 18.0, color: color)),
+                    Text(cardText,
+                        style: TextStyle(
                             fontSize: 18.0,
                             color:
                                 globals.isDark ? Colors.white : Colors.black)),
@@ -188,57 +188,57 @@ class AbsenceCard extends StatelessWidget {
                 padding: EdgeInsets.all(10.0),
               ),
               !isSingle
-                  ? new Container(
-                      child: new Text(
+                  ? Container(
+                      child: Text(
                           dateToHuman(absences[0].LessonStartTime),
-                          style: new TextStyle(
+                          style: TextStyle(
                             fontSize: 16.0,
                           )),
                       alignment: Alignment(1.0, -1.0),
                       padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 2.0),
                     )
-                  : new Container(),
-              new Container(
+                  : Container(),
+              Container(
                 padding: EdgeInsets.all(10.0),
-                child: new Padding(
-                  padding: new EdgeInsets.all(0.0),
-                  child: new Row(
+                child: Padding(
+                  padding: EdgeInsets.all(0.0),
+                  child: Row(
                     children: <Widget>[
-                      new Container(
-                        padding: new EdgeInsets.only(left: 2),
-                        child: new Icon(
+                      Container(
+                        padding: EdgeInsets.only(left: 2),
+                        child: Icon(
                           Icons.block,
                           color: globals.isDark ? Colors.white : Colors.black,
                         ),
                       ),
-                      new Container(
-                        child: new Text(
+                      Container(
+                        child: Text(
                           cardText,
-                          style: new TextStyle(fontSize: 18.0),
+                          style: TextStyle(fontSize: 18.0),
                         ),
                         padding: EdgeInsets.only(left: 8.0),
                       ),
                       isSingle
-                          ? new Expanded(
-                              child: new Container(
-                              child: new Text(
+                          ? Expanded(
+                              child: Container(
+                              child: Text(
                                   dateToHuman(absences[0].LessonStartTime),
-                                  style: new TextStyle(
+                                  style: TextStyle(
                                     fontSize: 18.0,
                                   )),
                               alignment: Alignment(1.0, 0.0),
                             ))
-                          : new Container(),
+                          : Container(),
                       !isSingle
-                          ? new Expanded(
-                              child: new Container(
-                              child: new Text(absences[0].owner.name,
-                                  style: new TextStyle(
+                          ? Expanded(
+                              child: Container(
+                              child: Text(absences[0].owner.name,
+                                  style: TextStyle(
                                       fontSize: 18.0,
                                       color: absences[0].owner.color)),
                               alignment: Alignment(1.0, 0.0),
                             ))
-                          : new Container(),
+                          : Container(),
                     ],
                   ),
                 ),
@@ -256,13 +256,13 @@ class AbsenceCard extends StatelessWidget {
               )
             ],
           ),
-          decoration: new BoxDecoration(
+          decoration: BoxDecoration(
             border: Border.all(
                 color: globals.isDark
                     ? Color.fromARGB(255, 25, 25, 25)
                     : Colors.blueGrey[100],
                 width: 2.5),
-            borderRadius: new BorderRadius.all(Radius.circular(5)),
+            borderRadius: BorderRadius.all(Radius.circular(5)),
             color: globals.isDark
                 ? Color.fromARGB(255, 25, 25, 25)
                 : Colors.blueGrey[100],

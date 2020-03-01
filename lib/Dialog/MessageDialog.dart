@@ -12,7 +12,7 @@ class MessageDialog extends StatefulWidget {
   final Message message;
 
   @override
-  MessageDialogState createState() => new MessageDialogState();
+  MessageDialogState createState() => MessageDialogState();
 }
 
 class MessageDialogState extends State<MessageDialog> {
@@ -43,8 +43,8 @@ class MessageDialogState extends State<MessageDialog> {
   }
 
   Widget build(BuildContext context) {
-    return new SimpleDialog(
-        title: new Text(currentMessage.subject),
+    return SimpleDialog(
+        title: Text(currentMessage.subject),
         titlePadding: EdgeInsets.all(15),
         contentPadding: const EdgeInsets.all(15.0),
         children: <Widget>[
@@ -55,7 +55,7 @@ class MessageDialogState extends State<MessageDialog> {
             ),
           ),
           Container(
-            child: new Html(data: HtmlUnescape().convert(currentMessage.text)),
+            child: Html(data: HtmlUnescape().convert(currentMessage.text)),
           ),
           Container(
             child: Text(

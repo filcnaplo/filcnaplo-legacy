@@ -11,12 +11,12 @@ import 'package:filcnaplo/Utils/StringFormatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
-  runApp(new MaterialApp(home: new NotesScreen()));
+  runApp(MaterialApp(home: NotesScreen()));
 }
 
 class NotesScreen extends StatefulWidget {
   @override
-  NotesScreenState createState() => new NotesScreenState();
+  NotesScreenState createState() => NotesScreenState();
 }
 
 class NotesScreenState extends State<NotesScreen> {
@@ -30,7 +30,7 @@ class NotesScreenState extends State<NotesScreen> {
   bool hasOfflineLoaded = false;
   bool hasLoaded = true;
 
-  List<Note> notes = new List();
+  List<Note> notes = List();
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class NotesScreenState extends State<NotesScreen> {
                     ),
                   ])
                 : new Center(child: new CircularProgressIndicator())),
-        "/main",
+        "/home",
         <Widget>[]);
   }
 
@@ -69,7 +69,7 @@ class NotesScreenState extends State<NotesScreen> {
     setState(() {
       hasLoaded = false;
     });
-    Completer<Null> completer = new Completer<Null>();
+    Completer<Null> completer = Completer<Null>();
 
     await globals.selectedAccount.refreshStudentString(false, showErrors);
     notes = globals.selectedAccount.notes;
@@ -86,7 +86,7 @@ class NotesScreenState extends State<NotesScreen> {
     setState(() {
       hasOfflineLoaded = false;
     });
-    Completer<Null> completer = new Completer<Null>();
+    Completer<Null> completer = Completer<Null>();
 
     globals.selectedAccount.refreshStudentString(true, false);
     notes = globals.selectedAccount.notes;
@@ -100,17 +100,17 @@ class NotesScreenState extends State<NotesScreen> {
   }
 
   Widget _itemBuilder(BuildContext context, int index) {
-    return new Column(
+    return Column(
       children: <Widget>[
-        new ListTile(
+        ListTile(
           title: notes[index].title != null && notes[index].title != ""
-              ? new Text(
+              ? Text(
                   notes[index].title,
                   style: TextStyle(fontSize: 22),
                 )
               : null,
-          subtitle: new Column(children: <Widget>[
-            new Container(
+          subtitle: Column(children: <Widget>[
+            Container(
               padding: EdgeInsets.all(5),
               child: Linkify(
                 style: TextStyle(fontSize: 16),
@@ -120,21 +120,21 @@ class NotesScreenState extends State<NotesScreen> {
                 },
               ),
             ),
-            new Container(
-              child: new Text(dateToHuman(notes[index].date) +
+            Container(
+              child: Text(dateToHuman(notes[index].date) +
                   dateToWeekDay(notes[index].date, context)),
               alignment: Alignment(1, -1),
             ),
             notes[index].teacher != null
-                ? new Container(
-                    child: new Text(notes[index].teacher),
+                ? Container(
+                    child: Text(notes[index].teacher),
                     alignment: Alignment(1, -1),
                   )
-                : new Container(),
+                : Container(),
           ]),
           isThreeLine: true,
         ),
-        new Divider(
+        Divider(
           height: 10.0,
         ),
       ],

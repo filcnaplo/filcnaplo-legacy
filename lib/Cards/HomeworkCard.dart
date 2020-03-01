@@ -22,7 +22,7 @@ class HomeworkCard extends StatelessWidget {
   }
 
   @override
-  Key get key => new Key(getDate());
+  Key get key => Key(getDate());
 
   void openDialog() {
     //_noteDialog(note);
@@ -33,10 +33,10 @@ class HomeworkCard extends StatelessWidget {
       context: context,
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
-        return new SimpleDialog(
+        return SimpleDialog(
           children: <Widget>[
-            new SingleChildScrollView(
-              child: new Linkify(
+            SingleChildScrollView(
+              child: Linkify(
                 text: note.content,
                 onOpen: (String url) {
                   launcher.launch(url);
@@ -62,59 +62,59 @@ class HomeworkCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new GestureDetector(
+    return GestureDetector(
       onTap: openDialog,
-      child: new Card(
+      child: Card(
         margin: EdgeInsets.all(6.0),
         color: Colors.lightBlue,
-        child: new Column(
+        child: Column(
           children: <Widget>[
-            new Container(
-              child: new Text(
+            Container(
+              child: Text(
                 homework.uploader,
-                style: new TextStyle(
+                style: TextStyle(
                     fontSize: 21.0,
                     color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
               margin: EdgeInsets.all(10.0),
             ),
-            new Container(
-              child: new Html(
+            Container(
+              child: Html(
                 data: HtmlUnescape().convert(homework.text),
               ),
               padding: EdgeInsets.all(10.0),
             ),
-            new Divider(
+            Divider(
               height: 1.0,
               color: Colors.white,
             ),
-            new Container(
+            Container(
                 color: Colors.blue,
-                child: new Padding(
-                  padding: new EdgeInsets.all(10.0),
-                  child: new Row(
+                child: Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Row(
                     children: <Widget>[
-                      new Divider(),
+                      Divider(),
                       isSingle || homework.owner == null
-                          ? new Expanded(
-                              child: new Container(
-                              child: new Text(homework.deadline,
-                                  style: new TextStyle(
+                          ? Expanded(
+                              child: Container(
+                              child: Text(homework.deadline,
+                                  style: TextStyle(
                                       fontSize: 18.0, color: Colors.white)),
                               alignment: Alignment(1.0, 0.0),
                             ))
-                          : new Container(),
+                          : Container(),
                       !isSingle
-                          ? new Expanded(
-                              child: new Container(
-                                child: new Text(homework.owner.name,
-                                    style: new TextStyle(
+                          ? Expanded(
+                              child: Container(
+                                child: Text(homework.owner.name,
+                                    style: TextStyle(
                                         color: Colors.white, fontSize: 15.0)),
                                 alignment: Alignment(1.0, -1.0),
                               ),
                             )
-                          : new Container(),
+                          : Container(),
                     ],
                   ),
                 )),

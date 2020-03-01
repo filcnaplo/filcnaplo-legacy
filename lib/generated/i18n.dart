@@ -192,6 +192,18 @@ class I18n implements WidgetsLocalizations {
   String get homeworkUploadUser => "feltöltő";
   /// "feltöltés ideje"
   String get homeworkUploadTime => "feltöltés ideje";
+  /// "Nincs ilyen tantárgyú órád a következő 7 napban."
+  String get chooseSubjectNotFound => "Nincs ilyen tantárgyú órád a következő 7 napban.";
+  /// "Órák betöltése..."
+  String get chooseLoading => "Órák betöltése...";
+  /// "a következő"
+  String get chooseNext => "a következő";
+  /// "a legutóbbi"
+  String get choosePrevious => "a legutóbbi";
+  /// "órához"
+  String get chooseForLesson => "órához";
+  /// "hozzáadás"
+  String get chooseAdd => "hozzáadás";
   /// "helyettesítés"
   String get substitution => "helyettesítés";
   /// "elmarad"
@@ -640,6 +652,24 @@ class _I18n_en_US extends I18n {
   /// "uploaded at"
   @override
   String get homeworkUploadTime => "uploaded at";
+  /// "You don't have a lesson with that subject in the following 7 days."
+  @override
+  String get chooseSubjectNotFound => "You don't have a lesson with that subject in the following 7 days.";
+  /// "Loading lessons..."
+  @override
+  String get chooseLoading => "Loading lessons...";
+  /// "to the next"
+  @override
+  String get chooseNext => "to the next";
+  /// "to the previous"
+  @override
+  String get choosePrevious => "to the previous";
+  /// "lesson"
+  @override
+  String get chooseForLesson => "lesson";
+  /// "add"
+  @override
+  String get chooseAdd => "add";
   /// "substitution"
   @override
   String get substitution => "substitution";
@@ -1182,6 +1212,24 @@ class _I18n_de_DE extends I18n {
   /// "Hochladezeit"
   @override
   String get homeworkUploadTime => "Hochladezeit";
+  /// "Du hast keine Stunde mit diesem Fach in den volgenden 7 Tagen."
+  @override
+  String get chooseSubjectNotFound => "Du hast keine Stunde mit diesem Fach in den volgenden 7 Tagen.";
+  /// "Stunden werden geladen..."
+  @override
+  String get chooseLoading => "Stunden werden geladen...";
+  /// "für die nächste"
+  @override
+  String get chooseNext => "für die nächste";
+  /// "für die letzte"
+  @override
+  String get choosePrevious => "für die letzte";
+  /// "Stunde"
+  @override
+  String get chooseForLesson => "Stunde";
+  /// "hochladen"
+  @override
+  String get chooseAdd => "hochladen";
   /// "vertretung"
   @override
   String get substitution => "vertretung";

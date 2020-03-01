@@ -13,12 +13,12 @@ import 'package:filcnaplo/Helpers/DBHelper.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
-  runApp(new MaterialApp(home: new ImportScreen()));
+  runApp(MaterialApp(home: ImportScreen()));
 }
 
 class ImportScreen extends StatefulWidget {
   @override
-  ImportScreenState createState() => new ImportScreenState();
+  ImportScreenState createState() => ImportScreenState();
 }
 
 class ImportScreenState extends State<ImportScreen> {
@@ -32,19 +32,16 @@ class ImportScreenState extends State<ImportScreen> {
   }
 
   void _showDialog() async {
-    // flutter defined function
     await Future.delayed(Duration(milliseconds: 50));
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        // return object of type Dialog
         return AlertDialog(
-          title: new Text("Figyelem"),
-          content: new Text("Ez kitöröl minden meglévő felhasználót! (ha van)"),
+          title: Text("Figyelem"),
+          content: Text("Ez kitöröl minden meglévő felhasználót! (ha van)"),
           actions: <Widget>[
-            // usually buttons at the bottom of the dialog
-            new FlatButton(
-              child: new Text("OK"),
+            FlatButton(
+              child: Text("OK"),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -60,7 +57,7 @@ class ImportScreenState extends State<ImportScreen> {
     controller.text = path;
   }
 
-  TextEditingController controller = new TextEditingController();
+  TextEditingController controller = TextEditingController();
   String path = "";
 
   @override
@@ -116,13 +113,16 @@ class ImportScreenState extends State<ImportScreen> {
 
                         DBHelper().saveUsersJson(users);
 
-                        SystemChannels.platform
-                            .invokeMethod('SystemNavigator.pop');
-                      });
-                    },
-                    child: new Text(
-                      "Import",
-                      style: TextStyle(color: Colors.white),
+
+                          SystemChannels.platform
+                              .invokeMethod('SystemNavigator.pop');
+                        });
+                      },
+                      child: Text(
+                        "Import",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      color: Colors.green[700],
                     ),
                     color: Colors.green[700],
                   ),
