@@ -19,40 +19,40 @@ class HomeworkDialog extends StatefulWidget {
 
 class HomeworkDialogState extends State<HomeworkDialog> {
   Widget build(BuildContext context) {
-    return new AlertDialog(
-      title: new Text(widget.lesson.subject),
-      content: new SingleChildScrollView(
-        child: new ListBody(
+    return AlertDialog(
+      title: Text(widget.lesson.subject),
+      content: SingleChildScrollView(
+        child: ListBody(
           children: <Widget>[
-            new Text(capitalize(I18n.of(context).lessonRoom) +
+            Text(capitalize(I18n.of(context).lessonRoom) +
                 ": " +
                 widget.lesson.room),
-            new Text(capitalize(I18n.of(context).lessonTeacher) +
+            Text(capitalize(I18n.of(context).lessonTeacher) +
                 ": " +
                 widget.lesson.teacher),
-            new Text(capitalize(I18n.of(context).lessonClass) +
+            Text(capitalize(I18n.of(context).lessonClass) +
                 ": " +
                 widget.lesson.group),
-            new Text(capitalize(I18n.of(context).lessonStart) +
+            Text(capitalize(I18n.of(context).lessonStart) +
                 ": " +
                 getLessonStartText(widget.lesson)),
-            new Text(capitalize(I18n.of(context).lessonEnd) +
+            Text(capitalize(I18n.of(context).lessonEnd) +
                 ": " +
                 getLessonEndText(widget.lesson)),
             widget.lesson.isMissed
-                ? new Text(capitalize(I18n.of(context).state) +
+                ? Text(capitalize(I18n.of(context).state) +
                     ": " +
                     widget.lesson.stateName)
-                : new Container(),
+                : Container(),
             (widget.lesson.theme != "" && widget.lesson.theme != null)
-                ? new Text(
+                ? Text(
                     I18n.of(context).lessonTheme + ": " + widget.lesson.theme)
-                : new Container(),
-            widget.lesson.homework != null
-                ? new Text("\n" + capitalize(I18n.of(context).homework) + ": ")
                 : Container(),
             widget.lesson.homework != null
-                ? new Divider(
+                ? Text("\n" + capitalize(I18n.of(context).homework) + ": ")
+                : Container(),
+            widget.lesson.homework != null
+                ? Divider(
                     color: Colors.blueGrey,
                   )
                 : Container(),
@@ -91,7 +91,7 @@ class HomeworkDialogState extends State<HomeworkDialog> {
       ),
       actions: <Widget>[
         (widget.lesson.homeworkEnabled && !widget.lesson.isMissed)
-            ? new FlatButton(
+            ? FlatButton(
                 child: Icon(Icons.home),
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -99,15 +99,15 @@ class HomeworkDialogState extends State<HomeworkDialog> {
                         barrierDismissible: true,
                         context: context,
                         builder: (BuildContext context) {
-                          return new NewHomeworkDialog(widget.lesson);
+                          return NewHomeworkDialog(widget.lesson);
                         },
                       ) ??
                       false;
                 },
               )
             : Container(),
-        new FlatButton(
-          child: new Text(I18n.of(context).dialogOk.toUpperCase()),
+        FlatButton(
+          child: Text(I18n.of(context).dialogOk.toUpperCase()),
           onPressed: () {
             Navigator.of(context).pop();
           },

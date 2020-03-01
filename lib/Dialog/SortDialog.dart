@@ -28,19 +28,19 @@ class SortDialogState extends State<SortDialog> {
       I18n.of(context).sortTimeReal,
     ];
 
-    return new SimpleDialog(
-      title: new Text(capitalize(I18n.of(context).sort)),
+    return SimpleDialog(
+      title: Text(capitalize(I18n.of(context).sort)),
       contentPadding: const EdgeInsets.all(10.0),
       children: <Widget>[
-        new PopupMenuButton<String>(
-          child: new Container(
-            child: new Row(
+        PopupMenuButton<String>(
+          child: Container(
+            child: Row(
               children: <Widget>[
-                new Text(
+                Text(
                   sortOptionList[globals.sort],
-                  style: new TextStyle(color: null, fontSize: 17.0),
+                  style: TextStyle(color: null, fontSize: 17.0),
                 ),
-                new Icon(
+                Icon(
                   Icons.arrow_drop_down,
                   color: null,
                 ),
@@ -53,9 +53,9 @@ class SortDialogState extends State<SortDialog> {
           },
           itemBuilder: (BuildContext context) {
             return sortOptionList.map((String sor) {
-              return new PopupMenuItem<String>(
+              return PopupMenuItem<String>(
                 value: sor,
-                child: new Text(sor),
+                child: Text(sor),
               );
             }).toList();
           },
