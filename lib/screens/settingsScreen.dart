@@ -436,7 +436,7 @@ class SettingsScreenState extends State<SettingsScreen> {
         ),
         "/home",
         <Widget>[]
-    )
+    );
   }
   _openBugReport() async {
     const url = "https://github.com/filcnaplo/filcnaplo/issues/new";

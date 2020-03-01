@@ -69,50 +69,49 @@ class ImportScreenState extends State<ImportScreen> {
           child: Container(
             padding: EdgeInsets.all(20),
             child: new Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                new TextField(
-                  onChanged: (text) {
-                    path = text;
-                  },
-                  controller: controller,
-                ),
-                new Container(
-                  child: new RaisedButton(
-                    onPressed: () async {
-                      PermissionHandler()
-                          .requestPermissions([PermissionGroup.storage]).then(
-                              (Map<PermissionGroup, PermissionStatus>
-                                  permissions) async {
-                        File importFile = new File(path);
-                        List<Map<String, dynamic>> userMap = new List();
-                        String data = importFile.readAsStringSync();
-                        List<dynamic> userList = json.decode(data);
-                        for (dynamic d in userList)
-                          userMap.add(d as Map<String, dynamic>);
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  new TextField(
+                    onChanged: (text) {
+                      path = text;
+                    },
+                    controller: controller,
+                  ),
+                  new Container(
+                    child: new RaisedButton(
+                      onPressed: () async {
+                        PermissionHandler()
+                            .requestPermissions([PermissionGroup.storage]).then(
+                                (Map<PermissionGroup, PermissionStatus>
+                                    permissions) async {
+                          File importFile = new File(path);
+                          List<Map<String, dynamic>> userMap = new List();
+                          String data = importFile.readAsStringSync();
+                          List<dynamic> userList = json.decode(data);
+                          for (dynamic d in userList)
+                            userMap.add(d as Map<String, dynamic>);
 
-                        List<User> users = new List();
-                        if (userMap.isNotEmpty)
-                          for (Map<String, dynamic> m in userMap)
-                            users.add(User.fromJson(m));
-                        List<Color> colors = [
-                          Colors.blue,
-                          Colors.green,
-                          Colors.red,
-                          Colors.black,
-                          Colors.brown,
-                          Colors.orange
-                        ];
-                        Iterator<Color> cit = colors.iterator;
-                        for (User u in users) {
-                          cit.moveNext();
-                          if (u.color.value == 0) u.color = cit.current;
-                        }
+                          List<User> users = new List();
+                          if (userMap.isNotEmpty)
+                            for (Map<String, dynamic> m in userMap)
+                              users.add(User.fromJson(m));
+                          List<Color> colors = [
+                            Colors.blue,
+                            Colors.green,
+                            Colors.red,
+                            Colors.black,
+                            Colors.brown,
+                            Colors.orange
+                          ];
+                          Iterator<Color> cit = colors.iterator;
+                          for (User u in users) {
+                            cit.moveNext();
+                            if (u.color.value == 0) u.color = cit.current;
+                          }
 
-                        DBHelper().saveUsersJson(users);
-
+                          DBHelper().saveUsersJson(users);
 
                           SystemChannels.platform
                               .invokeMethod('SystemNavigator.pop');
@@ -126,13 +125,11 @@ class ImportScreenState extends State<ImportScreen> {
                     ),
                     color: Colors.green[700],
                   ),
-                  margin: EdgeInsets.all(16),
-                ),
-              ],
-            ),
+                ]),
+            margin: EdgeInsets.all(16),
           ),
         ),
         "/login",
-        <Widget>[]);
+        []);
   }
 }

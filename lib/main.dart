@@ -9,6 +9,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:package_info/package_info.dart';
+import 'package:flutter/services.dart';
 
 import 'Datas/Account.dart';
 import 'Datas/User.dart';
@@ -175,7 +176,8 @@ void main({bool noReset = false}) async {
       globals.showCardType = await SettingsHelper().getShowCardType();
     }
 
-    runApp(MyApp());
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+        .then((_) => {runApp(MyApp())});
     BackgroundFetch.registerHeadlessTask(backgroundFetchHeadlessTask);
   }
 }
