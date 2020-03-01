@@ -5,7 +5,6 @@ import 'package:filcnaplo/Cards/TomorrowLessonCard.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:filcnaplo/Cards/SummaryCard.dart';
 import 'package:filcnaplo/Cards/AbsenceCard.dart';
@@ -24,35 +23,23 @@ import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
   runApp(MaterialApp(
-    home: MainScreen(),
+    home: HomeScreen(),
   ));
 }
 
-class MainScreen extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   @override
-  MainScreenState createState() => MainScreenState();
+  HomeScreenState createState() => HomeScreenState();
 }
 
-_launchDownloadWebsite() async {
-  const url = 'https://www.filcnaplo.hu/download/';
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
-
-class MainScreenState extends State<MainScreen> {
-  List mainScreenCards;
+class HomeScreenState extends State<HomeScreen> {
+  List HomeScreenCards;
   List<Evaluation> evaluations = List();
   Map<String, List<Absence>> absents = Map();
   List<Note> notes = List();
   List<Lesson> lessons = List();
-  // for testing
-  // DateTime get now => DateTime.parse("2019-06-03 08:00:00Z");
   DateTime get now => DateTime.now();
   DateTime startDate;
-  //DateTime startDate = DateTime.now();
   bool hasOfflineLoaded = false;
   bool hasLoaded = true;
   List realLessons;
@@ -88,8 +75,15 @@ class MainScreenState extends State<MainScreen> {
       globals.isSingle = true;
       SettingsHelper().setSingleUser(true);
     }
+  }
 
-    globals.context = context;
+  _launchDownloadWebsite() async {
+    const url = 'https://www.filcnaplo.hu/download/';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   Future showUpdateDialog() async {
@@ -98,8 +92,7 @@ class MainScreenState extends State<MainScreen> {
         builder: (BuildContext context) {
           return SimpleDialog(
               children: <Widget>[
-                Text(
-                    "Töltsd le most a legújabb verziót:"), //TODO: Make use translation DB everywhere
+                Text("Töltsd le most a legújabb verziót:"), //TODO: I18n
                 Text(
                   globals.latestVersion + "\n",
                   style: TextStyle(
@@ -131,16 +124,16 @@ class MainScreenState extends State<MainScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (globals.version != globals.latestVersion &&
+      if ("globals.version" != globals.latestVersion &&
           globals.latestVersion != "") showUpdateDialog();
     });
 
     _onRefresh(offline: true, showErrors: false).then((var a) async {
-      mainScreenCards = await feedItems();
+      HomeScreenCards = await feedItems();
     });
     if (globals.firstMain) {
       _onRefresh(offline: false, showErrors: false).then((var a) async {
-        mainScreenCards = await feedItems();
+        HomeScreenCards = await feedItems();
       });
       globals.firstMain = false;
     }
@@ -148,7 +141,7 @@ class MainScreenState extends State<MainScreen> {
     Timer.periodic(
         Duration(seconds: 10),
         (Timer t) => () async {
-              mainScreenCards = await feedItems();
+              HomeScreenCards = await feedItems();
               setState(() {});
             });
   }
@@ -173,14 +166,14 @@ class MainScreenState extends State<MainScreen> {
           .toList();
 
       if (firstQuarterEvaluations.isNotEmpty)
-        feedCards.add(SummaryCard(firstQuarterEvaluations, context, 1,
-            false, true, !globals.isSingle));
+        feedCards.add(SummaryCard(firstQuarterEvaluations, context, 1, false,
+            true, !globals.isSingle));
       if (halfYearEvaluations.isNotEmpty)
         feedCards.add(SummaryCard(
             halfYearEvaluations, context, 2, false, true, !globals.isSingle));
       if (thirdQuarterEvaluations.isNotEmpty)
-        feedCards.add(SummaryCard(thirdQuarterEvaluations, context, 3,
-            false, true, !globals.isSingle));
+        feedCards.add(SummaryCard(thirdQuarterEvaluations, context, 3, false,
+            true, !globals.isSingle));
       if (endYearEvaluations.isNotEmpty)
         feedCards.add(SummaryCard(
             endYearEvaluations, context, 4, false, true, !globals.isSingle));
@@ -199,64 +192,40 @@ class MainScreenState extends State<MainScreen> {
       feedCards.add(ChangedLessonCard(l, context));
 
     //realLessons = lessons.where((Lesson l) => !l.isMissed).toList();
-    lessonsToday = lessons.where((Lesson lesson) => (lesson.start.day == now.day)).toList();
-    lessonsTomorrow = lessons.where((Lesson lesson) => (lesson.start.day == now.add(Duration(days: 1)).day)).toList();
+    lessonsToday = lessons
+        .where((Lesson lesson) => (lesson.start.day == now.day))
+        .toList();
+    lessonsTomorrow = lessons
+        .where((Lesson lesson) =>
+            (lesson.start.day == now.add(Duration(days: 1)).day))
+        .toList();
 
     try {
-    	if (lessonsToday.last.end.isAfter(now)) {
-      isLessonsToday = true;
-      isLessonsTomorrow = false;
-	    }
-	    else if (lessonsTomorrow.first.start.day == now.add(Duration(days: 1)).day) {
-	      isLessonsToday = false;
-	      isLessonsTomorrow = true;
-	    }
-	    else {
-	      isLessonsToday = false;
-	      isLessonsTomorrow = false;
-	    }
+      if (lessonsToday.last.end.isAfter(now)) {
+        isLessonsToday = true;
+        isLessonsTomorrow = false;
+      } else if (lessonsTomorrow.first.start.day ==
+          now.add(Duration(days: 1)).day) {
+        isLessonsToday = false;
+        isLessonsTomorrow = true;
+      } else {
+        isLessonsToday = false;
+        isLessonsTomorrow = false;
+      }
 
       if (isLessonsToday) feedCards.add(LessonCard(lessonsToday, context));
-      if (isLessonsTomorrow) feedCards.add(TomorrowLessonCard(lessonsTomorrow, context, now));
+      if (isLessonsTomorrow)
+        feedCards.add(TomorrowLessonCard(lessonsTomorrow, context, now));
     } catch (e) {
-      print("[E] mainScreen.feedItems() (1): " + e.toString());
-    }
-    
-
-    /*for (Lesson l in realLessons) {
-      if (l.start.isAfter(now) && l.start.day == now.day) {
-        isLessonsToday = true;
-        break;
-      }
+      print("[E] HomeScreen.feedItems() (1): " + e.toString());
     }
 
-    if (realLessons.length > 0 && isLessonsToday) {
-      feedCards.add(LessonCard(lessons, isLessonsTomorrow, context));
-    }
     try {
       feedCards.sort((Widget a, Widget b) {
         return b.key.toString().compareTo(a.key.toString());
       });
     } catch (e) {
-      print(e);
-    }
-
-    for (Lesson l in realLessons) {
-      if (l.start.isAfter(now) &&
-          l.start.day == now.add(Duration(days: 1)).day) {
-        isLessonsTomorrow = true; // <-- ludas matyi
-        break;
-      }
-    }
-    
-    if (realLessons.length > 0 && isLessonsTomorrow)
-      feedCards.add(TomorrowLessonCard(realLessons, context, now));*/
-    try {
-      feedCards.sort((Widget a, Widget b) {
-        return b.key.toString().compareTo(a.key.toString());
-      });
-    } catch (e) {
-      print("[E] mainScreen.feedItems()2: " + e.toString());
+      print("[E] HomeScreen.feedItems()2: " + e.toString());
     }
 
     if (maximumFeedLength > feedCards.length)
@@ -302,7 +271,7 @@ class MainScreenState extends State<MainScreen> {
             ),
             body: hasOfflineLoaded &&
                     globals.isColor != null &&
-                    mainScreenCards != null
+                    HomeScreenCards != null
                 ? Container(
                     child: Column(children: <Widget>[
                     !hasLoaded
@@ -318,12 +287,12 @@ class MainScreenState extends State<MainScreen> {
                     Expanded(
                       child: RefreshIndicator(
                         child: ListView(
-                          children: mainScreenCards,
+                          children: HomeScreenCards,
                         ),
                         onRefresh: () {
                           Completer<Null> completer = Completer<Null>();
                           _onRefresh().then((bool b) async {
-                            mainScreenCards = await feedItems();
+                            HomeScreenCards = await feedItems();
                             setState(() {
                               completer.complete();
                             });
@@ -354,14 +323,7 @@ class MainScreenState extends State<MainScreen> {
         tempNotes.addAll(globals.selectedAccount.notes);
         tempAbsents.addAll(globals.selectedAccount.absents);
       } catch (exception) {
-      	/*
-        Fluttertoast.showToast(
-            msg: I18n.of(context).error,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
-           */
-      print("[E] mainScreen.onRefresh()1: " + exception.toString());
+        print("[E] HomeScreen.onRefresh()1: " + exception.toString());
       }
     } else {
       for (Account account in globals.accounts) {
@@ -369,13 +331,13 @@ class MainScreenState extends State<MainScreen> {
           try {
             await account.refreshStudentString(offline, showErrors);
           } catch (e) {
-      print("[E] mainScreen.onRefresh()2: " + e.toString());
+            print("[E] HomeScreen.onRefresh()2: " + e.toString());
           }
           tempEvaluations.addAll(account.student.Evaluations);
           tempNotes.addAll(account.notes);
           tempAbsents.addAll(account.absents);
         } catch (exception) {
-      print("[E] mainScreen.onRefresh()3: " + exception.toString());
+          print("[E] HomeScreen.onRefresh()3: " + exception.toString());
         }
       }
     }
@@ -392,7 +354,7 @@ class MainScreenState extends State<MainScreen> {
           lessons = await getLessonsOffline(startDate,
               startDate.add(Duration(days: 6)), globals.selectedUser);
         } catch (exception) {
-      print("[E] mainScreen.onRefresh()4: " + exception.toString());
+          print("[E] HomeScreen.onRefresh()4: " + exception.toString());
         }
         if (lessons.length > 0) globals.lessons.addAll(lessons);
       }
@@ -401,14 +363,14 @@ class MainScreenState extends State<MainScreen> {
         lessons = await getLessons(startDate, startDate.add(Duration(days: 6)),
             globals.selectedUser, showErrors);
       } catch (exception) {
-      print("[E] mainScreen.onRefresh()5: " + exception.toString());
+        print("[E] HomeScreen.onRefresh()5: " + exception.toString());
       }
     }
     try {
       lessons.sort((Lesson a, Lesson b) => a.start.compareTo(b.start));
       if (lessons.length > 0) globals.lessons = lessons;
     } catch (e) {
-      print("[E] mainScreen.onRefresh()6: " + e.toString());
+      print("[E] HomeScreen.onRefresh()6: " + e.toString());
     }
     Completer<Null> completer = Completer<Null>();
     if (!offline) hasLoaded = true;

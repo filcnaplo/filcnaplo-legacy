@@ -158,7 +158,7 @@ class TimeTableScreenState extends State<TimeTableScreen>
     return WillPopScope(
       onWillPop: () {
         globals.screen = 0;
-        Navigator.pushReplacementNamed(context, "/main");
+        Navigator.pushReplacementNamed(context, "/home");
       },
       child: DefaultTabController(
         length: tabLength,

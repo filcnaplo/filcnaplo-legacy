@@ -156,9 +156,7 @@ class _LessonCardState extends State<LessonCard> {
           context,
           thisLesson,
           I18n.of(context).lessonCardNow((minutesLeftOfThis + 1).toString()),
-          (thisBreakLength == 0)
-              ? ""
-              : thisBreakLength.toString(),
+          (thisBreakLength == 0) ? "" : thisBreakLength.toString(),
           (thisLesson.count == -1) ? "+" : thisLesson.count.toString(),
           thisLesson.subject,
           thisLesson.isMissed
@@ -193,8 +191,10 @@ class _LessonCardState extends State<LessonCard> {
     If after lesson, previous subject.
     Otherwise, null.
     */
-    if ([1, 2, 4].contains(lessonCardState)) homeworkToThisSubject = thisLesson.subject;
-    else if ([3, 5].contains(lessonCardState)) homeworkToThisSubject = previousLesson.subject;
+    if ([1, 2, 4].contains(lessonCardState))
+      homeworkToThisSubject = thisLesson.subject;
+    else if ([3, 5].contains(lessonCardState))
+      homeworkToThisSubject = previousLesson.subject;
   }
 
   @override
@@ -237,31 +237,30 @@ class _LessonCardState extends State<LessonCard> {
                     )),
               )
             : Container(),
-          Row(
-            children: <Widget>[
-              MaterialButton(
-                child: Icon(IconData(0xf520, fontFamily: "Material Design Icons"),),
-                onPressed: () {Navigator.of(context).pushNamed("/timetable");},
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30), side: BorderSide(color: Theme.of(context).accentColor, width: 2)),
-              ),
-              (homeworkToThisSubject != null)
-              ? Container(
-                margin: EdgeInsets.only(left: 10),
-                child: MaterialButton(
-                  child: Row(
-                    children: <Widget>[
-                      Icon(Icons.home),
-                      Text(" • " + capitalize(homeworkToThisSubject)),
-                    ],
-                  ),
-                  onPressed: _addHomeworkToThisSubject,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30), side: BorderSide(color: Theme.of(context).accentColor, width: 2)),
-                ),
-              )
-              : Container(),
-            ],
-            mainAxisAlignment: MainAxisAlignment.center,
-          )
+        Row(
+          children: <Widget>[
+            (homeworkToThisSubject != null &&
+                    [1, 2, 4].contains(lessonCardState))
+                ? Container(
+                    margin: EdgeInsets.only(left: 10),
+                    child: MaterialButton(
+                      child: Row(
+                        children: <Widget>[
+                          Icon(Icons.home),
+                          Text("+ " + I18n.of(context).homeworkAdd),
+                        ],
+                      ),
+                      onPressed: _addHomeworkToThisSubject,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          side: BorderSide(
+                              color: Theme.of(context).accentColor, width: 2)),
+                    ),
+                  )
+                : Container(),
+          ],
+          mainAxisAlignment: MainAxisAlignment.center,
+        )
       ],
     );
   }
@@ -340,10 +339,7 @@ class _LessonCardState extends State<LessonCard> {
                                   padding: EdgeInsets.all(5))
                               : Container(),
                           Column(
-                            children: <Widget>[
-                              Text(startTime),
-                              Text(room)
-                            ],
+                            children: <Widget>[Text(startTime), Text(room)],
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.end,
                           ),

@@ -202,8 +202,8 @@ class I18n implements WidgetsLocalizations {
   String get choosePrevious => "a legutóbbi";
   /// "órához"
   String get chooseForLesson => "órához";
-  /// "megnyitás"
-  String get chooseOpen => "megnyitás";
+  /// "hozzáadás"
+  String get chooseAdd => "hozzáadás";
   /// "helyettesítés"
   String get substitution => "helyettesítés";
   /// "elmarad"
@@ -667,9 +667,9 @@ class _I18n_en_US extends I18n {
   /// "lesson"
   @override
   String get chooseForLesson => "lesson";
-  /// "open"
+  /// "add"
   @override
-  String get chooseOpen => "open";
+  String get chooseAdd => "add";
   /// "substitution"
   @override
   String get substitution => "substitution";
@@ -1227,9 +1227,9 @@ class _I18n_de_DE extends I18n {
   /// "Stunde"
   @override
   String get chooseForLesson => "Stunde";
-  /// "öffnen"
+  /// "hochladen"
   @override
-  String get chooseOpen => "öffnen";
+  String get chooseAdd => "hochladen";
   /// "vertretung"
   @override
   String get substitution => "vertretung";

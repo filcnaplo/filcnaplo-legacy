@@ -1,6 +1,3 @@
-//Contributed by RedyAu
-
-import 'package:filcnaplo/Helpers/RequestHelper.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/Datas/Lesson.dart';
@@ -60,7 +57,7 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
           msg: I18n.of(context).chooseSubjectNotFound);
       throw ("No lesson is recorded with '" +
           widget._subject +
-          "' subject next week.");
+          "' subject next week."); // TODO: I18n
     }
 
     return SimpleDialog(
@@ -122,7 +119,7 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
                   ),
                   Container(
                     child: FlatButton(
-                      child: Text(I18n.of(context).chooseOpen.toUpperCase(),
+                      child: Text(I18n.of(context).chooseAdd.toUpperCase(),
                           style: TextStyle(
                               color: (widget._subject == "...")
                                   ? Colors.grey

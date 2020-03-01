@@ -722,7 +722,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
     return WillPopScope(
         onWillPop: () {
           globals.screen = 0;
-          Navigator.pushReplacementNamed(context, "/main");
+          Navigator.pushReplacementNamed(context, "/home");
         },
         child: Scaffold(
             bottomNavigationBar: BottomNavigationBar(

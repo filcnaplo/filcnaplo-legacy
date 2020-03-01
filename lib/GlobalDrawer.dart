@@ -34,7 +34,7 @@ class GDrawerState extends State<GDrawer> {
     bool popContext = true;
     switch (screen) {
       case 0:
-        Navigator.pushReplacementNamed(context, "/main");
+        Navigator.pushReplacementNamed(context, "/home");
         break;
       case 1:
         Navigator.pushReplacementNamed(context, "/evaluations");
@@ -214,7 +214,7 @@ class GDrawerState extends State<GDrawer> {
               onTap: () {
                 screen = 0;
                 Navigator.pop(context); // close the drawer
-                Navigator.pushReplacementNamed(context, "/main");
+                Navigator.pushReplacementNamed(context, "/home");
               },
             ),
             ListTile(
