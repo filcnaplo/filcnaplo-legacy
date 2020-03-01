@@ -35,13 +35,13 @@ class ChooseLessonDialog extends StatefulWidget {
   }
 
   @override
-  _ChooseLessonDialogState createState() => new _ChooseLessonDialogState();
+  _ChooseLessonDialogState createState() => _ChooseLessonDialogState();
 }
 
 class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
   List<String> subjects = [];
   List<Lesson> lessons = [];
-  DateTime now = new DateTime.now();
+  DateTime now = DateTime.now();
   SearchFor _searchFor;
 
   Widget build(BuildContext context) {
@@ -63,8 +63,8 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
           "' subject next week.");
     }
 
-    return new SimpleDialog(
-      title: new Text(capitalize(I18n.of(context).homeworkAdd) + "..."),
+    return SimpleDialog(
+      title: Text(capitalize(I18n.of(context).homeworkAdd) + "..."),
       children: <Widget>[
         subjects.isEmpty
             ? Column(
@@ -80,8 +80,8 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  new ListTile(
-                      leading: new Radio(
+                  ListTile(
+                      leading: Radio(
                         value: SearchFor.next,
                         groupValue: _searchFor,
                         onChanged: (SearchFor value) {
@@ -90,9 +90,9 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
                           });
                         },
                       ),
-                      title: new Text(I18n.of(context).chooseNext)),
-                  new ListTile(
-                      leading: new Radio(
+                      title: Text(I18n.of(context).chooseNext)),
+                  ListTile(
+                      leading: Radio(
                         value: SearchFor.previous,
                         groupValue: _searchFor,
                         onChanged: (SearchFor value) {
@@ -101,9 +101,9 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
                           });
                         },
                       ),
-                      title: new Text(I18n.of(context).choosePrevious)),
-                  new Container(
-                    child: new DropdownButton<String>(
+                      title: Text(I18n.of(context).choosePrevious)),
+                  Container(
+                    child: DropdownButton<String>(
                       value: widget._subject,
                       items: subjects.map((String subject) {
                         return DropdownMenuItem<String>(
@@ -116,14 +116,14 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
                       },
                     ),
                   ),
-                  new Text(
+                  Text(
                     I18n.of(context).chooseForLesson,
-                    style: new TextStyle(fontSize: 15),
+                    style: TextStyle(fontSize: 15),
                   ),
                   Container(
-                    child: new FlatButton(
-                      child: new Text(I18n.of(context).chooseOpen.toUpperCase(),
-                          style: new TextStyle(
+                    child: FlatButton(
+                      child: Text(I18n.of(context).chooseOpen.toUpperCase(),
+                          style: TextStyle(
                               color: (widget._subject == "...")
                                   ? Colors.grey
                                   : Theme.of(context).accentColor,
@@ -132,7 +132,7 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
                           ? null
                           : _openHomeworkDialog,
                     ),
-                    margin: new EdgeInsets.only(top: 10),
+                    margin: EdgeInsets.only(top: 10),
                   )
                 ],
               ),
@@ -147,7 +147,7 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
           barrierDismissible: true,
           context: context,
           builder: (BuildContext context) {
-            return new NewHomeworkDialog(lessons.firstWhere(
+            return NewHomeworkDialog(lessons.firstWhere(
                 (Lesson lesson) => (lesson.subject == widget._subject && lesson.start.isAfter(now))));
           });
     } else {
@@ -158,7 +158,7 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
           barrierDismissible: true,
           context: context,
           builder: (BuildContext context) {
-            return new NewHomeworkDialog(lessons.lastWhere(
+            return NewHomeworkDialog(lessons.lastWhere(
                 (Lesson lesson) => (lesson.subject == widget._subject && lesson.end.isBefore(now))));
           });
     }

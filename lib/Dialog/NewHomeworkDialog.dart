@@ -11,7 +11,7 @@ class NewHomeworkDialog extends StatefulWidget {
   final Lesson lesson;
 
   @override
-  NewHomeworkDialogState createState() => new NewHomeworkDialogState();
+  NewHomeworkDialogState createState() => NewHomeworkDialogState();
 }
 
 class NewHomeworkDialogState extends State<NewHomeworkDialog> {
@@ -19,25 +19,25 @@ class NewHomeworkDialogState extends State<NewHomeworkDialog> {
   bool uploading = false;
 
   Widget build(BuildContext context) {
-    return new SimpleDialog(
+    return SimpleDialog(
       title: Column(
         children: <Widget>[
-          new Text(capitalize(I18n.of(context).homeworkAdd)),
-          new Text(
+          Text(capitalize(I18n.of(context).homeworkAdd)),
+          Text(
               widget.lesson.subject +
                   " • " +
                   lessonToHuman(widget.lesson) +
                   capitalize(dateToWeekDay(widget.lesson.start, context)),
-              style: new TextStyle(
+              style: TextStyle(
                   fontSize: 15,
                   color: globals.isDark ? Colors.grey : Colors.black54)),
-          new Divider(color: globals.isDark ? Colors.grey : Colors.black54)
+          Divider(color: globals.isDark ? Colors.grey : Colors.black54)
         ],
         crossAxisAlignment: CrossAxisAlignment.start,
       ),
       contentPadding: const EdgeInsets.all(10.0),
       children: <Widget>[
-        new TextField(
+        TextField(
           keyboardType: TextInputType.multiline,
           maxLines: 10,
           onChanged: (String text) {
@@ -45,8 +45,8 @@ class NewHomeworkDialogState extends State<NewHomeworkDialog> {
           },
         ),
         uploading
-            ? new LinearProgressIndicator()
-            : new MaterialButton(
+            ? LinearProgressIndicator()
+            : MaterialButton(
                 child: Text(I18n.of(context).dialogOk.toUpperCase()),
                 onPressed: _uploadHomework,
               )
