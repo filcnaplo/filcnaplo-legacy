@@ -10,11 +10,10 @@ import 'package:html_unescape/html_unescape.dart';
 import 'package:filcnaplo/Datas/Homework.dart';
 import 'package:filcnaplo/Datas/User.dart';
 import 'package:filcnaplo/Dialog/TimeSelectDialog.dart';
-import 'package:filcnaplo/GlobalDrawer.dart';
 import 'package:filcnaplo/Helpers/HomeworkHelper.dart';
 import 'package:filcnaplo/Utils/StringFormatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
-
+import 'package:filcnaplo/screens/Screen.dart';
 void main() {
   runApp(new MaterialApp(home: new HomeworkScreen()));
 }
@@ -57,52 +56,47 @@ class HomeworkScreenState extends State<HomeworkScreen> {
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    return new WillPopScope(
-        onWillPop: () {
-          globals.screen = 0;
-          Navigator.pushReplacementNamed(context, "/main");
-        },
-        child: Scaffold(
-            drawer: GDrawer(),
-            appBar: new AppBar(
-              title: new Text(capitalize(I18n.of(context).homeworkTitle)),
-              actions: <Widget>[
-                new IconButton(
-                  icon: new Icon(Icons.access_time),
-                  onPressed: () {
-                    timeDialog().then((b) {
-                      _onRefreshOffline();
-                      refHomework();
-                      _onRefresh();
-                      refHomework();
-                    });
-                  },
-                ),
-                //new IconButton(icon: Icon(Icons.plus_one), onPressed: _openChooser,)
-              ],
-            ),
-            body: new Container(
+    return new Screen(
+        new Text(capitalize(I18n.of(context).homeworkTitle)),
+            new Container(
                 child: hasOfflineLoaded
                     ? new Column(children: <Widget>[
-                        !hasLoaded
-                            ? Container(
-                                child: new LinearProgressIndicator(
-                                  value: null,
-                                ),
-                                height: 3,
-                              )
-                            : Container(
-                                height: 3,
-                              ),
-                        new Expanded(
-                            child: new RefreshIndicator(
-                                child: new ListView.builder(
-                                  itemBuilder: _itemBuilder,
-                                  itemCount: selectedHomework.length,
-                                ),
-                                onRefresh: _onRefresh)),
-                      ])
-                    : new Center(child: new CircularProgressIndicator()))));
+                  !hasLoaded
+                      ? Container(
+                    child: new LinearProgressIndicator(
+                      value: null,
+                    ),
+                    height: 3,
+                  )
+                      : Container(
+                    height: 3,
+                  ),
+                  new Expanded(
+                      child: new RefreshIndicator(
+                          child: new ListView.builder(
+                            itemBuilder: _itemBuilder,
+                            itemCount: selectedHomework.length,
+                          ),
+                          onRefresh: _onRefresh)),
+                ])
+                    : new Center(child: new CircularProgressIndicator())),
+          "/main",
+            <Widget>[
+              new IconButton(
+                icon: new Icon(Icons.access_time),
+                onPressed: () {
+                  timeDialog().then((b) {
+                    _onRefreshOffline();
+                    refHomework();
+                    _onRefresh();
+                    refHomework();
+                  });
+                },
+              ),
+              //new IconButton(icon: Icon(Icons.plus_one), onPressed: _openChooser,)
+            ]
+    );
+
   }
 
   Future<bool> _openChooser() {

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:filcnaplo/generated/i18n.dart';
+import 'package:filcnaplo/screens/Screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:filcnaplo/Datas/Student.dart';
@@ -47,56 +48,50 @@ class AbsentsScreenState extends State<AbsentsScreen> {
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    return new WillPopScope(
-        onWillPop: () {
-          globals.screen = 0;
-          Navigator.pushReplacementNamed(context, "/main");
-        },
-        child: Scaffold(
-            drawer: GDrawer(),
-            appBar: new AppBar(
-              title: new Text(capitalize(I18n.of(context).absenceTitle)),
-              actions: <Widget>[
-                Tooltip(
-                  child: new IconButton(
-                      icon: new Icon(Icons.info),
-                      onPressed: () {
-                        return showDialog(
-                              barrierDismissible: true,
-                              context: context,
-                              builder: (BuildContext context) {
-                                return new AbsentDialog();
-                              },
-                            ) ??
-                            false;
-                      }),
-                  message: I18n.of(context).statistics,
-                ),
-              ],
-            ),
-            body: new Container(
-                child: hasOfflineLoaded
-                    ? new Column(children: <Widget>[
-                        !hasLoaded
-                            ? Container(
-                                child: new LinearProgressIndicator(
-                                  value: null,
-                                ),
-                                height: 3,
-                              )
-                            : Container(
-                                height: 3,
-                              ),
-                        new Expanded(
-                          child: new RefreshIndicator(
-                              child: new ListView.builder(
-                                itemBuilder: _itemBuilder,
-                                itemCount: absents.length,
-                              ),
-                              onRefresh: _onRefresh),
-                        ),
-                      ])
-                    : new Center(child: new CircularProgressIndicator()))));
+    return new Screen(
+        new Text(capitalize(I18n.of(context).absenceTitle)),
+        new Container(
+            child: hasOfflineLoaded
+                ? new Column(children: <Widget>[
+                    !hasLoaded
+                        ? Container(
+                            child: new LinearProgressIndicator(
+                              value: null,
+                            ),
+                            height: 3,
+                          )
+                        : Container(
+                            height: 3,
+                          ),
+                    new Expanded(
+                      child: new RefreshIndicator(
+                          child: new ListView.builder(
+                            itemBuilder: _itemBuilder,
+                            itemCount: absents.length,
+                          ),
+                          onRefresh: _onRefresh),
+                    ),
+                  ])
+                : new Center(child: new CircularProgressIndicator())),
+        "/main",
+        <Widget>[
+          Tooltip(
+            child: new IconButton(
+                icon: new Icon(Icons.info),
+                onPressed: () {
+                  return showDialog(
+                        barrierDismissible: true,
+                        context: context,
+                        builder: (BuildContext context) {
+                          return new AbsentDialog();
+                        },
+                      ) ??
+                      false;
+                }),
+            message: I18n.of(context).statistics,
+          ),
+        ]
+    );
   }
 
   Future<Null> _onRefresh({bool showErrors = true}) async {
@@ -275,7 +270,7 @@ class AbsentsScreenState extends State<AbsentsScreen> {
                 dateToWeekDay(thisAbsence[0].LessonStartTime, context) +
                 " (" +
                 thisAbsence.length.toString() +
-                " ${I18n.of(context).pcs})"), 
+                " ${I18n.of(context).pcs})"),
           ),
         ],
       ),

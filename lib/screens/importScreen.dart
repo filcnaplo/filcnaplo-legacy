@@ -2,6 +2,7 @@ import 'dart:convert' show json;
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:filcnaplo/screens/Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
@@ -65,80 +66,73 @@ class ImportScreenState extends State<ImportScreen> {
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    return new WillPopScope(
-        onWillPop: () {
-          globals.screen = 0;
-          Navigator.pushReplacementNamed(context, "/login");
-        },
-        child: Scaffold(
-          appBar: new AppBar(
-            title: new Text("Import"),
-            actions: <Widget>[],
-          ),
-          body: new Center(
-            child: Container(
-              padding: EdgeInsets.all(20),
-              child: new Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  new TextField(
-                    onChanged: (text) {
-                      path = text;
+    return new Screen(
+        new Text("Import"),
+        new Center(
+          child: Container(
+            padding: EdgeInsets.all(20),
+            child: new Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                new TextField(
+                  onChanged: (text) {
+                    path = text;
+                  },
+                  controller: controller,
+                ),
+                new Container(
+                  child: new RaisedButton(
+                    onPressed: () async {
+                      PermissionHandler()
+                          .requestPermissions([PermissionGroup.storage]).then(
+                              (Map<PermissionGroup, PermissionStatus>
+                                  permissions) async {
+                        File importFile = new File(path);
+                        List<Map<String, dynamic>> userMap = new List();
+                        String data = importFile.readAsStringSync();
+                        List<dynamic> userList = json.decode(data);
+                        for (dynamic d in userList)
+                          userMap.add(d as Map<String, dynamic>);
+
+                        List<User> users = new List();
+                        if (userMap.isNotEmpty)
+                          for (Map<String, dynamic> m in userMap)
+                            users.add(User.fromJson(m));
+                        List<Color> colors = [
+                          Colors.blue,
+                          Colors.green,
+                          Colors.red,
+                          Colors.black,
+                          Colors.brown,
+                          Colors.orange
+                        ];
+                        Iterator<Color> cit = colors.iterator;
+                        for (User u in users) {
+                          cit.moveNext();
+                          if (u.color.value == 0) u.color = cit.current;
+                        }
+
+                        DBHelper().saveUsersJson(users);
+
+                        SystemChannels.platform
+                            .invokeMethod('SystemNavigator.pop');
+                      });
                     },
-                    controller: controller,
-                  ),
-                  new Container(
-                    child: new RaisedButton(
-                      onPressed: () async {
-                        PermissionHandler()
-                            .requestPermissions([PermissionGroup.storage]).then(
-                                (Map<PermissionGroup, PermissionStatus>
-                                    permissions) async {
-                          File importFile = new File(path);
-                          List<Map<String, dynamic>> userMap = new List();
-                          String data = importFile.readAsStringSync();
-                          List<dynamic> userList = json.decode(data);
-                          for (dynamic d in userList)
-                            userMap.add(d as Map<String, dynamic>);
-
-                          List<User> users = new List();
-                          if (userMap.isNotEmpty)
-                            for (Map<String, dynamic> m in userMap)
-                              users.add(User.fromJson(m));
-                          List<Color> colors = [
-                            Colors.blue,
-                            Colors.green,
-                            Colors.red,
-                            Colors.black,
-                            Colors.brown,
-                            Colors.orange
-                          ];
-                          Iterator<Color> cit = colors.iterator;
-                          for (User u in users) {
-                            cit.moveNext();
-                            if (u.color.value == 0) u.color = cit.current;
-                          }
-
-                          DBHelper().saveUsersJson(users);
-
-                          SystemChannels.platform
-                              .invokeMethod('SystemNavigator.pop');
-                        });
-                      },
-                      child: new Text(
-                        "Import",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      color: Colors.green[700],
+                    child: new Text(
+                      "Import",
+                      style: TextStyle(color: Colors.white),
                     ),
-                    margin: EdgeInsets.all(16),
+                    color: Colors.green[700],
                   ),
-                ],
-              ),
+                  margin: EdgeInsets.all(16),
+                ),
+              ],
             ),
           ),
-        ));
+        ),
+        "/login",
+        <Widget>[]);
   }
 }

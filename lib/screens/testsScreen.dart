@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:filcnaplo/generated/i18n.dart';
+import 'package:filcnaplo/screens/Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart' as launcher;
@@ -35,42 +36,34 @@ class TestsScreenState extends State<TestsScreen> {
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    
-    return new WillPopScope(
-        onWillPop: () {
-          globals.screen = 0;
-          Navigator.pushReplacementNamed(context, "/main");
-        },
-        child: Scaffold(
-            drawer: GDrawer(),
-            appBar: new AppBar(
-              title: new Text(I18n.of(context).testTitle),
-              actions: <Widget>[],
-            ),
-            body: new Container(
-                child: (hasOfflineLoaded && tests != null)
-                    ? new Column(children: <Widget>[
-                        !hasLoaded
-                            ? Container(
-                                child: new LinearProgressIndicator(
-                                  value: null,
-                                ),
-                                height: 3,
-                              )
-                            : Container(
-                                height: 3,
-                              ),
-                        new Expanded(
-                          child: new RefreshIndicator(
-                            child: new ListView.builder(
-                              itemBuilder: _itemBuilder,
-                              itemCount: tests.length,
+    return new Screen(
+        new Text(I18n.of(context).testTitle),
+        new Container(
+            child: (hasOfflineLoaded && tests != null)
+                ? new Column(children: <Widget>[
+                    !hasLoaded
+                        ? Container(
+                            child: new LinearProgressIndicator(
+                              value: null,
                             ),
-                            onRefresh: _onRefresh,
+                            height: 3,
+                          )
+                        : Container(
+                            height: 3,
                           ),
+                    new Expanded(
+                      child: new RefreshIndicator(
+                        child: new ListView.builder(
+                          itemBuilder: _itemBuilder,
+                          itemCount: tests.length,
                         ),
-                      ])
-                    : new Center(child: new CircularProgressIndicator()))));
+                        onRefresh: _onRefresh,
+                      ),
+                    ),
+                  ])
+                : new Center(child: new CircularProgressIndicator())),
+        "main",
+        <Widget>[]);
   }
 
   Future<Null> _onRefresh({bool showErrors}) async {
