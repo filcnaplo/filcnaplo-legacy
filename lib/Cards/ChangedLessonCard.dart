@@ -26,29 +26,29 @@ class ChangedLessonCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: new Card(
+      child: Card(
         margin: EdgeInsets.all(6.0),
-        child: new Container(
-            child: new Column(
+        child: Container(
+            child: Column(
               children: <Widget>[
-                new Container(
+                Container(
                   child: Wrap(
                     children: <Widget>[
-                      new Row(
+                      Row(
                         children: <Widget>[
                           isSubstitution
-                              ? new Text(lesson.depTeacher + ", ",
-                                  style: new TextStyle(
+                              ? Text(lesson.depTeacher + ", ",
+                                  style: TextStyle(
                                       fontSize: 18.0, color: Colors.green))
-                              : new Container(),
-                          new Text(lesson.count.toString() + ". ",
-                              style: new TextStyle(
+                              : Container(),
+                          Text(lesson.count.toString() + ". ",
+                              style: TextStyle(
                                   fontSize: 18.0,
                                   color: globals.CurrentTextColor)),
-                          new Text(I18n.of(context).lesson + ", ",
-                              style: new TextStyle(fontSize: 18.0)),
-                          new Text(lesson.subject,
-                              style: new TextStyle(
+                          Text(I18n.of(context).lesson + ", ",
+                              style: TextStyle(fontSize: 18.0)),
+                          Text(lesson.subject,
+                              style: TextStyle(
                                   fontSize: 18.0,
                                   color: globals.CurrentTextColor)),
                         ],
@@ -62,7 +62,7 @@ class ChangedLessonCard extends StatelessWidget {
                       : Colors.blueGrey[100],
                   padding: EdgeInsets.all(12.0),
                 ),
-                new Container(
+                Container(
                     decoration: ShapeDecoration(
                       shape: RoundedRectangleBorder(
                         side: BorderSide(
@@ -76,31 +76,31 @@ class ChangedLessonCard extends StatelessWidget {
                           : Colors.white,
                     ),
                     padding: EdgeInsets.all(5.0),
-                    child: new Padding(
-                      padding: new EdgeInsets.all(0.0),
-                      child: new Row(
+                    child: Padding(
+                      padding: EdgeInsets.all(0.0),
+                      child: Row(
                         children: <Widget>[
-                          new Padding(
+                          Padding(
                             padding: EdgeInsets.all(4),
                             child: Icon(Icons.cancel,
                                 color: globals.isDark
                                     ? Colors.white
                                     : Color.fromARGB(255, 15, 15, 15)),
                           ),
-                          new Padding(
+                          Padding(
                             padding: EdgeInsets.only(left: 4),
-                            child: new Text(
+                            child: Text(
                                 (isSubstitution
                                     ? I18n.of(context).substitution
                                     : I18n.of(context).substitutionMissed),
-                                style: new TextStyle(fontSize: 18.0)),
+                                style: TextStyle(fontSize: 18.0)),
                           ),
-                          new Expanded(
-                            child: new Container(
-                              child: new Text(
+                          Expanded(
+                            child: Container(
+                              child: Text(
                                   lessonToHuman(lesson) +
                                       dateToWeekDay(lesson.date, context),
-                                  style: new TextStyle(
+                                  style: TextStyle(
                                     fontSize: 18.0,
                                   )),
                               alignment: Alignment(1.0, 0.0),
@@ -112,13 +112,13 @@ class ChangedLessonCard extends StatelessWidget {
                     )),
               ],
             ),
-            decoration: new BoxDecoration(
+            decoration: BoxDecoration(
               border: Border.all(
                   color: globals.isDark
                       ? Color.fromARGB(255, 25, 25, 25)
                       : Colors.blueGrey[100],
                   width: 2.5),
-              borderRadius: new BorderRadius.all(Radius.circular(5)),
+              borderRadius: BorderRadius.all(Radius.circular(5)),
               color: globals.isDark
                   ? Color.fromARGB(255, 25, 25, 25)
                   : Colors.blueGrey[100],
