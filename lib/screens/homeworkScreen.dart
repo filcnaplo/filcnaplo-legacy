@@ -78,8 +78,15 @@ class HomeworkScreenState extends State<HomeworkScreen> {
                     });
                   },
                 ),
-                new IconButton(icon: Icon(Icons.plus_one), onPressed: _openChooser,)
               ],
+            ),
+            floatingActionButton: new FloatingActionButton(
+              onPressed: _openChooser,
+              child: Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+              tooltip: "Házi hozzáadása",//TODO: I18n
             ),
             body: new Container(
                 child: hasOfflineLoaded
@@ -107,12 +114,11 @@ class HomeworkScreenState extends State<HomeworkScreen> {
 
   Future<bool> _openChooser() {
     return showDialog(
-      barrierDismissible: true,
-      context: context,
-      builder: (BuildContext context) {
-        return new ChooseLessonDialog(0, "Magyar nyelv");
-      }
-    );
+        barrierDismissible: true,
+        context: context,
+        builder: (BuildContext context) {
+          return new ChooseLessonDialog();
+        });
   }
 
   Future<bool> timeDialog() {
@@ -122,7 +128,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
           builder: (BuildContext context) {
             return new TimeSelectDialog();
           },
-        ) ?? 
+        ) ??
         false;
   }
 
@@ -171,7 +177,8 @@ class HomeworkScreenState extends State<HomeworkScreen> {
             new FlatButton(
               child: Icon(Icons.delete),
               onPressed: () {
-                RequestHelper().deleteHomework(homework.id, globals.selectedUser);
+                RequestHelper()
+                    .deleteHomework(homework.id, globals.selectedUser);
               },
             ),
             new FlatButton(
