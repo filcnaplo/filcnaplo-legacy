@@ -22,7 +22,7 @@ class TomorrowLessonCard extends StatelessWidget {
   }
 
   @override
-  Key get key => new Key(getDate());
+  Key get key => Key(getDate());
 
   String getDate() {
     return "c";

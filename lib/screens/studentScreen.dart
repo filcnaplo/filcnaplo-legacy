@@ -13,7 +13,7 @@ class StudentScreen extends StatefulWidget {
   StudentScreen({this.account});
   Account account;
   @override
-  StudentScreenState createState() => new StudentScreenState();
+  StudentScreenState createState() => StudentScreenState();
 }
 
 class StudentScreenState extends State<StudentScreen> {

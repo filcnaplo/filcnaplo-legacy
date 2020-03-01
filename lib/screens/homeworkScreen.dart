@@ -16,12 +16,12 @@ import 'package:filcnaplo/Utils/StringFormatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
-  runApp(new MaterialApp(home: new HomeworkScreen()));
+  runApp(MaterialApp(home: HomeworkScreen()));
 }
 
 class HomeworkScreen extends StatefulWidget {
   @override
-  HomeworkScreenState createState() => new HomeworkScreenState();
+  HomeworkScreenState createState() => HomeworkScreenState();
 }
 
 class HomeworkScreenState extends State<HomeworkScreen> {
@@ -30,8 +30,8 @@ class HomeworkScreenState extends State<HomeworkScreen> {
   bool hasLoaded = true;
   bool hasOfflineLoaded = false;
 
-  List<Homework> homeworks = new List();
-  List<Homework> selectedHomework = new List();
+  List<Homework> homeworksNew = List();
+  List<Homework> selectedHomework = List();
 
   @override
   void initState() {
@@ -45,7 +45,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
       selectedHomework.clear();
     });
 
-    for (Homework n in homeworks) {
+    for (Homework n in homeworksNew) {
       if (n.owner.id == globals.selectedUser.id) {
         setState(() {
           selectedHomework.add(n);
@@ -114,11 +114,12 @@ class HomeworkScreenState extends State<HomeworkScreen> {
 
   Future<bool> _openChooser() {
     return showDialog(
-        barrierDismissible: true,
-        context: context,
-        builder: (BuildContext context) {
-          return ChooseLessonDialog();
-        });
+      barrierDismissible: true,
+      context: context,
+      builder: (BuildContext context) {
+        return ChooseLessonDialog();
+      }
+    );
   }
 
   Future<bool> timeDialog() {
@@ -200,8 +201,8 @@ class HomeworkScreenState extends State<HomeworkScreen> {
     Completer<Null> completer = Completer<Null>();
     List<Homework> homeworksNew = await HomeworkHelper().getHomeworks(
         globals.timeData[globals.selectedTimeForHomework], showErrors);
-    if (homeworksNew.length > homeworks.length) homeworks = homeworksNew;
-    homeworks
+    if (homeworksNew.length > homeworksNew.length) homeworksNew = homeworksNew;
+    homeworksNew
         .sort((Homework a, Homework b) => b.uploadDate.compareTo(a.uploadDate));
     if (mounted)
       setState(() {
@@ -218,9 +219,9 @@ class HomeworkScreenState extends State<HomeworkScreen> {
       hasOfflineLoaded = false;
     });
     Completer<Null> completer = Completer<Null>();
-    homeworks = await HomeworkHelper()
+    homeworksNew = await HomeworkHelper()
         .getHomeworksOffline(globals.timeData[globals.selectedTimeForHomework]);
-    homeworks
+    homeworksNew
         .sort((Homework a, Homework b) => b.uploadDate.compareTo(a.uploadDate));
     if (mounted)
       setState(() {

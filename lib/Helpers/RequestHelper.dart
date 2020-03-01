@@ -44,7 +44,7 @@ class RequestHelper {
     "chiron",
     "clark"
   ];
-  final _random = new Random();
+  final _random = Random();
   void showError(String msg) {
     Fluttertoast.showToast(
         msg: msg,

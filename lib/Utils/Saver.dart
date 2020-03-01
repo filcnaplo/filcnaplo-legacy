@@ -25,7 +25,7 @@ Future<String> get _localFolder async {
 Future<File> _localEvaluations(User user) async {
   final path = await _localFolder;
   String suffix = user.id.toString();
-  return new File('$path/evaluations_$suffix.json');
+  return File('$path/evaluations_$suffix.json');
 }
 
 Future<File> saveEvaluations(String evaluationsString, User user) async {
@@ -47,7 +47,7 @@ Future<String> readStudent(User user) async {
 Future<File> _localEvents(User user) async {
   final path = await _localFolder;
   String suffix = user.id.toString();
-  return new File('$path/events_$suffix.json');
+  return File('$path/events_$suffix.json');
 }
 
 Future<File> saveEvents(String eventsString, User user) async {
@@ -68,7 +68,7 @@ Future<String> readEventsString(User user) async {
 Future<File> _localHomework(User user) async {
   final path = await _localFolder;
   String suffix = user.id.toString();
-  return new File('$path/' + suffix + '_homework.json');
+  return File('$path/' + suffix + '_homework.json');
 }
 
 Future<File> saveHomework(String homeworkString, User user) async {
@@ -81,14 +81,14 @@ Future<List<Map<String, dynamic>>> readHomework(User user) async {
     final file = await _localHomework(user);
     String contents = await doDecrypt(await file.readAsString());
 
-    List<Map<String, dynamic>> notes = new List();
+    List<Map<String, dynamic>> notes = List();
     List<dynamic> notesMap = json.decode(contents);
     for (dynamic note in notesMap)
       notes.add(note as Map<String, dynamic>);
 
     return notes;
   } catch (e) {
-    return new List();
+    return List();
   }
 }
 
@@ -96,7 +96,7 @@ Future<List<Map<String, dynamic>>> readHomework(User user) async {
 Future<File> _localTimeTable(String time, User user) async {
   final path = await _localFolder;
   String suffix = user.id.toString();
-  return new File('$path/timetable_$time-$suffix.json');
+  return File('$path/timetable_$time-$suffix.json');
 }
 
 Future<File> saveTimetable(String timetableString, String time, User user) async {
@@ -118,7 +118,7 @@ Future<List<dynamic>> readTimetable(String time, User user) async {
 
 Future<File> get _localSettings async {
   final path = await _localFolder;
-  return new File('$path/settings.json');
+  return File('$path/settings.json');
 }
 
 Future<File> saveSettings(String settingsString) async {
@@ -128,13 +128,13 @@ Future<File> saveSettings(String settingsString) async {
 }
 
 void migrate() async {
-  List<Map<String, dynamic>> userMap = new List();
+  List<Map<String, dynamic>> userMap = List();
   String data = (await userFile).readAsStringSync();
   List<dynamic> userList = json.decode(data);
   for (dynamic d in userList)
     userMap.add(d as Map<String, dynamic>);
 
-  List<User> users = new List();
+  List<User> users = List();
   if (userMap.isNotEmpty)
     for (Map<String, dynamic> m in userMap)
       users.add(User.fromJson(m));
@@ -156,7 +156,7 @@ void migrate() async {
   DBHelper().saveUsersJson(users);
 
   (await _localSettings).delete();
-  var dir = new Directory(await _localFolder);
+  var dir = Directory(await _localFolder);
   List contents = dir.listSync();
   for (var fileOrDir in contents) {
     if (fileOrDir is File) {
@@ -176,7 +176,7 @@ void migrate() async {
 
 Future<File> get userFile async {
   final path = await _localFolder;
-  return new File('$path/users.json');
+  return File('$path/users.json');
 }
 
 Future<void> saveUsers(List<User> users) async {
@@ -199,6 +199,6 @@ Future<Map<String, dynamic>> readSettings() async {
     Map<String, dynamic> settingsMap = json.decode(await doDecrypt(contents));
     return settingsMap;
   } catch (e) {
-    return new Map();
+    return Map();
   }
 }

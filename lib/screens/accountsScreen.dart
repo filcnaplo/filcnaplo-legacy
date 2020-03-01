@@ -19,12 +19,12 @@ import 'package:filcnaplo/screens/loginScreen.dart';
 import 'package:filcnaplo/Utils/StringFormatter.dart';
 
 void main() {
-  runApp(new MaterialApp(home: new AccountsScreen()));
+  runApp(MaterialApp(home: AccountsScreen()));
 }
 
 class AccountsScreen extends StatefulWidget {
   @override
-  AccountsScreenState createState() => new AccountsScreenState();
+  AccountsScreenState createState() => AccountsScreenState();
 }
 
 class AccountsScreenState extends State<AccountsScreen> {

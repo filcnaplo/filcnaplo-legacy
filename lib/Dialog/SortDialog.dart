@@ -8,7 +8,7 @@ class SortDialog extends StatefulWidget {
   const SortDialog();
 
   @override
-  SortDialogState createState() => new SortDialogState();
+  SortDialogState createState() => SortDialogState();
 }
 
 class SortDialogState extends State<SortDialog> {

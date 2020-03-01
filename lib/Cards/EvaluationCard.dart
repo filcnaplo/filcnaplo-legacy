@@ -165,7 +165,7 @@ class EvaluationCard extends StatelessWidget {
   }
 
   @override
-  Key get key => new Key(getDate());
+  Key get key => Key(getDate());
 
   void openDialog() {
     _evaluationDialog(evaluation);

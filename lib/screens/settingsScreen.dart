@@ -18,13 +18,13 @@ import 'package:filcnaplo/globals.dart' as globals;
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
-  runApp(new MaterialApp(home: new SettingsScreen()));
+  runApp(MaterialApp(home: SettingsScreen()));
   BackgroundHelper().register();
 }
 
 class SettingsScreen extends StatefulWidget {
   @override
-  SettingsScreenState createState() => new SettingsScreenState();
+  SettingsScreenState createState() => SettingsScreenState();
 }
 
 class SettingsScreenState extends State<SettingsScreen> {

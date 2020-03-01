@@ -11,12 +11,12 @@ import 'package:filcnaplo/Utils/StringFormatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
-  runApp(new MaterialApp(home: new NotesScreen()));
+  runApp(MaterialApp(home: NotesScreen()));
 }
 
 class NotesScreen extends StatefulWidget {
   @override
-  NotesScreenState createState() => new NotesScreenState();
+  NotesScreenState createState() => NotesScreenState();
 }
 
 class NotesScreenState extends State<NotesScreen> {
@@ -30,7 +30,7 @@ class NotesScreenState extends State<NotesScreen> {
   bool hasOfflineLoaded = false;
   bool hasLoaded = true;
 
-  List<Note> notes = new List();
+  List<Note> notes = List();
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,7 @@ class NotesScreenState extends State<NotesScreen> {
     setState(() {
       hasLoaded = false;
     });
-    Completer<Null> completer = new Completer<Null>();
+    Completer<Null> completer = Completer<Null>();
 
     await globals.selectedAccount.refreshStudentString(false, showErrors);
     notes = globals.selectedAccount.notes;
@@ -93,7 +93,7 @@ class NotesScreenState extends State<NotesScreen> {
     setState(() {
       hasOfflineLoaded = false;
     });
-    Completer<Null> completer = new Completer<Null>();
+    Completer<Null> completer = Completer<Null>();
 
     globals.selectedAccount.refreshStudentString(true, false);
     notes = globals.selectedAccount.notes;

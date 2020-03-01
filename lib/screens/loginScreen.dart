@@ -17,7 +17,7 @@ import 'package:filcnaplo/Utils/AccountManager.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 import 'package:filcnaplo/Utils/StringFormatter.dart';
 
-LoginScreenState loginScreenState = new LoginScreenState();
+LoginScreenState loginScreenState = LoginScreenState();
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({this.fromApp});

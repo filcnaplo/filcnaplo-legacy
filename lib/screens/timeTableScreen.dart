@@ -16,12 +16,12 @@ import "../Utils/StringFormatter.dart";
 import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
-  runApp(new MaterialApp(home: new TimeTableScreen()));
+  runApp(MaterialApp(home: TimeTableScreen()));
 }
 
 class TimeTableScreen extends StatefulWidget {
   @override
-  TimeTableScreenState createState() => new TimeTableScreenState();
+  TimeTableScreenState createState() => TimeTableScreenState();
 }
 
 class TimeTableScreenState extends State<TimeTableScreen>
@@ -384,13 +384,13 @@ class TimeTableScreenState extends State<TimeTableScreen>
       list = await getLessons(startDate, startDate.add(Duration(days: 6)),
           globals.selectedUser, showErrors);
 
-    List<Lesson> monday = new List();
-    List<Lesson> tuesday = new List();
-    List<Lesson> wednesday = new List();
-    List<Lesson> thursday = new List();
-    List<Lesson> friday = new List<Lesson>();
-    List<Lesson> saturday = new List();
-    List<Lesson> sunday = new List();
+    List<Lesson> monday = List();
+    List<Lesson> tuesday = List();
+    List<Lesson> wednesday = List();
+    List<Lesson> thursday = List();
+    List<Lesson> friday = List<Lesson>();
+    List<Lesson> saturday = List();
+    List<Lesson> sunday = List();
 
     setState(() {
       for (Lesson lesson in list) {
@@ -428,7 +428,7 @@ class TimeTableScreenState extends State<TimeTableScreen>
     saturday.sort((Lesson a, Lesson b) => a.start.compareTo(b.start));
     sunday.sort((Lesson a, Lesson b) => a.start.compareTo(b.start));
 
-    return new Week(monday, tuesday, wednesday, thursday, friday, saturday,
+    return Week(monday, tuesday, wednesday, thursday, friday, saturday,
         sunday, startDate);
   }
 }

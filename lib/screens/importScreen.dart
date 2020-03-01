@@ -12,12 +12,12 @@ import 'package:filcnaplo/Helpers/DBHelper.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
-  runApp(new MaterialApp(home: new ImportScreen()));
+  runApp(MaterialApp(home: ImportScreen()));
 }
 
 class ImportScreen extends StatefulWidget {
   @override
-  ImportScreenState createState() => new ImportScreenState();
+  ImportScreenState createState() => ImportScreenState();
 }
 
 class ImportScreenState extends State<ImportScreen> {
@@ -56,7 +56,7 @@ class ImportScreenState extends State<ImportScreen> {
     controller.text = path;
   }
 
-  TextEditingController controller = new TextEditingController();
+  TextEditingController controller = TextEditingController();
   String path = "";
 
   @override

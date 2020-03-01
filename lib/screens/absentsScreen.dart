@@ -11,16 +11,16 @@ import 'package:filcnaplo/Utils/StringFormatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
-  runApp(new MaterialApp(home: new AbsentsScreen()));
+  runApp(MaterialApp(home: AbsentsScreen()));
 }
 
 class AbsentsScreen extends StatefulWidget {
   @override
-  AbsentsScreenState createState() => new AbsentsScreenState();
+  AbsentsScreenState createState() => AbsentsScreenState();
 }
 
 class AbsentsScreenState extends State<AbsentsScreen> {
-  Map<String, List<Absence>> absents = new Map();
+  Map<String, List<Absence>> absents = Map();
 
   List<User> users;
   User selectedUser;

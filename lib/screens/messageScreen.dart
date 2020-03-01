@@ -11,12 +11,12 @@ import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
-  runApp(new MaterialApp(home: new MessageScreen()));
+  runApp(MaterialApp(home: MessageScreen()));
 }
 
 class MessageScreen extends StatefulWidget {
   @override
-  MessageScreenState createState() => new MessageScreenState();
+  MessageScreenState createState() => MessageScreenState();
 }
 
 class MessageScreenState extends State<MessageScreen> {

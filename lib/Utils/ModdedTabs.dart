@@ -47,7 +47,7 @@ class TabPageSelectorIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container (
-        child: new FlatButton(onPressed: (){
+        child: FlatButton(onPressed: (){
           controller.animateTo(index);
         }, child: Center(
           child: Text(day, style: TextStyle(color: Colors.white,),),

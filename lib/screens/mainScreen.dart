@@ -23,14 +23,14 @@ import 'package:filcnaplo/Helpers/TimetableHelper.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
-  runApp(new MaterialApp(
-    home: new MainScreen(),
+  runApp(MaterialApp(
+    home: MainScreen(),
   ));
 }
 
 class MainScreen extends StatefulWidget {
   @override
-  MainScreenState createState() => new MainScreenState();
+  MainScreenState createState() => MainScreenState();
 }
 
 _launchDownloadWebsite() async {
@@ -44,10 +44,10 @@ _launchDownloadWebsite() async {
 
 class MainScreenState extends State<MainScreen> {
   List mainScreenCards;
-  List<Evaluation> evaluations = new List();
-  Map<String, List<Absence>> absents = new Map();
-  List<Note> notes = new List();
-  List<Lesson> lessons = new List();
+  List<Evaluation> evaluations = List();
+  Map<String, List<Absence>> absents = Map();
+  List<Note> notes = List();
+  List<Lesson> lessons = List();
   // for testing
   // DateTime get now => DateTime.parse("2019-06-03 08:00:00Z");
   DateTime get now => DateTime.now();
@@ -145,7 +145,7 @@ class MainScreenState extends State<MainScreen> {
       globals.firstMain = false;
     }
     startDate = now;
-    new Timer.periodic(
+    Timer.periodic(
         Duration(seconds: 10),
         (Timer t) => () async {
               mainScreenCards = await feedItems();
@@ -155,7 +155,7 @@ class MainScreenState extends State<MainScreen> {
 
   Future<List<Widget>> feedItems() async {
     int maximumFeedLength = 100;
-    List<Widget> feedCards = new List();
+    List<Widget> feedCards = List();
 
     for (Account account in globals.accounts) {
       List<Evaluation> firstQuarterEvaluations = (evaluations.where(

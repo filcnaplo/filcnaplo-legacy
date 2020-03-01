@@ -14,7 +14,7 @@ class HomeworkDialog extends StatefulWidget {
   final Lesson lesson;
 
   @override
-  HomeworkDialogState createState() => new HomeworkDialogState();
+  HomeworkDialogState createState() => HomeworkDialogState();
 }
 
 class HomeworkDialogState extends State<HomeworkDialog> {

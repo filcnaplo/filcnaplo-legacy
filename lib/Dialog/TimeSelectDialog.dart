@@ -5,7 +5,7 @@ import 'package:filcnaplo/generated/i18n.dart';
 class TimeSelectDialog extends StatefulWidget {
   const TimeSelectDialog();
   @override
-  TimeSelectDialogState createState() => new TimeSelectDialogState();
+  TimeSelectDialogState createState() => TimeSelectDialogState();
 }
 
 class TimeSelectDialogState extends State<TimeSelectDialog> {

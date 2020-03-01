@@ -57,7 +57,7 @@ class AbsenceCard extends StatelessWidget {
   }
 
   @override
-  Key get key => new Key(getDate());
+  Key get key => Key(getDate());
 
   String getDate() {
     return absences[0].CreatingTime.toIso8601String();

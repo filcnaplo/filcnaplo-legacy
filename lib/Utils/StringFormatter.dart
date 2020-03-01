@@ -10,12 +10,12 @@ String getTimetableText(DateTime startDateText) {
       startDateText.day.toString() +
       ". - " +
       startDateText
-          .add(new Duration(days: 6))
+          .add(Duration(days: 6))
           .month
           .toString() +
       ". " +
       startDateText
-          .add(new Duration(days: 6))
+          .add(Duration(days: 6))
           .day
           .toString() +
       ".)") ??

@@ -10,7 +10,7 @@ class AbsentDialog extends StatefulWidget {
   const AbsentDialog();
 
   @override
-  AbsentDialogState createState() => new AbsentDialogState();
+  AbsentDialogState createState() => AbsentDialogState();
 }
 
 class AbsentDialogState extends State<AbsentDialog> {
@@ -19,7 +19,7 @@ class AbsentDialogState extends State<AbsentDialog> {
   int sumOfDelayMinutes = 0;
 
   List<User> users;
-  Map<String, List<Absence>> absents = new Map();
+  Map<String, List<Absence>> absents = Map();
 
   void initSelectedUser() async {
     absents = globals.selectedAccount.absents;

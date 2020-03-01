@@ -131,7 +131,7 @@ class SummaryCard extends StatelessWidget {
   }
 
   @override
-  Key get key => new Key(getDate());
+  Key get key => Key(getDate());
 
   Widget evaluationList(BuildContext context) {
     return Column(children: <Widget>[

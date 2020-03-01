@@ -15,7 +15,7 @@ class ChangedLessonCard extends StatelessWidget {
   }
 
   @override
-  Key get key => new Key(getDate());
+  Key get key => Key(getDate());
 
   String getDate() {
     return lesson.start.toIso8601String();

@@ -12,7 +12,7 @@ class MessageDialog extends StatefulWidget {
   final Message message;
 
   @override
-  MessageDialogState createState() => new MessageDialogState();
+  MessageDialogState createState() => MessageDialogState();
 }
 
 class MessageDialogState extends State<MessageDialog> {
