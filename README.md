@@ -11,7 +11,7 @@
 
 #### Ötleted van, vagy problémát találtál?
 
-[Írd meg nekünk!](https://github.com/filcnaplo/filcnaplo/issues/new)
+[Írd meg nekünk!](https://github.com/filcnaplo/filcnaplo/issues/new/choose)
 
 
 #### Konyítasz a kódoláshoz, és becsatlakoznál a fejlesztésbe?
