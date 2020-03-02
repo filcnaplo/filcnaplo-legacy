@@ -75,7 +75,7 @@
         "month2": "két hónap",
 
         "weekPrev": "előző hét",
-        "weekNext": "következö hét"
+        "weekNext": "következő hét"
     },
 
     "delay": {
@@ -124,7 +124,7 @@
     },
 
     "choose": {
-        "subjectNotFound": "Nincs ilyen tantárgyú órád a következő 7 napban.",
+        "subjectNotFound": "Nincs ilyen tantárgyú órád a következő/előző 7 napban.",
         "loading": "Órák betöltése...",
         "next": "a következő",
         "previous": "a legutóbbi",

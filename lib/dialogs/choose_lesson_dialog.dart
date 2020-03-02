@@ -14,8 +14,10 @@ bool suppliedData;
 class ChooseLessonDialog extends StatefulWidget {
   int searchForInt; //0: next, 1: previous
   String _subject;
+  String _teacher;
+  bool init = true;
 
-  ChooseLessonDialog([int searchForInt, String _subject]) {
+  ChooseLessonDialog([int searchForInt, String _subject, String _teacher]) {
     suppliedData = true;
 
     if (searchForInt == null) {
@@ -29,6 +31,8 @@ class ChooseLessonDialog extends StatefulWidget {
       suppliedData = false;
     }
     this._subject = _subject;
+
+    this._teacher = _teacher;
   }
 
   @override
@@ -38,6 +42,7 @@ class ChooseLessonDialog extends StatefulWidget {
 class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
   List<String> subjects = [];
   List<Lesson> lessons = [];
+  List<Lesson> lessonsPrevious = [];
   DateTime now = DateTime.now();
   SearchFor _searchFor = SearchFor.next;
 
@@ -62,7 +67,7 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
     return SimpleDialog(
       title: Text(capitalize(I18n.of(context).homeworkAdd) + "..."),
       children: <Widget>[
-        subjects.isEmpty
+        widget.init
             ? Column(
                 children: <Widget>[
                   Container(
@@ -138,32 +143,53 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
 
   void _openHomeworkDialog() async {
     if (_searchFor == SearchFor.next) {
-      Navigator.of(context).pop();
-      return showDialog(
-          barrierDismissible: true,
-          context: context,
-          builder: (BuildContext context) {
-            return NewHomeworkDialog(lessons.firstWhere((Lesson lesson) =>
-                (lesson.subject == widget._subject &&
-                    lesson.start.isAfter(now))));
-          });
+      try {
+        Lesson homeworkLesson = lessons.firstWhere((Lesson lesson) =>
+            (lesson.subject == widget._subject &&
+                (lesson.teacher == widget._teacher || widget._teacher == null) &&
+                lesson.start.isAfter(now) &&
+                now.day != lesson.start.day));
+        Navigator.of(context).pop();
+        return showDialog(
+            barrierDismissible: true,
+            context: context,
+            builder: (BuildContext context) {
+              return (NewHomeworkDialog(homeworkLesson));
+            });
+      } catch (e) {
+        Fluttertoast.showToast(msg: I18n.of(context).chooseSubjectNotFound);
+        throw (e);
+      }
     } else {
-      lessons.clear();
-      lessons = await getLessons(
+      widget.init = true;
+      setState(() {});
+
+      lessonsPrevious = await getLessons(
           now.subtract(Duration(days: 7)), now, globals.selectedUser, false);
-      Navigator.of(context).pop();
-      return showDialog(
-          barrierDismissible: true,
-          context: context,
-          builder: (BuildContext context) {
-            return NewHomeworkDialog(lessons.lastWhere((Lesson lesson) =>
-                (lesson.subject == widget._subject &&
-                    lesson.end.isBefore(now))));
-          });
+      widget.init = false;
+      try {
+        Lesson homeworkLesson = lessonsPrevious.lastWhere((Lesson lesson) =>
+            (lesson.subject == widget._subject &&
+                (lesson.teacher == widget._teacher || widget._teacher == null) &&
+                lesson.end.isBefore(now) &&
+                now.day != lesson.start.day));
+        Navigator.of(context).pop();
+        return showDialog(
+            barrierDismissible: true,
+            context: context,
+            builder: (BuildContext context) {
+              return NewHomeworkDialog(homeworkLesson);
+            });
+      } catch (e) {
+        Fluttertoast.showToast(msg: I18n.of(context).chooseSubjectNotFound);
+        throw (e);
+      }
     }
   }
 
   void _getLessons() async {
+    widget.init = true;
+    setState(() {});
     lessons = await getLessons(
         now, now.add(Duration(days: 7)), globals.selectedUser, false);
     for (Lesson lesson in lessons) {
@@ -171,7 +197,8 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
     }
     subjects.sort((a, b) => a.compareTo(b));
     subjects.insert(0, "...");
-    if (mounted) setState(() {});
+    widget.init = false;
+    setState(() {});
 
     if (suppliedData) {
       _openHomeworkDialog();

@@ -124,7 +124,7 @@
     },
 
     "choose": {
-        "subjectNotFound": "You don't have a lesson with that subject in the following 7 days.",
+        "subjectNotFound": "You don't have a lesson with that subject in the following/previous 7 days.",
         "loading": "Loading lessons...",
         "next": "to the next",
         "previous": "to the previous",

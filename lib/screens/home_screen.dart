@@ -266,7 +266,7 @@ class HomeScreenState extends State<HomeScreen> {
         barrierDismissible: true,
         context: context,
         builder: (BuildContext context) {
-          return ChooseLessonDialog(0, globals.currentSubject);
+          return ChooseLessonDialog(0, globals.currentLesson.subject, globals.currentLesson.teacher);
         });
   }
 
@@ -283,7 +283,7 @@ class HomeScreenState extends State<HomeScreen> {
   List<UnicornButton> _getUnicornMenu() {
     List<UnicornButton> children = [];
 
-    if (globals.currentSubject != null) {
+    if (globals.currentLesson != null) {
       children.add(_unicornOption(
           iconData: Icons.home,
           hero: I18n.of(context).homeworkAdd,

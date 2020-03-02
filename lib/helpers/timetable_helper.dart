@@ -78,12 +78,7 @@ Future<List<Lesson>> getLessons(
 
     user.setRecentlyRefreshed("getLessons" + fromToString(from, to));
     return lessons;
-  } else {
-      Fluttertoast.showToast(
-        msg: I18n.of(globals.context).rateLimitAlert(User.RATE_LIMIT_MINUTES.toString()),
-        );
-    }
-
+  }
   return getLessonsOffline(from, to, user);
 }
 

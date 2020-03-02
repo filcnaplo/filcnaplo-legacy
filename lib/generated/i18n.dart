@@ -132,8 +132,8 @@ class I18n implements WidgetsLocalizations {
   String get dateMonth2 => "két hónap";
   /// "előző hét"
   String get dateWeekPrev => "előző hét";
-  /// "következö hét"
-  String get dateWeekNext => "következö hét";
+  /// "következő hét"
+  String get dateWeekNext => "következő hét";
   /// "késés"
   String get delay => "késés";
   /// "késés mértéke"
@@ -194,8 +194,8 @@ class I18n implements WidgetsLocalizations {
   String get homeworkUploadUser => "feltöltő";
   /// "feltöltés ideje"
   String get homeworkUploadTime => "feltöltés ideje";
-  /// "Nincs ilyen tantárgyú órád a következő 7 napban."
-  String get chooseSubjectNotFound => "Nincs ilyen tantárgyú órád a következő 7 napban.";
+  /// "Nincs ilyen tantárgyú órád a következő/előző 7 napban."
+  String get chooseSubjectNotFound => "Nincs ilyen tantárgyú órád a következő/előző 7 napban.";
   /// "Órák betöltése..."
   String get chooseLoading => "Órák betöltése...";
   /// "a következő"
@@ -665,9 +665,9 @@ class _I18n_en_US extends I18n {
   /// "uploaded at"
   @override
   String get homeworkUploadTime => "uploaded at";
-  /// "You don't have a lesson with that subject in the following 7 days."
+  /// "You don't have a lesson with that subject in the following/previous 7 days."
   @override
-  String get chooseSubjectNotFound => "You don't have a lesson with that subject in the following 7 days.";
+  String get chooseSubjectNotFound => "You don't have a lesson with that subject in the following/previous 7 days.";
   /// "Loading lessons..."
   @override
   String get chooseLoading => "Loading lessons...";
@@ -1240,9 +1240,9 @@ class _I18n_de_DE extends I18n {
   /// "Hochladezeit"
   @override
   String get homeworkUploadTime => "Hochladezeit";
-  /// "Du hast keine Stunde mit diesem Fach in den volgenden 7 Tagen."
+  /// "Du hast keine Stunde mit diesem Fach in den volgenden/vorherige 7 Tagen."
   @override
-  String get chooseSubjectNotFound => "Du hast keine Stunde mit diesem Fach in den volgenden 7 Tagen.";
+  String get chooseSubjectNotFound => "Du hast keine Stunde mit diesem Fach in den volgenden/vorherige 7 Tagen.";
   /// "Stunden werden geladen..."
   @override
   String get chooseLoading => "Stunden werden geladen...";

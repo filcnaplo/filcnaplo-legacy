@@ -44,8 +44,6 @@ class _LessonCardState extends State<LessonCard> {
   int lessonCardState;
   bool isInit;
 
-  String homeworkToThisSubject;
-
   @override
   void setState(fn) {
     isInit = false;
@@ -203,13 +201,14 @@ class _LessonCardState extends State<LessonCard> {
     }
 
     //If during lesson, that subject. If after lesson, previous subject. Otherwise, null.
-    if ([1, 2, 4].contains(lessonCardState))
-      homeworkToThisSubject = thisLesson.subject;
-    else if ([3, 5].contains(lessonCardState))
-      homeworkToThisSubject = previousLesson.subject;
-
-    if (homeworkToThisSubject != null) {
-      globals.currentSubject = homeworkToThisSubject;
+    if ([1, 2, 4].contains(lessonCardState)) {
+      globals.currentLesson = thisLesson;
+    }
+    else if ([3, 5].contains(lessonCardState)) {
+      globals.currentLesson = previousLesson;
+    }
+    else {
+      globals.currentLesson = null;
     }
   }
 

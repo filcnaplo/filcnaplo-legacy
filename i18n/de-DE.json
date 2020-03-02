@@ -124,7 +124,7 @@
     },
 
     "choose": {
-        "subjectNotFound": "Du hast keine Stunde mit diesem Fach in den volgenden 7 Tagen.",
+        "subjectNotFound": "Du hast keine Stunde mit diesem Fach in den volgenden/vorherige 7 Tagen.",
         "loading": "Stunden werden geladen...",
         "next": "für die nächste",
         "previous": "für die letzte",
