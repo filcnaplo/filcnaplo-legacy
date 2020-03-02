@@ -20,6 +20,7 @@ import 'package:filcnaplo/global_drawer.dart';
 import 'package:filcnaplo/helpers/background_helper.dart';
 import 'package:filcnaplo/helpers/settings_helper.dart';
 import 'package:filcnaplo/helpers/timetable_helper.dart';
+import 'package:unicorndial/unicorndial.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
@@ -259,52 +260,79 @@ class HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Widget _profileOption({IconData iconData, String hero, Function onPressed}) {
+    return UnicornButton(
+        currentButton: FloatingActionButton(
+      heroTag: hero,
+      backgroundColor: Colors.grey[500],
+      mini: true,
+      child: Icon(iconData),
+      onPressed: onPressed,
+    ));
+  }
+
+  List<UnicornButton> _getProfileMenu() {
+    List<UnicornButton> children = [];
+
+    children
+        .add(_profileOption(iconData: Icons.account_balance, onPressed: () {}));
+    children.add(_profileOption(iconData: Icons.settings, onPressed: () {}));
+    children.add(_profileOption(
+        iconData: Icons.subdirectory_arrow_left, onPressed: () {}));
+
+    return children;
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
         onWillPop: _onWillPop,
         child: Scaffold(
-            drawer: GlobalDrawer(),
-            appBar: AppBar(
-              title: Text(globals.isSingle
-                  ? globals.selectedAccount.user.name
-                  : I18n.of(context).appTitle),
-            ),
-            body: 
-              hasOfflineLoaded &&
-                      globals.isColor != null &&
-                      HomeScreenCards != null
-                  ? Container(
-                      child: Column(children: <Widget>[
-                      !hasLoaded
-                          ? Container(
-                              child: LinearProgressIndicator(
-                                value: null,
-                              ),
-                              height: 3,
-                            )
-                          : Container(
-                              height: 3,
-                            ),
-                      Expanded(
-                        child: RefreshIndicator(
-                          child: ListView(
-                            children: HomeScreenCards,
+          drawer: GlobalDrawer(),
+          appBar: AppBar(
+            title: Text(globals.isSingle
+                ? globals.selectedAccount.user.name
+                : I18n.of(context).appTitle),
+          ),
+          body: hasOfflineLoaded &&
+                  globals.isColor != null &&
+                  HomeScreenCards != null
+              ? Container(
+                  child: Column(children: <Widget>[
+                  !hasLoaded
+                      ? Container(
+                          child: LinearProgressIndicator(
+                            value: null,
                           ),
-                          onRefresh: () {
-                            Completer<Null> completer = Completer<Null>();
-                            _onRefresh().then((bool b) async {
-                              HomeScreenCards = await feedItems();
-                              setState(() {
-                                completer.complete();
-                              });
-                            });
-                            return completer.future;
-                          },
+                          height: 3,
+                        )
+                      : Container(
+                          height: 3,
                         ),
+                  Expanded(
+                    child: RefreshIndicator(
+                      child: ListView(
+                        children: HomeScreenCards,
                       ),
-                    ]))
-                  : Center(child: CircularProgressIndicator())));
+                      onRefresh: () {
+                        Completer<Null> completer = Completer<Null>();
+                        _onRefresh().then((bool b) async {
+                          HomeScreenCards = await feedItems();
+                          setState(() {
+                            completer.complete();
+                          });
+                        });
+                        return completer.future;
+                      },
+                    ),
+                  ),
+                ]))
+              : Center(child: CircularProgressIndicator()),
+          floatingActionButton: UnicornDialer(
+            parentButton: Icon(Icons.menu),
+            childButtons: _getProfileMenu(),
+          ),
+        ));
   }
 
   Future<Null> _onRefresh(
