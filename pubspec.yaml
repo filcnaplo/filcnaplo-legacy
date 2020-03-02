@@ -33,8 +33,8 @@ dependencies:
   crypto: ">=2.0.6"
   flutter_secure_storage: ^3.2.1+1
   flutter_swiper: ^1.1.6
-  flutter_fab_dialer: ^0.1.1
-
+  unicorndial: ^1.1.5
+  
 flutter_icons:
   android: "launcher_icon"
   ios: true

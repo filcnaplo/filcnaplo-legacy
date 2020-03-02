@@ -270,40 +270,41 @@ class HomeScreenState extends State<HomeScreen> {
                   ? globals.selectedAccount.user.name
                   : I18n.of(context).appTitle),
             ),
-            body: hasOfflineLoaded &&
-                    globals.isColor != null &&
-                    HomeScreenCards != null
-                ? Container(
-                    child: Column(children: <Widget>[
-                    !hasLoaded
-                        ? Container(
-                            child: LinearProgressIndicator(
-                              value: null,
+            body: 
+              hasOfflineLoaded &&
+                      globals.isColor != null &&
+                      HomeScreenCards != null
+                  ? Container(
+                      child: Column(children: <Widget>[
+                      !hasLoaded
+                          ? Container(
+                              child: LinearProgressIndicator(
+                                value: null,
+                              ),
+                              height: 3,
+                            )
+                          : Container(
+                              height: 3,
                             ),
-                            height: 3,
-                          )
-                        : Container(
-                            height: 3,
+                      Expanded(
+                        child: RefreshIndicator(
+                          child: ListView(
+                            children: HomeScreenCards,
                           ),
-                    Expanded(
-                      child: RefreshIndicator(
-                        child: ListView(
-                          children: HomeScreenCards,
-                        ),
-                        onRefresh: () {
-                          Completer<Null> completer = Completer<Null>();
-                          _onRefresh().then((bool b) async {
-                            HomeScreenCards = await feedItems();
-                            setState(() {
-                              completer.complete();
+                          onRefresh: () {
+                            Completer<Null> completer = Completer<Null>();
+                            _onRefresh().then((bool b) async {
+                              HomeScreenCards = await feedItems();
+                              setState(() {
+                                completer.complete();
+                              });
                             });
-                          });
-                          return completer.future;
-                        },
+                            return completer.future;
+                          },
+                        ),
                       ),
-                    ),
-                  ]))
-                : Center(child: CircularProgressIndicator())));
+                    ]))
+                  : Center(child: CircularProgressIndicator())));
   }
 
   Future<Null> _onRefresh(
