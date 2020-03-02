@@ -147,7 +147,7 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   Future<List<Widget>> feedItems() async {
-    int maximumFeedLength = 100;
+    int maximumFeedLength = 20;
     List<Widget> feedCards = List();
 
     for (Account account in globals.accounts) {
@@ -201,7 +201,7 @@ class HomeScreenState extends State<HomeScreen> {
         .toList();
 
     try {
-      if (lessonsToday.last.end.isAfter(now)) {
+      if (lessonsToday.length > 0 && lessonsToday.last.end.isAfter(now)) {
         isLessonsToday = true;
         isLessonsTomorrow = false;
       } else if (lessonsTomorrow.first.start.day ==
@@ -225,7 +225,7 @@ class HomeScreenState extends State<HomeScreen> {
         return b.key.toString().compareTo(a.key.toString());
       });
     } catch (e) {
-      print("[E] HomeScreen.feedItems()2: " + e.toString());
+      print("[E] HomeScreen.feedItems() (2): " + e.toString());
     }
 
     if (maximumFeedLength > feedCards.length)
@@ -323,7 +323,7 @@ class HomeScreenState extends State<HomeScreen> {
         tempNotes.addAll(globals.selectedAccount.notes);
         tempAbsents.addAll(globals.selectedAccount.absents);
       } catch (exception) {
-        print("[E] HomeScreen.onRefresh()1: " + exception.toString());
+        print("[E] HomeScreen.onRefresh() (1): " + exception.toString());
       }
     } else {
       for (Account account in globals.accounts) {
