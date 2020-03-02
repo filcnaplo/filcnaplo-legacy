@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:background_fetch/background_fetch.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:filcnaplo/generated/i18n.dart';
-import 'package:filcnaplo/screens/Screen.dart';
+import 'package:filcnaplo/screens/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -94,7 +94,6 @@ class SettingsScreenState extends State<SettingsScreen> {
     SettingsHelper().setLang(_lang);
 
     const langs = {"en": en, "de": de, "hu": hu};
-//    print(langs[value]);
     I18n.onLocaleChanged(langs[value]);
   }
 
@@ -181,8 +180,6 @@ class SettingsScreenState extends State<SettingsScreen> {
         .setThemeData(ColorManager().getTheme(Theme.of(context).brightness));
     globals.CurrentTextColor =
         ColorManager().getTheme(Theme.of(context).brightness).accentColor;
-//    print("CurrentTextColor: ");
-    // print(globals.CurrentTextColor);
   }
 
   void _isSingleUserChange(bool value) {
@@ -438,7 +435,7 @@ class SettingsScreenState extends State<SettingsScreen> {
     );
   }
   _openBugReport() async {
-    const url = "https://github.com/filcnaplo/filcnaplo/issues/new";
+    const url = "https://github.com/filcnaplo/filcnaplo/issues/new/choose";
     if (await canLaunch(url)) {
       await launch(url);
     } else {

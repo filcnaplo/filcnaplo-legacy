@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:filcnaplo/models/message.dart';
 import 'package:filcnaplo/dialogs/message_dialog.dart';
 import 'package:filcnaplo/helpers/request_helper.dart';
-import 'package:filcnaplo/screens/Screen.dart';
+import 'package:filcnaplo/screens/screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:filcnaplo/utils/string_formatter.dart';

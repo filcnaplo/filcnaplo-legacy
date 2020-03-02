@@ -13,7 +13,7 @@ import 'package:csv/csv.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:date_range_picker/date_range_picker.dart' as DateRagePicker;
 import 'package:filcnaplo/helpers/timetable_helper.dart';
-import "package:filcnaplo/screens/Screen.dart";
+import "package:filcnaplo/screens/screen.dart";
 
 void main() {
   runApp(MaterialApp(home: ExportScreen()));

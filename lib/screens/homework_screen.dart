@@ -13,7 +13,7 @@ import 'package:filcnaplo/dialogs/select_time_dialog.dart';
 import 'package:filcnaplo/helpers/homework_helper.dart';
 import 'package:filcnaplo/utils/string_formatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
-import 'package:filcnaplo/screens/Screen.dart';
+import 'package:filcnaplo/screens/screen.dart';
 void main() {
   runApp(MaterialApp(home: HomeworkScreen()));
 }

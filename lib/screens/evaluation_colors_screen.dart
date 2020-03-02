@@ -7,7 +7,7 @@ import 'package:flutter_material_color_picker/flutter_material_color_picker.dart
 import 'package:filcnaplo/helpers/settings_helper.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 
-import 'package:filcnaplo/screens/Screen.dart';
+import 'package:filcnaplo/screens/screen.dart';
 
 class colorSettingsScreen extends StatefulWidget {
   @override

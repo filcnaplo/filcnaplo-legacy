@@ -2,7 +2,7 @@ import 'dart:convert' show json;
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:filcnaplo/screens/Screen.dart';
+import 'package:filcnaplo/screens/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
