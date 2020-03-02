@@ -2,7 +2,7 @@
 ![logo](.github/icon.png)
 # [Filc Napló](https://filcnaplo.hu/)
 
-### Nyílt forráskódú [Szivacs-Napló](https://github.com/boapps/Szivacs-Naplo) fork, KRÉTA rendszerhez.
+### Egy újgenerációs kliensalkalmazás az e-Kréta rendszerhez, újraélesztve.
 
 [![Letöltés](.github/download.png)](https://www.filcnaplo.hu/download/)
 
@@ -23,3 +23,6 @@ Első sikeres, lényegi változást tartalymazó commitod után meghívunk a fej
  
  
  
+### Credits:
+* [Szivacs Napló](https://github.com/boapps/Szivacs-Naplo/)
+* [Made with Flutter](https://flutter.dev/)
