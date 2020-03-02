@@ -1,4 +1,5 @@
-![logo](assets/icon.png)
+
+![logo](.github/icon.png)
 # [Filc Napló](https://filcnaplo.hu/)
 
 ### Nyílt forráskódú [Szivacs-Napló](https://github.com/boapps/Szivacs-Naplo) fork, KRÉTA rendszerhez.
