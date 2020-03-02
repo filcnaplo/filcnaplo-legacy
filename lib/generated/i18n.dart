@@ -390,10 +390,10 @@ class I18n implements WidgetsLocalizations {
   String refreshLimit(String mins) => "${mins} percenként egyszer frissíthetsz!";
   /// "Siker"
   String get success => "Siker";
-  /// "Házifeladat sikeresen feltöltve"
-  String get successHomework => "Házifeladat sikeresen feltöltve";
-  /// "Házifeladat sikeresen törölve"
-  String get successHomeworkDelete => "Házifeladat sikeresen törölve";
+  /// "Házi feladat feltöltve"
+  String get successHomework => "Házi feladat feltöltve";
+  /// "Házi feladat törölve"
+  String get successHomeworkDelete => "Házi feladat törölve";
   /// "Hiba"
   String get error => "Hiba";
   /// "Hálózati hiba"
@@ -641,6 +641,9 @@ class _I18n_en_US extends I18n {
   /// "Tomorrow there will be"
   @override
   String get lessonTomorrow => "Tomorrow there will be";
+  /// "Lessons tomorrow"
+  @override
+  String get lessonTomorrowTitle => "Lessons tomorrow";
   /// "homework"
   @override
   String get homework => "homework";
@@ -794,12 +797,12 @@ class _I18n_en_US extends I18n {
   /// "Previous"
   @override
   String get lessonCardPrevious => "Previous";
-  /// "Current - ${min} minutes left"
+  /// "Current • ${min} minutes left"
   @override
-  String lessonCardNow(String min) => "Current - ${min} minutes left";
-  /// "Next - Starts in ${min} minutes"
+  String lessonCardNow(String min) => "Current • ${min} minutes left";
+  /// "Next • Starts in ${min} minutes"
   @override
-  String lessonCardNext(String min) => "Next - Starts in ${min} minutes";
+  String lessonCardNext(String min) => "Next • Starts in ${min} minutes";
   /// "minutes"
   @override
   String get lessonCardMinutes => "minutes";
@@ -974,6 +977,18 @@ class _I18n_en_US extends I18n {
   /// "x"
   @override
   String get pcs => "x";
+  /// "download"
+  @override
+  String get download => "download";
+  /// "Download the latest version now"
+  @override
+  String get downloadLatest => "Download the latest version now";
+  /// "New version available!"
+  @override
+  String get updateAvailable => "New version available!";
+  /// "You can only refresh every ${minutes} minute(s)!"
+  @override
+  String rateLimitAlert(String minutes) => "You can only refresh every ${minutes} minute(s)!";
 
   @override
   TextDirection get textDirection => TextDirection.ltr;
@@ -1201,6 +1216,9 @@ class _I18n_de_DE extends I18n {
   /// "Morgen gibt es"
   @override
   String get lessonTomorrow => "Morgen gibt es";
+  /// "Lessons tomorrow"
+  @override
+  String get lessonTomorrowTitle => "Lessons tomorrow";
   /// "Hausaufgabe"
   @override
   String get homework => "Hausaufgabe";
@@ -1354,12 +1372,12 @@ class _I18n_de_DE extends I18n {
   /// "Letzte"
   @override
   String get lessonCardPrevious => "Letzte";
-  /// "Läuft - ${min} Minuten noch"
+  /// "Läuft • ${min} Minuten noch"
   @override
-  String lessonCardNow(String min) => "Läuft - ${min} Minuten noch";
-  /// "Nächste - In ${min} Minuten"
+  String lessonCardNow(String min) => "Läuft • ${min} Minuten noch";
+  /// "Nächste • In ${min} Minuten"
   @override
-  String lessonCardNext(String min) => "Nächste - In ${min} Minuten";
+  String lessonCardNext(String min) => "Nächste • In ${min} Minuten";
   /// "Minuten"
   @override
   String get lessonCardMinutes => "Minuten";
@@ -1534,6 +1552,18 @@ class _I18n_de_DE extends I18n {
   /// "x"
   @override
   String get pcs => "x";
+  /// "download"
+  @override
+  String get download => "download";
+  /// "Download the latest version now"
+  @override
+  String get downloadLatest => "Download the latest version now";
+  /// "New version available!"
+  @override
+  String get updateAvailable => "New version available!";
+  /// "You can only refresh every ${minutes} minute(s)!"
+  @override
+  String rateLimitAlert(String minutes) => "You can only refresh every ${minutes} minute(s)!";
 
   @override
   TextDirection get textDirection => TextDirection.ltr;

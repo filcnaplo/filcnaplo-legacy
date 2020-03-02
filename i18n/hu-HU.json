@@ -284,8 +284,8 @@
 
     "success": {
         "": "Siker",
-        "homework": "Házifeladat sikeresen feltöltve",
-        "homeworkDelete": "Házifeladat sikeresen törölve"
+        "homework": "Házi feladat feltöltve",
+        "homeworkDelete": "Házi feladat törölve"
     },
 
     "error": {
