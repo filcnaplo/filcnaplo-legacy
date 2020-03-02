@@ -244,8 +244,8 @@ class I18n implements WidgetsLocalizations {
   String get sort => "Rendezés";
   /// "beírás ideje"
   String get sortTime => "beírás ideje";
-  /// "jegy alapján"
-  String get sortEval => "jegy alapján";
+  /// "jegyérték"
+  String get sortEval => "jegyérték";
   /// "értékelés ideje"
   String get sortTimeReal => "értékelés ideje";
   /// "Jegyek"

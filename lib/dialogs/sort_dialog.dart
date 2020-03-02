@@ -26,6 +26,7 @@ class SortDialogState extends State<SortDialog> {
       I18n.of(context).sortTime,
       I18n.of(context).sortEval,
       I18n.of(context).sortTimeReal,
+      I18n.of(context).homeworkSubject
     ];
 
     return SimpleDialog(

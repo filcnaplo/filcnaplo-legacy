@@ -440,6 +440,13 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
         case 2:
           allEvals.sort((a, b) => b.Date.compareTo(a.Date));
           break;
+        case 3:
+          allEvals.sort((a, b) {
+            if (a.Subject == b.Subject)
+              return b.CreatingTime.compareTo(a.CreatingTime);
+            return a.Subject.compareTo(b.Subject);
+          });
+          break;
       }
     });
   }
@@ -462,23 +469,31 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
       ),
     ];
 
-    Widget _allBuilder(BuildContext context, int index) {
-      Widget sep = Container();
-      if (globals.sort == 1) {
-        if (((index == 0) && (allEvals[index].Value.length < 16) ||
-            (allEvals[index].Value != allEvals[index - 1].Value &&
-                allEvals[index].Value.length < 16)))
-          sep = Card(
+    Card Separator(String text) {
+      return Card(
               color: globals.isDark ? Colors.grey[1000] : Colors.grey[300],
               child: Container(
                 child: Text(
-                  allEvals[index].Value,
+                  text,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 alignment: Alignment(0, 0),
                 constraints: BoxConstraints.expand(height: 36),
               ),
               margin: EdgeInsets.only(top: 10, left: 30, right: 30, bottom: 3));
+    }
+
+    Widget _allBuilder(BuildContext context, int index) {
+      Widget sep = Container();
+      if (globals.sort == 1) {
+        if (((index == 0) && (allEvals[index].Value.length < 16) ||
+            (allEvals[index].Value != allEvals[index - 1].Value &&
+                allEvals[index].Value.length < 16)))
+          sep = Separator(allEvals[index].Value);
+      } else if (globals.sort == 3) {
+        if (index == 0 ||
+            (allEvals[index].Subject != allEvals[index - 1].Subject))
+          sep = Separator(allEvals[index].Subject);
       }
 
       return Column(

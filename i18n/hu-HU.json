@@ -173,7 +173,7 @@
     "sort": {
         "": "Rendezés",
         "time": "beírás ideje",
-        "eval": "jegy alapján",
+        "eval": "jegyérték",
         "timeReal": "értékelés ideje"
     },
 
