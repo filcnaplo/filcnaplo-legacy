@@ -147,7 +147,7 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   Future<List<Widget>> feedItems() async {
-    int maximumFeedLength = 20;
+    int maximumFeedLength = 50;
     List<Widget> feedCards = List();
 
     for (Account account in globals.accounts) {
