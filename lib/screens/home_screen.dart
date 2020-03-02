@@ -21,6 +21,7 @@ import 'package:filcnaplo/helpers/background_helper.dart';
 import 'package:filcnaplo/helpers/settings_helper.dart';
 import 'package:filcnaplo/helpers/timetable_helper.dart';
 import 'package:unicorndial/unicorndial.dart';
+import 'package:filcnaplo/dialogs/choose_lesson_dialog.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 
 void main() {
@@ -260,25 +261,41 @@ class HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _profileOption({IconData iconData, String hero, Function onPressed}) {
+  Future<bool> _addHomeworkToThisSubject() {
+    return showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (BuildContext context) {
+          return ChooseLessonDialog(0, globals.currentSubject);
+        });
+  }
+
+  Widget _unicornOption({IconData iconData, String hero, Function onPressed}) {
     return UnicornButton(
         currentButton: FloatingActionButton(
       heroTag: hero,
-      backgroundColor: Colors.grey[500],
       mini: true,
       child: Icon(iconData),
       onPressed: onPressed,
     ));
   }
 
-  List<UnicornButton> _getProfileMenu() {
+  List<UnicornButton> _getUnicornMenu() {
     List<UnicornButton> children = [];
 
-    children
-        .add(_profileOption(iconData: Icons.account_balance, onPressed: () {}));
-    children.add(_profileOption(iconData: Icons.settings, onPressed: () {}));
-    children.add(_profileOption(
-        iconData: Icons.subdirectory_arrow_left, onPressed: () {}));
+    if (globals.currentSubject != null) {
+      children.add(_unicornOption(
+          iconData: Icons.home,
+          hero: I18n.of(context).homeworkAdd,
+          onPressed: _addHomeworkToThisSubject));
+    }
+
+    children.add(_unicornOption(
+        iconData: IconData(0xf520, fontFamily: "Material Design Icons"),
+        hero: I18n.of(context).drawerTimetable,
+        onPressed: () {
+          Navigator.pushReplacementNamed(context, "/timetable");
+        }));
 
     return children;
   }
@@ -330,7 +347,7 @@ class HomeScreenState extends State<HomeScreen> {
               : Center(child: CircularProgressIndicator()),
           floatingActionButton: UnicornDialer(
             parentButton: Icon(Icons.menu),
-            childButtons: _getProfileMenu(),
+            childButtons: _getUnicornMenu(),
           ),
         ));
   }

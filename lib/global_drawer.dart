@@ -239,7 +239,7 @@ class GlobalDrawerState extends State<GlobalDrawer> {
                 color: screen == 2 ? Theme.of(context).accentColor : null,
               ),
               title: Text(
-                capitalize(I18n.of(context).timetable),
+                capitalize(I18n.of(context).drawerTimetable),
                 style: TextStyle(
                     color: screen == 2 ? Theme.of(context).accentColor : null),
               ),

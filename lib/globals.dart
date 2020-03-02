@@ -42,6 +42,7 @@ int selectedTimeForHomework = 1;
 List<int> timeData = [1, 7, 30, 60];
 Average selectedAverage;
 List<Evaluation> currentEvals = List();
+String currentSubject;
 int themeID = 0;
 String userAgent;
 List<Account> accounts = List();

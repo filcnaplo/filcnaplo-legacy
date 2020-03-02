@@ -207,6 +207,10 @@ class _LessonCardState extends State<LessonCard> {
       homeworkToThisSubject = thisLesson.subject;
     else if ([3, 5].contains(lessonCardState))
       homeworkToThisSubject = previousLesson.subject;
+
+    if (homeworkToThisSubject != null) {
+      globals.currentSubject = homeworkToThisSubject;
+    }
   }
 
   @override
@@ -249,29 +253,6 @@ class _LessonCardState extends State<LessonCard> {
                     )),
               )
             : Container(),
-        Row(
-          children: <Widget>[
-            (homeworkToThisSubject != null)
-                ? Container(
-                    margin: EdgeInsets.only(left: 10),
-                    child: MaterialButton(
-                      child: Row(
-                        children: <Widget>[
-                          Icon(Icons.home),
-                          Text("+ " + I18n.of(context).homeworkAdd),
-                        ],
-                      ),
-                      onPressed: _addHomeworkToThisSubject,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          side: BorderSide(
-                              color: Theme.of(context).accentColor, width: 2)),
-                    ),
-                  )
-                : Container(),
-          ],
-          mainAxisAlignment: MainAxisAlignment.center,
-        )
       ],
     );
   }
@@ -402,15 +383,6 @@ class _LessonCardState extends State<LessonCard> {
             )
           : Container(),
     ]));
-  }
-
-  Future<bool> _addHomeworkToThisSubject() {
-    return showDialog(
-        barrierDismissible: true,
-        context: context,
-        builder: (BuildContext context) {
-          return ChooseLessonDialog(0, homeworkToThisSubject);
-        });
   }
 
   Future<Null> _lessonDialog(Lesson lesson) async {
