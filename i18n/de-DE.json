@@ -202,8 +202,8 @@
 
     "lessonCard": {
         "previous": "Letzte",
-        "now": "Läuft - {min} Minuten noch",
-        "next": "Nächste - In {min} Minuten",
+        "now": "Läuft • {min} Minuten noch",
+        "next": "Nächste • In {min} Minuten",
         "minutes": "Minuten"
     },
 
