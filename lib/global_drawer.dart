@@ -9,17 +9,17 @@ import 'package:filcnaplo/utils/string_formatter.dart';
 
 BuildContext ctx;
 
-class GDrawer extends StatefulWidget {
-  GDrawerState myState;
+class GlobalDrawer extends StatefulWidget {
+  GlobalDrawerState myState;
 
   @override
-  GDrawerState createState() {
-    myState = GDrawerState();
+  GlobalDrawerState createState() {
+    myState = GlobalDrawerState();
     return myState;
   }
 }
 
-class GDrawerState extends State<GDrawer> {
+class GlobalDrawerState extends State<GlobalDrawer> {
   @override
   void initState() {
     super.initState();

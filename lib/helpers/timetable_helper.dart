@@ -6,6 +6,8 @@ import 'package:filcnaplo/models/lesson.dart';
 import 'package:filcnaplo/helpers/request_helper.dart';
 import 'package:filcnaplo/helpers/database_helper.dart';
 import 'package:filcnaplo/models/user.dart';
+import 'package:filcnaplo/generated/i18n.dart';
+import 'package:filcnaplo/globals.dart' as globals;
 import 'package:fluttertoast/fluttertoast.dart';
 
 Future<List<Lesson>> getLessonsOffline(
@@ -26,7 +28,7 @@ Future<List<Lesson>> getLessonsOffline(
             to.day.toString(),
         user);
   } catch (e) {
-    print("[E] TimetableHelper.GetLessonsOffline()1: " + e.toString());
+    print("[E] TimetableHelper.GetLessonsOffline() (1): " + e.toString());
   }
 
   List<Lesson> lessons = List();
@@ -34,7 +36,7 @@ Future<List<Lesson>> getLessonsOffline(
   try {
     for (dynamic d in ttMap) lessons.add(Lesson.fromJson(d));
   } catch (e) {
-    print("[E] TimetableHelper.GetLessonsOffline()2: " + e.toString());
+    print("[E] TimetableHelper.GetLessonsOffline() (2): " + e.toString());
   }
 
   return lessons;
@@ -75,11 +77,10 @@ Future<List<Lesson>> getLessons(
     }
 
     user.setRecentlyRefreshed("getLessons" + fromToString(from, to));
-  //  print(user.lastRefreshMap);
     return lessons;
   } else {
       Fluttertoast.showToast(
-        msg: User.RATE_LIMIT_MINUTES.toString() + " percenként egyszer frissíthetsz!", //TODO: Translation DB //TODO: Translation DB
+        msg: I18n.of(globals.context).rateLimitAlert(User.RATE_LIMIT_MINUTES.toString()),
         );
     }
 

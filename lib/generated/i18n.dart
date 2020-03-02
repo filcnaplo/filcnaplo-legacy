@@ -178,6 +178,8 @@ class I18n implements WidgetsLocalizations {
   String get lessonSubject => "tárgy";
   /// "Holnap"
   String get lessonTomorrow => "Holnap";
+  /// "Holnapi órák"
+  String get lessonTomorrowTitle => "Holnapi órák";
   /// "házi feladat"
   String get homework => "házi feladat";
   /// "házi hozzáadása"
@@ -400,6 +402,14 @@ class I18n implements WidgetsLocalizations {
   String get errorReadAccount => "Hiba a felhasználó olvasása közben";
   /// "db"
   String get pcs => "db";
+  /// "letöltés"
+  String get download => "letöltés";
+  /// "Töltsd le most a legújabb verziót"
+  String get downloadLatest => "Töltsd le most a legújabb verziót";
+  /// "Frissítés elérhető!"
+  String get updateAvailable => "Frissítés elérhető!";
+  /// "${minutes} percenként egyszer frissíthetsz!"
+  String rateLimitAlert(String minutes) => "${minutes} percenként egyszer frissíthetsz!";
 }
 
 class _I18n_hu_HU extends I18n {

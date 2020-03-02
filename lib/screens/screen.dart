@@ -17,7 +17,7 @@ class Screen extends StatelessWidget {
 					Navigator.pushReplacementNamed(context, returnPage);
 				},
 				child: Scaffold(
-						drawer: GDrawer(),
+						drawer: GlobalDrawer(),
 						appBar: new AppBar(
 							title: title,
 							actions: actions,

@@ -53,11 +53,10 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
         !subjects.contains(widget._subject) &&
         widget._subject != "...") {
       Navigator.of(context).pop();
-      Fluttertoast.showToast(
-          msg: I18n.of(context).chooseSubjectNotFound);
-      throw ("No lesson is recorded with '" +
+      Fluttertoast.showToast(msg: I18n.of(context).chooseSubjectNotFound);
+      print("[E] No lesson is recorded with '" +
           widget._subject +
-          "' subject next week."); // TODO: I18n
+          "' subject next week.");
     }
 
     return SimpleDialog(
@@ -144,8 +143,9 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
           barrierDismissible: true,
           context: context,
           builder: (BuildContext context) {
-            return NewHomeworkDialog(lessons.firstWhere(
-                (Lesson lesson) => (lesson.subject == widget._subject && lesson.start.isAfter(now))));
+            return NewHomeworkDialog(lessons.firstWhere((Lesson lesson) =>
+                (lesson.subject == widget._subject &&
+                    lesson.start.isAfter(now))));
           });
     } else {
       lessons.clear();
@@ -156,8 +156,9 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
           barrierDismissible: true,
           context: context,
           builder: (BuildContext context) {
-            return NewHomeworkDialog(lessons.lastWhere(
-                (Lesson lesson) => (lesson.subject == widget._subject && lesson.end.isBefore(now))));
+            return NewHomeworkDialog(lessons.lastWhere((Lesson lesson) =>
+                (lesson.subject == widget._subject &&
+                    lesson.end.isBefore(now))));
           });
     }
   }
@@ -170,7 +171,7 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
     }
     subjects.sort((a, b) => a.compareTo(b));
     subjects.insert(0, "...");
-    setState(() {});
+    if (mounted) setState(() {});
 
     if (suppliedData) {
       _openHomeworkDialog();

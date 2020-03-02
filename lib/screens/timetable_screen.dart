@@ -163,7 +163,7 @@ class TimeTableScreenState extends State<TimeTableScreen>
       child: DefaultTabController(
         length: tabLength,
         child: Scaffold(
-            drawer: GDrawer(),
+            drawer: GlobalDrawer(),
             appBar: AppBar(
               title: Text(capitalize(I18n.of(context).timetable) +
                   getTimetableText(startDateText)),

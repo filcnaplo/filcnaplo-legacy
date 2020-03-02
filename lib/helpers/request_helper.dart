@@ -209,7 +209,7 @@ class RequestHelper {
       }
     } catch (e) {
       print("[E] RequestHelper.uploadHomework(): " + e.toString());
-      showError(e.toString()); //todo
+      showError(e.toString());
       return false;
     }
   }
@@ -243,7 +243,7 @@ class RequestHelper {
       }
     } catch (e) {
       print("[E] RequestHelper.deleteHomework(): " + e.toString());
-      showError(e.toString()); //todo
+      showError(e.toString());
       return false;
     }
   }
@@ -266,7 +266,7 @@ class RequestHelper {
       }
     } catch (e) {
       print("[E] RequestHelper.getBearerToken(): " + e.toString());
-      showError(e.toString()); //todo
+      showError(e.toString());
     }
     return null;
   }

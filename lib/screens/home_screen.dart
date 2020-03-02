@@ -3,6 +3,7 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:filcnaplo/cards/lesson_card.dart';
 import 'package:filcnaplo/cards/tomorrow_lesson_card.dart';
 import 'package:filcnaplo/generated/i18n.dart';
+import 'package:filcnaplo/utils/string_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -92,7 +93,7 @@ class HomeScreenState extends State<HomeScreen> {
         builder: (BuildContext context) {
           return SimpleDialog(
               children: <Widget>[
-                Text("Töltsd le most a legújabb verziót:"), //TODO: I18n
+                Text(I18n.of(context).downloadLatest + ":"),
                 Text(
                   globals.latestVersion + "\n",
                   style: TextStyle(
@@ -104,12 +105,12 @@ class HomeScreenState extends State<HomeScreen> {
                   children: <Widget>[
                     RaisedButton(
                       onPressed: _launchDownloadWebsite,
-                      child: Text("Letöltés"),
+                      child: Text(capitalize(I18n.of(context).download)),
                     )
                   ],
                 )
               ],
-              title: Text("Frissítés elérhető!"),
+              title: Text(I18n.of(context).updateAvailable),
               contentPadding: EdgeInsets.all(20),
               shape: RoundedRectangleBorder(
                 side: BorderSide(style: BorderStyle.none, width: 1),
@@ -263,7 +264,7 @@ class HomeScreenState extends State<HomeScreen> {
     return WillPopScope(
         onWillPop: _onWillPop,
         child: Scaffold(
-            drawer: GDrawer(),
+            drawer: GlobalDrawer(),
             appBar: AppBar(
               title: Text(globals.isSingle
                   ? globals.selectedAccount.user.name

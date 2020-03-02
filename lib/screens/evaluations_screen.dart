@@ -743,7 +743,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
               ],
               onTap: switchToScreen,
             ),
-            drawer: GDrawer(),
+            drawer: GlobalDrawer(),
             appBar: AppBar(
                 title: Text(capitalize(I18n.of(context).evaluationTitle))),
             body: (currentBody == 0

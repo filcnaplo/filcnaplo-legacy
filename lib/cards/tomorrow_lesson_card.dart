@@ -120,7 +120,7 @@ class TomorrowLessonCard extends StatelessWidget {
             ),
           ],
           title: Text(
-              "Holnapi órák"), //TODO: Use translation DB everywhere (duplicate comment btw)
+              I18n.of(context).lessonTomorrowTitle),
           contentPadding: EdgeInsets.all(20),
           shape: RoundedRectangleBorder(
             side: BorderSide(

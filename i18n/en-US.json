@@ -109,7 +109,8 @@
         "end": "lesson end",
         "theme": "theme",
         "subject": "subject",
-        "tomorrow": "Tomorrow there will be"
+        "tomorrow": "Tomorrow there will be",
+        "tomorrowTitle": "Lessons tomorrow"
     },
 
     "homework": {
@@ -293,5 +294,18 @@
         "readAccount": "Error while reading user"
     },
 
-    "pcs": "x"
+    "pcs": "x",
+
+    "download": {
+        "": "download",
+        "latest": "Download the latest version now"
+    },
+
+    "update": {
+        "available": "New version available!"
+    },
+
+    "rateLimit": {
+        "alert": "You can only refresh every {minutes} minute(s)!"
+    }
 }

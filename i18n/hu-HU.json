@@ -109,7 +109,8 @@
         "end": "óra vége",
         "theme": "téma",
         "subject": "tárgy",
-        "tomorrow": "Holnap"
+        "tomorrow": "Holnap",
+        "tomorrowTitle": "Holnapi órák"
     },
 
     "homework": {
@@ -293,5 +294,18 @@
         "readAccount": "Hiba a felhasználó olvasása közben"
     },
 
-    "pcs": "db"
+    "pcs": "db",
+
+    "download": {
+        "": "letöltés",
+        "latest": "Töltsd le most a legújabb verziót"
+    },
+
+    "update": {
+        "available": "Frissítés elérhető!"
+    },
+
+    "rateLimit": {
+        "alert": "{minutes} percenként egyszer frissíthetsz!"
+    }
 }

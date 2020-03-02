@@ -23,7 +23,7 @@ class StudentScreenState extends State<StudentScreen> {
     double c_width = MediaQuery.of(context).size.width * 0.5;
 
     return Scaffold(
-      drawer: GDrawer(),
+      drawer: GlobalDrawer(),
       appBar: AppBar(
         title: Text(this.widget.account.student != null
             ? this.widget.account.student.Name ?? ""

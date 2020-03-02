@@ -17,6 +17,7 @@ import 'package:filcnaplo/screens/login_screen.dart';
 import 'package:filcnaplo/utils/string_formatter.dart';
 
 import 'package:filcnaplo/screens/screen.dart';
+
 void main() {
   runApp(MaterialApp(home: AccountsScreen()));
 }
@@ -230,8 +231,7 @@ class AccountsScreenState extends State<AccountsScreen> {
                     : CircularProgressIndicator()),
           ),
         ]),
-      "/home",
-      <Widget>[]
-    );
+        "/home",
+        <Widget>[]);
   }
 }

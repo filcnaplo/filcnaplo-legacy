@@ -10,10 +10,11 @@ import 'package:html_unescape/html_unescape.dart';
 import 'package:filcnaplo/models/homework.dart';
 import 'package:filcnaplo/models/user.dart';
 import 'package:filcnaplo/dialogs/select_time_dialog.dart';
+import 'package:filcnaplo/global_drawer.dart';
 import 'package:filcnaplo/helpers/homework_helper.dart';
 import 'package:filcnaplo/utils/string_formatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
-import 'package:filcnaplo/screens/screen.dart';
+
 void main() {
   runApp(MaterialApp(home: HomeworkScreen()));
 }
@@ -56,46 +57,55 @@ class HomeworkScreenState extends State<HomeworkScreen> {
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    return new Screen(
-        new Text(capitalize(I18n.of(context).homeworkTitle)),
-            new Container(
+    return WillPopScope(
+        onWillPop: () {
+          globals.screen = 0;
+          Navigator.pushReplacementNamed(context, "/home");
+        },
+        child: Scaffold(
+            drawer: GlobalDrawer(),
+            appBar: AppBar(
+              title: Text(capitalize(I18n.of(context).homeworkTitle)),
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.access_time),
+                  onPressed: () {
+                    timeDialog().then((b) {
+                      _onRefreshOffline();
+                      refHomework();
+                      _onRefresh();
+                      refHomework();
+                    });
+                  },
+                ),
+              ],
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: _openChooser,
+              child: Icon(Icons.add, color: Colors.white),
+            ),
+            body: Container(
                 child: hasOfflineLoaded
-                    ? new Column(children: <Widget>[
-                  !hasLoaded
-                      ? Container(
-                    child: new LinearProgressIndicator(
-                      value: null,
-                    ),
-                    height: 3,
-                  )
-                      : Container(
-                    height: 3,
-                  ),
-                  new Expanded(
-                      child: new RefreshIndicator(
-                          child: new ListView.builder(
-                            itemBuilder: _itemBuilder,
-                            itemCount: selectedHomework.length,
-                          ),
-                          onRefresh: _onRefresh)),
-                ])
-                    : new Center(child: new CircularProgressIndicator())),
-          "/home",
-            <Widget>[
-              new IconButton(
-                icon: new Icon(Icons.access_time),
-                onPressed: () {
-                  timeDialog().then((b) {
-                    _onRefreshOffline();
-                    refHomework();
-                    _onRefresh();
-                    refHomework();
-                  });
-                },
-              ),
-              //new IconButton(icon: Icon(Icons.plus_one), onPressed: _openChooser,)
-            ]
-    );
+                    ? Column(children: <Widget>[
+                        !hasLoaded
+                            ? Container(
+                                child: LinearProgressIndicator(
+                                  value: null,
+                                ),
+                                height: 3,
+                              )
+                            : Container(
+                                height: 3,
+                              ),
+                        Expanded(
+                            child: RefreshIndicator(
+                                child: ListView.builder(
+                                  itemBuilder: _itemBuilder,
+                                  itemCount: selectedHomework.length,
+                                ),
+                                onRefresh: _onRefresh)),
+                      ])
+                    : Center(child: CircularProgressIndicator()))));
   }
 
   Future<bool> _openChooser() {
