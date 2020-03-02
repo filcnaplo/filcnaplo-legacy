@@ -33,9 +33,11 @@ class _LessonCardState extends State<LessonCard> {
   Lesson previousLesson;
   Lesson thisLesson;
   Lesson nextLesson;
+  Lesson nextNextLesson;
 
   int prevBreakLength;
   int thisBreakLength;
+  int nextBreakLength;
   int minutesUntilNext;
   int minutesLeftOfThis;
 
@@ -71,12 +73,18 @@ class _LessonCardState extends State<LessonCard> {
     previousLesson = lessons.lastWhere(
         (Lesson lesson) => (lesson.end.isBefore(now)),
         orElse: () => null);
+
     thisLesson = lessons.lastWhere(
         (Lesson lesson) =>
             (lesson.start.isBefore(now) && lesson.end.isAfter(now)),
         orElse: () => null);
+
     nextLesson = lessons.firstWhere(
         (Lesson lesson) => (lesson.start.isAfter(now)),
+        orElse: () => null);
+
+    nextNextLesson = lessons.firstWhere(
+        (Lesson lesson) => (lesson.start.isAfter(nextLesson.end)),
         orElse: () => null);
 
     //States: Before first / First lesson / During lesson / During break / Last lesson / After last
@@ -96,6 +104,8 @@ class _LessonCardState extends State<LessonCard> {
 
     if (lessonCardState == 2) {
       //During a lesson, calculate previous and next break length
+      nextBreakLength =
+          nextNextLesson.start.difference(nextLesson.end).inMinutes;
       prevBreakLength =
           thisLesson.start.difference(previousLesson.end).inMinutes;
       if (nextLesson != null)
@@ -104,12 +114,15 @@ class _LessonCardState extends State<LessonCard> {
       minutesUntilNext = nextLesson.start.difference(now).inMinutes;
     } else if (lessonCardState == 3) {
       //During a break, calculate its length.
+      nextBreakLength =
+          nextNextLesson.start.difference(nextLesson.end).inMinutes;
       prevBreakLength =
           nextLesson.start.difference(previousLesson.end).inMinutes;
       thisBreakLength = 0;
       minutesUntilNext = nextLesson.start.difference(now).inMinutes;
     } else if (lessonCardState == 4) {
       //During the last lesson
+      nextBreakLength = 0;
       prevBreakLength =
           thisLesson.start.difference(previousLesson.end).inMinutes;
       thisBreakLength = 0;
@@ -118,6 +131,8 @@ class _LessonCardState extends State<LessonCard> {
     } else if (lessonCardState == 1) {
       //During the first lesson
       prevBreakLength = 0;
+      nextBreakLength =
+          nextNextLesson.start.difference(nextLesson.end).inMinutes;
       thisBreakLength = nextLesson.start.difference(thisLesson.end).inMinutes;
       minutesLeftOfThis = thisLesson.end.difference(now).inMinutes;
       minutesUntilNext = nextLesson.start.difference(now).inMinutes;
@@ -125,10 +140,12 @@ class _LessonCardState extends State<LessonCard> {
       prevBreakLength = 0;
       thisBreakLength = 0;
       minutesUntilNext = 0;
+      nextBreakLength = 0;
     } else {
       //If before or after the school day, don't calculate breaks.
       prevBreakLength = 0;
       thisBreakLength = 0;
+      nextBreakLength = 0;
       minutesUntilNext = nextLesson.start.difference(now).inMinutes;
     }
 
@@ -173,7 +190,7 @@ class _LessonCardState extends State<LessonCard> {
           context,
           nextLesson,
           I18n.of(context).lessonCardNext((minutesUntilNext + 1).toString()),
-          "",
+          (nextBreakLength == 0) ? "" : nextBreakLength.toString(),
           (nextLesson.count == -1) ? "+" : nextLesson.count.toString(),
           nextLesson.subject,
           nextLesson.isMissed
