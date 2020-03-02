@@ -4,11 +4,10 @@
 
 ### Egy újgenerációs kliensalkalmazás az e-Kréta rendszerhez, újraélesztve.
 
-[![Letöltés](.github/download.png)](https://www.filcnaplo.hu/download/)
-
+[![Letöltés](.github/download.png)](https://www.filcnaplo.hu/download/) 
 [![Telegram Hírlevél Csoport](.github/telegram.png)](https://t.me/filc_naplo)
 
-#
+---
 
 #### Ötleted van, vagy problémát találtál?
 
