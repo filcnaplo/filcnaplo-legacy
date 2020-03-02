@@ -21,7 +21,6 @@ void main() {
 }
 
 class EvalCount extends StatelessWidget {
-  //The colorful cards showing how many of a type of note you have
   BuildContext context;
   int value;
   int count;
@@ -33,7 +32,6 @@ class EvalCount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    globals.context = context;
     return Container(
       child: Card(
           child: Container(
@@ -96,7 +94,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
   int db3 = 0;
   int db4 = 0;
   int db5 = 0;
-  double allAverage;
+  double allAverage = 0.0;
   List<Widget> summaryCardsToShow = List();
 
   bool hasOfflineLoaded = false;
@@ -219,7 +217,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           db5++;
           break;
       }
-    allAverage = getAllAverages() ?? 0;
+    allAverage = getAllAverages() ?? 0.0;
 
     refreshSort();
 
@@ -342,7 +340,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           .where((Evaluation evaluation) => evaluation.isMidYear())).toList();
     } catch (exeption) {
       Fluttertoast.showToast(
-          msg: "Nem sikerült betölteni a jegyeket", //localization
+          msg: "Nem sikerült betölteni a jegyeket",
           backgroundColor: Colors.red,
           textColor: Colors.white,
           fontSize: 16.0);
@@ -543,8 +541,9 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
       );
     }
 
+    final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
     evaluationsBody = Scaffold(
-        //"Összes" "All"
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             showSortDialog().then((b) {
@@ -690,7 +689,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                               Text(I18n.of(context).evaluationAverage),
                               Container(
                                 child: Divider(
-                                  color: Colors.black45,
+                                  color: Colors.white,
                                   thickness: 1,
                                   indent: 27,
                                   endIndent: 27,
@@ -725,6 +724,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           Navigator.pushReplacementNamed(context, "/home");
         },
         child: Scaffold(
+          key: _scaffoldKey,
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: currentBody,
               items: <BottomNavigationBarItem>[
@@ -737,7 +737,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                       Text(I18n.of(context).evaluationNavigationStatistics),
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.assistant),
+                  icon: Icon(Icons.star),
                   title: Text(I18n.of(context).evaluationNavigationResults),
                 ),
               ],
@@ -837,11 +837,13 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                 try {
                   _evaluationDialog(globals.currentEvals[index]);
                 } catch (exeption) {
-                  Fluttertoast.showToast(
-                      msg: I18n.of(context).error,
+                  Scaffold.of(context).showSnackBar(SnackBar(
                       backgroundColor: Colors.red,
-                      textColor: Colors.white,
-                      fontSize: 16.0);
+                      duration: Duration(seconds: 3),
+                      content: Text(
+                        I18n.of(context).error,
+                        style: TextStyle(color: Colors.white, fontSize: 16.0),
+                      )));
                       print("[E] evaluationsScreen._itemBuilder()1: " + exeption.toString());
 
                 }

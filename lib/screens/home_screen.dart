@@ -300,6 +300,8 @@ class HomeScreenState extends State<HomeScreen> {
     return children;
   }
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(

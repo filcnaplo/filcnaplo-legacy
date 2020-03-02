@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:filcnaplo/models/account.dart';
 import 'package:filcnaplo/models/institution.dart';
@@ -99,12 +98,13 @@ class LoginScreenState extends State<LoginScreen> {
       globals.jsonres = json.decode(data);
     } catch (e) {
       print("[E] loginScreen.initJson(): " + e.toString());
-      Fluttertoast.showToast(
-        msg: "Nem sikerült lekérni a Krétás iskolákat.",
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
+      _scaffoldKey.currentState.showSnackBar(SnackBar(
+            backgroundColor: Colors.red,
+            duration: Duration(seconds: 3),
+            content: Text(
+              "Nem sikerült lekérni a Krétás iskolákat.",
+              style: TextStyle(color: Colors.white, fontSize: 16.0),
+            )));
       globals.jsonres = json.decode(data);
     }
 
@@ -153,7 +153,7 @@ class LoginScreenState extends State<LoginScreen> {
           });
           schoolSelected = false;
         } else {
-          String instCode = globals.selectedSchoolCode; //suli kódja
+          String instCode = globals.selectedSchoolCode;
           String jsonBody = "institute_code=" +
               instCode +
               "&userName=" +
@@ -209,8 +209,7 @@ class LoginScreenState extends State<LoginScreen> {
               } else if (code == "invalid_password") {
                 passwordError = "hibás felasználónév vagy jelszó";
               } else {
-                passwordError = "ismeretlen probléma: " +
-                    code.toString();
+                passwordError = "ismeretlen probléma: " + code.toString();
               }
             });
           }
@@ -246,6 +245,8 @@ class LoginScreenState extends State<LoginScreen> {
     Navigator.popAndPushNamed(context, "/about");
   }
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     globals.context = context;
@@ -255,6 +256,7 @@ class LoginScreenState extends State<LoginScreen> {
             Navigator.pushReplacementNamed(context, "/accounts");
         },
         child: Scaffold(
+            key: _scaffoldKey,
             body: Container(
                 color: Colors.black87,
                 child: Center(
@@ -266,8 +268,8 @@ class LoginScreenState extends State<LoginScreen> {
                                 EdgeInsets.fromLTRB(20.0, 50.0, 20.0, 20.0),
                             children: <Widget>[
                               Container(
-                                padding: EdgeInsets.only(
-                                    left: 40.0, right: 40.0),
+                                padding:
+                                    EdgeInsets.only(left: 40.0, right: 40.0),
                                 child: Image.asset("assets/icon.png"),
                                 height: kbSize,
                               ),
@@ -283,8 +285,7 @@ class LoginScreenState extends State<LoginScreen> {
                                                 TextStyle(color: Colors.white),
                                             controller: userNameController,
                                             decoration: InputDecoration(
-                                              prefixIcon:
-                                                  Icon(Icons.person),
+                                              prefixIcon: Icon(Icons.person),
                                               suffixIcon: IconButton(
                                                   icon: helpIconSwitch,
                                                   onPressed: () {
@@ -370,10 +371,10 @@ class LoginScreenState extends State<LoginScreen> {
                                   ])),
                               Column(children: <Widget>[
                                 Container(
-                                  margin: EdgeInsets.fromLTRB(
-                                      0.0, 10.0, 0.0, 5.0),
-                                  padding: EdgeInsets.fromLTRB(
-                                      10.0, 4.0, 10.0, 4.0),
+                                  margin:
+                                      EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 5.0),
+                                  padding:
+                                      EdgeInsets.fromLTRB(10.0, 4.0, 10.0, 4.0),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5.0),
                                     color: Color.fromARGB(40, 20, 20, 30),
@@ -431,7 +432,6 @@ class LoginScreenState extends State<LoginScreen> {
                                             disabledColor: Colors.blueGrey[800],
                                             disabledTextColor: Colors.blueGrey,
                                             color: Colors.green,
-                                            //#2196F3
                                             textColor: Colors.white,
                                           ),
                                         ))
@@ -449,10 +449,8 @@ class LoginScreenState extends State<LoginScreen> {
                                     : null,
                                 disabledColor: Colors.blueGrey.shade800,
                                 disabledTextColor: Colors.blueGrey,
-                                child: Text(
-                                    capitalize(I18n.of(context).login)),
+                                child: Text(capitalize(I18n.of(context).login)),
                                 color: Colors.blue,
-                                //#2196F3
                                 textColor: Colors.white,
                               ),
                             ].reversed.toList(),
@@ -464,7 +462,6 @@ class LoginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
-    // Clean up the controller when the Widget is disposed
     super.dispose();
   }
 }
@@ -483,7 +480,6 @@ MyDialogState myDialogState = MyDialogState();
 class MyDialogState extends State<MyDialog> {
   @override
   void dispose() {
-    // Clean up the controller when the Widget is disposed
     isDialog = false;
     super.dispose();
   }
