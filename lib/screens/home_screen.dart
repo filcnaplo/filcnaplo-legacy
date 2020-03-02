@@ -331,21 +331,22 @@ class HomeScreenState extends State<HomeScreen> {
           try {
             await account.refreshStudentString(offline, showErrors);
           } catch (e) {
-            print("[E] HomeScreen.onRefresh()2: " + e.toString());
+            print("[E] HomeScreen.onRefresh() (2): " + e.toString());
           }
           tempEvaluations.addAll(account.student.Evaluations);
           tempNotes.addAll(account.notes);
           tempAbsents.addAll(account.absents);
         } catch (exception) {
-          print("[E] HomeScreen.onRefresh()3: " + exception.toString());
+          print("[E] HomeScreen.onRefresh() (3): " + exception.toString());
         }
       }
     }
+
     if (tempEvaluations.length > 0) evaluations = tempEvaluations;
     if (tempAbsents.length > 0) absents = tempAbsents;
     if (tempNotes.length > 0) notes = tempNotes;
     startDate = now;
-    //startDate = startDate.add(Duration(days: (-1 * startDate.weekday + 1)));
+
     if (offline) {
       if (globals.lessons.length > 0) {
         lessons.addAll(globals.lessons);
@@ -354,7 +355,7 @@ class HomeScreenState extends State<HomeScreen> {
           lessons = await getLessonsOffline(startDate,
               startDate.add(Duration(days: 6)), globals.selectedUser);
         } catch (exception) {
-          print("[E] HomeScreen.onRefresh()4: " + exception.toString());
+          print("[E] HomeScreen.onRefresh() (4): " + exception.toString());
         }
         if (lessons.length > 0) globals.lessons.addAll(lessons);
       }
@@ -363,14 +364,14 @@ class HomeScreenState extends State<HomeScreen> {
         lessons = await getLessons(startDate, startDate.add(Duration(days: 6)),
             globals.selectedUser, showErrors);
       } catch (exception) {
-        print("[E] HomeScreen.onRefresh()5: " + exception.toString());
+        print("[E] HomeScreen.onRefresh() (5): " + exception.toString());
       }
     }
     try {
       lessons.sort((Lesson a, Lesson b) => a.start.compareTo(b.start));
       if (lessons.length > 0) globals.lessons = lessons;
     } catch (e) {
-      print("[E] HomeScreen.onRefresh()6: " + e.toString());
+      print("[E] HomeScreen.onRefresh() (6): " + e.toString());
     }
     Completer<Null> completer = Completer<Null>();
     if (!offline) hasLoaded = true;

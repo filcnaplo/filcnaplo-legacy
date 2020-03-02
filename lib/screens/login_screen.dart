@@ -196,7 +196,7 @@ class LoginScreenState extends State<LoginScreen> {
                   .firstWhere((Account account) => account.user.id == user.id);
               globals.selectedUser = user;
 
-              Navigator.pushNamed(context, "/main");
+              Navigator.pushNamed(context, "/home");
             });
           } catch (e) {
             setState(() {
@@ -209,7 +209,7 @@ class LoginScreenState extends State<LoginScreen> {
               } else if (code == "invalid_password") {
                 passwordError = "hibás felasználónév vagy jelszó";
               } else {
-                passwordError = "ismeretlen (valószínűleg KRÉTÁS) probléma: " +
+                passwordError = "ismeretlen probléma: " +
                     code.toString();
               }
             });

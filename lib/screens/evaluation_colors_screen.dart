@@ -144,24 +144,22 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
                     I18n.of(context).grade5 + " " + I18n.of(context).grade),
                 trailing: new Container(
                   child: new FlatButton(
-                    onPressed: () {
-                      _openDialog(
-                          I18n.of(context).color,
-                          MaterialColorPicker(
-                            selectedColor: selected,
-                            onColorChange: (Color c) => selected = c,
-                          ),
-                          4);
-                    },
-                    child: new Icon(Icons.color_lens, color: globals.color5)
-                  ),
+                      onPressed: () {
+                        _openDialog(
+                            I18n.of(context).color,
+                            MaterialColorPicker(
+                              selectedColor: selected,
+                              onColorChange: (Color c) => selected = c,
+                            ),
+                            4);
+                      },
+                      child: new Icon(Icons.color_lens, color: globals.color5)),
                 ),
               ),
             ],
           ),
         ),
         "/settings",
-        []
-    );
+        <Widget>[]);
   }
 }

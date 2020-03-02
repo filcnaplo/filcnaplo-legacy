@@ -231,7 +231,7 @@ class AccountsScreenState extends State<AccountsScreen> {
           ),
         ]),
       "/home",
-      []
+      <Widget>[]
     );
   }
 }
