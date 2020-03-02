@@ -8,10 +8,15 @@
 
 [![Telegram Hírlevél Csoport](.github/telegram.png)](https://t.me/filc_naplo)
 
-**Ötleted van, vagy problémát találtál?**<br>
-[Írd meg nekünk!](https://github.com/filcnaplo/filcnaplo/issues/new)<br>
+#
 
-**Konyítasz a kódoláshoz, és becsatlakoznál a fejlesztésbe?**<br>
+#### Ötleted van, vagy problémát találtál?
+
+[Írd meg nekünk!](https://github.com/filcnaplo/filcnaplo/issues/new)
+
+
+#### Konyítasz a kódoláshoz, és becsatlakoznál a fejlesztésbe?
+
 [Ajánljuk figyelmedbe a Contributing Guideunkat.](.github/CONTRIBUTING.md)
 
 Első sikeres, lényegi változást tartalymazó commitod után meghívunk a fejlesztői Telegram csoportunkba.
