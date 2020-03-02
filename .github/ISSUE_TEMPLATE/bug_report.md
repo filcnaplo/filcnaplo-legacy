@@ -1,6 +1,6 @@
 ---
 name: Hibajelentés
-about: Hibajelentés
+about: "Ha hibát, problémát találtál"
 title: "[BUG]"
 labels: bug
 assignees: ''
