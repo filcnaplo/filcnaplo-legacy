@@ -35,14 +35,14 @@ class TestsScreenState extends State<TestsScreen> {
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    return new Screen(
-        new Text(I18n.of(context).testTitle),
-        new Container(
+    return Screen(
+        Text(I18n.of(context).testTitle),
+        Container(
             child: (hasOfflineLoaded && tests != null)
-                ? new Column(children: <Widget>[
+                ? Column(children: <Widget>[
                     !hasLoaded
                         ? Container(
-                            child: new LinearProgressIndicator(
+                            child: LinearProgressIndicator(
                               value: null,
                             ),
                             height: 3,
@@ -50,9 +50,9 @@ class TestsScreenState extends State<TestsScreen> {
                         : Container(
                             height: 3,
                           ),
-                    new Expanded(
-                      child: new RefreshIndicator(
-                        child: new ListView.builder(
+                    Expanded(
+                      child: RefreshIndicator(
+                        child: ListView.builder(
                           itemBuilder: _itemBuilder,
                           itemCount: tests.length,
                         ),
@@ -60,7 +60,7 @@ class TestsScreenState extends State<TestsScreen> {
                       ),
                     ),
                   ])
-                : new Center(child: new CircularProgressIndicator())),
+                : Center(child: CircularProgressIndicator())),
         "/home",
         <Widget>[]);
   }

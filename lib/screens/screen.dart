@@ -11,14 +11,14 @@ class Screen extends StatelessWidget {
 	Screen(this.title, this.body, this.returnPage, this.actions);
 	Widget build(BuildContext context) {
 		globals.context = context;
-		return new WillPopScope(
+		return WillPopScope(
 				onWillPop: () {
 					globals.screen = 0;
 					Navigator.pushReplacementNamed(context, returnPage);
 				},
 				child: Scaffold(
 						drawer: GlobalDrawer(),
-						appBar: new AppBar(
+						appBar: AppBar(
 							title: title,
 							actions: actions,
 						),

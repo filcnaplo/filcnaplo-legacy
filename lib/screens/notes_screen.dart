@@ -35,14 +35,14 @@ class NotesScreenState extends State<NotesScreen> {
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    return new Screen(
-        new Text(capitalize(I18n.of(context).noteTitle)),
-        new Container(
+    return Screen(
+        Text(capitalize(I18n.of(context).noteTitle)),
+        Container(
             child: hasOfflineLoaded
-                ? new Column(children: <Widget>[
+                ? Column(children: <Widget>[
                     !hasLoaded
                         ? Container(
-                            child: new LinearProgressIndicator(
+                            child: LinearProgressIndicator(
                               value: null,
                             ),
                             height: 3,
@@ -50,9 +50,9 @@ class NotesScreenState extends State<NotesScreen> {
                         : Container(
                             height: 3,
                           ),
-                    new Expanded(
-                      child: new RefreshIndicator(
-                        child: new ListView.builder(
+                    Expanded(
+                      child: RefreshIndicator(
+                        child: ListView.builder(
                           itemBuilder: _itemBuilder,
                           itemCount: notes.length,
                         ),
@@ -60,7 +60,7 @@ class NotesScreenState extends State<NotesScreen> {
                       ),
                     ),
                   ])
-                : new Center(child: new CircularProgressIndicator())),
+                : Center(child: CircularProgressIndicator())),
         "/home",
         <Widget>[]);
   }

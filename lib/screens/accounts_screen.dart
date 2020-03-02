@@ -219,11 +219,11 @@ class AccountsScreenState extends State<AccountsScreen> {
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    return new Screen(
-        new Text(capitalize(I18n.of(context).accountTitle)),
-        new Column(children: <Widget>[
-          new Expanded(
-            child: new Container(
+    return Screen(
+        Text(capitalize(I18n.of(context).accountTitle)),
+        Column(children: <Widget>[
+          Expanded(
+            child: Container(
                 child: accountListWidgets != null
                     ? ListView(
                         children: accountListWidgets,

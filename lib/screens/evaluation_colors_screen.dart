@@ -62,16 +62,16 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    return new Screen(
-        new Text(I18n.of(context).appTitle),
-        new Center(
+    return Screen(
+        Text(I18n.of(context).appTitle),
+        Center(
           child: Column(
             children: <Widget>[
               ListTile(
                 title: Text(
                     I18n.of(context).grade1 + " " + I18n.of(context).grade),
-                trailing: new Container(
-                  child: new FlatButton(
+                trailing: Container(
+                  child: FlatButton(
                     onPressed: () {
                       _openDialog(
                           I18n.of(context).color,
@@ -81,15 +81,15 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
                           ),
                           0);
                     },
-                    child: new Icon(Icons.color_lens, color: globals.color1),
+                    child: Icon(Icons.color_lens, color: globals.color1),
                   ),
                 ),
               ),
               ListTile(
                 title: Text(
                     I18n.of(context).grade2 + " " + I18n.of(context).grade),
-                trailing: new Container(
-                  child: new FlatButton(
+                trailing: Container(
+                  child: FlatButton(
                     onPressed: () {
                       _openDialog(
                           I18n.of(context).color,
@@ -99,15 +99,15 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
                           ),
                           1);
                     },
-                    child: new Icon(Icons.color_lens, color: globals.color2),
+                    child: Icon(Icons.color_lens, color: globals.color2),
                   ),
                 ),
               ),
               ListTile(
                 title: Text(
                     I18n.of(context).grade3 + " " + I18n.of(context).grade),
-                trailing: new Container(
-                  child: new FlatButton(
+                trailing: Container(
+                  child: FlatButton(
                     onPressed: () {
                       _openDialog(
                           I18n.of(context).color,
@@ -117,15 +117,15 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
                           ),
                           2);
                     },
-                    child: new Icon(Icons.color_lens, color: globals.color3),
+                    child: Icon(Icons.color_lens, color: globals.color3),
                   ),
                 ),
               ),
               ListTile(
                 title: Text(
                     I18n.of(context).grade4 + " " + I18n.of(context).grade),
-                trailing: new Container(
-                  child: new FlatButton(
+                trailing: Container(
+                  child: FlatButton(
                     onPressed: () {
                       _openDialog(
                           I18n.of(context).color,
@@ -135,15 +135,15 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
                           ),
                           3);
                     },
-                    child: new Icon(Icons.color_lens, color: globals.color4),
+                    child: Icon(Icons.color_lens, color: globals.color4),
                   ),
                 ),
               ),
               ListTile(
                 title: Text(
                     I18n.of(context).grade5 + " " + I18n.of(context).grade),
-                trailing: new Container(
-                  child: new FlatButton(
+                trailing: Container(
+                  child: FlatButton(
                       onPressed: () {
                         _openDialog(
                             I18n.of(context).color,
@@ -153,7 +153,7 @@ class colorSettingsScreenState extends State<colorSettingsScreen> {
                             ),
                             4);
                       },
-                      child: new Icon(Icons.color_lens, color: globals.color5)),
+                      child: Icon(Icons.color_lens, color: globals.color5)),
                 ),
               ),
             ],

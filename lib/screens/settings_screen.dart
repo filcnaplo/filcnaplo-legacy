@@ -140,17 +140,19 @@ class SettingsScreenState extends State<SettingsScreen> {
     if (value) {
       BackgroundFetch.start().then((int status) {
         print('[BackgroundFetch] start success: $status');
-        Fluttertoast.showToast(
-            msg: I18n.of(context).success,
+        Scaffold.of(context).showSnackBar(SnackBar(
             backgroundColor: Colors.green,
-            textColor: Colors.white,
-            fontSize: 16.0);
+            content: Text(
+              I18n.of(context).success,
+              style: TextStyle(color: Colors.white, fontSize: 16.0),
+            )));
       }).catchError((e) {
-        Fluttertoast.showToast(
-            msg: I18n.of(context).notificationFailed,
+        Scaffold.of(context).showSnackBar(SnackBar(
             backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
+            content: Text(
+              I18n.of(context).notificationFailed,
+              style: TextStyle(color: Colors.white, fontSize: 16.0),
+            )));
         print('[BackgroundFetch] start FAILURE: $e');
       });
     } else {
@@ -202,7 +204,7 @@ class SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    
+
     List<String> themes = [
       I18n.of(context).colorGreen,
       I18n.of(context).colorRed,
@@ -215,225 +217,226 @@ class SettingsScreenState extends State<SettingsScreen> {
       I18n.of(context).colorPurple,
       I18n.of(context).colorTeal
     ];
-    return new Screen(
-        new Text(I18n.of(context).settingsTitle),
-        new Container(
+    return Screen(
+        Text(I18n.of(context).settingsTitle),
+        Container(
           child: _isColor != null
-              ? new ListView(
-            children: <Widget>[
-              SwitchListTile(
-                title: new Text(
-                  I18n.of(context).settingsColorful,
-                  style: TextStyle(fontSize: 20.0),
-                ),
-                activeColor: Theme.of(context).accentColor,
-                value: _isColor,
-                onChanged: _isColorChange,
-                secondary: new Icon(IconData(0xf266,
-                    fontFamily: "Material Design Icons")),
-              ),
-              SwitchListTile(
-                title: new Text(
-                  I18n.of(context).settingsDarkTheme,
-                  style: TextStyle(fontSize: 20.0),
-                ),
-                activeColor: Theme.of(context).accentColor,
-                value: _isDark,
-                onChanged: _isDarkChange,
-                secondary: new Icon(IconData(0xf50e,
-                    fontFamily: "Material Design Icons")),
-              ),
-              SwitchListTile(
-                title: new Text(
-                  I18n.of(context).settingsAmoled,
-                  style: TextStyle(fontSize: 20.0),
-                ),
-                activeColor: Theme.of(context).accentColor,
-                value: _isDark ? _amoled : false,
-                onChanged: _isDark ? _setAmoled : null,
-                secondary: new Icon(IconData(0xf301,
-                    fontFamily: "Material Design Icons")),
-              ),
-              SwitchListTile(
-                title: new Text(
-                  I18n.of(context).settingsSmart,
-                  style: TextStyle(fontSize: 20.0),
-                ),
-                activeColor: Theme.of(context).accentColor,
-                value: _smartUserAgent,
-                onChanged: _smartUserAgentChange,
-                secondary: new Icon(IconData(0xfcbf,
-                    fontFamily: "Material Design Icons")),
-              ),
-              ListTile(
-                title: new Text(
-                  I18n.of(context).settingsEvaluationColors,
-                  style: TextStyle(fontSize: 20.0),
-                ),
-                onTap: () {
-                  Navigator.pushNamed(context, "/evalcolor");
-                },
-                leading: new Icon(Icons.color_lens),
-              ),
-              ListTile(
-                title: new PopupMenuButton<int>(
-                  child: new ListTile(
-                    contentPadding: EdgeInsets.all(0),
-                    title: new Text(
-                      capitalize(I18n.of(context).color) +
-                          ": " +
-                          themes[_theme],
-                      style: TextStyle(fontSize: 20.0),
+              ? ListView(
+                  children: <Widget>[
+                    SwitchListTile(
+                      title: Text(
+                        I18n.of(context).settingsColorful,
+                        style: TextStyle(fontSize: 20.0),
+                      ),
+                      activeColor: Theme.of(context).accentColor,
+                      value: _isColor,
+                      onChanged: _isColorChange,
+                      secondary: Icon(IconData(0xf266,
+                          fontFamily: "Material Design Icons")),
                     ),
-                  ),
-                  onSelected: _themChange,
-                  itemBuilder: (BuildContext context) {
-                    return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                        .map((int integer) {
-                      return new PopupMenuItem<int>(
-                          value: integer,
-                          child: new Row(
-                            children: <Widget>[
-                              new Container(
-                                decoration: ShapeDecoration(
-                                    shape: CircleBorder(),
-                                    color: ColorManager()
-                                        .getColorSample(integer)),
-                                height: 16,
-                                width: 16,
-                                margin: EdgeInsets.only(right: 4),
-                              ),
-                              new Text(themes[integer]),
-                            ],
-                          ));
-                    }).toList();
-                  },
-                ),
-                leading: new Icon(Icons.color_lens),
-              ),
-              SwitchListTile(
-                title: new Text(
-                  I18n.of(context).settingsNotifications,
-                  style: TextStyle(fontSize: 20.0),
-                ),
-                activeColor: Theme.of(context).accentColor,
-                value: _isNotification,
-                onChanged: _isNotificationChange,
-                secondary: new Icon(IconData(0xf09a,
-                    fontFamily: "Material Design Icons")),
-              ),
-              SwitchListTile(
-                title: new Text(
-                  I18n.of(context).settingsNextLesson,
-                  style: TextStyle(fontSize: 20.0),
-                ),
-                value: nextLesson,
-                activeColor: Theme.of(context).accentColor,
-                onChanged: _isNotification ? _setNextLesson : null,
-                secondary: new Icon(Icons.access_time),
-              ),
-              _isNotification
-                  ? new PopupMenuButton<int>(
-                child: new ListTile(
-                  title: new Text(
-                    I18n.of(context).settingsSyncFrequency(
-                        _refreshNotification.toString()),
-                    style: TextStyle(fontSize: 20.0),
-                  ),
-                  leading: new Icon(IconData(0xf4e6,
-                      fontFamily: "Material Design Icons")),
-                ),
-                onSelected: _refreshNotificationChange,
-                itemBuilder: (BuildContext context) {
-                  return refreshArray.map((int integer) {
-                    return new PopupMenuItem<int>(
-                        value: integer,
-                        child: new Row(
-                          children: <Widget>[
-                            new Text(integer.toString() +
-                                " " +
-                                I18n.of(context).timeMinute),
-                          ],
-                        ));
-                  }).toList();
-                },
-              )
-                  : new ListTile(
-                title: new Text(
-                  I18n.of(context).settingsSyncFrequency(
-                      _refreshNotification.toString()),
-                  style: TextStyle(fontSize: 20.0),
-                ),
-                enabled: false,
-                leading: new Icon(IconData(0xf4e6,
-                    fontFamily: "Material Design Icons")),
-              ),
-              ListTile(
-                title: new Text(
-                  I18n.of(context).settingsLanguage,
-                  style: TextStyle(fontSize: 20.0),
-                ),
-                trailing: new Container(
-                  child: new DropdownButton<String>(
-                    items: LANG_LIST.keys.map((String lang) {
-                      String langName = LANG_LIST[lang];
-                      return DropdownMenuItem<String>(
-                        child: Text(
-                          langName,
-                          textAlign: TextAlign.end,
+                    SwitchListTile(
+                      title: Text(
+                        I18n.of(context).settingsDarkTheme,
+                        style: TextStyle(fontSize: 20.0),
+                      ),
+                      activeColor: Theme.of(context).accentColor,
+                      value: _isDark,
+                      onChanged: _isDarkChange,
+                      secondary: Icon(IconData(0xf50e,
+                          fontFamily: "Material Design Icons")),
+                    ),
+                    SwitchListTile(
+                      title: Text(
+                        I18n.of(context).settingsAmoled,
+                        style: TextStyle(fontSize: 20.0),
+                      ),
+                      activeColor: Theme.of(context).accentColor,
+                      value: _isDark ? _amoled : false,
+                      onChanged: _isDark ? _setAmoled : null,
+                      secondary: Icon(IconData(0xf301,
+                          fontFamily: "Material Design Icons")),
+                    ),
+                    SwitchListTile(
+                      title: Text(
+                        I18n.of(context).settingsSmart,
+                        style: TextStyle(fontSize: 20.0),
+                      ),
+                      activeColor: Theme.of(context).accentColor,
+                      value: _smartUserAgent,
+                      onChanged: _smartUserAgentChange,
+                      secondary: Icon(IconData(0xfcbf,
+                          fontFamily: "Material Design Icons")),
+                    ),
+                    ListTile(
+                      title: Text(
+                        I18n.of(context).settingsEvaluationColors,
+                        style: TextStyle(fontSize: 20.0),
+                      ),
+                      onTap: () {
+                        Navigator.pushNamed(context, "/evalcolor");
+                      },
+                      leading: Icon(Icons.color_lens),
+                    ),
+                    ListTile(
+                      title: PopupMenuButton<int>(
+                        child: ListTile(
+                          contentPadding: EdgeInsets.all(0),
+                          title: Text(
+                            capitalize(I18n.of(context).color) +
+                                ": " +
+                                themes[_theme],
+                            style: TextStyle(fontSize: 20.0),
+                          ),
                         ),
-                        value: lang,
-                      );
-                    }).toList(),
-                    onChanged: _setLang,
-                    value: _lang,
-                  ),
-                  height: 50,
-                  width: 120,
-                  alignment: Alignment(1, 0),
-                ),
-                leading: new Icon(IconData(0xf1e7,
-                    fontFamily: "Material Design Icons")),
-              ),
-              new Divider(color: globals.isDark ? Colors.grey : Colors.black54),
-              !Platform.isIOS
-                  ? new ListTile(
-                leading: new Icon(Icons.import_export),
-                title: new Text(
-                    I18n.of(context).export.toUpperCase(),
-                    style: TextStyle(
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.bold)),
-                onTap: () {
-                  Navigator.pushNamed(context, "/export");
-                },
-              )
-                  : Container(),
-              new ListTile(
-                leading: new Icon(Icons.bug_report),
-                title: new Text(I18n.of(context).settingsBugreport.toUpperCase(),
-                    style: TextStyle(
-                        fontSize: 15.0, fontWeight: FontWeight.bold)),
-                onTap: _openBugReport,
-              ),
-
-              new ListTile(
-                  title: new Text(
-                    capitalize(I18n.of(context).appVersion) +
-                        ": " +
-                        globals.version,
-                    style: TextStyle(fontSize: 15.0),
-                    textAlign: TextAlign.right,
-                  ))
-            ],
-            padding: EdgeInsets.all(10),
-          )
-              : new Container(),
+                        onSelected: _themChange,
+                        itemBuilder: (BuildContext context) {
+                          return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                              .map((int integer) {
+                            return PopupMenuItem<int>(
+                                value: integer,
+                                child: Row(
+                                  children: <Widget>[
+                                    Container(
+                                      decoration: ShapeDecoration(
+                                          shape: CircleBorder(),
+                                          color: ColorManager()
+                                              .getColorSample(integer)),
+                                      height: 16,
+                                      width: 16,
+                                      margin: EdgeInsets.only(right: 4),
+                                    ),
+                                    Text(themes[integer]),
+                                  ],
+                                ));
+                          }).toList();
+                        },
+                      ),
+                      leading: Icon(Icons.color_lens),
+                    ),
+                    SwitchListTile(
+                      title: Text(
+                        I18n.of(context).settingsNotifications,
+                        style: TextStyle(fontSize: 20.0),
+                      ),
+                      activeColor: Theme.of(context).accentColor,
+                      value: _isNotification,
+                      onChanged: _isNotificationChange,
+                      secondary: Icon(IconData(0xf09a,
+                          fontFamily: "Material Design Icons")),
+                    ),
+                    SwitchListTile(
+                      title: Text(
+                        I18n.of(context).settingsNextLesson,
+                        style: TextStyle(fontSize: 20.0),
+                      ),
+                      value: nextLesson,
+                      activeColor: Theme.of(context).accentColor,
+                      onChanged: _isNotification ? _setNextLesson : null,
+                      secondary: Icon(Icons.access_time),
+                    ),
+                    _isNotification
+                        ? PopupMenuButton<int>(
+                            child: ListTile(
+                              title: Text(
+                                I18n.of(context).settingsSyncFrequency(
+                                    _refreshNotification.toString()),
+                                style: TextStyle(fontSize: 20.0),
+                              ),
+                              leading: Icon(IconData(0xf4e6,
+                                  fontFamily: "Material Design Icons")),
+                            ),
+                            onSelected: _refreshNotificationChange,
+                            itemBuilder: (BuildContext context) {
+                              return refreshArray.map((int integer) {
+                                return PopupMenuItem<int>(
+                                    value: integer,
+                                    child: Row(
+                                      children: <Widget>[
+                                        Text(integer.toString() +
+                                            " " +
+                                            I18n.of(context).timeMinute),
+                                      ],
+                                    ));
+                              }).toList();
+                            },
+                          )
+                        : ListTile(
+                            title: Text(
+                              I18n.of(context).settingsSyncFrequency(
+                                  _refreshNotification.toString()),
+                              style: TextStyle(fontSize: 20.0),
+                            ),
+                            enabled: false,
+                            leading: Icon(IconData(0xf4e6,
+                                fontFamily: "Material Design Icons")),
+                          ),
+                    ListTile(
+                      title: Text(
+                        I18n.of(context).settingsLanguage,
+                        style: TextStyle(fontSize: 20.0),
+                      ),
+                      trailing: Container(
+                        child: DropdownButton<String>(
+                          items: LANG_LIST.keys.map((String lang) {
+                            String langName = LANG_LIST[lang];
+                            return DropdownMenuItem<String>(
+                              child: Text(
+                                langName,
+                                textAlign: TextAlign.end,
+                              ),
+                              value: lang,
+                            );
+                          }).toList(),
+                          onChanged: _setLang,
+                          value: _lang,
+                        ),
+                        height: 50,
+                        width: 120,
+                        alignment: Alignment(1, 0),
+                      ),
+                      leading: Icon(IconData(0xf1e7,
+                          fontFamily: "Material Design Icons")),
+                    ),
+                    Divider(
+                        color: globals.isDark ? Colors.grey : Colors.black54),
+                    !Platform.isIOS
+                        ? ListTile(
+                            leading: Icon(Icons.import_export),
+                            title: Text(
+                                I18n.of(context).export.toUpperCase(),
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold)),
+                            onTap: () {
+                              Navigator.pushNamed(context, "/export");
+                            },
+                          )
+                        : Container(),
+                    ListTile(
+                      leading: Icon(Icons.bug_report),
+                      title: Text(
+                          I18n.of(context).settingsBugreport.toUpperCase(),
+                          style: TextStyle(
+                              fontSize: 15.0, fontWeight: FontWeight.bold)),
+                      onTap: _openBugReport,
+                    ),
+                    ListTile(
+                        title: Text(
+                      capitalize(I18n.of(context).appVersion) +
+                          ": " +
+                          globals.version,
+                      style: TextStyle(fontSize: 15.0),
+                      textAlign: TextAlign.right,
+                    ))
+                  ],
+                  padding: EdgeInsets.all(10),
+                )
+              : Container(),
         ),
         "/home",
-        <Widget>[]
-    );
+        <Widget>[]);
   }
+
   _openBugReport() async {
     const url = "https://github.com/filcnaplo/filcnaplo/issues/new/choose";
     if (await canLaunch(url)) {

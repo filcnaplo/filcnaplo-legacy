@@ -34,14 +34,14 @@ class MessageScreenState extends State<MessageScreen> {
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    return new Screen(
-        new Text(I18n.of(context).messageTitle),
-        new Container(
+    return Screen(
+        Text(I18n.of(context).messageTitle),
+        Container(
             child: hasOfflineLoaded & (messages != null)
-                ? new Column(children: <Widget>[
+                ? Column(children: <Widget>[
               !hasLoaded
                   ? Container(
-                child: new LinearProgressIndicator(
+                child: LinearProgressIndicator(
                   value: null,
                 ),
                 height: 3,
@@ -49,16 +49,16 @@ class MessageScreenState extends State<MessageScreen> {
                   : Container(
                 height: 3,
               ),
-              new Expanded(
-                child: new RefreshIndicator(
-                    child: new ListView.builder(
+              Expanded(
+                child: RefreshIndicator(
+                    child: ListView.builder(
                       itemBuilder: _itemBuilder,
                       itemCount: messages.length,
                     ),
                     onRefresh: _onRefresh),
               ),
             ])
-                : new Center(child: new CircularProgressIndicator())),
+                : Center(child: CircularProgressIndicator())),
         "/home",
         <Widget>[]
     );

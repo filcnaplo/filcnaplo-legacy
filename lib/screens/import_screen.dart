@@ -63,37 +63,37 @@ class ImportScreenState extends State<ImportScreen> {
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    return new Screen(
-        new Text("Import"),
-        new Center(
+    return Screen(
+        Text("Import"),
+        Center(
           child: Container(
             padding: EdgeInsets.all(20),
-            child: new Column(
+            child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  new TextField(
+                  TextField(
                     onChanged: (text) {
                       path = text;
                     },
                     controller: controller,
                   ),
-                  new Container(
-                    child: new RaisedButton(
+                  Container(
+                    child: RaisedButton(
                       onPressed: () async {
                         PermissionHandler()
                             .requestPermissions([PermissionGroup.storage]).then(
                                 (Map<PermissionGroup, PermissionStatus>
                                     permissions) async {
-                          File importFile = new File(path);
-                          List<Map<String, dynamic>> userMap = new List();
+                          File importFile = File(path);
+                          List<Map<String, dynamic>> userMap = List();
                           String data = importFile.readAsStringSync();
                           List<dynamic> userList = json.decode(data);
                           for (dynamic d in userList)
                             userMap.add(d as Map<String, dynamic>);
 
-                          List<User> users = new List();
+                          List<User> users = List();
                           if (userMap.isNotEmpty)
                             for (Map<String, dynamic> m in userMap)
                               users.add(User.fromJson(m));

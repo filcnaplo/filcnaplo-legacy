@@ -47,14 +47,14 @@ class AbsentsScreenState extends State<AbsentsScreen> {
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    return new Screen(
-        new Text(capitalize(I18n.of(context).absenceTitle)),
-        new Container(
+    return Screen(
+        Text(capitalize(I18n.of(context).absenceTitle)),
+        Container(
             child: hasOfflineLoaded
-                ? new Column(children: <Widget>[
+                ? Column(children: <Widget>[
                     !hasLoaded
                         ? Container(
-                            child: new LinearProgressIndicator(
+                            child: LinearProgressIndicator(
                               value: null,
                             ),
                             height: 3,
@@ -62,27 +62,27 @@ class AbsentsScreenState extends State<AbsentsScreen> {
                         : Container(
                             height: 3,
                           ),
-                    new Expanded(
-                      child: new RefreshIndicator(
-                          child: new ListView.builder(
+                    Expanded(
+                      child: RefreshIndicator(
+                          child: ListView.builder(
                             itemBuilder: _itemBuilder,
                             itemCount: absents.length,
                           ),
                           onRefresh: _onRefresh),
                     ),
                   ])
-                : new Center(child: new CircularProgressIndicator())),
+                : Center(child: CircularProgressIndicator())),
         "/home",
         <Widget>[
           Tooltip(
-            child: new IconButton(
-                icon: new Icon(Icons.info),
+            child: IconButton(
+                icon: Icon(Icons.info),
                 onPressed: () {
                   return showDialog(
                         barrierDismissible: true,
                         context: context,
                         builder: (BuildContext context) {
-                          return new AbsentDialog();
+                          return AbsentDialog();
                         },
                       ) ??
                       false;
