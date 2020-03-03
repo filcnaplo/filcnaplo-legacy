@@ -18,7 +18,7 @@
 
 [Ajánljuk figyelmedbe a Contributing Guideunkat.](.github/CONTRIBUTING.md)
 
-Első sikeres, lényegi változást tartalymazó commitod után meghívunk a fejlesztői Telegram csoportunkba.
+Első sikeres, lényegi változást tartalmazó commitod után meghívunk a fejlesztői Telegram csoportunkba.
  
  
  
