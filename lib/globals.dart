@@ -10,6 +10,7 @@ import 'package:filcnaplo/models/note.dart';
 import 'package:filcnaplo/models/homework.dart';
 import 'package:filcnaplo/models/lesson.dart';
 import 'package:filcnaplo/models/account.dart';
+import 'models/lesson_entry.dart';
 
 BuildContext context;
 Color CurrentTextColor;
@@ -42,7 +43,8 @@ int selectedTimeForHomework = 1;
 List<int> timeData = [1, 7, 30, 60];
 Average selectedAverage;
 List<Evaluation> currentEvals = List();
-Lesson currentLesson;
+LessonEntry currentLesson;
+bool isCurrent;
 int themeID = 0;
 String userAgent;
 List<Account> accounts = List();

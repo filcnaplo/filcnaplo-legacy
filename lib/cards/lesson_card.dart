@@ -1,4 +1,5 @@
 import 'package:filcnaplo/dialogs/choose_lesson_dialog.dart';
+import 'package:filcnaplo/models/lesson_entry.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 import 'package:filcnaplo/models/lesson.dart';
@@ -6,6 +7,7 @@ import 'package:filcnaplo/utils/string_formatter.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:filcnaplo/dialogs/lesson_dialog.dart';
+import 'package:filcnaplo/utils/lesson_entry_builder.dart';
 
 import 'dart:async';
 
@@ -24,6 +26,8 @@ class LessonCard extends StatefulWidget {
   @override
   _LessonCardState createState() => _LessonCardState();
 }
+
+enum LessonCardTab { previous, current, next, normal }
 
 class _LessonCardState extends State<LessonCard> {
   String _now;
@@ -67,88 +71,58 @@ class _LessonCardState extends State<LessonCard> {
   }
 
   void _lessonCardBackend(
-      DateTime now, List<Lesson> lessons, bool isLessonsTomorrow) {
-    previousLesson = lessons.lastWhere(
-        (Lesson lesson) => (lesson.end.isBefore(now)),
-        orElse: () => null);
+      DateTime now, List<Lesson> justLessons, bool isLessonsTomorrow) {
+    List<LessonEntry> lessons = lessonEntryBuilder(justLessons);
 
-    thisLesson = lessons.lastWhere(
-        (Lesson lesson) =>
-            (lesson.start.isBefore(now) && lesson.end.isAfter(now)),
-        orElse: () => null);
+    globals.currentLesson = lessons.firstWhere((LessonEntry lesson) =>
+        (((lesson.start.isBefore(now) && lesson.end.isAfter(now)) ||
+            (lesson.end.isBefore(now) &&
+                lessons[lessons.indexOf(lesson) + 1].start.isAfter(now)))));
 
-    nextLesson = lessons.firstWhere(
-        (Lesson lesson) => (lesson.start.isAfter(now)),
-        orElse: () => null);
-
-    nextNextLesson = lessons.firstWhere(
-        (Lesson lesson) => (lesson.start.isAfter(nextLesson.end)),
-        orElse: () => null);
-
-    //States: Before first / First lesson / During lesson / During break / Last lesson / After last
-    //              0             1               2             3               4            5
-    if (lessons.first.start.isAfter(now))
-      lessonCardState = 0;
-    else if (previousLesson == null)
-      lessonCardState = 1;
-    else if (thisLesson == null && nextLesson == null)
-      lessonCardState = 5;
-    else if (nextLesson == null)
-      lessonCardState = 4;
-    else if (thisLesson != null)
-      lessonCardState = 2;
-    else if (previousLesson.end.isBefore(now) && nextLesson.start.isAfter(now))
-      lessonCardState = 3;
-
-    if (lessonCardState == 2) {
-      //During a lesson, calculate previous and next break length
-      nextBreakLength =
-          nextNextLesson.start.difference(nextLesson.end).inMinutes;
-      prevBreakLength =
-          thisLesson.start.difference(previousLesson.end).inMinutes;
-      if (nextLesson != null)
-        thisBreakLength = nextLesson.start.difference(thisLesson.end).inMinutes;
-      minutesLeftOfThis = thisLesson.end.difference(now).inMinutes;
-      minutesUntilNext = nextLesson.start.difference(now).inMinutes;
-    } else if (lessonCardState == 3) {
-      //During a break, calculate its length.
-      nextBreakLength =
-          nextNextLesson.start.difference(nextLesson.end).inMinutes;
-      prevBreakLength =
-          nextLesson.start.difference(previousLesson.end).inMinutes;
-      thisBreakLength = 0;
-      minutesUntilNext = nextLesson.start.difference(now).inMinutes;
-    } else if (lessonCardState == 4) {
-      //During the last lesson
-      nextBreakLength = 0;
-      prevBreakLength =
-          thisLesson.start.difference(previousLesson.end).inMinutes;
-      thisBreakLength = 0;
-      minutesLeftOfThis = thisLesson.end.difference(now).inMinutes;
-      minutesUntilNext = 0;
-    } else if (lessonCardState == 1) {
-      //During the first lesson
-      prevBreakLength = 0;
-      nextBreakLength =
-          nextNextLesson.start.difference(nextLesson.end).inMinutes;
-      thisBreakLength = nextLesson.start.difference(thisLesson.end).inMinutes;
-      minutesLeftOfThis = thisLesson.end.difference(now).inMinutes;
-      minutesUntilNext = nextLesson.start.difference(now).inMinutes;
-    } else if (lessonCardState == 5) {
-      prevBreakLength = 0;
-      thisBreakLength = 0;
-      minutesUntilNext = 0;
-      nextBreakLength = 0;
-    } else {
-      //If before or after the school day, don't calculate breaks.
-      prevBreakLength = 0;
-      thisBreakLength = 0;
-      nextBreakLength = 0;
-      minutesUntilNext = nextLesson.start.difference(now).inMinutes;
-    }
+    globals.isCurrent = (globals.currentLesson.start.isBefore(now) &&
+            globals.currentLesson.end.isAfter(now));
 
     quickLessons = [];
 
+    for (LessonEntry lesson in lessons) {
+      LessonCardTab lessonCardTab;
+      int topMinutes;
+
+      if (globals.isCurrent && globals.currentLesson == lessons[lessons.indexOf(lesson)]) {
+        topMinutes = lessons[lessons.indexOf(lesson)].end.difference(now).inMinutes;
+        lessonCardTab = LessonCardTab.current;
+      } else if (lessons.asMap().containsKey(lessons.indexOf(lesson) + 1) && globals.currentLesson == lessons[lessons.indexOf(lesson) + 1]) {
+        lessonCardTab = LessonCardTab.previous;
+      } else if (lessons.asMap().containsKey(lessons.indexOf(lesson) - 1) && globals.currentLesson == lessons[lessons.indexOf(lesson) - 1]) {
+        topMinutes = lessons[lessons.indexOf(lesson)].start.difference(now).inMinutes;
+        lessonCardTab = LessonCardTab.next;
+      } else {
+        lessonCardTab = LessonCardTab.normal;
+      }
+
+      quickLessons.add(LessonTile(
+          context,
+          lesson,
+          (lessonCardTab == LessonCardTab.current)
+          ? I18n.of(context).lessonCardNow((topMinutes + 1).toString())
+          : (lessonCardTab == LessonCardTab.previous)
+            ? I18n.of(context).lessonCardPrevious
+            : (lessonCardTab == LessonCardTab.next)
+              ? I18n.of(context).lessonCardNext((topMinutes + 1).toString())
+              : null,
+          (lesson.breakAfter == 0) ? "" : lesson.breakAfter.toString(),
+          (lesson.count == -1) ? "+" : lesson.count.toString(),
+          lesson.subject,
+          lesson.isMissed
+              ? I18n.of(context).substitutionMissed
+              : lesson.teacher,
+          (lesson.isSubstitution ? 1 : lesson.isMissed ? 2 : 0),
+          (lesson.homework != null) ? true : false,
+          getLessonRangeText(lesson),
+          lesson.room));
+    }
+
+/*
     if (previousLesson != null) {
       quickLessons.add(LessonTile(
           context,
@@ -198,18 +172,7 @@ class _LessonCardState extends State<LessonCard> {
           (nextLesson.homework != null) ? true : false,
           getLessonRangeText(nextLesson),
           nextLesson.room));
-    }
-
-    //If during lesson, that subject. If after lesson, previous subject. Otherwise, null.
-    if ([1, 2, 4].contains(lessonCardState)) {
-      globals.currentLesson = thisLesson;
-    }
-    else if ([3, 5].contains(lessonCardState)) {
-      globals.currentLesson = previousLesson;
-    }
-    else {
-      globals.currentLesson = null;
-    }
+    }*/
   }
 
   @override
@@ -280,7 +243,8 @@ class _LessonCardState extends State<LessonCard> {
                   Flexible(
                     child: Row(
                       children: <Widget>[
-                        Container(
+                        (tabText != null)
+                        ? Container(
                           child: Text(tabText,
                               style: TextStyle(
                                   color: globals.isDark
@@ -297,7 +261,8 @@ class _LessonCardState extends State<LessonCard> {
                               borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(4),
                                   topRight: Radius.circular(4))),
-                        ),
+                        )
+                        : Container(height: 20),
                       ],
                     ),
                   ),
