@@ -114,65 +114,15 @@ class _LessonCardState extends State<LessonCard> {
           (lesson.count == -1) ? "+" : lesson.count.toString(),
           lesson.subject,
           lesson.isMissed
-              ? I18n.of(context).substitutionMissed
-              : lesson.teacher,
+              ? "❌ " + capitalize(I18n.of(context).substitutionMissed)
+              : lesson.isSubstitution
+                ? "⭕ " + lesson.depTeacher
+                : lesson.teacher,
           (lesson.isSubstitution ? 1 : lesson.isMissed ? 2 : 0),
           (lesson.homework != null) ? true : false,
           getLessonRangeText(lesson),
           lesson.room));
     }
-
-/*
-    if (previousLesson != null) {
-      quickLessons.add(LessonTile(
-          context,
-          previousLesson,
-          I18n.of(context).lessonCardPrevious,
-          (prevBreakLength == 0) ? "" : prevBreakLength.toString(),
-          (previousLesson.count == -1) ? "+" : previousLesson.count.toString(),
-          previousLesson.subject,
-          previousLesson.isMissed
-              ? I18n.of(context).substitutionMissed
-              : previousLesson.teacher,
-          (previousLesson.isSubstitution ? 1 : previousLesson.isMissed ? 2 : 0),
-          (previousLesson.homework != null) ? true : false,
-          getLessonRangeText(previousLesson),
-          previousLesson.room));
-    }
-
-    if (thisLesson != null) {
-      quickLessons.add(LessonTile(
-          context,
-          thisLesson,
-          I18n.of(context).lessonCardNow((minutesLeftOfThis + 1).toString()),
-          (thisBreakLength == 0) ? "" : thisBreakLength.toString(),
-          (thisLesson.count == -1) ? "+" : thisLesson.count.toString(),
-          thisLesson.subject,
-          thisLesson.isMissed
-              ? I18n.of(context).substitutionMissed
-              : thisLesson.teacher,
-          (thisLesson.isSubstitution ? 1 : thisLesson.isMissed ? 2 : 0),
-          (thisLesson.homework != null) ? true : false,
-          getLessonRangeText(thisLesson),
-          thisLesson.room));
-    }
-
-    if (nextLesson != null) {
-      quickLessons.add(LessonTile(
-          context,
-          nextLesson,
-          I18n.of(context).lessonCardNext((minutesUntilNext + 1).toString()),
-          (nextBreakLength == 0) ? "" : nextBreakLength.toString(),
-          (nextLesson.count == -1) ? "+" : nextLesson.count.toString(),
-          nextLesson.subject,
-          nextLesson.isMissed
-              ? I18n.of(context).substitutionMissed
-              : nextLesson.teacher,
-          (nextLesson.isSubstitution ? 1 : nextLesson.isMissed ? 2 : 0),
-          (nextLesson.homework != null) ? true : false,
-          getLessonRangeText(nextLesson),
-          nextLesson.room));
-    }*/
   }
 
   @override
@@ -279,7 +229,14 @@ class _LessonCardState extends State<LessonCard> {
                           style: TextStyle(
                               fontSize: 30, fontWeight: FontWeight.bold)),
                       title: Text(capitalize(lessonSubject),
-                          style: TextStyle(fontWeight: FontWeight.bold)),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color:
+                            (lessonState == 1)
+                            ? Colors.orange
+                            : (lessonState == 2)
+                              ? Colors.red
+                              : Theme.of(context).textTheme.body1.color)),
                       subtitle: Text(
                         lessonSubtitle,
                         maxLines: 1,
@@ -295,7 +252,7 @@ class _LessonCardState extends State<LessonCard> {
                                   padding: EdgeInsets.all(5))
                               : Container(),
                           Column(
-                            children: <Widget>[Text(startTime), Text(room)],
+                            children: <Widget>[Text(room), Text(startTime)],
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.end,
                           ),
