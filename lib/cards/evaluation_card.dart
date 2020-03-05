@@ -91,6 +91,10 @@ class EvaluationCard extends StatelessWidget {
         typeIcon = Icons.border_color;
         typeName = "röpdolgozat";
         break;
+     case "Írásbeli dolgozat":
+        typeIcon = Icons.border_color;
+        typeName = "dolgozat";
+        break;
       case "Beszámoló":
         typeIcon = Icons.border_color;
         typeName = "beszámoló";

@@ -1,8 +1,6 @@
 import 'dart:ui';
-
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
-
 import 'package:filcnaplo/models/student.dart';
 import 'package:filcnaplo/utils/string_formatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
@@ -15,24 +13,19 @@ class AbsenceCard extends StatelessWidget {
   BuildContext context;
   bool isSingle;
   String cardText;
-
   AbsenceCard(List<Absence> absence, bool isSingle, BuildContext context) {
     this.context = context;
     this.absences = absence;
     numOfAbsences = absence.length;
-
     if (absence[0].DelayTimeMinutes != 0) {
       cardText = I18n.of(context).delay;
     } else {
       cardText = I18n.of(context).absence;
     }
-
     this.isSingle = isSingle;
-
     bool unjust = false;
     bool just = false;
     bool bejust = false;
-
     for (Absence a in absence) {
       if (a.JustificationState == "UnJustified")
         unjust = true;
@@ -40,7 +33,6 @@ class AbsenceCard extends StatelessWidget {
         just = true;
       else if (a.JustificationState == "BeJustified") bejust = true;
     }
-
     if (unjust && !just && !bejust) {
       state = I18n.of(context).justificationUnjustified;
       color = Colors.red;
@@ -55,10 +47,8 @@ class AbsenceCard extends StatelessWidget {
       color = Colors.orange;
     }
   }
-
   @override
   Key get key => Key(getDate());
-
   String getDate() {
     return absences[0].CreatingTime.toIso8601String();
   }
@@ -79,7 +69,7 @@ class AbsenceCard extends StatelessWidget {
         return Icons.person;
         break;
       default:
-      return IconData(0xf625, fontFamily: "Material Design Icons");
+        return IconData(0xf625, fontFamily: "Material Design Icons");
         break;
     }
   }
@@ -103,35 +93,39 @@ class AbsenceCard extends StatelessWidget {
 
   Future<Null> _absenceDialog(Absence absence) async {
     return showDialog<Null>(
-      context: context,
-      barrierDismissible: true, // user must tap button!
+      context: context, barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
         return SimpleDialog(
           children: <Widget>[
             SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  Text(
-                      I18n.of(context).lessonCount(numOfAbsences.toString())),
-                  Text(I18n.of(context).absenceTime + ": " +
-                      dateToHuman(absence.LessonStartTime)),
-                  Text(I18n.of(context).administrationTime + ": " +
-                      dateToHuman(absence.CreatingTime)),
-                  Text(I18n.of(context).justificationState + ": " +
-                      absence.JustificationStateName),
-                  Text(I18n.of(context).justificationMode + ": " +
-                      absence.JustificationTypeName),
+                  Text(capitalize(I18n.of(context).absenceTime +
+                      ": " +
+                      dateToHuman(absence.LessonStartTime))),
+                  Text(capitalize(I18n.of(context).administrationTime +
+                      ": " +
+                      dateToHuman(absence.CreatingTime))),
+                  Text(capitalize(I18n.of(context).justificationState +
+                      ": " +
+                      absence.JustificationStateName)),
+                  Text(capitalize(I18n.of(context).justificationMode +
+                      ": " +
+                      absence.JustificationTypeName)),
                   absence.DelayTimeMinutes != 0
-                      ? Text(I18n.of(context).delayMins +
+                      ? Text(capitalize(I18n.of(context).delayMins) +
+                          ": " +
                           absence.DelayTimeMinutes.toString() +
-                          " " + I18n.of(context).timeMinute)
+                          " " +
+                          I18n.of(context).timeMinute)
                       : Container(),
                 ].followedBy(absences.map((Absence absence) {
                   return ListTile(
                     leading: Icon(
                         absence.DelayTimeMinutes == 0
                             ? iconifyState(absence.JustificationState)
-                            : (Icons.watch_later),
+                            : (IconData(0xf954,
+                                fontFamily: "Material Design Icons")),
                         color: colorifyState(absence.JustificationState)),
                     title: Text(absence.Subject),
                     subtitle: Text(dateToHuman(absence.LessonStartTime)),
@@ -158,6 +152,12 @@ class AbsenceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    IconData currenticon;
+    if (cardText == I18n.of(context).delay) {
+      currenticon = IconData(0xf954, fontFamily: "Material Design Icons");
+    } else {
+      currenticon = IconData(0xF0F4, fontFamily: "Material Design Icons");
+    }
     return GestureDetector(
       onTap: openDialog,
       child: Card(
@@ -189,8 +189,7 @@ class AbsenceCard extends StatelessWidget {
               ),
               !isSingle
                   ? Container(
-                      child: Text(
-                          dateToHuman(absences[0].LessonStartTime),
+                      child: Text(dateToHuman(absences[0].LessonStartTime),
                           style: TextStyle(
                             fontSize: 16.0,
                           )),
@@ -207,7 +206,7 @@ class AbsenceCard extends StatelessWidget {
                       Container(
                         padding: EdgeInsets.only(left: 2),
                         child: Icon(
-                          Icons.block,
+                          currenticon,
                           color: globals.isDark ? Colors.white : Colors.black,
                         ),
                       ),
@@ -221,11 +220,11 @@ class AbsenceCard extends StatelessWidget {
                       isSingle
                           ? Expanded(
                               child: Container(
-                              child: Text(
-                                  dateToHuman(absences[0].LessonStartTime),
-                                  style: TextStyle(
-                                    fontSize: 18.0,
-                                  )),
+                              child:
+                                  Text(dateToHuman(absences[0].LessonStartTime),
+                                      style: TextStyle(
+                                        fontSize: 18.0,
+                                      )),
                               alignment: Alignment(1.0, 0.0),
                             ))
                           : Container(),
