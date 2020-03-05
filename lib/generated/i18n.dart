@@ -518,9 +518,9 @@ class _I18n_en_US extends I18n {
   /// "monday"
   @override
   String get dateMonday => "monday";
-  /// "tuesdau"
+  /// "tuesday"
   @override
-  String get dateTuesday => "tuesdau";
+  String get dateTuesday => "tuesday";
   /// "wednesday"
   @override
   String get dateWednesday => "wednesday";
