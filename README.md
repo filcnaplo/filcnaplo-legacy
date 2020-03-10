@@ -4,6 +4,8 @@
 
 ### Egy újgenerációs kliensalkalmazás az e-Kréta rendszerhez, újraélesztve.
 
+[![Codemagic build status](https://api.codemagic.io/apps/5e67b1201339a900142f6cb6/5e67b1201339a900142f6cb5/status_badge.svg)](https://codemagic.io/apps/5e67b1201339a900142f6cb6/5e67b1201339a900142f6cb5/latest_build)
+
 [![Letöltés](.github/download.png)](https://www.filcnaplo.hu/download/) 
 [![Telegram Hírlevél Csoport](.github/telegram.png)](https://t.me/filc_naplo)
 
