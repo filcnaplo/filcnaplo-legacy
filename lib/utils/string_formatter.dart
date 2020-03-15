@@ -5,20 +5,14 @@ import 'package:filcnaplo/generated/i18n.dart';
 
 String getTimetableText(DateTime startDateText) {
   return ((" (" +
-      startDateText.month.toString() +
-      ". " +
-      startDateText.day.toString() +
-      ". - " +
-      startDateText
-          .add(Duration(days: 6))
-          .month
-          .toString() +
-      ". " +
-      startDateText
-          .add(Duration(days: 6))
-          .day
-          .toString() +
-      ".)") ??
+          startDateText.month.toString() +
+          ". " +
+          startDateText.day.toString() +
+          ". - " +
+          startDateText.add(Duration(days: 6)).month.toString() +
+          ". " +
+          startDateText.add(Duration(days: 6)).day.toString() +
+          ".)") ??
       "");
 }
 
@@ -73,6 +67,5 @@ String dateToWeekDay(DateTime date, BuildContext context) {
   }
   return "";
 }
-
 
 String capitalize(String s) => s[0].toUpperCase() + s.substring(1);

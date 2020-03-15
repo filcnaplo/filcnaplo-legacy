@@ -39,29 +39,28 @@ class MessageScreenState extends State<MessageScreen> {
         Container(
             child: hasOfflineLoaded & (messages != null)
                 ? Column(children: <Widget>[
-              !hasLoaded
-                  ? Container(
-                child: LinearProgressIndicator(
-                  value: null,
-                ),
-                height: 3,
-              )
-                  : Container(
-                height: 3,
-              ),
-              Expanded(
-                child: RefreshIndicator(
-                    child: ListView.builder(
-                      itemBuilder: _itemBuilder,
-                      itemCount: messages.length,
+                    !hasLoaded
+                        ? Container(
+                            child: LinearProgressIndicator(
+                              value: null,
+                            ),
+                            height: 3,
+                          )
+                        : Container(
+                            height: 3,
+                          ),
+                    Expanded(
+                      child: RefreshIndicator(
+                          child: ListView.builder(
+                            itemBuilder: _itemBuilder,
+                            itemCount: messages.length,
+                          ),
+                          onRefresh: _onRefresh),
                     ),
-                    onRefresh: _onRefresh),
-              ),
-            ])
+                  ])
                 : Center(child: CircularProgressIndicator())),
         "/home",
-        <Widget>[]
-    );
+        <Widget>[]);
   }
 
   Future<Null> _onRefresh({bool showErrors = true}) async {

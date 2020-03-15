@@ -16,32 +16,35 @@ class AccountManager {
     }
     List<User> users = List();
     if (usersJson.isNotEmpty)
-      for (Map<String, dynamic> m in usersJson)
-        users.add(User.fromJson(m));
-    List<Color> colors = [Colors.green, Colors.red, Colors.black, Colors.brown, Colors.orange, Colors.blue];
+      for (Map<String, dynamic> m in usersJson) users.add(User.fromJson(m));
+    List<Color> colors = [
+      Colors.green,
+      Colors.red,
+      Colors.black,
+      Colors.brown,
+      Colors.orange,
+      Colors.blue
+    ];
     Iterator<Color> cit = colors.iterator;
     for (User u in users) {
       cit.moveNext();
-      if (u.color.value == 0)
-        u.color = cit.current;
+      if (u.color.value == 0) u.color = cit.current;
     }
     return users;
   }
 
-  void addUser(User user) async{
+  void addUser(User user) async {
     try {
       List<User> users = await getUsers(); //Logging in with another account
-      for (User u in users)
-        if (u.id == user.id)
-          return;
+      for (User u in users) if (u.id == user.id) return;
       users.add(user);
       globals.users = users;
       saveUsers(users);
 
       globals.isSingle = false;
       SettingsHelper().setSingleUser(false);
-
-    } catch (e) { //Logging in with the first account
+    } catch (e) {
+      //Logging in with the first account
       List<User> users = List();
       users.add(user);
       globals.users = users;
@@ -52,22 +55,21 @@ class AccountManager {
     }
   }
 
-  Future<void> removeUser(User user) async{
+  Future<void> removeUser(User user) async {
     List<User> users = await getUsers();
     List<User> newUsers = List();
-    for (User u in users)
-      if (u.id!=user.id)
-        newUsers.add(u);
+    for (User u in users) if (u.id != user.id) newUsers.add(u);
     if (newUsers.length < 2) {
       globals.multiAccount = false;
       globals.isSingle = true;
-      SettingsHelper().setSingleUser(true); //If only one user left, set SingleUser.
+      SettingsHelper()
+          .setSingleUser(true); //If only one user left, set SingleUser.
     }
     globals.users = newUsers;
     saveUsers(newUsers);
   }
 
-  void removeUserIndex(int index) async{
+  void removeUserIndex(int index) async {
     List<User> users = await getUsers();
     users.removeAt(index);
     saveUsers(users);

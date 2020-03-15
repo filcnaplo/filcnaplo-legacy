@@ -28,7 +28,6 @@ class BackgroundHelper {
 
   void doEvaluations(
       List<Evaluation> offlineEvals, List<Evaluation> evals) async {
-
     for (Evaluation e in evals) {
       bool exist = false;
       for (Evaluation o in offlineEvals)
@@ -93,8 +92,7 @@ class BackgroundHelper {
               if (absence.AbsenceId == offlineAbsence.AbsenceId) exist = true;
           });
           if (!exist) {
-            var androidPlatformChannelSpecifics =
-                AndroidNotificationDetails(
+            var androidPlatformChannelSpecifics = AndroidNotificationDetails(
               'absences',
               'mulasztások',
               'értesítések a hiányzásokról',
@@ -148,91 +146,99 @@ class BackgroundHelper {
   }
 
   void doLessons(Account account) async {
-    DateTime startDate = DateTime.now();
-    startDate = startDate.add(Duration(days: (-1 * startDate.weekday + 1)));
+    try {
+      DateTime startDate = DateTime.now();
+      startDate = startDate.add(Duration(days: (-1 * startDate.weekday + 1)));
 
-    List<Lesson> lessonsOffline = await getLessonsOffline(
-        startDate, startDate.add(Duration(days: 7)), account.user);
-    List<Lesson> lessons = await getLessons(
-        startDate, startDate.add(Duration(days: 7)), account.user, false);
+      List<Lesson> lessonsOffline = await getLessonsOffline(
+          startDate, startDate.add(Duration(days: 7)), account.user);
+      List<Lesson> lessons = await getLessons(
+          startDate, startDate.add(Duration(days: 7)), account.user, false);
 
-    bool nextLesson = await SettingsHelper().getNextLesson();
-    if (nextLesson) if (account.user.id == globals.accounts[0].user.id)
-      for (Lesson lesson in lessons) {
-        bool exist = false;
-        // Értesítés a következő óráról WIP
-        //print("1");
-        //print(lesson.end);
-        if (lesson.end.isAfter(DateTime.now()) &&
-            lesson.id != lessons.last.id) {
-          //print("2");
-          int index = lessons.indexOf(lesson);
-          //print("index: " + index.toString());
-          if (lessons[index].date == lessons[index + 1].date) {
-           // print("3");
-            //print(lesson.end.toIso8601String());
-            //print(lessons[index + 1].subject);
-            var scheduledNotificationDateTime = lesson.end;
-            var androidPlatformChannelSpecifics =
-                AndroidNotificationDetails('next-lesson', 'Következő óra',
-                    'Értesítés a következő óráról',
-                    playSound: false,
-                    enableVibration: false,
-                    color: Colors.blue);
+      bool nextLesson = await SettingsHelper().getNextLesson();
+      if (nextLesson) if (account.user.id == globals.accounts[0].user.id)
+        for (Lesson lesson in lessons) {
+          bool exist = false;
+          // Értesítés a következő óráról WIP
+          //print("1");
+          //print(lesson.end);
+          if (lesson.end.isAfter(DateTime.now()) &&
+              lesson.id != lessons.last.id) {
+            //print("2");
+            int index = lessons.indexOf(lesson);
+            //print("index: " + index.toString());
+            if (lessons[index].date == lessons[index + 1].date) {
+              // print("3");
+              //print(lesson.end.toIso8601String());
+              //print(lessons[index + 1].subject);
+              var scheduledNotificationDateTime = lesson.end;
+              var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+                  'next-lesson',
+                  'Következő óra',
+                  'Értesítés a következő óráról',
+                  playSound: false,
+                  enableVibration: false,
+                  color: Colors.blue);
+              var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+              NotificationDetails platformChannelSpecifics =
+                  NotificationDetails(androidPlatformChannelSpecifics,
+                      iOSPlatformChannelSpecifics);
+              await flutterLocalNotificationsPlugin.schedule(
+                  lesson.end.weekday * 24 * 3600 +
+                      lesson.end.hour * 3600 +
+                      lesson.end.minute * 60 +
+                      lesson.end.second,
+                  lessons[index + 1].subject +
+                      " " +
+                      ((lessons[index + 1].start.hour == lesson.end.hour)
+                          ? ""
+                          : (lessons[index + 1].start.hour - lesson.end.hour)
+                                  .toString() +
+                              " óra és ") +
+                      (lessons[index + 1].start.minute - lesson.end.minute)
+                          .toString() +
+                      " perc múlva",
+                  "Terem: " + lessons[index + 1].room,
+                  scheduledNotificationDateTime,
+                  platformChannelSpecifics,
+                  androidAllowWhileIdle: true);
+            }
+          }
+
+          for (Lesson offlineLesson in lessonsOffline) {
+            exist = (lesson.id == offlineLesson.id &&
+                ((lesson.isMissed && !offlineLesson.isMissed) ||
+                    (lesson.isSubstitution && !offlineLesson.isSubstitution)));
+          }
+          if (exist) {
+            var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+                'lessons',
+                'órák',
+                'értesítések elmaradt/helyettesített órákról',
+                importance: Importance.Max,
+                priority: Priority.High,
+                style: AndroidNotificationStyle.BigText,
+                color: Colors.blue);
             var iOSPlatformChannelSpecifics = IOSNotificationDetails();
-            NotificationDetails platformChannelSpecifics =
-                NotificationDetails(androidPlatformChannelSpecifics,
-                    iOSPlatformChannelSpecifics);
-            await flutterLocalNotificationsPlugin.schedule(
-                lesson.end.weekday * 24 * 3600 +
-                    lesson.end.hour * 3600 +
-                    lesson.end.minute * 60 +
-                    lesson.end.second,
-                lessons[index + 1].subject +
+            var platformChannelSpecifics = NotificationDetails(
+                androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+            flutterLocalNotificationsPlugin.show(
+                lesson.id,
+                lesson.subject +
                     " " +
-                    ((lessons[index + 1].start.hour == lesson.end.hour)
-                        ? ""
-                        : (lessons[index + 1].start.hour - lesson.end.hour)
-                                .toString() +
-                            " óra és ") +
-                    (lessons[index + 1].start.minute - lesson.end.minute)
-                        .toString() +
-                    " perc múlva",
-                "Terem: " + lessons[index + 1].room,
-                scheduledNotificationDateTime,
+                    lesson.date.toIso8601String().substring(0, 10),
+                lesson.stateName + " " + lesson.depTeacher,
                 platformChannelSpecifics,
-                androidAllowWhileIdle: true);
+                payload: lesson.id.toString());
           }
         }
-
-        for (Lesson offlineLesson in lessonsOffline) {
-          exist = (lesson.id == offlineLesson.id &&
-              ((lesson.isMissed && !offlineLesson.isMissed) ||
-                  (lesson.isSubstitution && !offlineLesson.isSubstitution)));
-        }
-        if (exist) {
-          var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-              'lessons', 'órák', 'értesítések elmaradt/helyettesített órákról',
-              importance: Importance.Max,
-              priority: Priority.High,
-              style: AndroidNotificationStyle.BigText,
-              color: Colors.blue);
-          var iOSPlatformChannelSpecifics = IOSNotificationDetails();
-          var platformChannelSpecifics = NotificationDetails(
-              androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-          flutterLocalNotificationsPlugin.show(
-              lesson.id,
-              lesson.subject +
-                  " " +
-                  lesson.date.toIso8601String().substring(0, 10),
-              lesson.stateName + " " + lesson.depTeacher,
-              platformChannelSpecifics,
-              payload: lesson.id.toString());
-        }
-      }
+    } catch (e) {
+      print("[e] BackgroundHelper.doLessons(): " + e.toString());
+    }
   }
 
   void doBackground() async {
+    print("[i] BackgroundHelper.doBackground() called");
     final storage = FlutterSecureStorage();
     String value = await storage.read(key: "db_key");
     if (value == null) {
@@ -252,21 +258,14 @@ class BackgroundHelper {
       accounts.add(Account(user));
     for (Account account in accounts) {
       try {
-     //   print(account.user.name);
+        //offfine check
         await account.refreshStudentString(true, false);
-
         List<Evaluation> offlineEvals = account.student.Evaluations;
-        // testing:
-        //offlineEvals.removeAt(0);
         List<Note> offlineNotes = account.notes;
-        // testing:
-        //offlineNotes.removeAt(0);
         Map<String, List<Absence>> offlineAbsences = account.absents;
-        // testing:
-        //offlineAbsences.remove(offlineAbsences.keys.first);
 
+        //online check
         await account.refreshStudentString(false, false);
-
         List<Evaluation> evals = account.student.Evaluations;
         List<Note> notes = account.notes;
         Map<String, List<Absence>> absences = account.absents;
@@ -274,19 +273,15 @@ class BackgroundHelper {
         doEvaluations(offlineEvals, evals);
         doNotes(offlineNotes, notes);
         doAbsences(offlineAbsences, absences);
-      } catch (e) {
-        print("[E] BackgroundHelper.doBackground()1: " + e.toString());
-      }
-
-      try {
         doLessons(account);
       } catch (e) {
-        print("[E] BackgroundHelper.doBackground()2: " + e.toString());
+        print("[E] BackgroundHelper.doBackground(): " + e.toString());
       }
     }
   }
 
   Future<int> backgroundTask() async {
+    print("[i] BackgroundHelper.backgroundTask() called");
     await Connectivity()
         .checkConnectivity()
         .then((ConnectivityResult result) async {
@@ -301,41 +296,41 @@ class BackgroundHelper {
     return 0;
   }
 
-  void backgroundFetchHeadlessTask() async {
-    var initializationSettingsAndroid =
-        AndroidInitializationSettings('notification_icon');
-    var initializationSettingsIOS = IOSInitializationSettings();
-    var initializationSettings = InitializationSettings(
-        initializationSettingsAndroid, initializationSettingsIOS);
-    flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-    flutterLocalNotificationsPlugin.initialize(initializationSettings);
+  void backgroundFetchHeadlessTask(String taskId) async {
+    print("[i] BackgroundHelper.backgroundFetchHeadlessTask() called");
+    try {
+      var initializationSettingsAndroid =
+          AndroidInitializationSettings('notification_icon');
+      var initializationSettingsIOS = IOSInitializationSettings();
+      var initializationSettings = InitializationSettings(
+          initializationSettingsAndroid, initializationSettingsIOS);
+      flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+      flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
-    await backgroundTask().then((int finished) {
-      BackgroundFetch.finish();
-    });
+      await backgroundTask();
+      BackgroundFetch.finish(taskId);
+    } catch (e) {
+      print("[e] BackgroundHelper.backgroundFetchHeadlessTask(): " +
+          e.toString());
+    }
   }
 
   Future<void> configure() async {
+    print("[i] BackgroundHelper.configure() called");
     if (await SettingsHelper().getNotification()) {
       await SettingsHelper()
           .getRefreshNotification()
           .then((int _refreshNotification) {
         BackgroundFetch.configure(
             BackgroundFetchConfig(
-              minimumFetchInterval: _refreshNotification,
-              stopOnTerminate: false,
-              forceReload: false,
-              enableHeadless: true,
-              startOnBoot: true,
-            ),
-            backgroundFetchHeadlessTask);
+                minimumFetchInterval: _refreshNotification,
+                stopOnTerminate: false,
+                enableHeadless: true,
+                startOnBoot: true), (String taskId) {
+          print('[BackgroundFetch] Event received.');
+          BackgroundFetch.finish(taskId);
+        });
       });
-    }
-  }
-
-  Future<void> register() async {
-    if (await SettingsHelper().getNotification()) {
-      BackgroundFetch.registerHeadlessTask(backgroundFetchHeadlessTask);
     }
   }
 }

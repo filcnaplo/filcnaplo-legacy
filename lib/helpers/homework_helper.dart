@@ -41,8 +41,7 @@ class HomeworkHelper {
   }
 
   Future<List<Homework>> getHomeworks(int time, bool showErrors) async {
-    List<Map<String, dynamic>> evaluationsMap =
-        List<Map<String, dynamic>>();
+    List<Map<String, dynamic>> evaluationsMap = List<Map<String, dynamic>>();
     List<Homework> homeworks = List<Homework>();
 
     evaluationsMap = await getHomeworkList(time, showErrors);
@@ -59,8 +58,7 @@ class HomeworkHelper {
   }
 
   Future<List<Homework>> getHomeworksOffline(int time) async {
-    List<Map<String, dynamic>> evaluationsMap =
-        List<Map<String, dynamic>>();
+    List<Map<String, dynamic>> evaluationsMap = List<Map<String, dynamic>>();
     List<Homework> homeworks = List<Homework>();
     List<User> users = await AccountManager().getUsers();
     for (User user in users) {

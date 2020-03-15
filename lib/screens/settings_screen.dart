@@ -20,7 +20,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(MaterialApp(home: SettingsScreen()));
-  BackgroundHelper().register();
 }
 
 class SettingsScreen extends StatefulWidget {
@@ -77,6 +76,7 @@ class SettingsScreenState extends State<SettingsScreen> {
 
   Future<bool> get canSyncOnData async =>
       await SettingsHelper().getCanSyncOnData();
+
   void _setNextLesson(bool value) async {
     setState(() {
       nextLesson = value;
@@ -150,7 +150,7 @@ class SettingsScreenState extends State<SettingsScreen> {
             )));
       }).catchError((e) {
         _scaffoldKey.currentState.showSnackBar(SnackBar(
-            backgroundColor: Colors.red,    
+            backgroundColor: Colors.red,
             duration: Duration(seconds: 3),
             content: Text(
               I18n.of(context).notificationFailed,
@@ -204,7 +204,7 @@ class SettingsScreenState extends State<SettingsScreen> {
     });
   }
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {

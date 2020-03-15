@@ -22,7 +22,7 @@ List<LessonEntry> lessonEntryBuilder(List<Lesson> lessons) {
       breakAfter = 0;
     }
 
-    lessonEntries.add(new LessonEntry(
+    lessonEntries.add(LessonEntry(
         lesson.id,
         lesson.count,
         lesson.date,

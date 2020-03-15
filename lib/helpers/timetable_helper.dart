@@ -58,7 +58,7 @@ Future<String> getLessonsJson(
 Future<List<Lesson>> getLessons(
     DateTime from, DateTime to, User user, bool showErrors) async {
   if (!user.getRecentlyRefreshed("getLessons" + fromToString(from, to))) {
-  //  print(user.lastRefreshMap);
+    //  print(user.lastRefreshMap);
     String code = await RequestHelper().getBearerToken(user, showErrors);
 
     String timetableString = await RequestHelper().getTimeTable(
@@ -66,7 +66,7 @@ Future<List<Lesson>> getLessons(
         to.toIso8601String().substring(0, 10),
         code,
         user.schoolCode);
-    
+
     List<dynamic> ttMap = json.decode(timetableString);
 
     await DBHelper().saveTimetableMap(fromToString(from, to), user, ttMap);

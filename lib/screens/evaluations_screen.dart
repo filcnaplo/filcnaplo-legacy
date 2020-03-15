@@ -49,8 +49,7 @@ class EvalCount extends StatelessWidget {
                     width: 40,
                     decoration: BoxDecoration(
                         color: getColors(context, value, true),
-                        borderRadius:
-                            BorderRadius.all(Radius.circular(40))),
+                        borderRadius: BorderRadius.all(Radius.circular(40))),
                   ),
                   Row(
                     children: <Widget>[
@@ -162,7 +161,8 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
     try {
       average = double.parse(avrString);
     } catch (e) {
-      print("[E] evaluationsScreen.getColorForAvarageString(): " + e.toString());
+      print(
+          "[E] evaluationsScreen.getColorForAvarageString(): " + e.toString());
     }
 
     return getColorForAverage(average);
@@ -235,17 +235,17 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
         .toList());
 
     if (endYearEvaluations.isNotEmpty)
-      summaryCardsToShow.add(
-          SummaryCard(endYearEvaluations, context, 4, false, true, false));
+      summaryCardsToShow
+          .add(SummaryCard(endYearEvaluations, context, 4, false, true, false));
     if (thirdQuarterEvaluations.isNotEmpty)
-      summaryCardsToShow.add(SummaryCard(
-          thirdQuarterEvaluations, context, 3, false, true, false));
+      summaryCardsToShow.add(
+          SummaryCard(thirdQuarterEvaluations, context, 3, false, true, false));
     if (halfYearEvaluations.isNotEmpty)
       summaryCardsToShow.add(
           SummaryCard(halfYearEvaluations, context, 2, false, true, false));
     if (firstQuarterEvaluations.isNotEmpty)
-      summaryCardsToShow.add(SummaryCard(firstQuarterEvaluations, context,
-          1, false, true, false)); //localization
+      summaryCardsToShow.add(SummaryCard(firstQuarterEvaluations, context, 1,
+          false, true, false)); //localization
 
     if (summaryCardsToShow.isEmpty)
       summaryCardsToShow.add(Card(
@@ -263,7 +263,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
         try {
           multiplier = double.parse(e.Weight.replaceAll("%", "")) / 100;
         } catch (e) {
-      print("[E] evaluationsScreen.getAllAverages(): " + e.toString());
+          print("[E] evaluationsScreen.getAllAverages(): " + e.toString());
         }
         sum += e.NumberValue * multiplier;
         n += multiplier;
@@ -284,7 +284,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           multiplier =
               double.parse(evaluation.Weight.replaceAll("%", "")) / 100;
         } catch (e) {
-      print("[E] evaluationsScreen.getAverage(): " + e.toString());
+          print("[E] evaluationsScreen.getAverage(): " + e.toString());
         }
         sum += evaluation.NumberValue * multiplier;
         db += multiplier;
@@ -399,7 +399,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           try {
             multiplier = double.parse(e.Weight.replaceAll("%", "")) / 100;
           } catch (e) {
-      print("[E] evaluationsScreen.callback(): " + e.toString());
+            print("[E] evaluationsScreen.callback(): " + e.toString());
           }
 
           sum += e.NumberValue * multiplier;
@@ -471,16 +471,16 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
 
     Card Separator(String text) {
       return Card(
-              color: globals.isDark ? Colors.grey[1000] : Colors.grey[300],
-              child: Container(
-                child: Text(
-                  text,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                alignment: Alignment(0, 0),
-                constraints: BoxConstraints.expand(height: 36),
-              ),
-              margin: EdgeInsets.only(top: 10, left: 30, right: 30, bottom: 3));
+          color: globals.isDark ? Colors.grey[1000] : Colors.grey[300],
+          child: Container(
+            child: Text(
+              text,
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            alignment: Alignment(0, 0),
+            constraints: BoxConstraints.expand(height: 36),
+          ),
+          margin: EdgeInsets.only(top: 10, left: 30, right: 30, bottom: 3));
     }
 
     Widget _allBuilder(BuildContext context, int index) {
@@ -556,7 +556,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
       );
     }
 
-    final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
     evaluationsBody = Scaffold(
         floatingActionButton: FloatingActionButton(
@@ -739,7 +739,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           Navigator.pushReplacementNamed(context, "/home");
         },
         child: Scaffold(
-          key: _scaffoldKey,
+            key: _scaffoldKey,
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: currentBody,
               items: <BottomNavigationBarItem>[
@@ -748,8 +748,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                     title: Text(I18n.of(context).evaluationNavigationAll)),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.show_chart),
-                  title:
-                      Text(I18n.of(context).evaluationNavigationStatistics),
+                  title: Text(I18n.of(context).evaluationNavigationStatistics),
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.star),
@@ -859,8 +858,8 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                         I18n.of(context).error,
                         style: TextStyle(color: Colors.white, fontSize: 16.0),
                       )));
-                      print("[E] evaluationsScreen._itemBuilder()1: " + exeption.toString());
-
+                  print("[E] evaluationsScreen._itemBuilder()1: " +
+                      exeption.toString());
                 }
               },
             ),

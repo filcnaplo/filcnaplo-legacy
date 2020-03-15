@@ -119,8 +119,7 @@ class TomorrowLessonCard extends StatelessWidget {
               }).toList()),
             ),
           ],
-          title: Text(
-              I18n.of(context).lessonTomorrowTitle),
+          title: Text(I18n.of(context).lessonTomorrowTitle),
           contentPadding: EdgeInsets.all(20),
           shape: RoundedRectangleBorder(
             side: BorderSide(

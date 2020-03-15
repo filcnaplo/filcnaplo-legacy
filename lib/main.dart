@@ -119,6 +119,15 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
+FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+void backgroundFetchHeadlessTask(String taskId) async {
+  print("[i] main.backgroundFetchHeadlessTask() called");
+  await BackgroundHelper().backgroundTask();
+  BackgroundFetch.finish(taskId);
+}
+
 void main({bool noReset = false}) async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -152,8 +161,6 @@ void main({bool noReset = false}) async {
     RequestHelper().refreshAppSettings();
 
     if (!isNew) {
-      BackgroundHelper().register();
-
       globals.isDark = await SettingsHelper().getDarkTheme();
       globals.isAmoled = await SettingsHelper().getAmoled();
       globals.isColor = await SettingsHelper().getColoredMainPage();
@@ -184,21 +191,4 @@ void main({bool noReset = false}) async {
 
 Future<void> reInit() async {
   runApp(MyApp());
-}
-
-FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
-
-void backgroundFetchHeadlessTask() async {
-  var initializationSettingsAndroid =
-      AndroidInitializationSettings('notification_icon');
-  var initializationSettingsIOS = IOSInitializationSettings();
-  var initializationSettings = InitializationSettings(
-      initializationSettingsAndroid, initializationSettingsIOS);
-  flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-  flutterLocalNotificationsPlugin.initialize(initializationSettings);
-
-  await BackgroundHelper().backgroundTask().then((int finished) {
-    BackgroundFetch.finish();
-  });
 }

@@ -64,8 +64,9 @@ Color color3 = Colors.orange;
 Color color4 = Color.fromARGB(255, 255, 151, 0);
 Color color5 = Colors.green;
 Color defaultColor = Color.fromARGB(255, 44, 160, 90);
-Color colorF1; //Foreground colors calculated for the values specified by the user. 
-               //See in mainScreen, _initSettings()
+Color
+    colorF1; //Foreground colors calculated for the values specified by the user.
+//See in mainScreen, _initSettings()
 Color colorF2;
 Color colorF3;
 Color colorF4;

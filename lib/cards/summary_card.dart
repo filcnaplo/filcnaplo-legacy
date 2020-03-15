@@ -49,7 +49,9 @@ class SummaryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
         color: !showColor
-            ? globals.isDark ? Color.fromARGB(255, 25, 25, 25) : Colors.grey[300]
+            ? globals.isDark
+                ? Color.fromARGB(255, 25, 25, 25)
+                : Colors.grey[300]
             : summaryEvaluations.first.owner.color ??
                 (globals.isDark
                     ? Color.fromARGB(255, 25, 25, 25)
@@ -107,9 +109,13 @@ class SummaryCard extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border.all(
                 color: !showColor
-                    ? globals.isDark ? Color.fromARGB(255, 25, 25, 25) : Colors.grey[300]
+                    ? globals.isDark
+                        ? Color.fromARGB(255, 25, 25, 25)
+                        : Colors.grey[300]
                     : summaryEvaluations.first.owner.color ??
-                        (globals.isDark ? Color.fromARGB(255, 25, 25, 25) : Colors.grey[300]),
+                        (globals.isDark
+                            ? Color.fromARGB(255, 25, 25, 25)
+                            : Colors.grey[300]),
                 width: 2.5),
             borderRadius: BorderRadius.all(Radius.circular(5)),
           ),

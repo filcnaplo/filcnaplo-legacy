@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/globals.dart' as globals;
+import 'dart:convert';
 
 class User {
   int id;
@@ -34,7 +35,7 @@ class User {
       color = Color(0);
     }
     try {
-      lastRefreshMap = json["lastRefreshMap"] ?? Map();
+      lastRefreshMap = json["lastRefreshMap"];
     } catch (e) {
       print("[E] User.fromJson(): " + e.toString());
     }
@@ -43,12 +44,14 @@ class User {
   bool isSelected() => id == globals.selectedUser.id;
 
   bool getRecentlyRefreshed(String request) {
-    if (lastRefreshMap != null) if (lastRefreshMap.containsKey(request))
-      return DateTime.now()
-              .difference(DateTime.parse(lastRefreshMap[request]))
-              .inMinutes <
-          RATE_LIMIT_MINUTES;
-
+    if (lastRefreshMap != null) {
+      if (lastRefreshMap.containsKey(request)) {
+        return DateTime.now()
+                .difference(DateTime.parse(lastRefreshMap[request]))
+                .inMinutes <
+            RATE_LIMIT_MINUTES;
+      }
+    }
     return false;
   }
 

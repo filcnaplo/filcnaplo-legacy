@@ -9,8 +9,7 @@ class AverageHelper {
 
     Map<String, dynamic> studentMap = json.decode(studentString);
 
-    List<Map<String, dynamic>> jsonAverageList =
-        List<Map<String, dynamic>>();
+    List<Map<String, dynamic>> jsonAverageList = List<Map<String, dynamic>>();
     for (dynamic jsonAverage in studentMap["SubjectAverages"])
       jsonAverageList.add(jsonAverage as Map<String, dynamic>);
 

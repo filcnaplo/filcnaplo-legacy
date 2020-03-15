@@ -55,8 +55,7 @@ class AbsentDialogState extends State<AbsentDialog> {
         children: <Widget>[
           Container(
             child: Text(
-              I18n
-                  .of(context)
+              I18n.of(context)
                   .absenceParental(sumOfParentalAbsences.toString()),
               style: TextStyle(fontSize: 16.0),
             ),

@@ -89,8 +89,7 @@ class AbsentsScreenState extends State<AbsentsScreen> {
                 }),
             message: I18n.of(context).statistics,
           ),
-        ]
-    );
+        ]);
   }
 
   Future<Null> _onRefresh({bool showErrors = true}) async {

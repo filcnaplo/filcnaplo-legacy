@@ -99,12 +99,12 @@ class LoginScreenState extends State<LoginScreen> {
     } catch (e) {
       print("[E] loginScreen.initJson(): " + e.toString());
       _scaffoldKey.currentState.showSnackBar(SnackBar(
-            backgroundColor: Colors.red,
-            duration: Duration(seconds: 3),
-            content: Text(
-              "Nem sikerült lekérni a Krétás iskolákat.",
-              style: TextStyle(color: Colors.white, fontSize: 16.0),
-            )));
+          backgroundColor: Colors.red,
+          duration: Duration(seconds: 3),
+          content: Text(
+            "Nem sikerült lekérni a Krétás iskolákat.",
+            style: TextStyle(color: Colors.white, fontSize: 16.0),
+          )));
       globals.jsonres = json.decode(data);
     }
 
@@ -245,7 +245,7 @@ class LoginScreenState extends State<LoginScreen> {
     Navigator.popAndPushNamed(context, "/about");
   }
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {

@@ -146,7 +146,8 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
       try {
         Lesson homeworkLesson = lessons.firstWhere((Lesson lesson) =>
             (lesson.subject == widget._subject &&
-                (lesson.teacher == widget._teacher || widget._teacher == null) &&
+                (lesson.teacher == widget._teacher ||
+                    widget._teacher == null) &&
                 lesson.start.isAfter(now) &&
                 now.day != lesson.start.day));
         Navigator.of(context).pop();
@@ -170,7 +171,8 @@ class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
       try {
         Lesson homeworkLesson = lessonsPrevious.lastWhere((Lesson lesson) =>
             (lesson.subject == widget._subject &&
-                (lesson.teacher == widget._teacher || widget._teacher == null) &&
+                (lesson.teacher == widget._teacher ||
+                    widget._teacher == null) &&
                 lesson.end.isBefore(now) &&
                 now.day != lesson.start.day));
         Navigator.of(context).pop();

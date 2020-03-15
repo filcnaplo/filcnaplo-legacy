@@ -80,7 +80,7 @@ class _LessonCardState extends State<LessonCard> {
                 lessons[lessons.indexOf(lesson) + 1].start.isAfter(now)))));
 
     globals.isCurrent = (globals.currentLesson.start.isBefore(now) &&
-            globals.currentLesson.end.isAfter(now));
+        globals.currentLesson.end.isAfter(now));
 
     quickLessons = [];
 
@@ -88,13 +88,18 @@ class _LessonCardState extends State<LessonCard> {
       LessonCardTab lessonCardTab;
       int topMinutes;
 
-      if (globals.isCurrent && globals.currentLesson == lessons[lessons.indexOf(lesson)]) {
-        topMinutes = lessons[lessons.indexOf(lesson)].end.difference(now).inMinutes;
+      if (globals.isCurrent &&
+          globals.currentLesson == lessons[lessons.indexOf(lesson)]) {
+        topMinutes =
+            lessons[lessons.indexOf(lesson)].end.difference(now).inMinutes;
         lessonCardTab = LessonCardTab.current;
-      } else if (lessons.asMap().containsKey(lessons.indexOf(lesson) + 1) && globals.currentLesson == lessons[lessons.indexOf(lesson) + 1]) {
+      } else if (lessons.asMap().containsKey(lessons.indexOf(lesson) + 1) &&
+          globals.currentLesson == lessons[lessons.indexOf(lesson) + 1]) {
         lessonCardTab = LessonCardTab.previous;
-      } else if (lessons.asMap().containsKey(lessons.indexOf(lesson) - 1) && globals.currentLesson == lessons[lessons.indexOf(lesson) - 1]) {
-        topMinutes = lessons[lessons.indexOf(lesson)].start.difference(now).inMinutes;
+      } else if (lessons.asMap().containsKey(lessons.indexOf(lesson) - 1) &&
+          globals.currentLesson == lessons[lessons.indexOf(lesson) - 1]) {
+        topMinutes =
+            lessons[lessons.indexOf(lesson)].start.difference(now).inMinutes;
         lessonCardTab = LessonCardTab.next;
       } else {
         lessonCardTab = LessonCardTab.normal;
@@ -104,20 +109,21 @@ class _LessonCardState extends State<LessonCard> {
           context,
           lesson,
           (lessonCardTab == LessonCardTab.current)
-          ? I18n.of(context).lessonCardNow((topMinutes + 1).toString())
-          : (lessonCardTab == LessonCardTab.previous)
-            ? I18n.of(context).lessonCardPrevious
-            : (lessonCardTab == LessonCardTab.next)
-              ? I18n.of(context).lessonCardNext((topMinutes + 1).toString())
-              : null,
+              ? I18n.of(context).lessonCardNow((topMinutes + 1).toString())
+              : (lessonCardTab == LessonCardTab.previous)
+                  ? I18n.of(context).lessonCardPrevious
+                  : (lessonCardTab == LessonCardTab.next)
+                      ? I18n.of(context)
+                          .lessonCardNext((topMinutes + 1).toString())
+                      : null,
           (lesson.breakAfter == 0) ? "" : lesson.breakAfter.toString(),
           (lesson.count == -1) ? "+" : lesson.count.toString(),
           lesson.subject,
           lesson.isMissed
               ? "❌ " + capitalize(I18n.of(context).substitutionMissed)
               : lesson.isSubstitution
-                ? "⭕ " + lesson.depTeacher
-                : lesson.teacher,
+                  ? "⭕ " + lesson.depTeacher
+                  : lesson.teacher,
           (lesson.isSubstitution ? 1 : lesson.isMissed ? 2 : 0),
           (lesson.homework != null) ? true : false,
           getLessonRangeText(lesson),
@@ -194,25 +200,25 @@ class _LessonCardState extends State<LessonCard> {
                     child: Row(
                       children: <Widget>[
                         (tabText != null)
-                        ? Container(
-                          child: Text(tabText,
-                              style: TextStyle(
-                                  color: globals.isDark
-                                      ? Colors.white
-                                      : Colors.black)),
-                          padding: EdgeInsets.fromLTRB(8, 1, 8, 0),
-                          decoration: BoxDecoration(
-                              color: globals.isDark
-                                  ? Color.fromARGB(255, 25, 25, 25)
-                                  : Colors.grey[350],
-                              boxShadow: [
-                                BoxShadow(blurRadius: 2, spreadRadius: -2)
-                              ],
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(4),
-                                  topRight: Radius.circular(4))),
-                        )
-                        : Container(height: 20),
+                            ? Container(
+                                child: Text(tabText,
+                                    style: TextStyle(
+                                        color: globals.isDark
+                                            ? Colors.white
+                                            : Colors.black)),
+                                padding: EdgeInsets.fromLTRB(8, 1, 8, 0),
+                                decoration: BoxDecoration(
+                                    color: globals.isDark
+                                        ? Color.fromARGB(255, 25, 25, 25)
+                                        : Colors.grey[350],
+                                    boxShadow: [
+                                      BoxShadow(blurRadius: 2, spreadRadius: -2)
+                                    ],
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(4),
+                                        topRight: Radius.circular(4))),
+                              )
+                            : Container(height: 20),
                       ],
                     ),
                   ),
@@ -230,13 +236,15 @@ class _LessonCardState extends State<LessonCard> {
                               fontSize: 30, fontWeight: FontWeight.bold)),
                       title: Text(capitalize(lessonSubject),
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color:
-                            (lessonState == 1)
-                            ? Colors.orange
-                            : (lessonState == 2)
-                              ? Colors.red
-                              : Theme.of(context).textTheme.body1.color)),
+                              fontWeight: FontWeight.bold,
+                              color: (lessonState == 1)
+                                  ? Colors.orange
+                                  : (lessonState == 2)
+                                      ? Colors.red
+                                      : Theme.of(context)
+                                          .textTheme
+                                          .body1
+                                          .color)),
                       subtitle: Text(
                         lessonSubtitle,
                         maxLines: 1,

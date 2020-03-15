@@ -107,8 +107,8 @@ class NoteCard extends StatelessWidget {
               !isSingle
                   ? Container(
                       child: Text(dateToHuman(note.date),
-                          style: TextStyle(
-                              fontSize: 16.0, color: Colors.white)),
+                          style:
+                              TextStyle(fontSize: 16.0, color: Colors.white)),
                       alignment: Alignment(1.0, -1.0),
                       padding: EdgeInsets.fromLTRB(5.0, 5.0, 10.0, 5.0),
                     )
@@ -184,7 +184,9 @@ class NoteCard extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border.all(
                 color: globals.isColor
-                    ? note.isEvent ? Colors.lightBlueAccent[400] : Colors.blue[600]
+                    ? note.isEvent
+                        ? Colors.lightBlueAccent[400]
+                        : Colors.blue[600]
                     : globals.isDark
                         ? Color.fromARGB(255, 25, 25, 25)
                         : Colors.white,

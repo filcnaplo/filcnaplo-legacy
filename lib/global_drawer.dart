@@ -329,23 +329,22 @@ class GlobalDrawerState extends State<GlobalDrawer> {
                 Navigator.pushReplacementNamed(context, "/absents");
               },
             ),
-            
-             ListTile(
-               leading: Icon(
-                 Icons.supervisor_account,
-                 color: screen == 4 ? Theme.of(context).accentColor : null,
-               ),
-               title: Text(
-                 capitalize(I18n.of(context).accountTitle),
-                 style: TextStyle(
-                     color: screen == 4 ? Theme.of(context).accentColor : null),
-               ),
-               onTap: () {
-                 screen = 4;
-                 Navigator.pop(context); // close the drawer
-                 Navigator.pushReplacementNamed(context, "/accounts");
-               },
-             ),
+            ListTile(
+              leading: Icon(
+                Icons.supervisor_account,
+                color: screen == 4 ? Theme.of(context).accentColor : null,
+              ),
+              title: Text(
+                capitalize(I18n.of(context).accountTitle),
+                style: TextStyle(
+                    color: screen == 4 ? Theme.of(context).accentColor : null),
+              ),
+              onTap: () {
+                screen = 4;
+                Navigator.pop(context); // close the drawer
+                Navigator.pushReplacementNamed(context, "/accounts");
+              },
+            ),
             ListTile(
               leading: Icon(
                 Icons.settings,

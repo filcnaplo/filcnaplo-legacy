@@ -91,7 +91,7 @@ class EvaluationCard extends StatelessWidget {
         typeIcon = Icons.border_color;
         typeName = "röpdolgozat";
         break;
-     case "Írásbeli dolgozat":
+      case "Írásbeli dolgozat":
         typeIcon = Icons.border_color;
         typeName = "dolgozat";
         break;
@@ -284,8 +284,7 @@ class EvaluationCard extends StatelessWidget {
                           : Container(),
                       evaluation.Theme != null
                           ? Text(evaluation.Theme,
-                              style:
-                                  TextStyle(color: fColor, fontSize: 18.0))
+                              style: TextStyle(color: fColor, fontSize: 18.0))
                           : Container(),
                       Text(
                         evaluation.Teacher,
@@ -375,8 +374,7 @@ class EvaluationCard extends StatelessWidget {
                             !isSingle
                                 ? Expanded(
                                     child: Container(
-                                      child: Text(
-                                          evaluation.owner.name ?? "",
+                                      child: Text(evaluation.owner.name ?? "",
                                           maxLines: 1,
                                           softWrap: false,
                                           overflow: TextOverflow.fade,

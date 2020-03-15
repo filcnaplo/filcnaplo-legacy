@@ -266,7 +266,8 @@ class HomeScreenState extends State<HomeScreen> {
         barrierDismissible: true,
         context: context,
         builder: (BuildContext context) {
-          return ChooseLessonDialog(0, globals.currentLesson.subject, globals.currentLesson.teacher);
+          return ChooseLessonDialog(
+              0, globals.currentLesson.subject, globals.currentLesson.teacher);
         });
   }
 
@@ -300,7 +301,7 @@ class HomeScreenState extends State<HomeScreen> {
     return children;
   }
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {

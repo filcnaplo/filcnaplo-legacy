@@ -75,8 +75,8 @@ class TimeTableScreenState extends State<TimeTableScreen>
     int current = process;
     ended = false;
     DateTime startDate = now;
-    startDate = startDate.add(
-        Duration(days: (-1 * startDate.weekday + 1 + 7 * relativeWeek)));
+    startDate = startDate
+        .add(Duration(days: (-1 * startDate.weekday + 1 + 7 * relativeWeek)));
 
     setState(() {
       lessonsWeek = null;
@@ -134,8 +134,8 @@ class TimeTableScreenState extends State<TimeTableScreen>
 
     initSelectedUser();
     startDateText = now;
-    startDateText = startDateText.add(Duration(
-        days: (-1 * startDateText.weekday + 1 + 7 * relativeWeek)));
+    startDateText = startDateText.add(
+        Duration(days: (-1 * startDateText.weekday + 1 + 7 * relativeWeek)));
     refreshWeek(first: true);
   }
 
@@ -154,7 +154,7 @@ class TimeTableScreenState extends State<TimeTableScreen>
   @override
   Widget build(BuildContext context) {
     globals.context = context;
-    
+
     return WillPopScope(
       onWillPop: () {
         globals.screen = 0;
@@ -378,8 +378,8 @@ class TimeTableScreenState extends State<TimeTableScreen>
       DateTime startDate, bool offline, bool showErrors) async {
     List<Lesson> list;
     if (offline)
-      list = await getLessonsOffline(startDate,
-          startDate.add(Duration(days: 6)), globals.selectedUser);
+      list = await getLessonsOffline(
+          startDate, startDate.add(Duration(days: 6)), globals.selectedUser);
     else
       list = await getLessons(startDate, startDate.add(Duration(days: 6)),
           globals.selectedUser, showErrors);
@@ -428,7 +428,7 @@ class TimeTableScreenState extends State<TimeTableScreen>
     saturday.sort((Lesson a, Lesson b) => a.start.compareTo(b.start));
     sunday.sort((Lesson a, Lesson b) => a.start.compareTo(b.start));
 
-    return Week(monday, tuesday, wednesday, thursday, friday, saturday,
-        sunday, startDate);
+    return Week(monday, tuesday, wednesday, thursday, friday, saturday, sunday,
+        startDate);
   }
 }
