@@ -23,6 +23,12 @@ import 'package:filcnaplo/helpers/timetable_helper.dart';
 import 'package:unicorndial/unicorndial.dart';
 import 'package:filcnaplo/dialogs/choose_lesson_dialog.dart';
 import 'package:filcnaplo/globals.dart' as globals;
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
+
+String generateMd5(String input) {
+  return md5.convert(utf8.encode(input)).toString();
+}
 
 void main() {
   runApp(MaterialApp(
@@ -181,15 +187,25 @@ class HomeScreenState extends State<HomeScreen> {
         feedCards.add(SummaryCard(
             endYearEvaluations, context, 4, false, true, !globals.isSingle));
     }
-
+    List<String> noteHashes = [];
     for (String day in absents.keys.toList())
       feedCards.add(AbsenceCard(absents[day], globals.isSingle, context));
     for (Evaluation evaluation in evaluations.where((Evaluation evaluation) =>
         !evaluation.isSummaryEvaluation())) //Only add non-summary evals
       feedCards.add(EvaluationCard(
           evaluation, globals.isColor, globals.isSingle, context));
-    for (Note note in notes)
-      feedCards.add(NoteCard(note, globals.isSingle, context));
+    for (Note note in notes) {
+      Codec<String, String> stringToBase64 = utf8.fuse(base64);
+      String currentNoteHash = generateMd5(stringToBase64.encode(note.content));
+
+      if (!noteHashes.contains(currentNoteHash)) {
+        feedCards.add(NoteCard(note, globals.isSingle, context));
+      } else {
+        print("[i] home_screen.feedItems(): skipped duplicate note #" +
+            currentNoteHash);
+      }
+      noteHashes.add(currentNoteHash);
+    }
     for (Lesson l in lessons.where((Lesson lesson) =>
         (lesson.isMissed || lesson.isSubstitution) && lesson.date.isAfter(now)))
       feedCards.add(ChangedLessonCard(l, context));
