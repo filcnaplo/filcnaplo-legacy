@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/globals.dart' as globals;
-import 'dart:convert';
 
 class User {
   int id;

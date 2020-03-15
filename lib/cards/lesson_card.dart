@@ -1,4 +1,3 @@
-import 'package:filcnaplo/dialogs/choose_lesson_dialog.dart';
 import 'package:filcnaplo/models/lesson_entry.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/globals.dart' as globals;
@@ -70,14 +69,16 @@ class _LessonCardState extends State<LessonCard> {
     });
   }
 
-  void _lessonCardBackend(
+  List<Lesson> _lessonCardBackend(
       DateTime now, List<Lesson> justLessons, bool isLessonsTomorrow) {
     List<LessonEntry> lessons = lessonEntryBuilder(justLessons);
 
-    globals.currentLesson = lessons.firstWhere((LessonEntry lesson) =>
-        (((lesson.start.isBefore(now) && lesson.end.isAfter(now)) ||
-            (lesson.end.isBefore(now) &&
-                lessons[lessons.indexOf(lesson) + 1].start.isAfter(now)))));
+    globals.currentLesson = lessons.firstWhere(
+        (LessonEntry lesson) =>
+            (((lesson.start.isBefore(now) && lesson.end.isAfter(now)) ||
+                (lesson.end.isBefore(now) &&
+                    lessons[lessons.indexOf(lesson) + 1].start.isAfter(now)))),
+        orElse: null);
 
     globals.isCurrent = (globals.currentLesson.start.isBefore(now) &&
         globals.currentLesson.end.isAfter(now));
@@ -120,21 +121,44 @@ class _LessonCardState extends State<LessonCard> {
           (lesson.count == -1) ? "+" : lesson.count.toString(),
           lesson.subject,
           lesson.isMissed
-              ? "❌ " + capitalize(I18n.of(context).substitutionMissed)
+              ? Row(children: [
+                  Icon(Icons.clear, color: Colors.red),
+                  Text(capitalize(I18n.of(context).substitutionMissed))
+                ])
               : lesson.isSubstitution
-                  ? "⭕ " + lesson.depTeacher
-                  : lesson.teacher,
+                  ? Row(children: [
+                      Icon(Icons.compare_arrows, color: Colors.yellow),
+                      Text(
+                        lesson.depTeacher,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: false,
+                      )
+                    ])
+                  : Text(
+                      lesson.teacher,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: false,
+                    ),
           (lesson.isSubstitution ? 1 : lesson.isMissed ? 2 : 0),
           (lesson.homework != null) ? true : false,
           getLessonRangeText(lesson),
           lesson.room));
     }
+
+    return lessons;
   }
 
   @override
   Widget build(BuildContext context) {
     now = DateTime.now();
-    _lessonCardBackend(now, widget.lessons, widget.isLessonsTomorrow);
+    List<Lesson> lessons;
+    try {
+      lessons =
+          _lessonCardBackend(now, widget.lessons, widget.isLessonsTomorrow);
+    } catch (_) {}
+
     return Column(
       children: <Widget>[
         (quickLessons.length > 0)
@@ -152,7 +176,9 @@ class _LessonCardState extends State<LessonCard> {
                       viewportFraction: 0.95,
                       scale: 0.9,
                       loop: false,
-                      index: isInit ? 1 : null,
+                      index: isInit
+                          ? lessons.indexOf(globals.currentLesson)
+                          : null,
                       pagination: SwiperCustomPagination(builder:
                           (BuildContext context, SwiperPluginConfig config) {
                         return Align(
@@ -182,7 +208,7 @@ class _LessonCardState extends State<LessonCard> {
     String breakLength,
     String lessonNumber,
     String lessonSubject,
-    String lessonSubtitle,
+    Widget lessonSubtitle,
     int lessonState, //0: normally held, 1: substituted, 2: not held
     bool hasHomework,
     String startTime,
@@ -245,12 +271,7 @@ class _LessonCardState extends State<LessonCard> {
                                           .textTheme
                                           .body1
                                           .color)),
-                      subtitle: Text(
-                        lessonSubtitle,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        softWrap: false,
-                      ),
+                      subtitle: lessonSubtitle,
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
@@ -284,7 +305,8 @@ class _LessonCardState extends State<LessonCard> {
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(6),
                       bottomLeft: Radius.circular(6),
-                      bottomRight: Radius.circular(6)),
+                      bottomRight: Radius.circular(6),
+                      topLeft: Radius.circular(tabText != null ? 0 : 6)),
                 ),
               ),
             ],

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:filcnaplo/dialogs/choose_lesson_dialog.dart';
+import 'package:filcnaplo/dialogs/add_homework_dialog.dart';
 import 'package:filcnaplo/helpers/request_helper.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';

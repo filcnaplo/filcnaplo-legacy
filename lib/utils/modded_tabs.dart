@@ -48,6 +48,7 @@ class TabPageSelectorIndicator extends StatelessWidget {
             day,
             style: TextStyle(
               color: Colors.white,
+              fontSize: 20.0,
             ),
           ),
         ),
@@ -58,8 +59,8 @@ class TabPageSelectorIndicator extends StatelessWidget {
         ),
         color: backgroundColor,
       ),
-      height: size,
-      width: size,
+      height: 30.0,
+      width: 40.0,
       margin: const EdgeInsets.all(2.0),
     );
   }

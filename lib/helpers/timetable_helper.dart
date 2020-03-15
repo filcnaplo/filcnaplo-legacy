@@ -6,9 +6,6 @@ import 'package:filcnaplo/models/lesson.dart';
 import 'package:filcnaplo/helpers/request_helper.dart';
 import 'package:filcnaplo/helpers/database_helper.dart';
 import 'package:filcnaplo/models/user.dart';
-import 'package:filcnaplo/generated/i18n.dart';
-import 'package:filcnaplo/globals.dart' as globals;
-import 'package:fluttertoast/fluttertoast.dart';
 
 Future<List<Lesson>> getLessonsOffline(
     DateTime from, DateTime to, User user) async {

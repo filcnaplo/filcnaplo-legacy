@@ -7,7 +7,7 @@ import 'package:filcnaplo/utils/string_formatter.dart';
 import 'package:filcnaplo/helpers/homework_helper.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:html_unescape/html_unescape.dart';
-import 'add_homework_dialog.dart';
+import 'package:filcnaplo/dialogs/homework_editor_dialog.dart';
 
 class HomeworkDialog extends StatefulWidget {
   const HomeworkDialog(this.lesson);

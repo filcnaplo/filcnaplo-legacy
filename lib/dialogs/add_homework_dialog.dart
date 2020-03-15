@@ -1,70 +1,199 @@
-import 'package:filcnaplo/helpers/request_helper.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/models/lesson.dart';
 import 'package:filcnaplo/globals.dart' as globals;
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:filcnaplo/utils/string_formatter.dart';
+import 'package:filcnaplo/helpers/timetable_helper.dart';
+import 'package:filcnaplo/dialogs/homework_editor_dialog.dart';
 
-class NewHomeworkDialog extends StatefulWidget {
-  const NewHomeworkDialog(this.lesson);
-  final Lesson lesson;
+enum SearchFor { next, previous }
+bool suppliedData;
+
+class ChooseLessonDialog extends StatefulWidget {
+  String _subject;
+  String _teacher;
+  bool init = true;
+
+  ChooseLessonDialog([int searchForInt, String _subject, String _teacher]) {
+    suppliedData = true;
+
+    if (_subject == null) {
+      _subject = "...";
+      suppliedData = false;
+    }
+    this._subject = _subject;
+
+    this._teacher = _teacher;
+  }
 
   @override
-  NewHomeworkDialogState createState() => NewHomeworkDialogState();
+  _ChooseLessonDialogState createState() => _ChooseLessonDialogState();
 }
 
-class NewHomeworkDialogState extends State<NewHomeworkDialog> {
-  String homework;
-  bool uploading = false;
+class _ChooseLessonDialogState extends State<ChooseLessonDialog> {
+  List<String> subjects = [];
+  List<Lesson> lessons = [];
+  List<Lesson> lessonsPrevious = [];
+  DateTime now = DateTime.now();
+  SearchFor _searchFor = SearchFor.next;
 
   Widget build(BuildContext context) {
+    if (suppliedData) {
+      _searchFor = SearchFor.next;
+    }
+
+    if (subjects.isEmpty) _getLessons();
+    if (subjects.isNotEmpty &&
+        !subjects.contains(widget._subject) &&
+        widget._subject != "...") {
+      Navigator.of(context).pop();
+      Fluttertoast.showToast(msg: I18n.of(context).chooseSubjectNotFound);
+      print("[E] No lesson is recorded with '" +
+          widget._subject +
+          "' subject next week.");
+    }
+
     return SimpleDialog(
-      title: Column(
-        children: <Widget>[
-          Text(capitalize(I18n.of(context).homeworkAdd)),
-          Text(
-              widget.lesson.subject +
-                  " • " +
-                  lessonToHuman(widget.lesson) +
-                  capitalize(dateToWeekDay(widget.lesson.start, context)),
-              style: TextStyle(
-                  fontSize: 15,
-                  color: globals.isDark ? Colors.grey : Colors.black54)),
-          Divider(color: globals.isDark ? Colors.grey : Colors.black54)
-        ],
-        crossAxisAlignment: CrossAxisAlignment.start,
-      ),
-      contentPadding: const EdgeInsets.all(10.0),
+      title: Text(capitalize(I18n.of(context).homeworkAdd) + "..."),
       children: <Widget>[
-        TextField(
-          keyboardType: TextInputType.multiline,
-          maxLines: 10,
-          onChanged: (String text) {
-            homework = text;
-          },
-        ),
-        uploading
-            ? LinearProgressIndicator()
-            : MaterialButton(
-                child: Text(I18n.of(context).dialogOk.toUpperCase()),
-                onPressed: _uploadHomework,
+        widget.init
+            ? Column(
+                children: <Widget>[
+                  Container(
+                      width: 45,
+                      height: 45,
+                      padding: EdgeInsets.all(10),
+                      child: CircularProgressIndicator()),
+                  Text(I18n.of(context).chooseLoading),
+                ],
               )
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  ListTile(
+                      leading: Radio(
+                        value: SearchFor.next,
+                        groupValue: _searchFor,
+                        onChanged: (SearchFor value) {
+                          setState(() {
+                            _searchFor = value;
+                          });
+                        },
+                      ),
+                      title: Text(I18n.of(context).chooseNext)),
+                  ListTile(
+                      leading: Radio(
+                        value: SearchFor.previous,
+                        groupValue: _searchFor,
+                        onChanged: (SearchFor value) {
+                          setState(() {
+                            _searchFor = value;
+                          });
+                        },
+                      ),
+                      title: Text(I18n.of(context).choosePrevious)),
+                  Container(
+                    child: DropdownButton<String>(
+                      value: widget._subject,
+                      items: subjects.map((String subject) {
+                        return DropdownMenuItem<String>(
+                            value: subject, child: Text(capitalize(subject)));
+                      }).toList(),
+                      onChanged: (String selectedSubject) {
+                        setState(() {
+                          widget._subject = selectedSubject;
+                        });
+                      },
+                    ),
+                  ),
+                  Text(
+                    I18n.of(context).chooseForLesson,
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  Container(
+                    child: FlatButton(
+                      child: Text(I18n.of(context).chooseAdd.toUpperCase(),
+                          style: TextStyle(
+                              color: (widget._subject == "...")
+                                  ? Colors.grey
+                                  : Theme.of(context).accentColor,
+                              fontWeight: FontWeight.bold)),
+                      onPressed: (widget._subject == "...")
+                          ? null
+                          : _openHomeworkDialog,
+                    ),
+                    margin: EdgeInsets.only(top: 10),
+                  )
+                ],
+              ),
       ],
     );
   }
 
-  void _uploadHomework() async {
-    setState(() {
-      uploading = true;
-    });
-
-    if (await RequestHelper().uploadHomework(
-        homework, widget.lesson, globals.selectedAccount.user)) {
-      Navigator.of(context).pop();
+  void _openHomeworkDialog() async {
+    if (_searchFor == SearchFor.next) {
+      try {
+        Lesson homeworkLesson = lessons.firstWhere((Lesson lesson) =>
+            (lesson.subject == widget._subject &&
+                (lesson.teacher == widget._teacher ||
+                    widget._teacher == null) &&
+                lesson.start.isAfter(now) &&
+                now.day != lesson.start.day));
+        Navigator.of(context).pop();
+        return showDialog(
+            barrierDismissible: true,
+            context: context,
+            builder: (BuildContext context) {
+              return (NewHomeworkDialog(homeworkLesson));
+            });
+      } catch (e) {
+        Fluttertoast.showToast(msg: I18n.of(context).chooseSubjectNotFound);
+        throw (e);
+      }
     } else {
-      setState(() {
-        uploading = false;
-      });
+      widget.init = true;
+      setState(() {});
+
+      lessonsPrevious = await getLessons(
+          now.subtract(Duration(days: 7)), now, globals.selectedUser, false);
+      widget.init = false;
+      try {
+        Lesson homeworkLesson = lessonsPrevious.lastWhere((Lesson lesson) =>
+            (lesson.subject == widget._subject &&
+                (lesson.teacher == widget._teacher ||
+                    widget._teacher == null) &&
+                lesson.end.isBefore(now) &&
+                now.day != lesson.start.day));
+        Navigator.of(context).pop();
+        return showDialog(
+            barrierDismissible: true,
+            context: context,
+            builder: (BuildContext context) {
+              return NewHomeworkDialog(homeworkLesson);
+            });
+      } catch (e) {
+        Fluttertoast.showToast(msg: I18n.of(context).chooseSubjectNotFound);
+        throw (e);
+      }
+    }
+  }
+
+  void _getLessons() async {
+    widget.init = true;
+    setState(() {});
+    lessons = await getLessons(
+        now, now.add(Duration(days: 7)), globals.selectedUser, false);
+    for (Lesson lesson in lessons) {
+      if (!subjects.contains(lesson.subject)) subjects.add(lesson.subject);
+    }
+    subjects.sort((a, b) => a.compareTo(b));
+    subjects.insert(0, "...");
+    widget.init = false;
+    setState(() {});
+
+    if (suppliedData) {
+      _openHomeworkDialog();
     }
   }
 

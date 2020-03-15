@@ -20,8 +20,7 @@ import 'package:filcnaplo/global_drawer.dart';
 import 'package:filcnaplo/helpers/background_helper.dart';
 import 'package:filcnaplo/helpers/settings_helper.dart';
 import 'package:filcnaplo/helpers/timetable_helper.dart';
-import 'package:unicorndial/unicorndial.dart';
-import 'package:filcnaplo/dialogs/choose_lesson_dialog.dart';
+import 'package:filcnaplo/dialogs/add_homework_dialog.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
@@ -287,36 +286,6 @@ class HomeScreenState extends State<HomeScreen> {
         });
   }
 
-  Widget _unicornOption({IconData iconData, String hero, Function onPressed}) {
-    return UnicornButton(
-        currentButton: FloatingActionButton(
-      heroTag: hero,
-      mini: true,
-      child: Icon(iconData),
-      onPressed: onPressed,
-    ));
-  }
-
-  List<UnicornButton> _getUnicornMenu() {
-    List<UnicornButton> children = [];
-
-    if (globals.currentLesson != null) {
-      children.add(_unicornOption(
-          iconData: Icons.home,
-          hero: I18n.of(context).homeworkAdd,
-          onPressed: _addHomeworkToThisSubject));
-    }
-
-    children.add(_unicornOption(
-        iconData: IconData(0xf520, fontFamily: "Material Design Icons"),
-        hero: I18n.of(context).drawerTimetable,
-        onPressed: () {
-          Navigator.pushReplacementNamed(context, "/timetable");
-        }));
-
-    return children;
-  }
-
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -364,10 +333,6 @@ class HomeScreenState extends State<HomeScreen> {
                   ),
                 ]))
               : Center(child: CircularProgressIndicator()),
-          floatingActionButton: UnicornDialer(
-            parentButton: Icon(Icons.menu),
-            childButtons: _getUnicornMenu(),
-          ),
         ));
   }
 

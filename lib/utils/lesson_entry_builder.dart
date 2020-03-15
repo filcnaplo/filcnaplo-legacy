@@ -1,6 +1,5 @@
 import 'package:filcnaplo/models/lesson.dart';
 import 'package:filcnaplo/models/lesson_entry.dart';
-import 'dart:async';
 
 List<LessonEntry> lessonEntryBuilder(List<Lesson> lessons) {
   List<LessonEntry> lessonEntries = [];
