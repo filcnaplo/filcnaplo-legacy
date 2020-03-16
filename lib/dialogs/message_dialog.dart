@@ -3,7 +3,7 @@ import 'package:filcnaplo/helpers/message_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:html_unescape/html_unescape.dart';
-
+import 'package:filcnaplo/utils/string_formatter.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 
@@ -50,8 +50,10 @@ class MessageDialogState extends State<MessageDialog> {
         children: <Widget>[
           Container(
             child: Text(
-              I18n.of(context).messageReceivers +
-                  currentMessage.receivers.join(", "),
+              capitalize(I18n.of(context).messageReceivers) +
+                  ": " +
+                  currentMessage.receivers.join(", ") +
+                  "\n",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),

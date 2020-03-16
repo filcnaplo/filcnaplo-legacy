@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/globals.dart' as globals;
+import 'dart:convert';
 
 class User {
   int id;
@@ -18,23 +19,25 @@ class User {
   User(this.id, this.username, this.password, this.name, this.schoolCode,
       this.schoolUrl, this.schoolName, this.parentName, this.parentId);
 
-  User.fromJson(Map json) {
-    id = json["id"];
-    username = json["username"];
-    password = json["password"];
-    name = json["name"];
-    schoolCode = json["schoolCode"];
-    schoolUrl = json["schoolUrl"];
-    schoolName = json["schoolName"];
-    parentName = json["parentName"];
-    parentId = json["parentId"];
+  User.fromJson(Map userJson) {
+    id = userJson["id"];
+    username = userJson["username"];
+    password = userJson["password"];
+    name = userJson["name"];
+    schoolCode = userJson["schoolCode"];
+    schoolUrl = userJson["schoolUrl"];
+    schoolName = userJson["schoolName"];
+    parentName = userJson["parentName"];
+    parentId = userJson["parentId"];
     try {
-      color = Color(json["color"]);
+      color = Color(userJson["color"]);
     } catch (e) {
       color = Color(0);
     }
     try {
-      lastRefreshMap = json["lastRefreshMap"];
+      // lastRefreshMap = userJson["lastRefreshMap"];
+      print("[i] User.fromJson(): lastRefreshMap size = " +
+          (userJson["lastRefreshMap"].length).toString());
     } catch (e) {
       print("[E] User.fromJson(): " + e.toString());
     }
