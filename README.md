@@ -25,5 +25,5 @@ Első sikeres, lényegi változást tartalmazó commitod után meghívunk a fejl
  
  
 ### Credits:
-* [Szivacs Napló](https://github.com/boapps/Szivacs-Naplo/)
+* [Szivacs Napló](https://github.com/boapps/Szivacs-Naplo/) - Az app a Szivacson alapul, de az eredeti készítő nem vesz részt a Filc projektben.
 * [Made with Flutter](https://flutter.dev/)
