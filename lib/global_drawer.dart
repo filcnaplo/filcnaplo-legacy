@@ -1,11 +1,10 @@
 import 'package:filcnaplo/generated/i18n.dart';
-import 'package:flutter/material.dart';
-
+import 'package:filcnaplo/globals.dart';
 import 'package:filcnaplo/models/account.dart';
 import 'package:filcnaplo/models/user.dart';
-import 'package:filcnaplo/globals.dart';
 import 'package:filcnaplo/screens/student_screen.dart';
 import 'package:filcnaplo/utils/string_formatter.dart';
+import 'package:flutter/material.dart';
 
 BuildContext ctx;
 
@@ -201,169 +200,112 @@ class GlobalDrawerState extends State<GlobalDrawer> {
                     margin: EdgeInsets.all(0),
                   )
                 : Container(),
-            ListTile(
-              leading: Icon(
-                Icons.dashboard,
-                color: screen == 0 ? Theme.of(context).accentColor : null,
-              ),
-              title: Text(
-                capitalize(I18n.of(context).drawerHome),
-                style: TextStyle(
-                    color: screen == 0 ? Theme.of(context).accentColor : null),
-              ),
-              onTap: () {
-                screen = 0;
-                Navigator.pop(context); // close the drawer
-                Navigator.pushReplacementNamed(context, "/home");
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                IconData(0xF474, fontFamily: "Material Design Icons"),
-                color: screen == 1 ? Theme.of(context).accentColor : null,
-              ),
-              title: Text(
-                capitalize(I18n.of(context).drawerEvaluations),
-                style: TextStyle(
-                    color: screen == 1 ? Theme.of(context).accentColor : null),
-              ),
-              onTap: () {
-                screen = 1;
-                Navigator.pop(context); // close the drawer
-                Navigator.pushReplacementNamed(context, "/evaluations");
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                IconData(0xf520, fontFamily: "Material Design Icons"),
-                color: screen == 2 ? Theme.of(context).accentColor : null,
-              ),
-              title: Text(
-                capitalize(I18n.of(context).drawerTimetable),
-                style: TextStyle(
-                    color: screen == 2 ? Theme.of(context).accentColor : null),
-              ),
-              onTap: () {
-                screen = 2;
-                Navigator.pop(context); // close the drawer
-                Navigator.pushReplacementNamed(context, "/timetable");
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                IconData(0xf2dc, fontFamily: "Material Design Icons"),
-                color: screen == 8 ? Theme.of(context).accentColor : null,
-              ),
-              title: Text(
-                capitalize(I18n.of(context).drawerHomeworks),
-                style: TextStyle(
-                    color: screen == 8 ? Theme.of(context).accentColor : null),
-              ),
-              onTap: () {
-                screen = 8;
-                Navigator.pop(context); // close the drawer
-                Navigator.pushReplacementNamed(context, "/homework");
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                IconData(0xf0e5, fontFamily: "Material Design Icons"),
-                color: screen == 3 ? Theme.of(context).accentColor : null,
-              ),
-              title: Text(
-                capitalize(I18n.of(context).drawerNotes),
-                style: TextStyle(
-                    color: screen == 3 ? Theme.of(context).accentColor : null),
-              ),
-              onTap: () {
-                screen = 3;
-                Navigator.pop(context); // close the drawer
-                Navigator.pushReplacementNamed(context, "/notes");
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.assignment,
-                color: screen == 10 ? Theme.of(context).accentColor : null,
-              ),
-              title: Text(
-                capitalize(I18n.of(context).drawerTests),
-                style: TextStyle(
-                    color: screen == 10 ? Theme.of(context).accentColor : null),
-              ),
-              onTap: () {
-                screen = 10;
-                Navigator.pop(context); // close the drawer
-                Navigator.pushReplacementNamed(context, "/tests");
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                IconData(0xF361, fontFamily: "Material Design Icons"),
-                color: screen == 11 ? Theme.of(context).accentColor : null,
-              ),
-              title: Text(
-                capitalize(I18n.of(context).drawerMessages),
-                style: TextStyle(
-                    color: screen == 11 ? Theme.of(context).accentColor : null),
-              ),
-              onTap: () {
-                screen = 11;
-                Navigator.pop(context); // close the drawer
-                Navigator.pushReplacementNamed(context, "/messages");
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.block,
-                color: screen == 5 ? Theme.of(context).accentColor : null,
-              ),
-              title: Text(
-                capitalize(I18n.of(context).drawerAbsences),
-                style: TextStyle(
-                    color: screen == 5 ? Theme.of(context).accentColor : null),
-              ),
-              onTap: () {
-                screen = 5;
-                Navigator.pop(context); // close the drawer
-                Navigator.pushReplacementNamed(context, "/absents");
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.supervisor_account,
-                color: screen == 4 ? Theme.of(context).accentColor : null,
-              ),
-              title: Text(
-                capitalize(I18n.of(context).accountTitle),
-                style: TextStyle(
-                    color: screen == 4 ? Theme.of(context).accentColor : null),
-              ),
-              onTap: () {
-                screen = 4;
-                Navigator.pop(context); // close the drawer
-                Navigator.pushReplacementNamed(context, "/accounts");
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.settings,
-                color: screen == 7 ? Theme.of(context).accentColor : null,
-              ),
-              title: Text(
-                capitalize(I18n.of(context).drawerSettings),
-                style: TextStyle(
-                    color: screen == 7 ? Theme.of(context).accentColor : null),
-              ),
-              onTap: () {
-                screen = 7;
-                Navigator.pop(context); // close the drawer
-                Navigator.pushReplacementNamed(context, "/settings");
-              },
-            ),
+            MenuPoint(
+                icon: Icons.dashboard,
+                text: I18n
+                    .of(context)
+                    .drawerHome,
+                route: "/home",
+                screenID: 0),
+            MenuPoint(
+                icon: IconData(0xF474, fontFamily: "Material Design Icons"),
+                text: I18n
+                    .of(context)
+                    .drawerEvaluations,
+                route: "/evaluations",
+                screenID: 1),
+            MenuPoint(
+                icon: IconData(0xf520, fontFamily: "Material Design Icons"),
+                text: I18n
+                    .of(context)
+                    .drawerTimetable,
+                route: "/timetable",
+                screenID: 2),
+            MenuPoint(
+                icon: IconData(0xf2dc, fontFamily: "Material Design Icons"),
+                text: I18n
+                    .of(context)
+                    .drawerHomeworks,
+                route: "/homework",
+                screenID: 8),
+            MenuPoint(
+                icon: IconData(0xf0e5, fontFamily: "Material Design Icons"),
+                text: I18n
+                    .of(context)
+                    .drawerNotes,
+                route: "/notes",
+                screenID: 3),
+            MenuPoint(
+                icon: Icons.assignment,
+                text: I18n
+                    .of(context)
+                    .drawerTests,
+                route: "/tests",
+                screenID: 10),
+            MenuPoint(
+                icon: IconData(0xF361, fontFamily: "Material Design Icons"),
+                text: I18n
+                    .of(context)
+                    .drawerMessages,
+                route: "/messages",
+                screenID: 11),
+            MenuPoint(
+                icon: Icons.block,
+                text: I18n
+                    .of(context)
+                    .drawerAbsences,
+                route: "/absents",
+                screenID: 5),
+            MenuPoint(
+                icon: Icons.supervisor_account,
+                text: I18n
+                    .of(context)
+                    .accountTitle,
+                route: "/accounts",
+                screenID: 4),
+            MenuPoint(
+                icon: Icons.settings,
+                text: I18n
+                    .of(context)
+                    .drawerSettings,
+                route: "/settings",
+                screenID: 7)
           ],
         ),
       ),
+    );
+  }
+}
+
+class MenuPoint extends StatelessWidget {
+  final IconData icon;
+  final String text;
+  final String route;
+  final int screenID;
+
+  MenuPoint({this.icon, this.text, this.route, this.screenID});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(
+        icon,
+        color: screen == screenID ? Theme
+            .of(context)
+            .accentColor : null,
+      ),
+      title: Text(
+        capitalize(text),
+        style: TextStyle(
+            color: screen == screenID ? Theme
+                .of(context)
+                .accentColor : null),
+      ),
+      onTap: () {
+        screen = screenID;
+        Navigator.pop(context); // close the drawer
+        Navigator.pushReplacementNamed(context, route);
+      },
     );
   }
 }
