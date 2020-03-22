@@ -1,19 +1,20 @@
 import 'dart:async';
-import 'dart:ui';
 import 'dart:io';
+import 'dart:ui';
+
 import 'package:background_fetch/background_fetch.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:filcnaplo/generated/i18n.dart';
+import 'package:filcnaplo/global_drawer.dart';
+import 'package:filcnaplo/globals.dart' as globals;
+import 'package:filcnaplo/helpers/background_helper.dart';
+import 'package:filcnaplo/helpers/request_helper.dart';
+import 'package:filcnaplo/helpers/settings_helper.dart';
+import 'package:filcnaplo/utils/color_manager.dart';
+import 'package:filcnaplo/utils/string_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:filcnaplo/global_drawer.dart';
-import 'package:filcnaplo/helpers/background_helper.dart';
-import 'package:filcnaplo/helpers/settings_helper.dart';
-import 'package:filcnaplo/helpers/request_helper.dart';
-import 'package:filcnaplo/utils/color_manager.dart';
-import 'package:filcnaplo/utils/string_formatter.dart';
-import 'package:filcnaplo/globals.dart' as globals;
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
@@ -35,12 +36,17 @@ class SettingsScreenState extends State<SettingsScreen> {
   bool _smartUserAgent;
   bool nextLesson;
   String _lang = "";
-  static const LANG_LIST = {"hu": "Magyar", "en": "English", "de": "Deutsch"};
+  static const Map<String, String> LANG_LIST = {
+    "hu": "Magyar",
+    "en": "English",
+    "de": "Deutsch"
+  };
   final List<int> refreshArray = [15, 60, 90, 120, 360, 720];
   int _refreshNotification;
   int _theme;
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
+
   void _initSet() async {
     _isColor = await SettingsHelper().getColoredMainPage();
     _isDark = await SettingsHelper().getDarkTheme();
@@ -233,49 +239,41 @@ class SettingsScreenState extends State<SettingsScreen> {
             child: _isColor != null
                 ? ListView(
                     children: <Widget>[
-                      SwitchListTile(
-                        title: Text(
-                          I18n.of(context).settingsColorful,
-                          style: TextStyle(fontSize: 20.0),
-                        ),
-                        activeColor: Theme.of(context).accentColor,
+                      MySwitchListTile(
+                        text: I18n
+                            .of(context)
+                            .settingsColorful,
+                        icon: IconData(0xf266,
+                            fontFamily: "Material Design Icons"),
                         value: _isColor,
                         onChanged: _isColorChange,
-                        secondary: Icon(IconData(0xf266,
-                            fontFamily: "Material Design Icons")),
                       ),
-                      SwitchListTile(
-                        title: Text(
-                          I18n.of(context).settingsDarkTheme,
-                          style: TextStyle(fontSize: 20.0),
-                        ),
-                        activeColor: Theme.of(context).accentColor,
+                      MySwitchListTile(
+                        text: I18n
+                            .of(context)
+                            .settingsDarkTheme,
+                        icon: IconData(
+                            0xf50e, fontFamily: "Material Design Icons"),
                         value: _isDark,
                         onChanged: _isDarkChange,
-                        secondary: Icon(IconData(0xf50e,
-                            fontFamily: "Material Design Icons")),
                       ),
-                      SwitchListTile(
-                        title: Text(
-                          I18n.of(context).settingsAmoled,
-                          style: TextStyle(fontSize: 20.0),
-                        ),
-                        activeColor: Theme.of(context).accentColor,
+                      MySwitchListTile(
+                        text: I18n
+                            .of(context)
+                            .settingsAmoled,
+                        icon: IconData(
+                            0xf301, fontFamily: "Material Design Icons"),
                         value: _isDark ? _amoled : false,
                         onChanged: _isDark ? _setAmoled : null,
-                        secondary: Icon(IconData(0xf301,
-                            fontFamily: "Material Design Icons")),
                       ),
-                      SwitchListTile(
-                        title: Text(
-                          I18n.of(context).settingsSmart,
-                          style: TextStyle(fontSize: 20.0),
-                        ),
-                        activeColor: Theme.of(context).accentColor,
+                      MySwitchListTile(
+                        text: I18n
+                            .of(context)
+                            .settingsSmart,
+                        icon: IconData(
+                            0xfcbf, fontFamily: "Material Design Icons"),
                         value: _smartUserAgent,
                         onChanged: _smartUserAgentChange,
-                        secondary: Icon(IconData(0xfcbf,
-                            fontFamily: "Material Design Icons")),
                       ),
                       ListTile(
                         title: Text(
@@ -323,26 +321,22 @@ class SettingsScreenState extends State<SettingsScreen> {
                         ),
                         leading: Icon(Icons.color_lens),
                       ),
-                      SwitchListTile(
-                        title: Text(
-                          I18n.of(context).settingsNotifications,
-                          style: TextStyle(fontSize: 20.0),
-                        ),
-                        activeColor: Theme.of(context).accentColor,
+                      MySwitchListTile(
+                        text: I18n
+                            .of(context)
+                            .settingsNotifications,
+                        icon: IconData(
+                            0xf09a, fontFamily: "Material Design Icons"),
                         value: _isNotification,
                         onChanged: _isNotificationChange,
-                        secondary: Icon(IconData(0xf09a,
-                            fontFamily: "Material Design Icons")),
                       ),
-                      SwitchListTile(
-                        title: Text(
-                          I18n.of(context).settingsNextLesson,
-                          style: TextStyle(fontSize: 20.0),
-                        ),
+                      MySwitchListTile(
+                        text: I18n
+                            .of(context)
+                            .settingsNextLesson,
+                        icon: Icons.access_time,
                         value: nextLesson,
-                        activeColor: Theme.of(context).accentColor,
                         onChanged: _isNotification ? _setNextLesson : null,
-                        secondary: Icon(Icons.access_time),
                       ),
                       _isNotification
                           ? PopupMenuButton<int>(
@@ -452,5 +446,30 @@ class SettingsScreenState extends State<SettingsScreen> {
     } else {
       throw 'Could not launch $url';
     }
+  }
+}
+
+class MySwitchListTile extends StatelessWidget {
+  final String text;
+  final IconData icon;
+  final bool value;
+  final Function onChanged;
+
+  MySwitchListTile({this.text, this.icon, this.value, this.onChanged});
+
+  @override
+  Widget build(BuildContext context) {
+    return SwitchListTile(
+      title: Text(
+        text,
+        style: TextStyle(fontSize: 20.0),
+      ),
+      activeColor: Theme
+          .of(context)
+          .accentColor,
+      value: value,
+      onChanged: onChanged,
+      secondary: Icon(icon),
+    );
   }
 }

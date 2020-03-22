@@ -79,49 +79,46 @@ class ImportScreenState extends State<ImportScreen> {
                     },
                     controller: controller,
                   ),
-                  Container(
-                    child: RaisedButton(
-                      onPressed: () async {
-                        PermissionHandler()
-                            .requestPermissions([PermissionGroup.storage]).then(
-                                (Map<PermissionGroup, PermissionStatus>
-                                    permissions) async {
-                          File importFile = File(path);
-                          List<Map<String, dynamic>> userMap = List();
-                          String data = importFile.readAsStringSync();
-                          List<dynamic> userList = json.decode(data);
-                          for (dynamic d in userList)
-                            userMap.add(d as Map<String, dynamic>);
+                  RaisedButton(
+                    onPressed: () async {
+                      PermissionHandler()
+                          .requestPermissions([PermissionGroup.storage]).then(
+                              (Map<PermissionGroup, PermissionStatus>
+                                  permissions) async {
+                        File importFile = File(path);
+                        List<Map<String, dynamic>> userMap = List();
+                        String data = importFile.readAsStringSync();
+                        List<dynamic> userList = json.decode(data);
+                        for (dynamic d in userList)
+                          userMap.add(d as Map<String, dynamic>);
 
-                          List<User> users = List();
-                          if (userMap.isNotEmpty)
-                            for (Map<String, dynamic> m in userMap)
-                              users.add(User.fromJson(m));
-                          List<Color> colors = [
-                            Colors.blue,
-                            Colors.green,
-                            Colors.red,
-                            Colors.black,
-                            Colors.brown,
-                            Colors.orange
-                          ];
-                          Iterator<Color> cit = colors.iterator;
-                          for (User u in users) {
-                            cit.moveNext();
-                            if (u.color.value == 0) u.color = cit.current;
-                          }
+                        List<User> users = List();
+                        if (userMap.isNotEmpty)
+                          for (Map<String, dynamic> m in userMap)
+                            users.add(User.fromJson(m));
+                        List<Color> colors = [
+                          Colors.blue,
+                          Colors.green,
+                          Colors.red,
+                          Colors.black,
+                          Colors.brown,
+                          Colors.orange
+                        ];
+                        Iterator<Color> cit = colors.iterator;
+                        for (User u in users) {
+                          cit.moveNext();
+                          if (u.color.value == 0) u.color = cit.current;
+                        }
 
-                          DBHelper().saveUsersJson(users);
+                        DBHelper().saveUsersJson(users);
 
-                          SystemChannels.platform
-                              .invokeMethod('SystemNavigator.pop');
-                        });
-                      },
-                      child: Text(
-                        "Import",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      color: Colors.green[700],
+                        SystemChannels.platform
+                            .invokeMethod('SystemNavigator.pop');
+                      });
+                    },
+                    child: Text(
+                      "Import",
+                      style: TextStyle(color: Colors.white),
                     ),
                     color: Colors.green[700],
                   ),
