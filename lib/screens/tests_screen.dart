@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/screens/screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart' as launcher;
 
 import 'package:filcnaplo/models/test.dart';
@@ -117,12 +116,9 @@ class TestsScreenState extends State<TestsScreen> {
           subtitle: Column(children: <Widget>[
             Container(
               padding: EdgeInsets.all(5),
-              child: Linkify(
+              child: Text(
+                tests[index].subject + " " + tests[index].mode,
                 style: TextStyle(fontSize: 16),
-                text: tests[index].subject + " " + tests[index].mode,
-                onOpen: (String url) {
-                  launcher.launch(url);
-                },
               ),
             ),
             Container(

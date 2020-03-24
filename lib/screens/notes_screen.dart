@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart' as launcher;
 
 import 'package:filcnaplo/models/note.dart';
@@ -112,12 +111,9 @@ class NotesScreenState extends State<NotesScreen> {
           subtitle: Column(children: <Widget>[
             Container(
               padding: EdgeInsets.all(5),
-              child: Linkify(
+              child: Text(
+                notes[index].content,
                 style: TextStyle(fontSize: 16),
-                text: notes[index].content,
-                onOpen: (String url) {
-                  launcher.launch(url);
-                },
               ),
             ),
             Container(

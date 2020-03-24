@@ -1,7 +1,6 @@
 import 'package:filcnaplo/models/homework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:filcnaplo/models/note.dart';
 import 'package:url_launcher/url_launcher.dart' as launcher;
@@ -36,11 +35,8 @@ class HomeworkCard extends StatelessWidget {
         return SimpleDialog(
           children: <Widget>[
             SingleChildScrollView(
-              child: Linkify(
-                text: note.content,
-                onOpen: (String url) {
-                  launcher.launch(url);
-                },
+              child: Text(
+                note.content,
               ),
             ),
           ],

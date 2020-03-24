@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:filcnaplo/models/note.dart';
 import 'package:filcnaplo/utils/string_formatter.dart';
 import 'package:url_launcher/url_launcher.dart' as launcher;
@@ -38,11 +37,8 @@ class NoteCard extends StatelessWidget {
         return SimpleDialog(
           children: <Widget>[
             SingleChildScrollView(
-              child: Linkify(
-                text: note.content,
-                onOpen: (String url) {
-                  launcher.launch(url);
-                },
+              child: Text(
+                note.content,
                 style: TextStyle(fontSize: 18.0),
               ),
             ),
