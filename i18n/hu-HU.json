@@ -265,7 +265,7 @@
         "colorful": "Színes főoldal",
         "darkTheme": "Sötét üzemmód",
         "amoled": "Amoled",
-        "smart": "Hamis adatlekérés KRÉTA appként (gyorsabb)",
+        "useAgent": "Lekérések KRÉTA appként",
         "evaluationColors": "Jegyek színe",
         "notifications": "Értesítések",
         "nextLesson": "Következő óra",

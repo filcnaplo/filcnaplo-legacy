@@ -269,7 +269,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                       MySwitchListTile(
                         text: I18n
                             .of(context)
-                            .settingsSmart,
+                            .settingsUseAgent,
                         icon: IconData(
                             0xfcbf, fontFamily: "Material Design Icons"),
                         value: _smartUserAgent,

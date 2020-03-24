@@ -265,7 +265,7 @@
         "colorful": "Colorful home",
         "darkTheme": "Dark theme",
         "amoled": "Amoled",
-        "smart": "Use fake KRÉTA agent (faster)",
+        "useAgent": "Send requests as KRÉTA",
         "evaluationColors": "Grade colors",
         "notifications": "Notifications",
         "nextLesson": "Next class",

@@ -67,8 +67,6 @@ class GlobalDrawerState extends State<GlobalDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    double c_width = MediaQuery.of(context).size.width * 0.5;
-    // TODO: implement build
     return Drawer(
       child: Container(
         color: Theme.of(context).scaffoldBackgroundColor,
