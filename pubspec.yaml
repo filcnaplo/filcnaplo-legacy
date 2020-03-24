@@ -1,5 +1,6 @@
 name: filcnaplo
-description: A Szivacs Naplóból forkolt enapló alkalmazás KRÉTA rendszerhez.
+description: Nem hivatalos e-napló alkalmazás az e-Kréta rendszerhez
+version: 1.4.2+15
 
 dependencies:
   background_fetch: '^0.5.1'
