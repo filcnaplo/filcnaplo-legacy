@@ -1,23 +1,21 @@
-import 'dart:ui';
-import 'package:filcnaplo/models/account.dart';
-import 'package:flutter/material.dart';
-import 'package:filcnaplo/generated/i18n.dart';
-import 'package:filcnaplo/models/user.dart';
-import 'package:filcnaplo/utils/saver.dart' as Saver;
-import 'package:filcnaplo/globals.dart' as globals;
-import 'package:path_provider/path_provider.dart';
-import 'dart:io';
-import 'package:permission_handler/permission_handler.dart';
 import 'dart:convert' show json;
-import 'package:csv/csv.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:date_range_picker/date_range_picker.dart' as DateRagePicker;
-import 'package:filcnaplo/helpers/timetable_helper.dart';
-import "package:filcnaplo/screens/screen.dart";
+import 'dart:io';
 
-void main() {
-  runApp(MaterialApp(home: ExportScreen()));
-}
+import 'package:csv/csv.dart';
+import 'package:date_range_picker/date_range_picker.dart' as DateRagePicker;
+import 'package:filcnaplo/generated/i18n.dart';
+import 'package:filcnaplo/globals.dart' as globals;
+import 'package:filcnaplo/helpers/timetable_helper.dart';
+import 'package:filcnaplo/models/account.dart';
+import 'package:filcnaplo/models/user.dart';
+import "package:filcnaplo/screens/screen.dart";
+import 'package:filcnaplo/utils/saver.dart' as Saver;
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+void main() => runApp(MaterialApp(home: ExportScreen()));
 
 class ExportScreen extends StatefulWidget {
   @override
@@ -29,399 +27,342 @@ class ExportScreenState extends State<ExportScreen> {
   void initState() {
     super.initState();
     setState(() {
-      initPath();
+      init();
     });
   }
 
-  //TODO refactor everything below this
-
-  void initPath() async {
-    path = (await getExternalStorageDirectory()).path +
-        "/grades-" +
-        selectedUser.username +
-        ".json";
-    controller.text = path;
+  void init() async {
+    rootPath = (await getExternalStorageDirectory()).path;
+    updateURL();
   }
 
-  TextEditingController controller = TextEditingController();
-  User selectedUser = globals.users[0];
+  //region final variables
+  final TextEditingController controller = TextEditingController();
+  String rootPath; //nemtom hogy ez hogy legyen final
+
   List<String> get exportOptions => [
         I18n.of(context).exportGrades,
         I18n.of(context).exportLessons,
         I18n.of(context).exportAccounts
-      ];
-  List<String> formatOptions = ["JSON", "CSV"];
-  List<String> formats = [".json", ".csv"];
+  ]; // a sorrend változtatása a hibás működéshez vezet!
+  final List<String> formatOptions = [
+    "JSON",
+    "CSV"
+  ]; // a sorrend változtatása a hibás működéshez vezet!
+  final List<String> formats = [
+    ".json",
+    ".csv"
+  ]; // a sorrend változtatása a hibás működéshez vezet!
+  //endregion
+  //region operation varriables
+  String fullPath;
+  User selectedUser = globals.users[0];
   int selectedData = 0;
   int selectedFormat = 0;
-  String path = "";
   String selectedDate;
   List<DateTime> pickedDate;
 
+  //endregion
+
+  void updateURL() {
+    setState(() {
+      String filename;
+      switch (selectedData) {
+        case 0:
+          filename = "/grades-" + selectedUser.name;
+          break;
+        case 1:
+          filename = "/lessons-" + selectedUser.name;
+          break;
+        case 2:
+          selectedFormat = 0; //json
+          filename = "/users";
+          break;
+      }
+      fullPath =
+          rootPath + filename.replaceAll(' ', '_') + formats[selectedFormat];
+      controller.text = fullPath;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    globals.context = context;
+    // TODO: implement build
     return Screen(
         Text(I18n.of(context).appTitle),
         Center(
           child: SingleChildScrollView(
             padding: EdgeInsets.all(20),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                DropdownButton(
-                  items: exportOptions.map((String exportData) {
-                    return DropdownMenuItem(
-                      child: Text(exportData),
-                      value: exportData,
-                    );
-                  }).toList(),
-                  onChanged: (exportData) async {
-                    selectedData = exportOptions.indexOf(exportData);
-                    switch (selectedData) {
-                      case 0:
-                        path = (await getExternalStorageDirectory()).path +
-                            "/grades-" +
-                            selectedUser.username +
-                            formats[selectedFormat];
-                        break;
-                      case 1:
-                        path = (await getExternalStorageDirectory()).path +
-                            "/lessons-" +
-                            selectedUser.username +
-                            formats[selectedFormat];
-                        break;
-                      case 2:
-                        path = (await getExternalStorageDirectory()).path +
-                            "/users" +
-                            formats[selectedFormat];
-                        break;
-                    }
-                    controller.text = path;
-                    setState(() {});
-                  },
-                  value: exportOptions[selectedData],
-                ),
-                (selectedData != 2)
-                    ? DropdownButton(
-                        items: globals.users.map((User user) {
-                          return DropdownMenuItem(
-                            child: Text(user.name),
-                            value: user,
-                          );
-                        }).toList(),
-                        onChanged: (user) {
-                          setState(() {
-                            selectedUser = user;
-                          });
-                        },
-                        value: selectedUser,
-                      )
-                    : Container(),
-                (selectedData == 1)
-                    ? MaterialButton(
-                        color: selectedDate == null
-                            ? Colors.deepOrangeAccent
-                            : Colors.green,
-                        onPressed: () async {
-                          final List<DateTime> picked =
-                              await DateRagePicker.showDatePicker(
-                                  context: context,
-                                  initialFirstDate: DateTime.now().subtract(
-                                      Duration(
-                                          days: DateTime.now().weekday - 1)),
-                                  initialLastDate: DateTime.now().subtract(
-                                      Duration(
-                                          days: DateTime.now().weekday - 7)),
-                                  firstDate: DateTime(2018),
-                                  lastDate: DateTime(2025));
-                          if (picked != null && picked.length == 2) {
-                            pickedDate = picked;
-                            selectedDate = picked[0]
-                                    .toIso8601String()
-                                    .substring(0, 10) +
-                                "  -  " +
-                                picked[1].toIso8601String().substring(0, 10);
-                            setState(() {});
-                          }
-                        },
-                        child:
-                            Text(selectedDate ?? I18n.of(context).exportChoose),
-                      )
-                    : Container(),
-                (selectedData != 2)
-                    ? DropdownButton(
-                        items: formatOptions.map((String exportFormat) {
-                          return DropdownMenuItem(
-                            child: Text(exportFormat),
-                            value: exportFormat,
-                          );
-                        }).toList(),
-                        onChanged: (exportFormat) async {
-                          selectedFormat = formatOptions.indexOf(exportFormat);
-
-                          switch (selectedData) {
-                            case 0:
-                              path =
-                                  (await getExternalStorageDirectory()).path +
-                                      "/grades-" +
-                                      selectedUser.username +
-                                      formats[selectedFormat];
-                              break;
-                            case 1:
-                              path =
-                                  (await getExternalStorageDirectory()).path +
-                                      "/lessons-" +
-                                      selectedUser.username +
-                                      formats[selectedFormat];
-                              break;
-                            case 2:
-                              path =
-                                  (await getExternalStorageDirectory()).path +
-                                      "/users" +
-                                      formats[selectedFormat];
-                              break;
-                          }
-                          controller.text = path;
-                          setState(() {});
-                        },
-                        value: formatOptions[selectedFormat],
-                      )
-                    : Container(),
-                TextField(
-                  onChanged: (text) {
-                    path = text;
-                  },
-                  controller: controller,
-                ),
-                Container(
-                  child: RaisedButton(
-                    onPressed: () async {
-                      switch (selectedData) {
-                        case 0:
-                          switch (selectedFormat) {
-                            case 0:
-                              Account selectedAccount = globals.accounts
-                                  .firstWhere((Account a) =>
-                                      a.user.id == selectedUser.id);
-                              String data = selectedAccount.getStudentString();
-                              File file = File(path);
-                              PermissionHandler().requestPermissions([
-                                PermissionGroup.storage
-                              ]).then((Map<PermissionGroup, PermissionStatus>
-                                  permissions) {
-                                file.writeAsString(data).then((File f) {
-                                  if (f.existsSync())
-                                    Fluttertoast.showToast(
-                                        msg: I18n.of(context).exportSuccess +
-                                            ": " +
-                                            path,
-                                        backgroundColor: Colors.green,
-                                        textColor: Colors.white,
-                                        fontSize: 16.0);
-                                });
-                              });
-                              break;
-                            case 1:
-                              Account selectedAccount = globals.accounts
-                                  .firstWhere((Account a) =>
-                                      a.user.id == selectedUser.id);
-                              Map data = selectedAccount.getStudentJson();
-                              List<List<dynamic>> csvList = [
-                                [
-                                  "EvaluationId",
-                                  "Form",
-                                  "FormName",
-                                  "Type",
-                                  "TypeName",
-                                  "Subject",
-                                  "SubjectCategory",
-                                  "SubjectCategoryName",
-                                  "Theme",
-                                  "Mode",
-                                  "Weight",
-                                  "Value",
-                                  "NumberValue",
-                                  "SeenByTutelaryUTC",
-                                  "Teacher",
-                                  "Date",
-                                  "CreatingTime"
-                                ]
-                              ];
-                              for (var jegy in data["Evaluations"])
-                                csvList.add([
-                                  jegy["EvaluationId"],
-                                  jegy["Form"],
-                                  jegy["FormName"],
-                                  jegy["Type"],
-                                  jegy["TypeName"],
-                                  jegy["Subject"],
-                                  jegy["SubjectCategory"],
-                                  jegy["SubjectCategoryName"],
-                                  jegy["Theme"],
-                                  jegy["Mode"],
-                                  jegy["Weight"],
-                                  jegy["Value"],
-                                  jegy["NumberValue"],
-                                  jegy["SeenByTutelaryUTC"],
-                                  jegy["Teacher"],
-                                  jegy["Date"],
-                                  jegy["CreatingTime"]
-                                ]);
-                              String csv =
-                                  const ListToCsvConverter().convert(csvList);
-                              File file = File(path);
-                              PermissionHandler().requestPermissions([
-                                PermissionGroup.storage
-                              ]).then((Map<PermissionGroup, PermissionStatus>
-                                  permissions) {
-                                file.writeAsString(csv).then((File f) {
-                                  if (f.existsSync())
-                                    Fluttertoast.showToast(
-                                        msg: I18n.of(context).exportSuccess +
-                                            ": " +
-                                            path,
-                                        backgroundColor: Colors.green,
-                                        textColor: Colors.white,
-                                        fontSize: 16.0);
-                                });
-                              });
-                          }
-                          break;
-                        case 2:
-                          //user
-                          String data = json.encode(await Saver.readUsers());
-                          File file = File(path);
-                          PermissionHandler().requestPermissions([
-                            PermissionGroup.storage
-                          ]).then((Map<PermissionGroup, PermissionStatus>
-                              permissions) {
-                            file.writeAsString(data).then((File f) {
-                              if (f.existsSync())
-                                Fluttertoast.showToast(
-                                    msg: I18n.of(context).exportSuccess +
-                                        ": " +
-                                        path,
-                                    backgroundColor: Colors.green,
-                                    textColor: Colors.white,
-                                    fontSize: 16.0);
-                            });
-                          });
-                          break;
-                        case 1:
-                          //orarend
-                          switch (selectedFormat) {
-                            case 0:
-                              String data = await getLessonsJson(pickedDate[0],
-                                  pickedDate[1], selectedUser, true);
-                              File file = File(path);
-                              PermissionHandler().requestPermissions([
-                                PermissionGroup.storage
-                              ]).then((Map<PermissionGroup, PermissionStatus>
-                                  permissions) {
-                                file.writeAsString(data).then((File f) {
-                                  if (f.existsSync())
-                                    Fluttertoast.showToast(
-                                        msg: I18n.of(context).exportSuccess +
-                                            ": " +
-                                            path,
-                                        backgroundColor: Colors.green,
-                                        textColor: Colors.white,
-                                        fontSize: 16.0);
-                                });
-                              });
-                              break;
-                            case 1:
-                              var data = json.decode(await getLessonsJson(
-                                  pickedDate[0],
-                                  pickedDate[1],
-                                  selectedUser,
-                                  true));
-                              List<List<dynamic>> csvList = [
-                                [
-                                  "LessonId",
-                                  "CalendarOraType",
-                                  "Count",
-                                  "Date",
-                                  "StartTime",
-                                  "EndTime",
-                                  "Subject",
-                                  "SubjectCategory",
-                                  "SubjectCategoryName",
-                                  "ClassRoom",
-                                  "ClassGroup",
-                                  "Teacher",
-                                  "DeputyTeacher",
-                                  "State",
-                                  "StateName",
-                                  "PresenceType",
-                                  "PresenceTypeName",
-                                  "TeacherHomeworkId",
-                                  "IsTanuloHaziFeladatEnabled",
-                                  "Theme",
-                                  "Homework"
-                                ]
-                              ];
-                              for (var ora in data)
-                                csvList.add([
-                                  ora["LessonId"],
-                                  ora["CalendarOraType"],
-                                  ora["Count"],
-                                  ora["Date"],
-                                  ora["StartTime"],
-                                  ora["EndTime"],
-                                  ora["Subject"],
-                                  ora["SubjectCategory"],
-                                  ora["SubjectCategoryName"],
-                                  ora["ClassRoom"],
-                                  ora["ClassGroup"],
-                                  ora["Teacher"],
-                                  ora["DeputyTeacher"],
-                                  ora["State"],
-                                  ora["StateName"],
-                                  ora["PresenceType"],
-                                  ora["PresenceTypeName"],
-                                  ora["TeacherHomeworkId"],
-                                  ora["IsTanuloHaziFeladatEnabled"],
-                                  ora["Theme"],
-                                  ora["Homework"]
-                                ]);
-                              String csv =
-                                  const ListToCsvConverter().convert(csvList);
-                              File file = File(path);
-                              PermissionHandler().requestPermissions([
-                                PermissionGroup.storage
-                              ]).then((Map<PermissionGroup, PermissionStatus>
-                                  permissions) {
-                                file.writeAsString(csv).then((File f) {
-                                  if (f.existsSync())
-                                    Fluttertoast.showToast(
-                                        msg: I18n.of(context).exportSuccess +
-                                            ": " +
-                                            path,
-                                        backgroundColor: Colors.green,
-                                        textColor: Colors.white,
-                                        fontSize: 16.0);
-                                });
-                              });
-                          }
-                      }
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  DropdownButton(
+                    items: exportOptions.map((String exportData) {
+                      return DropdownMenuItem(
+                        child: Text(exportData),
+                        value: exportData,
+                      );
+                    }).toList(),
+                    onChanged: (exportData) async {
+                      selectedData = exportOptions.indexOf(exportData);
+                      updateURL();
                     },
+                    value: exportOptions[selectedData],
+                  ),
+                  dinamicWidget(selectedData),
+                  TextField(
+                    onChanged: (text) {
+                      fullPath = text;
+                    },
+                    controller: controller,
+                  ),
+                  Divider(),
+                  RaisedButton(
+                    //todo fehér témában rosszak a színek
+                    onPressed: () => onExportPressed(),
                     child: Text(
-                      I18n.of(context).export,
+                      I18n
+                          .of(context)
+                          .export,
                       style: TextStyle(color: Colors.white),
                     ),
-                    color: Colors.blue[700],
                   ),
-                  margin: EdgeInsets.all(16),
-                ),
-              ],
-            ),
+                ]),
           ),
         ),
         "/settings",
         <Widget>[]);
+  }
+
+//todo be lehetne illeszteni a BUILD törzsébe ;D
+  Widget dinamicWidget(int id) {
+    if (id == 2) return Divider(); //ha kiválasztott: fiókok
+    return Column(
+      children: <Widget>[
+        DropdownButton(
+          items: globals.users.map((User user) {
+            return DropdownMenuItem(
+              child: Text(user.name),
+              value: user,
+            );
+          }).toList(),
+          onChanged: (user) async {
+            selectedUser = user;
+            updateURL();
+          },
+          value: selectedUser,
+        ),
+        (id == 1) //ha kiválasztott: órák
+            ? MaterialButton(
+          color: selectedDate == null
+              ? Colors.deepOrangeAccent
+              : Colors.green,
+          onPressed: () async {
+            final List<DateTime>
+            picked = await DateRagePicker.showDatePicker(
+                context: context,
+                initialFirstDate: DateTime.now()
+                    .subtract(
+                    Duration(days: DateTime
+                        .now()
+                        .weekday - 1)),
+                initialLastDate: DateTime.now().subtract(
+                    Duration(days: DateTime
+                        .now()
+                        .weekday - 7)),
+                firstDate: DateTime(2018),
+                lastDate: DateTime(2025));
+            if (picked != null && picked.length == 2) {
+              pickedDate = picked;
+              selectedDate =
+                  picked[0].toIso8601String().substring(0, 10) +
+                      "  -  " +
+                      picked[1].toIso8601String().substring(0, 10);
+              updateURL();
+            }
+          },
+          child: Text(selectedDate ?? I18n
+              .of(context)
+              .exportChoose),
+        )
+            : Container(),
+        DropdownButton(
+          items: formats.map((String format) {
+            return DropdownMenuItem(
+              child: Text(format.toUpperCase().substring(1, format.length)),
+              value: format,
+            );
+          }).toList(),
+          onChanged: (format) async {
+            selectedFormat = formats.indexOf(format);
+            updateURL();
+          },
+          value: formats[selectedFormat],
+        )
+      ],
+    );
+  }
+
+  Future<void> onExportPressed() async {
+    String data;
+    if (selectedFormat == 0) {
+      //json
+      switch (selectedData) {
+        case 0: //Jegyek
+          Account selectedAccount = globals.accounts
+              .firstWhere((Account a) => a.user.id == selectedUser.id);
+          data = selectedAccount.getStudentString();
+          break;
+        case 1: //Órák
+          data = await getLessonsJson(
+              pickedDate[0], pickedDate[1], selectedUser, true);
+          break;
+        case 2: //Fiókok
+          data = json.encode(await Saver.readUsers());
+          break;
+      }
+    } else {
+      //csv
+      switch (selectedData) {
+        case 0:
+        //region Jegyek
+          Account selectedAccount = globals.accounts
+              .firstWhere((Account a) => a.user.id == selectedUser.id);
+          Map _data = selectedAccount.getStudentJson();
+          List<List<dynamic>> csvList = [
+            [
+              "EvaluationId",
+              "Form",
+              "FormName",
+              "Type",
+              "TypeName",
+              "Subject",
+              "SubjectCategory",
+              "SubjectCategoryName",
+              "Theme",
+              "Mode",
+              "Weight",
+              "Value",
+              "NumberValue",
+              "SeenByTutelaryUTC",
+              "Teacher",
+              "Date",
+              "CreatingTime"
+            ]
+          ];
+          for (var jegy in _data["Evaluations"])
+            csvList.add([
+              jegy["EvaluationId"],
+              jegy["Form"],
+              jegy["FormName"],
+              jegy["Type"],
+              jegy["TypeName"],
+              jegy["Subject"],
+              jegy["SubjectCategory"],
+              jegy["SubjectCategoryName"],
+              jegy["Theme"],
+              jegy["Mode"],
+              jegy["Weight"],
+              jegy["Value"],
+              jegy["NumberValue"],
+              jegy["SeenByTutelaryUTC"],
+              jegy["Teacher"],
+              jegy["Date"],
+              jegy["CreatingTime"]
+            ]);
+          data = const ListToCsvConverter().convert(csvList);
+          //endregion
+          break;
+        case 1:
+        //region Órák
+          var _data = json.decode(await getLessonsJson(
+              pickedDate[0], pickedDate[1], selectedUser, true));
+          List<List<dynamic>> csvList = [
+            [
+              "LessonId",
+              "CalendarOraType",
+              "Count",
+              "Date",
+              "StartTime",
+              "EndTime",
+              "Subject",
+              "SubjectCategory",
+              "SubjectCategoryName",
+              "ClassRoom",
+              "ClassGroup",
+              "Teacher",
+              "DeputyTeacher",
+              "State",
+              "StateName",
+              "PresenceType",
+              "PresenceTypeName",
+              "TeacherHomeworkId",
+              "IsTanuloHaziFeladatEnabled",
+              "Theme",
+              "Homework"
+            ]
+          ];
+          for (var ora in _data)
+            csvList.add([
+              ora["LessonId"],
+              ora["CalendarOraType"],
+              ora["Count"],
+              ora["Date"],
+              ora["StartTime"],
+              ora["EndTime"],
+              ora["Subject"],
+              ora["SubjectCategory"],
+              ora["SubjectCategoryName"],
+              ora["ClassRoom"],
+              ora["ClassGroup"],
+              ora["Teacher"],
+              ora["DeputyTeacher"],
+              ora["State"],
+              ora["StateName"],
+              ora["PresenceType"],
+              ora["PresenceTypeName"],
+              ora["TeacherHomeworkId"],
+              ora["IsTanuloHaziFeladatEnabled"],
+              ora["Theme"],
+              ora["Homework"]
+            ]);
+          data = const ListToCsvConverter().convert(csvList);
+          //endregion
+          break;
+      }
+    }
+    writeToFile(fullPath, data);
+  }
+
+  bool writeToFile(String path, String data) {
+    File file = File(path);
+    try {
+      //todo ismert hiba android 10 mec 5 security patch nem működik az export
+      PermissionHandler().requestPermissions([PermissionGroup.storage]).then(
+              (Map<PermissionGroup, PermissionStatus> permissions) {
+            file.writeAsString(data).then((File f) {
+              if (f.existsSync())
+                Fluttertoast.showToast(
+                    msg: I18n
+                        .of(context)
+                        .exportSuccess + ": " + path,
+                    backgroundColor: Colors.green,
+                    textColor: Colors.white,
+                    fontSize: 16.0);
+              return true;
+            });
+            return false;
+          });
+    } catch (_) {
+      Fluttertoast.showToast(
+          msg: "Fájl műveleti hiba", //todo fordítás
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+      return false;
+    }
+    return false;
   }
 }
