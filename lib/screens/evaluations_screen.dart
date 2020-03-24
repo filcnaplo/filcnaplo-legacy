@@ -523,11 +523,9 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                         width: 3),
                     borderRadius: BorderRadius.all(Radius.circular(40))),
               ),
-              title: Text(
-                  allEvals[index].Subject ??
-                      allEvals[index].Jelleg.Leiras ??
-                      "",
-                  style: TextStyle(fontWeight: FontWeight.bold)),
+              title: Text(allEvals[index].Subject ??
+                  allEvals[index].Jelleg.Leiras ??
+                  ""),
               subtitle: Text(
                 (allEvals[index].Mode != null)
                     ? (allEvals[index].Theme == "")
@@ -699,23 +697,15 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
               Container(
                   child: Card(
                       child: Container(
-                          child: Column(
+                          child: Row(
                             children: <Widget>[
-                              Text(I18n.of(context).evaluationAverage),
-                              Container(
-                                child: Divider(
-                                  color: Colors.white,
-                                  thickness: 1,
-                                  indent: 27,
-                                  endIndent: 27,
-                                ),
-                                height: 5,
-                              ),
+                              Text(I18n.of(context).evaluationAverage + ": ",
+                                  style: TextStyle(fontSize: 18.0)),
                               Text(
                                 allAverage.toStringAsFixed(2),
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 18,
+                                  fontSize: 20.0,
                                 ),
                               ),
                             ],
