@@ -85,56 +85,10 @@ class HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  _launchDownloadWebsite() async {
-    const url = 'https://www.filcnaplo.hu/download/';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
-  Future showUpdateDialog() async {
-    return showDialog<bool>(
-        context: context,
-        builder: (BuildContext context) {
-          return SimpleDialog(
-              children: <Widget>[
-                Text(I18n.of(context).downloadLatest + ":"),
-                Text(
-                  globals.latestVersion + "\n",
-                  style: TextStyle(
-                      color: Theme.of(context).accentColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20),
-                ),
-                Row(
-                  children: <Widget>[
-                    RaisedButton(
-                      onPressed: _launchDownloadWebsite,
-                      child: Text(capitalize(I18n.of(context).download)),
-                    )
-                  ],
-                )
-              ],
-              title: Text(I18n.of(context).updateAvailable),
-              contentPadding: EdgeInsets.all(20),
-              shape: RoundedRectangleBorder(
-                side: BorderSide(style: BorderStyle.none, width: 1),
-                borderRadius: BorderRadius.circular(10),
-              ));
-        });
-  }
-
   @override
   void initState() {
     _initSettings();
     super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (globals.version != globals.latestVersion &&
-          globals.latestVersion != "") showUpdateDialog();
-    });
 
     _onRefresh(offline: true, showErrors: false).then((var a) async {
       HomeScreenCards = await feedItems();
