@@ -72,32 +72,29 @@ class GlobalDrawerState extends State<GlobalDrawer> {
         color: Theme.of(context).scaffoldBackgroundColor,
         child: ListView(
           children: <Widget>[
-            isLogo
-                ? Container(
-                    child: DrawerHeader(
-                      child: Column(
-                        children: <Widget>[
-                          Image.asset(
-                            "assets/icon.png",
-                            height: 120.0,
-                            width: 120.0,
-                          ),
-                          Container(
-                            child: Text(
-                              I18n.of(context).appTitle,
-                              style: TextStyle(fontSize: 19.0),
-                            ),
-                            padding: EdgeInsets.fromLTRB(5.0, 5.0, 0.0, 0.0),
-                          ),
-                        ],
-                        crossAxisAlignment: CrossAxisAlignment.start,
+            Container(
+                child: DrawerHeader(
+                  child: Column(
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/icon.png",
+                        height: 100.0,
+                        width: 100.0,
                       ),
-                      padding: EdgeInsets.all(2.0),
-                    ),
-                    padding: EdgeInsets.only(left: 10))
-                : Container(
-                    height: 5,
+                      Container(
+                        child: Text(
+                          I18n.of(context).appTitle,
+                          style: TextStyle(fontSize: 19.0),
+                        ),
+                        padding: EdgeInsets.fromLTRB(8.0, 5.0, 0.0, 0.0),
+                      ),
+                    ],
+                    crossAxisAlignment: CrossAxisAlignment.start,
                   ),
+                  padding: EdgeInsets.all(2.0),
+                ),
+                height: 154,
+                padding: EdgeInsets.only(left: 10)),
             selectedUser != null && multiAccount
                 ? Container(
                     child: DrawerHeader(
@@ -182,72 +179,52 @@ class GlobalDrawerState extends State<GlobalDrawer> {
                 : Container(),
             MenuPoint(
                 icon: Icons.dashboard,
-                text: I18n
-                    .of(context)
-                    .drawerHome,
+                text: I18n.of(context).drawerHome,
                 route: "/home",
                 screenID: 0),
             MenuPoint(
                 icon: IconData(0xF474, fontFamily: "Material Design Icons"),
-                text: I18n
-                    .of(context)
-                    .drawerEvaluations,
+                text: I18n.of(context).drawerEvaluations,
                 route: "/evaluations",
                 screenID: 1),
             MenuPoint(
                 icon: IconData(0xf520, fontFamily: "Material Design Icons"),
-                text: I18n
-                    .of(context)
-                    .drawerTimetable,
+                text: I18n.of(context).drawerTimetable,
                 route: "/timetable",
                 screenID: 2),
             MenuPoint(
                 icon: IconData(0xf2dc, fontFamily: "Material Design Icons"),
-                text: I18n
-                    .of(context)
-                    .drawerHomeworks,
+                text: I18n.of(context).drawerHomeworks,
                 route: "/homework",
                 screenID: 8),
             MenuPoint(
                 icon: IconData(0xf0e5, fontFamily: "Material Design Icons"),
-                text: I18n
-                    .of(context)
-                    .drawerNotes,
+                text: I18n.of(context).drawerNotes,
                 route: "/notes",
                 screenID: 3),
             MenuPoint(
                 icon: Icons.assignment,
-                text: I18n
-                    .of(context)
-                    .drawerTests,
+                text: I18n.of(context).drawerTests,
                 route: "/tests",
                 screenID: 10),
             MenuPoint(
                 icon: IconData(0xF361, fontFamily: "Material Design Icons"),
-                text: I18n
-                    .of(context)
-                    .drawerMessages,
+                text: I18n.of(context).drawerMessages,
                 route: "/messages",
                 screenID: 11),
             MenuPoint(
                 icon: Icons.block,
-                text: I18n
-                    .of(context)
-                    .drawerAbsences,
+                text: I18n.of(context).drawerAbsences,
                 route: "/absents",
                 screenID: 5),
             MenuPoint(
                 icon: Icons.supervisor_account,
-                text: I18n
-                    .of(context)
-                    .accountTitle,
+                text: I18n.of(context).accountTitle,
                 route: "/accounts",
                 screenID: 4),
             MenuPoint(
                 icon: Icons.settings,
-                text: I18n
-                    .of(context)
-                    .drawerSettings,
+                text: I18n.of(context).drawerSettings,
                 route: "/settings",
                 screenID: 7)
           ],
@@ -270,16 +247,12 @@ class MenuPoint extends StatelessWidget {
     return ListTile(
       leading: Icon(
         icon,
-        color: screen == screenID ? Theme
-            .of(context)
-            .accentColor : null,
+        color: screen == screenID ? Theme.of(context).accentColor : null,
       ),
       title: Text(
         capitalize(text),
         style: TextStyle(
-            color: screen == screenID ? Theme
-                .of(context)
-                .accentColor : null),
+            color: screen == screenID ? Theme.of(context).accentColor : null),
       ),
       onTap: () {
         screen = screenID;
