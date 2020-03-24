@@ -91,29 +91,11 @@ class GlobalDrawerState extends State<GlobalDrawer> {
                             ),
                             padding: EdgeInsets.fromLTRB(5.0, 5.0, 0.0, 0.0),
                           ),
-                          version != latestVersion && latestVersion != ""
-                              ? Card(
-                                  child: Container(
-                                    child: Text(
-                                        "Új verzió elérhető: " + latestVersion,
-                                        style: TextStyle(
-                                            color: Colors.redAccent[100],
-                                            fontWeight: FontWeight.bold)),
-                                    padding: EdgeInsets.all(5),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            width: 2, color: Colors.redAccent)),
-                                  ),
-                                )
-                              : Container(),
                         ],
                         crossAxisAlignment: CrossAxisAlignment.start,
                       ),
                       padding: EdgeInsets.all(2.0),
                     ),
-                    height: version != latestVersion && latestVersion != ""
-                        ? 205.0
-                        : 170.0,
                     padding: EdgeInsets.only(left: 10))
                 : Container(
                     height: 5,
