@@ -113,7 +113,7 @@ class AbsenceCard extends StatelessWidget {
                       ": " +
                       absence.JustificationTypeName)),
                   absence.DelayTimeMinutes != 0
-                      ? Text(capitalize(I18n.of(context).delayMins) +
+                      ? Text(capitalize(I18n.of(context).delayAmount) +
                           ": " +
                           absence.DelayTimeMinutes.toString() +
                           " " +

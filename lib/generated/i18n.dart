@@ -137,7 +137,7 @@ class I18n implements WidgetsLocalizations {
   /// "késés"
   String get delay => "késés";
   /// "késés mértéke"
-  String get delayMins => "késés mértéke";
+  String get delayAmount => "késés mértéke";
   /// "Összes késés: ${count} perc"
   String delayAll(String count) => "Összes késés: ${count} perc";
   /// "naplózás ideje"
@@ -580,7 +580,7 @@ class _I18n_en_US extends I18n {
   String get delay => "delay";
   /// "delay in minutes"
   @override
-  String get delayMins => "delay in minutes";
+  String get delayAmount => "delay in minutes";
   /// "all delays: ${count} minutes"
   @override
   String delayAll(String count) => "all delays: ${count} minutes";
@@ -1155,7 +1155,7 @@ class _I18n_de_DE extends I18n {
   String get delay => "Verspätungen";
   /// "verspetete Zeit"
   @override
-  String get delayMins => "verspetete Zeit";
+  String get delayAmount => "verspetete Zeit";
   /// "Menge aller Verspätungen: ${count} Minuten"
   @override
   String delayAll(String count) => "Menge aller Verspätungen: ${count} Minuten";

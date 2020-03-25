@@ -80,7 +80,7 @@
 
     "delay": {
         "": "delay",
-        "mins": "delay in minutes",
+        "amount": "delay in minutes",
         "all": "all delays: {count} minutes"
     },
 

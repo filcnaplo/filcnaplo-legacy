@@ -162,7 +162,8 @@ class AbsentsScreenState extends State<AbsentsScreen> {
                     ": " +
                     absence.JustificationTypeName),
                 absence.DelayTimeMinutes != 0
-                    ? Text(I18n.of(context).delayMins +
+                    ? Text(capitalize(I18n.of(context).delayAmount) + 
+                        ": " + 
                         absence.DelayTimeMinutes.toString() +
                         " " +
                         I18n.of(context).timeMinute)
@@ -172,7 +173,7 @@ class AbsentsScreenState extends State<AbsentsScreen> {
           ),
           actions: <Widget>[
             FlatButton(
-              child: Text('ok'),
+              child: Text(I18n.of(context).dialogOk),
               onPressed: () {
                 Navigator.of(context).pop();
               },

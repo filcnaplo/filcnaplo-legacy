@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:background_fetch/background_fetch.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:filcnaplo/generated/i18n.dart';
-import 'package:filcnaplo/screens/message_screen.dart';
+import 'package:filcnaplo/screens/messages_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

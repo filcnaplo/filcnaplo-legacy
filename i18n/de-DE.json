@@ -80,7 +80,7 @@
 
     "delay": {
         "": "Verspätungen",
-        "mins": "verspetete Zeit",
+        "amount": "verspetete Zeit",
         "all": "Menge aller Verspätungen: {count} Minuten"
     },
 

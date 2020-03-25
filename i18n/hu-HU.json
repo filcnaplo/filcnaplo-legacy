@@ -80,7 +80,7 @@
 
     "delay": {
         "": "késés",
-        "mins": "késés mértéke",
+        "amount": "késés mértéke",
         "all": "Összes késés: {count} perc"
     },
 
