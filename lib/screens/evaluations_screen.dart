@@ -1093,7 +1093,7 @@ class GradeDialogState extends State<GradeDialog> {
       "Theme": "${I18n.of(context).evaluationIf}",
       "IsAtlagbaBeleszamit": true,
       "Mode": "Hamis",
-      "Weight": "$weight",
+      "Weight": "$weight%",
       "Value": "Jeles(5)",
       "NumberValue": $jegy,
       "SeenByTutelaryUTC": null,
