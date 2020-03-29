@@ -269,7 +269,7 @@ class _LessonCardState extends State<LessonCard> {
                                       ? Colors.red
                                       : Theme.of(context)
                                           .textTheme
-                                          .body1
+                                          .bodyText2
                                           .color)),
                       subtitle: lessonSubtitle,
                       trailing: Row(
@@ -280,10 +280,20 @@ class _LessonCardState extends State<LessonCard> {
                                   child: Icon(Icons.home),
                                   padding: EdgeInsets.all(5))
                               : Container(),
-                          Column(
-                            children: <Widget>[Text(room), Text(startTime)],
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.end,
+                          Container(
+                            width: 85,
+                            child: Column(
+                              children: <Widget>[
+                                Flexible(
+                                    child: Text(room,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        textAlign: TextAlign.end)),
+                                Text(startTime)
+                              ],
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                            ),
                           ),
                         ],
                       ),

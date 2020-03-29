@@ -185,13 +185,13 @@
             "results": "Results"
         },
         "summaryPlaceholder": "You'll see your end-year, half-year and quarterly evaluations here.",
-        "average": "average",
+        "average": "avg",
         "averageClass": "class average",
         "mode": "mode",
         "weight": "weight",
         "value": "value",
         "range": "range",
-        "if": "if I got"
+        "if": "if I got a..."
     },
 
     "summary": {

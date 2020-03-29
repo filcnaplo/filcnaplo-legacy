@@ -17,7 +17,7 @@ String getTimetableText(DateTime startDateText) {
 }
 
 String getLessonRangeText(Lesson lesson) {
-  return getLessonStartText(lesson) + "-" + getLessonEndText(lesson);
+  return getLessonStartText(lesson) + " - " + getLessonEndText(lesson);
 }
 
 String getLessonStartText(Lesson lesson) {

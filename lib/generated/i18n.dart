@@ -761,9 +761,9 @@ class _I18n_en_US extends I18n {
   /// "You'll see your end-year, half-year and quarterly evaluations here."
   @override
   String get evaluationSummaryPlaceholder => "You'll see your end-year, half-year and quarterly evaluations here.";
-  /// "average"
+  /// "avg"
   @override
-  String get evaluationAverage => "average";
+  String get evaluationAverage => "avg";
   /// "class average"
   @override
   String get evaluationAverageClass => "class average";
@@ -779,9 +779,9 @@ class _I18n_en_US extends I18n {
   /// "range"
   @override
   String get evaluationRange => "range";
-  /// "if I got"
+  /// "if I got a..."
   @override
-  String get evaluationIf => "if I got";
+  String get evaluationIf => "if I got a...";
   /// "First quarter evaluations"
   @override
   String get summaryFirstQ => "First quarter evaluations";
@@ -1336,9 +1336,9 @@ class _I18n_de_DE extends I18n {
   /// "Deine Jahresendnoten, Halbjahresnoten und Quartalnoten werden hier sein."
   @override
   String get evaluationSummaryPlaceholder => "Deine Jahresendnoten, Halbjahresnoten und Quartalnoten werden hier sein.";
-  /// "Durchschnitt"
+  /// "Dschn"
   @override
-  String get evaluationAverage => "Durchschnitt";
+  String get evaluationAverage => "Dschn";
   /// "Klassendurchschnitt"
   @override
   String get evaluationAverageClass => "Klassendurchschnitt";
