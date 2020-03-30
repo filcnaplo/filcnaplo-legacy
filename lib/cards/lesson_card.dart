@@ -269,7 +269,7 @@ class _LessonCardState extends State<LessonCard> {
                                       ? Colors.red
                                       : Theme.of(context)
                                           .textTheme
-                                          .bodyText2
+                                          .body1
                                           .color)),
                       subtitle: lessonSubtitle,
                       trailing: Row(
