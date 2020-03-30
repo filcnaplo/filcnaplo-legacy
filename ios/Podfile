@@ -1,3 +1,51 @@
+ENV['COCOAPODS_DISABLE_STATS'] = 'true'
+
+project 'Runner', {
+  'Debug' => :debug,
+  'Profile' => :release,
+  'Release' => :release,
+}
+
+def parse_KV_file(file, separator='=')
+  file_abs_path = File.expand_path(file)
+  if !File.exists? file_abs_path
+    return [];
+  end
+  generated_key_values = {}
+  skip_line_start_symbols = ["#", "/"]
+  File.foreach(file_abs_path) do |line|
+    next if skip_line_start_symbols.any? { |symbol| line =~ /^\s*#{symbol}/ }
+    plugin = line.split(pattern=separator)
+    if plugin.length == 2
+      podname = plugin[0].strip()
+      path = plugin[1].strip()
+      podpath = File.expand_path("#{path}", file_abs_path)
+      generated_key_values[podname] = podpath
+    else
+      puts "Invalid plugin specification: #{line}"
+    end
+  end
+  generated_key_values
+end
+
+target 'Runner' do
+  # Keep pod path relative so it can be checked into Podfile.lock.
+  pod 'Flutter', :path => 'Flutter'
+
+  # Plugin Pods
+
+  # Prepare symlinks folder. We use symlinks to avoid having Podfile.lock
+  # referring to absolute paths on developers' machines.
+  system('rm -rf .symlinks')
+  system('mkdir -p .symlinks/plugins')
+  plugin_pods = parse_KV_file('../.flutter-plugins')
+  plugin_pods.each do |name, path|
+    symlink = File.join('.symlinks', 'plugins', name)
+    File.symlink(path, symlink)
+    pod name, :path => File.join(symlink, 'ios')
+  end
+end
+
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
