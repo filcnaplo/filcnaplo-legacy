@@ -1,3 +1,5 @@
+platform :ios, '10'
+
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 
 project 'Runner', {
