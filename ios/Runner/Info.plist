@@ -22,6 +22,28 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>2037</string>
+	
+	<key>NSContactsUsageDescription</key>
+	<string>The app does not uses this service.</string>
+	
+	<key>NSCalendarsUsageDescription</key>
+	<string>The app does not uses this service.string>
+	
+	<key>NSAppleMusicUsageDescription</key>
+	<string>The app does not uses this service.string>
+	
+	<key>NSMotionUsageDescription</key>
+	<string>The app does not uses this service.string>
+	
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>The app does not uses this service.string>
+	
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>The app does not uses this service.string>
+	
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>The app does not uses this service.string>
+
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIBackgroundModes</key>
@@ -40,15 +62,11 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
