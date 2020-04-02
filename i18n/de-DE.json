@@ -285,7 +285,8 @@
     "success": {
         "": "Erfolg",
         "homework": "Hausaufgabe ist hochgeladen worden",
-        "homeworkDelete": "Hausaufgaben erfolgreich gelöscht"
+        "homeworkDelete": "Hausaufgaben erfolgreich gelöscht",
+        "homeworkCopy": "Hausaufgaben erfolgreich kopiert"
     },
 
     "error": {

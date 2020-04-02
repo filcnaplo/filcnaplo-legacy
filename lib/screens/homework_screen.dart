@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:html_unescape/html_unescape.dart';
 
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:filcnaplo/models/homework.dart';
 import 'package:filcnaplo/models/user.dart';
 import 'package:filcnaplo/dialogs/select_time_dialog.dart';
@@ -14,6 +15,8 @@ import 'package:filcnaplo/global_drawer.dart';
 import 'package:filcnaplo/helpers/homework_helper.dart';
 import 'package:filcnaplo/utils/string_formatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
+import 'package:flutter/services.dart';
+import 'package:html/parser.dart';
 
 void main() {
   runApp(MaterialApp(home: HomeworkScreen()));
@@ -52,6 +55,19 @@ class HomeworkScreenState extends State<HomeworkScreen> {
         });
       }
     }
+  }
+
+String htmlParser(String html) {
+  var document = parse(html);
+  return document.body.text;
+}
+
+ void showSuccess(String msg) {
+ Fluttertoast.showToast(
+     msg: msg,
+     backgroundColor: Colors.green,
+     textColor: Colors.white,
+     fontSize: 16.0);
   }
 
   @override
@@ -189,6 +205,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
     );
   }
 
+ 
   Future<Null> _onRefresh({bool showErrors = true}) async {
     setState(() {
       hasLoaded = false;
@@ -248,6 +265,12 @@ class HomeworkScreenState extends State<HomeworkScreen> {
           onTap: () {
             homeworksDialog(selectedHomework[index]);
           },
+          onLongPress: () {        
+                Clipboard.setData(ClipboardData(text: htmlParser(HtmlUnescape().convert(selectedHomework[index].text)).toString())).then((result) {
+                  showSuccess(I18n.of(globals.context).successHomeworkCopy);
+                });
+          },
+          
         ),
         Divider(
           height: 5.0,
