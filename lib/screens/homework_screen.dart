@@ -17,6 +17,7 @@ import 'package:filcnaplo/utils/string_formatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 import 'package:flutter/services.dart';
 import 'package:html/parser.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(MaterialApp(home: HomeworkScreen()));
@@ -61,6 +62,13 @@ String htmlParser(String html) {
   var document = parse(html);
   return document.body.text;
 }
+  
+  void launchurl(url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  }
+}
+
 
  void showSuccess(String msg) {
  Fluttertoast.showToast(
@@ -181,7 +189,7 @@ String htmlParser(String html) {
                 Container(
                   padding: EdgeInsets.only(top: 10),
                 ),
-                Html(data: HtmlUnescape().convert(homework.text)),
+                Html(data: HtmlUnescape().convert(homework.text), onLinkTap: (url) {launchurl(url);}),
               ],
             ),
           ),
@@ -260,7 +268,7 @@ String htmlParser(String html) {
             style: TextStyle(fontSize: 20.0),
           ),
           subtitle:
-              Html(data: HtmlUnescape().convert(selectedHomework[index].text)),
+              Html(data: HtmlUnescape().convert(selectedHomework[index].text), onLinkTap: (url) {launchurl(url);}),
           isThreeLine: true,
           onTap: () {
             homeworksDialog(selectedHomework[index]);
