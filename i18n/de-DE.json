@@ -185,7 +185,7 @@
             "results": "Ergebnisse"
         },
         "summaryPlaceholder": "Deine Jahresendnoten, Halbjahresnoten und Quartalnoten werden hier sein.",
-        "average": "Dschn",
+        "average": "Durchschnitt",
         "averageClass": "Klassendurchschnitt",
         "mode": "Art",
         "weight": "Gewicht",
@@ -285,7 +285,8 @@
     "success": {
         "": "Erfolg",
         "homework": "Hausaufgabe ist hochgeladen worden",
-        "homeworkDelete": "Hausaufgaben erfolgreich gelöscht"
+        "homeworkDelete": "Hausaufgaben erfolgreich gelöscht",
+        "homeworkCopy": "Hausaufgaben erfolgreich kopiert"
     },
 
     "error": {

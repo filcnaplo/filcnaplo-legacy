@@ -185,13 +185,13 @@
             "results": "Results"
         },
         "summaryPlaceholder": "You'll see your end-year, half-year and quarterly evaluations here.",
-        "average": "avg",
+        "average": "average",
         "averageClass": "class average",
         "mode": "mode",
         "weight": "weight",
         "value": "value",
         "range": "range",
-        "if": "if I got a..."
+        "if": "if I got"
     },
 
     "summary": {
@@ -285,7 +285,8 @@
     "success": {
         "": "Success",
         "homework": "Homework uploaded successfully",
-        "homeworkDelete": "Homework deleted successfully"
+        "homeworkDelete": "Homework deleted successfully",
+        "homeworkCopy": "Homework successfully copied to Clipboard"
     },
 
     "error": {
