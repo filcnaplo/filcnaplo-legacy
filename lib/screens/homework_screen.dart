@@ -210,8 +210,8 @@ String htmlParser(String html) {
                   showSuccess(I18n.of(globals.context).successHomeworkCopy);
               });},
             ),
-            IconButton(
-              icon: Text(I18n.of(context).dialogOk.toUpperCase()),
+            FlatButton(
+              child: Text(I18n.of(context).dialogOk.toUpperCase()),
               onPressed: () {
                 Navigator.of(context).pop();
               },
