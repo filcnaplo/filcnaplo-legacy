@@ -87,8 +87,8 @@ class RequestHelper {
     }
   }
 
-  Future<String> apiRequest(
-      String url, String accessToken, String schoolCode) async {
+  Future apiRequest(
+      String url, String accessToken, String schoolCode, {String type = "string"}) async {
     if (accessToken != null) {
       http.Response response = await http.get(url, headers: {
         "HOST": schoolCode + ".e-kreta.hu",
@@ -96,7 +96,10 @@ class RequestHelper {
         "Authorization": "Bearer " + accessToken
       });
 
-      return response.body;
+      if (type == "string") 
+        return response.body;
+      else
+        return response.bodyBytes;
     }
   }
 
