@@ -131,8 +131,6 @@ class AccountsScreenState extends State<AccountsScreen> {
                       globals.accounts.removeWhere((Account a) =>
                           !users.map((User u) => u.id).contains(a.user.id));
                       await _getListWidgets();
-                      setState(
-                          () {}); //TODO Ez így lehet hogy full felesleges, delete this line if so
                     });
                   },
                   icon: Icon(
