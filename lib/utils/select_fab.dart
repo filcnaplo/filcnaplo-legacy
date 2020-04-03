@@ -30,8 +30,8 @@ class SelectButton extends StatelessWidget {
         child: items[i].child,
         label: items[i].text,
         onTap: () => onChanged(i),
-        backgroundColor: (i == selected) ? Colors.yellow : null,
-        labelBackgroundColor: globals.isDark ? Colors.black : Colors.white,
+        backgroundColor: (i == selected) ? null : Colors.grey,
+        labelBackgroundColor: globals.isDark ? Colors.grey[900] : Colors.white,
       ));
     }
     return widgetList;

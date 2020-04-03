@@ -164,9 +164,9 @@ class AccountsScreenState extends State<AccountsScreen> {
     }
 
     setState(() {
-      accountListWidgets.add(FlatButton(
+      accountListWidgets.add(IconButton(
           onPressed: addPressed,
-          child: Icon(
+          icon: Icon(
             Icons.add,
             color: globals.CurrentTextColor,
           )));
