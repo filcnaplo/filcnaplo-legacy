@@ -34,6 +34,7 @@ dependencies:
   flutter_secure_storage: ^3.2.1+1
   flutter_swiper: ^1.1.6
   unicorndial: ^1.1.5
+  flutter_speed_dial: ^1.2.5
 
 flutter_icons:
   android: "launcher_icon"
