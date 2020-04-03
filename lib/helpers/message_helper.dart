@@ -83,13 +83,14 @@ class MessageHelper {
   Future<bool> downloadAttachment(User user, int id) async {
     try {
       String code = await RequestHelper().getBearerToken(user, true);
-      String data =
+      List data =
           await RequestHelper().downloadAttachment(id, code, user.schoolCode);
 
-      print(data);
+      
+
       return true;
     } catch (e) {
-      print("[E] MessageHelper.getMessages(): " + e.toString());
+      print("[E] MessageHelper.downloadAttachment(): " + e.toString());
       return false;
     }
   }

@@ -87,8 +87,8 @@ class RequestHelper {
     }
   }
 
-  Future apiRequest(
-      String url, String accessToken, String schoolCode, {String type = "string"}) async {
+  Future<String> apiRequest(
+      String url, String accessToken, String schoolCode) async {
     if (accessToken != null) {
       http.Response response = await http.get(url, headers: {
         "HOST": schoolCode + ".e-kreta.hu",
@@ -96,10 +96,20 @@ class RequestHelper {
         "Authorization": "Bearer " + accessToken
       });
 
-      if (type == "string") 
-        return response.body;
-      else
-        return response.bodyBytes;
+      return response.body;
+    }
+  }
+
+  Future<List> apiRequestRaw(
+      String url, String accessToken, String schoolCode) async {
+    if (accessToken != null) {
+      http.Response response = await http.get(url, headers: {
+        "HOST": schoolCode + ".e-kreta.hu",
+        "User-Agent": globals.userAgent,
+        "Authorization": "Bearer " + accessToken
+      });
+
+      return response.bodyBytes;
     }
   }
 
@@ -120,9 +130,9 @@ class RequestHelper {
           accessToken,
           schoolCode);
 
-  Future<String> downloadAttachment(
+  Future downloadAttachment(
           int id, String accessToken, String schoolCode) =>
-      apiRequest(
+      apiRequestRaw(
           "https://eugyintezes.e-kreta.hu/integration-kretamobile-api/v1/dokumentumok/uzenetek/$id",
           accessToken,
           schoolCode);
