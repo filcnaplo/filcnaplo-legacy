@@ -95,6 +95,7 @@ class RequestHelper {
         "User-Agent": globals.userAgent,
         "Authorization": "Bearer " + accessToken
       });
+
       return response.body;
     }
   }
@@ -105,11 +106,10 @@ class RequestHelper {
           ".e-kreta.hu/mapi/api/v1/BejelentettSzamonkeres?DatumTol=null&DatumIg=null",
       accessToken,
       schoolCode);
-  Future<String> getMessages(String accessToken, String schoolCode) =>
-      apiRequest(
-          "https://eugyintezes.e-kreta.hu/integration-kretamobile-api/v1/kommunikacio/postaladaelemek/sajat",
-          accessToken,
-          schoolCode);
+  Future<String> getMessages(String accessToken, String schoolCode) => apiRequest(
+      "https://eugyintezes.e-kreta.hu/integration-kretamobile-api/v1/kommunikacio/postaladaelemek/sajat",
+      accessToken,
+      schoolCode);
   Future<String> getMessageById(
           int id, String accessToken, String schoolCode) =>
       apiRequest(
@@ -117,14 +117,12 @@ class RequestHelper {
           accessToken,
           schoolCode);
 
-  Future<bool> downloadAttachment(String accessToken, String schoolCode, int id) async {
-    apiRequest(
-          "https://eugyintezes.e-kreta.hu/integration-kretamobile-api/v1/dokumentumok/uzenetek/$id",
+  Future<String> downloadAttachment(
+          int id, String accessToken, String schoolCode) =>
+      apiRequest(
+          "https://eugyiutezes.e-kreta.hu/integration-kretamobile-api/v1/dokumentumok/uzenetek/$id",
           accessToken,
           schoolCode);
-
-    return false;
-  }
 
   Future<String> getEvaluations(String accessToken, String schoolCode) =>
       apiRequest(
@@ -148,9 +146,10 @@ class RequestHelper {
               id.toString(),
           accessToken,
           schoolCode);
-  Future<String> getEvents(String accessToken, String schoolCode) =>
-      apiRequest("https://" + schoolCode + ".e-kreta.hu/mapi/api/v1/Event",
-          accessToken, schoolCode);
+  Future<String> getEvents(String accessToken, String schoolCode) => apiRequest(
+      "https://" + schoolCode + ".e-kreta.hu/mapi/api/v1/Event",
+      accessToken,
+      schoolCode);
   Future<String> getTimeTable(
           String from, String to, String accessToken, String schoolCode) =>
       apiRequest(
