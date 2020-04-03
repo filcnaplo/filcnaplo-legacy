@@ -63,12 +63,13 @@ String htmlParser(String html) {
   var document = parse(html);
   return document.body.text;
 }
-
-void launchurl(url) async {
+  
+  void launchurl(url) async {
   if (await canLaunch(url)) {
     await launch(url);
   }
 }
+
 
 
  void showSuccess(String msg) {
