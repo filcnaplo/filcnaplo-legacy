@@ -277,20 +277,21 @@ class RequestHelper {
             "password=${user.password}&"
             "grant_type=password&client_id=" +
         globals.clientId;
-    try {
       String bearerResponse =
           await RequestHelper().getBearer(body, user.schoolCode, showErrors);
       if (bearerResponse != null) {
-        Map<String, dynamic> bearerMap = json.decode(bearerResponse);
-        if (bearerMap["error"] == "invalid_grant" && showErrors)
-          showError("Hibás jelszó vagy felhasználónév");
-        String code = bearerMap["access_token"];
-        return code;
+        try {
+            Map<String, dynamic> bearerMap = json.decode(bearerResponse);
+            if (bearerMap["error"] == "invalid_grant" && showErrors)
+              showError("Hibás jelszó vagy felhasználónév");
+            String code = bearerMap["access_token"];
+            return code;
+        } catch (e) {
+          print("[E] RequestHelper.getBearerToken(): " + e.toString());
+          //showError(e.toString());
+          return null;
+        }
       }
-    } catch (e) {
-      print("[E] RequestHelper.getBearerToken(): " + e.toString());
-      showError(e.toString());
-    }
     return null;
   }
 
