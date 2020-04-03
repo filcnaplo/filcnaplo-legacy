@@ -171,7 +171,7 @@ String htmlParser(String html) {
                 homework.deadline != null
                     ? Text(capitalize(I18n.of(context).homeworkDeadline) +
                         ": " +
-                        homework.deadline)
+                        stringdateToHuman(homework.deadline))
                     : Container(),
                 Text(capitalize(I18n.of(context).homeworkSubject) +
                     ": " +
@@ -290,7 +290,9 @@ String htmlParser(String html) {
                       fontSize: 21.0,
                       color: globals.isColor
                               ? Colors.white
-                              : Colors.black, 
+                              : globals.isDark
+                                 ?Colors.white
+                                 :Colors.black, 
                       fontWeight: FontWeight.bold),
                 ),
                 margin: EdgeInsets.all(10.0),
@@ -335,7 +337,7 @@ String htmlParser(String html) {
                         Flexible(
                                 fit: FlexFit.loose,
                                 child: Container(
-                                child: Text(
+                                child: Text( 
                               stringdateToHuman(selectedHomework[index].uploadDate),
                                     style: TextStyle(
                                         fontSize: 16.0,
