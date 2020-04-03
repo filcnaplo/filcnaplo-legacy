@@ -197,7 +197,7 @@ String htmlParser(String html) {
           ),
           actions: <Widget>[  
             IconButton(
-              icon: Icon(Icons.delete),
+              icon: Icon(Icons.delete, color: Colors.red),
               onPressed: () {
                 RequestHelper()
                     .deleteHomework(homework.id, globals.selectedUser);

@@ -120,7 +120,7 @@ class RequestHelper {
   Future<String> downloadAttachment(
           int id, String accessToken, String schoolCode) =>
       apiRequest(
-          "https://eugyiutezes.e-kreta.hu/integration-kretamobile-api/v1/dokumentumok/uzenetek/$id",
+          "https://eugyintezes.e-kreta.hu/integration-kretamobile-api/v1/dokumentumok/uzenetek/$id",
           accessToken,
           schoolCode);
 

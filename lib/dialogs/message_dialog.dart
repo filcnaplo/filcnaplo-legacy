@@ -52,16 +52,22 @@ class MessageDialogState extends State<MessageDialog> {
       if (att.fileName != null) {
         attachments.add(
           Row(children: <Widget>[
-            Text(att.fileName),
-              IconButton(
-                icon: Icon(
-                  Icons.get_app,
-                  color: Colors.blue,
-                ),
-                onPressed: () {
-                  MessageHelper().downloadAttachment(att.id);
-                },
+            Flexible(
+                child: Text(
+              att.fileName,
+              overflow: TextOverflow.ellipsis,
+              softWrap: false,
+            )),
+            IconButton(
+              icon: Icon(
+                Icons.get_app,
+                color: Colors.blue,
               ),
+              onPressed: () {
+                MessageHelper()
+                    .downloadAttachment(globals.selectedAccount.user, att.id);
+              },
+            ),
           ]),
         );
       }

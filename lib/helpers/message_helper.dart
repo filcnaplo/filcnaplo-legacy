@@ -5,7 +5,6 @@ import 'package:filcnaplo/helpers/request_helper.dart';
 
 import 'package:filcnaplo/models/message.dart';
 import 'package:filcnaplo/models/user.dart';
-import 'package:filcnaplo/models/attachment.dart';
 import 'package:filcnaplo/helpers/database_helper.dart';
 
 class MessageHelper {
@@ -55,9 +54,9 @@ class MessageHelper {
     Message message;
     try {
       String code = await RequestHelper().getBearerToken(user, true);
-      String messageSting =
+      String messageString =
           await RequestHelper().getMessageById(id, code, user.schoolCode);
-      var messagesJson = json.decode(messageSting);
+      var messagesJson = json.decode(messageString);
       DBHelper().addMessageByIdJson(id, messagesJson, user);
 
       message = Message.fromJson(messagesJson);
@@ -81,8 +80,17 @@ class MessageHelper {
     return message;
   }
 
-  Future<bool> downloadAttachment(String accessToken, String schoolCode, int id) async {
-    
-    return false;
+  Future<bool> downloadAttachment(User user, int id) async {
+    try {
+      String code = await RequestHelper().getBearerToken(user, true);
+      String data =
+          await RequestHelper().downloadAttachment(id, code, user.schoolCode);
+
+      print(data);
+      return true;
+    } catch (e) {
+      print("[E] MessageHelper.getMessages(): " + e.toString());
+      return false;
+    }
   }
 }
