@@ -18,7 +18,7 @@ import 'package:filcnaplo/utils/string_formatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 import 'package:flutter/services.dart';
 import 'package:html/parser.dart';
-import 'package:filcnaplo/cards/homework_card.dart';
+
 
 void main() {
   runApp(MaterialApp(home: HomeworkScreen()));
