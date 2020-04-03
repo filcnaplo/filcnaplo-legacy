@@ -65,7 +65,7 @@ class MessageDialogState extends State<MessageDialog> {
               ),
               onPressed: () {
                 MessageHelper()
-                    .downloadAttachment(globals.selectedAccount.user, att.id);
+                    .downloadAttachment(globals.selectedAccount.user, att);
               },
             ),
           ]),
