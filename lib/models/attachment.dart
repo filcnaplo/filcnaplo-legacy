@@ -4,6 +4,6 @@ class Attachment {
 
   Attachment.fromJson(Map json) {
     this.id = json["azonosito"];
-    this.fileName = json["fileName"];
+    this.fileName = json["fajlNev"];
   }
 }

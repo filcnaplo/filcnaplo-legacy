@@ -196,22 +196,22 @@ String htmlParser(String html) {
             ),
           ),
           actions: <Widget>[  
-            FlatButton(
-              child: Icon(Icons.delete),
+            IconButton(
+              icon: Icon(Icons.delete),
               onPressed: () {
                 RequestHelper()
                     .deleteHomework(homework.id, globals.selectedUser);
               },
             ),
-            FlatButton(
-              child: Icon(Icons.content_copy),
+            IconButton(
+              icon: Icon(Icons.content_copy),
               onPressed: () {
                 Clipboard.setData(ClipboardData(text: htmlParser(HtmlUnescape().convert(homework.text)).toString())).then((result) {
                   showSuccess(I18n.of(globals.context).successHomeworkCopy);
               });},
             ),
-            FlatButton(
-              child: Text(I18n.of(context).dialogOk.toUpperCase()),
+            IconButton(
+              icon: Text(I18n.of(context).dialogOk.toUpperCase()),
               onPressed: () {
                 Navigator.of(context).pop();
               },

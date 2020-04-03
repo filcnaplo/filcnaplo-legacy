@@ -80,15 +80,4 @@ class MessageHelper {
 
     return message;
   }
-
-  Future<Attachment> getAttachment(Message message) async {
-    Attachment attachment;
-    
-    return attachment;
-  }
-
-  Future<bool> downloadAttachment(Attachment attachment) async {
-    
-    return false;
-  }
 }

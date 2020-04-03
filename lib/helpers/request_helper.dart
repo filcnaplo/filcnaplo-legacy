@@ -116,6 +116,11 @@ class RequestHelper {
           "https://eugyintezes.e-kreta.hu/integration-kretamobile-api/v1/kommunikacio/postaladaelemek/$id",
           accessToken,
           schoolCode);
+
+  Future<bool> downloadAttachment(int id) async {
+    return false;
+  }
+
   Future<String> getEvaluations(String accessToken, String schoolCode) =>
       getStuffFromUrl(
           "https://" + schoolCode + ".e-kreta.hu" + "/mapi/api/v1/Student",
