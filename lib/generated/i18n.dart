@@ -394,7 +394,7 @@ class I18n implements WidgetsLocalizations {
   String get successHomework => "Házi feladat feltöltve";
   /// "Házi feladat törölve"
   String get successHomeworkDelete => "Házi feladat törölve";
-    /// "Házi feladat ki"
+  /// "Házi feladat sikeresen vágólapra másolva"
   String get successHomeworkCopy => "Házi feladat sikeresen vágólapra másolva";
   /// "Hiba"
   String get error => "Hiba";
@@ -969,7 +969,7 @@ class _I18n_en_US extends I18n {
   String get successHomeworkDelete => "Homework deleted successfully";
   /// "Homework successfully copied to Clipboard"
   @override
-  String get successHomeworkCopy => "Homework successfully copied to Clipboard"; 
+  String get successHomeworkCopy => "Homework successfully copied to Clipboard";
   /// "Error"
   @override
   String get error => "Error";
