@@ -80,4 +80,9 @@ class MessageHelper {
 
     return message;
   }
+
+  Future<bool> downloadAttachment(String accessToken, String schoolCode, int id) async {
+    
+    return false;
+  }
 }

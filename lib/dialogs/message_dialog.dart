@@ -59,7 +59,7 @@ class MessageDialogState extends State<MessageDialog> {
                   color: Colors.blue,
                 ),
                 onPressed: () {
-                  RequestHelper().downloadAttachment(att.id);
+                  MessageHelper().downloadAttachment(att.id);
                 },
               ),
           ]),
