@@ -6,7 +6,9 @@ import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:html_unescape/html_unescape.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:filcnaplo/models/homework.dart';
 import 'package:filcnaplo/models/user.dart';
 import 'package:filcnaplo/dialogs/select_time_dialog.dart';
@@ -14,6 +16,9 @@ import 'package:filcnaplo/global_drawer.dart';
 import 'package:filcnaplo/helpers/homework_helper.dart';
 import 'package:filcnaplo/utils/string_formatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
+import 'package:flutter/services.dart';
+import 'package:html/parser.dart';
+
 
 void main() {
   runApp(MaterialApp(home: HomeworkScreen()));
@@ -52,6 +57,27 @@ class HomeworkScreenState extends State<HomeworkScreen> {
         });
       }
     }
+  }
+
+String htmlParser(String html) {
+  var document = parse(html);
+  return document.body.text;
+}
+  
+  void launchurl(url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  }
+}
+
+
+
+ void showSuccess(String msg) {
+ Fluttertoast.showToast(
+     msg: msg,
+     backgroundColor: Colors.green,
+     textColor: Colors.white,
+     fontSize: 16.0);
   }
 
   @override
@@ -145,7 +171,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
                 homework.deadline != null
                     ? Text(capitalize(I18n.of(context).homeworkDeadline) +
                         ": " +
-                        homework.deadline)
+                        stringdateToHuman(homework.deadline))
                     : Container(),
                 Text(capitalize(I18n.of(context).homeworkSubject) +
                     ": " +
@@ -165,17 +191,24 @@ class HomeworkScreenState extends State<HomeworkScreen> {
                 Container(
                   padding: EdgeInsets.only(top: 10),
                 ),
-                Html(data: HtmlUnescape().convert(homework.text)),
+                Html(data: HtmlUnescape().convert(homework.text), onLinkTap: (url) {launchurl(url);}),
               ],
             ),
           ),
-          actions: <Widget>[
-            FlatButton(
-              child: Icon(Icons.delete),
+          actions: <Widget>[  
+            IconButton(
+              icon: Icon(Icons.delete),
               onPressed: () {
                 RequestHelper()
                     .deleteHomework(homework.id, globals.selectedUser);
               },
+            ),
+            IconButton(
+              icon: Icon(Icons.content_copy),
+              onPressed: () {
+                Clipboard.setData(ClipboardData(text: htmlParser(HtmlUnescape().convert(homework.text)).toString())).then((result) {
+                  showSuccess(I18n.of(globals.context).successHomeworkCopy);
+              });},
             ),
             FlatButton(
               child: Text(I18n.of(context).dialogOk.toUpperCase()),
@@ -189,6 +222,7 @@ class HomeworkScreenState extends State<HomeworkScreen> {
     );
   }
 
+ 
   Future<Null> _onRefresh({bool showErrors = true}) async {
     setState(() {
       hasLoaded = false;
@@ -230,29 +264,107 @@ class HomeworkScreenState extends State<HomeworkScreen> {
   Widget _itemBuilder(BuildContext context, int index) {
     return Column(
       children: <Widget>[
-        ListTile(
-          title: Text(
-            selectedHomework[index].uploadDate.substring(0, 10) +
-                " " +
-                dateToWeekDay(
-                    DateTime.parse(selectedHomework[index].uploadDate),
-                    context) +
-                (selectedHomework[index].subject == null
-                    ? ""
-                    : (" - " + selectedHomework[index].subject)),
-            style: TextStyle(fontSize: 20.0),
+        
+         GestureDetector(
+      onTap: (){ homeworksDialog(selectedHomework[index]);},
+      child:
+        Card(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            style: BorderStyle.none,
+            width: 1,
           ),
-          subtitle:
-              Html(data: HtmlUnescape().convert(selectedHomework[index].text)),
-          isThreeLine: true,
-          onTap: () {
-            homeworksDialog(selectedHomework[index]);
-          },
+          borderRadius: BorderRadius.circular(6),
         ),
-        Divider(
-          height: 5.0,
+        margin: EdgeInsets.all(6.0),
+        color: globals.isColor
+            ?  Colors.blue[600]
+            : globals.isDark ? Color.fromARGB(255, 25, 25, 25) : Colors.white,
+        child: Container(
+          child: Column(
+            children: <Widget>[
+              Container(
+                child: Text(
+                  selectedHomework[index].subject,
+                  style: TextStyle(
+                      fontSize: 21.0,
+                      color: globals.isColor
+                              ? Colors.white
+                              : globals.isDark
+                                 ?Colors.white
+                                 :Colors.black, 
+                      fontWeight: FontWeight.bold),
+                ),
+                margin: EdgeInsets.all(10.0),
+              ),
+              Container(
+                child: Text(htmlParser(HtmlUnescape().convert(selectedHomework[index].text)),
+                    maxLines: 4,
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontSize: 17.0,
+                        color: globals.isColor
+                            ? Colors.white
+                            : globals.isDark ? Colors.white : Colors.black)),
+                padding: EdgeInsets.all(10.0),
+              ),
+                
+              Container(
+                  decoration: ShapeDecoration(
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        style: BorderStyle.none,
+                        width: 0,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    color: globals.isDark
+                        ? Color.fromARGB(255, 25, 25, 25)
+                        : Colors.white,
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: 
+                     Row(
+                      children: <Widget>[
+                        Expanded(
+                        child: Container(
+                          padding: EdgeInsets.only(left:  2),
+                          child: Text(selectedHomework[index].uploader, overflow: TextOverflow.ellipsis)
+                            
+                          ),),
+                        Flexible(
+                                fit: FlexFit.loose,
+                                child: Container(
+                                child: Text( 
+                              stringdateToHuman(selectedHomework[index].uploadDate),
+                                    style: TextStyle(
+                                        fontSize: 16.0,
+                                        color: globals.isDark
+                                            ? Colors.white
+                                            : Colors.grey[900])),
+                                alignment: Alignment(1.0, 0.0),
+                              ))
+
+                      ],
+                    ),
+                  )),
+            ],
+          ),
+          decoration: BoxDecoration(
+            border: Border.all(
+                color: globals.isColor
+                    ? Colors.blue[600]
+                    : globals.isDark
+                        ? Color.fromARGB(255, 25, 25, 25)
+                        : Colors.white,
+                width: 2.5),
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+          ),
         ),
-      ],
+      )
+     )],
     );
   }
 

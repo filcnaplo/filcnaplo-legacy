@@ -1,3 +1,5 @@
+import 'package:filcnaplo/models/attachment.dart';
+
 class Message {
   int id;
   int messageId;
@@ -8,7 +10,7 @@ class Message {
   String text;
   String subject;
   List<String> receivers;
-  List<String> attachments;
+  List<Attachment> attachments;
 
   Message.fromJson(Map json) {
     this.id = json["azonosito"];
@@ -21,11 +23,11 @@ class Message {
     this.subject = json["uzenet"]["targy"];
     this.receivers = List();
     for (var rec in json["uzenet"]["cimzettLista"]) {
-      receivers.add(rec["nev"]);
+      this.receivers.add(rec["nev"]);
     }
     this.attachments = List();
     for (var att in json["uzenet"]["csatolmanyok"]) {
-      attachments.add(att["fajlNev"]);
+      this.attachments.add(Attachment.fromJson(att));
     }
   }
 }

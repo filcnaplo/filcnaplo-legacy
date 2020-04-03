@@ -17,7 +17,7 @@ String getTimetableText(DateTime startDateText) {
 }
 
 String getLessonRangeText(Lesson lesson) {
-  return getLessonStartText(lesson) + "-" + getLessonEndText(lesson);
+  return getLessonStartText(lesson) + " - " + getLessonEndText(lesson);
 }
 
 String getLessonStartText(Lesson lesson) {
@@ -35,6 +35,13 @@ String getLessonEndText(Lesson lesson) {
 String dateToHuman(DateTime date) {
   return date
       .toIso8601String()
+      .substring(0, 11)
+      .replaceAll("-", '. ')
+      .replaceAll("T", ". ");
+}
+
+String stringdateToHuman(String date) {
+  return date
       .substring(0, 11)
       .replaceAll("-", '. ')
       .replaceAll("T", ". ");

@@ -337,7 +337,11 @@ class TimeTableScreenState extends State<TimeTableScreen>
                     ? Colors.deepOrange
                     : null),
       ),
-      subtitle: Text(lessonList[index].theme),
+      subtitle: Text(
+        lessonList[index].theme,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+      ),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -347,13 +351,20 @@ class TimeTableScreenState extends State<TimeTableScreen>
                   margin: EdgeInsets.all(8),
                 )
               : Container(),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Text(lessonList[index].room),
-              Text(getLessonRangeText(lessonList[index])),
-            ],
+          Container(
+            width: 85,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Flexible(
+                    child: Text(
+                  lessonList[index].room,
+                  overflow: TextOverflow.ellipsis,
+                )),
+                Text(getLessonRangeText(lessonList[index])),
+              ],
+            ),
           ),
         ],
       ),

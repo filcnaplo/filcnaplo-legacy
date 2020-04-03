@@ -702,7 +702,10 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                       child: Container(
                           child: Row(
                             children: <Widget>[
-                              Text(I18n.of(context).evaluationAverage + ": ",
+                              Text(
+                                  capitalize(
+                                          I18n.of(context).evaluationAverage) +
+                                      ": ",
                                   style: TextStyle(fontSize: 18.0)),
                               Text(
                                 allAverage.toStringAsFixed(2),
@@ -1093,7 +1096,7 @@ class GradeDialogState extends State<GradeDialog> {
       "Theme": "${I18n.of(context).evaluationIf}",
       "IsAtlagbaBeleszamit": true,
       "Mode": "Hamis",
-      "Weight": "$weight",
+      "Weight": "$weight%",
       "Value": "Jeles(5)",
       "NumberValue": $jegy,
       "SeenByTutelaryUTC": null,

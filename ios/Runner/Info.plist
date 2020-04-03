@@ -17,11 +17,33 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.2.6</string>
+	<string>1.4.4</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>2037</string>
+	<string>2040</string>
+	
+	<key>NSContactsUsageDescription</key>
+	<string>The app does not use this service.</string>
+	
+	<key>NSCalendarsUsageDescription</key>
+	<string>The app does not use this service.</string>
+	
+	<key>NSAppleMusicUsageDescription</key>
+	<string>The app does not use this service.</string>
+	
+	<key>NSMotionUsageDescription</key>
+	<string>The app does not use this service.</string>
+	
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>The app does not use this service.</string>
+	
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>The app does not use this service.</string>
+	
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>The app does not use this service.</string>
+
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIBackgroundModes</key>

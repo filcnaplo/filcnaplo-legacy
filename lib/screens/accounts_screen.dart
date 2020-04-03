@@ -108,7 +108,7 @@ class AccountsScreenState extends State<AccountsScreen> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 Container(
-                  child: FlatButton(
+                  child: IconButton(
                     onPressed: () {
                       _openDialog(
                           I18n.of(context).color,
@@ -118,24 +118,22 @@ class AccountsScreenState extends State<AccountsScreen> {
                           ),
                           a.user);
                     },
-                    child: Icon(
+                    icon: Icon(
                       Icons.color_lens,
                       color: a.user.color,
                     ),
                   ),
                 ),
-                FlatButton(
+                IconButton(
                   onPressed: () async {
                     _removeUserDialog(a.user).then((nul) async {
                       users = await AccountManager().getUsers();
                       globals.accounts.removeWhere((Account a) =>
                           !users.map((User u) => u.id).contains(a.user.id));
                       await _getListWidgets();
-                      setState(
-                          () {}); //TODO Ez így lehet hogy full felesleges, delete this line if so
                     });
                   },
-                  child: Icon(
+                  icon: Icon(
                     Icons.clear,
                     color: Colors.red,
                   ),
