@@ -1,20 +1,20 @@
 import 'dart:convert' show json;
 import 'dart:ui';
+import 'dart:ui' as dart_ui;
 
 import 'package:charts_flutter/flutter.dart';
-import 'package:filcnaplo/utils/color_manager.dart';
+import 'package:filcnaplo/cards/summary_card.dart';
+import 'package:filcnaplo/dialogs/Select_Button.dart';
 import 'package:filcnaplo/generated/i18n.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:filcnaplo/global_drawer.dart';
+import 'package:filcnaplo/globals.dart' as globals;
 import 'package:filcnaplo/models/average.dart';
 import 'package:filcnaplo/models/student.dart';
-import 'package:filcnaplo/global_drawer.dart';
-import 'package:filcnaplo/utils/string_formatter.dart';
-import 'package:filcnaplo/globals.dart' as globals;
-import 'dart:ui' as dart_ui;
-import 'package:filcnaplo/dialogs/sort_dialog.dart';
 import 'package:filcnaplo/models/user.dart';
-import 'package:filcnaplo/cards/summary_card.dart';
+import 'package:filcnaplo/utils/color_manager.dart';
+import 'package:filcnaplo/utils/string_formatter.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() {
   runApp(MaterialApp(home: EvaluationsScreen()));
@@ -100,17 +100,6 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
   bool hasLoaded = true;
 
   User selectedUser;
-
-  Future<bool> showSortDialog() {
-    return showDialog(
-          barrierDismissible: true,
-          context: context,
-          builder: (BuildContext context) {
-            return SortDialog();
-          },
-        ) ??
-        false;
-  }
 
   Color color = MaterialPalette.blue.shadeDefault;
 
@@ -556,15 +545,29 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
 
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+    final List<ButtonOptionItem> items = [
+      ButtonOptionItem(I18n
+          .of(context)
+          .sortTime, Icon(Icons.timer)),
+      ButtonOptionItem(I18n
+          .of(context)
+          .sortEval, Icon(Icons.apps)),
+      ButtonOptionItem(I18n
+          .of(context)
+          .sortTimeReal, Icon(Icons.access_time)),
+      ButtonOptionItem(I18n
+          .of(context)
+          .homeworkSubject, Icon(Icons.category)),
+    ];
+
     evaluationsBody = Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            showSortDialog().then((b) {
-              refreshSort();
-              switchToScreen(0);
-            });
+        floatingActionButton: new SelectButton(
+          items: items,
+          selected: globals.sort,
+          onChanged: (int i) {
+            globals.sort = i;
+            refreshSort();
           },
-          child: Icon(Icons.sort, color: Colors.white),
           tooltip: I18n.of(context).sort,
         ),
         body: (Container(
