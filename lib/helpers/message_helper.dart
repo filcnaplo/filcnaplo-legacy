@@ -5,6 +5,7 @@ import 'package:filcnaplo/helpers/request_helper.dart';
 
 import 'package:filcnaplo/models/message.dart';
 import 'package:filcnaplo/models/user.dart';
+import 'package:filcnaplo/models/attachment.dart';
 import 'package:filcnaplo/helpers/database_helper.dart';
 
 class MessageHelper {
@@ -78,5 +79,16 @@ class MessageHelper {
     }
 
     return message;
+  }
+
+  Future<Attachment> getAttachment(Message message) async {
+    Attachment attachment;
+    
+    return attachment;
+  }
+
+  Future<bool> downloadAttachment(Attachment attachment) async {
+    
+    return false;
   }
 }
