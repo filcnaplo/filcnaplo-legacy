@@ -19,7 +19,6 @@ import 'package:filcnaplo/globals.dart' as globals;
 import 'package:flutter/services.dart';
 import 'package:html/parser.dart';
 
-
 void main() {
   runApp(MaterialApp(home: HomeworkScreen()));
 }
@@ -59,25 +58,23 @@ class HomeworkScreenState extends State<HomeworkScreen> {
     }
   }
 
-String htmlParser(String html) {
-  var document = parse(html);
-  return document.body.text;
-}
-  
-  void launchurl(url) async {
-  if (await canLaunch(url)) {
-    await launch(url);
+  String htmlParser(String html) {
+    var document = parse(html);
+    return document.body.text;
   }
-}
 
+  void launchurl(url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    }
+  }
 
-
- void showSuccess(String msg) {
- Fluttertoast.showToast(
-     msg: msg,
-     backgroundColor: Colors.green,
-     textColor: Colors.white,
-     fontSize: 16.0);
+  void showSuccess(String msg) {
+    Fluttertoast.showToast(
+        msg: msg,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0);
   }
 
   @override
@@ -191,11 +188,15 @@ String htmlParser(String html) {
                 Container(
                   padding: EdgeInsets.only(top: 10),
                 ),
-                Html(data: HtmlUnescape().convert(homework.text), onLinkTap: (url) {launchurl(url);}),
+                Html(
+                    data: HtmlUnescape().convert(homework.text),
+                    onLinkTap: (url) {
+                      launchurl(url);
+                    }),
               ],
             ),
           ),
-          actions: <Widget>[  
+          actions: <Widget>[
             IconButton(
               icon: Icon(Icons.delete, color: Colors.red),
               onPressed: () {
@@ -206,9 +207,14 @@ String htmlParser(String html) {
             IconButton(
               icon: Icon(Icons.content_copy),
               onPressed: () {
-                Clipboard.setData(ClipboardData(text: htmlParser(HtmlUnescape().convert(homework.text)).toString())).then((result) {
+                Clipboard.setData(ClipboardData(
+                        text: htmlParser(HtmlUnescape().convert(
+                                homework.text.replaceAll("<br>", "\n")))
+                            .toString()))
+                    .then((result) {
                   showSuccess(I18n.of(globals.context).successHomeworkCopy);
-              });},
+                });
+              },
             ),
             FlatButton(
               child: Text(I18n.of(context).dialogOk.toUpperCase()),
@@ -222,7 +228,6 @@ String htmlParser(String html) {
     );
   }
 
- 
   Future<Null> _onRefresh({bool showErrors = true}) async {
     setState(() {
       hasLoaded = false;
@@ -264,107 +269,110 @@ String htmlParser(String html) {
   Widget _itemBuilder(BuildContext context, int index) {
     return Column(
       children: <Widget>[
-        
-         GestureDetector(
-      onTap: (){ homeworksDialog(selectedHomework[index]);},
-      child:
-        Card(
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            style: BorderStyle.none,
-            width: 1,
-          ),
-          borderRadius: BorderRadius.circular(6),
-        ),
-        margin: EdgeInsets.all(6.0),
-        color: globals.isColor
-            ?  Colors.blue[600]
-            : globals.isDark ? Color.fromARGB(255, 25, 25, 25) : Colors.white,
-        child: Container(
-          child: Column(
-            children: <Widget>[
-              Container(
-                child: Text(
-                  selectedHomework[index].subject,
-                  style: TextStyle(
-                      fontSize: 21.0,
-                      color: globals.isColor
-                              ? Colors.white
-                              : globals.isDark
-                                 ?Colors.white
-                                 :Colors.black, 
-                      fontWeight: FontWeight.bold),
+        GestureDetector(
+            onTap: () {
+              homeworksDialog(selectedHomework[index]);
+            },
+            child: Card(
+              shape: RoundedRectangleBorder(
+                side: BorderSide(
+                  style: BorderStyle.none,
+                  width: 1,
                 ),
-                margin: EdgeInsets.all(10.0),
+                borderRadius: BorderRadius.circular(6),
               ),
-              Container(
-                child: Text(htmlParser(HtmlUnescape().convert(selectedHomework[index].text)),
-                    maxLines: 4,
-                    softWrap: true,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        fontSize: 17.0,
-                        color: globals.isColor
-                            ? Colors.white
-                            : globals.isDark ? Colors.white : Colors.black)),
-                padding: EdgeInsets.all(10.0),
-              ),
-                
-              Container(
-                  decoration: ShapeDecoration(
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                        style: BorderStyle.none,
-                        width: 0,
+              margin: EdgeInsets.all(6.0),
+              color: globals.isColor
+                  ? Colors.blue[600]
+                  : globals.isDark
+                      ? Color.fromARGB(255, 25, 25, 25)
+                      : Colors.white,
+              child: Container(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      child: Text(
+                        selectedHomework[index].subject,
+                        style: TextStyle(
+                            fontSize: 21.0,
+                            color: globals.isColor
+                                ? Colors.white
+                                : globals.isDark ? Colors.white : Colors.black,
+                            fontWeight: FontWeight.bold),
                       ),
-                      borderRadius: BorderRadius.circular(5),
+                      margin: EdgeInsets.all(10.0),
                     ),
-                    color: globals.isDark
-                        ? Color.fromARGB(255, 25, 25, 25)
-                        : Colors.white,
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: 
-                     Row(
-                      children: <Widget>[
-                        Expanded(
-                        child: Container(
-                          padding: EdgeInsets.only(left:  2),
-                          child: Text(selectedHomework[index].uploader, overflow: TextOverflow.ellipsis)
-                            
-                          ),),
-                        Flexible(
-                                fit: FlexFit.loose,
+                    Container(
+                      child: Text(
+                          htmlParser(HtmlUnescape()
+                              .convert(selectedHomework[index].text)),
+                          maxLines: 4,
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: 17.0,
+                              color: globals.isColor
+                                  ? Colors.white
+                                  : globals.isDark
+                                      ? Colors.white
+                                      : Colors.black)),
+                      padding: EdgeInsets.all(10.0),
+                    ),
+                    Container(
+                        decoration: ShapeDecoration(
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              style: BorderStyle.none,
+                              width: 0,
+                            ),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          color: globals.isDark
+                              ? Color.fromARGB(255, 25, 25, 25)
+                              : Colors.white,
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Row(
+                            children: <Widget>[
+                              Expanded(
                                 child: Container(
-                                child: Text( 
-                              stringdateToHuman(selectedHomework[index].uploadDate),
-                                    style: TextStyle(
-                                        fontSize: 16.0,
-                                        color: globals.isDark
-                                            ? Colors.white
-                                            : Colors.grey[900])),
-                                alignment: Alignment(1.0, 0.0),
-                              ))
-
-                      ],
-                    ),
-                  )),
-            ],
-          ),
-          decoration: BoxDecoration(
-            border: Border.all(
-                color: globals.isColor
-                    ? Colors.blue[600]
-                    : globals.isDark
-                        ? Color.fromARGB(255, 25, 25, 25)
-                        : Colors.white,
-                width: 2.5),
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-          ),
-        ),
-      )
-     )],
+                                    padding: EdgeInsets.only(left: 2),
+                                    child: Text(
+                                        selectedHomework[index].uploader,
+                                        overflow: TextOverflow.ellipsis)),
+                              ),
+                              Flexible(
+                                  fit: FlexFit.loose,
+                                  child: Container(
+                                    child: Text(
+                                        stringdateToHuman(
+                                            selectedHomework[index].uploadDate),
+                                        style: TextStyle(
+                                            fontSize: 16.0,
+                                            color: globals.isDark
+                                                ? Colors.white
+                                                : Colors.grey[900])),
+                                    alignment: Alignment(1.0, 0.0),
+                                  ))
+                            ],
+                          ),
+                        )),
+                  ],
+                ),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                      color: globals.isColor
+                          ? Colors.blue[600]
+                          : globals.isDark
+                              ? Color.fromARGB(255, 25, 25, 25)
+                              : Colors.white,
+                      width: 2.5),
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                ),
+              ),
+            ))
+      ],
     );
   }
 
