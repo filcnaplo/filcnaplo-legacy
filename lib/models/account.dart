@@ -74,8 +74,6 @@ class Account {
       await _refreshEventsString(isOffline, showErrors);
       notes = await NotesHelper()
           .getNotesFrom(_eventsString, json.encode(_studentJson), user);
-      averages = await AverageHelper()
-          .getAveragesFrom(json.encode(_studentJson), user);
 
       user.setRecentlyRefreshed("refreshStudentString");
     }
