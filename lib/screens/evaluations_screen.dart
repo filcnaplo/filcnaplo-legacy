@@ -181,7 +181,6 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
         evaluation.Weight == "-" ||
         evaluation.isSummaryEvaluation());
 
-    _onSelect(averages[0]);
     for (Evaluation e in evals)
       switch (e.NumberValue) {
         case 1:
