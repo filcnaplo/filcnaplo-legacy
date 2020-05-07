@@ -209,7 +209,6 @@ class LoginScreenState extends State<LoginScreen> {
               } else if (code == "invalid_password") {
                 passwordError = "hibás felasználónév vagy jelszó";
               } else {
-                print(code);
                 passwordError = "ismeretlen probléma: " + code.toString();
               }
             });

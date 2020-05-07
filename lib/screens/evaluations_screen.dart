@@ -147,6 +147,12 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
 
   dart_ui.Color getColorForAverageString(String averageString) {
     double average = 0;
+    try {
+      average = double.parse(avrString);
+    } catch (e) {
+      print(
+          "[E] evaluationsScreen.getColorForAvarageString(): " + e.toString());
+    }
 
     return getColorForAverage(average);
   }
@@ -199,6 +205,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           db5++;
           break;
       }
+    allAverage = getAllAverages() ?? 0.0;
 
     refreshSort();
 
@@ -278,6 +285,38 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
 
   void _initStats() async {
     await globals.selectedAccount.refreshStudentString(true, false);
+    setState(() {
+      averages = globals.selectedAccount.averages ?? List();
+      averages.removeWhere((Average average) => average.value < 1);
+      if (averages == null || averages.isEmpty) {
+        Map<String, List<Evaluation>> evaluationsBySubject = Map();
+        for (Evaluation evaluation
+            in globals.selectedAccount.midyearEvaluations) {
+          if (evaluationsBySubject[evaluation.Subject] == null)
+            evaluationsBySubject[evaluation.Subject] = List();
+          evaluationsBySubject[evaluation.Subject].add(evaluation);
+        }
+
+        evaluationsBySubject.forEach((String subject, List evaluations) {
+          averages.add(Average(
+              subject,
+              evaluations[0].SubjectCategory,
+              evaluations[0].SubjectCategoryName,
+              double.parse(getAverage(evaluations).toStringAsFixed(2)),
+              0.0,
+              0.0));
+        });
+      }
+      if (averages == null || averages.isEmpty)
+        averages = [Average("", "", "", 0.0, 0.0, 0.0)];
+      averages.sort((Average a, Average b) {
+        return a.subject.compareTo(b.subject);
+      });
+      selectedAverage = averages[0];
+      globals.selectedAverage = selectedAverage;
+      avrString = selectedAverage.value.toString();
+      classAvrString = selectedAverage.classValue.toString();
+    });
 
     initEvals();
   }
