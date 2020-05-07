@@ -77,10 +77,9 @@ class RequestHelper {
       if (globals.smartUserAgent) {
         var randomCodeName = randomDeviceCodeNames[
             _random.nextInt(randomDeviceCodeNames.length)];
-        globals.userAgent = settingsJson["KretaUserAgent"]
-            .replaceAll('<codename>', randomCodeName);
+        globals.userAgent = settingsJson["KretaUserAgent"].split(" ")[0];
       } else {
-        globals.userAgent = "FilcNaplo-" + globals.version;
+        globals.userAgent = "FilcNaplo/" + globals.version;
       }
     } catch (e) {
       print("[E] RequestHelper.refreshAppSettings(): " + e.toString());
@@ -130,8 +129,7 @@ class RequestHelper {
           accessToken,
           schoolCode);
 
-  Future downloadAttachment(
-          int id, String accessToken, String schoolCode) =>
+  Future downloadAttachment(int id, String accessToken, String schoolCode) =>
       apiRequestRaw(
           "https://eugyintezes.e-kreta.hu/integration-kretamobile-api/v1/dokumentumok/uzenetek/$id",
           accessToken,
@@ -139,7 +137,12 @@ class RequestHelper {
 
   Future<String> getEvaluations(String accessToken, String schoolCode) =>
       apiRequest(
-          "https://" + schoolCode + ".e-kreta.hu" + "/mapi/api/v1/Student",
+          "https://" + schoolCode + ".e-kreta.hu" + "/mapi/api/v1/StudentAmi",
+          accessToken,
+          schoolCode);
+  Future<String> getAverages(String accessToken, String schoolCode) =>
+      apiRequest(
+          "https://" + schoolCode + ".e-kreta.hu" + "/mapi/api/v1/TantargyiAtlagAmi",
           accessToken,
           schoolCode);
   Future<String> getHomework(String accessToken, String schoolCode, int id) =>
@@ -277,21 +280,21 @@ class RequestHelper {
             "password=${user.password}&"
             "grant_type=password&client_id=" +
         globals.clientId;
-      String bearerResponse =
-          await RequestHelper().getBearer(body, user.schoolCode, showErrors);
-      if (bearerResponse != null) {
-        try {
-            Map<String, dynamic> bearerMap = json.decode(bearerResponse);
-            if (bearerMap["error"] == "invalid_grant" && showErrors)
-              showError("Hibás jelszó vagy felhasználónév");
-            String code = bearerMap["access_token"];
-            return code;
-        } catch (e) {
-          print("[E] RequestHelper.getBearerToken(): " + e.toString());
-          //showError(e.toString());
-          return null;
-        }
+    String bearerResponse =
+        await RequestHelper().getBearer(body, user.schoolCode, showErrors);
+    if (bearerResponse != null) {
+      try {
+        Map<String, dynamic> bearerMap = json.decode(bearerResponse);
+        if (bearerMap["error"] == "invalid_grant" && showErrors)
+          showError("Hibás jelszó vagy felhasználónév");
+        String code = bearerMap["access_token"];
+        return code;
+      } catch (e) {
+        print("[E] RequestHelper.getBearerToken(): " + e.toString());
+        //showError(e.toString());
+        return null;
       }
+    }
     return null;
   }
 
@@ -313,7 +316,11 @@ class RequestHelper {
 
   Future<String> getStudentString(User user, bool showErrors) async {
     String code = await getBearerToken(user, showErrors);
-    String evaluationsString = await getEvaluations(code, user.schoolCode);
+    String justEvaluationsString = await getEvaluations(code, user.schoolCode);
+    String averagesString = await getAverages(code, user.schoolCode);
+    String evaluationsString = justEvaluationsString.replaceFirst("\"SubjectAverages\": null", "\"SubjectAverages\": " + averagesString);
+
+    print(averagesString);
     return evaluationsString;
   }
 
