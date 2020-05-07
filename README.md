@@ -9,7 +9,7 @@
 [![Letöltés](.github/download.png)](https://play.google.com/store/apps/details?id=hu.filcnaplo.ellenorzo) 
 [![Telegram Hírlevél Csoport](.github/telegram.png)](https://t.me/filc_naplo)
 
-Publikus Telegram csoportunk: **[Beszélgetés a fejlesztőkkel](t.me/filcnaplo)**
+Publikus Telegram csoportunk: **[Beszélgetés a fejlesztőkkel](https://t.me/filcnaplo)**
 
 ---
 
