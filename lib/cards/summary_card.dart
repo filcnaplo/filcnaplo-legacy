@@ -31,12 +31,18 @@ class SummaryCard extends StatelessWidget {
         title = I18n.of(context).summaryFirstQ;
         break;
       case 2:
-        title = I18n.of(context).summaryHalfYear;
+        title = I18n.of(context).summarySecondQ;
         break;
       case 3:
         title = I18n.of(context).summaryThirdQ;
         break;
       case 4:
+        title = I18n.of(context).summaryFourthQ;
+        break;
+      case 5:
+        title = I18n.of(context).summaryHalfYear;
+        break;
+      case 6:
         title = I18n.of(context).summaryEndYear;
         break;
     }

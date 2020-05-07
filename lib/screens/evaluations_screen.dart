@@ -213,11 +213,18 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
     List<Evaluation> firstQuarterEvaluations = (toSummaryEvals
         .where((Evaluation evaluation) => (evaluation.isFirstQuarter()))
         .toList());
-    List<Evaluation> halfYearEvaluations = (toSummaryEvals
-        .where((Evaluation evaluation) => (evaluation.isHalfYear()))
+    List<Evaluation> secondQuarterEvaluations = (toSummaryEvals
+        .where((Evaluation evaluation) => (evaluation.isSecondQuarter()))
         .toList());
     List<Evaluation> thirdQuarterEvaluations = (toSummaryEvals
         .where((Evaluation evaluation) => (evaluation.isThirdQuarter()))
+        .toList());
+    List<Evaluation> fourthQuarterEvaluations = (toSummaryEvals
+        .where((Evaluation evaluation) => (evaluation.isFourthQuarter()))
+        .toList());
+
+    List<Evaluation> halfYearEvaluations = (toSummaryEvals
+        .where((Evaluation evaluation) => (evaluation.isHalfYear()))
         .toList());
     List<Evaluation> endYearEvaluations = (toSummaryEvals
         .where((Evaluation evaluation) => (evaluation.isEndYear()))
@@ -225,13 +232,19 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
 
     if (endYearEvaluations.isNotEmpty)
       summaryCardsToShow
-          .add(SummaryCard(endYearEvaluations, context, 4, false, true, false));
+          .add(SummaryCard(endYearEvaluations, context, 6, false, true, false));
+    if (fourthQuarterEvaluations.isNotEmpty)
+      summaryCardsToShow.add(
+          SummaryCard(fourthQuarterEvaluations, context, 4, false, true, false));
     if (thirdQuarterEvaluations.isNotEmpty)
       summaryCardsToShow.add(
           SummaryCard(thirdQuarterEvaluations, context, 3, false, true, false));
     if (halfYearEvaluations.isNotEmpty)
       summaryCardsToShow.add(
-          SummaryCard(halfYearEvaluations, context, 2, false, true, false));
+          SummaryCard(halfYearEvaluations, context, 5, false, true, false));
+    if (secondQuarterEvaluations.isNotEmpty)
+      summaryCardsToShow.add(
+          SummaryCard(secondQuarterEvaluations, context, 2, false, true, false));
     if (firstQuarterEvaluations.isNotEmpty)
       summaryCardsToShow.add(SummaryCard(firstQuarterEvaluations, context, 1,
           false, true, false)); //localization

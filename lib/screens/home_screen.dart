@@ -116,11 +116,18 @@ class HomeScreenState extends State<HomeScreen> {
       List<Evaluation> firstQuarterEvaluations = (evaluations.where(
           (Evaluation evaluation) => (evaluation.isFirstQuarter() &&
               evaluation.owner == account.user))).toList();
-      List<Evaluation> halfYearEvaluations = (evaluations.where(
-          (Evaluation evaluation) => (evaluation.isHalfYear() &&
+      List<Evaluation> secondQuarterEvaluations = (evaluations.where(
+          (Evaluation evaluation) => (evaluation.isSecondQuarter() &&
               evaluation.owner == account.user))).toList();
       List<Evaluation> thirdQuarterEvaluations = (evaluations.where(
           (Evaluation evaluation) => (evaluation.isThirdQuarter() &&
+              evaluation.owner == account.user))).toList();
+      List<Evaluation> fourthQuarterEvaluations = (evaluations.where(
+          (Evaluation evaluation) => (evaluation.isFourthQuarter() &&
+              evaluation.owner == account.user))).toList();
+
+      List<Evaluation> halfYearEvaluations = (evaluations.where(
+          (Evaluation evaluation) => (evaluation.isHalfYear() &&
               evaluation.owner == account.user))).toList();
       List<Evaluation> endYearEvaluations = (evaluations.where(
               (Evaluation evaluation) =>
@@ -130,15 +137,22 @@ class HomeScreenState extends State<HomeScreen> {
       if (firstQuarterEvaluations.isNotEmpty)
         feedCards.add(SummaryCard(firstQuarterEvaluations, context, 1, false,
             true, !globals.isSingle));
-      if (halfYearEvaluations.isNotEmpty)
-        feedCards.add(SummaryCard(
-            halfYearEvaluations, context, 2, false, true, !globals.isSingle));
+      if (secondQuarterEvaluations.isNotEmpty)
+        feedCards.add(SummaryCard(secondQuarterEvaluations, context, 2, false,
+            true, !globals.isSingle));
       if (thirdQuarterEvaluations.isNotEmpty)
         feedCards.add(SummaryCard(thirdQuarterEvaluations, context, 3, false,
             true, !globals.isSingle));
+      if (fourthQuarterEvaluations.isNotEmpty)
+        feedCards.add(SummaryCard(fourthQuarterEvaluations, context, 4, false,
+            true, !globals.isSingle));
+
+      if (halfYearEvaluations.isNotEmpty)
+        feedCards.add(SummaryCard(
+            halfYearEvaluations, context, 5, false, true, !globals.isSingle));
       if (endYearEvaluations.isNotEmpty)
         feedCards.add(SummaryCard(
-            endYearEvaluations, context, 4, false, true, !globals.isSingle));
+            endYearEvaluations, context, 6, false, true, !globals.isSingle));
     }
     List<String> noteHashes = [];
     for (String day in absents.keys.toList())

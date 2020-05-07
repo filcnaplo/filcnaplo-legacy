@@ -196,8 +196,10 @@
 
     "summary": {
         "firstQ": "Noten des ersten Quartal",
-        "halfYear": "Halbjahresnoten",
+        "secondQ": "Noten des zweiten Quartal",
         "thirdQ": "Noten des dritten Quartal",
+        "fourthQ": "Noten des vierten Quartal",
+        "halfYear": "Halbjahresnoten",
         "endYear": "Jahresendnoten"
     },
 

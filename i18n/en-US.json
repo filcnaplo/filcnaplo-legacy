@@ -196,8 +196,10 @@
 
     "summary": {
         "firstQ": "First quarter evaluations",
-        "halfYear": "Half year evaluations",
+        "secondQ": "Second quarter evaluations",
         "thirdQ": "Third quarter evaluations",
+        "fourthQ": "Fourth quarter evaluations",
+        "halfYear": "Half year evaluations",
         "endYear": "End year evaluations"
     },
 

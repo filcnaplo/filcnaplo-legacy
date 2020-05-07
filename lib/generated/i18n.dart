@@ -274,10 +274,14 @@ class I18n implements WidgetsLocalizations {
   String get evaluationIf => "Ha kapnék egy...";
   /// "Első negyedévi jegyek"
   String get summaryFirstQ => "Első negyedévi jegyek";
-  /// "Félévi jegyek"
-  String get summaryHalfYear => "Félévi jegyek";
+  /// "Második negyedévi jegyek"
+  String get summarySecondQ => "Második negyedévi jegyek";
   /// "Harmadik negyedévi jegyek"
   String get summaryThirdQ => "Harmadik negyedévi jegyek";
+  /// "Negyedik negyedévi jegyek"
+  String get summaryFourthQ => "Negyedik negyedévi jegyek";
+  /// "Félévi jegyek"
+  String get summaryHalfYear => "Félévi jegyek";
   /// "Év végi jegyek"
   String get summaryEndYear => "Év végi jegyek";
   /// "Előző"
@@ -787,12 +791,18 @@ class _I18n_en_US extends I18n {
   /// "First quarter evaluations"
   @override
   String get summaryFirstQ => "First quarter evaluations";
-  /// "Half year evaluations"
+  /// "Second quarter evaluations"
   @override
-  String get summaryHalfYear => "Half year evaluations";
+  String get summarySecondQ => "Second quarter evaluations";
   /// "Third quarter evaluations"
   @override
   String get summaryThirdQ => "Third quarter evaluations";
+  /// "Fourth quarter evaluations"
+  @override
+  String get summaryFourthQ => "Fourth quarter evaluations";
+  /// "Half year evaluations"
+  @override
+  String get summaryHalfYear => "Half year evaluations";
   /// "End year evaluations"
   @override
   String get summaryEndYear => "End year evaluations";
@@ -1365,12 +1375,18 @@ class _I18n_de_DE extends I18n {
   /// "Noten des ersten Quartal"
   @override
   String get summaryFirstQ => "Noten des ersten Quartal";
-  /// "Halbjahresnoten"
+  /// "Noten des zweiten Quartal"
   @override
-  String get summaryHalfYear => "Halbjahresnoten";
+  String get summarySecondQ => "Noten des zweiten Quartal";
   /// "Noten des dritten Quartal"
   @override
   String get summaryThirdQ => "Noten des dritten Quartal";
+  /// "Noten des vierten Quartal"
+  @override
+  String get summaryFourthQ => "Noten des vierten Quartal";
+  /// "Halbjahresnoten"
+  @override
+  String get summaryHalfYear => "Halbjahresnoten";
   /// "Jahresendnoten"
   @override
   String get summaryEndYear => "Jahresendnoten";

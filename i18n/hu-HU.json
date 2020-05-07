@@ -196,8 +196,10 @@
 
     "summary": {
         "firstQ": "Első negyedévi jegyek",
-        "halfYear": "Félévi jegyek",
+        "secondQ": "Második negyedévi jegyek",
         "thirdQ": "Harmadik negyedévi jegyek",
+        "fourthQ": "Negyedik negyedévi jegyek",
+        "halfYear": "Félévi jegyek",
         "endYear": "Év végi jegyek"
     },
 

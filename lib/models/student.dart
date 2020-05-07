@@ -317,7 +317,9 @@ class Evaluation {
   static const String HALF_YEAR = "HalfYear";
   static const String END_YEAR = "EndYear";
   static const String FIRST_QUARTER = "IQuarterEvaluation";
+  static const String SECOND_QUARTER = "IIQuarterEvaluation";
   static const String THIRD_QUARTER = "IIIQuarterEvaluation";
+  static const String FOURTH_QUARTER = "IVQuarterEvaluation";
 
   bool isMidYear() => Type == MID_YEAR;
   bool isText() => Type == TEXT;
@@ -326,7 +328,9 @@ class Evaluation {
   bool isHalfYear() => Type == HALF_YEAR;
   bool isEndYear() => Type == END_YEAR;
   bool isFirstQuarter() => Type == FIRST_QUARTER;
+  bool isSecondQuarter() => Type == SECOND_QUARTER;
   bool isThirdQuarter() => Type == THIRD_QUARTER;
+  bool isFourthQuarter() => Type == FOURTH_QUARTER;
   bool isSummaryEvaluation() =>
       (isHalfYear() || isEndYear() || isFirstQuarter() || isThirdQuarter());
 
