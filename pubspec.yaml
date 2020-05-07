@@ -1,6 +1,6 @@
 name: filcnaplo
 description: Nem hivatalos e-napló alkalmazás az e-Kréta rendszerhez
-version: 1.5.1+19
+version: 1.5.2+20
 
 dependencies:
   background_fetch: "^0.5.1"
