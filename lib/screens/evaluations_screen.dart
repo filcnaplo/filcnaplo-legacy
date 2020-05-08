@@ -234,8 +234,8 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
       summaryCardsToShow
           .add(SummaryCard(endYearEvaluations, context, 6, false, true, false));
     if (fourthQuarterEvaluations.isNotEmpty)
-      summaryCardsToShow.add(
-          SummaryCard(fourthQuarterEvaluations, context, 4, false, true, false));
+      summaryCardsToShow.add(SummaryCard(
+          fourthQuarterEvaluations, context, 4, false, true, false));
     if (thirdQuarterEvaluations.isNotEmpty)
       summaryCardsToShow.add(
           SummaryCard(thirdQuarterEvaluations, context, 3, false, true, false));
@@ -243,8 +243,8 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
       summaryCardsToShow.add(
           SummaryCard(halfYearEvaluations, context, 5, false, true, false));
     if (secondQuarterEvaluations.isNotEmpty)
-      summaryCardsToShow.add(
-          SummaryCard(secondQuarterEvaluations, context, 2, false, true, false));
+      summaryCardsToShow.add(SummaryCard(
+          secondQuarterEvaluations, context, 2, false, true, false));
     if (firstQuarterEvaluations.isNotEmpty)
       summaryCardsToShow.add(SummaryCard(firstQuarterEvaluations, context, 1,
           false, true, false)); //localization
@@ -559,18 +559,10 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
     final List<ButtonOptionItem> items = [
-      ButtonOptionItem(I18n
-          .of(context)
-          .sortTime, Icon(Icons.timer)),
-      ButtonOptionItem(I18n
-          .of(context)
-          .sortEval, Icon(Icons.apps)),
-      ButtonOptionItem(I18n
-          .of(context)
-          .sortTimeReal, Icon(Icons.access_time)),
-      ButtonOptionItem(I18n
-          .of(context)
-          .homeworkSubject, Icon(Icons.category)),
+      ButtonOptionItem(I18n.of(context).sortTime, Icon(Icons.timer)),
+      ButtonOptionItem(I18n.of(context).sortEval, Icon(Icons.apps)),
+      ButtonOptionItem(I18n.of(context).sortTimeReal, Icon(Icons.access_time)),
+      ButtonOptionItem(I18n.of(context).homeworkSubject, Icon(Icons.category)),
     ];
 
     evaluationsBody = Scaffold(
@@ -596,86 +588,95 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
 
     averageBody = Scaffold(
       //"Statisztika" "Statistics"
-      body: Stack(children: <Widget>[
-        Column(
-          children: <Widget>[
-            Container(
-              child: selectedAverage != null
-                  ? DropdownButton(
-                      items: averages.map((Average average) {
-                        return DropdownMenuItem<Average>(
-                            value: average,
-                            child: Row(
-                              children: <Widget>[
-                                Text(average.subject),
-                              ],
-                            ));
-                      }).toList(),
-                      onChanged: _onSelect,
-                      value: selectedAverage,
-                    )
-                  : Container(),
-              alignment: Alignment(0, 0),
-              margin: EdgeInsets.all(5),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(capitalize(I18n.of(context).evaluationAverage) + ": "),
-                Text(
-                  avrString,
-                  style: TextStyle(
-                      color: getColorForAverageString(avrString),
-                      fontWeight: FontWeight.bold),
-                ),
-                Container(
-                  padding: EdgeInsets.only(left: 10),
-                ),
-                selectedAverage != null
-                    ? selectedAverage.classValue != null
-                        ? Text(capitalize(
-                                I18n.of(context).evaluationAverageClass) +
-                            ": ")
-                        : Container()
-                    : Container(),
-                selectedAverage != null
-                    ? selectedAverage.classValue != null
-                        ? Text(
-                            selectedAverage.classValue != 0
-                                ? selectedAverage.classValue.toString()
-                                : r"¯\_(ツ)_/¯",
-                            style: TextStyle(
-                                color: getColorForAverage(
-                                    selectedAverage.classValue),
-                                fontWeight: FontWeight.bold),
+      body: globals.noAverages //Show error text if couldn't load averages
+          ? Container(
+              child: Text(
+                I18n.of(context).errorNoStatistics,
+                style: Theme.of(context).textTheme.headline5,
+              ),
+              padding: EdgeInsets.all(30),
+            )
+          : Stack(children: <Widget>[
+              Column(
+                children: <Widget>[
+                  Container(
+                    child: selectedAverage != null
+                        ? DropdownButton(
+                            items: averages.map((Average average) {
+                              return DropdownMenuItem<Average>(
+                                  value: average,
+                                  child: Row(
+                                    children: <Widget>[
+                                      Text(average.subject),
+                                    ],
+                                  ));
+                            }).toList(),
+                            onChanged: _onSelect,
+                            value: selectedAverage,
                           )
-                        : Container()
-                    : Container(),
-              ],
-            ),
-            Container(
-              child: SizedBox(
-                child: TimeSeriesChart(
-                  series,
-                  animate: true,
-                  primaryMeasureAxis: NumericAxisSpec(
-                    showAxisLine: true,
+                        : Container(),
+                    alignment: Alignment(0, 0),
+                    margin: EdgeInsets.all(5),
                   ),
-                ),
-                height: 150,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(capitalize(I18n.of(context).evaluationAverage) +
+                          ": "),
+                      Text(
+                        avrString,
+                        style: TextStyle(
+                            color: getColorForAverageString(avrString),
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(left: 10),
+                      ),
+                      selectedAverage != null
+                          ? selectedAverage.classValue != null
+                              ? Text(capitalize(
+                                      I18n.of(context).evaluationAverageClass) +
+                                  ": ")
+                              : Container()
+                          : Container(),
+                      selectedAverage != null
+                          ? selectedAverage.classValue != null
+                              ? Text(
+                                  selectedAverage.classValue != 0
+                                      ? selectedAverage.classValue.toString()
+                                      : r"¯\_(ツ)_/¯",
+                                  style: TextStyle(
+                                      color: getColorForAverage(
+                                          selectedAverage.classValue),
+                                      fontWeight: FontWeight.bold),
+                                )
+                              : Container()
+                          : Container(),
+                    ],
+                  ),
+                  Container(
+                    child: SizedBox(
+                      child: TimeSeriesChart(
+                        series,
+                        animate: true,
+                        primaryMeasureAxis: NumericAxisSpec(
+                          showAxisLine: true,
+                        ),
+                      ),
+                      height: 150,
+                    ),
+                  ),
+                  Flexible(
+                    //Build list of evaluations below graph
+                    child: ListView.builder(
+                      itemBuilder: _itemBuilder,
+                      itemCount: globals.currentEvals.length,
+                    ),
+                  ),
+                ],
+                mainAxisAlignment: MainAxisAlignment.start,
               ),
-            ),
-            Flexible(
-              //Build list of evaluations below graph
-              child: ListView.builder(
-                itemBuilder: _itemBuilder,
-                itemCount: globals.currentEvals.length,
-              ),
-            ),
-          ],
-          mainAxisAlignment: MainAxisAlignment.start,
-        ),
-      ]),
+            ]),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           return showDialog(

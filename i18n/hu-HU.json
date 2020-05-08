@@ -295,7 +295,9 @@
     "error": {
         "": "Hiba",
         "network": "Hálózati hiba",
-        "readAccount": "Hiba a felhasználó olvasása közben"
+        "readAccount": "Hiba a felhasználó olvasása közben",
+        "averagesError": "Nem sikerült lekérni az átlagokat",
+        "noStatistics": "Nem sikerült lekérni az átlagokat a Kréta szererről, ezért a statisztika oldal nem használható. Próbálj frissíteni a főoldalon!"
     },
 
     "pcs": "db",

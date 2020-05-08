@@ -295,7 +295,9 @@
     "error": {
         "": "Error",
         "network": "Network error",
-        "readAccount": "Error while reading user"
+        "readAccount": "Error while reading user",
+        "averagesError": "Couldn't get averages",
+        "noStatistics": "Couldn't load averages from Kréta servers, therefore the Statistics screen can't be used. Try updating on the homescreen!"
     },
 
     "pcs": "x",

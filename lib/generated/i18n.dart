@@ -408,6 +408,10 @@ class I18n implements WidgetsLocalizations {
   String get errorNetwork => "Hálózati hiba";
   /// "Hiba a felhasználó olvasása közben"
   String get errorReadAccount => "Hiba a felhasználó olvasása közben";
+  /// "Nem sikerült lekérni az átlagokat"
+  String get errorAveragesError => "Nem sikerült lekérni az átlagokat";
+  /// "Nem sikerült lekérni az átlagokat a Kréta szererről, ezért a statisztika oldal nem használható. Próbálj frissíteni a főoldalon!"
+  String get errorNoStatistics => "Nem sikerült lekérni az átlagokat a Kréta szererről, ezért a statisztika oldal nem használható. Próbálj frissíteni a főoldalon!";
   /// "db"
   String get pcs => "db";
   /// "letöltés"
@@ -994,6 +998,12 @@ class _I18n_en_US extends I18n {
   /// "Error while reading user"
   @override
   String get errorReadAccount => "Error while reading user";
+  /// "Couldn't get averages"
+  @override
+  String get errorAveragesError => "Couldn't get averages";
+  /// "Couldn't load averages from Kréta servers, therefore the Statistics screen can't be used. Try updating on the homescreen!"
+  @override
+  String get errorNoStatistics => "Couldn't load averages from Kréta servers, therefore the Statistics screen can't be used. Try updating on the homescreen!";
   /// "x"
   @override
   String get pcs => "x";
@@ -1581,6 +1591,12 @@ class _I18n_de_DE extends I18n {
   /// "Konto konnte nicht geladen worden"
   @override
   String get errorReadAccount => "Konto konnte nicht geladen worden";
+  /// "Durchschnitten nicht geladen"
+  @override
+  String get errorAveragesError => "Durchschnitten nicht geladen";
+  /// "Durchschnitten konnten nicht geladen werden von Kréta servers, deshalb funktioniert die Statistikseite nicht. Versuche am Hauptbildschirm neuzugeladen!"
+  @override
+  String get errorNoStatistics => "Durchschnitten konnten nicht geladen werden von Kréta servers, deshalb funktioniert die Statistikseite nicht. Versuche am Hauptbildschirm neuzugeladen!";
   /// "x"
   @override
   String get pcs => "x";

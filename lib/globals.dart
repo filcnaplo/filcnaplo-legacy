@@ -32,6 +32,7 @@ List<User> users = List<User>();
 bool multiAccount;
 bool isSingle;
 bool smartUserAgent;
+bool noAverages = false;
 User selectedUser;
 String lang = "";
 String selectedSchoolCode = "";

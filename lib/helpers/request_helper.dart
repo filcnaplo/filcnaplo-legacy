@@ -318,6 +318,12 @@ class RequestHelper {
     String code = await getBearerToken(user, showErrors);
     String justEvaluationsString = await getEvaluations(code, user.schoolCode);
     String averagesString = await getAverages(code, user.schoolCode);
+    if (averagesString == null) {
+      Fluttertoast.showToast(
+        msg: I18n.of(globals.context).errorAveragesError,
+        backgroundColor: Colors.red);
+      globals.noAverages = true;
+    } else globals.noAverages = false;
     String evaluationsString = justEvaluationsString.replaceFirst("\"SubjectAverages\": null", "\"SubjectAverages\": " + averagesString);
 
     print(averagesString);

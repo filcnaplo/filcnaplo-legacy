@@ -295,7 +295,9 @@
     "error": {
         "": "Error",
         "network": "Netzwerk fehler",
-        "readAccount": "Konto konnte nicht geladen worden"
+        "readAccount": "Konto konnte nicht geladen worden",
+        "averagesError": "Durchschnitten nicht geladen",
+        "noStatistics": "Durchschnitten konnten nicht geladen werden von Kréta servers, deshalb funktioniert die Statistikseite nicht. Versuche am Hauptbildschirm neuzugeladen!"
     },
 
     "pcs": "x",
