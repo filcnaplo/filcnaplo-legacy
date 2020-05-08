@@ -265,6 +265,7 @@
     "settings": {
         "title": "Settings",
         "colorful": "Colorful home",
+        "singleUser": "One user on homepage",
         "darkTheme": "Dark theme",
         "amoled": "Amoled",
         "useAgent": "Send requests as KRÉTA",

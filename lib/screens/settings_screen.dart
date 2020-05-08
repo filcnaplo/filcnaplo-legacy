@@ -240,42 +240,47 @@ class SettingsScreenState extends State<SettingsScreen> {
                 ? ListView(
                     children: <Widget>[
                       MySwitchListTile(
-                        text: I18n
-                            .of(context)
-                            .settingsColorful,
+                        //Colorful Main Page
+                        text: I18n.of(context).settingsColorful,
                         icon: IconData(0xf266,
                             fontFamily: "Material Design Icons"),
                         value: _isColor,
                         onChanged: _isColorChange,
                       ),
                       MySwitchListTile(
-                        text: I18n
-                            .of(context)
-                            .settingsDarkTheme,
-                        icon: IconData(
-                            0xf50e, fontFamily: "Material Design Icons"),
+                        text: I18n.of(context).settingsSingleUser,
+                        icon: Icons.person,
+                        value: _isSingleUser,
+                        onChanged: !globals.multiAccount
+                            ? null
+                            : _isSingleUserChange, //Only able to be turned on, if multiple users are logged in. On second user login, gets turned on automatically (See: AccountManager)
+                      ),
+                      MySwitchListTile(
+                        //Dark mode
+                        text: I18n.of(context).settingsDarkTheme,
+                        icon: IconData(0xf50e,
+                            fontFamily: "Material Design Icons"),
                         value: _isDark,
                         onChanged: _isDarkChange,
                       ),
                       MySwitchListTile(
-                        text: I18n
-                            .of(context)
-                            .settingsAmoled,
-                        icon: IconData(
-                            0xf301, fontFamily: "Material Design Icons"),
+                        //Amoled mode
+                        text: I18n.of(context).settingsAmoled,
+                        icon: IconData(0xf301,
+                            fontFamily: "Material Design Icons"),
                         value: _isDark ? _amoled : false,
                         onChanged: _isDark ? _setAmoled : null,
                       ),
                       MySwitchListTile(
-                        text: I18n
-                            .of(context)
-                            .settingsUseAgent,
-                        icon: IconData(
-                            0xfcbf, fontFamily: "Material Design Icons"),
+                        //Smart Useragent
+                        text: I18n.of(context).settingsUseAgent,
+                        icon: IconData(0xfcbf,
+                            fontFamily: "Material Design Icons"),
                         value: _smartUserAgent,
                         onChanged: _smartUserAgentChange,
                       ),
                       ListTile(
+                        //Evaluation Colors
                         title: Text(
                           I18n.of(context).settingsEvaluationColors,
                           style: TextStyle(fontSize: 20.0),
@@ -286,6 +291,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                         leading: Icon(Icons.color_lens),
                       ),
                       ListTile(
+                        //App-wide Accent Color
                         title: PopupMenuButton<int>(
                           child: ListTile(
                             contentPadding: EdgeInsets.all(0),
@@ -322,24 +328,23 @@ class SettingsScreenState extends State<SettingsScreen> {
                         leading: Icon(Icons.color_lens),
                       ),
                       MySwitchListTile(
-                        text: I18n
-                            .of(context)
-                            .settingsNotifications,
-                        icon: IconData(
-                            0xf09a, fontFamily: "Material Design Icons"),
+                        //Notifications
+                        text: I18n.of(context).settingsNotifications,
+                        icon: IconData(0xf09a,
+                            fontFamily: "Material Design Icons"),
                         value: _isNotification,
                         onChanged: _isNotificationChange,
                       ),
                       MySwitchListTile(
-                        text: I18n
-                            .of(context)
-                            .settingsNextLesson,
+                        //Next lesson notif
+                        text: I18n.of(context).settingsNextLesson,
                         icon: Icons.access_time,
                         value: nextLesson,
                         onChanged: _isNotification ? _setNextLesson : null,
                       ),
                       _isNotification
                           ? PopupMenuButton<int>(
+                              //Notif update freq
                               child: ListTile(
                                 title: Text(
                                   I18n.of(context).settingsSyncFrequency(
@@ -375,6 +380,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                                   fontFamily: "Material Design Icons")),
                             ),
                       ListTile(
+                        //Language
                         title: Text(
                           I18n.of(context).settingsLanguage,
                           style: TextStyle(fontSize: 20.0),
@@ -405,6 +411,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                           color: globals.isDark ? Colors.grey : Colors.black54),
                       !Platform.isIOS
                           ? ListTile(
+                              //Export BUTTON
                               leading: Icon(Icons.import_export),
                               title: Text(I18n.of(context).export.toUpperCase(),
                                   style: TextStyle(
@@ -416,6 +423,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                             )
                           : Container(),
                       ListTile(
+                        //Bug report BUTTON
                         leading: Icon(Icons.bug_report),
                         title: Text(
                             I18n.of(context).settingsBugreport.toUpperCase(),
@@ -424,6 +432,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                         onTap: _openBugReport,
                       ),
                       ListTile(
+                          //Version number
                           title: Text(
                         capitalize(I18n.of(context).appVersion) +
                             ": " +
@@ -464,9 +473,7 @@ class MySwitchListTile extends StatelessWidget {
         text,
         style: TextStyle(fontSize: 20.0),
       ),
-      activeColor: Theme
-          .of(context)
-          .accentColor,
+      activeColor: Theme.of(context).accentColor,
       value: value,
       onChanged: onChanged,
       secondary: Icon(icon),

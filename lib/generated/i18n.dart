@@ -370,6 +370,8 @@ class I18n implements WidgetsLocalizations {
   String get settingsTitle => "Beállítások";
   /// "Színes főoldal"
   String get settingsColorful => "Színes főoldal";
+  /// "Egy felhasználó a főoldalon"
+  String get settingsSingleUser => "Egy felhasználó a főoldalon";
   /// "Sötét üzemmód"
   String get settingsDarkTheme => "Sötét üzemmód";
   /// "Amoled"
@@ -935,6 +937,9 @@ class _I18n_en_US extends I18n {
   /// "Colorful home"
   @override
   String get settingsColorful => "Colorful home";
+  /// "One user on homepage"
+  @override
+  String get settingsSingleUser => "One user on homepage";
   /// "Dark theme"
   @override
   String get settingsDarkTheme => "Dark theme";
@@ -1519,6 +1524,9 @@ class _I18n_de_DE extends I18n {
   /// "Bunte Hauptbildschirm"
   @override
   String get settingsColorful => "Bunte Hauptbildschirm";
+  /// "Nur eine Konte im Hauptbildschirm"
+  @override
+  String get settingsSingleUser => "Nur eine Konte im Hauptbildschirm";
   /// "Dunkles Thema"
   @override
   String get settingsDarkTheme => "Dunkles Thema";

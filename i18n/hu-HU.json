@@ -265,6 +265,7 @@
     "settings": {
         "title": "Beállítások",
         "colorful": "Színes főoldal",
+        "singleUser": "Egy felhasználó a főoldalon",
         "darkTheme": "Sötét üzemmód",
         "amoled": "Amoled",
         "useAgent": "Lekérések KRÉTA appként",

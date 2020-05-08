@@ -265,6 +265,7 @@
     "settings": {
         "title": "Einstellungen",
         "colorful": "Bunte Hauptbildschirm",
+        "singleUser": "Nur eine Konte im Hauptbildschirm",
         "darkTheme": "Dunkles Thema",
         "amoled": "Amoled",
         "useAgent": "Gefälschte KRÉTA Identität",
