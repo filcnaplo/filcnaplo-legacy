@@ -743,9 +743,9 @@ class _I18n_en_US extends I18n {
   /// "Timetable"
   @override
   String get timetable => "Timetable";
-  /// "empty timetable"
+  /// "It looks like you don't have any lessons this week :)"
   @override
-  String get timetableEmpty => "empty timetable";
+  String get timetableEmpty => "It looks like you don't have any lessons this week :)";
   /// "Sort"
   @override
   String get sort => "Sort";

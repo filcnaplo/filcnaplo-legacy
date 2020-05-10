@@ -167,7 +167,7 @@
     
     "timetable": {
         "": "Timetable",
-        "empty": "empty timetable"
+        "empty": "It looks like you don't have any lessons this week :)"
     },
 
     "sort": {
