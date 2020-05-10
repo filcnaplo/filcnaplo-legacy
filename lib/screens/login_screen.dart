@@ -417,6 +417,26 @@ class LoginScreenState extends State<LoginScreen> {
                                       )
                                     : Container(),
                               ]),
+                              Row(
+                                children: <Widget>[
+                                  !Platform.isIOS
+                                      ? Expanded(
+                                          child: Container(
+                                          child: FlatButton(
+                                            onPressed: () {
+                                              Navigator.pushNamed(
+                                                  context, "/import");
+                                            },
+                                            child: Text("Import"),
+                                            disabledColor: Colors.blueGrey[800],
+                                            disabledTextColor: Colors.blueGrey,
+                                            color: Colors.green,
+                                            textColor: Colors.white,
+                                          ),
+                                        ))
+                                      : Container(),
+                                ],
+                              ),
                               FlatButton(
                                 onPressed: !loggingIn
                                     ? () {
@@ -432,23 +452,6 @@ class LoginScreenState extends State<LoginScreen> {
                                 color: Colors.blue,
                                 textColor: Colors.white,
                               ),
-                              !Platform.isIOS
-                                  ? Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(left: 50, right: 50, top: 10),
-                                        child: FlatButton(
-                                          onPressed: () {
-                                            Navigator.pushNamed(
-                                                context, "/import");
-                                          },
-                                          child: Text("Import"),
-                                          disabledColor: Colors.blueGrey[800],
-                                          disabledTextColor: Colors.blueGrey,
-                                          color: Colors.green,
-                                          textColor: Colors.white,
-                                        ),
-                                      ))
-                                  : Container(),
                             ].reversed.toList(),
                           ))
                         : Container(
