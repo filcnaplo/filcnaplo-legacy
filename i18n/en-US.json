@@ -8,7 +8,7 @@
         "home": "home",
         "evaluations": "evaluations",
         "timetable": "timetable",
-        "homeworks": "homeworks",
+        "homeworks": "homework",
         "notes": "notes",
         "messages": "messages",
         "tests": "tests",
@@ -116,7 +116,7 @@
     "homework": {
         "": "homework",
         "add": "add homework",
-        "title": "Homeworks",
+        "title": "Homework",
         "deadline": "deadline",
         "subject": "subject",
         "uploadUser": "uploader",
@@ -174,7 +174,7 @@
         "": "Sort",
         "time": "date",
         "eval": "grade",
-        "timeReal": "test's date"
+        "timeReal": "test date"
     },
 
     "evaluation": {
@@ -215,9 +215,9 @@
         "username": "Username",
         "password": "Password",
         "usernameHint": "usually your education ID (11 numbers)",
-        "passwordHint": "most of the time birth date (19700101)",
-        "usernameError": "You must give a username!",
-        "passwordError": "You must give a password!",
+        "passwordHint": "usually your date of birth (1970-01-01)",
+        "usernameError": "You must enter a username!",
+        "passwordError": "You must enter a password!",
         "schoolError": "Please select a school!",
         "school": "School",
         "choose": "choose",
@@ -239,7 +239,7 @@
     },
 
     "info": {
-        "birthdate": "Birth date: ",
+        "birthdate": "Date of birth: ",
         "kretaID": "Kréta ID: ",
         "address": "Address: ",
         "teacher": "Classroom teacher: ",
@@ -256,7 +256,7 @@
         "lime": "lime",
         "yellow": "yellow",
         "orange": "orange",
-        "grey": "grey",
+        "grey": "gray",
         "pink": "pink",
         "purple": "purple",
         "teal": "teal"
@@ -274,7 +274,7 @@
         "nextLesson": "Next class",
         "syncFrequency": "Sync frequency: {n}",
         "language": "Language (Nyelv, Sprache)",
-        "bugreport": "bug report"
+        "bugreport": "report a bug"
     },
 
     "notification": {
@@ -282,7 +282,7 @@
     },
 
     "refresh" : {
-        "limit": "You can only update every {mins} minutes!"
+        "limit": "You can only update every {mins} minute(s)!"
     },
 
     "success": {
@@ -308,7 +308,7 @@
     },
 
     "update": {
-        "available": "New version available!"
+        "available": "A new version is available!"
     },
 
     "rateLimit": {
