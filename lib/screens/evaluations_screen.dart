@@ -301,7 +301,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
     await globals.selectedAccount.refreshStudentString(true, false);
     setState(() {
       averages = globals.selectedAccount.averages ?? List();
-      averages.removeWhere((Average average) => average.value < 1);
+      averages.removeWhere((Average average) => (average.value ?? 0) < 1);
       if (averages == null || averages.isEmpty) {
         Map<String, List<Evaluation>> evaluationsBySubject = Map();
         for (Evaluation evaluation
