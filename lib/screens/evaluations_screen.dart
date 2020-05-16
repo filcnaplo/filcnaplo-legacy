@@ -142,9 +142,6 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
       _initStats();
       _initAllEvals();
     });
-
-    switchToScreen(0); //hotfix
-    
     super.initState();
   }
 
