@@ -449,9 +449,9 @@ class _I18n_en_US extends I18n {
   /// "timetable"
   @override
   String get drawerTimetable => "timetable";
-  /// "homeworks"
+  /// "homework"
   @override
-  String get drawerHomeworks => "homeworks";
+  String get drawerHomeworks => "homework";
   /// "notes"
   @override
   String get drawerNotes => "notes";
@@ -662,9 +662,9 @@ class _I18n_en_US extends I18n {
   /// "add homework"
   @override
   String get homeworkAdd => "add homework";
-  /// "Homeworks"
+  /// "Homework"
   @override
-  String get homeworkTitle => "Homeworks";
+  String get homeworkTitle => "Homework";
   /// "deadline"
   @override
   String get homeworkDeadline => "deadline";
@@ -755,9 +755,9 @@ class _I18n_en_US extends I18n {
   /// "grade"
   @override
   String get sortEval => "grade";
-  /// "test's date"
+  /// "test date"
   @override
-  String get sortTimeReal => "test's date";
+  String get sortTimeReal => "test date";
   /// "Grades"
   @override
   String get evaluationTitle => "Grades";
@@ -836,15 +836,15 @@ class _I18n_en_US extends I18n {
   /// "usually your education ID (11 numbers)"
   @override
   String get loginUsernameHint => "usually your education ID (11 numbers)";
-  /// "most of the time birth date (19700101)"
+  /// "usually your date of birth (1970-01-01)"
   @override
-  String get loginPasswordHint => "most of the time birth date (19700101)";
-  /// "You must give a username!"
+  String get loginPasswordHint => "usually your date of birth (1970-01-01)";
+  /// "You must enter a username!"
   @override
-  String get loginUsernameError => "You must give a username!";
-  /// "You must give a password!"
+  String get loginUsernameError => "You must enter a username!";
+  /// "You must enter a password!"
   @override
-  String get loginPasswordError => "You must give a password!";
+  String get loginPasswordError => "You must enter a password!";
   /// "Please select a school!"
   @override
   String get loginSchoolError => "Please select a school!";
@@ -881,9 +881,9 @@ class _I18n_en_US extends I18n {
   /// "Are you sure you want to exit?"
   @override
   String get closeConfirm => "Are you sure you want to exit?";
-  /// "Birth date: "
+  /// "Date of birth: "
   @override
-  String get infoBirthdate => "Birth date: ";
+  String get infoBirthdate => "Date of birth: ";
   /// "Kréta ID: "
   @override
   String get infoKretaID => "Kréta ID: ";
@@ -923,9 +923,9 @@ class _I18n_en_US extends I18n {
   /// "orange"
   @override
   String get colorOrange => "orange";
-  /// "grey"
+  /// "gray"
   @override
-  String get colorGrey => "grey";
+  String get colorGrey => "gray";
   /// "pink"
   @override
   String get colorPink => "pink";
@@ -968,15 +968,15 @@ class _I18n_en_US extends I18n {
   /// "Language (Nyelv, Sprache)"
   @override
   String get settingsLanguage => "Language (Nyelv, Sprache)";
-  /// "bug report"
+  /// "report a bug"
   @override
-  String get settingsBugreport => "bug report";
+  String get settingsBugreport => "report a bug";
   /// "Failed to turn on notifications, please try again!"
   @override
   String get notificationFailed => "Failed to turn on notifications, please try again!";
-  /// "You can only update every ${mins} minutes!"
+  /// "You can only update every ${mins} minute(s)!"
   @override
-  String refreshLimit(String mins) => "You can only update every ${mins} minutes!";
+  String refreshLimit(String mins) => "You can only update every ${mins} minute(s)!";
   /// "Success"
   @override
   String get success => "Success";
@@ -1013,9 +1013,9 @@ class _I18n_en_US extends I18n {
   /// "Download the latest version now"
   @override
   String get downloadLatest => "Download the latest version now";
-  /// "New version available!"
+  /// "A new version is available!"
   @override
-  String get updateAvailable => "New version available!";
+  String get updateAvailable => "A new version is available!";
   /// "You can only refresh every ${minutes} minute(s)!"
   @override
   String rateLimitAlert(String minutes) => "You can only refresh every ${minutes} minute(s)!";
