@@ -51,7 +51,6 @@ class SettingsScreenState extends State<SettingsScreen> {
     _isColor = await SettingsHelper().getColoredMainPage();
     _isDark = await SettingsHelper().getDarkTheme();
     _isNotification = await SettingsHelper().getNotification();
-    _isLogo = await SettingsHelper().getLogo();
     _refreshNotification = await SettingsHelper().getRefreshNotification();
     _isSingleUser = await SettingsHelper().getSingleUser();
     _smartUserAgent = await SettingsHelper().getSmartUserAgent();
@@ -118,14 +117,6 @@ class SettingsScreenState extends State<SettingsScreen> {
       SettingsHelper().setRefreshNotification(_refreshNotification);
     });
     await BackgroundHelper().configure();
-  }
-
-  void _isLogoChange(bool value) {
-    setState(() {
-      _isLogo = value;
-      globals.isLogo = value;
-      SettingsHelper().setLogo(_isLogo);
-    });
   }
 
   void _isColorChange(bool value) {

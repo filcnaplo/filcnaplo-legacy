@@ -154,7 +154,6 @@ void main({bool noReset = false}) async {
     globals.isBeta = globals.version.endsWith("-beta");
     List<User> users = await AccountManager().getUsers();
     isNew = (users.isEmpty);
-    globals.isLogo = await SettingsHelper().getLogo();
     globals.isSingle = await SettingsHelper().getSingleUser();
     globals.smartUserAgent = await SettingsHelper().getSmartUserAgent();
     globals.lang = await SettingsHelper().getLang();
@@ -166,6 +165,7 @@ void main({bool noReset = false}) async {
       globals.isColor = await SettingsHelper().getColoredMainPage();
       globals.isSingle = await SettingsHelper().getSingleUser();
       globals.multiAccount = (await Saver.readUsers()).length != 1;
+      globals.isNewsletterRead = await SettingsHelper().getNewsletterRead();
       if (!noReset) globals.users = users;
       if (!noReset) globals.accounts = List();
       if (!noReset)
@@ -179,8 +179,6 @@ void main({bool noReset = false}) async {
       globals.color3 = await SettingsHelper().getEvalColor(2);
       globals.color4 = await SettingsHelper().getEvalColor(3);
       globals.color5 = await SettingsHelper().getEvalColor(4);
-
-      globals.showCardType = await SettingsHelper().getShowCardType();
     }
 
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])

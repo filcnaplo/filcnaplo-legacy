@@ -6,6 +6,9 @@ import 'package:filcnaplo/screens/student_screen.dart';
 import 'package:filcnaplo/utils/string_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:filcnaplo/helpers/settings_helper.dart';
+import 'package:filcnaplo/globals.dart' as globals;
+
 
 BuildContext ctx;
 
@@ -102,7 +105,8 @@ class GlobalDrawerState extends State<GlobalDrawer> {
                                   BorderSide(width: 1.5, color: Colors.grey[600]),
                               child: Row(
                                 children: <Widget>[
-                                  Container(
+                                  !globals.isNewsletterRead //Only show "New!" if user has yet to click on button
+                                  ? Container(
                                     child: Text(
                                       I18n.of(context).drawerNew,
                                       style: TextStyle(color: Colors.white),
@@ -110,7 +114,8 @@ class GlobalDrawerState extends State<GlobalDrawer> {
                                     margin: EdgeInsets.only(left: 5, right: 5),
                                     padding: EdgeInsets.all(1),
                                     color: Colors.deepOrange[900],
-                                  ),
+                                  )
+                                  : Container(),
                                   Container(
                                     child: Icon(Icons.new_releases,
                                         color: Colors.grey),
@@ -275,6 +280,8 @@ class GlobalDrawerState extends State<GlobalDrawer> {
 
 _launchNewsletter() async {
   const url = "https://t.me/s/filcnaplo_hirlevel";
+  SettingsHelper().setNewsletterRead();
+  globals.isNewsletterRead = true;
   if (await canLaunch(url)) {
     await launch(url);
   } else {
