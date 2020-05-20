@@ -692,7 +692,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
           Icons.add,
           color: Colors.white,
         ),
-        tooltip: I18n.of(context).sort,
+        tooltip: I18n.of(context).evaluationIf,
       ),
     );
 
