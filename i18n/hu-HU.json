@@ -5,6 +5,8 @@
     },
 
     "drawer": {
+        "new": "Új!",
+        "newsletter": "Hírlevél",
         "home": "főoldal",
         "evaluations": "jegyek",
         "timetable": "órarend",

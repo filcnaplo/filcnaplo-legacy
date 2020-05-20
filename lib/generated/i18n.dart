@@ -36,6 +36,10 @@ class I18n implements WidgetsLocalizations {
   String get appTitle => "Filc Napló";
   /// "verzió"
   String get appVersion => "verzió";
+  /// "Új!"
+  String get drawerNew => "Új!";
+  /// "Hírlevél"
+  String get drawerNewsletter => "Hírlevél";
   /// "főoldal"
   String get drawerHome => "főoldal";
   /// "jegyek"
@@ -440,6 +444,12 @@ class _I18n_en_US extends I18n {
   /// "version"
   @override
   String get appVersion => "version";
+  /// "New!"
+  @override
+  String get drawerNew => "New!";
+  /// "Newsletter"
+  @override
+  String get drawerNewsletter => "Newsletter";
   /// "home"
   @override
   String get drawerHome => "home";
@@ -1033,6 +1043,12 @@ class _I18n_de_DE extends I18n {
   /// "Version"
   @override
   String get appVersion => "Version";
+  /// "Neu!"
+  @override
+  String get drawerNew => "Neu!";
+  /// "Newsletter"
+  @override
+  String get drawerNewsletter => "Newsletter";
   /// "hauptbildschirm"
   @override
   String get drawerHome => "hauptbildschirm";

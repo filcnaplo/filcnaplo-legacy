@@ -5,6 +5,8 @@
     },
 
     "drawer": {
+        "new": "New!",
+        "newsletter": "Newsletter",
         "home": "home",
         "evaluations": "evaluations",
         "timetable": "timetable",
@@ -191,7 +193,7 @@
         "weight": "weight",
         "value": "value",
         "range": "range",
-        "if": "if I got a..."
+        "if": "If I got a..."
     },
 
     "summary": {

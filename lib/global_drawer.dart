@@ -5,6 +5,7 @@ import 'package:filcnaplo/models/user.dart';
 import 'package:filcnaplo/screens/student_screen.dart';
 import 'package:filcnaplo/utils/string_formatter.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 BuildContext ctx;
 
@@ -74,27 +75,64 @@ class GlobalDrawerState extends State<GlobalDrawer> {
           children: <Widget>[
             Container(
                 child: DrawerHeader(
-                  child: Column(
+                  child: Row(
                     children: <Widget>[
                       Image.asset(
                         "assets/icon.png",
                         height: 100.0,
                         width: 100.0,
                       ),
-                      Container(
-                        child: Text(
-                          I18n.of(context).appTitle,
-                          style: TextStyle(fontSize: 19.0),
-                        ),
-                        padding: EdgeInsets.fromLTRB(8.0, 5.0, 0.0, 0.0),
+                      Column(
+                        children: <Widget>[
+                          Container(
+                            child: Text(
+                              I18n.of(context).appTitle,
+                              style: TextStyle(fontSize: 19.0),
+                            ),
+                            padding: EdgeInsets.fromLTRB(8.0, 5.0, 0.0, 0.0),
+                            margin: EdgeInsets.only(bottom: 10),
+                          ),
+                          Container(
+                            child: OutlineButton(
+                              onPressed: _launchNewsletter,
+                              highlightedBorderColor:
+                                  Theme.of(context).accentColor,
+                              shape: StadiumBorder(),
+                              borderSide:
+                                  BorderSide(width: 1.5, color: Colors.grey[600]),
+                              child: Row(
+                                children: <Widget>[
+                                  Container(
+                                    child: Text(
+                                      I18n.of(context).drawerNew,
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    margin: EdgeInsets.only(left: 5, right: 5),
+                                    padding: EdgeInsets.all(1),
+                                    color: Colors.deepOrange[900],
+                                  ),
+                                  Container(
+                                    child: Icon(Icons.new_releases,
+                                        color: Colors.grey),
+                                    margin: EdgeInsets.only(right: 5),
+                                  ),
+                                  Text(I18n.of(context).drawerNewsletter)
+                                ],
+                              ),
+                            ),
+                            margin: EdgeInsets.only(left: 8),
+                          )
+                        ],
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                       ),
                     ],
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                   ),
                   padding: EdgeInsets.all(2.0),
                 ),
-                height: 154,
-                padding: EdgeInsets.only(left: 10)),
+                height: 160,
+                padding: EdgeInsets.only(left: 10, top: 10, bottom: 10)),
             selectedUser != null && multiAccount
                 ? Container(
                     child: DrawerHeader(
@@ -217,6 +255,7 @@ class GlobalDrawerState extends State<GlobalDrawer> {
                 text: I18n.of(context).drawerAbsences,
                 route: "/absents",
                 screenID: 5),
+            Divider(),
             MenuPoint(
                 icon: Icons.supervisor_account,
                 text: I18n.of(context).accountTitle,
@@ -231,6 +270,15 @@ class GlobalDrawerState extends State<GlobalDrawer> {
         ),
       ),
     );
+  }
+}
+
+_launchNewsletter() async {
+  const url = "https://t.me/s/filcnaplo_hirlevel";
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw "Could not launch newsletter. $url";
   }
 }
 

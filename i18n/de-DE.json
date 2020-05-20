@@ -5,6 +5,8 @@
     },
 
     "drawer": {
+        "new": "Neu!",
+        "newsletter": "Newsletter",
         "home": "hauptbildschirm",
         "evaluations": "noten",
         "timetable": "stundenplan",
