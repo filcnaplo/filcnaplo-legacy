@@ -272,7 +272,7 @@
         "amoled": "Amoled",
         "useAgent": "Gefälschte KRÉTA Identität",
         "evaluationColors": "Notefarben",
-        "notifications": "Push-Benachrichtigung",
+        "notifications": "Push-Benachrichtigung\nNur von Stunden",
         "nextLesson": "Nächster Stunde",
         "syncFrequency": "Häufigkeit der Synchronisierung: Alle {n} Minuten",
         "language": "Sprache (Nyelv, Language)",

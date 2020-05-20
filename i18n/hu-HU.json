@@ -272,7 +272,7 @@
         "amoled": "Amoled",
         "useAgent": "Lekérések KRÉTA appként",
         "evaluationColors": "Jegyek színe",
-        "notifications": "Értesítések",
+        "notifications": "Értesítések\nCsak következő óráról",
         "nextLesson": "Következő óra",
         "syncFrequency": "Szinkronizálás gyakorisága: {n}",
         "language": "Nyelv (Sprache, Language)",

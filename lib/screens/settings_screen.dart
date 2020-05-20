@@ -342,7 +342,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                         value: nextLesson,
                         onChanged: _isNotification ? _setNextLesson : null,
                       ),
-                      _isNotification
+                      /* _isNotification
                           ? PopupMenuButton<int>(
                               //Notif update freq
                               child: ListTile(
@@ -378,7 +378,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                               enabled: false,
                               leading: Icon(IconData(0xf4e6,
                                   fontFamily: "Material Design Icons")),
-                            ),
+                            ), */
                       ListTile(
                         //Language
                         title: Text(
@@ -439,7 +439,8 @@ class SettingsScreenState extends State<SettingsScreen> {
                             globals.version,
                         style: TextStyle(fontSize: 15.0),
                         textAlign: TextAlign.right,
-                      ))
+                      ),
+                      onTap: _launchNewsletter,)
                     ],
                     padding: EdgeInsets.all(10),
                   )
@@ -456,6 +457,14 @@ class SettingsScreenState extends State<SettingsScreen> {
       throw 'Could not launch $url';
     }
   }
+  _launchNewsletter() async {
+  const url = "https://t.me/s/filcnaplo_hirlevel";
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw "Could not launch newsletter. $url";
+  }
+}
 }
 
 class MySwitchListTile extends StatelessWidget {

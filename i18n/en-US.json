@@ -1,6 +1,6 @@
 { 
     "app": {
-        "title": "Filc Diary",
+        "title": "Filc Gradebook",
         "version": "version"
     },
 
@@ -272,7 +272,7 @@
         "amoled": "Amoled",
         "useAgent": "Send requests as KRÉTA",
         "evaluationColors": "Grade colors",
-        "notifications": "Notifications",
+        "notifications": "Notifications\nOnly of next classes",
         "nextLesson": "Next class",
         "syncFrequency": "Sync frequency: {n}",
         "language": "Language (Nyelv, Sprache)",

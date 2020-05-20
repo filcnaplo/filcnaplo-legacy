@@ -384,8 +384,8 @@ class I18n implements WidgetsLocalizations {
   String get settingsUseAgent => "Lekérések KRÉTA appként";
   /// "Jegyek színe"
   String get settingsEvaluationColors => "Jegyek színe";
-  /// "Értesítések"
-  String get settingsNotifications => "Értesítések";
+  /// "Értesítések\nCsak következő óráról"
+  String get settingsNotifications => "Értesítések\nCsak következő óráról";
   /// "Következő óra"
   String get settingsNextLesson => "Következő óra";
   /// "Szinkronizálás gyakorisága: ${n}"
@@ -438,9 +438,9 @@ class _I18n_hu_HU extends I18n {
 class _I18n_en_US extends I18n {
   const _I18n_en_US();
 
-  /// "Filc Diary"
+  /// "Filc Gradebook"
   @override
-  String get appTitle => "Filc Diary";
+  String get appTitle => "Filc Gradebook";
   /// "version"
   @override
   String get appVersion => "version";
@@ -801,9 +801,9 @@ class _I18n_en_US extends I18n {
   /// "range"
   @override
   String get evaluationRange => "range";
-  /// "if I got a..."
+  /// "If I got a..."
   @override
-  String get evaluationIf => "if I got a...";
+  String get evaluationIf => "If I got a...";
   /// "First quarter evaluations"
   @override
   String get summaryFirstQ => "First quarter evaluations";
@@ -966,9 +966,9 @@ class _I18n_en_US extends I18n {
   /// "Grade colors"
   @override
   String get settingsEvaluationColors => "Grade colors";
-  /// "Notifications"
+  /// "Notifications\nOnly of next classes"
   @override
-  String get settingsNotifications => "Notifications";
+  String get settingsNotifications => "Notifications\nOnly of next classes";
   /// "Next class"
   @override
   String get settingsNextLesson => "Next class";
@@ -1565,9 +1565,9 @@ class _I18n_de_DE extends I18n {
   /// "Notefarben"
   @override
   String get settingsEvaluationColors => "Notefarben";
-  /// "Push-Benachrichtigung"
+  /// "Push-Benachrichtigung\nNur von Stunden"
   @override
-  String get settingsNotifications => "Push-Benachrichtigung";
+  String get settingsNotifications => "Push-Benachrichtigung\nNur von Stunden";
   /// "Nächster Stunde"
   @override
   String get settingsNextLesson => "Nächster Stunde";
