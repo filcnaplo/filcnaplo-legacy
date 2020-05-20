@@ -12,6 +12,8 @@ import 'package:filcnaplo/models/user.dart';
 import 'package:filcnaplo/helpers/database_helper.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 
+import 'package:filcnaplo/generated/i18n.dart';
+
 void main() {
   runApp(MaterialApp(home: ImportScreen()));
 }
@@ -37,11 +39,11 @@ class ImportScreenState extends State<ImportScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Figyelem"),
-          content: Text("Ez kitöröl minden meglévő felhasználót! (ha van)"),
+          title: Text(I18n.of(context).importWarning),
+          content: Text(I18n.of(context).importWarningText),
           actions: <Widget>[
             FlatButton(
-              child: Text("OK"),
+              child: Text(I18n.of(context).dialogOk),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -64,7 +66,7 @@ class ImportScreenState extends State<ImportScreen> {
   Widget build(BuildContext context) {
     globals.context = context;
     return Screen(
-        Text("Import"),
+        Text(I18n.of(context).import),
         Center(
           child: Container(
             padding: EdgeInsets.all(20),
@@ -117,7 +119,7 @@ class ImportScreenState extends State<ImportScreen> {
                       });
                     },
                     child: Text(
-                      "Import",
+                      I18n.of(context).import,
                       style: TextStyle(color: Colors.white),
                     ),
                     color: Colors.green[700],
@@ -127,6 +129,7 @@ class ImportScreenState extends State<ImportScreen> {
           ),
         ),
         "/login",
-        <Widget>[]);
+        <Widget>[],
+        showDrawer: false);
   }
 }

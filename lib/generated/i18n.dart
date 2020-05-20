@@ -330,6 +330,12 @@ class I18n implements WidgetsLocalizations {
   String get exportChoose => "válassz intervallumot";
   /// "sikeresen exportálva"
   String get exportSuccess => "sikeresen exportálva";
+  /// "Importálás"
+  String get import => "Importálás";
+  /// "Figyelem"
+  String get importWarning => "Figyelem";
+  /// "Ez kitöröl minden meglévő felhasználót!\nImportálás után az app bezár, nyisd meg újra."
+  String get importWarningText => "Ez kitöröl minden meglévő felhasználót!\nImportálás után az app bezár, nyisd meg újra.";
   /// "Alkalmazás bezárása"
   String get closeTitle => "Alkalmazás bezárása";
   /// "Biztosan be akarod zárni az alkalmazást?"
@@ -885,6 +891,15 @@ class _I18n_en_US extends I18n {
   /// "Success!"
   @override
   String get exportSuccess => "Success!";
+  /// "Import"
+  @override
+  String get import => "Import";
+  /// "Warning"
+  @override
+  String get importWarning => "Warning";
+  /// "All accounts will be deleted.\nAfter importing the app will close, please reopen it."
+  @override
+  String get importWarningText => "All accounts will be deleted.\nAfter importing the app will close, please reopen it.";
   /// "Close the application"
   @override
   String get closeTitle => "Close the application";
@@ -1433,9 +1448,9 @@ class _I18n_de_DE extends I18n {
   /// "Minuten"
   @override
   String get lessonCardMinutes => "Minuten";
-  /// "Anmeldung"
+  /// "Anmelden"
   @override
-  String get login => "Anmeldung";
+  String get login => "Anmelden";
   /// "Benutzername"
   @override
   String get loginUsername => "Benutzername";
@@ -1460,15 +1475,15 @@ class _I18n_de_DE extends I18n {
   /// "Schule"
   @override
   String get loginSchool => "Schule";
-  /// "Schulwahl"
+  /// "wählen"
   @override
-  String get loginChoose => "Schulwahl";
+  String get loginChoose => "wählen";
   /// "Wähle deine Schule"
   @override
   String get loginChooseSchool => "Wähle deine Schule";
-  /// "Ausführen"
+  /// "Export"
   @override
-  String get export => "Ausführen";
+  String get export => "Export";
   /// "Noten und alle andere"
   @override
   String get exportGrades => "Noten und alle andere";
@@ -1481,9 +1496,18 @@ class _I18n_de_DE extends I18n {
   /// "wähle eine Zeitabstand"
   @override
   String get exportChoose => "wähle eine Zeitabstand";
-  /// "Ausführung fertig"
+  /// "Export fertig"
   @override
-  String get exportSuccess => "Ausführung fertig";
+  String get exportSuccess => "Export fertig";
+  /// "Import"
+  @override
+  String get import => "Import";
+  /// "Achtung"
+  @override
+  String get importWarning => "Achtung";
+  /// "Alle Konten werden gelöscht werden.\nWährend importieren das App wird schließen, bitte neuöffnen."
+  @override
+  String get importWarningText => "Alle Konten werden gelöscht werden.\nWährend importieren das App wird schließen, bitte neuöffnen.";
   /// "App schließen"
   @override
   String get closeTitle => "App schließen";

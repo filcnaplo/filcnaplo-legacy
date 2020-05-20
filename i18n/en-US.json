@@ -235,6 +235,12 @@
         "success": "Success!"
     },
 
+    "import": {
+        "": "Import",
+        "warning": "Warning",
+        "warningText": "All accounts will be deleted.\nAfter importing the app will close, please reopen it."
+    },
+
     "close": {
         "title": "Close the application",
         "confirm": "Are you sure you want to exit?"

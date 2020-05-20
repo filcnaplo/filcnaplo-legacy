@@ -213,7 +213,7 @@
     },
 
     "login": {
-        "": "Anmeldung",
+        "": "Anmelden",
         "username": "Benutzername",
         "password": "Passwort",
         "usernameHint": "Studenten ID: 11-stelliger Nummer (beginnt mit 7)",
@@ -222,17 +222,23 @@
         "passwordError": "Bitte Passwort eingeben!",
         "schoolError": "Bitte wähle deine Schule!",
         "school": "Schule",
-        "choose": "Schulwahl",
+        "choose": "wählen",
         "chooseSchool": "Wähle deine Schule"
     },
 
     "export": {
-        "": "Ausführen",
+        "": "Export",
         "grades": "Noten und alle andere",
         "lessons": "Stunden",
         "accounts": "Konten",
         "choose": "wähle eine Zeitabstand",
-        "success": "Ausführung fertig"
+        "success": "Export fertig"
+    },
+
+    "import": {
+        "": "Import",
+        "warning": "Achtung",
+        "warningText": "Alle Konten werden gelöscht werden.\nWährend importieren das App wird schließen, bitte neuöffnen."
     },
 
     "close": {

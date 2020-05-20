@@ -7,7 +7,8 @@ class Screen extends StatelessWidget {
   final Widget body;
   final String returnPage;
   final actions;
-  Screen(this.title, this.body, this.returnPage, this.actions);
+  final bool showDrawer;
+  Screen(this.title, this.body, this.returnPage, this.actions, {this.showDrawer = true});
   Widget build(BuildContext context) {
     globals.context = context;
     return WillPopScope(
@@ -16,7 +17,7 @@ class Screen extends StatelessWidget {
           Navigator.pushReplacementNamed(context, returnPage);
         },
         child: Scaffold(
-            drawer: GlobalDrawer(),
+            drawer: showDrawer ? GlobalDrawer() : null,
             appBar: AppBar(
               title: title,
               actions: actions,

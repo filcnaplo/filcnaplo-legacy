@@ -223,7 +223,7 @@ class LoginScreenState extends State<LoginScreen> {
       setState(() {
         loggingIn = false;
       });
-      passwordError = "nincs internet";
+      passwordError = "Nincs internet";
     }
   }
 
@@ -239,10 +239,6 @@ class LoginScreenState extends State<LoginScreen> {
         setState(() {});
       });
     });
-  }
-
-  _gotoAbout() {
-    Navigator.popAndPushNamed(context, "/about");
   }
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -270,7 +266,31 @@ class LoginScreenState extends State<LoginScreen> {
                                 padding:
                                     EdgeInsets.only(left: 40.0, right: 40.0),
                                 child: Image.asset("assets/icon.png"),
-                                height: kbSize,
+                                height: 250,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 10),
+                                child: Row(
+                                  children: <Widget>[
+                                    Text(
+                                      I18n.of(context).appTitle,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 35),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(left: 15),
+                                      child: Text(
+                                        globals.version,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.grey, fontSize: 20),
+                                      ),
+                                    ),
+                                  ],
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                ),
                               ),
                               Container(
                                   margin: EdgeInsets.only(top: 5.0),
@@ -417,26 +437,6 @@ class LoginScreenState extends State<LoginScreen> {
                                       )
                                     : Container(),
                               ]),
-                              Row(
-                                children: <Widget>[
-                                  !Platform.isIOS
-                                      ? Expanded(
-                                          child: Container(
-                                          child: FlatButton(
-                                            onPressed: () {
-                                              Navigator.pushNamed(
-                                                  context, "/import");
-                                            },
-                                            child: Text("Import"),
-                                            disabledColor: Colors.blueGrey[800],
-                                            disabledTextColor: Colors.blueGrey,
-                                            color: Colors.green,
-                                            textColor: Colors.white,
-                                          ),
-                                        ))
-                                      : Container(),
-                                ],
-                              ),
                               FlatButton(
                                 onPressed: !loggingIn
                                     ? () {
@@ -451,6 +451,33 @@ class LoginScreenState extends State<LoginScreen> {
                                 child: Text(capitalize(I18n.of(context).login)),
                                 color: Colors.blue,
                                 textColor: Colors.white,
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  !Platform.isIOS
+                                      ? Expanded(
+                                          child: Container(
+                                          child: FlatButton(
+                                            onPressed: () {
+                                              Navigator.pushNamed(
+                                                  context, "/import");
+                                            },
+                                            child: Text(I18n.of(context).import),
+                                            disabledColor: Colors.blueGrey[800],
+                                            disabledTextColor: Colors.blueGrey,
+                                            color: Colors.green,
+                                            textColor: Colors.white,
+                                          ),
+                                        ))
+                                      : Container(),
+                                  IconButton(
+                                    icon: Icon(Icons.settings),
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, "/settings");
+                                    },
+                                    color: Colors.grey,
+                                  )
+                                ],
                               ),
                             ].reversed.toList(),
                           ))

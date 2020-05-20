@@ -235,6 +235,12 @@
         "success": "sikeresen exportálva"
     },
 
+    "import": {
+        "": "Importálás",
+        "warning": "Figyelem",
+        "warningText": "Ez kitöröl minden meglévő felhasználót!\nImportálás után az app bezár, nyisd meg újra."
+    },
+
     "close": {
         "title": "Alkalmazás bezárása",
         "confirm": "Biztosan be akarod zárni az alkalmazást?"

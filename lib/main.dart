@@ -158,13 +158,13 @@ void main({bool noReset = false}) async {
     globals.smartUserAgent = await SettingsHelper().getSmartUserAgent();
     globals.lang = await SettingsHelper().getLang();
     RequestHelper().refreshAppSettings();
+    globals.multiAccount = (await Saver.readUsers()).length != 1;
 
     if (!isNew) {
       globals.isDark = await SettingsHelper().getDarkTheme();
       globals.isAmoled = await SettingsHelper().getAmoled();
       globals.isColor = await SettingsHelper().getColoredMainPage();
       globals.isSingle = await SettingsHelper().getSingleUser();
-      globals.multiAccount = (await Saver.readUsers()).length != 1;
       globals.isNewsletterRead = await SettingsHelper().getNewsletterRead();
       if (!noReset) globals.users = users;
       if (!noReset) globals.accounts = List();

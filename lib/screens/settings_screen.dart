@@ -218,11 +218,13 @@ class SettingsScreenState extends State<SettingsScreen> {
     return WillPopScope(
         onWillPop: () {
           globals.screen = 0;
-          Navigator.pushReplacementNamed(context, "/home");
+          globals.users.isNotEmpty
+          ? Navigator.pushReplacementNamed(context, "/home")
+          : Navigator.pushReplacementNamed(context, "/login");
         },
         child: Scaffold(
           key: _scaffoldKey,
-          drawer: GlobalDrawer(),
+          drawer: globals.users.isNotEmpty ? GlobalDrawer() : null,
           appBar: AppBar(
             title: Text(I18n.of(context).settingsTitle),
           ),
@@ -253,6 +255,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                             fontFamily: "Material Design Icons"),
                         value: _isDark,
                         onChanged: _isDarkChange,
+                        showOnLogin: true,
                       ),
                       MySwitchListTile(
                         //Amoled mode
@@ -261,6 +264,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                             fontFamily: "Material Design Icons"),
                         value: _isDark ? _amoled : false,
                         onChanged: _isDark ? _setAmoled : null,
+                        showOnLogin: true,
                       ),
                       MySwitchListTile(
                         //Smart Useragent
@@ -269,8 +273,11 @@ class SettingsScreenState extends State<SettingsScreen> {
                             fontFamily: "Material Design Icons"),
                         value: _smartUserAgent,
                         onChanged: _smartUserAgentChange,
+                        showOnLogin: true,
                       ),
-                      ListTile(
+
+                      globals.users.isNotEmpty
+                      ? ListTile(
                         //Evaluation Colors
                         title: Text(
                           I18n.of(context).settingsEvaluationColors,
@@ -280,8 +287,11 @@ class SettingsScreenState extends State<SettingsScreen> {
                           Navigator.pushNamed(context, "/evalcolor");
                         },
                         leading: Icon(Icons.color_lens),
-                      ),
-                      ListTile(
+                      )
+                      : Container(),
+                      
+                      globals.users.isNotEmpty
+                      ? ListTile(
                         //App-wide Accent Color
                         title: PopupMenuButton<int>(
                           child: ListTile(
@@ -317,7 +327,9 @@ class SettingsScreenState extends State<SettingsScreen> {
                           },
                         ),
                         leading: Icon(Icons.color_lens),
-                      ),
+                      )
+                      : Container(),
+
                       MySwitchListTile(
                         //Notifications
                         text: I18n.of(context).settingsNotifications,
@@ -326,6 +338,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                         value: _isNotification,
                         onChanged: _isNotificationChange,
                       ),
+                      
                       MySwitchListTile(
                         //Next lesson notif
                         text: I18n.of(context).settingsNextLesson,
@@ -370,6 +383,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                               leading: Icon(IconData(0xf4e6,
                                   fontFamily: "Material Design Icons")),
                             ), */
+                      
                       ListTile(
                         //Language
                         title: Text(
@@ -400,7 +414,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                       ),
                       Divider(
                           color: globals.isDark ? Colors.grey : Colors.black54),
-                      !Platform.isIOS
+                      !Platform.isIOS && globals.users.isNotEmpty
                           ? ListTile(
                               //Export BUTTON
                               leading: Icon(Icons.import_export),
@@ -463,12 +477,15 @@ class MySwitchListTile extends StatelessWidget {
   final IconData icon;
   final bool value;
   final Function onChanged;
+  final bool showOnLogin;
 
-  MySwitchListTile({this.text, this.icon, this.value, this.onChanged});
+  MySwitchListTile({this.text, this.icon, this.value, this.onChanged, this.showOnLogin = false});
 
   @override
   Widget build(BuildContext context) {
-    return SwitchListTile(
+    return 
+    ((globals.users.isEmpty && showOnLogin) || globals.users.isNotEmpty)
+    ? SwitchListTile(
       title: Text(
         text,
         style: TextStyle(fontSize: 20.0),
@@ -477,6 +494,7 @@ class MySwitchListTile extends StatelessWidget {
       value: value,
       onChanged: onChanged,
       secondary: Icon(icon),
-    );
+    )
+    : Container();
   }
 }
