@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart' as launcher;
+import 'package:flutter_linkify/flutter_linkify.dart';
+
 
 import 'package:filcnaplo/models/note.dart';
 import 'package:filcnaplo/screens/screen.dart';
@@ -111,9 +113,12 @@ class NotesScreenState extends State<NotesScreen> {
           subtitle: Column(children: <Widget>[
             Container(
               padding: EdgeInsets.all(5),
-              child: Text(
-                notes[index].content,
+              child: Linkify(
+                text: notes[index].content,
+                linkStyle: TextStyle(fontSize: 16, color: Colors.blue),
                 style: TextStyle(fontSize: 16),
+                onOpen: (link) {_launchUrl(link.url);},
+                options: LinkifyOptions(humanize: false),
               ),
             ),
             Container(
@@ -135,6 +140,10 @@ class NotesScreenState extends State<NotesScreen> {
         ),
       ],
     );
+  }
+
+  void _launchUrl(url) async {
+    if (await launcher.canLaunch(url)) await launcher.launch(url);
   }
 
   @override
