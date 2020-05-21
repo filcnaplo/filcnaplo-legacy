@@ -5,12 +5,16 @@ import 'package:csv/csv.dart';
 import 'package:date_range_picker/date_range_picker.dart' as DateRagePicker;
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/globals.dart' as globals;
+import 'package:filcnaplo/helpers/database_helper.dart';
+import 'package:filcnaplo/helpers/settings_helper.dart';
 import 'package:filcnaplo/helpers/timetable_helper.dart';
 import 'package:filcnaplo/models/account.dart';
 import 'package:filcnaplo/models/user.dart';
 import "package:filcnaplo/screens/screen.dart";
 import 'package:filcnaplo/utils/saver.dart' as Saver;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+//import 'package:path_provider/path_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -87,9 +91,9 @@ class ExportScreenState extends State<ExportScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    if (globals.exportScreenToShowDeleteDB) selectedData = 2; //If coming from DB help popup
     return Screen(
-        Text(I18n.of(context).appTitle),
+        Text(I18n.of(context).export),
         Center(
           child: SingleChildScrollView(
             padding: EdgeInsets.all(20),
@@ -98,6 +102,29 @@ class ExportScreenState extends State<ExportScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
+                  globals.exportScreenToShowDeleteDB
+                  ? Text("""ADATBÁZISTÖRLŐ-MÓD
+
+Először exportáld a fiókjaidat, hogy ne kelljen újból bejelentkezned. Ne változtass a fájl mentési helyén vagy formátumán.
+Az exportálás után ebben a módban törlődik az adatbázis, majd bezár az app.
+Ezután nyisd meg újra, és a bejelentkező képernyőn válaszd az "Importálás"-t.
+                  """,
+                  textAlign: TextAlign.start,)
+                  : Container(),
+                  globals.exportScreenToShowDeleteDB
+                  ? RaisedButton(
+                    onPressed: () {
+                      globals.exportScreenToShowDeleteDB = false;
+                      selectedData = 0;
+                      setState(() {});
+                    },
+                    color: Theme.of(context).accentColor,
+                    child: Text(
+                      "Kilépés az adatbázistörlő-módból",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  )
+                  : Container(),
                   DropdownButton(
                     items: exportOptions.map((String exportData) {
                       return DropdownMenuItem(
@@ -120,12 +147,12 @@ class ExportScreenState extends State<ExportScreen> {
                   ),
                   Divider(),
                   RaisedButton(
-                    //todo fehér témában rosszak a színek
                     onPressed: () => onExportPressed(),
+                    color: Theme.of(context).accentColor,
                     child: Text(
-                      I18n
-                          .of(context)
-                          .export,
+                      globals.exportScreenToShowDeleteDB
+                      ? "Exportálás, adatbázis törlése, majd app bezárása"
+                      : I18n.of(context).export,
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
@@ -334,6 +361,11 @@ class ExportScreenState extends State<ExportScreen> {
       }
     }
     writeToFile(fullPath, data);
+
+    if (globals.exportScreenToShowDeleteDB) {//If coming from db help popup
+      DBHelper().clearDB();
+      SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+    }
   }
 
   bool writeToFile(String path, String data) {

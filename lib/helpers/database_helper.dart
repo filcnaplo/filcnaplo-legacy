@@ -10,6 +10,10 @@ class DBHelper {
     return directory.path + "/";
   }
 
+  void clearDB() async {
+    store.delete(db);
+  }
+
   Future<void> saveUsersJson(List<User> users) async {
     List<Map<String, dynamic>> userMap = List();
     for (User user in users) userMap.add(user.toMap());

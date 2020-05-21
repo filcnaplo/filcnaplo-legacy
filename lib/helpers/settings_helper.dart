@@ -103,6 +103,12 @@ class SettingsHelper {
     return await _getProperty("newsletterRead", false);
   }
 
+  void setDeleteDBNotificationRead() {
+    _setPropertyBool("DBNotificationRead", true);
+  } Future<bool> getDeleteDBNotificationRead() async {
+    return await _getProperty("DBNotificationRead", false);
+  }
+
   static const List<Color> COLORS = [
     Colors.red,
     Colors.brown,

@@ -77,5 +77,6 @@ DatabaseFactory dbFactory = databaseFactoryIo;
 Database db;
 var store = StoreRef.main();
 List<Homework> currentHomeworks = List();
+bool exportScreenToShowDeleteDB = false; //Yes this is a very bad way of doing this don't kill me -RedyAu
 
 Map showCardType = Map();

@@ -99,6 +99,21 @@ class HomeScreenState extends State<HomeScreen> {
       });
       globals.firstMain = false;
     }
+    Timer(Duration(seconds: 3), () async {
+      if (!await SettingsHelper().getDeleteDBNotificationRead()) _showPromptDeleteDB();
+    });
+    Timer(Duration(seconds: 3), () {
+      if (HomeScreenCards.length < 1) {
+        Completer<Null> completer = Completer<Null>();
+        _onRefresh().then((bool b) async {
+          HomeScreenCards = await feedItems();
+          setState(() {
+            completer.complete();
+          });
+        });
+        return completer.future;
+      }
+    });
     startDate = now;
     Timer.periodic(
         Duration(seconds: 10),
@@ -386,5 +401,36 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   void dispose() {
     super.dispose();
+  }
+
+  Future<void> _showPromptDeleteDB() async {
+    SettingsHelper().setDeleteDBNotificationRead();
+    return showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Nem frissül a főképernyő?"),
+            content: Text("""
+Ha úgy tapasztalod, hogy nem firssülnek az adatok, válaszd a 'Nem frissül'-t, és segítünk.
+Ha nincs ilyen problémád, válaszd a 'Minden rendben'-t. Ha mégis szükséged lenne erre a lehetőségre, keresd a beállításokban.
+"""),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("Nem frissül!"),
+                onPressed: () {
+                  globals.exportScreenToShowDeleteDB = true;
+                  Navigator.pushNamed(context, "/export");
+                },
+              ),
+              FlatButton(
+                child: Text("Minden rendben."),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
   }
 }
