@@ -427,20 +427,6 @@ class SettingsScreenState extends State<SettingsScreen> {
                               },
                             )
                           : Container(),
-                      !Platform.isIOS && globals.users.isNotEmpty
-                          ? ListTile(
-                              //Export BUTTON
-                              leading: Icon(Icons.delete),
-                              title: Text("ADATBÁZIS TÖRLÉSE",
-                                  style: TextStyle(
-                                      fontSize: 15.0,
-                                      fontWeight: FontWeight.bold)),
-                              onTap: () {
-                                globals.exportScreenToShowDeleteDB = true;
-                                Navigator.pushNamed(context, "/export");
-                              },
-                            )
-                          : Container(),
                       ListTile(
                         //Bug report BUTTON
                         leading: Icon(Icons.bug_report),

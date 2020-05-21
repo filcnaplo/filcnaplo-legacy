@@ -115,16 +115,28 @@ Ezután nyisd meg újra, és a bejelentkező képernyőn válaszd az "Importál�
                   ? RaisedButton(
                     onPressed: () {
                       globals.exportScreenToShowDeleteDB = false;
-                      selectedData = 0;
-                      setState(() {});
+                      Navigator.of(context).pushReplacementNamed("/export");
                     },
-                    color: Theme.of(context).accentColor,
+                    color: Colors.grey[300],
                     child: Text(
-                      "Kilépés az adatbázistörlő-módból",
-                      style: TextStyle(color: Colors.white),
+                      "Vissza az adatbázis-törlő módból",
+                      style: TextStyle(color: Colors.black),
                     ),
                   )
-                  : Container(),
+                  : Container(
+                    margin: EdgeInsets.only(bottom: 50),
+                    child: RaisedButton(
+                      onPressed: () {
+                        globals.exportScreenToShowDeleteDB = true;
+                        Navigator.of(context).pushReplacementNamed("/export");
+                      },
+                      color: Colors.grey[300],
+                      child: Text(
+                        "Adatbázis-törlő mód bekapcsolása",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                  ),
                   DropdownButton(
                     items: exportOptions.map((String exportData) {
                       return DropdownMenuItem(
