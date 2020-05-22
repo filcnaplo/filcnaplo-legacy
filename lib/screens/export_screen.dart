@@ -103,11 +103,14 @@ class ExportScreenState extends State<ExportScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   globals.exportScreenToShowDeleteDB
-                  ? Text("""ADATBÁZISTÖRLŐ-MÓD
+                  ? Text("""ADATBÁZIS-TÖRLŐ MÓD
 
-Először exportáld a fiókjaidat, hogy ne kelljen újból bejelentkezned. Ne változtass a fájl mentési helyén vagy formátumán.
-Az exportálás után ebben a módban törlődik az adatbázis, majd bezár az app.
-Ezután nyisd meg újra, és a bejelentkező képernyőn válaszd az "Importálás"-t.
+Még az 1.5.1-es verzióra való frissítésnél megváltozott az alkalmazás által tárolt adatok felépítése, ezért azt tapasztalhatod, hogy nem töltődnek be, vagy nem frissülnek az adatok. Ebben a módban lehetőséged van törölni az adatbázist, ez megoldhatja a problémát.
+
+Ne változtass az exportálás beállításain.
+A zöld gombra kattintva elmentjük a bejelentkezési adataidat, töröljük az adatbázist, majd bezárjuk az appot.
+
+Ezután nyisd meg újra, és a bejelentkezésnél válaszd az "Importálás" lehetőséget.
                   """,
                   textAlign: TextAlign.start,)
                   : Container(),
@@ -160,7 +163,8 @@ Ezután nyisd meg újra, és a bejelentkező képernyőn válaszd az "Importál�
                   Divider(),
                   RaisedButton(
                     onPressed: () => onExportPressed(),
-                    color: Theme.of(context).accentColor,
+                    color: Colors.green,
+                    padding: EdgeInsets.all(10),
                     child: Text(
                       globals.exportScreenToShowDeleteDB
                       ? "Exportálás, adatbázis törlése, majd app bezárása"
@@ -376,6 +380,7 @@ Ezután nyisd meg újra, és a bejelentkező képernyőn válaszd az "Importál�
 
     if (globals.exportScreenToShowDeleteDB) {//If coming from db help popup
       DBHelper().clearDB();
+      SettingsHelper().setDeleteDBNotificationRead();
       SystemChannels.platform.invokeMethod('SystemNavigator.pop');
     }
   }
@@ -401,7 +406,7 @@ Ezután nyisd meg újra, és a bejelentkező képernyőn válaszd az "Importál�
           });
     } catch (_) {
       Fluttertoast.showToast(
-          msg: "Fájl műveleti hiba", //todo fordítás
+          msg: "Fájlműveleti hiba", //todo fordítás
           backgroundColor: Colors.red,
           textColor: Colors.white,
           fontSize: 16.0);

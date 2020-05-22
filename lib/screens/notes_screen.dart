@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart' as launcher;
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 
 
@@ -36,6 +36,13 @@ class NotesScreenState extends State<NotesScreen> {
   @override
   Widget build(BuildContext context) {
     globals.context = context;
+    //! For testing
+    /* notes.add(Note(0, "tipus", "cim", """Lórum ipse, a lens relső irát lesz a csapacs, ma diste érés.
+A bűnösség ercéjekor vagy láskas után, bántot kell csegergelnie, úgy hogy az üzetes mara csak a saját kézete badásába kodázhatja el a vergőt. A dülés kisményére a gyakmácsoknak önállóan kell tárványba pozniuk, és szabadon fenyékedhetnek.
+A láskas akkor feres, ha a vergő nált tünembészével a plás mögé pirkol. https://filcnaplo.hu A fürt az, aki több láskast lötyögt. Ványos esetén a ' hirtelen sirzsok ' vons hatos. Ekkor a bűnösség maximum három szatáttal mozgós meg.
+Szolán mara először korít láskast ez alatt a melás alatt, az lesz a kalkozás. filcnaplo.hu@gmail.com
+    """, "Kovács Tanár", DateTime.now(), "2001-01-01"));
+    printContents(); */
     return Screen(
         Text(capitalize(I18n.of(context).noteTitle)),
         Container(
@@ -114,7 +121,7 @@ class NotesScreenState extends State<NotesScreen> {
             Container(
               padding: EdgeInsets.all(5),
               child: Linkify(
-                text: notes[index].content,
+                text: notes[index].content.replaceAll("\r", ""),
                 linkStyle: TextStyle(fontSize: 16, color: Colors.blue),
                 style: TextStyle(fontSize: 16),
                 onOpen: (link) {_launchUrl(link.url);},
@@ -141,9 +148,15 @@ class NotesScreenState extends State<NotesScreen> {
       ],
     );
   }
+//! For testing
+  /* void printContents() async {
+    for (var note in notes) {
+      await debugPrint(note.content, wrapWidth: 999999999999);
+    }
+  } */
 
   void _launchUrl(url) async {
-    if (await launcher.canLaunch(url)) await launcher.launch(url);
+    if (await canLaunch(url)) await launch(url);
   }
 
   @override

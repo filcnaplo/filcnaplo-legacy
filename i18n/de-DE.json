@@ -238,7 +238,7 @@
     "import": {
         "": "Import",
         "warning": "Achtung",
-        "warningText": "Alle Konten werden gelöscht werden.\nWährend importieren das App wird schließen, bitte neuöffnen."
+        "warningText": "Alle Konten werden durch die Konten in der zu importierenden Datei ersetzt.\nWährend importieren das App wird schließen, bitte neuöffnen."
     },
 
     "close": {

@@ -412,8 +412,11 @@ class HomeScreenState extends State<HomeScreen> {
           return AlertDialog(
             title: Text("Nem frissül a főképernyő?"),
             content: Text("""
-Ha úgy tapasztalod, hogy nem firssülnek az adatok, válaszd a 'Nem frissül'-t, és segítünk.
-Ha nincs ilyen problémád, válaszd a 'Minden rendben'-t. Ha mégis szükséged lenne erre a lehetőségre, keresd a beállításokban.
+Ha úgy tapasztalod, hogy nem frissülnek az adatok, válaszd a 'Nem frissül'-t, és segítünk. Az export képernyőre irányítunk és fiókadataid megtartása mellett tisztítjuk az alkalmazás adatbázisát.
+
+Ha nincs ilyen problémád, válaszd a 'Minden rendben'-t. Ha mégis szükséged lenne erre a lehetőségre, keresd a beállításokban, az export képernyőn.
+
+(Ez az ablak egyszer mindenkinek megnyílik, nem annak az eredménye hogy hibát észleltünk volna.)
 """),
             actions: <Widget>[
               FlatButton(
@@ -424,7 +427,7 @@ Ha nincs ilyen problémád, válaszd a 'Minden rendben'-t. Ha mégis szükséged
                 },
               ),
               FlatButton(
-                child: Text("Minden rendben."),
+                child: Text("Minden rendben. [Close]"),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

@@ -3,9 +3,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:filcnaplo/models/note.dart';
 import 'package:filcnaplo/utils/string_formatter.dart';
-import 'package:url_launcher/url_launcher.dart' as launcher;
 import 'package:filcnaplo/globals.dart' as globals;
 import 'package:filcnaplo/generated/i18n.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NoteCard extends StatelessWidget {
   Note note;
@@ -32,14 +33,16 @@ class NoteCard extends StatelessWidget {
   Future<Null> _noteDialog(Note note) async {
     return showDialog<Null>(
       context: context,
-      barrierDismissible: true, // user must tap button!
+      barrierDismissible: true,
       builder: (BuildContext context) {
         return SimpleDialog(
           children: <Widget>[
             SingleChildScrollView(
-              child: Text(
-                note.content,
-                style: TextStyle(fontSize: 18.0),
+              child: Linkify(
+                text: note.content.replaceAll("\r", ""),
+                style: TextStyle(fontSize: 18),
+                linkStyle: TextStyle(fontSize: 18, color: Colors.blue),
+                onOpen: (link) {_launchUrl(link.url);},
               ),
             ),
           ],
@@ -192,5 +195,9 @@ class NoteCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _launchUrl(url) async {
+    if (await canLaunch(url)) await launch(url);
   }
 }

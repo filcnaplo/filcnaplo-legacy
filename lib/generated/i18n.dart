@@ -334,8 +334,8 @@ class I18n implements WidgetsLocalizations {
   String get import => "Importálás";
   /// "Figyelem"
   String get importWarning => "Figyelem";
-  /// "Ez kitöröl minden meglévő felhasználót!\nImportálás után az app bezár, nyisd meg újra."
-  String get importWarningText => "Ez kitöröl minden meglévő felhasználót!\nImportálás után az app bezár, nyisd meg újra.";
+  /// "Ez a jelenleg bejelentkezett felhasználókat törli, cseréli őket az importált fájl tartalmára!\nImportálás után az app bezár, nyisd meg újra."
+  String get importWarningText => "Ez a jelenleg bejelentkezett felhasználókat törli, cseréli őket az importált fájl tartalmára!\nImportálás után az app bezár, nyisd meg újra.";
   /// "Alkalmazás bezárása"
   String get closeTitle => "Alkalmazás bezárása";
   /// "Biztosan be akarod zárni az alkalmazást?"
@@ -420,8 +420,8 @@ class I18n implements WidgetsLocalizations {
   String get errorReadAccount => "Hiba a felhasználó olvasása közben";
   /// "Nem sikerült lekérni az átlagokat"
   String get errorAveragesError => "Nem sikerült lekérni az átlagokat";
-  /// "Nem sikerült lekérni az átlagokat a Kréta szererről, ezért a statisztika oldal nem használható. Próbálj frissíteni a főoldalon!"
-  String get errorNoStatistics => "Nem sikerült lekérni az átlagokat a Kréta szererről, ezért a statisztika oldal nem használható. Próbálj frissíteni a főoldalon!";
+  /// "Nem sikerült lekérni az átlagokat a Kréta szerverről, ezért a statisztika oldal nem használható. Próbálj frissíteni a főoldalon!"
+  String get errorNoStatistics => "Nem sikerült lekérni az átlagokat a Kréta szerverről, ezért a statisztika oldal nem használható. Próbálj frissíteni a főoldalon!";
   /// "db"
   String get pcs => "db";
   /// "letöltés"
@@ -897,9 +897,9 @@ class _I18n_en_US extends I18n {
   /// "Warning"
   @override
   String get importWarning => "Warning";
-  /// "All accounts will be deleted.\nAfter importing the app will close, please reopen it."
+  /// "Current accounts will be replaced by the ones in the file to be imported.\nAfter importing the app will close, please reopen it."
   @override
-  String get importWarningText => "All accounts will be deleted.\nAfter importing the app will close, please reopen it.";
+  String get importWarningText => "Current accounts will be replaced by the ones in the file to be imported.\nAfter importing the app will close, please reopen it.";
   /// "Close the application"
   @override
   String get closeTitle => "Close the application";
@@ -1505,9 +1505,9 @@ class _I18n_de_DE extends I18n {
   /// "Achtung"
   @override
   String get importWarning => "Achtung";
-  /// "Alle Konten werden gelöscht werden.\nWährend importieren das App wird schließen, bitte neuöffnen."
+  /// "Alle Konten werden durch die Konten in der zu importierenden Datei ersetzt.\nWährend importieren das App wird schließen, bitte neuöffnen."
   @override
-  String get importWarningText => "Alle Konten werden gelöscht werden.\nWährend importieren das App wird schließen, bitte neuöffnen.";
+  String get importWarningText => "Alle Konten werden durch die Konten in der zu importierenden Datei ersetzt.\nWährend importieren das App wird schließen, bitte neuöffnen.";
   /// "App schließen"
   @override
   String get closeTitle => "App schließen";

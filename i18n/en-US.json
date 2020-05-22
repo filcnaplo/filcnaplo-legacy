@@ -238,7 +238,7 @@
     "import": {
         "": "Import",
         "warning": "Warning",
-        "warningText": "All accounts will be deleted.\nAfter importing the app will close, please reopen it."
+        "warningText": "Current accounts will be replaced by the ones in the file to be imported.\nAfter importing the app will close, please reopen it."
     },
 
     "close": {

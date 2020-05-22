@@ -238,7 +238,7 @@
     "import": {
         "": "Importálás",
         "warning": "Figyelem",
-        "warningText": "Ez kitöröl minden meglévő felhasználót!\nImportálás után az app bezár, nyisd meg újra."
+        "warningText": "Ez a jelenleg bejelentkezett felhasználókat törli, cseréli őket az importált fájl tartalmára!\nImportálás után az app bezár, nyisd meg újra."
     },
 
     "close": {
@@ -305,7 +305,7 @@
         "network": "Hálózati hiba",
         "readAccount": "Hiba a felhasználó olvasása közben",
         "averagesError": "Nem sikerült lekérni az átlagokat",
-        "noStatistics": "Nem sikerült lekérni az átlagokat a Kréta szererről, ezért a statisztika oldal nem használható. Próbálj frissíteni a főoldalon!"
+        "noStatistics": "Nem sikerült lekérni az átlagokat a Kréta szerverről, ezért a statisztika oldal nem használható. Próbálj frissíteni a főoldalon!"
     },
 
     "pcs": "db",

@@ -9,6 +9,8 @@ import 'package:filcnaplo/utils/string_formatter.dart';
 import 'package:filcnaplo/generated/i18n.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 
+import 'package:url_launcher/url_launcher.dart';
+
 class MessageDialog extends StatefulWidget {
   const MessageDialog(this.message);
   final Message message;
@@ -88,7 +90,7 @@ class MessageDialogState extends State<MessageDialog> {
           ),
         ),
         Container(
-          child: Html(data: HtmlUnescape().convert(currentMessage.text)),
+          child: Html(data: HtmlUnescape().convert(currentMessage.text), onLinkTap: (url) {_launchUrl(url);},),
         ),
         Container(
           child: Text(
@@ -103,5 +105,9 @@ class MessageDialogState extends State<MessageDialog> {
         ),
       ],
     );
+  }
+
+  void _launchUrl(url) async {
+    if (await canLaunch(url)) await launch(url);
   }
 }
