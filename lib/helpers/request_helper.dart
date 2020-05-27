@@ -10,42 +10,18 @@ import 'package:filcnaplo/utils/string_formatter.dart';
 import 'package:filcnaplo/globals.dart' as globals;
 import 'package:filcnaplo/generated/i18n.dart';
 import "dart:math";
+import "package:random_string/random_string.dart";
 
 class RequestHelper {
-  var randomDeviceCodeNames = [
-    "coral",
-    "flame",
-    "clark",
-    "walleye",
-    "a6eltemtr",
-    "gracelte",
-    "klte",
-    "kwifi",
-    "zerofltectc",
-    "heroqltecctvzw",
-    "a50",
-    "beyond1",
-    "H8416",
-    "SOV38",
-    "a6lte",
-    "OnePlus7",
-    "flashlmdd",
-    "hammerhead",
-    "mako",
-    "lucye",
-    "bullhead",
-    "griffin",
-    "h1",
-    "HWBKL",
-    "HWMHA",
-    "HWALP",
-    "cheeseburger",
-    "bonito",
-    "crosshatch",
-    "taimen",
-    "blueline"
-  ];
   final _random = Random();
+
+  final int minUaLength = 5;
+  final int maxUaLength = 15;
+  String randomDeviceCodename() {
+    int length = minUaLength +  _random.nextInt(maxUaLength - minUaLength);
+    return randomAlphaNumeric(length);
+  }
+
   void showError(String msg) {
     Fluttertoast.showToast(
         msg: msg,
@@ -75,11 +51,11 @@ class RequestHelper {
       Map settingsJson = json.decode(settings);
       globals.latestVersion = settingsJson["LatestVersion"];
       if (globals.smartUserAgent) {
-        var randomCodeName = randomDeviceCodeNames[
-            _random.nextInt(randomDeviceCodeNames.length)];
-        globals.userAgent = settingsJson["KretaUserAgent"].split(" ")[0];
+        globals.userAgent = settingsJson["KretaUserAgent"].replaceAll('<codename>', randomDeviceCodename());
+        print(globals.userAgent);
       } else {
         globals.userAgent = "FilcNaplo/" + globals.version;
+        print(globals.userAgent);
       }
     } catch (e) {
       print("[E] RequestHelper.refreshAppSettings(): " + e.toString());
