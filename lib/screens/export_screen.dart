@@ -380,7 +380,6 @@ Ezután nyisd meg újra, és a bejelentkezésnél válaszd az "Importálás" leh
 
     if (globals.exportScreenToShowDeleteDB) {//If coming from db help popup
       DBHelper().clearDB();
-      SettingsHelper().setDeleteDBNotificationRead();
       SystemChannels.platform.invokeMethod('SystemNavigator.pop');
     }
   }

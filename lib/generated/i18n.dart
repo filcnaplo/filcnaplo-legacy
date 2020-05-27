@@ -86,6 +86,14 @@ class I18n implements WidgetsLocalizations {
   String get dialogNo => "Nem";
   /// "Kész"
   String get dialogDone => "Kész";
+  /// "Bezárás"
+  String get dialogClose => "Bezárás";
+  /// "Tovább"
+  String get dialogMore => "Tovább";
+  /// "Megnyitás"
+  String get dialogOpen => "Megnyitás";
+  /// "Később"
+  String get dialogLater => "Később";
   /// "idő"
   String get time => "idő";
   /// "óra"
@@ -525,6 +533,18 @@ class _I18n_en_US extends I18n {
   /// "Done"
   @override
   String get dialogDone => "Done";
+  /// "Close"
+  @override
+  String get dialogClose => "Close";
+  /// "More"
+  @override
+  String get dialogMore => "More";
+  /// "Open"
+  @override
+  String get dialogOpen => "Open";
+  /// "Later"
+  @override
+  String get dialogLater => "Later";
   /// "time"
   @override
   String get time => "time";
@@ -1133,6 +1153,18 @@ class _I18n_de_DE extends I18n {
   /// "Fertig"
   @override
   String get dialogDone => "Fertig";
+  /// "Schließen"
+  @override
+  String get dialogClose => "Schließen";
+  /// "Weiter"
+  @override
+  String get dialogMore => "Weiter";
+  /// "Öffnen"
+  @override
+  String get dialogOpen => "Öffnen";
+  /// "Später"
+  @override
+  String get dialogLater => "Später";
   /// "zeit"
   @override
   String get time => "zeit";

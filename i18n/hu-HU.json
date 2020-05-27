@@ -41,7 +41,11 @@
         "ok": "OK",
         "yes": "Igen",
         "no": "Nem",
-        "done": "Kész"
+        "done": "Kész",
+        "close": "Bezárás",
+        "more": "Tovább",
+        "open": "Megnyitás",
+        "later": "Később"
     },
 
     "time": {

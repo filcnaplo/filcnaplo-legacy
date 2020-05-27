@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:filcnaplo/cards/lesson_card.dart';
 import 'package:filcnaplo/cards/tomorrow_lesson_card.dart';
@@ -83,6 +84,10 @@ class HomeScreenState extends State<HomeScreen> {
       globals.isSingle = true;
       SettingsHelper().setSingleUser(true);
     }
+
+    /*
+    
+    */
   }
 
   @override
@@ -100,7 +105,7 @@ class HomeScreenState extends State<HomeScreen> {
       globals.firstMain = false;
     }
     Timer(Duration(seconds: 3), () async {
-      if (!await SettingsHelper().getDeleteDBNotificationRead()) _showPromptDeleteDB();
+      if (!globals.homepageNotificationRead) _showHomepageNotification();
     });
     Timer(Duration(seconds: 3), () {
       if (HomeScreenCards.length < 1) {
@@ -403,37 +408,53 @@ class HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-  Future<void> _showPromptDeleteDB() async {
-    SettingsHelper().setDeleteDBNotificationRead();
+  Future<void> _showHomepageNotification() async {
+    String websiteUrl = "http://filcnaplo.hu/kerdoiv";
     return showDialog<void>(
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Nem frissül a főképernyő?"),
-            content: Text("""
-Ha úgy tapasztalod, hogy nem frissülnek az adatok, válaszd a 'Nem frissül'-t, és segítünk. Az export képernyőre irányítunk és fiókadataid megtartása mellett tisztítjuk az alkalmazás adatbázisát.
+            title: Text("Küldj ötletet a Filc 2.0-hoz!"),
+            content: Text("""A Filc Napló újraírása mellett döntöttünk.
+Ennek egyik fő oka az, hogy a Kréta egy új, jelenleg zárt béta fázisban levő appon dolgozik, ami immár nem küzd a logikátlanság és lassúság gyerekbetegségével. Ezért a Filcet egy teljes körű iskolai asszisztenssé szeretnénk tenni, ami pl. megmondja, holnap mire kell készülnöd, amiben beoszthatod az idődet, stb.
+Ehhez kérnénk segítségeteket, szeretnénk megtudni, milyen funkciókra van szükségetek.
 
-Ha nincs ilyen problémád, válaszd a 'Minden rendben'-t. Ha mégis szükséged lenne erre a lehetőségre, keresd a beállításokban, az export képernyőn.
-
-(Ez az ablak egyszer mindenkinek megnyílik, nem annak az eredménye hogy hibát észleltünk volna.)
-"""),
+Ötleteidet megoszthatod velünk a "Megnyitás" gombot választva, egy Google Forms kérdőíven."""),
             actions: <Widget>[
               FlatButton(
-                child: Text("Nem frissül!"),
+                child: Text(I18n.of(context).dialogOpen),
                 onPressed: () {
-                  globals.exportScreenToShowDeleteDB = true;
-                  Navigator.pushNamed(context, "/export");
+                  SettingsHelper().setHomepageNotificationRead(globals.homepageNotificationName);
+                  globals.homepageNotificationRead = true;
+                  _launchWebpage(websiteUrl);
+                  Navigator.of(context).pop();
                 },
               ),
               FlatButton(
-                child: Text("Minden rendben. [Close]"),
+                child: Text(I18n.of(context).dialogLater),
                 onPressed: () {
+                  globals.homepageNotificationRead = true;
+                  Navigator.of(context).pop();
+                },
+              ),
+              FlatButton(
+                child: Text(I18n.of(context).dialogClose),
+                onPressed: () {
+                  SettingsHelper().setHomepageNotificationRead(globals.homepageNotificationName);
+                  globals.homepageNotificationRead = true;
                   Navigator.of(context).pop();
                 },
               )
             ],
           );
         });
+  }
+  _launchWebpage(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw "Could not launch newsletter. $url";
+  }
   }
 }

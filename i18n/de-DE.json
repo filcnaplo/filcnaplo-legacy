@@ -41,7 +41,11 @@
         "ok": "OK",
         "yes": "Ja",
         "no": "Nein",
-        "done": "Fertig"
+        "done": "Fertig",
+        "close": "Schließen",
+        "more": "Weiter",
+        "open": "Öffnen",
+        "later": "Später"
     },
 
     "time": {

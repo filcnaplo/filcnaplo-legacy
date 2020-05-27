@@ -179,6 +179,7 @@ void main({bool noReset = false}) async {
       globals.color3 = await SettingsHelper().getEvalColor(2);
       globals.color4 = await SettingsHelper().getEvalColor(3);
       globals.color5 = await SettingsHelper().getEvalColor(4);
+      globals.homepageNotificationRead = await SettingsHelper().getHomepageNotificationRead(globals.homepageNotificationName);
     }
 
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])

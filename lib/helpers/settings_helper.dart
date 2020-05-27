@@ -103,10 +103,10 @@ class SettingsHelper {
     return await _getProperty("newsletterRead", false);
   }
 
-  void setDeleteDBNotificationRead() {
-    _setPropertyBool("DBNotificationRead", true);
-  } Future<bool> getDeleteDBNotificationRead() async {
-    return await _getProperty("DBNotificationRead", false);
+  void setHomepageNotificationRead(String name) {
+    _setPropertyBool(name, true);
+  } Future<bool> getHomepageNotificationRead(String name) async {
+    return await _getProperty(name, false);
   }
 
   static const List<Color> COLORS = [
