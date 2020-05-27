@@ -46,6 +46,7 @@ class SettingsScreenState extends State<SettingsScreen> {
   int _theme;
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
+  String _useragent = globals.userAgent;
 
   void _initSet() async {
     _isColor = await SettingsHelper().getColoredMainPage();
@@ -190,12 +191,14 @@ class SettingsScreenState extends State<SettingsScreen> {
     });
   }
 
-  void _smartUserAgentChange(bool value) {
+  void _smartUserAgentChange(bool value) async {
+    globals.smartUserAgent = value;
+    SettingsHelper().setSmartUserAgent(value);
+    await RequestHelper().refreshAppSettings();
+    
     setState(() {
       _smartUserAgent = value;
-      globals.smartUserAgent = value;
-      SettingsHelper().setSmartUserAgent(_smartUserAgent);
-      RequestHelper().refreshAppSettings();
+      _useragent = globals.userAgent;
     });
   }
 
@@ -266,14 +269,17 @@ class SettingsScreenState extends State<SettingsScreen> {
                         onChanged: _isDark ? _setAmoled : null,
                         showOnLogin: true,
                       ),
-                      MySwitchListTile(
-                        //Smart Useragent
-                        text: I18n.of(context).settingsUseAgent,
-                        icon: IconData(0xfcbf,
-                            fontFamily: "Material Design Icons"),
-                        value: _smartUserAgent,
-                        onChanged: _smartUserAgentChange,
-                        showOnLogin: true,
+                      Tooltip(
+                        message: _useragent,
+                        child: MySwitchListTile(
+                          //Smart Useragent
+                          text: I18n.of(context).settingsUseAgent,
+                          icon: IconData(0xfcbf,
+                              fontFamily: "Material Design Icons"),
+                          value: _smartUserAgent,
+                          onChanged: _smartUserAgentChange,
+                          showOnLogin: true,
+                        ),
                       ),
 
                       globals.users.isNotEmpty
