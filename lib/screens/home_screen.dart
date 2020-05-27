@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ffi';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:filcnaplo/cards/lesson_card.dart';
 import 'package:filcnaplo/cards/tomorrow_lesson_card.dart';
