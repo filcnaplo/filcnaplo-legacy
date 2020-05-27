@@ -415,11 +415,13 @@ class HomeScreenState extends State<HomeScreen> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text("Küldj ötletet a Filc 2.0-hoz!"),
-            content: Text("""A Filc Napló újraírása mellett döntöttünk.
+            content: SingleChildScrollView(
+              child: Text("""A Filc Napló újraírása mellett döntöttünk.
 Ennek egyik fő oka az, hogy a Kréta egy új, jelenleg zárt béta fázisban levő appon dolgozik, ami immár nem küzd a logikátlanság és lassúság gyerekbetegségével. Ezért a Filcet egy teljes körű iskolai asszisztenssé szeretnénk tenni, ami pl. megmondja, holnap mire kell készülnöd, amiben beoszthatod az idődet, stb.
 Ehhez kérnénk segítségeteket, szeretnénk megtudni, milyen funkciókra van szükségetek.
 
 Ötleteidet megoszthatod velünk a "Megnyitás" gombot választva, egy Google Forms kérdőíven."""),
+            ),
             actions: <Widget>[
               FlatButton(
                 child: Text(I18n.of(context).dialogOpen),
