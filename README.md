@@ -7,9 +7,7 @@
 [![Codemagic build status](https://api.codemagic.io/apps/5e67b1201339a900142f6cb6/5e67b1201339a900142f6cb5/status_badge.svg)](https://codemagic.io/apps/5e67b1201339a900142f6cb6/5e67b1201339a900142f6cb5/latest_build)
 
 [![Letöltés](.github/download.png)](https://play.google.com/store/apps/details?id=hu.filcnaplo.ellenorzo) 
-[![Telegram Hírlevél Csoport](.github/telegram.png)](https://t.me/filc_naplo)
-
-Publikus Telegram csoportunk: **[Beszélgetés a fejlesztőkkel](https://t.me/filcnaplo)**
+[![Discord közösség](.github/dclogo.png)](https://discord.gg/GqzTJj5)
 
 ---
 
