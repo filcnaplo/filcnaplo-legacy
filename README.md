@@ -20,7 +20,7 @@
 
 [Ajánljuk figyelmedbe a Contributing Guideunkat.](.github/CONTRIBUTING.md)
 
-Első sikeres, lényegi változást tartalmazó commitod után meghívunk a fejlesztői Telegram csoportunkba.
+Első sikeres, lényegi változást tartalmazó commitod után Discord szerverünkön "Dev" rangot kapsz.
  
  
  
