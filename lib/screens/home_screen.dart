@@ -336,7 +336,7 @@ class HomeScreenState extends State<HomeScreen> {
     });
     if (globals.isSingle) {
       try {
-        await globals.selectedAccount.refreshStudentString(offline, showErrors, userInit: userInit);
+        await globals.selectedAccount.refreshStudentString(offline, showErrors, userInit: userInit, context: context);
         tempEvaluations.addAll(globals.selectedAccount.student.Evaluations);
         tempNotes.addAll(globals.selectedAccount.notes);
         tempAbsents.addAll(globals.selectedAccount.absents);
@@ -347,7 +347,7 @@ class HomeScreenState extends State<HomeScreen> {
       for (Account account in globals.accounts) {
         try {
           try {
-            await account.refreshStudentString(offline, showErrors, userInit: userInit);
+            await account.refreshStudentString(offline, showErrors, userInit: userInit, context: context);
           } catch (e) {
             print("[E] HomeScreen.onRefresh() (2): " + e.toString());
           }

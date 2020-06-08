@@ -46,7 +46,7 @@ class Account {
 
   Map getStudentJson() => _studentJson;
 
-  Future<void> refreshStudentString(bool isOffline, bool showErrors, {bool userInit = false}) async {
+  Future<void> refreshStudentString(bool isOffline, bool showErrors, {bool userInit = false, BuildContext context}) async {
     if (!user.getRecentlyRefreshed("refreshStudentString")) {
       if (isOffline && _studentJson == null) {
         try {
@@ -78,13 +78,13 @@ class Account {
           .getAveragesFrom(json.encode(_studentJson), user);
 
       user.setRecentlyRefreshed("refreshStudentString");
-    }
-    if (userInit) {
+    } else if (userInit) {
       Fluttertoast.showToast(
-              msg: I18n.of(globals.context).rateLimitAlert(User.RATE_LIMIT_MINUTES.toString()),
+              msg: I18n.of(context).rateLimitAlert(globals.rateLimitMinutes.toString()),
               backgroundColor: Colors.red,
               textColor: Colors.white,
-              fontSize: 16.0);
+              fontSize: 16.0,
+              toastLength: Toast.LENGTH_LONG);
     }
   }
 
