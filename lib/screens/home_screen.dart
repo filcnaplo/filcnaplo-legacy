@@ -308,7 +308,7 @@ class HomeScreenState extends State<HomeScreen> {
                       ),
                       onRefresh: () {
                         Completer<Null> completer = Completer<Null>();
-                        _onRefresh().then((bool b) async {
+                        _onRefresh(userInit: true).then((bool b) async {
                           HomeScreenCards = await feedItems();
                           setState(() {
                             completer.complete();
@@ -324,7 +324,7 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   Future<Null> _onRefresh(
-      {bool offline = false, bool showErrors = true}) async {
+      {bool offline = false, bool showErrors = true, bool userInit = false}) async {
     List<Evaluation> tempEvaluations = List();
     Map<String, List<Absence>> tempAbsents = Map();
     List<Note> tempNotes = List();
@@ -336,7 +336,7 @@ class HomeScreenState extends State<HomeScreen> {
     });
     if (globals.isSingle) {
       try {
-        await globals.selectedAccount.refreshStudentString(offline, showErrors);
+        await globals.selectedAccount.refreshStudentString(offline, showErrors, userInit: userInit);
         tempEvaluations.addAll(globals.selectedAccount.student.Evaluations);
         tempNotes.addAll(globals.selectedAccount.notes);
         tempAbsents.addAll(globals.selectedAccount.absents);
@@ -347,7 +347,7 @@ class HomeScreenState extends State<HomeScreen> {
       for (Account account in globals.accounts) {
         try {
           try {
-            await account.refreshStudentString(offline, showErrors);
+            await account.refreshStudentString(offline, showErrors, userInit: userInit);
           } catch (e) {
             print("[E] HomeScreen.onRefresh() (2): " + e.toString());
           }
