@@ -11,6 +11,7 @@ import 'package:filcnaplo/globals.dart' as globals;
 import 'package:filcnaplo/generated/i18n.dart';
 import "dart:math";
 import "package:random_string/random_string.dart";
+import "dart:io";
 
 class RequestHelper {
   final _random = Random();
@@ -18,7 +19,7 @@ class RequestHelper {
   final int minUaLength = 5;
   final int maxUaLength = 15;
   String randomDeviceCodename() {
-    int length = minUaLength +  _random.nextInt(maxUaLength - minUaLength);
+    int length = minUaLength + _random.nextInt(maxUaLength - minUaLength);
     return randomAlphaNumeric(length);
   }
 
@@ -51,7 +52,8 @@ class RequestHelper {
       Map settingsJson = json.decode(settings);
       globals.latestVersion = settingsJson["LatestVersion"];
       if (globals.smartUserAgent) {
-        globals.userAgent = settingsJson["KretaUserAgent"].replaceAll('<codename>', randomDeviceCodename());
+        globals.userAgent = settingsJson["KretaUserAgent"]
+            .replaceAll('<codename>', randomDeviceCodename());
         print(globals.userAgent);
       } else {
         globals.userAgent = "FilcNaplo/" + globals.version;
@@ -118,7 +120,10 @@ class RequestHelper {
           schoolCode);
   Future<String> getAverages(String accessToken, String schoolCode) =>
       apiRequest(
-          "https://" + schoolCode + ".e-kreta.hu" + "/mapi/api/v1/TantargyiAtlagAmi",
+          "https://" +
+              schoolCode +
+              ".e-kreta.hu" +
+              "/mapi/api/v1/TantargyiAtlagAmi",
           accessToken,
           schoolCode);
   Future<String> getHomework(String accessToken, String schoolCode, int id) =>
@@ -292,17 +297,35 @@ class RequestHelper {
 
   Future<String> getStudentString(User user, bool showErrors) async {
     String code = await getBearerToken(user, showErrors);
-    String justEvaluationsString = await getEvaluations(code, user.schoolCode);
+    String evaluationsString = await getEvaluations(code, user.schoolCode);
+
     String averagesString = await getAverages(code, user.schoolCode);
-    if (averagesString == null) {
+    //only declare error if current request failed because of no internet and there is no existing data
+    if (averagesString == null && globals.isOnline && globals.selectedAccount.averages.isNotEmpty) {
       Fluttertoast.showToast(
-        msg: I18n.of(globals.context).errorAveragesError,
-        backgroundColor: Colors.red);
+          msg: I18n.of(globals.context).errorAveragesError,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0,);
       globals.noAverages = true;
-    } else globals.noAverages = false;
-    String evaluationsString = justEvaluationsString??"".replaceFirst("\"SubjectAverages\": null", "\"SubjectAverages\": " + averagesString??"");
-    
-    return evaluationsString;
+    } else
+      globals.noAverages = false;
+    String studentString = evaluationsString ??
+        "".replaceFirst("\"SubjectAverages\": null",
+            "\"SubjectAverages\": " + averagesString ?? "");
+
+    return studentString;
+  }
+
+  void getIsOnline() async {
+    try {
+      final result = await InternetAddress.lookup('example.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        globals.isOnline = true;
+      }
+    } on SocketException catch (e) {
+      globals.isOnline = false;
+    }
   }
 
   Future<String> getEventsString(User user, bool showErrors) async {

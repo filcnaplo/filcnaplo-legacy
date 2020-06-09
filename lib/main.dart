@@ -149,6 +149,7 @@ void main({bool noReset = false}) async {
   if (await Saver.shouldMigrate) {
     Saver.migrate();
   } else {
+    await RequestHelper().getIsOnline();
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     globals.version = packageInfo.version;
     globals.isBeta = globals.version.endsWith("-beta");
