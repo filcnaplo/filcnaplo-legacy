@@ -147,7 +147,7 @@ class SummaryCard extends StatelessWidget {
 
   Widget evaluationList(BuildContext context) {
     return Column(children: <Widget>[
-      for (Evaluation evaluation in summaryEvaluations)
+      for (Evaluation evaluation in summaryEvaluations) 
         ListTile(
           leading: Container(
             child: Text(evaluation.realValue.toString(),
@@ -165,8 +165,16 @@ class SummaryCard extends StatelessWidget {
                 color: globals.isColor
                     ? getColors(context, evaluation.realValue, true)
                     : Color.fromARGB(255, 15, 15, 15),
-                borderRadius: BorderRadius.all(Radius.circular(40))),
-          ),
+                borderRadius: BorderRadius.all(Radius.circular(40)),
+                border: Border.all(
+                  color: (evaluation.Theme == "Dicséret")
+                    ? globals.isDark 
+                      ? Colors.white38
+                      : Colors.black38
+                    : Colors.transparent,
+                    width: 3
+                )
+          )),
           title: Text(
             evaluation.Subject ?? evaluation.Jelleg.Leiras,
             style: TextStyle(fontWeight: FontWeight.bold),
