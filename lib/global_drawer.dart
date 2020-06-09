@@ -117,11 +117,10 @@ class GlobalDrawerState extends State<GlobalDrawer> {
                                   )
                                   : Container(),
                                   Container(
-                                    child: Icon(Icons.new_releases,
-                                        color: Colors.grey),
+                                    child: Image(image: AssetImage('assets/discordicon.png'), height: 25,),
                                     margin: EdgeInsets.only(right: 5),
                                   ),
-                                  Text(I18n.of(context).drawerNewsletter)
+                                  Text("Discord")
                                 ],
                               ),
                             ),
@@ -279,7 +278,7 @@ class GlobalDrawerState extends State<GlobalDrawer> {
 }
 
 _launchNewsletter() async {
-  const url = "https://t.me/s/filcnaplo_hirlevel";
+  const url = "https://discord.gg/GqzTJj5";
   SettingsHelper().setNewsletterRead();
   globals.isNewsletterRead = true;
   if (await canLaunch(url)) {
