@@ -633,21 +633,21 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                         padding: EdgeInsets.only(left: 10),
                       ),
                       selectedAverage != null
-                          ? selectedAverage.classValue != null
-                              ? Text(capitalize(
+                          ? (selectedAverage.classValue != null && selectedAverage.classValue != 0)
+                              ? Row(
+                                children: <Widget>[
+                                  Text(capitalize(
                                       I18n.of(context).evaluationAverageClass) +
-                                  ": ")
-                              : Container()
-                          : Container(),
-                      selectedAverage != null
-                          ? selectedAverage.classValue??0 != 0
-                              ? Text(
-                                  selectedAverage.classValue.toString(),
-                                  style: TextStyle(
-                                      color: getColorForAverage(
-                                          selectedAverage.classValue),
-                                      fontWeight: FontWeight.bold),
-                                )
+                                  ": "),
+                                  Text(
+                                      selectedAverage.classValue.toString(),
+                                      style: TextStyle(
+                                          color: getColorForAverage(
+                                              selectedAverage.classValue),
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                ],
+                              )
                               : Container()
                           : Container(),
                     ],
