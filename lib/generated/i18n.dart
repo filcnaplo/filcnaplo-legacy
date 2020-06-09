@@ -1681,9 +1681,9 @@ class _I18n_de_DE extends I18n {
   /// "New version available!"
   @override
   String get updateAvailable => "New version available!";
-  /// "You can only refresh every ${minutes} minute(s)!"
+  /// "Du kannst nur jede ${minutes} Minuten neuladen!"
   @override
-  String rateLimitAlert(String minutes) => "You can only refresh every ${minutes} minute(s)!";
+  String rateLimitAlert(String minutes) => "Du kannst nur jede ${minutes} Minuten neuladen!";
 
   @override
   TextDirection get textDirection => TextDirection.ltr;

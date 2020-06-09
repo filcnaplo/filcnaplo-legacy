@@ -324,6 +324,6 @@
     },
 
     "rateLimit": {
-        "alert": "You can only refresh every {minutes} minute(s)!"
+        "alert": "Du kannst nur jede {minutes} Minuten neuladen!"
     }
 }
