@@ -300,9 +300,8 @@ class RequestHelper {
         backgroundColor: Colors.red);
       globals.noAverages = true;
     } else globals.noAverages = false;
-    String evaluationsString = justEvaluationsString.replaceFirst("\"SubjectAverages\": null", "\"SubjectAverages\": " + averagesString);
-
-    print(averagesString);
+    String evaluationsString = justEvaluationsString??"".replaceFirst("\"SubjectAverages\": null", "\"SubjectAverages\": " + averagesString??"");
+    
     return evaluationsString;
   }
 

@@ -93,30 +93,24 @@ class HomeScreenState extends State<HomeScreen> {
   void initState() {
     _initSettings();
     super.initState();
+    
+    globals.context = context; //For i18n of error msgs
 
+    //First load in existing data from database, then try to update from kréta.
     _onRefresh(offline: true, showErrors: false).then((var a) async {
-      HomeScreenCards = await feedItems();
-    });
-    if (globals.firstMain) {
+      if (globals.firstMain) {
       _onRefresh(offline: false, showErrors: false).then((var a) async {
         HomeScreenCards = await feedItems();
-      });
+      },
+      onError: (e) {print("Online refresh error: " + e.toString());});
       globals.firstMain = false;
+    } else {
+      HomeScreenCards = await feedItems();
     }
+    },
+    onError: (e) {print("Offline refresh error: " + e.toString());});
     Timer(Duration(seconds: 3), () async {
       if (!globals.homepageNotificationRead) _showHomepageNotification();
-    });
-    Timer(Duration(seconds: 3), () {
-      if (HomeScreenCards.length < 1) {
-        Completer<Null> completer = Completer<Null>();
-        _onRefresh().then((bool b) async {
-          HomeScreenCards = await feedItems();
-          setState(() {
-            completer.complete();
-          });
-        });
-        return completer.future;
-      }
     });
     startDate = now;
     Timer.periodic(

@@ -46,9 +46,11 @@ class Account {
 
   Map getStudentJson() => _studentJson;
 
-  Future<void> refreshStudentString(bool isOffline, bool showErrors, {bool userInit = false, BuildContext context}) async {
+  Future<void> refreshStudentString(bool isOffline, bool showErrors,
+      {bool userInit = false, BuildContext context}) async {
     if (!user.getRecentlyRefreshed("refreshStudentString")) {
       if (isOffline && _studentJson == null) {
+        print("\n[i] Loading existing data from database");
         try {
           _studentJson = await DBHelper().getStudentJson(user);
         } catch (e) {
@@ -60,32 +62,48 @@ class Account {
         }
         messages = await MessageHelper().getMessagesOffline(user);
       } else if (!isOffline) {
+        print("\n[i] Getting new data from Kréta");
         String studentString =
             await RequestHelper().getStudentString(user, showErrors);
         if (studentString != null) {
-          _studentJson = json.decode(studentString);
+          try {
+            _studentJson = json.decode(studentString);
+          } catch (e) {
+            print("\n[E] account.dart json decode error: " + e.toString());
+          }
           await DBHelper().addStudentJson(_studentJson, user);
         }
         messages = await MessageHelper().getMessages(user, showErrors);
+        print("\n[i] Got new evaluation string");
+      }
+      print("\n[i] Student data loaded. Processing...");
+
+      try {
+        student = Student.fromMap(_studentJson, user);
+        absents = await AbsentHelper().getAbsentsFrom(student.Absences);
+        await _refreshEventsString(isOffline, showErrors);
+        notes = await NotesHelper()
+            .getNotesFrom(_eventsString, json.encode(_studentJson), user);
+        averages = await AverageHelper()
+            .getAveragesFrom(json.encode(_studentJson), user);
+      } catch (e) {
+        print("[E] account.dart data processing error: " + e.toString());
       }
 
-      student = Student.fromMap(_studentJson, user);
-      absents = await AbsentHelper().getAbsentsFrom(student.Absences);
-      await _refreshEventsString(isOffline, showErrors);
-      notes = await NotesHelper()
-          .getNotesFrom(_eventsString, json.encode(_studentJson), user);
-      averages = await AverageHelper()
-          .getAveragesFrom(json.encode(_studentJson), user);
-
-      user.setRecentlyRefreshed("refreshStudentString");
+      if (!isOffline) user.setRecentlyRefreshed("refreshStudentString");
+      print("\n[i] Loading complete.");
     } else if (userInit) {
+      print("\n[warning] User initiated update denied: rate limit");
       Fluttertoast.showToast(
-              msg: I18n.of(context).rateLimitAlert(globals.rateLimitMinutes.toString()),
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
-              fontSize: 16.0,
-              toastLength: Toast.LENGTH_LONG);
-    }
+          msg: I18n.of(context)
+              .rateLimitAlert(globals.rateLimitMinutes.toString()),
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0,
+          toastLength: Toast.LENGTH_LONG);
+    } else
+      print(
+          "\n[warning] Background process initiated update denied: rate limit");
   }
 
   Future<void> refreshTests(bool isOffline, bool showErrors) async {

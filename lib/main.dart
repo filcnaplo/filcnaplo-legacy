@@ -157,7 +157,7 @@ void main({bool noReset = false}) async {
     globals.isSingle = await SettingsHelper().getSingleUser();
     globals.smartUserAgent = await SettingsHelper().getSmartUserAgent();
     globals.lang = await SettingsHelper().getLang();
-    RequestHelper().refreshAppSettings();
+    await RequestHelper().refreshAppSettings();
     globals.multiAccount = (await Saver.readUsers()).length != 1;
 
     if (!isNew) {
