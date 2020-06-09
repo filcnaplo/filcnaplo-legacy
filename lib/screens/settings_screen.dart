@@ -270,7 +270,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                         showOnLogin: true,
                       ),
                       Tooltip(
-                        message: _useragent,
+                        message: _useragent??" ",
                         child: MySwitchListTile(
                           //Smart Useragent
                           text: I18n.of(context).settingsUseAgent,
