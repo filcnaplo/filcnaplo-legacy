@@ -640,11 +640,9 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                               : Container()
                           : Container(),
                       selectedAverage != null
-                          ? selectedAverage.classValue != null
+                          ? selectedAverage.classValue??0 != 0
                               ? Text(
-                                  selectedAverage.classValue != 0
-                                      ? selectedAverage.classValue.toString()
-                                      : r"¯\_(ツ)_/¯",
+                                  selectedAverage.classValue.toString(),
                                   style: TextStyle(
                                       color: getColorForAverage(
                                           selectedAverage.classValue),
