@@ -148,6 +148,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
   dart_ui.Color getColorForAverageString(String averageString) {
     double average = 0;
     try {
+      print("[i] THEGERGO IDENEZZ: Ezt kapja a getColorForAverageString(): " + averageString??"null!");
       average = double.parse(avrString);
     } catch (e) {
       print(
