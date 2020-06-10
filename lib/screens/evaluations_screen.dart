@@ -336,6 +336,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
               0.0));
               print("8.2");
           } catch (e) {
+            print("999");
             print("THEGERGO init stats error " + e.toString());
           }
         });
@@ -346,7 +347,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
         averages = [Average("", "", "", 0.0, 0.0, 0.0)];
         print("10");
       averages.sort((Average a, Average b) {
-        return a.subject.compareTo(b.subject);
+        return a.subject??"".compareTo(b.subject??"");
       });
       print("11");
       selectedAverage = averages[0];
