@@ -86,8 +86,8 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
   List<Evaluation> evals = List();
   List<Evaluation> toSummaryEvals = List();
   List<Evaluation> allEvals = List();
-  String avrString = "";
-  String classAvrString = "";
+  String avrString = "";//average of currently selected subject
+  String classAvrString = "";//class avg of currently selected subject
   int db1 = 0;
   int db2 = 0;
   int db3 = 0;
