@@ -171,7 +171,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
     try {
       print(average.round());
     } catch (e) {
-      print("thegergo error 99999: " + e.toString());
+      print("thegergo error 99999: "+ e.toString());
     }
     switch (average.round()) {
       case 1:
@@ -192,31 +192,15 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
   void initEvals() async {
     await globals.selectedAccount.refreshStudentString(true, false);
 
-    try {
-      toSummaryEvals.addAll(globals.selectedAccount.student.Evaluations); 
-    } catch (e) {
-      print("[E] EvaluationScreen.initEvals() eval list adding error 1: " +
-          e.toString());
-    }
+    toSummaryEvals.addAll(globals.selectedAccount.student.Evaluations);
 
-    try {
-      evals.addAll(globals.selectedAccount.student.Evaluations); 
-    } catch (e) {
-      print("[E] EvaluationScreen.initEvals() eval list adding error 2: " +
-          e.toString());
-    }
-
-    try {
-      evals.removeWhere((Evaluation evaluation) =>
+    evals.addAll(globals.selectedAccount.student.Evaluations);
+    evals.removeWhere((Evaluation evaluation) =>
         evaluation.NumberValue == 0 ||
         evaluation.Mode == "Na" ||
         evaluation.Weight == null ||
         evaluation.Weight == "-" ||
-        evaluation.isSummaryEvaluation()); 
-    } catch (e) {
-      print("[E] EvaluationScreen.initEvals() eval selection error: " +
-          e.toString());
-    }
+        evaluation.isSummaryEvaluation());
 
     _onSelect(averages[0]);
     for (Evaluation e in evals)
@@ -241,60 +225,44 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
 
     refreshSort();
 
-    List<Evaluation> firstQuarterEvaluations;
-    List<Evaluation> secondQuarterEvaluations;
-    List<Evaluation> thirdQuarterEvaluations;
-    List<Evaluation> fourthQuarterEvaluations;
-    List<Evaluation> halfYearEvaluations;
-    List<Evaluation> endYearEvaluations;
-    try {
-      firstQuarterEvaluations = (toSummaryEvals
-          .where((Evaluation evaluation) => (evaluation.isFirstQuarter()))
-          .toList());
-      secondQuarterEvaluations = (toSummaryEvals
-          .where((Evaluation evaluation) => (evaluation.isSecondQuarter()))
-          .toList());
-      thirdQuarterEvaluations = (toSummaryEvals
-          .where((Evaluation evaluation) => (evaluation.isThirdQuarter()))
-          .toList());
-      fourthQuarterEvaluations = (toSummaryEvals
-          .where((Evaluation evaluation) => (evaluation.isFourthQuarter()))
-          .toList());
+    List<Evaluation> firstQuarterEvaluations = (toSummaryEvals
+        .where((Evaluation evaluation) => (evaluation.isFirstQuarter()))
+        .toList());
+    List<Evaluation> secondQuarterEvaluations = (toSummaryEvals
+        .where((Evaluation evaluation) => (evaluation.isSecondQuarter()))
+        .toList());
+    List<Evaluation> thirdQuarterEvaluations = (toSummaryEvals
+        .where((Evaluation evaluation) => (evaluation.isThirdQuarter()))
+        .toList());
+    List<Evaluation> fourthQuarterEvaluations = (toSummaryEvals
+        .where((Evaluation evaluation) => (evaluation.isFourthQuarter()))
+        .toList());
 
-      halfYearEvaluations = (toSummaryEvals
-          .where((Evaluation evaluation) => (evaluation.isHalfYear()))
-          .toList());
-      endYearEvaluations = (toSummaryEvals
-          .where((Evaluation evaluation) => (evaluation.isEndYear()))
-          .toList());
-    } catch (e) {
-      print("[E] EvaluationScreen.initEvals() Summary Card eval selection error: " +
-          e.toString());
-    }
+    List<Evaluation> halfYearEvaluations = (toSummaryEvals
+        .where((Evaluation evaluation) => (evaluation.isHalfYear()))
+        .toList());
+    List<Evaluation> endYearEvaluations = (toSummaryEvals
+        .where((Evaluation evaluation) => (evaluation.isEndYear()))
+        .toList());
 
-    try {
-      if (endYearEvaluations.isNotEmpty)
-        summaryCardsToShow.add(
-            SummaryCard(endYearEvaluations, context, 6, false, true, false));
-      if (fourthQuarterEvaluations.isNotEmpty)
-        summaryCardsToShow.add(SummaryCard(
-            fourthQuarterEvaluations, context, 4, false, true, false));
-      if (thirdQuarterEvaluations.isNotEmpty)
-        summaryCardsToShow.add(SummaryCard(
-            thirdQuarterEvaluations, context, 3, false, true, false));
-      if (halfYearEvaluations.isNotEmpty)
-        summaryCardsToShow.add(
-            SummaryCard(halfYearEvaluations, context, 5, false, true, false));
-      if (secondQuarterEvaluations.isNotEmpty)
-        summaryCardsToShow.add(SummaryCard(
-            secondQuarterEvaluations, context, 2, false, true, false));
-      if (firstQuarterEvaluations.isNotEmpty)
-        summaryCardsToShow.add(SummaryCard(firstQuarterEvaluations, context, 1,
-            false, true, false)); //localization
-    } catch (e) {
-      print("[E] EvaluationScreen.initEvals() Summary Card adding error: " +
-          e.toString());
-    }
+    if (endYearEvaluations.isNotEmpty)
+      summaryCardsToShow
+          .add(SummaryCard(endYearEvaluations, context, 6, false, true, false));
+    if (fourthQuarterEvaluations.isNotEmpty)
+      summaryCardsToShow.add(SummaryCard(
+          fourthQuarterEvaluations, context, 4, false, true, false));
+    if (thirdQuarterEvaluations.isNotEmpty)
+      summaryCardsToShow.add(
+          SummaryCard(thirdQuarterEvaluations, context, 3, false, true, false));
+    if (halfYearEvaluations.isNotEmpty)
+      summaryCardsToShow.add(
+          SummaryCard(halfYearEvaluations, context, 5, false, true, false));
+    if (secondQuarterEvaluations.isNotEmpty)
+      summaryCardsToShow.add(SummaryCard(
+          secondQuarterEvaluations, context, 2, false, true, false));
+    if (firstQuarterEvaluations.isNotEmpty)
+      summaryCardsToShow.add(SummaryCard(firstQuarterEvaluations, context, 1,
+          false, true, false)); //localization
 
     if (summaryCardsToShow.isEmpty)
       summaryCardsToShow.add(Card(
@@ -680,22 +648,21 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
                         padding: EdgeInsets.only(left: 10),
                       ),
                       selectedAverage != null
-                          ? (selectedAverage.classValue != null &&
-                                  selectedAverage.classValue != 0)
+                          ? (selectedAverage.classValue != null && selectedAverage.classValue != 0)
                               ? Row(
-                                  children: <Widget>[
-                                    Text(capitalize(I18n.of(context)
-                                            .evaluationAverageClass) +
-                                        ": "),
-                                    Text(
+                                children: <Widget>[
+                                  Text(capitalize(
+                                      I18n.of(context).evaluationAverageClass) +
+                                  ": "),
+                                  Text(
                                       selectedAverage.classValue.toString(),
                                       style: TextStyle(
                                           color: getColorForAverage(
                                               selectedAverage.classValue),
                                           fontWeight: FontWeight.bold),
                                     ),
-                                  ],
-                                )
+                                ],
+                              )
                               : Container()
                           : Container(),
                     ],
