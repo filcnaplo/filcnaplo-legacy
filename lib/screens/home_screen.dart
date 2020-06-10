@@ -96,16 +96,17 @@ class HomeScreenState extends State<HomeScreen> {
     
     globals.context = context; //For i18n of error msgs
 
-    //First load in existing data from database, then try to update from kréta.
+    //First load in existing data from database and show it.
+    //then try to update from kréta, and if successful, update.
     _onRefresh(offline: true, showErrors: false).then((var a) async {
+      HomeScreenCards = await feedItems();
+
       if (globals.firstMain) {
       _onRefresh(offline: false, showErrors: false).then((var a) async {
         HomeScreenCards = await feedItems();
       },
       onError: (e) {print("Online refresh error: " + e.toString());});
       globals.firstMain = false;
-    } else {
-      HomeScreenCards = await feedItems();
     }
     },
     onError: (e) {print("Offline refresh error: " + e.toString());});
