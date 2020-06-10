@@ -326,7 +326,8 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
 
         evaluationsBySubject.forEach((String subject, List evaluations) {
           print("8.1");
-          averages.add(Average(
+          try{
+            averages.add(Average(
               subject,
               evaluations[0].SubjectCategory,
               evaluations[0].SubjectCategoryName,
@@ -334,6 +335,9 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
               0.0,
               0.0));
               print("8.2");
+          } catch (e) {
+            print("THEGERGO init stats error " + e.toString());
+          }
         });
         print("8.3");
       }
@@ -372,7 +376,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
     }
   }
 
-  void _onSelect(Average average) async {
+  void _onSelect(Average average) async { //!! !! !! !! !! !!
     setState(() {
       selectedAverage = average;
       globals.selectedAverage = selectedAverage;
