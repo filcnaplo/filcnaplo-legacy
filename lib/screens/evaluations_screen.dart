@@ -347,8 +347,8 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
         averages = [Average("", "", "", 0.0, 0.0, 0.0)];
         print("10changed-doyouactuallyupdate");
         averages.sort((Average a, Average b) {
-        return a.subject??"".compareTo(b.subject??"");
-        })
+        return a.subject.compareTo(b.subject);
+        });
       print("11");
       selectedAverage = averages[0];
       print("12");
