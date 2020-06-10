@@ -79,7 +79,7 @@ class Account {
       print("\n[i] Student data loaded. Processing...");
 
       try {
-        student = Student.fromMap(_studentJson, user);
+        student = await Student.fromMap(_studentJson, user);
         absents = await AbsentHelper().getAbsentsFrom(student.Absences);
         await _refreshEventsString(isOffline, showErrors);
         notes = await NotesHelper()
