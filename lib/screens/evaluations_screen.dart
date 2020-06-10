@@ -346,13 +346,9 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
       if (averages == null || averages.isEmpty)
         averages = [Average("", "", "", 0.0, 0.0, 0.0)];
         print("10changed-doyouactuallyupdate");
-      try {
         averages.sort((Average a, Average b) {
         return a.subject??"".compareTo(b.subject??"");
-      });
-      } catch (e) {
-        print("THEGERGO init stats error 2 :" + e.toString());
-      }
+        })
       print("11");
       selectedAverage = averages[0];
       print("12");

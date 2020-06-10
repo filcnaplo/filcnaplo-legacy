@@ -366,6 +366,7 @@ class Evaluation {
     evaluationsBean.Type = map['Type'];
     evaluationsBean.TypeName = map['TypeName'];
     evaluationsBean.Subject = map['Subject'];
+    if (evaluationsBean.Subject == null) evaluationsBean.Subject = " ";
     evaluationsBean.SubjectCategory = map['SubjectCategory'];
     evaluationsBean.SubjectCategoryName = map['SubjectCategoryName'];
     evaluationsBean.Theme = map['Theme'];
