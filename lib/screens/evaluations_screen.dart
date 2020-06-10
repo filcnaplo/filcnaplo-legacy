@@ -146,33 +146,19 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
   }
 
   dart_ui.Color getColorForAverageString(String averageString) {
-    print("1");
     double average = 0;
-    print("2");
     try {
-      print("3");
       average = double.parse(averageString);
-      print("4");
     } catch (e) {
-      print("5");
       print(
           "[E] evaluationsScreen.getColorForAvarageString(): " + e.toString());
-      print("6");
       average = 0.0;
-      print("7");
     }
-    print("8");
-    print(average);
+
     return getColorForAverage(average);
   }
 
   dart_ui.Color getColorForAverage(double average) {
-    print("9");
-    try {
-      print(average.round());
-    } catch (e) {
-      print("thegergo error 99999: "+ e.toString());
-    }
     switch (average.round()) {
       case 1:
         return globals.color1;
