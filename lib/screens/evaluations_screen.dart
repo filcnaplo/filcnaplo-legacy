@@ -273,8 +273,7 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
       }
     }
     if (n > 0) return sum / n;
-
-    return 0;
+    else return 0;
   }
 
   double getAverage(List<Evaluation> evaluations) {
@@ -294,25 +293,39 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
       }
     }
     if (db > 0) return sum / db;
-
-    return 0;
+    else return 0;
   }
 
   void _initStats() async {
+    print("1");
     await globals.selectedAccount.refreshStudentString(true, false);
+    print("2");
     setState(() {
+      print("3");
       averages = globals.selectedAccount.averages ?? List();
+      print("4");
       averages.removeWhere((Average average) => (average.value ?? 0) < 1);
+      print("5");
       if (averages == null || averages.isEmpty) {
+        print("6");
         Map<String, List<Evaluation>> evaluationsBySubject = Map();
+        print("7");
         for (Evaluation evaluation
             in globals.selectedAccount.midyearEvaluations) {
-          if (evaluationsBySubject[evaluation.Subject] == null)
-            evaluationsBySubject[evaluation.Subject] = List();
+              print("7.1");
+          if (evaluationsBySubject[evaluation.Subject] == null) {
+            print("7.2");
+            evaluationsBySubject[evaluation.Subject] = List();//if for this eval the subject is null, don't add it.
+            print("7.3");
+          }
+          print("7.4");
           evaluationsBySubject[evaluation.Subject].add(evaluation);
         }
 
+        print("8");
+
         evaluationsBySubject.forEach((String subject, List evaluations) {
+          print("8.1");
           averages.add(Average(
               subject,
               evaluations[0].SubjectCategory,
@@ -320,17 +333,26 @@ class EvaluationsScreenState extends State<EvaluationsScreen> {
               double.parse(getAverage(evaluations).toStringAsFixed(2)),
               0.0,
               0.0));
+              print("8.2");
         });
+        print("8.3");
       }
+      print("9");
       if (averages == null || averages.isEmpty)
         averages = [Average("", "", "", 0.0, 0.0, 0.0)];
+        print("10");
       averages.sort((Average a, Average b) {
         return a.subject.compareTo(b.subject);
       });
+      print("11");
       selectedAverage = averages[0];
+      print("12");
       globals.selectedAverage = selectedAverage;
+      print("13");
       avrString = selectedAverage.value.toString();
+      print("14");
       classAvrString = selectedAverage.classValue.toString();
+      print("15");
     });
 
     initEvals();
