@@ -176,7 +176,9 @@ class SummaryCard extends StatelessWidget {
                 )
           )),
           title: Text(
-            evaluation.Subject ?? evaluation.Jelleg.Leiras,
+            (evaluation.Subject == " " || evaluation.Subject == null) 
+              ? evaluation.Jelleg.Leiras
+              : evaluation.Subject,
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           subtitle: Text(evaluation.Teacher),
@@ -194,7 +196,7 @@ class SummaryCard extends StatelessWidget {
 
   Widget listEntry(String data, {bold = false, right = false}) => Container(
         child: Text(
-          data,
+          data??" ",
           style: TextStyle(
               fontSize: right ? 16 : 19,
               fontWeight: bold ? FontWeight.bold : FontWeight.normal),
