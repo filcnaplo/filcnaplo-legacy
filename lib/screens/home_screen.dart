@@ -402,19 +402,26 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _showHomepageNotification() async {
-    String websiteUrl = "http://filcnaplo.hu/kerdoiv";
+    String websiteUrl = "https://discord.gg/GqzTJj5";
     return showDialog<void>(
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Küldj ötletet a Filc 2.0-hoz!"),
             content: SingleChildScrollView(
-              child: Text("""A Filc Napló újraírása mellett döntöttünk.
-Ennek egyik fő oka az, hogy a Kréta egy új, jelenleg zárt béta fázisban levő appon dolgozik, ami immár nem küzd a logikátlanság és lassúság gyerekbetegségével. Ezért a Filcet egy teljes körű iskolai asszisztenssé szeretnénk tenni, ami pl. megmondja, holnap mire kell készülnöd, amiben beoszthatod az idődet, stb.
-Ehhez kérnénk segítségeteket, szeretnénk megtudni, milyen funkciókra van szükségetek.
+              child: Column(children: <Widget>[
+                Text("Szeptemberre itt a Filc 2.0!",
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
+                Image(image: AssetImage('assets/filc2icon.png'), height: 150,),
+                Text("""Ez pedig az új app logója. A Filc 2.0 egy igazi tanulási asszisztens lesz, a Kréta elérésén kívül sok más hasznos funkcióval. Ha viszont csak a legalapvetőbbekre vágysz egy igazán kicsi appban, addigra elérhető lesz számodra az új Filc Lite.
 
-Ötleteidet megoszthatod velünk a "Megnyitás" gombot választva, egy Google Forms kérdőíven."""),
+Köszönjük a türelmeteket, a belépéskori frissítés problémáját ez a (1.5.6-os) verzió megoldja.
+Ha esetleg emiatt rossz értékelést adtál, kérünk frissítsd ha valóban megoldódott a gond! Köszönjük 😉
+
+Ha szeretnél részt venni testközelből a fejlesztésben, tesztelésben, írnál a fejlesztőknek vagy csak tagja lennél a Filc felhasználói közösségének, csatlakozz Discord szerverünkhöz a 'Megnyitás' gombbal. Várunk!
+
+Szép nyarat kíván a Filc fejlesztőcsapata.""")
+              ],)
             ),
             actions: <Widget>[
               FlatButton(

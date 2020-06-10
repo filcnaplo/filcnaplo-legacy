@@ -80,5 +80,5 @@ var store = StoreRef.main();
 List<Homework> currentHomeworks = List();
 bool exportScreenToShowDeleteDB = false; //Yes this is a very bad way of doing this don't kill me -RedyAu
 bool homepageNotificationRead = false;
-final String homepageNotificationName = "filc2googleform";
+final String homepageNotificationName = "filc2roadmap";
 const int rateLimitMinutes = 2;
