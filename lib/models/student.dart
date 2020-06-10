@@ -369,6 +369,7 @@ class Evaluation {
     evaluationsBean.SubjectCategory = map['SubjectCategory'];
     evaluationsBean.SubjectCategoryName = map['SubjectCategoryName'];
     evaluationsBean.Theme = map['Theme'];
+    if (evaluationsBean.Theme == null) evaluationsBean.Theme = " "; //thegergo test fix
     evaluationsBean.IsAtlagbaBeleszamit = map['IsAtlagbaBeleszamit'];
     evaluationsBean.Mode = map['Mode'];
     evaluationsBean.Weight = map['Weight'];
