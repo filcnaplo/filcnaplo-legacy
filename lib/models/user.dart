@@ -14,7 +14,6 @@ class User {
   Color color;
   Map<String, String> lastRefreshMap = Map();
   static const RATE_LIMIT_MINUTES = globals.rateLimitMinutes;
-  Ebből szép kis error lesz és az action majd sír
 
   User(this.id, this.username, this.password, this.name, this.schoolCode,
       this.schoolUrl, this.schoolName, this.parentName, this.parentId);
